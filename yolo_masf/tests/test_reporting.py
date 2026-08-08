@@ -6,6 +6,48 @@ from pathlib import Path
 from masf_yolo.reporting import rebuild_report
 
 
+def _b0_metrics(*, offset: float) -> dict[str, object]:
+    return {
+        "map50_95": 0.50 + offset,
+        "per_class": {
+            "ball": {"ap": 0.51 + offset, "ap50": 0.61 + offset},
+            "bat": {"ap": 0.52 + offset, "ap50": 0.62 + offset},
+        },
+        "class_diagnostics": {
+            "ball": {
+                "gt_count": 12,
+                "prediction_count": 10,
+                "true_positive_count": 8,
+                "missed_count": 4,
+                "false_positive_count": 2,
+                "precision": 0.8,
+                "recall": 2 / 3,
+                "subsets": {
+                    "tiny": {"gt_count": 3, "recall": 1 / 3},
+                    "small": {"gt_count": 5, "recall": 0.8},
+                    "large": {"gt_count": 4, "recall": 0.75},
+                    "blur_proxy": {"gt_count": 2, "recall": 0.5},
+                },
+            },
+            "bat": {
+                "gt_count": 7,
+                "prediction_count": 8,
+                "true_positive_count": 6,
+                "missed_count": 1,
+                "false_positive_count": 2,
+                "precision": 0.75,
+                "recall": 6 / 7,
+                "subsets": {
+                    "tiny": {"gt_count": 0, "recall": None},
+                    "small": {"gt_count": 1, "recall": 1.0},
+                    "large": {"gt_count": 6, "recall": 5 / 6},
+                    "blur_proxy": {"gt_count": 3, "recall": 2 / 3},
+                },
+            },
+        },
+    }
+
+
 def test_report_rebuilds_from_available_immutable_artifacts(tmp_path: Path) -> None:
     work = tmp_path / "work"
     config_dir = work / "configs"
@@ -41,6 +83,10 @@ pipeline: {max_attempts: 3, device: 0, systemd_unit_prefix: masf-yolo-phase1}
             }
         )
     )
+    for split, offset in (("val", 0.0), ("test", 0.1)):
+        evaluation = artifacts / "evaluation" / split / "b0"
+        evaluation.mkdir(parents=True)
+        (evaluation / "metrics.json").write_text(json.dumps(_b0_metrics(offset=offset)))
 
     report_path = Path(rebuild_report(config))
     text = report_path.read_text()
@@ -52,3 +98,10 @@ pipeline: {max_attempts: 3, device: 0, systemd_unit_prefix: masf-yolo-phase1}
     assert "formal_m7: pending" in text
     assert "- B0:" in text
     assert "- M7:" in text
+    assert "### B0" in text
+    assert "Ball: AP50=" in text
+    assert "Bat: AP50=" in text
+    assert "GT=12" in text
+    assert "predictions=10" in text
+    assert "missed=4" in text
+    assert "false positives=2" in text

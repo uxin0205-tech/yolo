@@ -117,8 +117,24 @@ def run_final_audit(artifact_root: Path) -> dict[str, Any]:
             errors.append("B0 reference must be data-exposed and selection-ineligible")
     for split in ("val", "test"):
         for variant in EVALUATION_MODELS:
-            if not (artifact_root / "evaluation" / split / variant.lower() / "metrics.json").is_file():
+            metrics_path = artifact_root / "evaluation" / split / variant.lower() / "metrics.json"
+            if not metrics_path.is_file():
                 errors.append(f"missing {split} metrics: {variant}")
+                continue
+            try:
+                metrics = _read_json(metrics_path)
+            except (OSError, UnicodeError, json.JSONDecodeError):
+                errors.append(f"invalid {split} metrics: {variant}")
+                continue
+            for section in ("per_class", "class_diagnostics"):
+                class_values = metrics.get(section)
+                for class_name in ("ball", "bat"):
+                    if not isinstance(class_values, dict) or not isinstance(
+                        class_values.get(class_name), dict
+                    ):
+                        errors.append(
+                            f"missing {split} {section} class {class_name}: {variant}"
+                        )
     for variant in EVALUATION_MODELS:
         if not (artifact_root / "profiles" / variant.lower() / "profile.json").is_file():
             errors.append(f"missing hardware profile: {variant}")

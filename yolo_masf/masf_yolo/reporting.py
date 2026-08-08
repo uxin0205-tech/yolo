@@ -36,6 +36,42 @@ def _atomic_text(path: Path, text: str) -> None:
         raise
 
 
+def _display(value: Any) -> str:
+    if value is None:
+        return "null"
+    if isinstance(value, float):
+        return f"{value:.4f}"
+    return str(value)
+
+
+def _class_lines(metrics: dict[str, Any], class_name: str, label: str) -> list[str]:
+    per_class = metrics.get("per_class", {}).get(class_name, {})
+    diagnostics = metrics.get("class_diagnostics", {}).get(class_name, {})
+    lines = [
+        f"  - {label}: AP50={_display(per_class.get('ap50'))}, "
+        f"AP50-95={_display(per_class.get('ap'))}, "
+        f"precision={_display(diagnostics.get('precision'))}, "
+        f"recall={_display(diagnostics.get('recall'))}, "
+        f"GT={_display(diagnostics.get('gt_count'))}, "
+        f"predictions={_display(diagnostics.get('prediction_count'))}, "
+        f"missed={_display(diagnostics.get('missed_count'))}, "
+        f"false positives={_display(diagnostics.get('false_positive_count'))}"
+    ]
+    subsets = diagnostics.get("subsets", {})
+    lines.append(
+        f"    - size/blur recall: "
+        f"tiny={_display(subsets.get('tiny', {}).get('recall'))} "
+        f"(n={_display(subsets.get('tiny', {}).get('gt_count'))}), "
+        f"small={_display(subsets.get('small', {}).get('recall'))} "
+        f"(n={_display(subsets.get('small', {}).get('gt_count'))}), "
+        f"large={_display(subsets.get('large', {}).get('recall'))} "
+        f"(n={_display(subsets.get('large', {}).get('gt_count'))}), "
+        f"blur={_display(subsets.get('blur_proxy', {}).get('recall'))} "
+        f"(n={_display(subsets.get('blur_proxy', {}).get('gt_count'))})"
+    )
+    return lines
+
+
 def rebuild_report(config_path: Path) -> str:
     from masf_yolo.cli import load_config
     from masf_yolo.variants import EVALUATED_MODELS
@@ -98,6 +134,16 @@ def rebuild_report(config_path: Path) -> str:
             f"test mAP50-95={test.get('map50_95') if test else 'pending'}, "
             f"GFLOPs={profile.get('gflops') if profile else 'pending'}"
         )
+        lines.extend(["", f"### {variant}", ""])
+        for split_label, metrics in (("Validation", val), ("Test", test)):
+            if metrics is None:
+                lines.append(f"- {split_label}: pending")
+                continue
+            lines.append(
+                f"- {split_label} overall: mAP50-95={_display(metrics.get('map50_95'))}"
+            )
+            lines.extend(_class_lines(metrics, "ball", "Ball"))
+            lines.extend(_class_lines(metrics, "bat", "Bat"))
     errors = final_audit.get("errors", [])
     lines.extend(["", "## Audit errors", ""])
     lines.extend([f"- {error}" for error in errors] or ["- None"])

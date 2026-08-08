@@ -7,6 +7,16 @@ from masf_yolo.evaluation.profiling import HardwareProfile
 from masf_yolo.pipeline import candidate_from_artifacts, normalize_profile, run_final_audit
 
 
+def _complete_class_metrics() -> dict[str, object]:
+    return {
+        "per_class": {"ball": {"ap": 0.4}, "bat": {"ap": 0.5}},
+        "class_diagnostics": {
+            "ball": {"gt_count": 2, "prediction_count": 2},
+            "bat": {"gt_count": 1, "prediction_count": 1},
+        },
+    }
+
+
 def test_candidate_uses_exact_quality_and_hardware_fields() -> None:
     metrics = {
         "map50_95": 0.51,
@@ -65,6 +75,19 @@ def test_final_audit_rejects_missing_or_selection_eligible_b0_reference(tmp_path
     assert "B0 reference must be data-exposed and selection-ineligible" in result["errors"]
 
 
+def test_final_audit_rejects_metrics_without_ball_and_bat_sections(tmp_path: Path) -> None:
+    metrics = tmp_path / "evaluation" / "val" / "b0" / "metrics.json"
+    metrics.parent.mkdir(parents=True)
+    metrics.write_text("{}")
+
+    result = run_final_audit(tmp_path)
+
+    assert "missing val per_class class ball: B0" in result["errors"]
+    assert "missing val per_class class bat: B0" in result["errors"]
+    assert "missing val class_diagnostics class ball: B0" in result["errors"]
+    assert "missing val class_diagnostics class bat: B0" in result["errors"]
+
+
 def test_final_audit_accepts_one_complete_phase1_matrix(tmp_path: Path) -> None:
     for stage in ("b1_a", "b1_b", "formal_m7", "formal_m0", "formal_m1", "formal_m2", "formal_m3"):
         path = tmp_path / "training" / stage
@@ -77,7 +100,7 @@ def test_final_audit_accepts_one_complete_phase1_matrix(tmp_path: Path) -> None:
         for variant in ("B0", "B1", "M7", "M0", "M1", "M2", "M3"):
             path = tmp_path / "evaluation" / split / variant.lower()
             path.mkdir(parents=True)
-            (path / "metrics.json").write_text("{}")
+            (path / "metrics.json").write_text(json.dumps(_complete_class_metrics()))
     for variant in ("B0", "B1", "M7", "M0", "M1", "M2", "M3"):
         path = tmp_path / "profiles" / variant.lower()
         path.mkdir(parents=True)
