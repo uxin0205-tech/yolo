@@ -273,11 +273,17 @@ def _attention_only_delta_diagnostics(
 
     max_frozen = max(frozen_deltas, default=float("inf"))
     max_frozen_bn = max(frozen_bn_deltas, default=float("inf"))
+    # Ultralytics updates every floating tensor in the epoch EMA. Even a
+    # mathematically unchanged frozen tensor can therefore accumulate a few
+    # ulps of round-off. Keep the proof fail-closed, but compare EMA tensors
+    # with an explicit absolute tolerance instead of impossible bit equality.
+    frozen_parameter_atol = 1e-5
+    frozen_bn_buffer_atol = 1e-5
     passed = (
         not missing_frozen
         and not missing_bn_buffers
-        and max_frozen == 0.0
-        and max_frozen_bn == 0.0
+        and max_frozen <= frozen_parameter_atol
+        and max_frozen_bn <= frozen_bn_buffer_atol
         and bool(changed_source_attention)
     )
     return {
@@ -287,6 +293,9 @@ def _attention_only_delta_diagnostics(
         "max_frozen_parameter_delta": max_frozen,
         "frozen_non_attention_bn_buffer_count": len(frozen_bn_deltas),
         "max_frozen_non_attention_bn_buffer_delta": max_frozen_bn,
+        "frozen_parameter_atol": frozen_parameter_atol,
+        "frozen_non_attention_bn_buffer_atol": frozen_bn_buffer_atol,
+        "comparison_policy": "absolute tolerance for epoch-EMA floating-point round-off",
         "changed_source_attention_tensor_count": len(changed_source_attention),
         "changed_source_attention_parameter_names": changed_source_attention,
         "missing_frozen_parameter_names": missing_frozen,

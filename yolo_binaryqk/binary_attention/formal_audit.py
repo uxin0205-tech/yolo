@@ -27,6 +27,8 @@ T6_CANDIDATES = ("T6-O", "T6-F", "T6-A", "T6-O/F", "T6-O/A", "T6-F/A")
 T7_CANDIDATES = ("T7-D", "T7-R", "T7-P", "T7-V", "T7-PV")
 N4_CANDIDATES = ("N4-FP", "N4-I8", "N4-I4")
 EXPECTED_EPOCHS = {"validation": 0, "full": 10}
+EMA_FROZEN_PARAMETER_ATOL = 1e-5
+EMA_FROZEN_BN_BUFFER_ATOL = 1e-5
 VARIANT_FIELDS = (
     "id", "attention_type", "qk_mode", "use_qat", "use_distillation",
     "distillation_type", "kd_components", "bias_type", "p_bits", "v_bits",
@@ -150,6 +152,14 @@ def _check_run(root: Path, variant: str, stage: str) -> tuple[Path | None, list[
     score = metrics.get("mAP50_95")
     if not isinstance(score, (int, float)) or not math.isfinite(score):
         missing.append("validation_metrics.mAP50_95")
+    for key in ("coco_mAP50_95", "coco_mAP50", "coco_mAP75", "mAPs", "mAPm", "mAPl"):
+        value = metrics.get(key)
+        if not isinstance(value, (int, float)) or not math.isfinite(value) or not 0.0 <= value <= 1.0:
+            missing.append(f"validation_metrics.{key}")
+    if not isinstance(metrics.get("area_metrics_annotation_sha256"), str):
+        missing.append("validation_metrics.area_metrics_annotation_sha256")
+    if not checkpoint.is_file() or metrics.get("area_metrics_checkpoint_sha256") != _sha256(checkpoint):
+        missing.append("validation_metrics.area_metrics_checkpoint_sha256")
     if status.get("stage") != stage:
         missing.append(f"status.stage={stage}")
     expected_manifest = str((root / "data" / "coco_full.txt").resolve())
@@ -228,13 +238,31 @@ def _check_run(root: Path, variant: str, stage: str) -> tuple[Path | None, list[
                 missing.append("checkpoint_manifest.quantization_contract")
         if not (run / "parameter_delta_diagnostics.json").exists():
             missing.append("parameter_delta_diagnostics.json")
-        if parameter_deltas.get("variant_id") != variant or parameter_deltas.get("passed") is not True:
+        max_frozen_parameter_delta = parameter_deltas.get("max_frozen_parameter_delta")
+        max_frozen_bn_delta = parameter_deltas.get("max_frozen_non_attention_bn_buffer_delta")
+        missing_frozen_parameters = parameter_deltas.get("missing_frozen_parameter_names")
+        missing_frozen_bn_buffers = parameter_deltas.get("missing_frozen_bn_buffer_names")
+        changed_attention_count = parameter_deltas.get("changed_source_attention_tensor_count")
+        delta_proof_passed = (
+            parameter_deltas.get("variant_id") == variant
+            and isinstance(max_frozen_parameter_delta, (int, float))
+            and math.isfinite(max_frozen_parameter_delta)
+            and max_frozen_parameter_delta <= EMA_FROZEN_PARAMETER_ATOL
+            and isinstance(max_frozen_bn_delta, (int, float))
+            and math.isfinite(max_frozen_bn_delta)
+            and max_frozen_bn_delta <= EMA_FROZEN_BN_BUFFER_ATOL
+            and missing_frozen_parameters == []
+            and missing_frozen_bn_buffers == []
+            and isinstance(changed_attention_count, int)
+            and changed_attention_count > 0
+        )
+        if not delta_proof_passed:
             missing.append("attention-only parameter delta proof")
-        if parameter_deltas.get("max_frozen_parameter_delta") != 0.0:
-            missing.append("frozen parameter tensors changed from FP source")
-        if parameter_deltas.get("max_frozen_non_attention_bn_buffer_delta") != 0.0:
-            missing.append("frozen non-attention BN buffers changed from FP source")
-        if not isinstance(parameter_deltas.get("changed_source_attention_tensor_count"), int) or parameter_deltas.get("changed_source_attention_tensor_count") <= 0:
+        if not isinstance(max_frozen_parameter_delta, (int, float)) or max_frozen_parameter_delta > EMA_FROZEN_PARAMETER_ATOL:
+            missing.append("frozen parameter delta exceeds epoch-EMA numerical tolerance")
+        if not isinstance(max_frozen_bn_delta, (int, float)) or max_frozen_bn_delta > EMA_FROZEN_BN_BUFFER_ATOL:
+            missing.append("frozen non-attention BN buffer delta exceeds epoch-EMA numerical tolerance")
+        if not isinstance(changed_attention_count, int) or changed_attention_count <= 0:
             missing.append("no source-initialized Attention tensor changed")
         formal_log = run / "logs" / "formal.log"
         if not formal_log.exists() or formal_log.stat().st_size == 0:
@@ -457,6 +485,8 @@ def audit_formal_plan(root: Path) -> dict:
         "binary_attention_final_report.md",
         "binary_attention_summary.json",
         "binary_attention_summary.csv",
+        "coco_area_metrics.json",
+        "coco_area_metrics.csv",
         "run_reports_index.md",
         "paper_qat_selection.json",
     )
@@ -477,6 +507,7 @@ def audit_formal_plan(root: Path) -> dict:
         "fake quantization",
         "T6",
         "N4",
+        "APs/APm/APl",
     ):
         if required_text not in final_text:
             errors.append(f"final report missing disclosure: {required_text}")
@@ -523,13 +554,85 @@ def audit_formal_plan(root: Path) -> dict:
         if matching[-1].get("mAP50_95") != expected_score:
             errors.append(f"summary mAP50_95 disagrees with audited run {variant}")
 
+    area_summary = _read(reports / "coco_area_metrics.json")
+    area_rows = area_summary.get("records")
+    if area_summary.get("variant_count") != len(expected) or not isinstance(area_rows, list):
+        errors.append("COCO area metrics summary must contain 26 variants")
+        area_rows = []
+    area_variants = {str(row.get("variant")) for row in area_rows if isinstance(row, dict)}
+    if area_variants != expected:
+        errors.append("COCO area metrics summary variant set")
+
+    weight_archive = root / "artifacts" / "final_weights"
+    weight_manifest = _read(weight_archive / "manifest.json")
+    weight_rows = weight_manifest.get("weights")
+    if weight_manifest.get("variant_count") != len(expected) or not isinstance(weight_rows, list):
+        errors.append("final_weights manifest must contain 26 canonical weights")
+        weight_rows = []
+    rows_by_variant = {
+        str(row.get("variant")): row for row in weight_rows if isinstance(row, dict)
+    }
+    if len(rows_by_variant) != len(expected):
+        errors.append("final_weights manifest contains missing or duplicate variants")
+    for variant in sorted(expected):
+        row = rows_by_variant.get(variant)
+        relative_run = runs.get(variant)
+        if not isinstance(row, dict) or relative_run is None:
+            errors.append(f"final_weights missing variant {variant}")
+            continue
+        run = root / relative_run
+        status = _read(run / "status.json")
+        resolved = _read(run / "resolved_config.json")
+        source_name = "strict-validation.pt" if status.get("stage") == "validation" else "strict-last.pt"
+        expected_source = run / "checkpoints" / source_name
+        archived = root / str(row.get("archived_weight", ""))
+        if not archived.is_file() or not expected_source.is_file():
+            errors.append(f"final_weights missing weight file {variant}")
+            continue
+        archived_hash = _sha256(archived)
+        source_hash = _sha256(expected_source)
+        if archived_hash != source_hash or row.get("sha256") != archived_hash:
+            errors.append(f"final_weights hash mismatch {variant}")
+        if row.get("source_run") != relative_run:
+            errors.append(f"final_weights source run mismatch {variant}")
+        if row.get("config_hash") != resolved.get("config_hash"):
+            errors.append(f"final_weights config hash mismatch {variant}")
+        if row.get("size_bytes") != archived.stat().st_size:
+            errors.append(f"final_weights size mismatch {variant}")
+        if row.get("strict_reload_verified") is not True:
+            errors.append(f"final_weights strict reload not verified {variant}")
+        run_metrics = _read(run / "validation_metrics.json")
+        for key in ("coco_mAP50_95", "mAPs", "mAPm", "mAPl"):
+            if row.get(key) != run_metrics.get(key):
+                errors.append(f"final_weights {key} mismatch {variant}")
+
+    observed_parameter_deltas = []
+    observed_bn_deltas = []
+    for relative in runs.values():
+        diagnostics = _read(root / relative / "parameter_delta_diagnostics.json")
+        parameter_delta = diagnostics.get("max_frozen_parameter_delta")
+        bn_delta = diagnostics.get("max_frozen_non_attention_bn_buffer_delta")
+        if isinstance(parameter_delta, (int, float)) and math.isfinite(parameter_delta):
+            observed_parameter_deltas.append(float(parameter_delta))
+        if isinstance(bn_delta, (int, float)) and math.isfinite(bn_delta):
+            observed_bn_deltas.append(float(bn_delta))
+
     return {
         "ok": not errors,
         "plan_name": PLAN_NAME,
         "expected_variant_count": len(expected),
         "expected_research_run_count": len(E_VARIANTS) + len(FORMAL_VARIANTS),
         "verified_variant_count": len(runs),
+        "archived_weight_count": len(rows_by_variant),
+        "area_metric_count": len(area_rows),
         "selected_best_variant": selected_variant,
+        "freeze_delta_policy": {
+            "reason": "epoch EMA floating-point updates can round unchanged frozen tensors",
+            "parameter_atol": EMA_FROZEN_PARAMETER_ATOL,
+            "non_attention_bn_buffer_atol": EMA_FROZEN_BN_BUFFER_ATOL,
+            "max_observed_frozen_parameter_delta": max(observed_parameter_deltas, default=None),
+            "max_observed_frozen_non_attention_bn_buffer_delta": max(observed_bn_deltas, default=None),
+        },
         "runs": runs,
         "errors": errors,
     }

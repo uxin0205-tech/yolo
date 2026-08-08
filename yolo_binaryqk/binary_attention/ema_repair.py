@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 from pathlib import Path
 
@@ -20,6 +21,25 @@ def _write_json(path: Path, value: dict) -> None:
 def _variant_from_run(run: Path):
     resolved = json.loads((run / "resolved_config.json").read_text())
     return variant_from_resolved_config(resolved)
+
+
+def _ema_checkpoint_epoch(run: Path, payload: dict) -> tuple[int, str]:
+    """Recover the completed epoch when Ultralytics stripped it from last.pt."""
+
+    checkpoint_epoch = payload.get("epoch", -1)
+    if isinstance(checkpoint_epoch, int) and checkpoint_epoch >= 0:
+        return checkpoint_epoch + 1, "last.pt epoch metadata"
+    curves = run / "training_curves.csv"
+    if not curves.exists():
+        curves = run / "ultralytics" / "train" / "results.csv"
+    try:
+        with curves.open(newline="") as handle:
+            completed_epochs = sum(1 for _row in csv.DictReader(handle))
+    except OSError:
+        completed_epochs = 0
+    if completed_epochs <= 0:
+        raise ValueError("cannot recover EMA checkpoint epoch from stripped last.pt or training curves")
+    return completed_epochs, f"{curves.name} completed-row count; last.pt epoch metadata stripped"
 
 
 def repair_run(run: Path, source_weights: Path) -> Path:
@@ -43,11 +63,13 @@ def repair_run(run: Path, source_weights: Path) -> Path:
     model.load_state_dict(serialized.float().state_dict(), strict=True)
     freeze_to_attention_only(model)
     finalize_training_artifact(run, model, variant, source_weights=source_weights)
+    ema_checkpoint_epoch, epoch_evidence = _ema_checkpoint_epoch(run, payload)
     provenance = {
         "checkpoint_weight_source": "epoch_ema",
         "metrics_weight_source": "epoch_ema",
         "ema_repair_source": str(last.resolve()),
-        "ema_checkpoint_epoch": int(payload.get("epoch", -1)) + 1,
+        "ema_checkpoint_epoch": ema_checkpoint_epoch,
+        "ema_checkpoint_epoch_evidence": epoch_evidence,
     }
     for name in ("status.json", "training_args.json"):
         path = run / name

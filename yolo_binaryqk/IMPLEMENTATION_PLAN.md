@@ -1,5 +1,8 @@
 # YOLO11 BinaryAttention corrected attention-only QAT plan
 
+> 狀態：正式矩陣已完成並通過 final audit。日常維護、報告重建、權重封存與清理
+> 請依 [`OPERATIONS.md`](OPERATIONS.md)；本文件保留作為實驗設計與訓練契約。
+
 本計畫保留 T0→T1→T2→T3→T4→T5/N 完整實驗矩陣，並依最新要求將正式訓練
 改為 10 epochs、只更新 attention parameters，其餘 YOLO11m parameters 全部凍結。
 

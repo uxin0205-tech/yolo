@@ -520,4 +520,4 @@ print(path)
 PY
 "$PY" -u -m binary_attention.cli report > "$LOG_DIR/final-report.log" 2>&1
 "$PY" -u -m binary_attention.cli audit > "$LOG_DIR/final-audit.json" 2>&1
-log "CORRECTED MATRIX COMPLETE: selected=$selected_variant"
+log "FORMAL PLAN COMPLETE: corrected matrix selected=$selected_variant"

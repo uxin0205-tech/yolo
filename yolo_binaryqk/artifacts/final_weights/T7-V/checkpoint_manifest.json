@@ -1,0 +1,29 @@
+{
+  "attention_class": "ResidualDualFullBasisAttention",
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "bias_type": "dense_2d",
+  "binary_forward_count": 3131,
+  "distillation_enabled": true,
+  "distillation_type": "positional+feature",
+  "experiment_schema_version": 3,
+  "magnitude_bits": null,
+  "model_yaml_hash": "30ec3de4cb075a257db198e1044cca30fd5a37a49008a955474169c4409df39e",
+  "p_bits": null,
+  "quantization_contract": {
+    "bias_initialization": "truncated_normal_std_0.02",
+    "bias_parameterization": "full_2d_relative_position",
+    "p8_scale": "none",
+    "qk_scale": "residual_basis_channel_per_token",
+    "v8_scale": "max_abs_token_per_sample_head_channel"
+  },
+  "quantizer_types": {
+    "model.10.m.0.attn": "V8"
+  },
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "v_bits": 8,
+  "variant_config_hash": "2effb19317703f4c3e071235be7bdf0170dee51781c5b72574f13a8eaf59aeb5",
+  "variant_id": "T7-V"
+}
