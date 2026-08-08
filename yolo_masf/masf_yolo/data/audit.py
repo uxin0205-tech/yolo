@@ -64,8 +64,10 @@ def _index_dataset(source_root: Path) -> list[_Record]:
             records.append(
                 _Record(
                     record_id=f"{partition}/{image_path.name}",
-                    image_path=image_path.resolve(),
-                    label_path=label_path.resolve(),
+                    # Keep the detect-view path intact. Resolving an image symlink
+                    # makes Ultralytics infer labels beside the backing pose image.
+                    image_path=image_path.absolute(),
+                    label_path=label_path.absolute(),
                     original_stem=original_stem,
                     source_key=derive_source_key(original_stem),
                     content_hash=sha256_file(image_path.resolve()),
