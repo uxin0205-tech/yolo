@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 
 import pytest
 
+from masf_yolo.contracts import PipelineState
 from masf_yolo.workflow import PHASE1_STAGES, PipelineWorkflow, StageResult
 
 
@@ -52,6 +54,40 @@ def test_workflow_reuses_only_hash_valid_completed_stage(tmp_path: Path) -> None
     changed = PipelineWorkflow(tmp_path, pipeline_id="p1", common_input_hashes={"config": "c2"})
     changed.run_stage("audit", action)
     assert calls == ["audit", "audit"]
+
+
+def test_stale_running_smoke_m7_is_restarted_with_incremented_attempt(tmp_path: Path) -> None:
+    calls: list[str] = []
+    workflow = PipelineWorkflow(
+        tmp_path,
+        pipeline_id="p1",
+        common_input_hashes={"config": "c1"},
+    )
+    names = [stage.name for stage in PHASE1_STAGES]
+    for name in names[: names.index("smoke_m7")]:
+        workflow.run_stage(name, lambda name=name: StageResult({name: f"{name}-hash"}))
+    stale = PipelineState(
+        pipeline_id="p1",
+        stage="smoke_m7",
+        status="running",
+        attempt=4,
+        epoch=None,
+        input_hashes={"config": "c1", "m7_gate:m7_gate": "m7_gate-hash"},
+        output_hashes={},
+    )
+    smoke_path = tmp_path / "stages" / "smoke_m7.json"
+    smoke_path.write_text(json.dumps(stale.to_dict()))
+
+    workflow.run_stage(
+        "smoke_m7",
+        lambda: (calls.append("smoke_m7") or StageResult({"canonical": "new-hash"})),
+    )
+    recovered = PipelineState.from_dict(json.loads(smoke_path.read_text()))
+
+    assert calls == ["smoke_m7"]
+    assert recovered.attempt == stale.attempt + 1
+    assert recovered.status == "completed"
+    assert recovered.output_hashes == {"canonical": "new-hash"}
 
 
 def test_workflow_refuses_stage_before_dependencies(tmp_path: Path) -> None:

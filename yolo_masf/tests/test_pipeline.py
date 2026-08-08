@@ -3,8 +3,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from masf_yolo.evaluation.profiling import HardwareProfile
-from masf_yolo.pipeline import candidate_from_artifacts, normalize_profile, run_final_audit
+from masf_yolo.contracts import PipelineState
+from masf_yolo.pipeline import FormalPipeline, candidate_from_artifacts, normalize_profile, run_final_audit
+from masf_yolo.workflow import PHASE1_STAGES, PipelineWorkflow, StageResult
 
 
 def _complete_class_metrics() -> dict[str, object]:
@@ -121,3 +125,73 @@ def test_final_audit_accepts_one_complete_phase1_matrix(tmp_path: Path) -> None:
     result = run_final_audit(tmp_path)
 
     assert result == {"ok": True, "errors": [], "best_partial": "M3"}
+
+
+def test_formal_pipeline_reuses_predecessors_and_restarts_only_stale_smoke_m7(
+    tmp_path: Path,
+) -> None:
+    workflow = PipelineWorkflow(
+        tmp_path,
+        pipeline_id="p1",
+        common_input_hashes={"config": "c1"},
+    )
+    names = [stage.name for stage in PHASE1_STAGES]
+    for name in names[: names.index("smoke_m7")]:
+        workflow.run_stage(name, lambda name=name: StageResult({name: f"{name}-hash"}))
+    stale = PipelineState(
+        pipeline_id="p1",
+        stage="smoke_m7",
+        status="running",
+        attempt=1,
+        epoch=None,
+        input_hashes={"config": "c1", "m7_gate:m7_gate": "m7_gate-hash"},
+        output_hashes={},
+    )
+    smoke_path = tmp_path / "stages" / "smoke_m7.json"
+    smoke_path.write_text(json.dumps(stale.to_dict()))
+    predecessor_calls: list[str] = []
+    training_calls: list[str] = []
+
+    class StopAfterSmoke(RuntimeError):
+        pass
+
+    def unexpected(name: str):
+        def action() -> StageResult:
+            predecessor_calls.append(name)
+            return StageResult({name: "unexpected"})
+
+        return action
+
+    def train(stage: str, variant_id: str) -> StageResult:
+        if stage != "smoke_m7":
+            raise StopAfterSmoke(stage)
+        training_calls.append(f"{stage}:{variant_id}")
+        return StageResult({"canonical": "smoke-m7-hash"})
+
+    pipeline = object.__new__(FormalPipeline)
+    pipeline.artifact_root = tmp_path
+    pipeline.workflow = workflow
+    pipeline._train = train
+    for method_name in (
+        "_audit",
+        "_verify",
+        "_preflight",
+        "_batch_probe",
+        "_m7_gate",
+        "_baseline_b0",
+        "_select",
+        "_profile_all",
+        "_final_audit",
+        "_report",
+    ):
+        setattr(pipeline, method_name, unexpected(method_name))
+    pipeline._evaluate = lambda split: unexpected(f"evaluate_{split}")()
+
+    with pytest.raises(StopAfterSmoke, match="formal_m7"):
+        pipeline.execute()
+
+    assert predecessor_calls == []
+    assert training_calls == ["smoke_m7:M7"]
+    recovered = PipelineState.from_dict(json.loads(smoke_path.read_text()))
+    assert recovered.status == "completed"
+    assert recovered.attempt == 2

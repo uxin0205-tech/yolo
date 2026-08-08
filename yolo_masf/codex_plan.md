@@ -636,6 +636,11 @@ Tasks 1–9 record the original five-variant implementation and its completed re
 
   Start the existing pipeline identity through `pipeline start`. Require B1-A and B1-B stage manifests to be reused/completed, B1-B CSV to remain 91 lines including header, and the live stage to reach `m7_gate`, `smoke_m7`, or `formal_m7`. Any attempt to launch B1 training is a permanent acceptance failure and the service must be stopped.
 
+  Automated recovery coverage now seeds completed predecessors plus a stale
+  `smoke_m7` state and proves only `smoke_m7` is invoked, its attempt increments,
+  and all B1/preflight handlers remain unused. Real-service acceptance remains
+  unchecked until launch.
+
 - [ ] **Step 7: Notify and monitor terminal acceptance**
 
   Immediately report the verified M7 launch with unit/PID/stage and explain systemd persistence. At terminal completion require canonical B1-A/B/M7/M0–M3, B0 reference, all seven val/test/profile sets, immutable M2/M3 selection, `final_audit.ok=true`, zero errors, and a human-readable report that carries the B0 exposure warning.
