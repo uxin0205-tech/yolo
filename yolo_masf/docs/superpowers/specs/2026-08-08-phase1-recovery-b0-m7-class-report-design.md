@@ -67,6 +67,22 @@ service with bounded restart behavior, OOM containment, and memory accounting.
 It must continue when Codex or the interactive shell is closed. Status and report
 commands are read-only operator entry points for a later session.
 
+## Confirmed Context
+
+- B1-A completed 10 epochs and has a canonical strict checkpoint.
+- B1-B completed all 90 epochs. Its `results.csv` has 90 data rows and its
+  loadable `best.pt` and `last.pt` are each approximately 40 MB.
+- B1-B was killed during Ultralytics' duplicate final validation, after weights
+  were stripped and after epoch 90 validation had already completed.
+- Kernel evidence records a global OOM kill, a 13.1 GB service memory peak,
+  2.7 GB swap peak, and 88 leaked multiprocessing semaphores.
+- On restart, the pipeline treated the completed stripped `last.pt` as
+  resumable. Ultralytics correctly rejected it with “training to 90 epochs is
+  finished, nothing to resume.”
+- B0 is `bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt`, SHA-256 `9adacdd1a86cde27b7568c0756ca06f7be83160445fc90a10449206c82b06f4d`.
+- B0 metadata shows Ultralytics 8.4.90, classes `ball` and `bat`, strides
+  `[8, 16, 32]`, and a detection model.
+
 ## Interruption and Error Handling
 
 Recovery is fail-closed:

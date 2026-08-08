@@ -616,11 +616,11 @@ Tasks 1–9 record the original five-variant implementation and its completed re
 
   Document B0 provenance/exposure, M7 equation and priority, 615 total planned epochs, completed-run classification, no duplicate final validation, worker boundaries, B1-B recovery evidence, and exact status/log/report commands.
 
-- [ ] **Step 2: Run the complete fresh verification suite**
+- [x] **Step 2: Run the complete fresh verification suite**
 
   Run `../.venv/bin/python -m pytest -q`, `../.venv/bin/python -m compileall -q masf_yolo tests`, `git diff --check`, and CLI import/help smoke. Record exact pass/fail counts; any failure blocks commit and restart.
 
-- [ ] **Step 3: Perform real recovery and B0/M7 gates before launch**
+- [x] **Step 3: Perform real recovery and B0/M7 gates before launch**
 
   Classify B1-B as complete, finalize canonical in a fresh subprocess, strict-load and fresh-val it, prove `results.csv` remains 90 epochs, inspect B0, and run M7 batch-16 GPU gate. Do not start the service until every artifact hash and gate passes.
 
