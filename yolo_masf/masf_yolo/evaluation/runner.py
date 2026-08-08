@@ -16,8 +16,7 @@ from faster_coco_eval import COCO, COCOeval_faster
 from masf_yolo.artifacts.io import atomic_write_json
 
 from .metrics import (
-    ball_observations_from_coco,
-    summarize_ball_subsets,
+    summarize_class_diagnostics,
     translate_predictions_to_letterbox,
 )
 from .galleries import write_false_positive_gallery
@@ -38,7 +37,7 @@ def _run_evaluator(
     ground_truth: dict[str, Any],
     predictions: list[dict[str, Any]],
     category_ids: list[int] | None = None,
-) -> list[float]:
+) -> list[float | None]:
     coco_gt = COCO()
     coco_gt.dataset = ground_truth
     coco_gt.createIndex()
@@ -73,6 +72,12 @@ def evaluate_coco(
             "ap50": class_stats[1],
             "ap75": class_stats[2],
             "ap_s": class_stats[3],
+            "ap_m": class_stats[4],
+            "ap_l": class_stats[5],
+            "ar100": class_stats[8],
+            "ar_s": class_stats[9],
+            "ar_m": class_stats[10],
+            "ar_l": class_stats[11],
             "gt_count": sum(
                 int(annotation["category_id"]) == category_id
                 for annotation in ground_truth["annotations"]
@@ -87,6 +92,44 @@ def evaluate_coco(
         "ap_m": stats[4],
         "ap_l": stats[5],
         "per_class": per_class,
+    }
+
+
+def assemble_evaluation_results(
+    *,
+    checkpoint: Path,
+    split: str,
+    ground_truth: dict[str, Any],
+    predictions: list[dict[str, Any]],
+    coco_metrics: dict[str, Any],
+    ultralytics_results: dict[str, Any],
+) -> dict[str, Any]:
+    class_diagnostics = {
+        "ball": summarize_class_diagnostics(
+            ground_truth,
+            predictions,
+            category_id=0,
+        ),
+        "bat": summarize_class_diagnostics(
+            ground_truth,
+            predictions,
+            category_id=1,
+        ),
+    }
+    ball = class_diagnostics["ball"]
+    return {
+        **coco_metrics,
+        "split": split,
+        "checkpoint": str(checkpoint.resolve()),
+        "class_diagnostics": class_diagnostics,
+        "ball_recall": ball["recall"],
+        "ball_gt_count": ball["gt_count"],
+        "ball_ap": coco_metrics["per_class"]["ball"]["ap"],
+        "ball_ap_s": coco_metrics["per_class"]["ball"]["ap_s"],
+        "ball_subsets": ball["subsets"],
+        "ultralytics": {
+            key: float(value) for key, value in ultralytics_results.items()
+        },
     }
 
 
@@ -118,23 +161,14 @@ def run_variant_evaluation(
     ground_truth = json.loads(coco_path.read_text(encoding="utf-8"))
     predictions = translate_predictions_to_letterbox(raw_predictions, ground_truth)
     coco_metrics = evaluate_coco(ground_truth, predictions)
-    observations = ball_observations_from_coco(ground_truth, predictions)
-    subsets = summarize_ball_subsets(observations)
-    ball_count = len(observations)
-    ball_recall = sum(observation.matched for observation in observations) / ball_count if ball_count else None
-    results = {
-        **coco_metrics,
-        "split": split,
-        "checkpoint": str(checkpoint.resolve()),
-        "ball_recall": ball_recall,
-        "ball_gt_count": ball_count,
-        "ball_ap": coco_metrics["per_class"]["ball"]["ap"],
-        "ball_ap_s": coco_metrics["per_class"]["ball"]["ap_s"],
-        "ball_subsets": subsets,
-        "ultralytics": {
-            key: float(value) for key, value in ultralytics_metrics.results_dict.items()
-        },
-    }
+    results = assemble_evaluation_results(
+        checkpoint=checkpoint,
+        split=split,
+        ground_truth=ground_truth,
+        predictions=predictions,
+        coco_metrics=coco_metrics,
+        ultralytics_results=ultralytics_metrics.results_dict,
+    )
     atomic_write_json(output_dir / "predictions.letterbox.json", predictions)
     atomic_write_json(output_dir / "metrics.json", results)
     write_false_positive_gallery(ground_truth, predictions, output_dir)

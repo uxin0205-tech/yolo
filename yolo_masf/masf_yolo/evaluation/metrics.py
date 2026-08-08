@@ -8,10 +8,13 @@ from typing import Any
 
 
 @dataclass(frozen=True, slots=True)
-class BallObservation:
+class ObjectObservation:
     short_side: float
     aspect_ratio: float
     matched: bool
+
+
+BallObservation = ObjectObservation
 
 
 def translate_predictions_to_letterbox(
@@ -64,26 +67,32 @@ def _iou(left: list[float], right: list[float]) -> float:
     return intersection / union if union > 0 else 0.0
 
 
-def ball_observations_from_coco(
+def _match_category(
     ground_truth: dict[str, Any],
     predictions: list[dict[str, Any]],
     *,
+    category_id: int,
     iou_threshold: float = 0.5,
-) -> list[BallObservation]:
+) -> tuple[list[ObjectObservation], int, int]:
     annotations = [
         annotation for annotation in ground_truth["annotations"]
-        if int(annotation["category_id"]) == 0
+        if int(annotation["category_id"]) == category_id
     ]
     by_image: dict[int, list[int]] = {}
     for index, annotation in enumerate(annotations):
         by_image.setdefault(int(annotation["image_id"]), []).append(index)
     matched: set[int] = set()
-    ball_predictions = sorted(
-        (prediction for prediction in predictions if int(prediction["category_id"]) == 0),
+    category_predictions = sorted(
+        (
+            prediction
+            for prediction in predictions
+            if int(prediction["category_id"]) == category_id
+        ),
         key=lambda prediction: float(prediction["score"]),
         reverse=True,
     )
-    for prediction in ball_predictions:
+    matched_predictions = 0
+    for prediction in category_predictions:
         candidates = [
             index for index in by_image.get(int(prediction["image_id"]), []) if index not in matched
         ]
@@ -92,16 +101,32 @@ def ball_observations_from_coco(
         best = max(candidates, key=lambda index: _iou(prediction["bbox"], annotations[index]["bbox"]))
         if _iou(prediction["bbox"], annotations[best]["bbox"]) >= iou_threshold:
             matched.add(best)
-    observations: list[BallObservation] = []
+            matched_predictions += 1
+    observations: list[ObjectObservation] = []
     for index, annotation in enumerate(annotations):
         width, height = annotation["bbox"][2:]
         observations.append(
-            BallObservation(
+            ObjectObservation(
                 short_side=float(annotation.get("short_side", min(width, height))),
                 aspect_ratio=max(width, height) / min(width, height),
                 matched=index in matched,
             )
         )
+    return observations, len(category_predictions), matched_predictions
+
+
+def ball_observations_from_coco(
+    ground_truth: dict[str, Any],
+    predictions: list[dict[str, Any]],
+    *,
+    iou_threshold: float = 0.5,
+) -> list[BallObservation]:
+    observations, _, _ = _match_category(
+        ground_truth,
+        predictions,
+        category_id=0,
+        iou_threshold=iou_threshold,
+    )
     return observations
 
 
@@ -125,4 +150,32 @@ def summarize_ball_subsets(
         "blur_proxy": _result(
             [observation for observation in observations if observation.aspect_ratio > 2]
         ),
+    }
+
+
+def summarize_class_diagnostics(
+    ground_truth: dict[str, Any],
+    predictions: list[dict[str, Any]],
+    *,
+    category_id: int,
+    iou_threshold: float = 0.5,
+) -> dict[str, Any]:
+    observations, prediction_count, true_positive_count = _match_category(
+        ground_truth,
+        predictions,
+        category_id=category_id,
+        iou_threshold=iou_threshold,
+    )
+    gt_count = len(observations)
+    return {
+        "gt_count": gt_count,
+        "prediction_count": prediction_count,
+        "true_positive_count": true_positive_count,
+        "missed_count": gt_count - true_positive_count,
+        "false_positive_count": prediction_count - true_positive_count,
+        "precision": (
+            true_positive_count / prediction_count if prediction_count else None
+        ),
+        "recall": true_positive_count / gt_count if gt_count else None,
+        "subsets": summarize_ball_subsets(observations),
     }
