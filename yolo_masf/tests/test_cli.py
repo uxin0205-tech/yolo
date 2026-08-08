@@ -40,6 +40,8 @@ def test_systemd_command_uses_absolute_paths_and_one_service() -> None:
 
     assert command[:4] == ["systemd-run", "--user", "--unit", "masf-yolo-phase1-abcd"]
     assert command.count("--unit") == 1
+    assert "--property=OOMPolicy=continue" in command
+    assert "--property=MemoryAccounting=yes" in command
     assert "/work/.venv/bin/python" in command
     assert command[-5:] == [
         "-m",

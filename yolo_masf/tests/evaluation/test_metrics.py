@@ -56,7 +56,8 @@ def test_ultralytics_original_coordinates_translate_to_locked_letterbox_space() 
         {
             "image_id": "frame",
             "file_name": "frame.jpg",
-            "category_id": 0,
+            # Ultralytics save_json uses 1-based category IDs for custom data.
+            "category_id": 1,
             "bbox": [576.0, 288.0, 128.0, 144.0],
             "score": 0.9,
         }
@@ -65,7 +66,30 @@ def test_ultralytics_original_coordinates_translate_to_locked_letterbox_space() 
     translated = translate_predictions_to_letterbox(predictions, ground_truth)
 
     assert translated[0]["image_id"] == 7
+    assert translated[0]["category_id"] == 0
     assert translated[0]["bbox"] == pytest.approx([288.0, 284.0, 64.0, 72.0])
+
+
+def test_ultralytics_one_based_categories_map_to_zero_based_ball_and_bat() -> None:
+    ground_truth = {
+        "images": [
+            {
+                "id": 1,
+                "file_name": "frame.jpg",
+                "source_width": 640,
+                "source_height": 640,
+            }
+        ],
+        "categories": [{"id": 0, "name": "ball"}, {"id": 1, "name": "bat"}],
+    }
+    predictions = [
+        {"file_name": "frame.jpg", "category_id": 1, "bbox": [1, 2, 3, 4], "score": 0.9},
+        {"file_name": "frame.jpg", "category_id": 2, "bbox": [5, 6, 7, 8], "score": 0.8},
+    ]
+
+    translated = translate_predictions_to_letterbox(predictions, ground_truth)
+
+    assert [prediction["category_id"] for prediction in translated] == [0, 1]
 
 
 def test_ball_observations_match_each_prediction_at_most_once() -> None:

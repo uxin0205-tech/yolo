@@ -51,6 +51,16 @@ def test_partial_variants_use_exact_slots_without_global_registry_mutation() -> 
     assert set(tasks.__dict__) == before
 
 
+def test_m7_uses_full_channel_357_slot_and_four_scales() -> None:
+    model = build_model("M7")
+
+    assert isinstance(model.model[P2_SLOT_INDEX], MFAM)
+    assert model.model[P2_SLOT_INDEX].channels == 128
+    assert model.model[P2_SLOT_INDEX].kernels == (3, 5, 7)
+    assert model.stride.tolist() == [4.0, 8.0, 16.0, 32.0]
+    assert model.model[-1].nl == 4
+
+
 def test_detect_receives_p2_p3_p4_p5_feature_shapes() -> None:
     model = build_model("M1").eval()
     captured: list[list[tuple[int, ...]]] = []

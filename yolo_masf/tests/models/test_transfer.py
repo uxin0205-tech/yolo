@@ -61,3 +61,23 @@ def test_variant_transfer_loads_all_b1_tensors_but_keeps_mfam_random() -> None:
     torch.testing.assert_close(m0.state_dict()["model.20.branches.0.conv.weight"], before)
     assert "model.20.branches.0.conv.weight" in report.missing
     assert not report.shape_mismatch
+
+
+def test_m7_transfer_keeps_every_mfam_tensor_random() -> None:
+    b1 = build_model("B1")
+    m7 = build_model("M7")
+    _fill_module(b1, 0.625)
+    before = {
+        key: tensor.clone()
+        for key, tensor in m7.state_dict().items()
+        if key.startswith("model.20.")
+    }
+
+    report = transfer_b1_canonical(m7, b1.state_dict())
+
+    assert torch.all(m7.state_dict()["model.0.conv.weight"] == 0.625)
+    assert before
+    for key, tensor in before.items():
+        torch.testing.assert_close(m7.state_dict()[key], tensor)
+        assert key in report.missing
+    assert not report.shape_mismatch

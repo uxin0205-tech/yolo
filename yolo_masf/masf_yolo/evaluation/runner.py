@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import contextlib
 import copy
 import io
@@ -20,6 +21,17 @@ from .metrics import (
     translate_predictions_to_letterbox,
 )
 from .galleries import write_false_positive_gallery
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--checkpoint", type=Path, required=True)
+    parser.add_argument("--data", type=Path, required=True)
+    parser.add_argument("--coco", type=Path, required=True)
+    parser.add_argument("--split", choices=("val", "test"), required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--device", type=int, default=0)
+    return parser
 
 
 def _run_evaluator(
@@ -127,3 +139,20 @@ def run_variant_evaluation(
     atomic_write_json(output_dir / "metrics.json", results)
     write_false_positive_gallery(ground_truth, predictions, output_dir)
     return results
+
+
+def main() -> None:
+    args = build_parser().parse_args()
+    results = run_variant_evaluation(
+        args.checkpoint,
+        args.data,
+        args.coco,
+        split=args.split,
+        output_dir=args.output,
+        device=args.device,
+    )
+    print(json.dumps(results, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

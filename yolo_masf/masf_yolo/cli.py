@@ -37,6 +37,8 @@ def build_systemd_command(*, config_path: Path, unit: str, python: Path) -> list
         "--property=RestartSec=30s",
         "--property=StartLimitBurst=3",
         "--property=StartLimitIntervalSec=1h",
+        "--property=OOMPolicy=continue",
+        "--property=MemoryAccounting=yes",
         "--collect",
         f"--working-directory={workdir}",
         str(python),

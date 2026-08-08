@@ -29,6 +29,18 @@ pipeline: {max_attempts: 3, device: 0, systemd_unit_prefix: masf-yolo-phase1}
     (artifacts / "dataset" / "manifest.json").write_text(json.dumps({"dataset_hash": "data-hash"}))
     (artifacts / "selection.json").write_text(json.dumps({"selected": "M3", "reason": "efficiency_equivalent"}))
     (artifacts / "final_audit.json").write_text(json.dumps({"ok": True, "errors": []}))
+    reference = artifacts / "references"
+    reference.mkdir()
+    (reference / "b0.json").write_text(
+        json.dumps(
+            {
+                "checkpoint_hash": "9adacdd1a86cde27b7568c0756ca06f7be83160445fc90a10449206c82b06f4d",
+                "provenance": "BBT5 pose checkpoint converted to detect",
+                "data_exposed": True,
+                "selection_eligible": False,
+            }
+        )
+    )
 
     report_path = Path(rebuild_report(config))
     text = report_path.read_text()
@@ -36,3 +48,7 @@ pipeline: {max_attempts: 3, device: 0, systemd_unit_prefix: masf-yolo-phase1}
     assert "BEST_PARTIAL: M3" in text
     assert "data-hash" in text
     assert "Final audit: PASS" in text
+    assert "B0 is pose-derived and data-exposed" in text
+    assert "formal_m7: pending" in text
+    assert "- B0:" in text
+    assert "- M7:" in text

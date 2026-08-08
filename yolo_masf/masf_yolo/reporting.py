@@ -38,6 +38,7 @@ def _atomic_text(path: Path, text: str) -> None:
 
 def rebuild_report(config_path: Path) -> str:
     from masf_yolo.cli import load_config
+    from masf_yolo.variants import EVALUATED_MODELS
 
     config_path = config_path.resolve()
     config = load_config(config_path)
@@ -48,6 +49,7 @@ def rebuild_report(config_path: Path) -> str:
     selection = _load(artifacts / "selection.json") or {}
     final_audit = _load(artifacts / "final_audit.json") or {}
     state = _load(artifacts / "state.json") or {}
+    b0_reference = _load(artifacts / "references" / "b0.json") or {}
     lines = [
         "# MASF-YOLO Phase 1 Report",
         "",
@@ -59,10 +61,25 @@ def rebuild_report(config_path: Path) -> str:
         f"Selection reason: {selection.get('reason', 'not available')}",
         f"Final audit: {'PASS' if final_audit.get('ok') is True else 'INCOMPLETE'}",
         "",
+        "## B0 reference warning",
+        "",
+        "B0 is pose-derived and data-exposed; its metrics are operational reference values, "
+        "not a leak-free comparison.",
+        f"Checkpoint hash: {b0_reference.get('checkpoint_hash', 'missing')}",
+        f"Provenance: {b0_reference.get('provenance', 'missing')}",
+        "",
         "## Training artifacts",
         "",
     ]
-    for stage in ("b1_a", "b1_b", "formal_m0", "formal_m1", "formal_m2", "formal_m3"):
+    for stage in (
+        "b1_a",
+        "b1_b",
+        "formal_m7",
+        "formal_m0",
+        "formal_m1",
+        "formal_m2",
+        "formal_m3",
+    ):
         record = _load(artifacts / "training" / stage / "run.json")
         if record:
             lines.append(
@@ -72,7 +89,7 @@ def rebuild_report(config_path: Path) -> str:
         else:
             lines.append(f"- {stage}: pending")
     lines.extend(["", "## Evaluation and profiling", ""])
-    for variant in ("B1", "M0", "M1", "M2", "M3"):
+    for variant in EVALUATED_MODELS:
         val = _load(artifacts / "evaluation" / "val" / variant.lower() / "metrics.json")
         test = _load(artifacts / "evaluation" / "test" / variant.lower() / "metrics.json")
         profile = _load(artifacts / "profiles" / variant.lower() / "profile.json")

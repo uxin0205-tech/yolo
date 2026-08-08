@@ -38,10 +38,15 @@ def translate_predictions_to_letterbox(
         pad_x = (imgsz - source_width * scale) / 2
         pad_y = (imgsz - source_height * scale) / 2
         x, y, width, height = prediction["bbox"]
+        raw_category_id = int(prediction["category_id"])
+        if raw_category_id < 1:
+            raise ValueError(
+                f"Ultralytics JSON category IDs must be 1-based, got {raw_category_id}"
+            )
         translated.append(
             {
                 "image_id": image["id"],
-                "category_id": int(prediction["category_id"]),
+                "category_id": raw_category_id - 1,
                 "bbox": [x * scale + pad_x, y * scale + pad_y, width * scale, height * scale],
                 "score": float(prediction["score"]),
             }

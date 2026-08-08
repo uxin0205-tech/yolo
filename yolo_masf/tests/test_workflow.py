@@ -17,6 +17,25 @@ def test_phase1_dag_has_selection_before_test_and_no_phase2_nodes() -> None:
         assert set(stage.dependencies) <= set(names[:index])
 
 
+def test_m7_is_gated_and_completed_before_every_legacy_mfam_stage() -> None:
+    stages = {stage.name: stage for stage in PHASE1_STAGES}
+    names = list(stages)
+
+    assert stages["b1_b"].dependencies == ("b1_a",)
+    assert stages["m7_gate"].dependencies == ("b1_b",)
+    assert names.index("m7_gate") < names.index("smoke_m7")
+    assert names.index("smoke_m7") < names.index("formal_m7")
+    assert names.index("formal_m7") < names.index("smoke_m0")
+    assert all(names.index("formal_m7") < names.index(stage) for stage in ("smoke_m0", "formal_m0"))
+
+
+def test_b0_reference_is_inspected_after_training_and_before_validation() -> None:
+    names = [stage.name for stage in PHASE1_STAGES]
+
+    assert names.index("formal_m3") < names.index("baseline_b0")
+    assert names.index("baseline_b0") < names.index("val_all")
+
+
 def test_workflow_reuses_only_hash_valid_completed_stage(tmp_path: Path) -> None:
     calls: list[str] = []
 

@@ -47,6 +47,29 @@ def test_m1_has_only_identity_three_and_five_paths() -> None:
     assert block(torch.randn(2, 4, 9, 11)).shape == (2, 4, 9, 11)
 
 
+def test_m7_sums_identity_three_five_and_one_7_equivalent_path() -> None:
+    block = MFAM(1, kernels=(3, 5, 7)).eval()
+    for branch in block.branches:
+        for module in branch.modules():
+            if hasattr(module, "conv") and hasattr(module, "bn"):
+                _make_conv_identity(module)
+    _make_conv_identity(block.fuse)
+    value = torch.tensor([[[[-1.0, 0.5], [1.0, 2.0]]]], requires_grad=True)
+
+    actual = block(value)
+    first = torch.nn.functional.silu(value)
+    expected = torch.nn.functional.silu(value + 2 * first + torch.nn.functional.silu(first))
+
+    torch.testing.assert_close(actual, expected, rtol=1e-5, atol=1e-6)
+    assert block.kernels == (3, 5, 7)
+    assert len(block.branches) == 3
+    actual.sum().backward()
+    assert value.grad is not None and torch.isfinite(value.grad).all()
+    for parameter in block.parameters():
+        assert parameter.grad is not None
+        assert torch.isfinite(parameter.grad).all()
+
+
 def test_partial_mfam_processes_leading_half_and_preserves_bypass() -> None:
     block = PartialMFAM(8, processed_ratio=0.5, kernels=(3, 5)).eval()
     value = torch.randn(2, 8, 7, 9, requires_grad=True)

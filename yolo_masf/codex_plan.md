@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
-**Goal:** Build a fail-closed, one-command YOLO11m P2/MFAM experiment pipeline that audits BBT5, trains B1 and M0–M3, selects one BEST_PARTIAL using validation only, evaluates it on test, profiles every variant, and emits reproducible artifacts.
+**Goal:** Build a fail-closed, one-command YOLO11m P2/MFAM experiment pipeline that audits BBT5, trains B1, priority M7, and M0–M3, measures the pose-derived B0 detection reference, selects one BEST_PARTIAL using validation only, evaluates it on test, profiles every model, and emits reproducible artifacts.
 
 **Architecture:** A repository-local `masf_yolo` package owns immutable experiment contracts, dataset grouping and split generation, P2/MFAM model construction, training/evaluation adapters, strict checkpoints, and a dependency-DAG workflow. The CLI is the only operator interface; a user systemd transient service runs the workflow independently of an interactive Codex process. Generated datasets, checkpoints, logs, and reports stay under ignored work directories.
 
@@ -10,12 +10,13 @@
 
 ## Global Constraints
 
-- Preserve `MFAM_plan.md` as the research source and implement Phase 1 only: `B1 → M0/M1/M2/M3 → BEST_PARTIAL`.
+- Preserve `MFAM_plan.md` as the research source and implement Phase 1 only: `B1 → priority M7 → M0/M1/M2/M3 → BEST_PARTIAL` plus report-only B0.
 - Use only `../original/weight/yolo11m.pt` for official pretrained initialization; never overwrite it and never initialize formal runs from pose-derived BBT5 weights.
 - Pin and verify Ultralytics `8.4.90`, faster-coco-eval `1.7.2`, the official model/default YAML SHA-256 values, PyTorch/CUDA versions, and source-weight SHA-256 `d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95`.
 - Keep `imgsz=640`, `seed=42`, `deterministic=True`, `amp=True`, optimizer `SGD`, momentum `0.937`, cosine policy, and `nbs=64`; formal variants use one common probed batch size.
-- B1-A trains 10 epochs with official backbone indices `0–10` frozen and `lr0=0.01`; B1-B trains 90 epochs unfrozen with `lr0=0.001`; M0–M3 each run a 3-epoch smoke and a 100-epoch formal run.
-- Formal B1-B and M0–M3 resolved arguments may differ only in model path, output path/name, and epochs.
+- B1-A trains 10 epochs with official backbone indices `0–10` frozen and `lr0=0.01`; B1-B trains 90 epochs unfrozen with `lr0=0.001`; M7 and M0–M3 each run a 3-epoch smoke and a 100-epoch formal run.
+- Formal B1-B, M7, and M0–M3 resolved arguments may differ only in model path, output path/name, and epochs.
+- B0 is the exact pose-derived detection checkpoint with SHA-256 `9adacdd1a86cde27b7568c0756ca06f7be83160445fc90a10449206c82b06f4d`; label it data-exposed, evaluate/profile it, and never use it for initialization or selection.
 - All selection decisions use validation data. Freeze `selection.json` before any test evaluation.
 - Strict checkpoint reuse requires matching data, variant, config, environment, and checkpoint hashes plus fresh-process strict reload validation.
 - Do not modify Ultralytics installation files or global registries. Install MFAM slots in the model before the first forward pass.
@@ -23,6 +24,10 @@
 - Never delete source data or weights automatically. Generated training artifacts remain ignored and are not pushed.
 
 ---
+
+## Completed Original Implementation (Tasks 1–9)
+
+Tasks 1–9 record the original five-variant implementation and its completed red/green cycles. Tasks 10–15 are the approved amendment and supersede the original registry, matrix, recovery, launch, and terminal-acceptance wording wherever they differ.
 
 ### Task 1: Repository contracts, documentation, and configuration
 
@@ -88,7 +93,7 @@
 
 - [x] **Step 4: Implement frozen variant registry and hash contract**
 
-  Register only B1, M0, M1, M2, and M3. B1 uses identity slots; M0 uses 3/5/7/9 at P2; M1 uses 3/5 at P2; M2/M3 wrap M1 at ratios 1/2 and 1/4.
+  Register the original set B1, M0, M1, M2, and M3. B1 uses identity slots; M0 uses 3/5/7/9 at P2; M1 uses 3/5 at P2; M2/M3 wrap M1 at ratios 1/2 and 1/4. Task 10 extends this registry with M7.
 
 - [x] **Step 5: Run MFAM and variant tests**
 
@@ -338,6 +343,8 @@
 
 ### Task 9: Full verification, cleanup, requested commit, and formal launch
 
+> Outstanding launch and terminal steps in this original task are superseded by Task 15, which adds completed-run recovery, M7, and B0 acceptance.
+
 **Files:**
 - Modify: checkbox states in this plan as each task completes
 - Generate (ignored): configured pipeline artifact root
@@ -383,12 +390,260 @@
 
 - [ ] **Step 9: Verify terminal Phase 1 artifacts when the service finishes**
 
-  Confirm B1-A/B and M0–M3 canonical checkpoints, frozen selection, complete tests/profiles, one BEST_PARTIAL, strict-reload evidence, `final_audit.ok=true`, zero audit errors, and the human-readable report. Phase 1 stops normally without S0 or Temporal Motion.
+  Confirm B1-A/B and M7/M0–M3 canonical checkpoints, B0 reference evidence, frozen selection, complete tests/profiles, one BEST_PARTIAL, strict-reload evidence, `final_audit.ok=true`, zero audit errors, and the human-readable report. Phase 1 stops normally without S0 or Temporal Motion.
+
+### Task 10: M7 priority variant and non-invalidating extension contract
+
+**Files:**
+- Modify: `masf_yolo/variants.py`
+- Modify: `masf_yolo/models/builder.py`
+- Create: `configs/m7-priority.yaml`
+- Modify: `tests/test_variants.py`
+- Modify: `tests/models/test_mfam.py`
+- Modify: `tests/models/test_builder.py`
+- Modify: `tests/models/test_transfer.py`
+
+**Interfaces:**
+- Produces: `M7 = VariantDefinition("M7", (3, 5, 7), 1.0, "mfam")`.
+- Keeps: the existing `configs/static-phase1.yaml` bytes and config hash unchanged so completed B1 stages remain reusable.
+- Produces constants that separate `CORE_VARIANTS`, `PRIORITY_VARIANTS`, `TRAINED_VARIANTS`, `EVALUATED_MODELS`, and `SELECTION_CANDIDATES` rather than overloading one tuple.
+
+- [x] **Step 1: Write the failing M7 registry and numerical tests**
+
+  Assert `get_variant("M7")` has kernels `(3, 5, 7)`, ratio `1.0`, P2 `mfam`, and a stable hash distinct from M0/M1. Hand-set Conv/BN parameters and prove the forward value equals identity plus direct 3/5 branches plus the sequential 1x7/7x1 branch before 1x1 fusion. Backpropagate a scalar loss and assert every M7 branch receives a finite nonzero gradient.
+
+- [x] **Step 2: Run the focused tests and observe RED**
+
+  Run `../.venv/bin/python -m pytest tests/test_variants.py tests/models/test_mfam.py -q`. Expected failure: `unsupported variant: M7` or missing M7 registry entry.
+
+- [x] **Step 3: Implement the minimal M7 definition**
+
+  Add `M7` without changing M0/M1/M2/M3 semantics. Reuse `MFAM(channels, kernels=(3, 5, 7))`; do not introduce a new operator implementation, shuffle, gate, bypass, or projection.
+
+- [x] **Step 4: Add builder and transfer ownership tests**
+
+  Build M7 and assert strides `[4, 8, 16, 32]`, four Detect inputs, and M7 in the P2 slot before forward. Transfer the B1 canonical state and prove shared tensors match B1 while all `model.20` M7 tensors retain their pre-transfer random values and appear as missing/variant-owned tensors in the report.
+
+- [x] **Step 5: Add and verify the extension manifest**
+
+  Write `configs/m7-priority.yaml` with `variant_id: M7`, kernels `[3, 5, 7]`, processed ratio `1.0`, smoke epochs `3`, formal epochs `100`, and `priority_before: M0`. Test strict unknown-key rejection and verify `sha256sum configs/static-phase1.yaml` is unchanged from the running pipeline's config hash input.
+
+- [x] **Step 6: Run the M7 model suite**
+
+  Run `../.venv/bin/python -m pytest tests/test_variants.py tests/models -q` and one real CUDA forward/backward/save/reload for M7 at batch 16 before any M7 training.
+
+### Task 11: Completed-run classification and B1-B recovery
+
+**Files:**
+- Create: `masf_yolo/training/completion.py`
+- Modify: `masf_yolo/training/resume.py`
+- Modify: `masf_yolo/pipeline.py`
+- Create: `tests/training/test_completion.py`
+- Modify: `tests/training/test_resume.py`
+- Modify: `tests/test_pipeline.py`
+
+**Interfaces:**
+- Produces: `TrainingOutputState(status, completed_epochs, expected_epochs, best, last, results_hash, best_hash, last_hash, reason)`.
+- Produces: `classify_training_output(run_dir: Path, expected_epochs: int) -> TrainingOutputState` with statuses `absent`, `incomplete`, `complete`, or `invalid`.
+- A complete output skips Ultralytics training and enters canonical finalization; only an incomplete output may use native resume.
+
+- [x] **Step 1: Write literal absent/incomplete/complete/invalid tests**
+
+  Create real small Ultralytics-style checkpoint dictionaries with `train_args["epochs"]`, finite CSV rows, and loadable model payloads. Assert absent has no last file; incomplete has 1 of 3 rows; complete has exactly 3 rows plus best/last; invalid covers 4 of 3 rows, non-finite final values, mismatched checkpoint epochs, unreadable checkpoint, missing best, and contradictory CSV/checkpoint state.
+
+- [x] **Step 2: Run completion tests and observe RED**
+
+  Run `../.venv/bin/python -m pytest tests/training/test_completion.py -q`. Expected failure: missing `masf_yolo.training.completion`.
+
+- [x] **Step 3: Implement fail-closed classification**
+
+  Parse `results.csv` with `csv.DictReader`, require the literal `epoch` column to be consecutive `1..N`, require all metric/loss/LR cells finite, load checkpoints on CPU, compare `train_args["epochs"]`, and SHA-256 all accepted files. Never infer completion from file existence alone and never mutate the run directory.
+
+- [x] **Step 4: Write orchestration tests for skip versus resume**
+
+  Given a completed 90-row B1-B fixture, assert `_initial_model`, `run_training`, and resume are never called and the next action is finalization. Given an incomplete fixture, assert the exact `last.pt` is passed once as native resume. Given invalid artifacts, assert `PermanentTrainingError` before a GPU model is built.
+
+- [x] **Step 5: Implement classification before model construction**
+
+  Refactor `_train` so it classifies output first. Return the existing best/last for `complete`; call the worker with no resume for `absent`; call it with the exact last path for `incomplete`; reject `invalid`. Record the classification and all three file hashes in `training/<stage>/run.json`.
+
+- [x] **Step 6: Prove the real B1-B output is recoverable**
+
+  Run the classifier against `artifacts/static-phase1/runs/b1-b` and require `status=complete`, `completed_epochs=90`, unchanged 90-row results hash, and both checkpoint hashes. Record `wc -l results.csv` before and after finalization and require 91 lines including the header both times.
+
+### Task 12: Memory-safe trainer and fresh-process canonical finalization
+
+**Files:**
+- Modify: `masf_yolo/training/runner.py`
+- Create: `masf_yolo/training/worker.py`
+- Create: `masf_yolo/artifacts/finalize.py`
+- Modify: `masf_yolo/pipeline.py`
+- Modify: `masf_yolo/cli.py`
+- Modify: `masf_yolo/runtime.py`
+- Create: `tests/training/test_runner.py`
+- Create: `tests/training/test_worker.py`
+- Create: `tests/artifacts/test_finalize.py`
+- Modify: `tests/test_cli.py`
+
+**Interfaces:**
+- `RepositoryDetectionTrainer.final_eval()` strips optimizer state from last/best but deliberately omits Ultralytics' redundant final best validation.
+- Produces internal commands `python -m masf_yolo.training.worker ...` and `python -m masf_yolo.artifacts.finalize ...`; they write atomic machine-readable result manifests.
+- The externally documented CLI remains unchanged.
+
+- [x] **Step 1: Write the failing final-eval regression test**
+
+  Construct a trainer with temporary best/last checkpoints and a validator callable that raises if invoked. Call `final_eval()`, assert the validator call count stays zero, and assert both checkpoints are stripped/loadable with the final `train_results` retained.
+
+- [x] **Step 2: Run runner regression and observe RED**
+
+  Run `../.venv/bin/python -m pytest tests/training/test_runner.py -q`. Expected failure: inherited Ultralytics `final_eval` invokes the sentinel validator.
+
+- [x] **Step 3: Override only duplicate final validation**
+
+  Copy the pinned 8.4.90 optimizer-stripping portion using `torch_distributed_zero_first`, `LOCAL_RANK`, `RANK`, and `strip_optimizer`. Do not change per-epoch validation, checkpoint choice, optimizer, augmentation, or training arguments.
+
+- [x] **Step 4: Write worker-boundary tests**
+
+  Launch real subprocesses against tiny fixtures. Assert exit 0 yields a JSON result containing best/last paths and hashes; SIGKILL/nonzero exit becomes `TransientTrainingError`; malformed/hash-mismatched output becomes `PermanentTrainingError`; a completed run bypasses worker launch.
+
+- [x] **Step 5: Implement isolated training and finalization workers**
+
+  Move model construction and `RepositoryDetectionTrainer.train()` into the training worker. The parent retains only paths/hashes. In a second fresh process, load best EMA, attach `masf_variant` and its hash, call `save_canonical_checkpoint`, then exit before the existing strict-reload/validation subprocess runs.
+
+- [x] **Step 6: Add systemd OOM containment**
+
+  Make `build_systemd_command()` include `--property=OOMPolicy=continue` and memory accounting. Test the exact property and keep `Restart=on-failure`, three bounded starts, and the venv interpreter contract.
+
+- [x] **Step 7: Run focused process tests**
+
+  Run `../.venv/bin/python -m pytest tests/training tests/artifacts tests/test_cli.py -q`. Confirm no test leaves worker processes, semaphore warnings, temporary checkpoints, or live locks.
+
+### Task 13: Priority DAG, M7 gate, and formal scheduling
+
+**Files:**
+- Modify: `masf_yolo/workflow.py`
+- Modify: `masf_yolo/pipeline.py`
+- Modify: `masf_yolo/training/preflight.py`
+- Modify: `tests/test_workflow.py`
+- Modify: `tests/training/test_preflight.py`
+- Modify: `tests/test_pipeline.py`
+
+**Interfaces:**
+- Produces exact order `b1_b -> m7_gate -> smoke_m7 -> formal_m7 -> smoke_m0 -> smoke_m1 -> smoke_m2 -> smoke_m3 -> formal_m0 -> formal_m1 -> formal_m2 -> formal_m3`.
+- `m7_gate` consumes the existing common batch and proves M7 can perform real AMP forward/backward/SGD/save/reload at batch 16.
+
+- [x] **Step 1: Write the failing DAG-order and reuse tests**
+
+  Assert M7 gate/smoke/formal precede every M0 stage, `b1_b` still depends directly on `b1_a`, and no completed pre-M7 stage gains a new dependency. Seed completed B1-A plus failed-but-recoverable B1-B state and prove the workflow does not invoke audit, verify, preflight, batch probe, or B1-A actions again.
+
+- [x] **Step 2: Run workflow tests and observe RED**
+
+  Run `../.venv/bin/python -m pytest tests/test_workflow.py tests/test_pipeline.py -q`. Expected failure: missing M7 stage names/order.
+
+- [x] **Step 3: Add M7 stages and handlers**
+
+  Insert the three nodes without changing earlier node names or input hashes. Use the existing smoke/formal profile builders, B1 canonical transfer, training-output classifier, isolated worker, canonical finalizer, and strict reload gate.
+
+- [x] **Step 4: Add the real M7 acceptance gate**
+
+  Load the locked common batch (16), build M7 from B1-B canonical, perform finite AMP loss and one SGD optimizer step, save/reload, verify strides and four scales, and atomically write `m7_gate.json`. Fail permanently rather than silently lowering the shared batch.
+
+- [x] **Step 5: Run DAG and real GPU gate**
+
+  Run focused tests, then execute only the M7 gate on CUDA device 0. Record loss, peak GPU memory, checkpoint hash, variant hash, and strict-load outcome.
+
+### Task 14: B0 reference inspection, common evaluation, and reporting
+
+**Files:**
+- Create: `configs/b0-reference.yaml`
+- Create: `masf_yolo/evaluation/reference.py`
+- Modify: `masf_yolo/pipeline.py`
+- Modify: `masf_yolo/workflow.py`
+- Modify: `masf_yolo/reporting.py`
+- Create: `tests/evaluation/test_reference.py`
+- Modify: `tests/evaluation/test_metrics.py`
+- Modify: `tests/evaluation/test_profiling.py`
+- Modify: `tests/test_pipeline.py`
+- Modify: `tests/test_reporting.py`
+- Modify: `tests/test_workflow.py`
+
+**Interfaces:**
+- Produces `inspect_b0_reference(definition_path: Path, output_path: Path) -> ReferenceManifest` in a fresh subprocess.
+- Evaluated models are `B0, B1, M7, M0, M1, M2, M3`; selection candidates remain exactly `M2, M3`.
+- B0 checkpoint path resolves to `bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt` and must hash to `9adacdd1a86cde27b7568c0756ca06f7be83160445fc90a10449206c82b06f4d`.
+
+- [x] **Step 1: Write failing reference-definition tests**
+
+  Cover exact SHA-256, `ball=0/bat=1`, task detect, three scales, strides `[8,16,32]`, Ultralytics 8.4.90, pose-derived provenance, and `data_exposed=true`. Corrupt each field independently and require a fail-closed error.
+
+- [x] **Step 2: Run reference tests and observe RED**
+
+  Run `../.venv/bin/python -m pytest tests/evaluation/test_reference.py -q`. Expected failure: missing reference loader/manifest.
+
+- [x] **Step 3: Implement B0 definition and fresh-process inspection**
+
+  Load the checkpoint on CPU, record source metadata without trusting it for validation, inspect the actual model task/names/strides, run a 640 forward, hash the checkpoint, and atomically write `references/b0.json`. Never rewrite or copy the source checkpoint.
+
+- [x] **Step 4: Add B0 to common val/test/profile loops**
+
+  Route `_best_checkpoint("B0")` to the immutable reference weight. Run the same prediction export, Ultralytics metrics, faster-coco-eval, Ball AP/Recall/counts, size bins, blur proxy, FP gallery, params, MACs/GFLOPs, peak activation, operator counts, and feature traffic as other models.
+
+- [x] **Step 5: Preserve selection isolation**
+
+  Test that B0 and M7 can have arbitrarily better metrics without entering `CandidateMetrics`, `selection.json`, or changing the selected M2/M3 result. Require frozen selection before B0 test evaluation along with every other test evaluation.
+
+- [x] **Step 6: Extend audit and report**
+
+  Require B0 plus six trained models in val/test/profile artifacts. Add a visible report section: `B0 is pose-derived and data-exposed; its metrics are operational reference values, not a leak-free comparison.` Include checkpoint hash, provenance, val/test metrics, per-class/ball summaries, and hardware profile.
+
+- [ ] **Step 7: Run B0 focused tests and real val**
+
+  Run `../.venv/bin/python -m pytest tests/evaluation tests/test_pipeline.py tests/test_reporting.py -q`, then run B0 validation against the frozen union val manifest. Confirm 781 images, 1,099 instances, complete metrics JSON, and no mutation of selection or test artifacts.
+
+### Task 15: Documentation, full verification, cleanup, commit, and safe restart
+
+**Files:**
+- Modify: `README.md`
+- Modify: `OPERATIONS.md`
+- Modify: `docs/design/phase1-best-partial.md`
+- Modify: `codex_plan.md`
+- Generate (ignored): B1-B recovery, M7, B0, and pipeline artifacts
+
+**Interfaces:**
+- Produces a clean tracked `main`, one pushed `4080 hplab` commit, and one live background service that advances from recovered B1-B to M7 without repeating B1.
+
+- [ ] **Step 1: Update operator and research documentation**
+
+  Document B0 provenance/exposure, M7 equation and priority, 615 total planned epochs, completed-run classification, no duplicate final validation, worker boundaries, B1-B recovery evidence, and exact status/log/report commands.
+
+- [ ] **Step 2: Run the complete fresh verification suite**
+
+  Run `../.venv/bin/python -m pytest -q`, `../.venv/bin/python -m compileall -q masf_yolo tests`, `git diff --check`, and CLI import/help smoke. Record exact pass/fail counts; any failure blocks commit and restart.
+
+- [ ] **Step 3: Perform real recovery and B0/M7 gates before launch**
+
+  Classify B1-B as complete, finalize canonical in a fresh subprocess, strict-load and fresh-val it, prove `results.csv` remains 90 epochs, inspect B0, and run M7 batch-16 GPU gate. Do not start the service until every artifact hash and gate passes.
+
+- [ ] **Step 4: Clean generated validation garbage and review scope**
+
+  Enumerate first, then remove only `.pytest_cache`, `__pycache__`, temporary test/audit/preflight outputs, the generated `bbt5-detect-baseline/dataset/train/labels.cache`, and incomplete worker fixtures. Preserve source data, B0 weights, B1-A/B valid runs, canonical checkpoints, and formal artifacts. Verify Git staging excludes `bbt5-detect-baseline/`, `field_check/`, datasets, caches, logs, runs, and checkpoints.
+
+- [ ] **Step 5: Commit and push the focused implementation**
+
+  Commit on `main` with exact subject `4080 hplab`, inspect the committed file list, push `origin main`, and verify local `HEAD == origin/main`. Never add the B0 checkpoint or generated artifacts.
+
+- [ ] **Step 6: Restart once and prove no B1 retraining**
+
+  Start the existing pipeline identity through `pipeline start`. Require B1-A and B1-B stage manifests to be reused/completed, B1-B CSV to remain 91 lines including header, and the live stage to reach `m7_gate`, `smoke_m7`, or `formal_m7`. Any attempt to launch B1 training is a permanent acceptance failure and the service must be stopped.
+
+- [ ] **Step 7: Notify and monitor terminal acceptance**
+
+  Immediately report the verified M7 launch with unit/PID/stage and explain systemd persistence. At terminal completion require canonical B1-A/B/M7/M0–M3, B0 reference, all seven val/test/profile sets, immutable M2/M3 selection, `final_audit.ok=true`, zero errors, and a human-readable report that carries the B0 exposure warning.
 
 ## Self-Review Record
 
-- Every Phase 1 requirement in `MFAM_plan.md` and the approved handoff maps to Tasks 1–9.
+- Every Phase 1 requirement in `MFAM_plan.md`, the approved handoff, and the B0/M7 recovery amendment maps to Tasks 1–15.
 - Public interfaces use one spelling across producers and consumers.
 - Generated data and model artifacts are excluded from Git; source data and source weights are read-only.
-- The plan contains no unresolved implementation choices: thresholds, hashes, versions, stage order, retry limits, training epochs, selection order, and commit timing are explicit.
+- The plan contains no unresolved implementation choices: thresholds, hashes, versions, B0 exposure, M7 branches, stage order, recovery states, retry limits, training epochs, selection order, and commit timing are explicit.
 - User overrides are honored: inline execution, work on `main`, no early push, commit message `4080 hplab`, exclude baseline/field directories, and notify after verified training start.

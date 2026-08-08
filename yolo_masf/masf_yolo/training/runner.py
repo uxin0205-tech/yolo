@@ -8,7 +8,9 @@ from typing import Any, Mapping
 
 import torch
 from torch import nn
+from ultralytics.engine.trainer import LOCAL_RANK, RANK
 from ultralytics.models.yolo.detect.train import DetectionTrainer
+from ultralytics.utils.torch_utils import strip_optimizer, torch_distributed_zero_first
 
 from .resume import TransientTrainingError
 
@@ -28,6 +30,18 @@ class RepositoryDetectionTrainer(DetectionTrainer):
             return weights
         return super().get_model(cfg=cfg, weights=weights, verbose=verbose)
 
+    def final_eval(self) -> None:
+        """Strip native checkpoints; strict fresh-process val runs afterward."""
+        model = self.best if self.best.exists() else None
+        with torch_distributed_zero_first(LOCAL_RANK):
+            if RANK in {-1, 0}:
+                checkpoint = strip_optimizer(self.last) if self.last.exists() else {}
+                if model:
+                    strip_optimizer(
+                        self.best,
+                        updates={"train_results": checkpoint.get("train_results")},
+                    )
+
 
 @dataclass(frozen=True, slots=True)
 class TrainingResult:
@@ -37,7 +51,7 @@ class TrainingResult:
 
 
 def run_training(
-    model: nn.Module,
+    model: nn.Module | None,
     profile: Mapping[str, Any],
     *,
     resume_path: Path | None = None,
@@ -49,6 +63,8 @@ def run_training(
     try:
         trainer = RepositoryDetectionTrainer(overrides=overrides)
         if resume_path is None:
+            if model is None:
+                raise ValueError("a new training run requires an initialized model")
             trainer.model = model
         trainer.train()
     except torch.cuda.OutOfMemoryError as error:
