@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from PIL import Image
+import yaml
 
 from masf_yolo.contracts import DatasetManifest, sha256_file, sha256_value
 
@@ -216,7 +217,17 @@ def audit_dataset(
             encoding="utf-8",
         )
     (output_root / "data.yaml").write_text(
-        "path: .\ntrain: train.txt\nval: val.txt\ntest: test.txt\nnc: 2\nnames: [ball, bat]\n",
+        yaml.safe_dump(
+            {
+                "path": str(output_root),
+                "train": "train.txt",
+                "val": "val.txt",
+                "test": "test.txt",
+                "nc": 2,
+                "names": ["ball", "bat"],
+            },
+            sort_keys=False,
+        ),
         encoding="utf-8",
     )
     for split in ("val", "test"):

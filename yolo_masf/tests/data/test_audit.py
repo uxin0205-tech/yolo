@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 from PIL import Image
+import yaml
 
 from masf_yolo.data.audit import audit_dataset
 
@@ -35,6 +36,9 @@ def test_audit_writes_reproducible_manifests_profile_and_coco(tmp_path: Path) ->
     assert first.split_counts == {"train": 16, "val": 2, "test": 2}
     for name in ("train.txt", "val.txt", "test.txt", "data.yaml", "dataset_profile.json", "audit.json", "manifest.json", "val.coco.json", "test.coco.json"):
         assert (output / name).is_file()
+    data_config = yaml.safe_load((output / "data.yaml").read_text())
+    assert Path(data_config["path"]) == output.resolve()
+    assert data_config["val"] == "val.txt"
     audit = json.loads((output / "audit.json").read_text())
     assert audit["ok"] is True
     assert audit["group_overlap"] == []
