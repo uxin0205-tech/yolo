@@ -89,6 +89,11 @@ def pipeline_identity(config_hash: str, data_hash: str, environment_hash: str) -
     )[:12]
 
 
+def launch_python_path(executable: str) -> Path:
+    """Return an absolute interpreter path without dereferencing a venv symlink."""
+    return Path(executable).absolute()
+
+
 def _dataset_manifest(artifact_root: Path) -> DatasetManifest:
     path = artifact_root / "dataset" / "manifest.json"
     if not path.is_file():
@@ -137,7 +142,7 @@ def pipeline_start(config_path: Path) -> dict[str, Any]:
         command = build_systemd_command(
             config_path=config_path,
             unit=unit,
-            python=Path(sys.executable).resolve(),
+            python=launch_python_path(sys.executable),
         )
         launched = subprocess.run(command, check=True, capture_output=True, text=True)
     return metadata | {"active": True, "existing": False, "systemd_output": launched.stdout.strip()}

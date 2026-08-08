@@ -10,6 +10,7 @@ from masf_yolo.cli import (
     ensure_tracked_clean,
     load_config,
 )
+from masf_yolo.runtime import launch_python_path
 
 
 def test_repository_config_loads_with_locked_hash() -> None:
@@ -55,3 +56,14 @@ def test_tracked_clean_gate_ignores_untracked_but_rejects_tracked_changes() -> N
 
     with pytest.raises(RuntimeError, match="tracked worktree"):
         ensure_tracked_clean(" M yolo_masf/masf_yolo/cli.py")
+
+
+def test_systemd_launch_preserves_virtualenv_python_symlink(tmp_path: Path) -> None:
+    virtualenv_python = tmp_path / ".venv" / "bin" / "python"
+    virtualenv_python.parent.mkdir(parents=True)
+    virtualenv_python.symlink_to("/usr/bin/python3.14")
+
+    selected = launch_python_path(str(virtualenv_python))
+
+    assert selected == virtualenv_python
+    assert selected != virtualenv_python.resolve()
