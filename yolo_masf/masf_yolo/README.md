@@ -242,6 +242,18 @@ BBT5 原始 detect view
 
 ## 操作原則
 
+## B1R/P2/P3 第二輪加測
+
+第二輪使用獨立設定 `configs/retest/b1r_p2_p3_retest.yaml` 與產物根目錄
+`artifacts/b1r-p2-p3-retest/`，不修改 `artifacts/static-phase1/`。B1R 保留四尺度
+P2 graph，但使用 per-scale Detect 並將 P5 封頂為 512，使 B0 P3/P4/P5 tensors
+可完整轉移；正式 transfer contract 為 649 matched、154 新增 destination、
+0 shape mismatch、0 unexpected。P3 則使用 B0 三尺度原始 graph，只在 P3 slot
+放置 MFAM。兩個 family 都依序測試 `PaperFormula-Full`、`Lite-35`、
+`Lite-35-F7`、`Partial50-35`、`Partial25-35`；smoke 不列入正式結果，formal
+才納入 validation/test。完整規格與 artifact lineage 見
+`docs/superpowers/specs/2026-08-11-b1r-p2-p3-retest-design.md`。
+
 - GPU 被其他工作占用時，只執行 CPU audit、測試、結構檢查與文件工作。
 - 不刪除或覆寫來源 dataset、官方權重及 baseline 權重。
 - 不把 `artifacts/`、`runs/`、checkpoint、cache 加入 Git。

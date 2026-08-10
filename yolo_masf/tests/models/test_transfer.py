@@ -6,7 +6,7 @@ import pytest
 import torch
 from ultralytics.nn.tasks import DetectionModel
 
-from masf_yolo.models.builder import build_model
+from masf_yolo.models.builder import build_b1r_model, build_model, build_p3_model
 import masf_yolo.models.transfer as transfer_module
 from masf_yolo.models.transfer import transfer_b1_canonical, transfer_official_weights
 
@@ -66,6 +66,29 @@ def test_requested_pose_derived_initializer_transfers_all_compatible_b1_tensors(
     assert not report["unexpected"]
     assert all(key.startswith("model.31.cv3.") for key in report["shape_mismatch"])
     assert model.stride.tolist() == [4.0, 8.0, 16.0, 32.0]
+
+
+def test_b1r_transfer_preserves_b0_p3_p5_classification_shapes() -> None:
+    source = DetectionModel("yolo11m.yaml", nc=2, verbose=False)
+    destination = build_b1r_model()
+    _fill_module(source, 0.25)
+    report = transfer_official_weights(destination, source)
+    assert not report.shape_mismatch
+    assert len(report.matched) == 649
+    assert len(report.missing) == 154
+    assert report.unexpected == ()
+    assert torch.all(destination.state_dict()["model.31.cv3.1.1.1.conv.weight"] == 0.25)
+
+
+def test_p3_variant_leaves_only_the_replaced_p3_slot_new():
+    source = DetectionModel("yolo11m.yaml", nc=2, verbose=False)
+    destination = build_p3_model("PaperFormula-Full")
+    _fill_module(source, 0.25)
+    report = transfer_module.transfer_b0_p3_parent(destination, source)
+    assert report.shape_mismatch == {}
+    assert report.unexpected == ()
+    assert report.missing
+    assert all(key.startswith("model.16.") for key in report.missing)
 
 
 def test_variant_transfer_loads_all_b1_tensors_but_keeps_mfam_random() -> None:

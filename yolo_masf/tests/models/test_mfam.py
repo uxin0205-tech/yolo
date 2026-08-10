@@ -3,7 +3,7 @@ from __future__ import annotations
 import torch
 from torch import nn
 
-from masf_yolo.models.mfam import MFAM, PartialMFAM
+from masf_yolo.models.mfam import MFAM, PartialMFAM, PaperFormulaMFAM, PartialPaperFormulaMFAM
 
 
 def _make_conv_identity(conv_module: nn.Module) -> None:
@@ -92,3 +92,19 @@ def test_partial_mfam_processes_leading_quarter() -> None:
 
     assert block.processed_channels == 2
     assert output.shape == (1, 8, 5, 5)
+
+
+def test_paper_formula_mfam_has_explicit_branches_and_two_fusions() -> None:
+    block = PaperFormulaMFAM(8)
+    assert block.kernels == (3, 5, 7, 9)
+    assert len(block.branches) == 4
+    assert hasattr(block, "pre_fuse") and hasattr(block, "post_fuse")
+    assert not any("gate" in name or "branch_weight" in name for name, _ in block.named_parameters())
+    assert block(torch.randn(1, 8, 16, 16)).shape == (1, 8, 16, 16)
+
+
+def test_partial_paper_formula_mfam_bypass_is_exact() -> None:
+    block = PartialPaperFormulaMFAM(8, 0.5)
+    value = torch.randn(1, 8, 16, 16)
+    output = block(value)
+    torch.testing.assert_close(output[:, 4:], value[:, 4:], rtol=0, atol=0)

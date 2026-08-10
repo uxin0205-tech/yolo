@@ -57,6 +57,32 @@ class SP2PTransferReport:
         }
 
 
+def transfer_b0_p3_parent(
+    destination: nn.Module,
+    source: nn.Module | Mapping[str, Tensor] | Path,
+    *,
+    slot_prefix: str = "model.16.",
+) -> TransferReport:
+    """Copy the B0 parent while deliberately leaving the P3 MFAM slot random."""
+    source_state = _state_dict(source)
+
+    def key_mapper(destination_key: str) -> str | None:
+        if destination_key.startswith(slot_prefix):
+            return None
+        return destination_key
+
+    report = _apply_mapping(destination, source_state, key_mapper)
+    # The source's replaced P3 tensors are an explicit, auditable adaptation,
+    # not an unexpected key or a shape mismatch.
+    skipped = tuple(sorted(key for key in source_state if key.startswith(slot_prefix)))
+    return TransferReport(
+        matched=report.matched,
+        missing=report.missing,
+        unexpected=tuple(sorted(set(report.unexpected) - set(skipped))),
+        shape_mismatch=report.shape_mismatch,
+    )
+
+
 _LAYER_KEY = re.compile(r"^model\.(\d+)\.(.+)$")
 _DETECT_BRANCH = re.compile(r"^(cv[23])\.(\d+)\.(.+)$")
 _SELECTIVE_MAIN_BRANCH = re.compile(r"^model\.31\.main_(cv[23])\.(\d+)\.(.+)$")
