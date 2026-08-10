@@ -1,0 +1,29 @@
+{
+  "attention_class": "MagnitudeSideChannelAttention",
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "bias_type": "dense_2d",
+  "binary_forward_count": 3131,
+  "distillation_enabled": false,
+  "distillation_type": null,
+  "experiment_schema_version": 3,
+  "magnitude_bits": 4,
+  "model_yaml_hash": "d3b87ebc7ce938c641d85387712f48fff82d0dd28370fba91fe5af05b966653f",
+  "p_bits": null,
+  "quantization_contract": {
+    "bias_initialization": "truncated_normal_std_0.02",
+    "bias_parameterization": "full_2d_relative_position",
+    "p8_scale": "none",
+    "qk_scale": "residual_basis_channel_per_token",
+    "v8_scale": "none"
+  },
+  "quantizer_types": {
+    "model.10.m.0.attn": "M4"
+  },
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "v_bits": null,
+  "variant_config_hash": "758fee34f21bc9270f7a93d9bff3fb39b26f609e3b95afab11ffff6336a89050",
+  "variant_id": "N4-I4"
+}

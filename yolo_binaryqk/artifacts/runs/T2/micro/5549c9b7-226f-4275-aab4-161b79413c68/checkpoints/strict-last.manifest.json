@@ -1,0 +1,21 @@
+{
+  "experiment_schema_version": 1,
+  "variant_id": "T2",
+  "attention_class": "ScaledBinaryAttention",
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "attention_module_count": 1,
+  "variant_config_hash": "fbf61068773e500237464975a1463600dfc23537155e7048be43e87f050e13f9",
+  "model_yaml_hash": "a2c5872560f853b0bd15ec91dd7c5942e6b0a45efafc9ecb7f0845b6feb4a0ef",
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "binary_forward_count": 1251,
+  "quantizer_types": {
+    "model.10.m.0.attn": "UltralyticsBinaryAttention"
+  },
+  "distillation_enabled": false,
+  "distillation_type": null,
+  "bias_type": "none",
+  "p_bits": null,
+  "v_bits": null
+}

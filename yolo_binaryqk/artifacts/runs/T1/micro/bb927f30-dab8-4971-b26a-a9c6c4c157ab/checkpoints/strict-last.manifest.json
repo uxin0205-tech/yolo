@@ -1,0 +1,21 @@
+{
+  "experiment_schema_version": 1,
+  "variant_id": "T1",
+  "attention_class": "SignOnlyBinaryAttention",
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "attention_module_count": 1,
+  "variant_config_hash": "eab0c84370baf58cd227a5f15ed9a00a5f6ddb85732b349400eaa247ce04adec",
+  "model_yaml_hash": "4a781fea006583aca27d012b5917c005f38ec3888f17c941e1b6cb1862a147d5",
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "binary_forward_count": 1251,
+  "quantizer_types": {
+    "model.10.m.0.attn": "UltralyticsBinaryAttention"
+  },
+  "distillation_enabled": false,
+  "distillation_type": null,
+  "bias_type": "none",
+  "p_bits": null,
+  "v_bits": null
+}

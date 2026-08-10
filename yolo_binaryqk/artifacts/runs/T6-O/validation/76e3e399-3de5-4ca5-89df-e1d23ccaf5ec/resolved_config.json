@@ -1,0 +1,40 @@
+{
+  "attention_type": "ScaledBinaryAttention",
+  "base_variant": "best-T1-T5",
+  "baseline_epochs": 600,
+  "baseline_source": "original/weight/yolo11m.pt",
+  "bias_type": "none",
+  "config_hash": "d20a8e50fcc7a91ce94b6fd3d34f4f96a3e718921e3421c3a12f43b238e4f220",
+  "dataset_scope": "COCO2017 train2017/val2017 full",
+  "distillation_type": "positional_encoding",
+  "engineering_gates": "not executed by plan",
+  "formal_epochs": 10,
+  "id": "T6-O",
+  "initialization": "full-precision source checkpoint fine-tuning",
+  "kd_components": [
+    "positional"
+  ],
+  "kd_target_family": "T1-T5",
+  "magnitude_bits": null,
+  "num_binary_qk": 0,
+  "num_pv": 1,
+  "num_softmax": 1,
+  "p_bits": null,
+  "paper_profile": "zero-training source-checkpoint validation",
+  "paper_reference_epochs": 300,
+  "plan_name": "YOLO11 BinaryAttention complete 10-epoch attention-only QAT plan",
+  "qk_mode": "scaled_sign",
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "mean_abs_channel_token_per_sample_head",
+    "v8_scale": "none"
+  },
+  "run_epochs": 0,
+  "teacher": "full-precision source checkpoint",
+  "trainable_scope": "none",
+  "use_distillation": true,
+  "use_qat": true,
+  "v_bits": null
+}
