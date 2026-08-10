@@ -31,3 +31,13 @@ The following rules apply to every work directory and its descendants: this is a
 ## Cleanliness and Safety
 
 Do not leave loose temporary files in the root. Remove unneeded generated artifacts when they are no longer useful, but never delete data or weights without confirming their purpose and recovery path. Keep large checkpoints and datasets out of Git unless the repository explicitly uses Git LFS.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs are tracked in GitHub Issues for `uxin0205-tech/yolo`. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+This repository uses a single-context domain documentation layout. See `docs/agents/domain.md`.
