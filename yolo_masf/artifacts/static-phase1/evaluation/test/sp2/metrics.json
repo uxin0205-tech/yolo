@@ -1,0 +1,126 @@
+{
+  "ap_l": 0.7779531740543163,
+  "ap_m": 0.8139132908274026,
+  "ap_s": 0.5565717687621659,
+  "ball_ap": 0.5970107876684566,
+  "ball_ap_s": 0.45852128603534076,
+  "ball_gt_count": 503,
+  "ball_recall": 0.9821073558648111,
+  "ball_subsets": {
+    "blur_proxy": {
+      "gt_count": 13,
+      "recall": 1.0
+    },
+    "large": {
+      "gt_count": 292,
+      "recall": 1.0
+    },
+    "small": {
+      "gt_count": 186,
+      "recall": 1.0
+    },
+    "tiny": {
+      "gt_count": 25,
+      "recall": 0.64
+    }
+  },
+  "checkpoint": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/sp2-b/weights/best.pt",
+  "class_diagnostics": {
+    "ball": {
+      "false_positive_count": 6908,
+      "gt_count": 503,
+      "missed_count": 9,
+      "precision": 0.0667387192650635,
+      "prediction_count": 7402,
+      "recall": 0.9821073558648111,
+      "subsets": {
+        "blur_proxy": {
+          "gt_count": 13,
+          "recall": 1.0
+        },
+        "large": {
+          "gt_count": 292,
+          "recall": 1.0
+        },
+        "small": {
+          "gt_count": 186,
+          "recall": 1.0
+        },
+        "tiny": {
+          "gt_count": 25,
+          "recall": 0.64
+        }
+      },
+      "true_positive_count": 494
+    },
+    "bat": {
+      "false_positive_count": 986,
+      "gt_count": 590,
+      "missed_count": 8,
+      "precision": 0.3711734693877551,
+      "prediction_count": 1568,
+      "recall": 0.9864406779661017,
+      "subsets": {
+        "blur_proxy": {
+          "gt_count": 256,
+          "recall": 0.98828125
+        },
+        "large": {
+          "gt_count": 524,
+          "recall": 0.9866412213740458
+        },
+        "small": {
+          "gt_count": 66,
+          "recall": 0.9848484848484849
+        },
+        "tiny": {
+          "gt_count": 0,
+          "recall": null
+        }
+      },
+      "true_positive_count": 582
+    }
+  },
+  "data_exposed": true,
+  "evaluator": "faster-coco-eval 1.7.2",
+  "initializer": "/home/uxin/yolo/yolo_masf/bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt",
+  "map50": 0.8963820053219936,
+  "map50_95": 0.7170246881882252,
+  "map75": 0.7747812740383165,
+  "per_class": {
+    "ball": {
+      "ap": 0.5970107876684566,
+      "ap50": 0.8161319970441231,
+      "ap75": 0.6144844780670736,
+      "ap_l": 0.7579319309460572,
+      "ap_m": 0.7654565456545654,
+      "ap_s": 0.45852128603534076,
+      "ar100": 0.7290258449304176,
+      "ar_l": 0.8757462686567162,
+      "ar_m": 0.7833333333333333,
+      "ar_s": 0.5497757847533632,
+      "gt_count": 503
+    },
+    "bat": {
+      "ap": 0.837038588707994,
+      "ap50": 0.9766320135998637,
+      "ap75": 0.9350780700095594,
+      "ap_l": 0.7979744171625756,
+      "ap_m": 0.8623700360002398,
+      "ap_s": 0.654622251488991,
+      "ar100": 0.8649152542372882,
+      "ar_l": 0.825925925925926,
+      "ar_m": 0.8927947598253276,
+      "ar_s": 0.7308641975308641,
+      "gt_count": 590
+    }
+  },
+  "split": "test",
+  "ultralytics": {
+    "fitness": 0.7183331779481883,
+    "metrics/mAP50(B)": 0.9003347979024139,
+    "metrics/mAP50-95(B)": 0.7183331779481883,
+    "metrics/precision(B)": 0.8820534357603123,
+    "metrics/recall(B)": 0.9206267248215847
+  }
+}

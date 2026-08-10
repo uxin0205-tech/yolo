@@ -1,0 +1,54 @@
+{
+  "best": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/m2/weights/best.pt",
+  "best_hash": "b6c7cd0421249fa138018c78956b0eaed5d5b99cb4e52936af6b0c5eaf0325ca",
+  "canonical": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/training/formal_m2/canonical.pt",
+  "canonical_hash": "95f0bcc3555384715cc43ee11b8cde84f08aa7c2ee8044111c69562e6b645d38",
+  "data_exposed": true,
+  "finalize_report": {
+    "checkpoint": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/training/formal_m2/canonical.pt",
+    "checkpoint_hash": "95f0bcc3555384715cc43ee11b8cde84f08aa7c2ee8044111c69562e6b645d38",
+    "source": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/m2/weights/best.pt",
+    "source_hash": "b6c7cd0421249fa138018c78956b0eaed5d5b99cb4e52936af6b0c5eaf0325ca",
+    "state_dict_hash": "2b72c8c5326c223461dc20b21ff8deff6af1afd492698b3ee861800cc868c36b",
+    "variant": "M2"
+  },
+  "initializer": "/home/uxin/yolo/yolo_masf/bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt",
+  "last": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/m2/weights/last.pt",
+  "last_hash": "f5ca29af1bd2704d51f0c8a86183926905e9b660a4f06b93026856e417523fa1",
+  "profile_hash": "2867346f6e02e64e5989157aa998fa4d22f70eab8a2b41401b1c13cc2b997f57",
+  "results_hash": "fda0e4cdd784b22aae3deec57c5fa8dafcd6d80312c257ff59ea736d660b05c6",
+  "stage": "formal_m2",
+  "strict_reload": true,
+  "strict_reload_report": {
+    "detect_scales": 4,
+    "strict_load": true,
+    "strides": [
+      4.0,
+      8.0,
+      16.0,
+      32.0
+    ],
+    "validation": {
+      "fitness": 0.706752887504418,
+      "metrics/mAP50(B)": 0.9727536408749594,
+      "metrics/mAP50-95(B)": 0.706752887504418,
+      "metrics/precision(B)": 0.9197959528205697,
+      "metrics/recall(B)": 0.963117341845618
+    },
+    "validation_ran": true,
+    "variant": "M2"
+  },
+  "training_output": {
+    "best": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/m2/weights/best.pt",
+    "best_hash": "b6c7cd0421249fa138018c78956b0eaed5d5b99cb4e52936af6b0c5eaf0325ca",
+    "completed_epochs": 100,
+    "expected_epochs": 100,
+    "last": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/m2/weights/last.pt",
+    "last_hash": "f5ca29af1bd2704d51f0c8a86183926905e9b660a4f06b93026856e417523fa1",
+    "reason": "completed all 100 epochs",
+    "results_hash": "fda0e4cdd784b22aae3deec57c5fa8dafcd6d80312c257ff59ea736d660b05c6",
+    "status": "complete"
+  },
+  "transfer": null,
+  "variant": "M2"
+}

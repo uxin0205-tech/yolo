@@ -1,0 +1,54 @@
+{
+  "best": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/sp2-b/weights/best.pt",
+  "best_hash": "5361d9ceb4ddcfe68034ce9c1033b6fd0932dbb5bba3812f742e11bb9de3ecd6",
+  "canonical": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/training/sp2_b/canonical.pt",
+  "canonical_hash": "089f21355ebcd85240d77ef6d9a3c90bc15eec0587cbeffb62260699873b03d5",
+  "data_exposed": true,
+  "finalize_report": {
+    "checkpoint": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/training/sp2_b/canonical.pt",
+    "checkpoint_hash": "089f21355ebcd85240d77ef6d9a3c90bc15eec0587cbeffb62260699873b03d5",
+    "source": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/sp2-b/weights/best.pt",
+    "source_hash": "5361d9ceb4ddcfe68034ce9c1033b6fd0932dbb5bba3812f742e11bb9de3ecd6",
+    "state_dict_hash": "6a774403cf4f01bca48a2ab86ff523a6871f799211e026672d5bfd62fe87cfec",
+    "variant": "SP2"
+  },
+  "initializer": "/home/uxin/yolo/yolo_masf/bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt",
+  "last": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/sp2-b/weights/last.pt",
+  "last_hash": "00069ca924e56d2a57f854e659e3271d46306d24a0a52db75ada0cf8ab1836c2",
+  "profile_hash": "c98afb37886a15f45f347e8ebc36845c93d8a52463eeafafadc92efdd4539619",
+  "results_hash": "922c52535871e90f15d87ffeaf1127bbf9f7e351b7766a1887284ee98b8b0f1f",
+  "stage": "sp2_b",
+  "strict_reload": true,
+  "strict_reload_report": {
+    "detect_scales": 4,
+    "strict_load": true,
+    "strides": [
+      4.0,
+      8.0,
+      16.0,
+      32.0
+    ],
+    "validation": {
+      "fitness": 0.7076729597807334,
+      "metrics/mAP50(B)": 0.9685358655800671,
+      "metrics/mAP50-95(B)": 0.7076729597807334,
+      "metrics/precision(B)": 0.9407568639432329,
+      "metrics/recall(B)": 0.9480411862195424
+    },
+    "validation_ran": true,
+    "variant": "SP2"
+  },
+  "training_output": {
+    "best": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/sp2-b/weights/best.pt",
+    "best_hash": "5361d9ceb4ddcfe68034ce9c1033b6fd0932dbb5bba3812f742e11bb9de3ecd6",
+    "completed_epochs": 90,
+    "expected_epochs": 90,
+    "last": "/home/uxin/yolo/yolo_masf/artifacts/static-phase1/runs/sp2-b/weights/last.pt",
+    "last_hash": "00069ca924e56d2a57f854e659e3271d46306d24a0a52db75ada0cf8ab1836c2",
+    "reason": "completed all 90 epochs",
+    "results_hash": "922c52535871e90f15d87ffeaf1127bbf9f7e351b7766a1887284ee98b8b0f1f",
+    "status": "complete"
+  },
+  "transfer": null,
+  "variant": "SP2"
+}

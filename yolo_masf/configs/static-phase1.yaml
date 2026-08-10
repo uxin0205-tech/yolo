@@ -1,0 +1,60 @@
+schema_version: 1
+pipeline_name: static-phase1
+artifacts_root: artifacts/static-phase1
+variants: [B1, M7, M0, M1, M2, M3, P3M, SP2]
+
+environment:
+  python: "3.12"
+  torch: "2.11.0+cu128"
+  cuda: "12.8"
+  ultralytics: "8.4.90"
+  faster_coco_eval: "1.7.2"
+  onnx: "1.22.0"
+  ml_dtypes: "0.5.4"
+  protobuf: "7.35.1"
+
+dataset:
+  source: bbt5-detect-baseline/dataset
+  split_ratios: [0.8, 0.1, 0.1]
+  class_names: [ball, bat]
+  seed: 42
+  minimum_ball_count: 50
+
+model:
+  source_weights: bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt
+  source_weights_sha256: 9adacdd1a86cde27b7568c0756ca06f7be83160445fc90a10449206c82b06f4d
+  official_model_yaml_sha256: 43d8a7c86acc77282ddf4966d6526e091e5b064c140ed4a6e4c0b68ecbc3784c
+  official_default_yaml_sha256: f6e19ab7228826341cc6370bcc8c78d10478d2bd604e25a13d9975b5efc9b410
+  imgsz: 640
+  nc: 2
+  scale: m
+  sp2_hidden_channels: 32
+  sp2_auxiliary_loss_weight: 1.0
+
+training:
+  optimizer: SGD
+  momentum: 0.937
+  cos_lr: true
+  deterministic: true
+  amp: true
+  nbs: 64
+  batch_candidates: [16, 8, 4, 2, 1]
+  b1_a_epochs: 10
+  b1_b_epochs: 90
+  smoke_epochs: 3
+  variant_epochs: 100
+  b1_a_lr0: 0.01
+  formal_lr0: 0.001
+  freeze: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+profiling:
+  precision: fp16
+  batch: 1
+  warmup: 100
+  iterations: 1000
+
+pipeline:
+  max_attempts: 3
+  device: 0
+  systemd_unit_prefix: masf-yolo-phase1
+  wait_for_units: [yolo-p2-study.service]
