@@ -224,7 +224,7 @@ def build_p3_model(
             replacement = PartialPaperFormulaMFAM(256, 0.25, kernels=(3, 5))
         else:
             raise ValueError(f"unsupported P3 variant: {variant}")
-        model.model[16] = _with_metadata(replacement, model.model[16])
+        model.model[16] = _with_metadata(nn.Sequential(model.model[16], replacement), model.model[16])
         if source_weights is not None:
             model.masf_transfer_report = transfer_b0_p3_parent(model, source_weights).to_dict()
     elif source_weights is not None:

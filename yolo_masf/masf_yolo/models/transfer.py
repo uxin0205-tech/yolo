@@ -67,8 +67,10 @@ def transfer_b0_p3_parent(
     source_state = _state_dict(source)
 
     def key_mapper(destination_key: str) -> str | None:
-        if destination_key.startswith(slot_prefix):
+        if destination_key.startswith(slot_prefix + "1."):
             return None
+        if destination_key.startswith(slot_prefix + "0."):
+            return destination_key.replace(slot_prefix + "0.", slot_prefix, 1)
         return destination_key
 
     report = _apply_mapping(destination, source_state, key_mapper)

@@ -16,7 +16,8 @@ def test_p2_and_p3_retest_builders_keep_their_intended_detection_scales():
 
 def test_p3_variant_has_formula_module_only_at_p3():
     model = build_retest_model("P3", "Partial50-35")
-    assert model.model[16].__class__.__name__ == "PartialPaperFormulaMFAM"
+    assert model.model[16].__class__.__name__ == "Sequential"
+    assert model.model[16][1].__class__.__name__ == "PartialPaperFormulaMFAM"
     assert isinstance(model.model[19], torch.nn.Module)
 
 
