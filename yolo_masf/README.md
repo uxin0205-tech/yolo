@@ -40,12 +40,6 @@ B1R/P2/P3 統一後處理結果。原始資料與正式 checkpoint 不移動、�
 
 重要資料夾各有 `README.md`；自動生成的 leaf 不重複放文件，以免污染模型輸出。
 
-## 本輪模型與結果
-
-B1 是 YOLO11m P2 baseline，採凍結 backbone 0–10 共 10 epochs，再全模型 90 epochs。M7 是 P2 的 DW3×3 + DW5×5 + DW(1×7→7×1)；M0/M1/M2/M3 比較 kernel 與 partial channels；P3M 只在 P3 使用 3、5、factorized 7，沒有 9×9；SP2 是 Ball-only 輕量高解析 head；SP2P 再加入 validation 選出的 M2，並採同樣 10+90。
-
-公平 test 中 M7 mAP50–95 為 0.7386、P3M 為 0.7340、B1 為 0.7303。SP2/SP2P 雖降低理論 GFLOPs，RTX 5090 實測更慢且 Ball 誤報大增，目前不建議部署。
-
 ## 操作
 
 ```bash
