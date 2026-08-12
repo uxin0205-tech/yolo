@@ -13,7 +13,7 @@ from ..artifacts.checkpoints import save_canonical_checkpoint
 from ..contracts import sha256_file
 from ..training.runner import run_training
 from .builder import build_retest_model
-from .profiles import b1r_a_profile, b1r_b_profile, direct_profile, retest_formal_profile, retest_smoke_profile
+from .profiles import b1r_a_profile, b1r_b_profile, control_full_profile, control_head_profile, direct_profile, retest_formal_profile, retest_smoke_profile
 
 
 @dataclass(frozen=True, slots=True)
@@ -26,14 +26,15 @@ class RetestWorkerRequest:
     data_yaml: Path
     project: Path
     resume_path: Path | None = None
+    parent_checkpoint: Path | None = None
 
     @classmethod
     def from_dict(cls, raw: Mapping[str, Any]) -> "RetestWorkerRequest":
-        expected = {"config_path", "stage", "family", "variant", "source_weights", "data_yaml", "project", "resume_path"}
+        expected = {"config_path", "stage", "family", "variant", "source_weights", "data_yaml", "project", "resume_path", "parent_checkpoint"}
         unknown = set(raw) - expected
         if unknown:
             raise ValueError(f"unknown retest worker keys: {sorted(unknown)}")
-        missing = expected - set(raw)
+        missing = (expected - {"parent_checkpoint"}) - set(raw)
         if missing:
             raise ValueError(f"missing retest worker keys: {sorted(missing)}")
         return cls(
@@ -42,6 +43,7 @@ class RetestWorkerRequest:
             source_weights=Path(str(raw["source_weights"])) if raw["source_weights"] is not None else None,
             data_yaml=Path(str(raw["data_yaml"])), project=Path(str(raw["project"])),
             resume_path=Path(str(raw["resume_path"])) if raw["resume_path"] is not None else None,
+            parent_checkpoint=Path(str(raw["parent_checkpoint"])) if raw.get("parent_checkpoint") is not None else None,
         )
 
 
@@ -50,6 +52,10 @@ def profile_for(request: RetestWorkerRequest, model_path: str) -> dict[str, Any]
         return b1r_a_profile(model_path, str(request.project))
     if request.stage == "b1r_b":
         return b1r_b_profile(model_path, str(request.project))
+    if request.stage == "control_head":
+        return control_head_profile(model_path, str(request.project))
+    if request.stage == "control_full":
+        return control_full_profile(model_path, str(request.project))
     if request.stage == "direct":
         return direct_profile(model_path, str(request.project))
     if request.variant is None:
@@ -62,6 +68,13 @@ def profile_for(request: RetestWorkerRequest, model_path: str) -> dict[str, Any]
 
 
 def build_request_model(request: RetestWorkerRequest):
+    if request.stage == "b1r_b" and request.resume_path is not None:
+        from ultralytics import YOLO
+
+        model = YOLO(str(request.resume_path), task="detect").model
+        model.masf_variant = "B1R"
+        model.masf_variant_hash = "b1r-per-scale-detect-v1"
+        return model
     return build_retest_model(request.family, request.variant, source_weights=request.source_weights)
 
 
@@ -72,9 +85,23 @@ def main() -> None:
     args = parser.parse_args()
     request = RetestWorkerRequest.from_dict(json.loads(args.request.read_text(encoding="utf-8")))
     model = build_request_model(request)
+    if request.parent_checkpoint is not None:
+        from ultralytics import YOLO
+
+        parent_state = YOLO(str(request.parent_checkpoint), task="detect").model.state_dict()
+        # MFAM is intentionally new for every ablation; all other compatible
+        # B1R/B0 parent tensors are inherited explicitly.
+        if request.stage == "control_full":
+            inherited = parent_state
+        else:
+            slot_prefix = "model.20." if request.family == "P2" else "model.16.1."
+            inherited = {key: value for key, value in parent_state.items() if not key.startswith(slot_prefix)}
+        model.load_state_dict(inherited, strict=False)
     profile = profile_for(request, "retest-in-memory")
     profile["data"] = str(request.data_yaml)
-    result = run_training(model, profile, resume_path=request.resume_path)
+    # B1R-B is a fresh 90-epoch full-unfreeze stage initialized from A-best;
+    # it must not inherit the trainer's previous epoch counter.
+    result = run_training(model, profile, resume_path=None if request.stage in {"b1r_b", "control_full"} else request.resume_path)
     report = {"stage": request.stage, "family": request.family, "variant": request.variant, "best": str(result.best), "last": str(result.last), "best_hash": sha256_file(result.best), "last_hash": sha256_file(result.last), "save_dir": str(result.save_dir)}
     atomic_write_json(args.output.resolve(), report)
     print(json.dumps(report, sort_keys=True))

@@ -29,6 +29,17 @@ def b1r_b_profile(model: str, project: str) -> dict[str, Any]:
     return _profile(model=model, project=project, name="b1r-b", epochs=90, lr0=0.001, freeze=None)
 
 
+def control_head_profile(model: str, project: str) -> dict[str, Any]:
+    # Match yolo_p2 A2: keep P2 slot (model.20) and P2 Detect branch (index 0)
+    # trainable while freezing the inherited backbone/neck and P3-P5 towers.
+    freeze = [*range(20), *range(21, 31), "31.cv2.1", "31.cv2.2", "31.cv2.3", "31.cv3.1", "31.cv3.2", "31.cv3.3", "31.dfl"]
+    return _profile(model=model, project=project, name="bbt5-p2-control-head", epochs=20, lr0=0.01, freeze=freeze)
+
+
+def control_full_profile(model: str, project: str) -> dict[str, Any]:
+    return _profile(model=model, project=project, name="bbt5-p2-control-full", epochs=80, lr0=0.001, freeze=None)
+
+
 def direct_profile(model: str, project: str) -> dict[str, Any]:
     return _profile(model=model, project=project, name="direct", epochs=100, lr0=0.001, freeze=None)
 

@@ -24,3 +24,11 @@ def test_retest_formal_profile_is_direct_unfrozen_one_hundred_epochs():
     assert profile["epochs"] == 100
     assert profile["lr0"] == 0.001
     assert profile["freeze"] is None
+
+
+def test_control_head_profile_only_leaves_p2_and_p2_detect_trainable():
+    request = RetestWorkerRequest(Path("config"), "control_head", "B1R", None, None, Path("data"), Path("project"), None)
+    profile = profile_for(request, "model.pt")
+    assert profile["epochs"] == 20
+    assert 20 not in profile["freeze"]
+    assert "31.cv2.1" in profile["freeze"]
