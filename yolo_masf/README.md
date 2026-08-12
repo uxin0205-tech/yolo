@@ -16,6 +16,17 @@
 | 第二輪設計規格 | [B1R/P2/P3 spec](docs/superpowers/specs/2026-08-11-b1r-p2-p3-retest-design.md) |
 | 論文實作稽核 | [paper audit](docs/research/2026-08-11-masf-paper-implementation-audit.md) |
 
+## 歷史紀錄（第一輪 Phase 1）
+
+舊的 M0–M7、P3M、SP2、SP2P、B0/B1 紀錄已保留並接入目前首頁；它們仍與本輪 B1R/P2/P3 重測分開，不會被誤當成同一組公平排名。
+
+| 內容 | 入口 |
+|---|---|
+| 歷史結果摘要與指標 | [LEGACY_RESULTS.md](b1r_p2_p3_study/results/LEGACY_RESULTS.md) |
+| 第一輪完整中文報告 | [EXPERIMENT_RESULTS_ZH.md](EXPERIMENT_RESULTS_ZH.md) |
+| 第一輪機器報告 | [artifacts/static-phase1/report.md](artifacts/static-phase1/report.md) |
+| 第一輪產物索引 | [artifacts/static-phase1/README.md](artifacts/static-phase1/README.md) |
+
 ## 目前正式結論
 
 統一 test 的 B0 Original 3Scale 為 0.770812；最佳新增模型為 P3 Partial25-35，
