@@ -1,0 +1,15 @@
+study:
+  name: b1r-p2-p3-retest
+  dataset: bbt5-detect-baseline/dataset
+  dataset_artifact: artifacts/static-phase1/dataset
+  initializer: bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt
+  imgsz: 640
+  seed: 42
+  batch: 16
+  device: 0
+  formal_epochs: 100
+  smoke_epochs: 3
+  split: [0.8, 0.1, 0.1]
+  classes: [ball, bat]
+results_root: b1r_p2_p3_study/results
+runtime_artifacts: artifacts/b1r-p2-p3-retest
