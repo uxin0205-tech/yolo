@@ -244,6 +244,11 @@ BBT5 原始 detect view
 
 ## B1R/P2/P3 第二輪加測
 
+整理後的 study 入口在 [`b1r_p2_p3_study/`](../b1r_p2_p3_study/)，其結構仿照
+`yolo_p2/p2_study`：設定、data 說明、results、metadata、metrics、weights 與
+報告分層；大型 checkpoint 與完整 prediction 仍由 symlink 指向本地
+`artifacts/b1r-p2-p3-retest/`，避免重複佔用磁碟或誤提交 dataset。
+
 第二輪使用獨立設定 `configs/retest/b1r_p2_p3_retest.yaml` 與產物根目錄
 `artifacts/b1r-p2-p3-retest/`，不修改 `artifacts/static-phase1/`。B1R 保留四尺度
 P2 graph，但使用 per-scale Detect 並將 P5 封頂為 512，使 B0 P3/P4/P5 tensors
