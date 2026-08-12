@@ -1,10 +1,30 @@
-# MASF-YOLO：BBT5 球棒／球偵測實驗
+# MASF-YOLO：BBT5 球棒／球偵測實驗首頁
 
 本 repo 是 MASF-YOLO Phase 1 的可重現實驗工作區。資料固定使用 `bbt5-detect-baseline/dataset/`，初始化固定使用 `bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt`。該 pose-derived 權重已看過 BBT5，因此本階段是資料暴露下的操作性消融，不能解讀為無洩漏泛化能力。
 
-正式 pipeline `cb7e0392cc32` 已完成 34 個階段，final audit 通過。完整數值與分析見 `EXPERIMENT_RESULTS_ZH.md`；機器證據見 `artifacts/static-phase1/report.md`。
+## 先看這裡
 
-## 目錄導覽
+| 內容 | 直接入口 |
+|---|---|
+| 本輪完整中文報告 | [B1R/P2/P3 REPORT](artifacts/b1r-p2-p3-retest/REPORT.md) |
+| 所有 val/test 比較表 | [comparison.csv](artifacts/b1r-p2-p3-retest/comparison.csv) |
+| JSON 統整結果 | [summary.json](artifacts/b1r-p2-p3-retest/summary.json) |
+| 結果完整性檢查 | [final_audit.json](artifacts/b1r-p2-p3-retest/final_audit.json) |
+| checkpoint 路徑與 SHA-256 | [checkpoints.json](artifacts/b1r-p2-p3-retest/lineage/checkpoints.json) |
+| 硬體成本 | [profiles/summary.json](artifacts/b1r-p2-p3-retest/profiles/summary.json) |
+| 整理後 study 封面 | [b1r_p2_p3_study/](b1r_p2_p3_study/README.md) |
+| 第二輪設計規格 | [B1R/P2/P3 spec](docs/superpowers/specs/2026-08-11-b1r-p2-p3-retest-design.md) |
+| 論文實作稽核 | [paper audit](docs/research/2026-08-11-masf-paper-implementation-audit.md) |
+
+## 目前正式結論
+
+統一 test 的 B0 Original 3Scale 為 0.770812；最佳新增模型為 P3 Partial25-35，
+為 0.754951。P3 PaperFormula-Full 為 0.750617，P2 Control-Full 為 0.747240。
+因此目前證據支持「P3 partial 比完整 P2 更穩定」，不支持「加入 P2 必然提升」。
+
+完整模型、Ball/Bat、AP_S/AP_M/AP_L、FP、recall 與硬體數值均在上方報告與 CSV。
+
+## 專案導覽
 
 | 路徑 | 用途 |
 |---|---|
@@ -13,8 +33,10 @@
 | `bbt5-detect-baseline/` | BBT5 detect view 與來源權重 |
 | `masf_yolo/` / `tests/` | 實驗程式與自動測試 |
 | `artifacts/` | 正式權重、評估、profile 與報告 |
-| `field_check/` | 正式管線外的探索性檢查 |
 | `docs/` | agent 規則、spec、計畫與 ADR |
+
+`artifacts/static-phase1/` 是第一輪正式結果；`artifacts/b1r-p2-p3-retest/` 是本輪
+B1R/P2/P3 統一後處理結果。原始資料與正式 checkpoint 不移動、不覆寫。
 
 重要資料夾各有 `README.md`；自動生成的 leaf 不重複放文件，以免污染模型輸出。
 
