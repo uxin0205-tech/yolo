@@ -1,0 +1,29 @@
+{
+  "attention_class": "ResidualDualFullBasisAttention",
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "bias_type": "none",
+  "binary_forward_count": 3131,
+  "distillation_enabled": true,
+  "distillation_type": "feature",
+  "experiment_schema_version": 3,
+  "magnitude_bits": null,
+  "model_yaml_hash": "457c2a44bde11456617e39b5fc0078117b33c838d9af5ac01cfb04cc35036732",
+  "p_bits": null,
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "residual_basis_channel_per_token",
+    "v8_scale": "none"
+  },
+  "quantizer_types": {
+    "model.10.m.0.attn": "none"
+  },
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "v_bits": null,
+  "variant_config_hash": "408e3cb1e9ea50918b08039d0d2454cbcf7fb9f4148e98005ca6ec0faae14f5e",
+  "variant_id": "T6-F"
+}

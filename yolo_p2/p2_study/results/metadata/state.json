@@ -1,0 +1,492 @@
+{
+  "status": "completed",
+  "created_at": "2026-08-06T17:03:03.111124+00:00",
+  "updated_at": "2026-08-09T17:16:05.312792+00:00",
+  "root": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study",
+  "config": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml",
+  "pid": 3620290,
+  "stages": {
+    "preflight": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-06T17:03:03.111287+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "preflight",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/preflight.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-06T17:03:04.637527+00:00",
+          "duration_seconds": 1.5261300640413538,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-06T17:03:04.637544+00:00"
+    },
+    "static_tests": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-06T17:03:04.637844+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "static",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/static_tests.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-06T17:03:10.855939+00:00",
+          "duration_seconds": 6.21152837399859,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-06T17:03:10.855960+00:00"
+    },
+    "prepare_weights": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-06T17:03:10.856279+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "prepare",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/prepare_weights.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-06T17:03:12.534807+00:00",
+          "duration_seconds": 1.671896841027774,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-06T17:03:12.534826+00:00"
+    },
+    "autobatch": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-06T17:03:12.535166+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "autobatch",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/autobatch.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-06T17:03:22.452144+00:00",
+          "duration_seconds": 9.910451458010357,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-06T17:03:22.452162+00:00"
+    },
+    "gate1_A1": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-06T17:04:21.537227+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "train",
+            "--phase",
+            "gate1",
+            "--experiment",
+            "A1",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/gate1_A1.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-06T17:05:36.050516+00:00",
+          "duration_seconds": 74.50668271601899,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-06T17:05:36.050536+00:00"
+    },
+    "health_A1": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-06T19:20:49.193688+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "train",
+            "--phase",
+            "health",
+            "--experiment",
+            "A1",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/health_A1.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-06T22:28:34.674993+00:00",
+          "duration_seconds": 11265.474558899994,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-06T22:28:34.675015+00:00"
+    },
+    "formal_A1": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-07T08:13:37.968028+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "train",
+            "--phase",
+            "formal",
+            "--experiment",
+            "A1",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/formal_A1.attempt1.log",
+          "checkpoint": null
+        },
+        {
+          "attempt": 2,
+          "started_at": "2026-08-08T04:19:57.611271+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "train",
+            "--phase",
+            "formal",
+            "--experiment",
+            "A1",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml",
+            "--resume",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/runs/formal/A1/weights/last.pt"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/formal_A1.attempt2.log",
+          "checkpoint": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/runs/formal/A1/weights/last.pt"
+        },
+        {
+          "attempt": 3,
+          "started_at": "2026-08-08T05:54:13.795990+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "train",
+            "--phase",
+            "formal",
+            "--experiment",
+            "A1",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml",
+            "--resume",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/runs/formal/A1/weights/last.pt"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/formal_A1.attempt3.log",
+          "checkpoint": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/runs/formal/A1/weights/last.pt",
+          "ended_at": "2026-08-08T14:56:42.519376+00:00",
+          "duration_seconds": 32548.723237165017,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-08T14:56:42.519398+00:00"
+    },
+    "validate_A0": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-09T17:00:00.506782+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "validate",
+            "--experiment",
+            "A0",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/validate_A0.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T17:01:36.589857+00:00",
+          "duration_seconds": 96.07559994293842,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-09T17:01:36.589872+00:00"
+    },
+    "validate_A1": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-09T17:01:36.590297+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "validate",
+            "--experiment",
+            "A1",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/validate_A1.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T17:03:49.371293+00:00",
+          "duration_seconds": 132.77450217597652,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-09T17:03:49.371311+00:00"
+    },
+    "benchmark_A0": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-09T17:05:45.348970+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "benchmark",
+            "--experiment",
+            "A0",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/benchmark_A0.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T17:05:48.370840+00:00",
+          "duration_seconds": 3.0216444310499355,
+          "exit_code": 1,
+          "error_type": "error",
+          "resolved_by_code_fix": "clone inference tensor before NMS"
+        },
+        {
+          "attempt": 2,
+          "started_at": "2026-08-09T17:05:48.371405+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "benchmark",
+            "--experiment",
+            "A0",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/benchmark_A0.attempt2.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T17:05:51.075322+00:00",
+          "duration_seconds": 2.697302136104554,
+          "exit_code": 1,
+          "error_type": "error",
+          "resolved_by_code_fix": "clone inference tensor before NMS"
+        },
+        {
+          "attempt": 3,
+          "started_at": "2026-08-09T17:08:45.627103+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "benchmark",
+            "--experiment",
+            "A0",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/benchmark_A0.attempt3.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T17:11:07.104301+00:00",
+          "duration_seconds": 141.46805362496525,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-09T17:11:07.104317+00:00"
+    },
+    "benchmark_A1": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-09T17:11:07.104757+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "benchmark",
+            "--experiment",
+            "A1",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/benchmark_A1.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T17:13:31.620049+00:00",
+          "duration_seconds": 144.50870204495732,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-09T17:13:31.620065+00:00"
+    },
+    "analysis": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.analyze",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/analysis.attempt1.log",
+          "exit_code": 0,
+          "ended_at": "2026-08-09T17:16:05.312385+00:00"
+        }
+      ]
+    },
+    "staged_A2_head": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-08T14:56:42.519821+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "train_staged",
+            "--stage",
+            "head",
+            "--experiment",
+            "A2",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/staged_A2_head.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-08T18:18:55.674812+00:00",
+          "duration_seconds": 12132.985329601914,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-08T18:18:55.674834+00:00"
+    },
+    "formal_A2": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-08T18:18:55.675309+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "train_staged",
+            "--stage",
+            "full",
+            "--experiment",
+            "A2",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/formal_A2.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T16:57:46+00:00",
+          "termination": "user_early_stop_after_epoch_73"
+        }
+      ],
+      "completed_at": "2026-08-09T16:57:46+00:00",
+      "early_stopped": true,
+      "completed_epochs": 73,
+      "planned_epochs": 80,
+      "best_epoch": 39,
+      "best_map": 0.51214
+    },
+    "validate_A2": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-09T17:03:49.371723+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "validate",
+            "--experiment",
+            "A2",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/validate_A2.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T17:05:45.348337+00:00",
+          "duration_seconds": 115.96988998900633,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-09T17:05:45.348359+00:00"
+    },
+    "benchmark_A2": {
+      "status": "completed",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-08-09T17:13:31.620501+00:00",
+          "command": [
+            "/home/uxin/yolo/.venv/bin/python",
+            "-m",
+            "p2_study.worker",
+            "benchmark",
+            "--experiment",
+            "A2",
+            "--config",
+            "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/config.yaml"
+          ],
+          "log": "/home/uxin/yolo/yolo_p2/.worktrees/p2-study/p2_study/artifacts/logs/stages/benchmark_A2.attempt1.log",
+          "checkpoint": null,
+          "ended_at": "2026-08-09T17:16:00.701071+00:00",
+          "duration_seconds": 149.07392845896538,
+          "exit_code": 0
+        }
+      ],
+      "completed_at": "2026-08-09T17:16:00.701086+00:00"
+    }
+  },
+  "completed_at": "2026-08-09T17:16:05.312789+00:00"
+}

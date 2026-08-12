@@ -1,0 +1,34 @@
+{
+  "fake_quantization": false,
+  "hardware_speed_claim": false,
+  "modules": [
+    {
+      "binary_forward_count": 1,
+      "binary_qk_count": 2,
+      "class": "ParallelDualBinaryAttention",
+      "path": "",
+      "probability_finite": true,
+      "probability_shape": [
+        2,
+        2,
+        16,
+        16
+      ],
+      "pv_count": 2,
+      "score_finite": true,
+      "score_shape": [
+        2,
+        2,
+        16,
+        16
+      ],
+      "softmax_count": 2
+    }
+  ],
+  "theoretical_cost": {
+    "binary_qk": 2,
+    "pv": 2,
+    "softmax": 2
+  },
+  "variant_id": "T3"
+}

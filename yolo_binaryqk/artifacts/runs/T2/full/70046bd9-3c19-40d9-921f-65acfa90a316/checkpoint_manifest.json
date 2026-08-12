@@ -1,0 +1,29 @@
+{
+  "attention_class": "UltralyticsBinaryAttention",
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "bias_type": "none",
+  "binary_forward_count": 3131,
+  "distillation_enabled": false,
+  "distillation_type": null,
+  "experiment_schema_version": 3,
+  "magnitude_bits": null,
+  "model_yaml_hash": "99136a4621329470f30c282951b2d3f1ee6d9b9dc852eda189333a8d328cd3bc",
+  "p_bits": null,
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "mean_abs_channel_token_per_sample_head",
+    "v8_scale": "none"
+  },
+  "quantizer_types": {
+    "model.10.m.0.attn": "none"
+  },
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "v_bits": null,
+  "variant_config_hash": "ed7a5b51d8e62db06315774b14190551896596eecca3e952dc6954f528aaec08",
+  "variant_id": "T2"
+}
