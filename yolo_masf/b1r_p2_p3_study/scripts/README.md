@@ -1,5 +1,30 @@
-# Scripts
+# 執行與重建入口
 
-後處理由 package module 執行：`postprocess` 產生 val/test，`profile_all` 產生
-硬體成本，`report` 產生中文報告，`audit` 檢查完整性。GPU queue 由
-`masf_yolo.retest.queue` 依序執行訓練 stage。
+## GPU queue
+
+```bash
+PYTHONPATH=. ../.venv/bin/python -m masf_yolo.retest.queue
+```
+
+Queue 一次只跑一個 worker；requests 與 worker manifests 位於 [`../results/metadata/`](../results/metadata/)。
+
+## 統一後處理
+
+```bash
+PYTHONPATH=. ../.venv/bin/python -m masf_yolo.retest.postprocess
+PYTHONPATH=. ../.venv/bin/python -m masf_yolo.retest.profile_all
+PYTHONPATH=. ../.venv/bin/python -m masf_yolo.retest.report
+PYTHONPATH=. ../.venv/bin/python -m masf_yolo.retest.audit
+```
+
+## GitHub 發布包
+
+```bash
+python scripts/build_retest_publication.py \
+  --source artifacts/b1r-p2-p3-retest \
+  --repo .
+```
+
+發布腳本把 runtime metrics、profiles、queue metadata 與 lineage 實體化到 `b1r_p2_p3_study/results/`；不複製 dataset、smoke/last checkpoints、大型 predictions 或 queue logs。
+
+完整流程請看 [`../EXPERIMENT_PROCESS.md`](../EXPERIMENT_PROCESS.md)。

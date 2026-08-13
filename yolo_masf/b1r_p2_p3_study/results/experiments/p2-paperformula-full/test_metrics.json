@@ -1,0 +1,124 @@
+{
+  "ap_l": 0.8314794158808043,
+  "ap_m": 0.8681953424573244,
+  "ap_s": 0.535393517718264,
+  "ball_ap": 0.6371965228410336,
+  "ball_ap_s": 0.41687509304891596,
+  "ball_gt_count": 503,
+  "ball_recall": 0.974155069582505,
+  "ball_subsets": {
+    "blur_proxy": {
+      "gt_count": 13,
+      "recall": 1.0
+    },
+    "large": {
+      "gt_count": 292,
+      "recall": 1.0
+    },
+    "small": {
+      "gt_count": 186,
+      "recall": 0.9623655913978495
+    },
+    "tiny": {
+      "gt_count": 25,
+      "recall": 0.76
+    }
+  },
+  "checkpoint": "/home/uxin/single_view_pipeline/runs/detect/artifacts/b1r-p2-p3-retest/training/paperformula-full/weights/best.pt",
+  "class_diagnostics": {
+    "ball": {
+      "false_positive_count": 8525,
+      "gt_count": 503,
+      "missed_count": 13,
+      "precision": 0.05435385468663339,
+      "prediction_count": 9015,
+      "recall": 0.974155069582505,
+      "subsets": {
+        "blur_proxy": {
+          "gt_count": 13,
+          "recall": 1.0
+        },
+        "large": {
+          "gt_count": 292,
+          "recall": 1.0
+        },
+        "small": {
+          "gt_count": 186,
+          "recall": 0.9623655913978495
+        },
+        "tiny": {
+          "gt_count": 25,
+          "recall": 0.76
+        }
+      },
+      "true_positive_count": 490
+    },
+    "bat": {
+      "false_positive_count": 3868,
+      "gt_count": 590,
+      "missed_count": 0,
+      "precision": 0.13234634365186182,
+      "prediction_count": 4458,
+      "recall": 1.0,
+      "subsets": {
+        "blur_proxy": {
+          "gt_count": 256,
+          "recall": 1.0
+        },
+        "large": {
+          "gt_count": 524,
+          "recall": 1.0
+        },
+        "small": {
+          "gt_count": 66,
+          "recall": 1.0
+        },
+        "tiny": {
+          "gt_count": 0,
+          "recall": null
+        }
+      },
+      "true_positive_count": 590
+    }
+  },
+  "evaluator": "faster-coco-eval 1.7.2",
+  "map50": 0.9377275984094235,
+  "map50_95": 0.7433124191777315,
+  "map75": 0.7994980848880126,
+  "per_class": {
+    "ball": {
+      "ap": 0.6371965228410336,
+      "ap50": 0.8849009978219026,
+      "ap75": 0.6532821378069535,
+      "ap_l": 0.8030029084548775,
+      "ap_m": 0.8656765676567657,
+      "ap_s": 0.41687509304891596,
+      "ar100": 0.7276341948310139,
+      "ar_l": 0.8794776119402984,
+      "ar_m": 0.8666666666666666,
+      "ar_s": 0.5376681614349776,
+      "gt_count": 503
+    },
+    "bat": {
+      "ap": 0.8494283155144295,
+      "ap50": 0.9905541989969447,
+      "ap75": 0.9457140319690716,
+      "ap_l": 0.8599559233067312,
+      "ap_m": 0.8707141172578833,
+      "ap_s": 0.6539119423876121,
+      "ar100": 0.8769491525423728,
+      "ar_l": 0.8907407407407408,
+      "ar_m": 0.900655021834061,
+      "ar_s": 0.7308641975308642,
+      "gt_count": 590
+    }
+  },
+  "split": "test",
+  "ultralytics": {
+    "fitness": 0.7447174783871856,
+    "metrics/mAP50(B)": 0.9399856215199546,
+    "metrics/mAP50-95(B)": 0.7447174783871856,
+    "metrics/precision(B)": 0.9117132511340549,
+    "metrics/recall(B)": 0.9385504259560022
+  }
+}

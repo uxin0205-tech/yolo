@@ -1,4 +1,3 @@
-# Profiles
+# 硬體成本
 
-統一使用 640×640、batch 1 的靜態 profiling，記錄 Params、MACs/GFLOPs、P2
-activation、peak activation、depthwise/pointwise count 與 feature traffic。
+`summary.json` 與各模型 JSON 保存 Params、MACs、GFLOPs、activation、operator count 與 feature traffic；本輪沒有可發布的實機 latency。

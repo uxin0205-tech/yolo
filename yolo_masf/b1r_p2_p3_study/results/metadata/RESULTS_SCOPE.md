@@ -1,5 +1,5 @@
-# Results scope
+# 發布證據範圍
 
-本 study 的 28 筆 metrics 是 14 個模型各自的 val/test 結果：B0、P2 direct、
-P2 control head/full、P2 五變體、P3 五變體。所有 test 都在 formal 訓練完成後
-統一執行；B0 只作資料暴露 reference，不參與選模。完整數值見 `comparison.csv`。
+本目錄發布可重建結論所需的小型正式證據：queue state、worker/request manifests、checkpoint lineage、metrics、profiles、總表與報告。
+
+未納入：dataset、smoke/preflight checkpoint、last.pt、raw prediction dumps、false-positive 大圖與大型 queue logs。第二輪 formal best.pt 的原 runtime 已遺失，因此只保存 SHA-256；第一輪正式權重仍由 Git LFS 保存。

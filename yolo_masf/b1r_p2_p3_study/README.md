@@ -1,51 +1,46 @@
-# B1R / P2 / P3 Study
+# B1R / P2 / P3 第二輪實驗
 
-這是本 repo 的正式研究入口，採用 `yolo_p2/p2_study` 的分層方式整理第二輪
-BBT5 實驗。訓練、驗證、profile 與報告已完成；原始 runtime 產物仍保留在
-`artifacts/b1r-p2-p3-retest/`，本目錄提供穩定、易讀的 study 入口。
+這是第二輪實驗的 GitHub 穩定入口。報告、metrics、profiles 與執行 metadata 都是實體檔案，不再連到被 `.gitignore` 排除的本機 runtime symlink。
 
-## 實驗順序
+## 閱讀順序
 
-1. CPU contract、模型 forward/backward 與 transfer audit。
-2. B1R-A freeze 0–10、10 epochs。
-3. B1R-B full 90 epochs；若退化則 direct 100 epochs。
-4. BBT5 head-only control 20 epochs + full 80 epochs。
-5. P2 五種 MFAM 先 smoke 3 epochs，再 formal 100 epochs。
-6. P3 五種 MFAM 先 smoke 3 epochs，再 formal 100 epochs。
-7. 統一 val/test、AP_S/M/L、Ball/Bat、FP 與硬體成本。
+1. [完整實驗流程](EXPERIMENT_PROCESS.md)：資料、初始化、baseline、MFAM、GPU queue 與後處理。
+2. [完整結果報告](results/REPORT.md)：val/test 全表、硬體成本與分析。
+3. [逐模型索引](results/experiments/README.md)：每個模型自己的做法、metrics、profile 與 lineage。
+4. [權重狀態](results/weights/CHECKPOINT_STATUS.md)：哪些 `.pt` 可下載、哪些只剩 SHA-256。
+5. [第一輪歷史摘要](results/LEGACY_RESULTS.md)：B0/B1、M0–M7、P3M、SP2/SP2P。
 
 ## 目錄
 
 ```text
 b1r_p2_p3_study/
 ├── README.md
-├── config.yaml                 # 唯一實驗設定摘要
-├── data/README.md              # 資料來源、split 與 hash
-├── results/
-│   ├── README.md
-│   ├── REPORT.md               # 中文正式報告入口
-│   ├── comparison.csv
-│   ├── summary.json
-│   ├── metrics/                # val/test 指標索引
-│   ├── weights/                # formal checkpoint 索引
-│   ├── profiles/               # 硬體成本索引
-│   └── metadata/               # lineage、queue、audit
-└── scripts/README.md           # 如何重建後處理
+├── EXPERIMENT_PROCESS.md
+├── config.yaml
+├── data/README.md
+├── scripts/README.md
+└── results/
+    ├── README.md
+    ├── REPORT.md
+    ├── comparison.csv
+    ├── summary.json
+    ├── PUBLICATION_MANIFEST.json
+    ├── experiments/<model>/
+    │   ├── README.md
+    │   ├── val_metrics.json
+    │   ├── test_metrics.json
+    │   ├── profile.json
+    │   └── checkpoint.json
+    ├── profiles/
+    ├── metadata/{requests,worker}/
+    └── weights/CHECKPOINT_STATUS.md
 ```
 
-## 資料與限制
+## 實驗矩陣
 
-- dataset：`bbt5-detect-baseline/dataset`，固定 group split 80/10/10，hash 見 `data/README.md`。
-- initializer：`bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt`。
-- B0 是資料暴露的 operational reference，不參與選模。
-- smoke 只驗證工程穩定性；正式比較只使用 formal best checkpoint。
-- P2/P3 的 placement 與 partial variants 是任務 adaptation，不宣稱完整重現論文 placement。
+- Baselines：B0 Original 3Scale、P2 Base Direct、P2 Control Head、P2 Control Full。
+- P2：PaperFormula-Full、Lite-35、Lite-35-F7、Partial50-35、Partial25-35。
+- P3：相同五種變體，只在 P3 placement，不增加完整 P2 Detect head。
+- Formal 設定：640、batch 16、SGD、cosine LR、AMP、seed 42；各 MFAM formal 100 epochs。
 
-## 重建命令
-
-```bash
-../.venv/bin/python -m masf_yolo.retest.postprocess
-../.venv/bin/python -m masf_yolo.retest.profile_all
-../.venv/bin/python -m masf_yolo.retest.report
-../.venv/bin/python -m masf_yolo.retest.audit
-```
+Dataset 不在 GitHub 發布包。來源 initializer 已接觸 BBT5，所以此 study 只支持同源操作性比較。
