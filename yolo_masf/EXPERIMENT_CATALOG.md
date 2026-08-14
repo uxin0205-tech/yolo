@@ -4,6 +4,8 @@
 
 > **共同限制**：所有模型使用 `bbt5-detect-baseline/dataset/` 的 BBT5 固定資料集，train/validation/test 為 1,987/300/291 個 unique frames。來源初始化權重 `yolo11m_bat_detect_init.pt` 已接觸 BBT5，因此以下是同源、資料暴露的操作性消融，不是無洩漏泛化估計。所有正式結果只有 seed 42。
 
+> **新 Clean 實驗線**：官方 COCO80 initializer、三 seeds 與 train/val-only trainer view 已實作並通過 CPU feasibility，但尚未排程或訓練。完整設計見 [Clean 實驗說明](configs/clean/README.md)。
+
 ## 先理解比較邏輯
 
 ```text

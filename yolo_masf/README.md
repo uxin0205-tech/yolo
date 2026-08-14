@@ -8,6 +8,7 @@
 
 | 想看什麼 | GitHub 入口 |
 |---|---|
+| Clean initializer、公平比較與資料可見規則 | [Clean 實驗設計與 CPU feasibility](configs/clean/README.md) |
 | 每一個實驗在做什麼、為何要做、如何比較 | [完整實驗目錄](EXPERIMENT_CATALOG.md) |
 | 第二輪完整做法、表格與分析 | [B1R / P2 / P3 完整實驗報告](b1r_p2_p3_study/results/REPORT.md) |
 | 從資料檢查到 GPU queue、評估與發布的過程 | [完整實驗流程](b1r_p2_p3_study/EXPERIMENT_PROCESS.md) |

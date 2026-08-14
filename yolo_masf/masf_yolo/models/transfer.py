@@ -174,6 +174,14 @@ def transfer_official_weights(
     return _apply_mapping(destination, _state_dict(source), _official_source_key)
 
 
+def transfer_same_graph_compatible(
+    destination: nn.Module,
+    source: nn.Module | Mapping[str, Tensor] | Path,
+) -> TransferReport:
+    """Transfer same-name tensors while leaving incompatible task heads new."""
+    return _apply_mapping(destination, _state_dict(source), lambda key: key)
+
+
 def transfer_b1_canonical(
     destination: nn.Module,
     source: nn.Module | Mapping[str, Tensor] | Path,

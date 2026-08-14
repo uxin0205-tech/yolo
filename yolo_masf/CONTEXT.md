@@ -16,6 +16,10 @@ _Avoid_: 隨機資料集、臨時 split
 `yolo11m_bat_detect_init.pt`；由 pose 權重轉成 detect 模型，且已接觸 BBT5。
 _Avoid_: 官方乾淨權重、無洩漏 baseline
 
+**乾淨初始化權重（Clean Initializer）**:
+與 Ultralytics v8.3.0 官方 release SHA-256 完全一致的 COCO80 `yolo11m.pt`，未經 BBT5 fine-tuning；轉入兩類模型時，相容 backbone/neck/head tensors 可複製，80 類輸出 tensors 必須重新初始化。
+_Avoid_: `yolo11m_bat_detect_init.pt`、pose-derived initializer
+
 **資料暴露（Data Exposed）**:
 initializer 已在 BBT5 相關訓練中看過資料，因此結果只能用於同源操作性比較。
 _Avoid_: data leakage-free、unseen generalization
@@ -30,6 +34,17 @@ _Avoid_: smoke model、preflight model
 **B0-Fair**:
 保留 B0 原始 P3/P4/P5 三尺度 Detect graph，從與第二輪 P3 正式變體相同的來源初始化權重出發，並使用完全相同的全模型 100 epochs 訓練設定；用來隔離 training budget 差異，但不消除來源初始化權重的資料暴露。
 _Avoid_: clean baseline、unseen baseline
+
+**嚴格公平組（Strict Fair Tier）**:
+使用同一乾淨初始化權重、固定資料集、direct 100 epochs 與完全相同 resolved training profile 的 B0-Clean、P3-PaperFormula-Clean、P3-Partial25-Clean、P2-Direct-Clean。
+
+**歷史測試集（Historical Test）**:
+現有固定 test；雖然 group/hash audit 通過，但結果已被研究者反覆查看並影響後續設計，只能用於歷史對照，不可再支撐 unseen claim。
+_Avoid_: final test、unseen test
+
+**最終保留集（Final Holdout）**:
+來自新影片、比賽或攝影機，建立後在 validation 選模與所有訓練決策凍結前不得查看的資料；目前尚未建立。
+_Avoid_: 現有 test、重新切一次相同 frames
 
 **MFAM**:
 在指定 feature slot 以多個 depthwise kernel 聚合尺度資訊，再用 1×1 fusion 的模組。

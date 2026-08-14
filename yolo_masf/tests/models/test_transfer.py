@@ -8,7 +8,7 @@ from ultralytics.nn.tasks import DetectionModel
 
 from masf_yolo.models.builder import build_b1r_model, build_model, build_p3_model
 import masf_yolo.models.transfer as transfer_module
-from masf_yolo.models.transfer import transfer_b1_canonical, transfer_official_weights
+from masf_yolo.models.transfer import transfer_b1_canonical, transfer_official_weights, transfer_same_graph_compatible
 
 
 def _fill_module(model: torch.nn.Module, value: float) -> None:
@@ -51,6 +51,19 @@ def test_official_transfer_report_has_one_disposition_per_destination_tensor() -
     assert dispositions == set(destination.state_dict())
     assert not (set(report.matched) & set(report.missing))
     assert report.unexpected == ("model.999.extra",)
+
+
+def test_clean_same_graph_transfer_keeps_coco_class_outputs_new() -> None:
+    source = DetectionModel("yolo11m.yaml", nc=80, verbose=False)
+    destination = build_p3_model()
+    _fill_module(source, 0.25)
+    before = destination.state_dict()["model.23.cv3.0.2.bias"].clone()
+    report = transfer_same_graph_compatible(destination, source)
+
+    assert torch.all(destination.state_dict()["model.0.conv.weight"] == 0.25)
+    torch.testing.assert_close(destination.state_dict()["model.23.cv3.0.2.bias"], before)
+    assert "model.23.cv3.0.2.bias" in report.shape_mismatch
+    assert not report.missing
 
 
 def test_requested_pose_derived_initializer_transfers_all_compatible_b1_tensors() -> None:

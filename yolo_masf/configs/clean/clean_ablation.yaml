@@ -1,0 +1,42 @@
+schema_version: 1
+study_name: clean-bbt5-ablation
+environment:
+  ultralytics: 8.4.90
+  default_cfg: inherited_identically_by_all_strict_fair_models
+initializer:
+  path: ../original/weight/yolo11m.pt
+  provenance: https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11m.pt
+  sha256: d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95
+  expected_nc: 80
+dataset:
+  source: bbt5-detect-baseline/dataset
+  locked_data_yaml: artifacts/static-phase1/dataset/data.yaml
+  dataset_hash: 6e16c975941dbae2af174a2eb4b5424bffd4736c74aad56d424805da019b8fbc
+  visibility:
+    train: fit_only
+    val: selection_only
+    test: historical_already_observed
+    final_holdout: null
+seeds: [42, 43, 44]
+experiments:
+  - B0-Clean
+  - P3-PaperFormula-Clean
+  - P3-Partial25-Clean
+  - P2-Direct-Clean
+  - P2-Control-Clean-Head
+  - P2-Control-Clean-Full
+training:
+  imgsz: 640
+  batch: 16
+  optimizer: SGD
+  momentum: 0.937
+  cos_lr: true
+  deterministic: true
+  amp: true
+  nbs: 64
+  direct_epochs: 100
+  direct_lr0: 0.001
+  control_head_epochs: 20
+  control_head_lr0: 0.01
+  control_full_epochs: 80
+  control_full_lr0: 0.001
