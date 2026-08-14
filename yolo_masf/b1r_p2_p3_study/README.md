@@ -4,6 +4,7 @@
 
 ## 閱讀順序
 
+0. [完整實驗目錄](../EXPERIMENT_CATALOG.md)：兩輪每一個實驗的目的、改動、訓練方式、結果與解讀。
 1. [完整實驗流程](EXPERIMENT_PROCESS.md)：資料、初始化、baseline、MFAM、GPU queue 與後處理。
 2. [完整結果報告](results/REPORT.md)：val/test 全表、硬體成本與分析。
 3. [逐模型索引](results/experiments/README.md)：每個模型自己的做法、metrics、profile 與 lineage。
