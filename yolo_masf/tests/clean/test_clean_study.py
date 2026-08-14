@@ -7,6 +7,7 @@ from masf_yolo.clean.contracts import CLEAN_EXPERIMENTS, load_clean_config
 from masf_yolo.clean.data_view import write_train_val_view
 from masf_yolo.clean.plan import build_clean_plan
 from masf_yolo.clean.profiles import clean_profile
+from masf_yolo.models.builder import build_p3_model
 
 
 CONFIG = Path(__file__).parents[2] / "configs" / "clean" / "clean_ablation.yaml"
@@ -38,7 +39,7 @@ def test_strict_fair_profiles_have_identical_training_settings():
 
 def test_clean_plan_is_prepared_only_and_preserves_control_dependency():
     plan = build_clean_plan(load_clean_config(CONFIG))
-    assert len(plan) == 18
+    assert len(plan) == 42
     assert {job["status"] for job in plan} == {"prepared_not_queued"}
     full = [job for job in plan if job["experiment"] == "P2-Control-Clean-Full"]
     assert [job["depends_on"] for job in full] == [
@@ -46,6 +47,19 @@ def test_clean_plan_is_prepared_only_and_preserves_control_dependency():
         "P2-Control-Clean-Head:seed43",
         "P2-Control-Clean-Head:seed44",
     ]
+
+
+def test_clean_p3_matrix_forbids_f9_and_factorized_f7_is_real():
+    p3_specs = [spec for spec in CLEAN_EXPERIMENTS.values() if spec.family == "P3"]
+    assert p3_specs
+    assert all(spec.variant != "PaperFormula-Full" for spec in p3_specs)
+
+    legacy = build_p3_model("M7-Legacy")
+    paper = build_p3_model("Lite-35-F7")
+    assert legacy.model[16][1].kernels == (3, 5, 7)
+    assert paper.model[16][1].kernels == (3, 5, 7)
+    assert not hasattr(legacy.model[16][1], "post_fuse")
+    assert hasattr(paper.model[16][1], "post_fuse")
 
 
 def test_train_val_view_physically_omits_historical_test(tmp_path):

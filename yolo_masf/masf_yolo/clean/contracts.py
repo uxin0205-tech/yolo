@@ -24,14 +24,38 @@ class CleanExperimentSpec:
 
 CLEAN_EXPERIMENTS = {
     "B0-Clean": CleanExperimentSpec("B0-Clean", "B0", None, "direct100", "strict_fair"),
-    "P3-PaperFormula-Clean": CleanExperimentSpec(
-        "P3-PaperFormula-Clean", "P3", "PaperFormula-Full", "direct100", "strict_fair"
+    "P2-Direct-Clean": CleanExperimentSpec(
+        "P2-Direct-Clean", "P2", None, "direct100", "strict_fair"
+    ),
+    "P2-PaperFormula-Clean": CleanExperimentSpec(
+        "P2-PaperFormula-Clean", "P2", "PaperFormula-Full", "direct100", "strict_fair"
+    ),
+    "P2-Lite35-Clean": CleanExperimentSpec(
+        "P2-Lite35-Clean", "P2", "Lite-35", "direct100", "strict_fair"
+    ),
+    "P2-Lite35-F7-Clean": CleanExperimentSpec(
+        "P2-Lite35-F7-Clean", "P2", "Lite-35-F7", "direct100", "strict_fair"
+    ),
+    "P2-Partial50-Clean": CleanExperimentSpec(
+        "P2-Partial50-Clean", "P2", "Partial50-35", "direct100", "strict_fair"
+    ),
+    "P2-Partial25-Clean": CleanExperimentSpec(
+        "P2-Partial25-Clean", "P2", "Partial25-35", "direct100", "strict_fair"
+    ),
+    "P3-M7-Clean": CleanExperimentSpec(
+        "P3-M7-Clean", "P3", "M7-Legacy", "direct100", "strict_fair"
+    ),
+    "P3-Lite35-Clean": CleanExperimentSpec(
+        "P3-Lite35-Clean", "P3", "Lite-35", "direct100", "strict_fair"
+    ),
+    "P3-Lite35-F7-Clean": CleanExperimentSpec(
+        "P3-Lite35-F7-Clean", "P3", "Lite-35-F7", "direct100", "strict_fair"
+    ),
+    "P3-Partial50-Clean": CleanExperimentSpec(
+        "P3-Partial50-Clean", "P3", "Partial50-35", "direct100", "strict_fair"
     ),
     "P3-Partial25-Clean": CleanExperimentSpec(
         "P3-Partial25-Clean", "P3", "Partial25-35", "direct100", "strict_fair"
-    ),
-    "P2-Direct-Clean": CleanExperimentSpec(
-        "P2-Direct-Clean", "P2", None, "direct100", "strict_fair"
     ),
     "P2-Control-Clean-Head": CleanExperimentSpec(
         "P2-Control-Clean-Head", "P2", None, "head20", "optimization_control"

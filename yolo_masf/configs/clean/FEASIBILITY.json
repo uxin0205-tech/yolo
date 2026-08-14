@@ -2,7 +2,7 @@
   "ok": true,
   "training_started": false,
   "ultralytics": "8.4.90",
-  "config_hash": "96dd5120e4c8445d07a3196a5b5946761bc55b9b56b5cc16d964f11110a16146",
+  "config_hash": "c891ea4eb7fd292335f5b6bcce98e9e9fa6e3c926fb47cfa0ff0a0637c381657",
   "initializer": {
     "path": "../original/weight/yolo11m.pt",
     "sha256": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
@@ -18,9 +18,17 @@
   "fairness": {
     "strict_tier": [
       "B0-Clean",
-      "P3-PaperFormula-Clean",
-      "P3-Partial25-Clean",
-      "P2-Direct-Clean"
+      "P2-Direct-Clean",
+      "P2-PaperFormula-Clean",
+      "P2-Lite35-Clean",
+      "P2-Lite35-F7-Clean",
+      "P2-Partial50-Clean",
+      "P2-Partial25-Clean",
+      "P3-M7-Clean",
+      "P3-Lite35-Clean",
+      "P3-Lite35-F7-Clean",
+      "P3-Partial50-Clean",
+      "P3-Partial25-Clean"
     ],
     "shared_schedule": {
       "task": "detect",
@@ -150,17 +158,158 @@
       "unexpected_source_tensors": 0
     },
     {
-      "representative": "P3-PaperFormula-Clean",
-      "family": "P3",
+      "representative": "P2-Direct-Clean",
+      "family": "P2",
+      "variant": null,
+      "strides": [
+        4.0,
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20868696,
+      "matched_tensors": 643,
+      "new_tensors": 154,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P2-PaperFormula-Clean",
+      "family": "P2",
       "variant": "PaperFormula-Full",
+      "strides": [
+        4.0,
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20911960,
+      "matched_tensors": 643,
+      "new_tensors": 154,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P2-Lite35-Clean",
+      "family": "P2",
+      "variant": "Lite-35",
+      "strides": [
+        4.0,
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20906840,
+      "matched_tensors": 643,
+      "new_tensors": 154,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P2-Lite35-F7-Clean",
+      "family": "P2",
+      "variant": "Lite-35-F7",
+      "strides": [
+        4.0,
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20909144,
+      "matched_tensors": 643,
+      "new_tensors": 154,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P2-Partial50-Clean",
+      "family": "P2",
+      "variant": "Partial50-35",
+      "strides": [
+        4.0,
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20879576,
+      "matched_tensors": 643,
+      "new_tensors": 154,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P2-Partial25-Clean",
+      "family": "P2",
+      "variant": "Partial25-35",
+      "strides": [
+        4.0,
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20872088,
+      "matched_tensors": 643,
+      "new_tensors": 154,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P3-M7-Clean",
+      "family": "P3",
+      "variant": "M7-Legacy",
       "strides": [
         8.0,
         16.0,
         32.0
       ],
-      "parameters": 20206614,
+      "parameters": 20134934,
       "matched_tensors": 643,
-      "new_tensors": 48,
+      "new_tensors": 30,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P3-Lite35-Clean",
+      "family": "P3",
+      "variant": "Lite-35",
+      "strides": [
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20196374,
+      "matched_tensors": 643,
+      "new_tensors": 24,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P3-Lite35-F7-Clean",
+      "family": "P3",
+      "variant": "Lite-35-F7",
+      "strides": [
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20200982,
+      "matched_tensors": 643,
+      "new_tensors": 36,
+      "shape_mismatches": 6,
+      "unexpected_source_tensors": 0
+    },
+    {
+      "representative": "P3-Partial50-Clean",
+      "family": "P3",
+      "variant": "Partial50-35",
+      "strides": [
+        8.0,
+        16.0,
+        32.0
+      ],
+      "parameters": 20092694,
+      "matched_tensors": 643,
+      "new_tensors": 24,
       "shape_mismatches": 6,
       "unexpected_source_tensors": 0
     },
@@ -178,22 +327,6 @@
       "new_tensors": 24,
       "shape_mismatches": 6,
       "unexpected_source_tensors": 0
-    },
-    {
-      "representative": "P2-Direct-Clean",
-      "family": "P2",
-      "variant": null,
-      "strides": [
-        4.0,
-        8.0,
-        16.0,
-        32.0
-      ],
-      "parameters": 20868696,
-      "matched_tensors": 643,
-      "new_tensors": 154,
-      "shape_mismatches": 6,
-      "unexpected_source_tensors": 0
     }
   ],
   "jobs": [
@@ -207,8 +340,89 @@
       "status": "prepared_not_queued"
     },
     {
-      "job_id": "P3-PaperFormula-Clean:seed42",
-      "experiment": "P3-PaperFormula-Clean",
+      "job_id": "P2-Direct-Clean:seed42",
+      "experiment": "P2-Direct-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-PaperFormula-Clean:seed42",
+      "experiment": "P2-PaperFormula-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Lite35-Clean:seed42",
+      "experiment": "P2-Lite35-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Lite35-F7-Clean:seed42",
+      "experiment": "P2-Lite35-F7-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Partial50-Clean:seed42",
+      "experiment": "P2-Partial50-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Partial25-Clean:seed42",
+      "experiment": "P2-Partial25-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-M7-Clean:seed42",
+      "experiment": "P3-M7-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Lite35-Clean:seed42",
+      "experiment": "P3-Lite35-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Lite35-F7-Clean:seed42",
+      "experiment": "P3-Lite35-F7-Clean",
+      "seed": 42,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Partial50-Clean:seed42",
+      "experiment": "P3-Partial50-Clean",
       "seed": 42,
       "comparison_tier": "strict_fair",
       "schedule": "direct100",
@@ -218,15 +432,6 @@
     {
       "job_id": "P3-Partial25-Clean:seed42",
       "experiment": "P3-Partial25-Clean",
-      "seed": 42,
-      "comparison_tier": "strict_fair",
-      "schedule": "direct100",
-      "depends_on": null,
-      "status": "prepared_not_queued"
-    },
-    {
-      "job_id": "P2-Direct-Clean:seed42",
-      "experiment": "P2-Direct-Clean",
       "seed": 42,
       "comparison_tier": "strict_fair",
       "schedule": "direct100",
@@ -261,8 +466,89 @@
       "status": "prepared_not_queued"
     },
     {
-      "job_id": "P3-PaperFormula-Clean:seed43",
-      "experiment": "P3-PaperFormula-Clean",
+      "job_id": "P2-Direct-Clean:seed43",
+      "experiment": "P2-Direct-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-PaperFormula-Clean:seed43",
+      "experiment": "P2-PaperFormula-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Lite35-Clean:seed43",
+      "experiment": "P2-Lite35-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Lite35-F7-Clean:seed43",
+      "experiment": "P2-Lite35-F7-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Partial50-Clean:seed43",
+      "experiment": "P2-Partial50-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Partial25-Clean:seed43",
+      "experiment": "P2-Partial25-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-M7-Clean:seed43",
+      "experiment": "P3-M7-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Lite35-Clean:seed43",
+      "experiment": "P3-Lite35-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Lite35-F7-Clean:seed43",
+      "experiment": "P3-Lite35-F7-Clean",
+      "seed": 43,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Partial50-Clean:seed43",
+      "experiment": "P3-Partial50-Clean",
       "seed": 43,
       "comparison_tier": "strict_fair",
       "schedule": "direct100",
@@ -272,15 +558,6 @@
     {
       "job_id": "P3-Partial25-Clean:seed43",
       "experiment": "P3-Partial25-Clean",
-      "seed": 43,
-      "comparison_tier": "strict_fair",
-      "schedule": "direct100",
-      "depends_on": null,
-      "status": "prepared_not_queued"
-    },
-    {
-      "job_id": "P2-Direct-Clean:seed43",
-      "experiment": "P2-Direct-Clean",
       "seed": 43,
       "comparison_tier": "strict_fair",
       "schedule": "direct100",
@@ -315,8 +592,89 @@
       "status": "prepared_not_queued"
     },
     {
-      "job_id": "P3-PaperFormula-Clean:seed44",
-      "experiment": "P3-PaperFormula-Clean",
+      "job_id": "P2-Direct-Clean:seed44",
+      "experiment": "P2-Direct-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-PaperFormula-Clean:seed44",
+      "experiment": "P2-PaperFormula-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Lite35-Clean:seed44",
+      "experiment": "P2-Lite35-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Lite35-F7-Clean:seed44",
+      "experiment": "P2-Lite35-F7-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Partial50-Clean:seed44",
+      "experiment": "P2-Partial50-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P2-Partial25-Clean:seed44",
+      "experiment": "P2-Partial25-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-M7-Clean:seed44",
+      "experiment": "P3-M7-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Lite35-Clean:seed44",
+      "experiment": "P3-Lite35-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Lite35-F7-Clean:seed44",
+      "experiment": "P3-Lite35-F7-Clean",
+      "seed": 44,
+      "comparison_tier": "strict_fair",
+      "schedule": "direct100",
+      "depends_on": null,
+      "status": "prepared_not_queued"
+    },
+    {
+      "job_id": "P3-Partial50-Clean:seed44",
+      "experiment": "P3-Partial50-Clean",
       "seed": 44,
       "comparison_tier": "strict_fair",
       "schedule": "direct100",
@@ -326,15 +684,6 @@
     {
       "job_id": "P3-Partial25-Clean:seed44",
       "experiment": "P3-Partial25-Clean",
-      "seed": 44,
-      "comparison_tier": "strict_fair",
-      "schedule": "direct100",
-      "depends_on": null,
-      "status": "prepared_not_queued"
-    },
-    {
-      "job_id": "P2-Direct-Clean:seed44",
-      "experiment": "P2-Direct-Clean",
       "seed": 44,
       "comparison_tier": "strict_fair",
       "schedule": "direct100",

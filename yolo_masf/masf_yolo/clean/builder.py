@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from ..models.builder import build_b1r_model, build_p3_model
+from ..models.builder import build_b1r_model, build_p2_retest_model, build_p3_model
 from ..models.transfer import transfer_same_graph_compatible
 from .contracts import CLEAN_EXPERIMENTS
 
@@ -23,7 +23,11 @@ def build_clean_model(experiment: str, official_weights: Path):
     elif spec.family == "P3":
         model = build_p3_model(spec.variant, source_weights=official_weights)
     elif spec.family == "P2":
-        model = build_b1r_model(source_weights=official_weights)
+        model = (
+            build_b1r_model(source_weights=official_weights)
+            if spec.variant is None
+            else build_p2_retest_model(spec.variant, source_weights=official_weights)
+        )
     else:  # pragma: no cover - locked specs make this unreachable
         raise ValueError(f"unsupported clean family: {spec.family}")
     model.masf_variant = experiment

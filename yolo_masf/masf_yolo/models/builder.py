@@ -222,6 +222,8 @@ def build_p3_model(
             replacement = PartialPaperFormulaMFAM(256, 0.5, kernels=(3, 5))
         elif variant == "Partial25-35":
             replacement = PartialPaperFormulaMFAM(256, 0.25, kernels=(3, 5))
+        elif variant == "M7-Legacy":
+            replacement = MFAM(256, kernels=(3, 5, 7))
         else:
             raise ValueError(f"unsupported P3 variant: {variant}")
         model.model[16] = _with_metadata(nn.Sequential(model.model[16], replacement), model.model[16])

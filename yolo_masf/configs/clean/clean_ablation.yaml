@@ -10,7 +10,7 @@ initializer:
   expected_nc: 80
 dataset:
   source: bbt5-detect-baseline/dataset
-  locked_data_yaml: artifacts/static-phase1/dataset/data.yaml
+  locked_data_yaml: artifacts/locked-bbt5-dataset/data.yaml
   dataset_hash: 6e16c975941dbae2af174a2eb4b5424bffd4736c74aad56d424805da019b8fbc
   visibility:
     train: fit_only
@@ -20,9 +20,17 @@ dataset:
 seeds: [42, 43, 44]
 experiments:
   - B0-Clean
-  - P3-PaperFormula-Clean
-  - P3-Partial25-Clean
   - P2-Direct-Clean
+  - P2-PaperFormula-Clean
+  - P2-Lite35-Clean
+  - P2-Lite35-F7-Clean
+  - P2-Partial50-Clean
+  - P2-Partial25-Clean
+  - P3-M7-Clean
+  - P3-Lite35-Clean
+  - P3-Lite35-F7-Clean
+  - P3-Partial50-Clean
+  - P3-Partial25-Clean
   - P2-Control-Clean-Head
   - P2-Control-Clean-Full
 training:

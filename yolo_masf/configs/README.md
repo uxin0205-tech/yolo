@@ -1,10 +1,12 @@
 # 設定檔
 
-| 檔案 | 用途 |
-|---|---|
-| `static-phase1.yaml` | Phase 1 唯一正式 pipeline 設定 |
-| `b0-reference.yaml` | B0 來源權重參考評估 |
-| `m7-priority.yaml` | M7 優先驗證設定 |
-| `models/yolo11m-p2-slots.yaml` | YOLO11m P2 架構與 P2/P3 slots |
+目前唯一可用於新正式結論的入口是 [`clean/clean_ablation.yaml`](clean/clean_ablation.yaml)。它鎖定官方 COCO80 `yolo11m.pt` 的 SHA-256、`artifacts/locked-bbt5-dataset/`、direct 100 epochs、seeds 42/43/44，以及 Clean B0／P2／P3 模型矩陣。
 
-資料來源是 `../bbt5-detect-baseline/dataset`，初始化是 `../bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt`。SHA-256 pin 防止誤換權重或基礎 YAML。修改正式設定會改變 pipeline identity；不要覆寫既有 `artifacts/static-phase1/`。
+| 路徑 | 用途 |
+|---|---|
+| `clean/` | Clean initializer 公平實驗的正式設定、說明與 CPU feasibility |
+| `models/` | 共用 YOLO11m P2 架構及 slot 定義 |
+| `retest/` | 舊第二輪流程的歷史實作；不可作為新排名或 unseen 證據 |
+| `static-phase1.yaml`、`b0-reference.yaml`、`m7-priority.yaml` | 舊 data-exposed 流程的歷史設定，不再是正式入口 |
+
+`bbt5-detect-baseline/` 會完整保留；其中 `yolo11m_bat_detect_init.pt` 已看過 BBT5，只能作歷史對照，不能用於 Clean 正式初始化。
