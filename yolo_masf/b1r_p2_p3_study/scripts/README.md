@@ -8,6 +8,10 @@ PYTHONPATH=. ../.venv/bin/python -m masf_yolo.retest.queue
 
 Queue 一次只跑一個 worker；requests 與 worker manifests 位於 [`../results/metadata/`](../results/metadata/)。
 
+## B0-Fair（目前不要執行）
+
+B0-Fair 已完成設定與 worker 支援，但尚未排入 GPU queue。確認 GPU 空閒後，再依 [`../../configs/retest/requests/README.md`](../../configs/retest/requests/README.md) 執行單一正式工作。
+
 ## 統一後處理
 
 ```bash

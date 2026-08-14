@@ -58,6 +58,7 @@ Phase 1 的完整 AP、precision/recall、FP、延遲與參數量在[第一輪�
 | 實驗 | 在做什麼、要回答什麼 | Test mAP50–95 | 結果怎麼看 |
 |---|---|---:|---|
 | **B0 Original 3Scale** | 原始 P3/P4/P5 initializer；作為既有系統參考。 | **0.770812** | 仍非同預算公平 baseline。 |
+| **B0-Fair（待執行）** | 保持與 B0 完全相同的三尺度 graph，從相同 initializer 出發，以 P3 formal 完全相同的全模型 100 epochs、`lr0=0.001` 與其餘訓練設定重訓。 | 尚未產生 | 已完成程式、契約與 request；尚未排程、未使用 GPU。它能修正 training budget 公平性，但不能消除 initializer data exposure。 |
 | **P2 Base Direct** | 使用與 B1R 相同的四尺度 graph，直接全模型訓練 100 epochs、`lr0=0.001`；比較 direct training 與 staged fine-tuning。 | 0.739114 | 比第一輪 B1 好，但仍低於 B0。 |
 | **P2 Control Head** | 先只訓練新增 P2 slot/head，凍結繼承的 backbone、neck 與 P3–P5 towers，20 epochs、`lr0=0.01`。 | 0.743269 | 單獨適配新 head 有幫助；它同時是下一階段的起點。 |
 | **P2 Control Full** | 從 Control Head best 初始化，全模型解除凍結再訓練 80 epochs、`lr0=0.001`。 | **0.747240** | 第二輪最佳 P2 baseline，顯示 staged head adaptation 比直接訓練好，但仍未追上 B0。 |
@@ -95,6 +96,10 @@ Phase 1 的完整 AP、precision/recall、FP、延遲與參數量在[第一輪�
 3. **新增 P2 不會自動變好。** 高解析 head 增加特徵與候選框，也可能增加最佳化難度與誤報；本次所有 P2 MFAM 都未超過 Control Full。
 4. **P3 Partial25-35 是目前最合理的新候選。** 它不增加完整 P2 Detect head，只處理 25% P3 channels，test mAP50–95 為 0.754951，第二輪新增模型中最高且 GFLOPs 僅 67.779。
 5. **仍需多 seed 與乾淨 initializer。** 目前每個 formal 只有 seed 42，且共同 initializer data-exposed；結論只能用於本資料與本權重來源的操作性決策。
+
+## 待執行：B0-Fair
+
+B0-Fair 的實作與 request 已完成，但不會自動啟動 GPU。確認 GPU 空閒後，才依 [`configs/retest/requests/README.md`](configs/retest/requests/README.md) 的命令執行。完成後應使用與第二輪相同的 val/test、profile 與報告流程，主要公平比較 `B0-Fair`、`P3 PaperFormula-Full`、`P3 Partial50-35` 與 `P3 Partial25-35`。
 
 ## 完整證據入口
 

@@ -44,6 +44,11 @@ def direct_profile(model: str, project: str) -> dict[str, Any]:
     return _profile(model=model, project=project, name="direct", epochs=100, lr0=0.001, freeze=None)
 
 
+def b0_fair_profile(model: str, project: str) -> dict[str, Any]:
+    """Three-scale control with the exact P3-formal training budget."""
+    return _profile(model=model, project=project, name="b0-fair-seed42", epochs=100, lr0=0.001, freeze=None)
+
+
 def retest_smoke_profile(variant: str, model: str, project: str) -> dict[str, Any]:
     return _profile(model=model, project=project, name=f"{variant.lower()}-smoke", epochs=3, lr0=0.001, freeze=None)
 

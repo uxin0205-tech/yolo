@@ -23,4 +23,8 @@ def build_retest_model(
         from ..models.builder import build_b1r_model
 
         return build_b1r_model(source_weights=source_weights)
-    raise ValueError("family must be B1R, P2, or P3")
+    if family == "B0":
+        # B0-Fair keeps the unmodified three-scale graph and strictly loads
+        # the same source initializer used by the P3 formal variants.
+        return build_p3_model(source_weights=source_weights)
+    raise ValueError("family must be B0, B1R, P2, or P3")

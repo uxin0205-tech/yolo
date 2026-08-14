@@ -38,6 +38,14 @@
 
 從同一 initializer 建立 B1R，直接全模型訓練 100 epochs，lr0=0.001，用來檢查 staged freeze 是否真的有幫助。
 
+### B0-Fair control（已實作、待 GPU 空閒）
+
+1. 保持原始 B0 的 P3/P4/P5 三尺度 Detect graph，不加入 P2 或 MFAM。
+2. 從與 P3 formal variants 相同的 `yolo11m_bat_detect_init.pt` 初始化。
+3. 使用與 P3 formal 完全相同的 640、batch 16、SGD、momentum 0.937、cosine LR、AMP、seed 42、全模型 100 epochs 與 lr0=0.001。
+4. Request 位於 [`../configs/retest/requests/b0_fair.json`](../configs/retest/requests/b0_fair.json)。目前只完成實作與 CPU 驗證，不在既有 queue 中，因此不會自行占用 GPU。
+5. 這個對照只能修正 B0 training budget 不一致；因 source initializer 仍 data-exposed，不能宣稱 unseen BBT5 泛化。
+
 ### Head-only + full control
 
 仿照原 `yolo_p2` 的訓練概念：

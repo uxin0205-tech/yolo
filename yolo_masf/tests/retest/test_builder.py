@@ -14,6 +14,13 @@ def test_p2_and_p3_retest_builders_keep_their_intended_detection_scales():
     assert p3.model[16].__class__.__name__ == "C3k2"
 
 
+def test_b0_fair_builder_keeps_the_unmodified_three_scale_graph():
+    model = build_retest_model("B0")
+    assert model.stride.tolist() == [8.0, 16.0, 32.0]
+    assert model.masf_variant == "P3-Base-Original"
+    assert model.model[16].__class__.__name__ == "C3k2"
+
+
 def test_p3_variant_has_formula_module_only_at_p3():
     model = build_retest_model("P3", "Partial50-35")
     assert model.model[16].__class__.__name__ == "Sequential"

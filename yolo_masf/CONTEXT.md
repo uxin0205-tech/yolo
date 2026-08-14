@@ -27,6 +27,10 @@ _Avoid_: smoke model、preflight model
 **B1**:
 加入標準 P2 detection head 的四尺度 baseline，採凍結 10 epochs 後全解凍 90 epochs。
 
+**B0-Fair**:
+保留 B0 原始 P3/P4/P5 三尺度 Detect graph，從與第二輪 P3 正式變體相同的來源初始化權重出發，並使用完全相同的全模型 100 epochs 訓練設定；用來隔離 training budget 差異，但不消除來源初始化權重的資料暴露。
+_Avoid_: clean baseline、unseen baseline
+
 **MFAM**:
 在指定 feature slot 以多個 depthwise kernel 聚合尺度資訊，再用 1×1 fusion 的模組。
 _Avoid_: Hadamard attention、binary basis

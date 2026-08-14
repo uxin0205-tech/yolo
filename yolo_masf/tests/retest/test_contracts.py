@@ -14,7 +14,7 @@ def _config():
         "environment": {},
         "dataset": {"source": "bbt5-detect-baseline/dataset", "locked_artifacts": "artifacts/static-phase1/dataset", "split_ratios": [0.8, 0.1, 0.1], "class_names": ["ball", "bat"], "seed": 42},
         "model": {},
-        "training": {"optimizer": "SGD", "momentum": 0.937, "cos_lr": True, "deterministic": True, "amp": True, "nbs": 64, "batch": 16, "seed": 42, "b1_a_epochs": 10, "b1_b_epochs": 90, "direct_epochs": 100, "smoke_epochs": 3, "formal_epochs": 100, "b1_a_lr0": 0.01, "formal_lr0": 0.001, "freeze": list(range(11))},
+        "training": {"optimizer": "SGD", "momentum": 0.937, "cos_lr": True, "deterministic": True, "amp": True, "nbs": 64, "batch": 16, "seed": 42, "b1_a_epochs": 10, "b1_b_epochs": 90, "direct_epochs": 100, "smoke_epochs": 3, "formal_epochs": 100, "b0_fair_epochs": 100, "b1_a_lr0": 0.01, "formal_lr0": 0.001, "b0_fair_lr0": 0.001, "freeze": list(range(11))},
         "profiling": {},
         "pipeline": {},
     }
@@ -51,4 +51,6 @@ def test_checked_in_yaml_is_loadable_and_has_locked_source():
     config = RetestConfig.from_mapping(yaml.safe_load(path.read_text(encoding="utf-8")))
     assert config.values["model"]["source_weights"].endswith("yolo11m_bat_detect_init.pt")
     assert config.values["training"]["formal_epochs"] == 100
+    assert config.values["training"]["b0_fair_epochs"] == 100
+    assert config.values["training"]["b0_fair_lr0"] == 0.001
     assert load_retest_config(path).config_hash == config.config_hash

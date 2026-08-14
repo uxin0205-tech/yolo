@@ -82,11 +82,15 @@ class RetestConfig:
         if tuple(dataset.get("split_ratios", ())) != SPLIT_RATIOS or tuple(dataset.get("class_names", ())) != CLASS_NAMES:
             raise ValueError("dataset must use the locked 80/10/10 ball/bat contract")
         training = raw["training"]
-        _reject_unknown("training", training, {"optimizer", "momentum", "cos_lr", "deterministic", "amp", "nbs", "batch", "seed", "b1_a_epochs", "b1_b_epochs", "direct_epochs", "smoke_epochs", "formal_epochs", "b1_a_lr0", "formal_lr0", "freeze"})
+        _reject_unknown("training", training, {"optimizer", "momentum", "cos_lr", "deterministic", "amp", "nbs", "batch", "seed", "b1_a_epochs", "b1_b_epochs", "direct_epochs", "smoke_epochs", "formal_epochs", "b0_fair_epochs", "b1_a_lr0", "formal_lr0", "b0_fair_lr0", "freeze"})
         if training.get("optimizer") != "SGD" or training.get("momentum") != 0.937 or training.get("cos_lr") is not True:
             raise ValueError("training optimizer contract must be SGD/momentum .937/cosine")
         if tuple(training.get("freeze", ())) != tuple(range(11)):
             raise ValueError("B1R-A must freeze backbone indices 0-10")
+        if training.get("b0_fair_epochs") != training.get("formal_epochs"):
+            raise ValueError("B0-Fair epochs must match the MFAM formal budget")
+        if training.get("b0_fair_lr0") != training.get("formal_lr0"):
+            raise ValueError("B0-Fair lr0 must match the MFAM formal learning rate")
         values = deepcopy(dict(raw))
         return cls(values)
 

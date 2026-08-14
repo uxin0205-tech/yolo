@@ -13,7 +13,7 @@ from ..artifacts.checkpoints import save_canonical_checkpoint
 from ..contracts import sha256_file
 from ..training.runner import run_training
 from .builder import build_retest_model
-from .profiles import b1r_a_profile, b1r_b_profile, control_full_profile, control_head_profile, direct_profile, retest_formal_profile, retest_smoke_profile
+from .profiles import b0_fair_profile, b1r_a_profile, b1r_b_profile, control_full_profile, control_head_profile, direct_profile, retest_formal_profile, retest_smoke_profile
 
 
 @dataclass(frozen=True, slots=True)
@@ -48,6 +48,8 @@ class RetestWorkerRequest:
 
 
 def profile_for(request: RetestWorkerRequest, model_path: str) -> dict[str, Any]:
+    if request.stage == "b0_fair":
+        return b0_fair_profile(model_path, str(request.project))
     if request.stage == "b1r_a":
         return b1r_a_profile(model_path, str(request.project))
     if request.stage == "b1r_b":
