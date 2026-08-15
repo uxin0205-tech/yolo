@@ -104,6 +104,7 @@ class VariantConfig:
     bdcn_denominator: BDCNDenominator | None = None
     bdcn_levels: int = 16
     bdcn_step: float = 0.125
+    bdcn_distance_max: float | None = None
     bdcn_fused_value: bool = True
     bdcn_reciprocal_newton_steps: int = 0
     p_bits: int | None = None
@@ -165,6 +166,8 @@ class VariantConfig:
                 raise ValueError("BDCN requires codebook, sharing, projection, and denominator")
             if self.bdcn_levels < 2 or self.bdcn_step <= 0:
                 raise ValueError("BDCN levels must be at least 2 and step positive")
+            if self.bdcn_distance_max is not None and self.bdcn_distance_max <= 0:
+                raise ValueError("BDCN maximum distance must be positive")
             if (
                 self.bdcn_codebook is BDCNCodebookKind.FIXED_EXP
                 and self.bdcn_projection is not BDCNProjection.FLOAT
@@ -181,6 +184,7 @@ class VariantConfig:
             any(value is not None for value in bdcn_values)
             or self.bdcn_levels != 16
             or self.bdcn_step != 0.125
+            or self.bdcn_distance_max is not None
             or self.bdcn_reciprocal_newton_steps != 0
         ):
             raise ValueError("BDCN options only apply to BDCN normalization")
@@ -194,6 +198,14 @@ class VariantConfig:
                 raise ValueError(f"{name} must be at least 2")
         if (self.projection_weight_bits is None) != (self.projection_activation_bits is None):
             raise ValueError("projection weight and activation bits must be configured together")
+
+    @property
+    def resolved_bdcn_step(self) -> float:
+        """Return the uniform bucket width, preserving legacy step-only configs."""
+
+        if self.bdcn_distance_max is None:
+            return self.bdcn_step
+        return self.bdcn_distance_max / (self.bdcn_levels - 1)
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)

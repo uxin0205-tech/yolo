@@ -622,6 +622,14 @@ N0-MK1/3/5 使用 floating sigmoid，先隔離 Top-K 與遞迴 normalization 本
 
 BDCN 是 A0 上的 normalization/dataflow 候選，不取代 I/H/T5 architecture screening。它利用 binary score 的離散性，把 row-max distance 量化成有限 bucket：
 
+舊 D0 的 $L=16,\Delta=0.125$ 只覆蓋 $d_{max}=1.875$，可能把大量遠距
+score 壓到最後一格。主線完成後直接從已完成 scale/bias 補償的 A0（V1-BR）
+建立 BDCN v2：固定 $d_{max}=8,L=64$，使 $\Delta=8/63\approx0.127$，
+保留近似舊解析度並修正覆蓋範圍。直接跑 global learned-codebook 10 epochs，
+再評估 R1 reciprocal LUT，不增加 levels screening。COCO evaluation 必須記錄
+bucket histogram、true overflow rate、last-bucket rate 與 observed max distance。
+此分支不改舊 BDCN artifacts，也不啟動 optional quantization。
+
 $$
 d_{ij}=\max_k S_{ik}-S_{ij},
 $$

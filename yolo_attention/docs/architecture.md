@@ -122,6 +122,14 @@ I/H/T5 的 scheduling dependency 依序串接，避免同時跑；但三者的 `
 
 COCO result 統一寫 `map50_95/map50/map75/maps`、checkpoint、profile 與 row-sum error。Custom training parent 至少需有 95% target state coverage，避免 fused inference checkpoint 靜默只載入少量權重；child mAP 低於 model parent 的 50% 時 executor fail closed。Final tie-break 只接受存在的 profile JSON；分析 profile 是固定兩個 Attention、reference shape 的比較 proxy，不是 hardware measurement。
 
+BDCN v2 透過同一 QueueExecutor 的 `append-bdcn-v2` 在已完成 queue 後追加，不能
+另開 worker script。它從已完成 scale/bias 補償的 A0 checkpoint 直接建立
+$d_{max}=8,L=64$ 的 10-epoch learned-codebook 與 R1 reciprocal-LUT jobs，
+不做額外 levels screening。BDCN validation 額外聚合兩處 Attention、所有 batches
+的 bucket histogram、true overflow、last-bucket rate 與最大 distance 到
+`metrics/queue-result.json`。`BCND/` 只保存設定與說明，唯一演算法 source 仍是
+`src/yolo_attention/bdcn.py`。
+
 ## 7. 尚未執行
 
 - canonical COCO JSON baseline 與最終候選重測。

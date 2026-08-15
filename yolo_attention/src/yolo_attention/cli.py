@@ -33,6 +33,9 @@ def _add_queue_parser(subparsers) -> None:
     rewind.add_argument("selection_job_id")
     rewind.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
     rewind.add_argument("--json", action="store_true")
+    append_bdcn = commands.add_parser("append-bdcn-v2")
+    append_bdcn.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
+    append_bdcn.add_argument("--json", action="store_true")
 
 
 class _ExecutionDisabledBackend:
@@ -99,6 +102,13 @@ def _run_queue_command(args) -> int:
         if args.queue_command == "rewind":
             job = executor.rewind_selection(args.selection_job_id)
             _print_payload({"job_id": job.id, "status": job.status.value}, as_json=args.json)
+            return 0
+        if args.queue_command == "append-bdcn-v2":
+            state = executor.append_bdcn_v2()
+            _print_payload(
+                {"jobs": len(state.jobs), "next": executor.preview_next().job_id},
+                as_json=args.json,
+            )
             return 0
         if args.queue_command == "run-next":
             payload = executor.run_next(execute=execute).to_dict()

@@ -283,3 +283,15 @@ class QueueExecutor:
             self.store.save(_replace_job(state, retried))
             self.store.append_event("retried", job_id=job_id, details={"attempts": job.attempts})
             return retried
+
+    def append_bdcn_v2(self) -> QueueState:
+        """Append the immutable post-mainline BDCN defect-fix branch."""
+
+        from .queue_workflow import append_bdcn_v2_fix
+
+        with self.store.worker_lock():
+            state = append_bdcn_v2_fix(self.store.load())
+            state = refresh_readiness(state)
+            self.store.save(state)
+            self.store.append_event("bdcn_v2_appended", job_id=None, details={})
+            return state

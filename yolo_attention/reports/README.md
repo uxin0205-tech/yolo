@@ -4,8 +4,7 @@
 
 - [REPORT.md](REPORT.md)：完整結果、方法比較、運算量與研究結論。
 - [TRAINING_AUDIT.md](TRAINING_AUDIT.md)：17 個正式 training run 的 checkpoint、epoch、數值與 provenance 稽核。
-- [COMPUTE_AND_SIZE.md](COMPUTE_AND_SIZE.md)：公式、修正後運算量、memory proxy、參數與 checkpoint 大小。
-- [ATTENTION_OPERATION_SAVINGS.md](ATTENTION_OPERATION_SAVINGS.md)：原始 Attention、A-FINAL、逐項節省量與可安全引用的結論。
+- [COMPUTE_AND_SIZE.md](COMPUTE_AND_SIZE.md)：整合原始 Attention、A-FINAL、全模型占比、逐項節省、memory proxy、參數與 checkpoint 大小。
 - [operation_savings.csv](operation_savings.csv)：原始／最終／差值的機器可讀運算量表。
 - [CLEANUP.md](CLEANUP.md)：中間產物永久清理與保留 checkpoint。
 - [comparison.csv](comparison.csv)：主要候選的機器可讀比較表。

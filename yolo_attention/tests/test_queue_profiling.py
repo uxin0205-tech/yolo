@@ -40,3 +40,21 @@ def test_fused_bdcn_profile_removes_dense_probability_materialization(tmp_path) 
 
     assert payload["operation_counts"]["bdcn_materialized_probability_entries"] == 0
     assert payload["assumptions"]["hardware_measurement"] is False
+
+
+def test_bdcn_profile_uses_configured_codebook_levels(tmp_path) -> None:
+    config = VariantConfig(
+        name="D0V2-U64",
+        normalization=NormalizationKind.BDCN,
+        bdcn_codebook=BDCNCodebookKind.FIXED_EXP,
+        bdcn_sharing=BDCNSharing.GLOBAL,
+        bdcn_projection=BDCNProjection.FLOAT,
+        bdcn_denominator=BDCNDenominator.EXACT,
+        bdcn_levels=64,
+        bdcn_distance_max=8.0,
+    )
+
+    payload = json.loads(write_variant_profile(tmp_path, config).read_text(encoding="utf-8"))
+
+    assert payload["assumptions"]["bdcn_levels"] == 64
+    assert payload["operation_counts"]["bdcn_codebook_value_ops"] == 13_107_200

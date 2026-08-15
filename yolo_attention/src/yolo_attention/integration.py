@@ -101,7 +101,7 @@ def convert_yolo26_model(
         bank = BDCNCodebookBank(
             num_tables=num_tables,
             levels=config.bdcn_levels,
-            step=config.bdcn_step,
+            step=config.resolved_bdcn_step,
             kind=config.bdcn_codebook,
             projection=config.bdcn_projection,
         )
@@ -119,7 +119,7 @@ def convert_yolo26_model(
                 attention.config.bdcn_codebook is config.bdcn_codebook
                 and attention.config.bdcn_sharing is config.bdcn_sharing
                 and attention.config.bdcn_levels == config.bdcn_levels
-                and attention.config.bdcn_step == config.bdcn_step
+                and attention.config.resolved_bdcn_step == config.resolved_bdcn_step
                 for attention in source_bdcn
             )
             if compatible:

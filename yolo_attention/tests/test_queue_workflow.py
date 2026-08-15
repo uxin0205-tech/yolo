@@ -4,14 +4,47 @@ from dataclasses import replace
 from pathlib import Path
 
 from yolo_attention.config import BasisKind, BiasKind, ScaleMode, VariantConfig
-from yolo_attention.queue_model import JobStatus, QueueResult
+from yolo_attention.queue_model import JobKind, JobStatus, QueueJob, QueueResult, QueueState
 from yolo_attention.queue_policy import SelectionDecision
 from yolo_attention.queue_workflow import (
+    append_bdcn_v2_fix,
     create_initial_state,
     materialize_after_selection,
     next_runnable_job,
     refresh_readiness,
 )
+
+
+def test_bdcn_v2_appends_direct_a0_derived_defect_fix(tmp_path: Path) -> None:
+    a0_variant = tmp_path / "a0.yaml"
+    VariantConfig(name="V1-BR", basis=BasisKind.HADAMARD).to_yaml(a0_variant)
+    jobs = (
+        QueueJob(
+            id="v1-br", run_name="V1-BR", stage="a0", kind=JobKind.TRAIN,
+            order=0, status=JobStatus.SUCCEEDED, variant_path=str(a0_variant),
+        ),
+        QueueJob(
+            id="a0-select", run_name="A0-SELECT", stage="select", kind=JobKind.SELECT,
+            order=1, status=JobStatus.SUCCEEDED, parent_job_ids=("v1-br",),
+        ),
+        QueueJob(
+            id="a-final", run_name="A-FINAL", stage="final", kind=JobKind.EVALUATE,
+            order=2, status=JobStatus.SUCCEEDED, parent_job_ids=("a0-select",),
+            model_parent_job_id="v1-br",
+        ),
+    )
+    state = QueueState.initial(jobs, project_root=str(ROOT))
+    state = replace(
+        state,
+        selections={"a0-select": {"winners": ["v1-br"], "skipped": [], "reason": "test", "expand": []}},
+    )
+
+    appended = append_bdcn_v2_fix(state)
+    learned = VariantConfig.from_yaml(appended.job("bdcn-v2-learn").variant_path)
+    assert appended.job("bdcn-v2-learn").model_parent_job_id == "v1-br"
+    assert learned.bdcn_levels == 64
+    assert learned.bdcn_distance_max == 8.0
+    assert appended.job("bdcn-v2-r1").model_parent_job_id == "bdcn-v2-learn"
 from yolo_attention.run_config import TrainingRecipe
 
 ROOT = Path(__file__).resolve().parents[1]

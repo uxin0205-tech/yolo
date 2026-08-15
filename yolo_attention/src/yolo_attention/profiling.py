@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import math
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 
 from .config import BasisKind, BDCNDenominator, BDCNProjection, NormalizationKind, VariantConfig
@@ -74,6 +74,7 @@ def write_variant_profile(
     if attention_sites < 1:
         raise ValueError("attention_sites must be positive")
     reference = shape or AttentionShape(tokens=400, heads=4, key_dim=32, value_dim=64)
+    reference = replace(reference, bdcn_levels=config.bdcn_levels)
     operations = estimate_operations(reference)
     counts = {name: value * attention_sites for name, value in operations.to_dict().items()}
     score_entries = counts["score_entries"]
@@ -160,6 +161,7 @@ def write_variant_profile(
             "heads": reference.heads,
             "key_dim": reference.key_dim,
             "value_dim": reference.value_dim,
+            "bdcn_levels": reference.bdcn_levels,
             "hardware_measurement": False,
             "units": "comparable algorithmic proxy units",
         },

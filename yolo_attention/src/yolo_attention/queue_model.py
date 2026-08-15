@@ -47,11 +47,16 @@ class QueueResult:
     checkpoint_path: str | None = None
     metrics_path: str | None = None
     profile_path: str | None = None
+    bdcn_bucket_histogram: tuple[int, ...] = ()
+    bdcn_bucket_overflow_rate: float | None = None
+    bdcn_last_bucket_rate: float | None = None
+    bdcn_distance_max: float | None = None
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> QueueResult:
         payload = dict(data)
         payload["maps"] = tuple(payload.get("maps", ()))
+        payload["bdcn_bucket_histogram"] = tuple(payload.get("bdcn_bucket_histogram", ()))
         return cls(**payload)
 
 
@@ -110,6 +115,9 @@ class QueueJob:
         data["parent_job_ids"] = list(self.parent_job_ids)
         if self.result is not None:
             data["result"]["maps"] = list(self.result.maps)
+            data["result"]["bdcn_bucket_histogram"] = list(
+                self.result.bdcn_bucket_histogram
+            )
         return data
 
     @classmethod

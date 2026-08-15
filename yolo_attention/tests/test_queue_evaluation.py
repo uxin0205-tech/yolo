@@ -7,6 +7,7 @@ import pytest
 
 from yolo_attention.config import BasisKind, ScaleMode, VariantConfig
 from yolo_attention.evaluation import (
+    BDCNDiagnosticsCollector,
     EvaluationRecipe,
     EvaluationRequest,
     ResultContractError,
@@ -16,6 +17,28 @@ from yolo_attention.evaluation import (
     standardize_metrics,
     write_standard_result,
 )
+
+
+def test_bdcn_diagnostics_collector_aggregates_forward_calls() -> None:
+    import torch
+
+    from yolo_attention.bdcn import BDCNCodebookBank, BDCNNormalizer
+    from yolo_attention.config import BDCNCodebookKind, BDCNDenominator, BDCNProjection
+
+    bank = BDCNCodebookBank(1, 17, 0.5, BDCNCodebookKind.FIXED_EXP, BDCNProjection.FLOAT)
+    module = BDCNNormalizer(bank, torch.tensor([0]), 0.5, BDCNDenominator.EXACT)
+    with BDCNDiagnosticsCollector(module) as collector:
+        module(torch.tensor([[[[0.0, -2.0, -8.0, -10.0]]]]))
+        module.aggregate(
+            torch.tensor([[[[0.0, -1.0]]]]),
+            torch.tensor([[[[1.0, 2.0], [3.0, 4.0]]]]),
+        )
+
+    result = collector.result()
+    assert result.bucket_histogram[0] == 2
+    assert result.bucket_histogram[-1] == 2
+    assert result.bucket_overflow_rate == pytest.approx(1 / 6)
+    assert result.distance_max == pytest.approx(10.0)
 from yolo_attention.integration import YOLO26M_ATTENTION_PATHS
 
 

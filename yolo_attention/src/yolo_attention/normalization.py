@@ -227,7 +227,7 @@ def build_normalizer(
         return BDCNNormalizer(
             bank=bdcn_bank,
             table_indices=bdcn_table_indices,
-            step=config.bdcn_step,
+            step=config.resolved_bdcn_step,
             denominator=config.bdcn_denominator,
             reciprocal_newton_steps=config.bdcn_reciprocal_newton_steps,
         )

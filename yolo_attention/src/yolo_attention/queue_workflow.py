@@ -367,6 +367,43 @@ def materialize_after_selection(
     return _expand_a_final(state, decision, generated_root)
 
 
+def append_bdcn_v2_fix(state: QueueState) -> QueueState:
+    """Append the direct A0-derived BDCN defect fix without rewriting history."""
+
+    if any(job.status not in {JobStatus.SUCCEEDED, JobStatus.SKIPPED} for job in state.jobs):
+        raise ValueError("BDCN v2 can only be appended after the existing queue is complete")
+    if any(job.id.startswith("bdcn-v2-") for job in state.jobs):
+        raise ValueError("BDCN v2 rerun branch already exists")
+    a0_id = _a0_winner(state)
+    root = Path(state.project_root)
+    order = max(job.order for job in state.jobs) + 1
+    previous = state.jobs[-1].id
+    jobs = (
+        _training_job(
+            state,
+            job_id="bdcn-v2-learn",
+            run_name="BDCN-V2-LEARN",
+            stage="bdcn-v2-recovery",
+            order=order,
+            variant_path=_project_path(root, "BCND/configs/bdcn-v2.yaml"),
+            training_file="configs/training/bdcn-codebook.yaml",
+            parent_job_ids=(previous,),
+            model_parent_job_id=a0_id,
+        ),
+        _evaluation_job(
+            state,
+            job_id="bdcn-v2-r1",
+            run_name="BDCN-V2-R1",
+            stage="bdcn-v2-denominator",
+            order=order + 1,
+            variant_path=_project_path(root, "BCND/configs/bdcn-v2-r1.yaml"),
+            parent_job_ids=("bdcn-v2-learn",),
+            model_parent_job_id="bdcn-v2-learn",
+        ),
+    )
+    return _append_jobs(state, jobs)
+
+
 def _expand_architecture(
     state: QueueState,
     decision: SelectionDecision,

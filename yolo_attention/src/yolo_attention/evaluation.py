@@ -59,6 +59,63 @@ class EvaluationRequest:
     variant_path: Path | None = None
 
 
+@dataclass(frozen=True)
+class BDCNDiagnostics:
+    bucket_histogram: tuple[int, ...] = ()
+    bucket_overflow_rate: float | None = None
+    last_bucket_rate: float | None = None
+    distance_max: float | None = None
+
+
+class BDCNDiagnosticsCollector:
+    """Aggregate BDCN bucket diagnostics across every validation forward."""
+
+    def __init__(self, model: object) -> None:
+        self.model = model
+        self._modules: list[object] = []
+
+    def __enter__(self):
+        modules = getattr(self.model, "modules", None)
+        if modules is None:
+            return self
+        for module in modules():
+            reset = getattr(module, "reset_diagnostics", None)
+            if reset is None:
+                continue
+            reset()
+            self._modules.append(module)
+        return self
+
+    def __exit__(self, *_args: object) -> None:
+        return None
+
+    def result(self) -> BDCNDiagnostics:
+        histogram: list[int] = []
+        overflow_count = 0.0
+        total = 0
+        distance_max: float | None = None
+        for module in self._modules:
+            values = getattr(module, "diagnostic_bucket_histogram", None)
+            if values is None:
+                continue
+            counts = [int(value) for value in values.detach().cpu().tolist()]
+            if len(histogram) < len(counts):
+                histogram.extend([0] * (len(counts) - len(histogram)))
+            for index, count in enumerate(counts):
+                histogram[index] += count
+            overflow_count += float(module.diagnostic_overflow_count)
+            total += int(module.diagnostic_total_count)
+            maximum = module.diagnostic_distance_max
+            if maximum is not None:
+                distance_max = maximum if distance_max is None else max(distance_max, maximum)
+        return BDCNDiagnostics(
+            bucket_histogram=tuple(histogram),
+            bucket_overflow_rate=overflow_count / total if total else None,
+            last_bucket_rate=histogram[-1] / total if total and histogram else None,
+            distance_max=distance_max,
+        )
+
+
 def _finite(value: object, field: str) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise ResultContractError(f"{field} must be numeric")
@@ -110,6 +167,7 @@ def write_standard_result(
     checkpoint_path: str | Path | None,
     profile_path: str | Path | None,
     row_sum_max_error: float | None,
+    bdcn_diagnostics: BDCNDiagnostics | None = None,
 ) -> QueueResult:
     run = Path(run_dir)
     metrics_dir = run / "metrics"
@@ -126,6 +184,18 @@ def write_standard_result(
         ),
         "checkpoint_path": checkpoint,
         "profile_path": profile,
+        "bdcn_bucket_histogram": list(
+            bdcn_diagnostics.bucket_histogram if bdcn_diagnostics is not None else ()
+        ),
+        "bdcn_bucket_overflow_rate": (
+            bdcn_diagnostics.bucket_overflow_rate if bdcn_diagnostics is not None else None
+        ),
+        "bdcn_last_bucket_rate": (
+            bdcn_diagnostics.last_bucket_rate if bdcn_diagnostics is not None else None
+        ),
+        "bdcn_distance_max": (
+            bdcn_diagnostics.distance_max if bdcn_diagnostics is not None else None
+        ),
     }
     result_path = metrics_dir / "queue-result.json"
     payload["metrics_path"] = str(result_path.resolve())
@@ -173,7 +243,8 @@ class UltralyticsEvaluationBackend:
 
     def evaluate_official(self, request: EvaluationRequest) -> QueueResult:
         model = self._make_model(request.parent_checkpoint)
-        metrics = standardize_metrics(model.val(**self._validation_args(request)))
+        with BDCNDiagnosticsCollector(getattr(model, "model", model)) as collector:
+            metrics = standardize_metrics(model.val(**self._validation_args(request)))
         row_error = collect_row_sum_max_error(getattr(model, "model", model))
         return write_standard_result(
             request.run_dir,
@@ -181,6 +252,7 @@ class UltralyticsEvaluationBackend:
             checkpoint_path=request.parent_checkpoint,
             profile_path=None,
             row_sum_max_error=row_error,
+            bdcn_diagnostics=collector.result(),
         )
 
     def evaluate_variant(self, request: EvaluationRequest) -> QueueResult:
@@ -214,7 +286,8 @@ class UltralyticsEvaluationBackend:
                 model.save(str(checkpoint_path))
             finally:
                 model.model = inference_model
-        metrics = standardize_metrics(model.val(**validation_args))
+        with BDCNDiagnosticsCollector(model.model) as collector:
+            metrics = standardize_metrics(model.val(**validation_args))
         row_error = collect_row_sum_max_error(model.model)
         return write_standard_result(
             request.run_dir,
@@ -222,4 +295,5 @@ class UltralyticsEvaluationBackend:
             checkpoint_path=checkpoint_path,
             profile_path=None,
             row_sum_max_error=row_error,
+            bdcn_diagnostics=collector.result(),
         )

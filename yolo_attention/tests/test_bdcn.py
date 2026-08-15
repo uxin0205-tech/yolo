@@ -29,6 +29,23 @@ def test_bdcn_codebook_is_positive_monotonic_and_exact_rows_normalize() -> None:
     torch.testing.assert_close(probability.sum(-1), torch.ones(2, 2, 7))
 
 
+def test_bdcn_reports_bucket_histogram_and_true_distance_overflow() -> None:
+    bank = BDCNCodebookBank(
+        num_tables=1,
+        levels=17,
+        step=0.5,
+        kind=BDCNCodebookKind.FIXED_EXP,
+        projection=BDCNProjection.FLOAT,
+    )
+    module = BDCNNormalizer(bank, torch.tensor([0]), 0.5, BDCNDenominator.EXACT)
+
+    module(torch.tensor([[[[0.0, -2.0, -8.0, -10.0]]]]))
+
+    assert module.last_bucket_histogram.tolist() == [1, 0, 0, 0, 1] + [0] * 11 + [2]
+    assert module.last_bucket_overflow_rate.item() == pytest.approx(0.25)
+    assert module.last_distance_max.item() == pytest.approx(10.0)
+
+
 @pytest.mark.parametrize("denominator", [BDCNDenominator.RECIPROCAL_LUT, BDCNDenominator.POT_SHIFT])
 def test_hardware_denominators_are_finite_and_nonnegative(denominator: BDCNDenominator) -> None:
     module = BDCNNormalizer(make_bank(), torch.tensor([0, 1]), 0.125, denominator)

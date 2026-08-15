@@ -35,6 +35,7 @@ python -m yolo_attention.cli queue init|status|validate|next
 python -m yolo_attention.cli queue run-next [--execute]
 python -m yolo_attention.cli queue retry JOB_ID
 python -m yolo_attention.cli queue rewind SELECTION_JOB_ID
+python -m yolo_attention.cli queue append-bdcn-v2  # completed mainline 後追加改良重跑
 ~~~
 
 `train` 預設只能 dry-run；只有使用者明確要求並加入 `--execute` 才能訓練。

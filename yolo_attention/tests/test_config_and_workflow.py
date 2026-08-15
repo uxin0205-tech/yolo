@@ -60,6 +60,22 @@ def test_bdcn_config_round_trips_and_validates_scope(tmp_path: Path) -> None:
         VariantConfig(name="bad", normalization=NormalizationKind.EXACT, bdcn_levels=8)
 
 
+def test_bdcn_distance_range_derives_uniform_bucket_step_and_round_trips(tmp_path: Path) -> None:
+    config = VariantConfig(
+        name="D0V2-U17",
+        normalization=NormalizationKind.BDCN,
+        bdcn_codebook=BDCNCodebookKind.FIXED_EXP,
+        bdcn_sharing=BDCNSharing.GLOBAL,
+        bdcn_projection=BDCNProjection.FLOAT,
+        bdcn_denominator=BDCNDenominator.EXACT,
+        bdcn_levels=17,
+        bdcn_distance_max=8.0,
+    )
+
+    assert config.resolved_bdcn_step == pytest.approx(0.5)
+    assert VariantConfig.from_yaml(config.to_yaml(tmp_path / "range.yaml")) == config
+
+
 def test_registry_encodes_the_approved_funnel() -> None:
     registry = ExperimentRegistry.default()
 

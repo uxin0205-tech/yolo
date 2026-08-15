@@ -15,7 +15,7 @@
 | A-FINAL 相對 exact binary arithmetic proxy | -5.57% |
 | Queue | 52 succeeded / 0 failed |
 
-這裡的 AP 是本 repository 對 COCO2017 val images 的 Ultralytics internal metric，不是 canonical COCO API AP，也不能直接和官方 0.525 E2E／0.531 Non-E2E 混用。完整數據與限制見 [完整實驗報告](reports/REPORT.md)、[Attention 運算量節省](reports/ATTENTION_OPERATION_SAVINGS.md)、[計算量與大小](reports/COMPUTE_AND_SIZE.md)、[訓練稽核](reports/TRAINING_AUDIT.md)、[比較表](reports/comparison.csv) 與 [機器可讀摘要](reports/summary.json)。
+這裡的 AP 是本 repository 對 COCO2017 val images 的 Ultralytics internal metric，不是 canonical COCO API AP，也不能直接和官方 0.525 E2E／0.531 Non-E2E 混用。完整數據與限制見 [完整實驗報告](reports/REPORT.md)、[Attention 運算量、全模型占比與大小整合報告](reports/COMPUTE_AND_SIZE.md)、[訓練稽核](reports/TRAINING_AUDIT.md)、[比較表](reports/comparison.csv) 與 [機器可讀摘要](reports/summary.json)。
 
 ![Main experiment results](reports/figures/mainline-map.svg)
 
@@ -145,6 +145,17 @@ x → Attention → residual → FFN → residual
 ../.venv/bin/python -m yolo_attention.cli queue validate --json
 ~~~
 
+若要追加不覆寫舊結果的 BDCN v2 defect-fix branch：
+
+~~~bash
+../.venv/bin/python -m yolo_attention.cli queue append-bdcn-v2 --json
+../.venv/bin/python -m yolo_attention.cli queue validate --json
+../.venv/bin/python -m yolo_attention.cli queue run --execute --json
+~~~
+
+它直接從 A0（V1-BR）跑 10 epochs learned codebook，再做 reciprocal-LUT
+evaluation，不增加 levels screening。詳細設定與結果位置見 [BCND/README.md](BCND/README.md)。
+
 D1 依序執行 `D1-SHARED`、`D1-PATTN`、`D1-PHEAD`，每個候選都是從共同 D0 parent 開始的一次完整 10-epoch codebook-only run；`D1-SELECT` 直接比較這三個結果。只有 top-two 落在 0.001 tie band 時，queue 才加入 winner 的 seed-1 10-epoch confirmation，完成後自動接回 D2、R 與 A-FINAL。舊 artifacts 中的 `d1-*-10` 是先前已完成的 staged 5+5 歷史紀錄，不代表目前程式仍採 extension workflow。
 
 ## Repository 結構
@@ -186,6 +197,7 @@ yolo_attention/
 │   └── cli.py           # 唯一公開入口
 ├── scripts/main.py      # CLI 薄包裝
 ├── tests/
+├── BCND/                  # BDCN v2 defect-fix 設定、說明與結果索引
 ├── reports/               # 正式彙整、training audit、CSV/JSON 摘要
 ├── artifacts/
 │   ├── logs/              # worker 程序 log
@@ -207,8 +219,8 @@ yolo_attention/
 3. [docs/architecture.md](docs/architecture.md)：程式 seam 與修改位置。
 4. [reports/REPORT.md](reports/REPORT.md)：本次完整結果與分析。
 5. [reports/TRAINING_AUDIT.md](reports/TRAINING_AUDIT.md)：checkpoint、epoch、finite-value 與 provenance 稽核。
-6. [reports/ATTENTION_OPERATION_SAVINGS.md](reports/ATTENTION_OPERATION_SAVINGS.md)：原始 Attention、A-FINAL 與實際節省量。
-7. [reports/COMPUTE_AND_SIZE.md](reports/COMPUTE_AND_SIZE.md)：計算公式、corrected proxy、參數與 checkpoint 大小。
+6. [reports/COMPUTE_AND_SIZE.md](reports/COMPUTE_AND_SIZE.md)：原始 Attention、全模型占比、節省原因、corrected proxy、參數與 checkpoint 大小。
+7. [BCND/README.md](BCND/README.md)：BDCN v2 修正原因、單一路徑 config 與重跑方法。
 8. [reports/CLEANUP.md](reports/CLEANUP.md)：永久刪除與保留項目。
 9. [configs/README.md](configs/README.md)、[src/README.md](src/README.md)、[artifacts/README.md](artifacts/README.md)：局部操作與資料契約。
 10. `hardware-friendly_attention.md`：舊 YOLO11 背景，不具現行規格效力。

@@ -102,6 +102,18 @@ class BDCNNormalizer(nn.Module):
         self.register_buffer("reciprocal_lut", mantissa.reciprocal(), persistent=True)
         self.last_row_sums: torch.Tensor | None = None
         self.last_bucket_saturation: torch.Tensor | None = None
+        self.last_bucket_histogram: torch.Tensor | None = None
+        self.last_bucket_overflow_rate: torch.Tensor | None = None
+        self.last_distance_max: torch.Tensor | None = None
+        self.reset_diagnostics()
+
+    def reset_diagnostics(self) -> None:
+        """Reset validation-wide counters used by the result contract."""
+
+        self.diagnostic_bucket_histogram: torch.Tensor | None = None
+        self.diagnostic_overflow_count = 0.0
+        self.diagnostic_total_count = 0
+        self.diagnostic_distance_max: float | None = None
 
     def _weights(self, scores: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         if scores.ndim != 4 or scores.shape[1] != self.table_indices.numel():
@@ -112,7 +124,31 @@ class BDCNNormalizer(nn.Module):
         tables = self.bank.codebook()[self.table_indices]
         source = tables.view(1, scores.shape[1], 1, -1).expand(scores.shape[0], -1, scores.shape[2], -1)
         weights = source.gather(-1, bucket)
-        self.last_bucket_saturation = (raw_bucket >= self.bank.levels - 1).float().mean().detach()
+        self.last_bucket_histogram = torch.bincount(
+            bucket.reshape(-1), minlength=self.bank.levels
+        ).detach()
+        self.last_bucket_overflow_rate = (
+            raw_bucket > self.bank.levels - 1
+        ).float().mean().detach()
+        self.last_distance_max = distance.max().detach()
+        self.last_bucket_saturation = (
+            bucket == self.bank.levels - 1
+        ).float().mean().detach()
+        histogram = self.last_bucket_histogram
+        self.diagnostic_bucket_histogram = (
+            histogram.clone()
+            if self.diagnostic_bucket_histogram is None
+            else self.diagnostic_bucket_histogram + histogram
+        )
+        total = int(histogram.sum().item())
+        self.diagnostic_total_count += total
+        self.diagnostic_overflow_count += float(self.last_bucket_overflow_rate.item()) * total
+        maximum = float(self.last_distance_max.item())
+        self.diagnostic_distance_max = (
+            maximum
+            if self.diagnostic_distance_max is None
+            else max(self.diagnostic_distance_max, maximum)
+        )
         return weights, bucket, tables
 
     def _reciprocal(self, denominator: torch.Tensor) -> torch.Tensor:

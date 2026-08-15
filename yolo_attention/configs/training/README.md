@@ -6,6 +6,7 @@
 - `recovery-*.yaml`：winner 的 Direct／Progressive recovery。
 - `normalization-recovery.yaml`：N1 attention-only PMP recovery。
 - `bdcn-codebook.yaml`：D1 三候選各自一次完整 10-epoch codebook-only training。
+- `bdcn-codebook-extension.yaml`：只供既有 staged 5+5 queue provenance 與 validation；新流程不再建立 extension jobs。
 - `bdcn-codebook-seed1.yaml`：只有排名接近時才執行的 10-epoch seed confirmation。
 - `quantization-qat.yaml`：optional phase，未核准不得執行。
 
