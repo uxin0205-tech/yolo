@@ -1,0 +1,13 @@
+name: D2-1P
+basis: identity
+bias: none
+scale_mode: dynamic
+normalization: bdcn
+use_ste: true
+bdcn_codebook: learned
+bdcn_sharing: global
+bdcn_projection: one_pot
+bdcn_denominator: exact
+bdcn_levels: 16
+bdcn_step: 0.125
+bdcn_fused_value: true

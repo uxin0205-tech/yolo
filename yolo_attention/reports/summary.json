@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "algorithm_mainline_complete",
+  "queue": {
+    "jobs_succeeded": 52,
+    "jobs_failed": 0,
+    "optional_quantization_locked": true
+  },
+  "dataset": {
+    "name": "COCO2017",
+    "train_images": 118287,
+    "val_images": 5000,
+    "evaluator": "ultralytics_internal_metric",
+    "canonical_coco_api_completed": false
+  },
+  "baseline": {
+    "run_id": "b26-fp",
+    "map50_95": 0.5179978354321163,
+    "map50": 0.6907129398442434,
+    "map75": 0.5666710540300949
+  },
+  "final": {
+    "run_id": "a-final",
+    "source_run_id": "n1-shift",
+    "method": "Hadamard MDB + PoT scale + decomposed 2D bias + PoT normalization",
+    "map50_95": 0.506356604887567,
+    "map50": 0.6769404124357148,
+    "map75": 0.554141849919115,
+    "map50_95_delta_from_baseline": -0.011641230544549352,
+    "baseline_retention": 0.9775264880502094,
+    "parameters": 21897260,
+    "checkpoint_bytes": 71576233,
+    "parameter_tensor_bytes_fp16": 43794520,
+    "arithmetic_cost_proxy": 86790400,
+    "exact_normalization_arithmetic_cost_proxy": 91910400,
+    "arithmetic_proxy_reduction_vs_exact": 0.05570642712903007,
+    "checkpoint_sha256": "6bd4b25ea36bfe453f437cec6647d7d7dbab745e1e0035b1610928a454e63ce1"
+  },
+  "training_audit": {
+    "accepted_training_runs": 17,
+    "completed_epochs": 132,
+    "image_presentations": 15613884,
+    "mini_batches": 975876,
+    "elapsed_process_hours": 26.484222222222225,
+    "all_csv_numeric_values_finite": true,
+    "all_best_checkpoints_load": true,
+    "all_best_checkpoint_tensors_finite": true,
+    "all_runs_convert_both_attention_sites": true,
+    "all_embedded_configs_match_run_yaml": true,
+    "audit_performed_before_cleanup": true,
+    "retained_best_checkpoints_after_cleanup": 5
+  },
+  "cleanup": {
+    "completed": true,
+    "project_size_before_approx_bytes": 4187593114,
+    "project_size_after_approx_bytes": 389021696,
+    "retained_checkpoint_runs": ["h-scr", "w-dir", "v1-br", "n1-shift", "d1-shared-10"]
+  },
+  "warnings": [
+    "W-DIR and W-PROG stopped early at 26/40 and 11/40 epochs",
+    "D1 shared seed-0/seed-1 gap is 0.025084 mAP",
+    "N1-SHIFT is 0.000390 below its N0-SHIFT parent",
+    "metrics are not canonical COCO API results",
+    "runtime Ultralytics source path/commit is absent from existing manifests",
+    "hardware latency and energy were not measured",
+    "A-FINAL BN-fold and bit-true exports were not produced"
+    ,"legacy immutable analytical profiles undercount the second Hadamard binary basis; corrected report data is in compute_and_size.csv"
+  ]
+}

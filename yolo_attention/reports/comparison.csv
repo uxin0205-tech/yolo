@@ -1,0 +1,34 @@
+stage,run,method,map50_95,map50,map75,row_sum_max_error,selected,note
+baseline,b26-fp,YOLO26m local internal baseline,0.517997835,0.690712940,0.566671054,,false,official reference is separate
+screening,i-scr,Identity binary QK,0.492482425,0.666038576,0.541214295,,false,
+screening,h-scr,Hadamard MDB,0.495242744,0.668325004,0.543717501,,true,architecture winner
+screening,t5-scr,T5 approximation,0.492907297,0.666901696,0.542237836,,false,
+recovery,w-dir,Direct binary recovery,0.507457458,0.678237355,0.555833137,,true,26 of 40 epochs early stop
+recovery,w-prog,Progressive FP to binary,0.502865837,0.674109100,0.548371777,,false,11 of 40 epochs early stop
+scale,v1-dyn,Dynamic scale,0.507457458,0.678237355,0.555833137,,false,accuracy maximum
+scale,v1-shead,Static per-head scale,0.506878571,0.677656693,0.555648747,,false,
+scale,v1-p2,Power-of-two scale,0.506951921,0.677575961,0.555628225,,true,tie-band complexity winner
+bias,v1-b0,No relative bias,0.505416019,0.675838553,0.553640216,,false,
+bias,v1-bd,Dense 2D bias,0.506876950,0.676877250,0.555280274,,false,accuracy maximum
+bias,v1-br,Decomposed 2D bias,0.506657624,0.677102806,0.554940610,,true,A0 tie-band complexity winner
+normalization,n0-exact,Exact Softmax,0.506657624,0.677102806,0.554940610,,false,
+normalization,n0-lut,LUT,0.506700321,0.677184780,0.555158375,,false,
+normalization,n0-pwl,Piecewise linear,0.506771552,0.677174554,0.555123723,,false,zero-train accuracy maximum
+normalization,n0-shift,Power-of-two zero-train,0.506746446,0.677211506,0.554961195,,false,recommended no-recovery control
+normalization,n0-hsig,Hard sigmoid approximation,0.505871589,0.676296942,0.554394685,,false,
+normalization,n0-relu,ReLU normalization,0.494963716,0.663321135,0.543294727,,false,
+normalization,n0-mk1,Multimax Top-1,0.486970006,0.654435333,0.534714183,,false,
+normalization,n0-mk3,Multimax Top-3,0.493864375,0.663020011,0.542221674,,false,
+normalization,n0-mk5,Multimax Top-5,0.494888289,0.664083329,0.543206493,,false,
+normalization,n1-pwl,PWL PMP recovery,0.506267784,0.676618171,0.554578511,,false,worse than N0 parent
+normalization,n1-shift,Shift PMP recovery,0.506356605,0.676940412,0.554141850,,true,queue-selected A-FINAL
+bdcn,d0-idx,Fixed exponential codebook,0.503184060,0.673871743,0.553528402,0.000000060,false,
+bdcn,d1-shared-10,Learned global shared staged 10,0.500098468,0.670838941,0.549115359,0.000000060,true,D1 winner
+bdcn,d1-pattn-10,Learned per-attention staged 10,0.500054869,0.670777569,0.549093868,0.000000060,false,
+bdcn,d1-phead-10,Learned per-head staged 10,0.499841550,0.670573911,0.548894757,0.000000060,false,
+bdcn,d1-seed1,Global shared seed 1,0.475014014,0.650867392,0.520658109,0.000000060,false,large seed gap
+bdcn,d2-1p,One-PoT table,0.500087547,0.670808654,0.548973068,0.000000060,true,D2 winner
+bdcn,r0-div,Exact reciprocal,0.500087547,0.670808654,0.548973068,0.000000060,false,numerical reference
+bdcn,r1-rlut,Reciprocal LUT,0.499812061,0.670411175,0.548928460,0.001907468,true,BDCN denominator winner
+bdcn,r2-pshift,Nearest-PoT denominator,0.004872126,0.007387216,0.005210225,0.414062500,false,failed accuracy diagnostic
+final,a-final,N1-SHIFT,0.506356605,0.676940412,0.554141850,,true,algorithm-phase final

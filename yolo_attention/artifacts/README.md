@@ -1,0 +1,39 @@
+# artifacts
+
+~~~text
+artifacts/
+├── queue/
+│   ├── queue.json       # schema v1，唯一排程狀態
+│   ├── events.jsonl     # append-only transitions/failures
+│   ├── worker.lock      # non-blocking single-worker lock
+│   └── generated/       # winner-derived variant YAML
+├── runs/<run-id>/       # 下列每次實驗輸出
+└── invalidated/          # queue rewind 保存的失效 run/generated artifacts
+~~~
+
+`queue init` 只建立 queue，不建立 run、載入 CUDA 或開始 COCO。`queue run-next` 預設也只預覽；只有明確加入 `--execute` 才執行一個 job。Queue 不可覆寫。`queue rewind SELECTION_JOB_ID` 只回退已完成 selection，利用 queue 的嚴格遞增 order 邊界將其後續 materialized jobs 移到 `invalidated/`，在 `events.jsonl` 記錄原因與路徑，再重新排程；不會刪除既有結果。order 邊界也能修復舊 queue 中錯誤的 parent link。
+
+舊版 D1 queue 若已完成三個 5-epoch run，可先 `queue rewind d1-select`，再執行 `queue extend-d1`；後者會記錄 `d1_extended` event、保留原 run，並插入三個 staged 5+5 extension。新建立的 queue 已原生包含這些 jobs，不需 migration。
+
+`ArtifactStore` 在真正 launch training 前建立：
+
+~~~text
+artifacts/runs/<run_id>/
+├── manifest.json
+├── variant.yaml
+├── training.yaml
+├── checkpoints/
+├── metrics/
+├── profiles/
+├── exports/
+├── logs/
+└── ultralytics/
+~~~
+
+`metrics/queue-result.json` 是 queue 的標準結果 contract。Fixed-scale `checkpoints/calibrated.pt` 必須保存未融合 Conv+BN training graph 與校準完成的兩處 Attention coefficients；fused checkpoint 只可作 inference/export，不可作下一個 training parent。`profiles/analytical.json` 保存固定 shape 假設下的 operation/memory proxy，`hardware_measurement: false`；它用於相同 evaluator 的 tie-break，不代表實際板端 latency 或 energy。
+
+2026-08-15 的永久清理刪除了 invalidated tree、worker logs、last/non-winner checkpoints、calibration checkpoints 與 Ultralytics 圖；保留 queue、所有正式數值 provenance 與五個階段 winner checkpoint。既有 immutable `profiles/analytical.json` 是舊 schema-1 產物，Hadamard 總量少算第二個 binary basis；不覆寫原始 artifact，正式修正值與公式放在 `../reports/COMPUTE_AND_SIZE.md`／`compute_and_size.csv`。
+
+manifest 記錄 variant、training recipe、Python、PyTorch、Ultralytics、platform 與 Git revision。run directory 使用 `exist_ok=False`，避免覆寫正式 V1。
+
+`artifacts/queue/`、`artifacts/runs/`、checkpoint、ONNX、engine 與 NumPy dump 都不應提交 Git；README 本身保留作目錄契約。

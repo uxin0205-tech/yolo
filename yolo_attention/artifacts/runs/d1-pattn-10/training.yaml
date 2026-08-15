@@ -1,0 +1,13 @@
+stage: bdcn_codebook
+weights: /home/uxin/yolo/yolo_attention/artifacts/runs/d1-pattn/ultralytics/weights/best.pt
+data: data/coco2017.yaml
+epochs: 5
+batch: 16
+imgsz: 640
+device: '0'
+workers: 8
+seed: 0
+patience: 0
+optimizer: AdamW
+lr0: 5.0e-05
+amp: true
