@@ -128,7 +128,7 @@ class BDCNNormalizer(nn.Module):
             bucket.reshape(-1), minlength=self.bank.levels
         ).detach()
         self.last_bucket_overflow_rate = (
-            raw_bucket > self.bank.levels - 1
+            distance > self.step * (self.bank.levels - 1)
         ).float().mean().detach()
         self.last_distance_max = distance.max().detach()
         self.last_bucket_saturation = (

@@ -179,6 +179,11 @@ arithmetic proxy，memory proxy 從 4.557M 增至 14.387M。另一方面，它�
 必須看本次 10-epoch recovery 的 mAP 與 overflow 是否實際改善；尚未完成前
 不能宣稱它優於 A-FINAL。
 
+上述 BDCN v2 profiler 數字和其他候選一樣未含 decomposed bias。因 v2 直接
+繼承 V1-BR，保守加入 $2E=2.560$M bias additions 後，learn/R1 分別為
+115.590M／115.568M；R1 相對原始分析區域的 reduction 由 12.59% 改為
+10.61%。兩組數字都必須連同假設一起報告。
+
 ![Accuracy versus corrected cost](figures/accuracy-cost.svg)
 
 完整數據見 [compute_and_size.csv](compute_and_size.csv)。

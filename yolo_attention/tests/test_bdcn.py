@@ -46,6 +46,43 @@ def test_bdcn_reports_bucket_histogram_and_true_distance_overflow() -> None:
     assert module.last_distance_max.item() == pytest.approx(10.0)
 
 
+def test_extended_range_prevents_old_tail_distance_collapse() -> None:
+    scores = torch.tensor([[[[0.0, -1.875, -8.0]]]])
+    old = BDCNNormalizer(
+        BDCNCodebookBank(1, 16, 0.125, BDCNCodebookKind.FIXED_EXP, BDCNProjection.FLOAT),
+        torch.tensor([0]),
+        0.125,
+        BDCNDenominator.EXACT,
+    )
+    fixed_step = 8.0 / 63.0
+    fixed = BDCNNormalizer(
+        BDCNCodebookBank(1, 64, fixed_step, BDCNCodebookKind.FIXED_EXP, BDCNProjection.FLOAT),
+        torch.tensor([0]),
+        fixed_step,
+        BDCNDenominator.EXACT,
+    )
+
+    old_probability = old(scores)
+    fixed_probability = fixed(scores)
+
+    assert old_probability[..., 1].item() == pytest.approx(old_probability[..., 2].item())
+    assert fixed_probability[..., 2].item() < fixed_probability[..., 1].item() * 0.01
+
+
+def test_bdcn_true_overflow_starts_immediately_above_representable_range() -> None:
+    step = 8.0 / 63.0
+    module = BDCNNormalizer(
+        BDCNCodebookBank(1, 64, step, BDCNCodebookKind.FIXED_EXP, BDCNProjection.FLOAT),
+        torch.tensor([0]),
+        step,
+        BDCNDenominator.EXACT,
+    )
+
+    module(torch.tensor([[[[0.0, -8.0, -8.001]]]]))
+
+    assert module.last_bucket_overflow_rate.item() == pytest.approx(1 / 3)
+
+
 @pytest.mark.parametrize("denominator", [BDCNDenominator.RECIPROCAL_LUT, BDCNDenominator.POT_SHIFT])
 def test_hardware_denominators_are_finite_and_nonnegative(denominator: BDCNDenominator) -> None:
     module = BDCNNormalizer(make_bank(), torch.tensor([0, 1]), 0.125, denominator)
