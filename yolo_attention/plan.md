@@ -657,7 +657,7 @@ $$
 | 階段 | Run | 內容 | 訓練 |
 |---|---|---|---:|
 | D0 | D0-IDX | fixed exponential table；確認 distance indexing 本身 | 0 |
-| D1 | D1-SHARED-10 / D1-PATTN-10 / D1-PHEAD-10 | global、每 Attention、每 head 的 learned monotonic table | seed 0 staged 5+5 ep codebook-only |
+| D1 | D1-SHARED / D1-PATTN / D1-PHEAD | global、每 Attention、每 head 的 learned monotonic table | seed 0，各一次完整 10 ep codebook-only |
 | D2 | D2-FP / D2-1P / D2-2P | winner table 保持 float、投影成一項或兩項 power-of-two | 0；最多一個候選補 5 ep |
 | R0 | R0-DIV | exact division/reciprocal numerical reference | 0 |
 | R1 | R1-RLUT | leading-one normalization + reciprocal LUT | 0，主要硬體候選 |
@@ -667,7 +667,7 @@ R1 並沒有消除 normalization；它把通用除法改成每列一次 reciproc
 
 D2 與 R0/R1/R2 都必須從 D1 winner checkpoint 載入同一組 learned codebook parameters，再套用 float/1-PoT/2-PoT projection 或 denominator variant。variant reconfiguration 不得重新使用 exponential initializer；若 codebook kind、sharing、levels 或 step 不相容，必須明確建立新研究分支，不能靜默搬移 state。
 
-D1 三個 sharing 候選先各跑 5 epochs，再各自從自己的 seed-0 `best.pt` 追加 5 epochs，最後只用三個 staged 10-epoch 結果選擇。由於已完成的 Ultralytics checkpoint 不保留可安全搬移到新 immutable run 的完整 optimizer/scheduler 狀態，第二段必須標示為 checkpoint-based staged 5+5，不得寫成 bit-identical native resume。若 10-epoch 前兩名差小於 0.001，或 winner 的 5→10 epoch mAP 絕對變化仍達 0.001，才從共同 D0 parent 對 winner 補一個完整 10-epoch seed 1；seed 1 只作重現性報告，D2 固定沿用 seed-0 winner，避免 best-seed selection bias。
+D1 三個 sharing 候選依序排程，各自從共同 D0 parent 進行一次完整 10-epoch seed-0 codebook-only training，再直接比較三個結果。若前兩名差小於 0.001，才從共同 D0 parent 對 winner 補一個完整 10-epoch seed 1；seed 1 只作重現性報告，D2 固定沿用 seed-0 winner，避免 best-seed selection bias。既有 artifacts 的 staged 5+5 結果維持其原始名稱與方法註記，不回寫成新版單次訓練。
 
 D1 sharing 以與最佳者差小於 0.001 時選較簡單者；D2/R1/R2 相對 A0 的 mAP loss gate 為 0.01。所有 run 同時替換 YOLO26m 兩個 Attention，使用相同 A0、COCO evaluator 與未修改模組；除明列的 seed 1 confirmation 外均固定 seed 0。BDCN core 和 IntAttention/IndexSoftmax 接近，因此不得主張 distance-indexed normalization 為本研究首次提出；可檢驗的研究點是 Binary-QK 情境、跨兩個 Attention 的 learned sharing、PoT table projection、denominator ablation 與 fused bucket-$PV$ 組合。完整 prior-art 見 `docs/research/bdcn-prior-art.md`。
 
@@ -806,7 +806,7 @@ formal V1 形成後：
 3. 依 mAP、scale 成本與 bias 參數選出 algorithm parent A0。
 4. 從同一 A0 做 N0-EXACT/LUT/PWL/SHIFT/HSIG/RELU/MK1/MK3/MK5 zero-train screening。
 5. 通過 0.01 gate 後依 accuracy/cost 最多保留兩個候選，各做 N1 5-epoch attention-only PMP。
-6. 從同一 A0 依序做 BDCN D0 → D1 三候選 staged 5+5 → conditional winner seed 1 → D2 projection → R0/R1/R2；只讓通過 gate 的 BDCN winner 留下。
+6. 從同一 A0 依序做 BDCN D0 → D1 三候選各完整 10 epochs → conditional winner seed 1 → D2 projection → R0/R1/R2；只讓通過 gate 的 BDCN winner 留下。
 7. 依 mAP、normalization 成本與 dataflow，從 A0 exact、N1 winner、BDCN winner 選 A-FINAL。
 8. 對 A-FINAL 執行完整 COCO val、運算量、latency proxy、memory 與 error analysis。
 9. 記錄 A-FINAL 的完整 provenance，不覆寫 formal V1；完成研究報告後主線結束。
@@ -842,7 +842,7 @@ N0 normalization zero-train screening
         ↓（通過 0.01 gate，最多兩個）
 N1 probability-level PMP recovery，5 ep
         ↓
-BDCN: D0 → D1 sharing，三候選各 staged 5+5 ep codebook-only
+BDCN: D0 → D1 sharing，三候選各完整 10 ep codebook-only
       → conditional winner seed 1，完整 10 ep from D0
       → D2 FP / 1-PoT / 2-PoT
       → R0 exact / R1 reciprocal LUT / R2 PoT shift

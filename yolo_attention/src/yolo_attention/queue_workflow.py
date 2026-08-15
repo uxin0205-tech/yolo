@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping
 from dataclasses import replace
 from pathlib import Path
 
@@ -721,104 +720,17 @@ def _expand_d1(
             )
         )
         previous = job_id
-    base_jobs = {job.id: job for job in jobs}
-    extension_jobs = _build_d1_extension_jobs(
-        state,
-        base_jobs=base_jobs,
-        first_order=order + len(specs),
-        generated_root=generated_root,
-    )
-    jobs.extend(extension_jobs)
     jobs.append(
         QueueJob(
             id="d1-select",
             run_name="D1-SELECT",
             stage="bdcn-sharing-selection",
             kind=JobKind.SELECT,
-            order=order + len(specs) + len(extension_jobs),
-            parent_job_ids=tuple(job.id for job in extension_jobs),
+            order=order + len(specs),
+            parent_job_ids=tuple(job_id for job_id, _, _ in specs),
         )
     )
     return _append_jobs(state, tuple(jobs))
-
-
-def _build_d1_extension_jobs(
-    state: QueueState,
-    *,
-    base_jobs: Mapping[str, QueueJob],
-    first_order: int,
-    generated_root: Path,
-) -> tuple[QueueJob, ...]:
-    specs = (
-        ("d1-shared-10", "D1-SHARED-10", "d1-shared"),
-        ("d1-pattn-10", "D1-PATTN-10", "d1-pattn"),
-        ("d1-phead-10", "D1-PHEAD-10", "d1-phead"),
-    )
-    jobs: list[QueueJob] = []
-    previous = "d1-phead"
-    for index, (job_id, name, model_parent) in enumerate(specs):
-        source = base_jobs[model_parent]
-        if source.variant_path is None:
-            raise ValueError(f"D1 model parent {model_parent!r} has no variant configuration")
-        path = _variant(
-            VariantConfig.from_yaml(source.variant_path),
-            job_id=job_id,
-            name=name,
-            generated_root=generated_root,
-        )
-        jobs.append(
-            _training_job(
-                state,
-                job_id=job_id,
-                run_name=name,
-                stage="bdcn-convergence",
-                order=first_order + index,
-                variant_path=path,
-                training_file="configs/training/bdcn-codebook-extension.yaml",
-                parent_job_ids=(previous,),
-                model_parent_job_id=model_parent,
-            )
-        )
-        previous = job_id
-    return tuple(jobs)
-
-
-def extend_existing_d1_to_ten(state: QueueState, *, generated_root: Path) -> QueueState:
-    """Insert staged 5+5 D1 jobs into a completed legacy five-epoch queue."""
-
-    if any(job.status in {JobStatus.QUEUED, JobStatus.RUNNING} for job in state.jobs):
-        raise ValueError("cannot extend D1 while another queue job is active")
-    base_ids = ("d1-shared", "d1-pattn", "d1-phead")
-    base_jobs = {job_id: state.job(job_id) for job_id in base_ids}
-    if any(job.status is not JobStatus.SUCCEEDED for job in base_jobs.values()):
-        raise ValueError("all three five-epoch D1 jobs must be succeeded before extension")
-    extension_ids = ("d1-shared-10", "d1-pattn-10", "d1-phead-10")
-    present = {job.id for job in state.jobs} & set(extension_ids)
-    if present:
-        raise ValueError(f"D1 extension jobs already exist: {sorted(present)}")
-    selection = state.job("d1-select")
-    if selection.status not in {JobStatus.BLOCKED, JobStatus.READY} or selection.decision is not None:
-        raise ValueError("d1-select must be rewound and inactive before extension")
-    if selection.parent_job_ids != base_ids:
-        raise ValueError("d1-select does not have the legacy five-epoch dependency set")
-    first_order = selection.order
-    extension_jobs = _build_d1_extension_jobs(
-        state,
-        base_jobs=base_jobs,
-        first_order=first_order,
-        generated_root=generated_root,
-    )
-    revised_selection = replace(
-        selection,
-        order=first_order + len(extension_jobs),
-        status=JobStatus.BLOCKED,
-        parent_job_ids=tuple(job.id for job in extension_jobs),
-        parent_checkpoint=None,
-    )
-    jobs = tuple(job for job in state.jobs if job.id != "d1-select") + extension_jobs + (
-        revised_selection,
-    )
-    return refresh_readiness(replace(state, jobs=jobs, revision=state.revision + 1))
 
 
 def _expand_d2(

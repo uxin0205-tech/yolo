@@ -33,9 +33,6 @@ def _add_queue_parser(subparsers) -> None:
     rewind.add_argument("selection_job_id")
     rewind.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
     rewind.add_argument("--json", action="store_true")
-    extend_d1 = commands.add_parser("extend-d1")
-    extend_d1.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
-    extend_d1.add_argument("--json", action="store_true")
 
 
 class _ExecutionDisabledBackend:
@@ -102,19 +99,6 @@ def _run_queue_command(args) -> int:
         if args.queue_command == "rewind":
             job = executor.rewind_selection(args.selection_job_id)
             _print_payload({"job_id": job.id, "status": job.status.value}, as_json=args.json)
-            return 0
-        if args.queue_command == "extend-d1":
-            state = executor.extend_d1_to_ten()
-            _print_payload(
-                {
-                    "jobs": [
-                        state.job(job_id).id
-                        for job_id in ("d1-shared-10", "d1-pattn-10", "d1-phead-10")
-                    ],
-                    "next": executor.preview_next().job_id,
-                },
-                as_json=args.json,
-            )
             return 0
         if args.queue_command == "run-next":
             payload = executor.run_next(execute=execute).to_dict()

@@ -11,7 +11,7 @@ N0_LOSS_GATE = 0.01
 R1_MAP_LOSS_GATE = 0.002
 R1_ROW_ERROR_GATE = 0.01
 ARCH_COST_ORDER = ("i-scr", "t5-scr", "h-scr")
-D1_COMPLEXITY_ORDER = ("d1-shared-10", "d1-pattn-10", "d1-phead-10")
+D1_COMPLEXITY_ORDER = ("d1-shared", "d1-pattn", "d1-phead")
 
 
 class SelectionInputError(ValueError):
@@ -79,29 +79,16 @@ def select_bias(metrics: Mapping[str, object]) -> SelectionDecision:
     return _pick_near_best(metrics, ("v1-br", "v1-bd", "v1-b0"))
 
 
-def select_d1(
-    metrics: Mapping[str, object],
-    *,
-    five_epoch_metrics: Mapping[str, object],
-) -> SelectionDecision:
+def select_d1(metrics: Mapping[str, object]) -> SelectionDecision:
     required = set(D1_COMPLEXITY_ORDER)
     values = _finite_metric_map(metrics)
     if set(values) != required:
         raise SelectionInputError(f"D1 metrics must contain {sorted(required)}")
-    five_required = {name.removesuffix("-10") for name in required}
-    five_values = _finite_metric_map(five_epoch_metrics)
-    if set(five_values) != five_required:
-        raise SelectionInputError(f"D1 five-epoch metrics must contain {sorted(five_required)}")
     decision = _pick_near_best(values, D1_COMPLEXITY_ORDER)
-    winner = decision.winners[0]
     ranked = sorted(values.values(), reverse=True)
     top_gap = ranked[0] - ranked[1]
-    extension_change = abs(values[winner] - five_values[winner.removesuffix("-10")])
-    needs_seed = top_gap < MAP_TIE - 1e-12 or extension_change >= MAP_TIE - 1e-12
-    reason = (
-        f"{decision.reason}; 5-to-10 change={extension_change:.6f}, "
-        f"top-two gap={top_gap:.6f}"
-    )
+    needs_seed = top_gap < MAP_TIE - 1e-12
+    reason = f"{decision.reason}; top-two gap={top_gap:.6f}"
     return SelectionDecision(
         decision.winners,
         decision.skipped,

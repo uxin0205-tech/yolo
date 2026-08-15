@@ -101,12 +101,12 @@ def test_workflow_places_bdcn_denominator_branch_before_final() -> None:
 
     assert steps["bdcn-reference"]["runs"] == ["D0-IDX"]
     assert steps["bdcn-learning"]["runs"] == [
-        "D1-SHARED-10",
-        "D1-PATTN-10",
-        "D1-PHEAD-10",
+        "D1-SHARED",
+        "D1-PATTN",
+        "D1-PHEAD",
         "D1-SEED1 (conditional)",
     ]
-    assert steps["bdcn-learning"]["epochs"] == "5+5; conditional seed 1 uses 10"
+    assert steps["bdcn-learning"]["epochs"] == 10
     assert steps["bdcn-projection"]["runs"] == ["D2-FP", "D2-1P", "D2-2P"]
     assert steps["bdcn-denominator"]["runs"] == ["R0-DIV", "R1-RLUT", "R2-PSHIFT"]
     assert order.index("normalization-recovery") < order.index("bdcn-reference")

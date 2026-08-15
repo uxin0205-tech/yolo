@@ -5,6 +5,8 @@
 - [REPORT.md](REPORT.md)：完整結果、方法比較、運算量與研究結論。
 - [TRAINING_AUDIT.md](TRAINING_AUDIT.md)：17 個正式 training run 的 checkpoint、epoch、數值與 provenance 稽核。
 - [COMPUTE_AND_SIZE.md](COMPUTE_AND_SIZE.md)：公式、修正後運算量、memory proxy、參數與 checkpoint 大小。
+- [ATTENTION_OPERATION_SAVINGS.md](ATTENTION_OPERATION_SAVINGS.md)：原始 Attention、A-FINAL、逐項節省量與可安全引用的結論。
+- [operation_savings.csv](operation_savings.csv)：原始／最終／差值的機器可讀運算量表。
 - [CLEANUP.md](CLEANUP.md)：中間產物永久清理與保留 checkpoint。
 - [comparison.csv](comparison.csv)：主要候選的機器可讀比較表。
 - [compute_and_size.csv](compute_and_size.csv)：修正後逐方法 selected operation counts。
@@ -15,5 +17,7 @@
 閱讀順序建議：先看 `TRAINING_AUDIT.md` 判斷資料是否可信，再看 `REPORT.md` 的研究比較；需要自行畫圖或重算表格時使用 CSV/JSON。
 
 目前主線已完成至 A-FINAL；Optional Phase Q 仍鎖住，沒有執行 PTQ、QAT、INT5/6/8、ternary 或 SD4。這裡的 mAP 是目前 repository evaluator 的 Ultralytics internal metric，不是假稱為官方 COCO API AP。analytical profile 是固定 shape 假設下的 proxy，不是 RTX 5090、FPGA latency 或 energy 實測。
+
+本報告中的 `d1-*-10` 是當時實際完成的 staged 5+5 歷史 runs；目前程式已簡化為 `d1-shared`、`d1-pattn`、`d1-phead` 各一次完整 10 epochs。報告保留舊名稱以維持 provenance，不把既有量測改寫成新版流程的結果。
 
 本目錄應提交 Git；原始 Ultralytics 中間圖與 queue logs 已依核准刪除，保留的五個階段 checkpoint 仍在 `../artifacts/runs/`。

@@ -13,7 +13,7 @@ artifacts/
 
 `queue init` 只建立 queue，不建立 run、載入 CUDA 或開始 COCO。`queue run-next` 預設也只預覽；只有明確加入 `--execute` 才執行一個 job。Queue 不可覆寫。`queue rewind SELECTION_JOB_ID` 只回退已完成 selection，利用 queue 的嚴格遞增 order 邊界將其後續 materialized jobs 移到 `invalidated/`，在 `events.jsonl` 記錄原因與路徑，再重新排程；不會刪除既有結果。order 邊界也能修復舊 queue 中錯誤的 parent link。
 
-舊版 D1 queue 若已完成三個 5-epoch run，可先 `queue rewind d1-select`，再執行 `queue extend-d1`；後者會記錄 `d1_extended` event、保留原 run，並插入三個 staged 5+5 extension。新建立的 queue 已原生包含這些 jobs，不需 migration。
+新建立的 D1 queue 只有 `d1-shared`、`d1-pattn`、`d1-phead` 三個完整 10-epoch run，沒有 extension migration。repository 內既有 `d1-*-10`、`d1_extended` event 與相關 checkpoints 是 2026-08 已完成 staged 5+5 實驗的不可改寫歷史 provenance；結果報告應維持原 run 名稱，不能把它們宣稱為新版單次 10-epoch run。
 
 `ArtifactStore` 在真正 launch training 前建立：
 

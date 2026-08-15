@@ -15,7 +15,7 @@
 | A-FINAL 相對 exact binary arithmetic proxy | -5.57% |
 | Queue | 52 succeeded / 0 failed |
 
-這裡的 AP 是本 repository 對 COCO2017 val images 的 Ultralytics internal metric，不是 canonical COCO API AP，也不能直接和官方 0.525 E2E／0.531 Non-E2E 混用。完整數據與限制見 [完整實驗報告](reports/REPORT.md)、[計算量與大小](reports/COMPUTE_AND_SIZE.md)、[訓練稽核](reports/TRAINING_AUDIT.md)、[比較表](reports/comparison.csv) 與 [機器可讀摘要](reports/summary.json)。
+這裡的 AP 是本 repository 對 COCO2017 val images 的 Ultralytics internal metric，不是 canonical COCO API AP，也不能直接和官方 0.525 E2E／0.531 Non-E2E 混用。完整數據與限制見 [完整實驗報告](reports/REPORT.md)、[Attention 運算量節省](reports/ATTENTION_OPERATION_SAVINGS.md)、[計算量與大小](reports/COMPUTE_AND_SIZE.md)、[訓練稽核](reports/TRAINING_AUDIT.md)、[比較表](reports/comparison.csv) 與 [機器可讀摘要](reports/summary.json)。
 
 ![Main experiment results](reports/figures/mainline-map.svg)
 
@@ -145,7 +145,7 @@ x → Attention → residual → FFN → residual
 ../.venv/bin/python -m yolo_attention.cli queue validate --json
 ~~~
 
-D1 現在依序執行 `D1-SHARED/PATTN/PHEAD` 的第一段 5 epochs，再各自建立 `d1-*-10` immutable extension run 追加 5 epochs；`D1-SELECT` 只比較三個 staged 10-epoch 結果。top-two 落在 0.001 tie band 或 winner 的 5→10 變化仍達 0.001 時，queue 才加入 winner 的 seed-1 10-epoch confirmation，完成後自動接回 D2、R 與 A-FINAL。`queue extend-d1` 是只供既有五輪 queue 經 `queue rewind d1-select` 後使用的一次性稽核 migration，新 queue 不需要手動呼叫。
+D1 依序執行 `D1-SHARED`、`D1-PATTN`、`D1-PHEAD`，每個候選都是從共同 D0 parent 開始的一次完整 10-epoch codebook-only run；`D1-SELECT` 直接比較這三個結果。只有 top-two 落在 0.001 tie band 時，queue 才加入 winner 的 seed-1 10-epoch confirmation，完成後自動接回 D2、R 與 A-FINAL。舊 artifacts 中的 `d1-*-10` 是先前已完成的 staged 5+5 歷史紀錄，不代表目前程式仍採 extension workflow。
 
 ## Repository 結構
 
@@ -207,10 +207,11 @@ yolo_attention/
 3. [docs/architecture.md](docs/architecture.md)：程式 seam 與修改位置。
 4. [reports/REPORT.md](reports/REPORT.md)：本次完整結果與分析。
 5. [reports/TRAINING_AUDIT.md](reports/TRAINING_AUDIT.md)：checkpoint、epoch、finite-value 與 provenance 稽核。
-6. [reports/COMPUTE_AND_SIZE.md](reports/COMPUTE_AND_SIZE.md)：計算公式、corrected proxy、參數與 checkpoint 大小。
-7. [reports/CLEANUP.md](reports/CLEANUP.md)：永久刪除與保留項目。
-8. [configs/README.md](configs/README.md)、[src/README.md](src/README.md)、[artifacts/README.md](artifacts/README.md)：局部操作與資料契約。
-9. `hardware-friendly_attention.md`：舊 YOLO11 背景，不具現行規格效力。
+6. [reports/ATTENTION_OPERATION_SAVINGS.md](reports/ATTENTION_OPERATION_SAVINGS.md)：原始 Attention、A-FINAL 與實際節省量。
+7. [reports/COMPUTE_AND_SIZE.md](reports/COMPUTE_AND_SIZE.md)：計算公式、corrected proxy、參數與 checkpoint 大小。
+8. [reports/CLEANUP.md](reports/CLEANUP.md)：永久刪除與保留項目。
+9. [configs/README.md](configs/README.md)、[src/README.md](src/README.md)、[artifacts/README.md](artifacts/README.md)：局部操作與資料契約。
+10. `hardware-friendly_attention.md`：舊 YOLO11 背景，不具現行規格效力。
 
 ## 已知限制與下一步
 

@@ -12,6 +12,7 @@ from yolo_attention.queue_workflow import (
     next_runnable_job,
     refresh_readiness,
 )
+from yolo_attention.run_config import TrainingRecipe
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -190,28 +191,32 @@ def test_selection_expansions_materialize_complete_pre_quantization_funnel(tmp_p
         "d1-shared",
         "d1-pattn",
         "d1-phead",
-        "d1-shared-10",
-        "d1-pattn-10",
-        "d1-phead-10",
         "d1-select",
     } <= {job.id for job in state.jobs}
-    assert state.job("d1-shared-10").model_parent_job_id == "d1-shared"
-    assert state.job("d1-pattn-10").model_parent_job_id == "d1-pattn"
-    assert state.job("d1-phead-10").model_parent_job_id == "d1-phead"
-    assert state.job("d1-select").parent_job_ids == (
+    assert not {job.id for job in state.jobs} & {
         "d1-shared-10",
         "d1-pattn-10",
         "d1-phead-10",
+    }
+    assert state.job("d1-select").parent_job_ids == (
+        "d1-shared",
+        "d1-pattn",
+        "d1-phead",
     )
+    assert all(
+        Path(state.job(job_id).training_path).name == "bdcn-codebook.yaml"
+        for job_id in ("d1-shared", "d1-pattn", "d1-phead")
+    )
+    assert TrainingRecipe.from_yaml(ROOT / "configs/training/bdcn-codebook.yaml").epochs == 10
 
     state = materialize_after_selection(
         state,
         "d1-select",
-        SelectionDecision(("d1-shared-10",), ("d1-pattn-10", "d1-phead-10"), "d1"),
+        SelectionDecision(("d1-shared",), ("d1-pattn", "d1-phead"), "d1"),
         generated_root=generated,
     )
     assert {"d2-fp", "d2-1p", "d2-2p", "d2-select"} <= {job.id for job in state.jobs}
-    assert state.job("d2-fp").model_parent_job_id == "d1-shared-10"
+    assert state.job("d2-fp").model_parent_job_id == "d1-shared"
 
     state = materialize_after_selection(
         state,
@@ -292,9 +297,9 @@ def test_denominator_gate_can_materialize_one_newton_job(tmp_path: Path) -> None
 
 
 def test_d1_uncertainty_runs_winner_seed_one_before_d2(tmp_path: Path) -> None:
-    winner_path = tmp_path / "d1-shared-10.yaml"
+    winner_path = tmp_path / "d1-shared.yaml"
     VariantConfig(
-        name="D1-SHARED-10",
+        name="D1-SHARED",
         basis=BasisKind.HADAMARD,
         normalization="bdcn",
         bdcn_codebook="learned",
@@ -305,8 +310,8 @@ def test_d1_uncertainty_runs_winner_seed_one_before_d2(tmp_path: Path) -> None:
     state = create_initial_state(tmp_path)
     base = replace(
         state.job("p0"),
-        id="d1-shared-10",
-        run_name="D1-SHARED-10",
+        id="d1-shared",
+        run_name="D1-SHARED",
         order=6,
         variant_path=str(winner_path),
         parent_job_ids=(),
@@ -317,7 +322,7 @@ def test_d1_uncertainty_runs_winner_seed_one_before_d2(tmp_path: Path) -> None:
         id="d1-select",
         run_name="D1-SELECT",
         order=7,
-        parent_job_ids=("d1-shared-10",),
+        parent_job_ids=("d1-shared",),
     )
     d0 = replace(
         state.job("p0"),
@@ -333,7 +338,7 @@ def test_d1_uncertainty_runs_winner_seed_one_before_d2(tmp_path: Path) -> None:
         state,
         "d1-select",
         SelectionDecision(
-            ("d1-shared-10",),
+            ("d1-shared",),
             (),
             "D1 requires seed confirmation",
             ("d1-seed1",),
@@ -348,9 +353,9 @@ def test_d1_uncertainty_runs_winner_seed_one_before_d2(tmp_path: Path) -> None:
     confirmed = materialize_after_selection(
         seeded,
         "d1-confirm-select",
-        SelectionDecision(("d1-shared-10",), ("d1-seed1",), "seed recorded"),
+        SelectionDecision(("d1-shared",), ("d1-seed1",), "seed recorded"),
         generated_root=tmp_path / "generated",
     )
 
-    assert confirmed.job("d2-fp").model_parent_job_id == "d1-shared-10"
+    assert confirmed.job("d2-fp").model_parent_job_id == "d1-shared"
     assert confirmed.job("d2-fp").parent_job_ids == ("d1-confirm-select",)

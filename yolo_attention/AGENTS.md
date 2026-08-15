@@ -35,7 +35,6 @@ python -m yolo_attention.cli queue init|status|validate|next
 python -m yolo_attention.cli queue run-next [--execute]
 python -m yolo_attention.cli queue retry JOB_ID
 python -m yolo_attention.cli queue rewind SELECTION_JOB_ID
-python -m yolo_attention.cli queue extend-d1  # legacy 5-epoch queue migration only
 ~~~
 
 `train` 預設只能 dry-run；只有使用者明確要求並加入 `--execute` 才能訓練。
@@ -93,7 +92,7 @@ B26-FP baseline → P0 equivalence
 → winner 做 Direct / Progressive 20–40 ep recovery → A0
 → N0 normalization zero-train screening
 → 最多兩個候選做 N1 5 ep attention-only PMP recovery
-→ BDCN D0 → D1 三候選 staged 5+5 ep codebook-only → conditional winner seed 1 → D2/R0/R1/R2
+→ BDCN D0 → D1 三候選各 10 ep codebook-only → conditional winner seed 1 → D2/R0/R1/R2
 → A-FINAL 與完整 COCO/operation/error report
 → optional quantization（未核准時停止）
 ~~~

@@ -40,21 +40,19 @@ def test_recovery_exact_threshold_is_not_a_tie() -> None:
 
 def test_d1_tie_prefers_global_sharing() -> None:
     decision = select_d1(
-        {"d1-shared-10": 0.3900, "d1-pattn-10": 0.3908, "d1-phead-10": 0.3909},
-        five_epoch_metrics={"d1-shared": 0.3898, "d1-pattn": 0.3900, "d1-phead": 0.3901},
+        {"d1-shared": 0.3900, "d1-pattn": 0.3908, "d1-phead": 0.3909},
     )
 
-    assert decision.winners == ("d1-shared-10",)
+    assert decision.winners == ("d1-shared",)
     assert decision.expand == ("d1-seed1",)
 
 
 def test_d1_skips_second_seed_when_winner_is_converged_and_decisive() -> None:
     decision = select_d1(
-        {"d1-shared-10": 0.4002, "d1-pattn-10": 0.3989, "d1-phead-10": 0.3980},
-        five_epoch_metrics={"d1-shared": 0.4000, "d1-pattn": 0.3985, "d1-phead": 0.3978},
+        {"d1-shared": 0.4002, "d1-pattn": 0.3989, "d1-phead": 0.3980},
     )
 
-    assert decision.winners == ("d1-shared-10",)
+    assert decision.winners == ("d1-shared",)
     assert decision.expand == ()
 
 

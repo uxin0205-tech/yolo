@@ -6,5 +6,6 @@
 - `bdcn-prior-art.md`：BDCN／IndexSoftmax 相近工作與可主張範圍。
 - `ternary-accelerator-section-3.6.1.md`：Multimax 與三元化加速器分析。
 - `deferred-mixed-precision-quantization.md`：5/6/7-bit、ternary、SD4、PTQ→QAT gate。
+- `accuracy-recovery-next-steps.md`：已討論但尚未核准執行的 Binary-QK 準確率恢復候選。
 
 研究筆記提交 Git；不能用推測公式取代原論文或 codebook。

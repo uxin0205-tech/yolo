@@ -73,14 +73,14 @@ class ResearchWorkflow:
                 WorkflowStep(
                     "bdcn-learning",
                     (
-                        "D1-SHARED-10",
-                        "D1-PATTN-10",
-                        "D1-PHEAD-10",
+                        "D1-SHARED",
+                        "D1-PATTN",
+                        "D1-PHEAD",
                         "D1-SEED1 (conditional)",
                     ),
-                    "5+5; conditional seed 1 uses 10",
-                    "Staged codebook-only convergence and sharing ablation",
-                    "choose inside 0.001 mAP, then confirm an uncertain winner with seed 1",
+                    10,
+                    "Codebook-only sharing ablation with one complete run per candidate",
+                    "choose inside 0.001 mAP; confirm a near-tied winner with seed 1",
                 ),
                 WorkflowStep(
                     "bdcn-projection",

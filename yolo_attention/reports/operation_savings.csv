@@ -1,0 +1,11 @@
+item,original,final,delta,reduction_percent,unit,note
+fp_qk_mac,40960000,0,-40960000,100.000000,fp_mac,replaced rather than made free
+dual_binary_qk,0,2560000,2560000,,packed_word_ops,introduced two 32-bit XNOR-popcount bases
+hadamard_transform,0,1024000,1024000,,add_sub,introduced Q/K butterfly operations
+qk_aggregate_proxy,40960000,3584000,-37376000,91.250000,heterogeneous_proxy,not cycle or energy equivalence
+normalization,6406400,1286400,-5120000,79.920080,proxy_ops,exact Softmax to PoT SHIFT
+pv,81920000,81920000,0,0.000000,mac,preserved unchanged
+modified_core_proxy,129286400,86790400,-42496000,32.869660,heterogeneous_proxy,excludes relative-bias generation and addition
+modified_core_with_streaming_bias,129286400,89350400,-39936000,30.889560,heterogeneous_proxy,conservatively adds two additions per score entry
+parameters,21896248,21897260,1012,-0.004622,parameters,negative reduction means increase
+map50_95,0.517998,0.506357,-0.011641,2.247113,metric,local Ultralytics internal metric

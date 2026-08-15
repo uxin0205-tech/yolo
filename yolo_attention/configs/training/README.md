@@ -5,7 +5,8 @@
 - `screening.yaml`：I/H/T5 各 10 epochs。
 - `recovery-*.yaml`：winner 的 Direct／Progressive recovery。
 - `normalization-recovery.yaml`：N1 attention-only PMP recovery。
-- `bdcn-codebook*.yaml`：D1 codebook-only 5+5 與 seed confirmation。
+- `bdcn-codebook.yaml`：D1 三候選各自一次完整 10-epoch codebook-only training。
+- `bdcn-codebook-seed1.yaml`：只有排名接近時才執行的 10-epoch seed confirmation。
 - `quantization-qat.yaml`：optional phase，未核准不得執行。
 
 以 `python -m yolo_attention.cli train --variant ... --training ... --run-id ...` 預覽；只有明確加 `--execute` 才訓練。本目錄提交 Git。

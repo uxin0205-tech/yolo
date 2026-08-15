@@ -118,7 +118,7 @@ ResearchQueueBackend
  └─ pure selection policies → dynamic graph expansion
 ~~~
 
-I/H/T5 的 scheduling dependency 依序串接，避免同時跑；但三者的 `model_parent_job_id` 都是 P0，所以模型權重不會錯接前一個 screening run。D1 三個 sharing 候選各先跑 5 epochs，再由 `d1-*-10` 從各自 `best.pt` 做一個新的 immutable 5-epoch extension run；因此是 staged 5+5，不是保留 optimizer/scheduler 的 native resume。`d1-select` 只比較三個 10-epoch結果；若 top-two tie 或 5→10 尚未穩定，才從 D0 parent 建立 winner 的 seed-1 10-epoch confirmation，D2 仍接 seed-0 winner。每次 selection 後，`queue_workflow.py` 從實際 winner YAML 產生下一階段設定。Optional quantization 不在這張 graph 中。
+I/H/T5 的 scheduling dependency 依序串接，避免同時跑；但三者的 `model_parent_job_id` 都是 P0，所以模型權重不會錯接前一個 screening run。D1 三個 sharing 候選也依序排程，但各自從共同 D0 parent 進行一次完整 10-epoch codebook-only training；沒有 extension job 或 checkpoint-based 5+5 resume。`d1-select` 直接比較 `d1-shared`、`d1-pattn`、`d1-phead`；只有 top-two 差距小於 0.001 時，才從 D0 parent 建立 winner 的 seed-1 10-epoch confirmation，D2 仍接 seed-0 winner。每次 selection 後，`queue_workflow.py` 從實際 winner YAML 產生下一階段設定。Optional quantization 不在這張 graph 中。
 
 COCO result 統一寫 `map50_95/map50/map75/maps`、checkpoint、profile 與 row-sum error。Custom training parent 至少需有 95% target state coverage，避免 fused inference checkpoint 靜默只載入少量權重；child mAP 低於 model parent 的 50% 時 executor fail closed。Final tie-break 只接受存在的 profile JSON；分析 profile 是固定兩個 Attention、reference shape 的比較 proxy，不是 hardware measurement。
 

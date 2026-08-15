@@ -222,13 +222,7 @@ class ResearchQueueBackend:
         if job.id == "d0-select":
             return SelectionDecision((ids[0],), (), "D0 reference accepted")
         if job.id == "d1-select":
-            return select_d1(
-                self._metrics(state, ids),
-                five_epoch_metrics=self._metrics(
-                    state,
-                    ("d1-shared", "d1-pattn", "d1-phead"),
-                ),
-            )
+            return select_d1(self._metrics(state, ids))
         if job.id == "d1-confirm-select":
             primary = self._decision_winner(state, "d1-select")
             primary_map = self._job_result(state, primary).map50_95

@@ -12,12 +12,7 @@ from typing import Protocol
 from .queue_model import JobStatus, QueueJob, QueueResult, QueueState
 from .queue_policy import SelectionDecision
 from .queue_store import QueueStore
-from .queue_workflow import (
-    extend_existing_d1_to_ten,
-    materialize_after_selection,
-    next_runnable_job,
-    refresh_readiness,
-)
+from .queue_workflow import materialize_after_selection, next_runnable_job, refresh_readiness
 
 
 class QueueExecutionError(RuntimeError):
@@ -288,22 +283,3 @@ class QueueExecutor:
             self.store.save(_replace_job(state, retried))
             self.store.append_event("retried", job_id=job_id, details={"attempts": job.attempts})
             return retried
-
-    def extend_d1_to_ten(self) -> QueueState:
-        """Auditably migrate a stopped legacy D1 queue to staged 5+5 runs."""
-
-        with self.store.worker_lock():
-            state = extend_existing_d1_to_ten(
-                self.store.load(),
-                generated_root=self.store.generated_root,
-            )
-            self.store.save(state)
-            self.store.append_event(
-                "d1_extended",
-                job_id="d1-select",
-                details={
-                    "runs": ["d1-shared-10", "d1-pattn-10", "d1-phead-10"],
-                    "schedule": "staged 5+5 epochs",
-                },
-            )
-            return state

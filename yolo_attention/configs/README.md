@@ -15,7 +15,7 @@ configs/
 
 `normalization-recovery.yaml` 是 N1 的 5-epoch attention-only schedule。N0 是 zero-train 評估，不能使用這份 recipe。N0/N1 variant 必須從實際 A0 winner 複製後只改 `normalization` 與其專用參數，不能用固定 Identity template 偷換 architecture winner。
 
-`bdcn-codebook.yaml` 是 D1 第一段 5-epoch codebook-only schedule；`bdcn-codebook-extension.yaml` 讓三個候選分別從自己的 `best.pt` 再跑 5 epochs，形成明確標示的 staged 5+5。`bdcn-codebook-seed1.yaml` 只在收斂或排名不確定時，讓 winner 從共同 D0 parent 用 seed 1 完整跑 10 epochs。三者都只解凍 `BDCNCodebookBank`。`bdcn-d1-pattn.yaml`／`phead.yaml` 比較共享粒度；`bdcn-d2-1p.yaml`／`2p.yaml` 比較 codebook 投影；`bdcn-r0-div.yaml`、`r1-rlut.yaml`、`r2-pshift.yaml` 比較 denominator。這些模板目前以 Identity 為可執行 reference；正式 run 必須從實際 A0 複製其 basis、bias 與 scale，不得偷換 parent。
+`bdcn-codebook.yaml` 是 D1 三個候選共用的完整 10-epoch codebook-only schedule。`bdcn-codebook-seed1.yaml` 只在排名落入 tie band 時，讓 winner 從共同 D0 parent 用 seed 1 再完整跑 10 epochs；兩者都只解凍 `BDCNCodebookBank`。`bdcn-d1-pattn.yaml`／`phead.yaml` 比較共享粒度；`bdcn-d2-1p.yaml`／`2p.yaml` 比較 codebook 投影；`bdcn-r0-div.yaml`、`r1-rlut.yaml`、`r2-pshift.yaml` 比較 denominator。這些模板目前以 Identity 為可執行 reference；正式 run 必須從實際 A0 複製其 basis、bias 與 scale，不得偷換 parent。
 
 N0 的 `normalization` 對照如下：
 

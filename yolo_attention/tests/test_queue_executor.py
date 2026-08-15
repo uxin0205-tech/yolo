@@ -5,7 +5,6 @@ from pathlib import Path
 
 import pytest
 
-from yolo_attention.config import VariantConfig
 from yolo_attention.queue_executor import QueueExecutionError, QueueExecutor
 from yolo_attention.queue_model import JobKind, JobStatus, QueueJob, QueueResult, QueueState
 from yolo_attention.queue_store import QueueStore
@@ -241,7 +240,7 @@ def test_rewind_selection_archives_later_legacy_job_with_stale_parent_link(tmp_p
         kind=JobKind.SELECT,
         order=40,
         status=JobStatus.SUCCEEDED,
-        decision={"winners": ["d1-shared-10"], "skipped": [], "reason": "old", "expand": []},
+        decision={"winners": ["d1-shared"], "skipped": [], "reason": "old", "expand": []},
     )
     legacy = QueueJob(
         id="d2-fp",
@@ -261,58 +260,3 @@ def test_rewind_selection_archives_later_legacy_job_with_stale_parent_link(tmp_p
 
     assert [job.id for job in store.load().jobs] == ["d1-confirm-select"]
     assert not run.exists()
-
-
-def test_extend_d1_to_ten_migrates_completed_five_epoch_queue(tmp_path: Path) -> None:
-    project = tmp_path / "project"
-    generated = tmp_path / "queue" / "generated"
-    jobs: list[QueueJob] = []
-    for order, job_id in enumerate(("d1-shared", "d1-pattn", "d1-phead")):
-        variant = project / f"{job_id}.yaml"
-        checkpoint = project / f"{job_id}.pt"
-        VariantConfig(name=job_id).to_yaml(variant)
-        checkpoint.parent.mkdir(parents=True, exist_ok=True)
-        checkpoint.touch()
-        jobs.append(
-            QueueJob(
-                id=job_id,
-                run_name=job_id.upper(),
-                stage="bdcn-learning",
-                kind=JobKind.TRAIN,
-                order=order,
-                status=JobStatus.SUCCEEDED,
-                variant_path=str(variant),
-                result=QueueResult(map50_95=0.4, checkpoint_path=str(checkpoint)),
-                checkpoint_path=str(checkpoint),
-            )
-        )
-    jobs.append(
-        QueueJob(
-            id="d1-select",
-            run_name="D1-SELECT",
-            stage="bdcn-sharing-selection",
-            kind=JobKind.SELECT,
-            order=3,
-            status=JobStatus.READY,
-            parent_job_ids=("d1-shared", "d1-pattn", "d1-phead"),
-        )
-    )
-    store = QueueStore(tmp_path / "queue")
-    store.initialize(QueueState.initial(tuple(jobs), project_root=str(project)))
-
-    migrated = QueueExecutor(
-        store,
-        backend=FakeBackend(tmp_path / "unused.pt"),
-    ).extend_d1_to_ten()
-
-    assert migrated.job("d1-shared-10").model_parent_job_id == "d1-shared"
-    assert migrated.job("d1-pattn-10").model_parent_job_id == "d1-pattn"
-    assert migrated.job("d1-phead-10").model_parent_job_id == "d1-phead"
-    assert migrated.job("d1-select").parent_job_ids == (
-        "d1-shared-10",
-        "d1-pattn-10",
-        "d1-phead-10",
-    )
-    assert migrated.job("d1-shared-10").status is JobStatus.READY
-    assert generated.joinpath("d1-shared-10", "variant.yaml").is_file()
-    assert '"event": "d1_extended"' in store.events_path.read_text(encoding="utf-8")
