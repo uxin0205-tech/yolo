@@ -69,6 +69,7 @@ class HardwareFriendlyAttention(nn.Module):
         self.register_buffer("current_epoch", torch.zeros((), dtype=torch.long), persistent=True)
         self.last_scores: torch.Tensor | None = None
         self.last_probabilities: torch.Tensor | None = None
+        self.last_values: torch.Tensor | None = None
 
     @classmethod
     def from_ultralytics(
@@ -121,6 +122,7 @@ class HardwareFriendlyAttention(nn.Module):
         module.normalize.to(source.score.gamma.device)
         module.progressive = ProgressiveBlend(transition_epochs=10) if config.progressive else None
         module.last_scores = None
+        module.last_values = None
         module.last_probabilities = None
         module.train(source.training)
         return module
@@ -153,6 +155,7 @@ class HardwareFriendlyAttention(nn.Module):
         scores = self.bias(scores, height=height, width=width)
         if self.config.v_bits:
             v = fake_quant_symmetric(v, bits=self.config.v_bits, dim=-1)
+        self.last_values = v.detach()
         self.last_scores = scores.detach()
         aggregate = getattr(self.normalize, "aggregate", None)
         if self.config.bdcn_fused_value and aggregate is not None:

@@ -41,6 +41,12 @@ class EvaluationBackend(Protocol):
     def evaluate_variant(self, request: EvaluationRequest) -> QueueResult: ...
 
 
+class PWLRunner(Protocol):
+    def score_analysis(self, request: EvaluationRequest) -> QueueResult: ...
+
+    def compare(self, request: EvaluationRequest, *, score_run_dir: Path) -> QueueResult: ...
+
+
 TrainingLauncher = Callable[[object], object]
 def completed_training_checkpoint(run_dir: Path, expected_epochs: int) -> Path | None:
     """Return best.pt only when immutable Ultralytics outputs prove training completed."""
@@ -94,16 +100,20 @@ class ResearchQueueBackend:
         evaluation_backend: EvaluationBackend | None = None,
         training_launcher: TrainingLauncher | None = None,
         p0_runner: P0Runner | None = None,
+        pwl_runner: PWLRunner | None = None,
     ) -> None:
         self.project_root = Path(project_root).resolve()
         self.runs_root = self.project_root / "artifacts" / "runs"
         self.evaluation = evaluation_backend or UltralyticsEvaluationBackend()
         self._training_launcher = training_launcher
         self._p0_runner = p0_runner or run_p0_equivalence
+        self._pwl_runner = pwl_runner
 
     def execute(self, job: QueueJob, state: QueueState) -> QueueResult | SelectionDecision:
         if job.kind is JobKind.SELECT:
             return self._select(job, state)
+        if job.id in {"pwl-score-analysis", "pwl-compare"}:
+            return self._run_pwl(job)
         if job.kind is JobKind.EVALUATE:
             return self._evaluate(job)
         if job.kind is JobKind.TRAIN:
@@ -111,6 +121,20 @@ class ResearchQueueBackend:
         if job.kind is JobKind.VALIDATE:
             return self._p0_runner(job, self.runs_root / job.id)
         raise ValueError(f"unsupported queue job kind: {job.kind.value}")
+
+    def _run_pwl(self, job: QueueJob) -> QueueResult:
+        runner = self._pwl_runner
+        if runner is None:
+            from .pwl_experiment import PWLExperimentRunner
+
+            runner = PWLExperimentRunner(project_root=self.project_root)
+        request = self._request(job)
+        if job.id == "pwl-score-analysis":
+            return runner.score_analysis(request)
+        return runner.compare(
+            request,
+            score_run_dir=self.runs_root / "pwl-score-analysis",
+        )
 
     @staticmethod
     def _require_path(value: str | None, field: str) -> Path:

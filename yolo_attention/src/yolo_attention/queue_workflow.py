@@ -452,6 +452,51 @@ def append_bdcn_v3_stable(state: QueueState) -> QueueState:
 
 
 
+def append_pwl_validation(state: QueueState) -> QueueState:
+    """Append the no-training Exact/Float/Bit-True PWL validation branch."""
+
+    if any(job.id.startswith("pwl-") for job in state.jobs):
+        raise ValueError("PWL validation branch already exists")
+    if any(job.status not in {JobStatus.SUCCEEDED, JobStatus.SKIPPED} for job in state.jobs):
+        raise ValueError("PWL validation can only be appended after the existing queue is complete")
+    parent = state.job("v1-br")
+    checkpoint = None
+    if parent.result is not None:
+        checkpoint = parent.result.checkpoint_path
+    checkpoint = checkpoint or parent.checkpoint_path
+    if checkpoint is None or not Path(checkpoint).is_file():
+        raise FileNotFoundError("PWL validation requires the retained V1-BR best checkpoint")
+    root = Path(state.project_root)
+    order = max(job.order for job in state.jobs) + 1
+    analysis = QueueJob(
+        id="pwl-score-analysis",
+        run_name="PWL-SCORE-ANALYSIS",
+        stage="pwl-final-validation",
+        kind=JobKind.VALIDATE,
+        order=order,
+        variant_path=_project_path(root, "PWL/configs/exact.yaml"),
+        evaluation_path=_project_path(root, "configs/evaluation/coco2017.yaml"),
+        parent_job_ids=(state.jobs[-1].id,),
+        model_parent_job_id="v1-br",
+        parent_checkpoint=str(Path(checkpoint).resolve()),
+        requires_gpu=True,
+    )
+    comparison = QueueJob(
+        id="pwl-compare",
+        run_name="PWL-COMPARE",
+        stage="pwl-final-validation",
+        kind=JobKind.VALIDATE,
+        order=order + 1,
+        variant_path=_project_path(root, "PWL/configs/exact.yaml"),
+        evaluation_path=_project_path(root, "configs/evaluation/coco2017.yaml"),
+        parent_job_ids=(analysis.id,),
+        model_parent_job_id="v1-br",
+        parent_checkpoint=str(Path(checkpoint).resolve()),
+        requires_gpu=True,
+    )
+    return _append_jobs(state, (analysis, comparison))
+
+
 def _expand_architecture(
     state: QueueState,
     decision: SelectionDecision,

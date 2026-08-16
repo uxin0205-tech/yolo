@@ -37,6 +37,7 @@ python -m yolo_attention.cli queue retry JOB_ID
 python -m yolo_attention.cli queue rewind SELECTION_JOB_ID
 python -m yolo_attention.cli queue append-bdcn-v2  # completed mainline 後追加改良重跑
 python -m yolo_attention.cli queue append-bdcn-v3  # fixed control → anchored learning → R1
+python -m yolo_attention.cli queue append-pwl-validation  # Exact score analysis → adaptive Float/Bit-True PWL compare
 ~~~
 
 `train` 預設只能 dry-run；只有使用者明確要求並加入 `--execute` 才能訓練。
@@ -50,6 +51,8 @@ config.py          唯一演算法設定 seam；enum、驗證、YAML round-trip
 projection.py      官方 fused QKV gather/interleave、Conv+BN split/fold
 binary_basis.py    FP、Identity、Hadamard MDB、T5 score
 relative_bias.py   none、dense 2D、decomposed 2D bias
+pwl_validation.py  雙 Attention streaming score/P/PV diagnostics
+pwl_experiment.py  PWL range gate、正式 validation artifacts、CSV/SVG/report
 normalization.py   scores → normalized P；所有 Softmax/Multimax 候選與 factory
 bdcn.py            distance codebook、PoT projection、denominator 與 fused bucket-PV
 attention.py       組合上述元件並保留官方 V/PE/projection path
@@ -93,6 +96,8 @@ B26-FP baseline → P0 equivalence
 → I/H/T5 各 10 ep screening → architecture winner
 → winner 做 Direct / Progressive 20–40 ep recovery → A0
 → N0 normalization zero-train screening
+→ PWL final validation：Exact score analysis → Float PWL / Q8.8 Bit-True PWL
+  （tail mass gate 決定 [-8,0]/16 或 [-10,0]/20；不訓練）
 → 最多兩個候選做 N1 5 ep attention-only PMP recovery
 → BDCN D0 → D1 三候選各 10 ep codebook-only → conditional winner seed 1 → D2/R0/R1/R2
 → A-FINAL 與完整 COCO/operation/error report

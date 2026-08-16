@@ -34,6 +34,11 @@ artifacts/runs/<run_id>/
 
 2026-08-16 最終清理刪除 invalidated tree、worker logs、所有 last、階段/non-winner/calibration checkpoints、Ultralytics 圖與空 leaf；保留 queue、所有正式數值 provenance，以及 V1-BR、N1-SHIFT、BDCN-V3-LEARN 三個必要 best checkpoints。既有 immutable `profiles/analytical.json` 是舊 schema-1 產物，Hadamard 總量少算第二個 binary basis；不覆寫原始 artifact，正式修正值與公式放在 `../reports/COMPUTE_AND_SIZE.md`／`compute_and_size.csv`。
 
+PWL final validation 追加後使用 `pwl-score-analysis` 與 `pwl-compare` 兩個 immutable
+run ID。前者保存 Exact COCO metrics、雙-site/per-head score diagnostics 與兩個 range 的
+numerical error；後者保存 adaptive range 下的 Float/Bit-True 子結果與 top-level
+`queue-result.json`。整理後 CSV/SVG/report 另同步到 `../PWL/results/`。
+
 manifest 記錄 variant、training recipe、Python、PyTorch、Ultralytics、platform 與 Git revision。run directory 使用 `exist_ok=False`，避免覆寫正式 V1。
 
 runtime artifacts 預設由 `.gitignore` 排除；本次正式 metrics/profile 與三個必要 checkpoints 經使用者明確核准提交 Git。未來的 checkpoint、ONNX、engine 與 NumPy dump 仍不得在沒有明確授權時提交。

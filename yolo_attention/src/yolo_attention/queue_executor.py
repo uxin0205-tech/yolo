@@ -307,3 +307,15 @@ class QueueExecutor:
             self.store.save(state)
             self.store.append_event("bdcn_v3_appended", job_id=None, details={})
             return state
+
+    def append_pwl_validation(self) -> QueueState:
+        """Append the PWL-only score analysis and final comparison branch."""
+
+        from .queue_workflow import append_pwl_validation
+
+        with self.store.worker_lock():
+            state = append_pwl_validation(self.store.load())
+            state = refresh_readiness(state)
+            self.store.save(state)
+            self.store.append_event("pwl_validation_appended", job_id=None, details={})
+            return state

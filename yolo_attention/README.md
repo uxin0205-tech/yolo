@@ -1,8 +1,8 @@
 # YOLO26m Hardware-Friendly Attention
 
-這是一套 YOLO26m Binary Attention 演算法研究與 CPU-reference 框架。程式包含 I／Hadamard MDB／T5、Dense／Decomposed 2D bias、多種 normalization、BDCN distance-codebook 分支、modular QKV、BN fold、雙 Attention fail-closed adapter、研究工作流、artifact provenance 與安全訓練入口。
+這是一套 YOLO26m Binary Attention 演算法研究與 CPU-reference 框架。程式包含 I／Hadamard MDB／T5、Dense／Decomposed 2D bias、多種 normalization、Float/Bit-True PWL final validation、BDCN distance-codebook 分支、modular QKV、BN fold、雙 Attention fail-closed adapter、研究工作流、artifact provenance 與安全訓練入口。
 
-本機 COCO2017 設為 `/home/uxin/yolo/coco2017`；官方權重放在 `weights/yolo26m.pt`。截至 2026-08-16，主線與 BDCN V3 共 57 個 queue jobs 全部成功；Optional Phase Q 維持鎖定。即時狀態仍以 `artifacts/queue/queue.json` 為唯一依據。
+本機 COCO2017 設為 `/home/uxin/yolo/coco2017`；官方權重放在 `weights/yolo26m.pt`。截至 2026-08-16，主線、BDCN V3 與 PWL final validation 共 59 個 jobs 全部成功。PWL 已在 RTX 5090 上完成 Exact／Float／Q8.8 Bit-True 的同條件 COCO2017 val 比較；Optional Phase Q 維持鎖定。即時狀態仍以 `artifacts/queue/queue.json` 為唯一依據。
 
 ## 目前成果
 
@@ -15,9 +15,11 @@
 | A-FINAL 相對 exact binary arithmetic proxy | -5.57% |
 | BDCN-V3-FIXED mAP50-95 | 0.506566 |
 | BDCN-V3-R1 mAP50-95 | 0.506562 |
-| Queue | 57 succeeded / 0 failed |
+| PWL Exact / Float / Bit-True mAP50-95 | 0.506658 / 0.506730 / 0.506737 |
+| PWL final setting | `[-10,0]` / 20 segments / $\Delta=0.5$ / 42-byte endpoints |
+| Queue | 59 succeeded / 0 failed |
 
-這裡的 AP 是本 repository 對 COCO2017 val images 的 Ultralytics internal metric，不是 canonical COCO API AP，也不能直接和官方 0.525 E2E／0.531 Non-E2E 混用。完整數據與限制見 [完整實驗報告](reports/REPORT.md)、[BDCN V3 完整報告](reports/BDCN_V3_REPORT.md)、[Attention 運算量、全模型占比與大小整合報告](reports/COMPUTE_AND_SIZE.md)、[訓練稽核](reports/TRAINING_AUDIT.md)、[比較表](reports/comparison.csv) 與 [機器可讀摘要](reports/summary.json)。
+這裡的 AP 是本 repository 對 COCO2017 val images 的 Ultralytics internal metric，不是 canonical COCO API AP，也不能直接和官方 0.525 E2E／0.531 Non-E2E 混用。完整數據與限制見 [完整實驗報告](reports/REPORT.md)、[PWL final validation](PWL/results/REPORT.md)、[BDCN V3 完整報告](reports/BDCN_V3_REPORT.md)、[Attention 運算量、全模型占比與大小整合報告](reports/COMPUTE_AND_SIZE.md)、[訓練稽核](reports/TRAINING_AUDIT.md)、[比較表](reports/comparison.csv) 與 [機器可讀摘要](reports/summary.json)。
 
 ![Main experiment results](reports/figures/mainline-map.svg)
 
@@ -41,7 +43,7 @@ HardwareFriendlyAttention.from_ultralytics()
       ├─ ModularQKVProjection
       ├─ BinaryScore (FP / I / H / T5)
       ├─ RelativePositionBias
-      ├─ Exact / LUT / PWL / PoT / HardSigmoid / ReLU / Multimax
+      ├─ Exact / Float PWL / Q8.8 Bit-True PWL / LUT / PoT / HardSigmoid / ReLU / Multimax
       ├─ BDCN：distance bucket → codebook → R0/R1/R2 denominator
       └─ official V → dense PV 或 fused bucket-PV → PE(V) → projection
       ↓
@@ -180,6 +182,22 @@ $L=16,\Delta=0.125$ 的 flat-tail 缺陷。append 命令只有在現有 queue �
 
 D1 依序執行 `D1-SHARED`、`D1-PATTN`、`D1-PHEAD`，每個候選都是從共同 D0 parent 開始的一次完整 10-epoch codebook-only run；`D1-SELECT` 直接比較這三個結果。只有 top-two 落在 0.001 tie band 時，queue 才加入 winner 的 seed-1 10-epoch confirmation，完成後自動接回 D2、R 與 A-FINAL。舊 artifacts 中的 `d1-*-10` 是先前已完成的 staged 5+5 歷史紀錄，不代表目前程式仍採 extension workflow。
 
+PWL final hardware-setting validation 已完成。它沒有重跑訓練，只從保留的
+`v1-br` checkpoint 依序做 Exact score analysis 與 adaptive Float/Bit-True PWL compare：
+
+~~~bash
+# append-pwl-validation 已執行；只有未追加的新 completed queue 才需要再用
+../.venv/bin/python -m yolo_attention.cli queue validate --json
+../.venv/bin/python -m yolo_attention.cli queue run-next --json            # dry-run
+../.venv/bin/python -m yolo_attention.cli queue run-next --execute --json  # 明確 GPU 授權後
+~~~
+
+量測的 $u<-8$ probability mass 為 0.11552%，超過 0.1% gate，因此正式設定選
+`[-10,0]`/20 segments，而不是 `[-8,0]`/16 segments；兩者維持 $\Delta=0.5$。輸出包含雙 Attention/per-head
+score distribution、tail mass、exp/P/PV errors、COCO mAP、endpoint storage 與 hardware
+breakdown；詳見 [PWL/README.md](PWL/README.md)。PWL Bit-True 僅固定 exponential path，
+denominator 仍為 exact software reference，且不會自動觸發 QAT。
+
 ## Repository 結構
 
 ~~~text
@@ -205,6 +223,8 @@ yolo_attention/
 │   ├── attention.py
 │   ├── integration.py
 │   ├── experiments.py
+│   ├── pwl_validation.py # streaming score/P/PV diagnostics
+│   ├── pwl_experiment.py # range gate、formal validation、CSV/SVG/report
 │   ├── workflow.py      # 主線與 optional phase 的單一流程定義
 │   ├── training.py
 │   ├── runner.py
@@ -220,6 +240,7 @@ yolo_attention/
 ├── scripts/main.py      # CLI 薄包裝
 ├── tests/
 ├── BCND/                  # BDCN v2 defect-fix 設定、說明與結果索引
+├── PWL/                   # PWL configs、bit-true specification、結果與圖表
 ├── reports/               # 正式彙整、training audit、CSV/JSON 摘要
 ├── artifacts/
 │   ├── logs/              # worker 程序 log
@@ -244,9 +265,10 @@ yolo_attention/
 6. [reports/COMPUTE_AND_SIZE.md](reports/COMPUTE_AND_SIZE.md)：原始 Attention、全模型占比、節省原因、corrected proxy、參數與 checkpoint 大小。
 7. [BCND/README.md](BCND/README.md)：BDCN v2/v3 修正原因、設定與重跑方法。
 8. [reports/BDCN_V3_REPORT.md](reports/BDCN_V3_REPORT.md)：每一步實作、正式結果、成本與最終判定。
-9. [reports/CLEANUP.md](reports/CLEANUP.md)：永久刪除與保留項目。
-10. [configs/README.md](configs/README.md)、[src/README.md](src/README.md)、[artifacts/README.md](artifacts/README.md)：局部操作與資料契約。
-11. `hardware-friendly_attention.md`：舊 YOLO11 背景，不具現行規格效力。
+9. [PWL/README.md](PWL/README.md)：Exact/Float/Bit-True PWL final validation、range gate 與結果導航。
+10. [reports/CLEANUP.md](reports/CLEANUP.md)：永久刪除與保留項目。
+11. [configs/README.md](configs/README.md)、[src/README.md](src/README.md)、[artifacts/README.md](artifacts/README.md)：局部操作與資料契約。
+12. `hardware-friendly_attention.md`：舊 YOLO11 背景，不具現行規格效力。
 
 ## 已知限制與下一步
 

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import asdict, dataclass
 from enum import Enum
 from pathlib import Path
@@ -63,6 +64,7 @@ class NormalizationKind(StringEnum):
     LUT = "lut"
     INTEGER_LUT = "integer_lut"
     PIECEWISE_LINEAR = "piecewise_linear"
+    BIT_TRUE_PWL = "bit_true_pwl"
     POWER_OF_TWO = "power_of_two"
     HARD_SIGMOID = "hard_sigmoid"
     RELU = "relu"
@@ -162,6 +164,14 @@ class VariantConfig:
             raise ValueError("multimax_top_k must be positive")
         if self.normalization_transition_epochs < 1:
             raise ValueError("normalization_transition_epochs must be positive")
+        if self.normalization is NormalizationKind.BIT_TRUE_PWL and not math.isclose(
+            -(self.score_min * self.score_step) / self.pwl_segments,
+            0.5,
+            rel_tol=0.0,
+            abs_tol=1e-12,
+        ):
+            raise ValueError("bit-true PWL requires uniform segment width 0.5")
+
         bdcn_values = (self.bdcn_codebook, self.bdcn_sharing, self.bdcn_projection, self.bdcn_denominator)
         if self.normalization is NormalizationKind.BDCN:
             if any(value is None for value in bdcn_values):

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import math
+
 import torch
 from torch import nn
 
@@ -118,14 +120,75 @@ class PiecewiseLinearSoftmax(nn.Module):
         self.register_buffer("knots", knots, persistent=True)
         self.register_buffer("values", knots.exp(), persistent=True)
 
-    def forward(self, scores: torch.Tensor) -> torch.Tensor:
-        centered = (scores - scores.amax(dim=-1, keepdim=True)).clamp(self.score_floor, 0.0)
+    def approximate_weights(self, centered: torch.Tensor) -> torch.Tensor:
+        centered = centered.clamp(self.score_floor, 0.0)
         position = (centered - self.score_floor) * self.segments / -self.score_floor
         lower = position.floor().to(torch.long).clamp(0, self.segments - 1)
         fraction = position - lower.to(position.dtype)
         y0 = self.values[lower]
         y1 = self.values[lower + 1]
-        return _normalize_weights(y0 + fraction * (y1 - y0))
+        return y0 + fraction * (y1 - y0)
+
+    def forward(self, scores: torch.Tensor) -> torch.Tensor:
+        centered = scores - scores.amax(dim=-1, keepdim=True)
+        return _normalize_weights(self.approximate_weights(centered))
+
+
+class BitTruePiecewiseLinearSoftmax(nn.Module):
+    """Project bit-true Q8.8/UQ1.15 PWL-exp path with exact float normalization.
+
+    Endpoint lookup, indexing, interpolation and saturation reproduce the
+    intended integer datapath. The final reciprocal remains an exact software
+    reference and is not claimed as an integer or division-free implementation.
+    """
+
+    score_fraction_bits = 8
+    endpoint_fraction_bits = 15
+    endpoint_bits = 16
+    fraction_bits = 7
+
+    def __init__(self, *, score_floor: float = -8.0, segments: int = 16) -> None:
+        super().__init__()
+        if score_floor >= 0 or segments < 2:
+            raise ValueError("score_floor must be negative and segments at least 2")
+        width = -float(score_floor) / int(segments)
+        if not math.isclose(width, 0.5, rel_tol=0.0, abs_tol=1e-12):
+            raise ValueError("bit-true PWL requires uniform segment width 0.5")
+        self.score_floor = float(score_floor)
+        self.segments = int(segments)
+        knots = torch.linspace(self.score_floor, 0.0, self.segments + 1, dtype=torch.float64)
+        scale = 1 << self.endpoint_fraction_bits
+        endpoints = torch.floor(knots.exp() * scale + 0.5).clamp(0, 2**self.endpoint_bits - 1)
+        self.register_buffer("endpoint_table", endpoints.to(torch.int64), persistent=True)
+        self.last_centered_q: torch.Tensor | None = None
+        self.last_weights_int: torch.Tensor | None = None
+
+    @property
+    def endpoint_storage_bits(self) -> int:
+        return self.endpoint_table.numel() * self.endpoint_bits
+
+    def approximate_weights(self, centered: torch.Tensor) -> torch.Tensor:
+        score_scale = 1 << self.score_fraction_bits
+        centered_q = torch.floor(centered * score_scale + 0.5).to(torch.int64)
+        signed_min = -(1 << 15)
+        signed_max = (1 << 15) - 1
+        floor_q = round(self.score_floor * score_scale)
+        centered_q = centered_q.clamp(signed_min, signed_max).clamp(floor_q, 0)
+        z = centered_q - floor_q
+        endpoint_mask = z == -floor_q
+        segment_index = torch.bitwise_right_shift(z, self.fraction_bits).clamp(0, self.segments - 1)
+        fraction = torch.bitwise_and(z, (1 << self.fraction_bits) - 1)
+        y0 = self.endpoint_table[segment_index]
+        y1 = self.endpoint_table[segment_index + 1]
+        interpolated = y0 + torch.bitwise_right_shift(fraction * (y1 - y0), self.fraction_bits)
+        weights_int = torch.where(endpoint_mask, self.endpoint_table[-1], interpolated)
+        self.last_centered_q = centered_q.detach()
+        self.last_weights_int = weights_int.detach()
+        return weights_int.to(centered.dtype) / (1 << self.endpoint_fraction_bits)
+
+    def forward(self, scores: torch.Tensor) -> torch.Tensor:
+        centered = scores - scores.amax(dim=-1, keepdim=True)
+        return _normalize_weights(self.approximate_weights(centered))
 
 
 class PowerOfTwoSoftmax(nn.Module):
@@ -245,6 +308,10 @@ def build_normalizer(
             correction=config.row_correction,
         ),
         NormalizationKind.PIECEWISE_LINEAR: lambda: PiecewiseLinearSoftmax(
+            score_floor=score_floor,
+            segments=config.pwl_segments,
+        ),
+        NormalizationKind.BIT_TRUE_PWL: lambda: BitTruePiecewiseLinearSoftmax(
             score_floor=score_floor,
             segments=config.pwl_segments,
         ),

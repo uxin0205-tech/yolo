@@ -130,6 +130,7 @@ def write_variant_profile(
             NormalizationKind.LUT: 2,
             NormalizationKind.INTEGER_LUT: 2,
             NormalizationKind.PIECEWISE_LINEAR: 3,
+            NormalizationKind.BIT_TRUE_PWL: 3,
             NormalizationKind.POWER_OF_TWO: 1,
             NormalizationKind.HARD_SIGMOID: 2,
             NormalizationKind.RELU: 1,

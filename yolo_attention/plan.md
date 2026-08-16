@@ -1,6 +1,6 @@
 # YOLO26m Hardware-Friendly Binary Attention：主線研究計畫
 
-> 狀態：程式骨架與 CPU reference 已完成；尚未開始 GPU baseline、正式訓練或量化搜尋。
+> 狀態：演算法主線、BDCN 分支與 PWL GPU validation 已完成；Optional Phase Q 尚未啟動。
 > 模型：官方 Ultralytics `yolo26m.pt`。
 > 資料：COCO2017 train2017／val2017，`imgsz=640`。
 > 範圍：先做 PyTorch 與 bit-true 模擬；不做上板、HLS、Vivado 或 Vitis-AI。
@@ -709,7 +709,44 @@ $e^{-8}$ 且必須由 overflow diagnostics 報告占比。V3-FIXED 與 V3-LEARN
 只有 V3-LEARN 更新 codebook，因此可直接判定 codebook learning 是否有益。
 
 
-### 6.6 Optional Phase Q：延後量化、PTQ 與 QAT
+### 6.6 PWL final hardware-setting validation
+
+在不改動 A0 的 Hadamard MDB Binary QK、PoT scale、decomposed 2D bias、V、
+$PV+PE(V)$ 與 projection 下，固定 `v1-br` checkpoint 與同一 COCO2017 val evaluator，
+只比較：
+
+1. Exact Softmax。
+2. Float PWL。
+3. Q8.8 Bit-True PWL。
+
+先量測真正送入 normalization 的 centered score：
+
+$$
+u=S-\max(S).
+$$
+
+兩個 Attention site 必須分開且最好分 head 報告 min/mean/std、percentile、histogram、
+$u<-4,-6,-8,-10$ 的比例，以及 $u<-8$ 在 Exact Softmax 中的平均 probability mass。
+range gate 固定為 0.1%：
+
+- tail mass $\le0.001$：`[-8,0]`、16 segments。
+- tail mass $>0.001$：`[-10,0]`、20 segments。
+
+兩者皆保持 $\Delta=0.5$。Float/Bit-True 同時報告 exp approximation、normalized $P$
+MAE/max error、$PV$ MAE/max/cosine 與 COCO mAP50-95/mAP50。
+
+Bit-True exponential path 固定 Q8.8 score、UQ1.15 16-bit endpoints、signed 16-bit
+saturation、shift/mask indexing 與 truncating interpolation；`u=0` 直接選最後 endpoint。
+本階段保留 integer multiplier，也保留 exact software denominator reciprocal。因指定論文沒有
+公開 endpoint 整數、Q-format、rounding、intermediate width 與 RTL，必須標成
+paper-parameterized project bit-true reference，不得標成 faithful RTL reproduction。
+
+這個 branch 不訓練、不測 BDCN、不加入其他 normalization、不做 P/V 或 projection 量化。
+實測 overall $u<-8$ tail probability mass 為 0.11552%，因此選 `[-10,0]`、
+20 segments、$\Delta=0.5$。Exact／Float／Bit-True mAP50-95 分別為
+0.506658／0.506730／0.506737，未觀察到可辨識精度損失，不需要為 PWL 啟動 QAT。
+
+### 6.7 Optional Phase Q：延後量化、PTQ 與 QAT
 
 量化不是主研究必做項目。A-FINAL 的完整 COCO evaluation、運算量報告與方法結論完成後，主研究即可結束。只有使用者或老師明確決定繼續 Phase Q，才啟動正式 bit-width／format 搜尋；沒有新核准時，Q0/Q1/Q2、TW0/TW1 與 SD4-0 全部保持 dormant。
 
@@ -847,8 +884,9 @@ formal V1 形成後：
 6. 從同一 A0 依序做 BDCN D0 → D1 三候選各完整 10 epochs → conditional winner seed 1 → D2 projection → R0/R1/R2；只讓通過 gate 的 BDCN winner 留下。
 7. 依 mAP、normalization 成本與 dataflow，從 A0 exact、N1 winner、BDCN winner 選 A-FINAL。
 8. 對 A-FINAL 執行完整 COCO val、運算量、latency proxy、memory 與 error analysis。
-9. 記錄 A-FINAL 的完整 provenance，不覆寫 formal V1；完成研究報告後主線結束。
-10. 只有另行核准 Optional Phase Q 時，才複製 A-FINAL 為 quantization parent，重新 `eval()`、BN fold 並通過等價性測試。
+9. 以 `v1-br` 固定 parent 做 PWL final validation；先量 score/tail，再依 gate 比較 Float/Bit-True PWL，不訓練。
+10. 記錄 A-FINAL 與 PWL validation 的完整 provenance，不覆寫 formal V1；完成研究報告後主線結束。
+11. 只有另行核准 Optional Phase Q 時，才複製最終選定 parent，重新 `eval()`、BN fold 並通過等價性測試。
 
 scale 的條件式 3-epoch recovery、bias 的 5-epoch branches 與 N1 都只解凍兩個目標 Attention module。Q2 則採 full-model fake-quant fine-tuning。
 
@@ -1070,15 +1108,17 @@ $$
 - [x] 實作 I、H、T5 float reference 與 XNOR-popcount reference。
 - [x] 通過 binary、Hadamard、integration unit tests 與 CPU smoke test。
 - [x] 建立並執行 persistent single-worker queue；加入 failure/retry、selection rewind/archive、動態 winner graph、共同 evaluator 與 analytical profile contract。
-- [x] Queue 只包含 A-FINAL 前的主線；Optional Phase Q 維持 locked，不自動排入。
+- [x] Queue 包含已核准主線、BDCN 歷史分支與 PWL final validation；Optional Phase Q 維持 locked，不自動排入。
 - [x] 執行 I/H/T5 各 10 epochs Direct screening；Hadamard 勝出。
-- [ ] 重新執行 W-DIR 與 W-PROG recovery；舊結果因 custom parent state 未完整載入而封存。
-- [ ] 重新選 formal V1 並保存共同 evaluator 結果。
-- [ ] 執行 scale 與 bias add-ons，選定 algorithm parent A0。
-- [ ] 從 A0 執行完整 N0 normalization screening；通過 gate 後最多兩個候選做 N1 PMP 5 epochs。
-- [ ] 選定 A-FINAL，完成 full COCO evaluation 與 accuracy、運算量、latency proxy、memory、scale、bias、normalization error 報告。
-- [ ] A-FINAL 報告完成即視為主研究完成；量化不作為完成條件。
+- [x] 重新執行 W-DIR 與 W-PROG recovery；舊結果因 custom parent state 未完整載入而封存。
+- [x] 重新選 formal V1 並保存共同 evaluator 結果。
+- [x] 執行 scale 與 bias add-ons，選定 algorithm parent A0。
+- [x] 從 A0 執行完整 N0 normalization screening；通過 gate 後最多兩個候選做 N1 PMP 5 epochs。
+- [x] 選定 A-FINAL，完成 full COCO evaluation 與 accuracy、運算量、latency proxy、memory、scale、bias、normalization error 報告。
+- [x] A-FINAL 報告完成即視為主研究完成；量化不作為完成條件。
 
+- [x] 建立獨立 Float/Bit-True PWL、雙-site/per-head streaming diagnostics、adaptive range gate 與兩-job queue workflow。
+- [x] 執行 PWL Exact score analysis 與同 checkpoint/val 的 Float/Bit-True COCO comparison；59 jobs 全部成功。
 Optional Phase Q（目前不執行；需使用者／老師另行核准）：
 
 - [ ] 複製 A-FINAL 為唯一 quantization parent，重新 eval、BN fold 與等價性驗證。

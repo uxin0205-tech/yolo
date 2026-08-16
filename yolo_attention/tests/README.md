@@ -4,7 +4,8 @@
 
 - I/H/T5、FWHT、STE 與 XNOR-popcount。
 - Dense/Decomposed bias。
-- Exact/LUT/PWL/PoT/HardSigmoid/ReLU/Multimax row normalization 與 L3-A/B/C。
+- Exact/LUT/Float PWL/Q8.8 Bit-True PWL/PoT/HardSigmoid/ReLU/Multimax row normalization 與 L3-A/B/C。
+- PWL integer endpoint/index/interpolation/saturation、tail-mass range gate、streaming score/P/PV metrics、雙 Attention hooks 與 queue/CLI/backend dispatch。
 - BDCN fixed/unbounded/anchored codebook、tail bound、梯度、D1→D2/R state preservation、1/2-PoT、R0/R1/R2 數值範圍、fused bucket-PV 等價與雙 Attention 共享。
 - Queue 的一般 catastrophic-mAP fail-closed gate，以及 R2 accuracy-bound diagnostic 只記錄負結果、不阻塞 R1 selection 的明列例外。
 - per-head QKV gather/interleave、BN fold、Attention/C2PSA P0。

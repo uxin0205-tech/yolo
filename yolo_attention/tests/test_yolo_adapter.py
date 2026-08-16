@@ -21,6 +21,7 @@ from yolo_attention.integration import (
     convert_yolo26_model,
     freeze_for_stage,
 )
+from yolo_attention.pwl_validation import PWLModelDiagnosticsCollector
 
 
 def test_yolo26m_yaml_converts_both_attention_sites_on_cpu() -> None:
@@ -32,6 +33,27 @@ def test_yolo26m_yaml_converts_both_attention_sites_on_cpu() -> None:
     assert c2psa_count > 0
     assert paths == list(YOLO26M_ATTENTION_PATHS)
     assert len(paths) == 2
+
+
+def test_pwl_collector_observes_both_yolo26_attention_sites() -> None:
+    model = DetectionModel("yolo26m.yaml", ch=3, nc=80, verbose=False).eval()
+    config = VariantConfig(
+        name="PWL-EXACT",
+        basis=BasisKind.HADAMARD,
+        bias="decomposed_2d",
+        scale_mode=ScaleMode.POWER_OF_TWO,
+        normalization=NormalizationKind.EXACT,
+    )
+    convert_yolo26_model(model, config)
+    for path in YOLO26M_ATTENTION_PATHS:
+        model.get_submodule(path).score.set_fixed_coefficients(torch.ones(4, 2))
+
+    with PWLModelDiagnosticsCollector(model) as collector, torch.no_grad():
+        model(torch.randn(1, 3, 64, 64))
+
+    summaries = collector.summaries()
+    assert [summary["site"] for summary in summaries] == list(YOLO26M_ATTENTION_PATHS)
+    assert all(summary["aggregate"]["count"] > 0 for summary in summaries)
 
 
 def test_yolo26_conversion_fails_closed_when_expected_site_is_missing() -> None:

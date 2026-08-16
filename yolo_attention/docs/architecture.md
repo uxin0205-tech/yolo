@@ -57,6 +57,21 @@ $$
 
 PoT 是本專案的軟體 reference approximation，不宣稱是特定 Shiftmax 論文的 bit-true reproduction。Optional Phase Q 才使用 `IntegerLUTSoftmax` 量化 U8 P，並保存 `last_u8` 與 `last_row_sums` diagnostics。
 
+PWL final validation 保留既有 `PiecewiseLinearSoftmax` 作 floating reference，另以
+`BitTruePiecewiseLinearSoftmax` 建立 paper-parameterized project bit-true path。後者固定
+Q8.8 centered score、$Δ=0.5$、UQ1.15 16-bit endpoints、integer shift/mask indexing、
+truncating interpolation 與明確 saturation；它不覆蓋 Float PWL。論文未公開完整 endpoint
+Q-format、rounding 或 RTL，因此不能稱 faithful reproduction。兩者最後仍使用 exact
+software row reciprocal，PWL 只替換 exponential numerator approximation，沒有消除 denominator。
+
+`PWLModelDiagnosticsCollector` 只接受固定 H/PoT/decomposed-bias/exact 架構，而且必須同時
+命中 `YOLO26M_ATTENTION_PATHS`。它透過只讀 hook streaming 累加 centered-score distribution、
+Exact tail probability mass、exp/P/PV error 與 cosine；不保存整個 COCO 的 $N^2$ score。
+`PWLExperimentRunner` 只能由 `pwl-score-analysis`／`pwl-compare` queue jobs 呼叫：先量測
+`[-8,0]` 與 `[-10,0]` numerical reference；若 $u<-8$ 的 Exact probability mass 超過
+0.1%，才選 20-segment `[-10,0]`，否則維持 16-segment `[-8,0]`。兩者皆保持
+$Δ=0.5$，且全程不訓練。
+
 BDCN 由 `bdcn.py` 實作。`convert_yolo26_model()` 先依 global／per-attention／per-head 建立 table assignment，再把同一個 `BDCNCodebookBank` 注入兩個 Attention。`BDCNNormalizer.aggregate()` 直接把相同 bucket 的 value 相加，不 materialize dense $P$：
 
 $$

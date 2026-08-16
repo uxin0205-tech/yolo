@@ -34,6 +34,9 @@ def _add_queue_parser(subparsers) -> None:
     rewind.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
     rewind.add_argument("--json", action="store_true")
     append_bdcn = commands.add_parser("append-bdcn-v2")
+    append_pwl = commands.add_parser("append-pwl-validation")
+    append_pwl.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
+    append_pwl.add_argument("--json", action="store_true")
     append_bdcn.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
     append_bdcn.add_argument("--json", action="store_true")
     append_bdcn_v3 = commands.add_parser("append-bdcn-v3")
@@ -120,6 +123,14 @@ def _run_queue_command(args) -> int:
                 as_json=args.json,
             )
             return 0
+        if args.queue_command == "append-pwl-validation":
+            state = executor.append_pwl_validation()
+            _print_payload(
+                {"jobs": len(state.jobs), "next": executor.preview_next().job_id},
+                as_json=args.json,
+            )
+            return 0
+
         if args.queue_command == "run-next":
             payload = executor.run_next(execute=execute).to_dict()
         else:
