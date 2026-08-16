@@ -15,6 +15,6 @@
 └── ultralytics/
 ~~~
 
-原始 training run 含 `results.csv`、`best.pt` 與 `last.pt`。2026-08-15 主線清理後只保留 `h-scr`、`w-dir`、`v1-br`、`n1-shift`、`d1-shared-10` 的 `best.pt`。2026-08-16 完成的 `bdcn-v2-learn` 與 `bdcn-v3-learn` 另保留 best/last，供 defect provenance 與安全 postprocess retry 使用。Evaluate-only variant 由 `../../queue/generated/` 追溯。
+原始 training run 含 `results.csv`、`best.pt` 與 `last.pt`。最終清理後只保留 `v1-br`、`n1-shift`、`bdcn-v3-learn` 的 `best.pt`；所有 `last.pt`、階段中間權重與 V2 負結果權重均已刪除。CSV、metrics、config、profile 與 manifest provenance 仍保留；evaluate-only variant 由 `../../queue/generated/` 追溯。
 
-run 不可覆寫或手改為成功；清理明細見 `../../../reports/CLEANUP.md`。
+已清理 run 視為 archived completed result，不再支援原地 retry。run 不可覆寫或手改為成功；清理明細見 `../../../reports/CLEANUP.md`。

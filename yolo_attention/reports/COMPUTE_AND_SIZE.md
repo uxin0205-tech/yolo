@@ -200,10 +200,12 @@ arithmetic proxy，memory proxy 從 4.557M 增至 14.387M。另一方面，它�
 | D1-SHARED-10 | 21,897,275 | 55.29 MiB | 41.77 MiB | 0.109 MiB |
 
 A-FINAL 比 B26-FP 多 1,012 parameters。checkpoint 檔案另含 class/config/metadata，不能當參數 RAM。A-FINAL parameters 為 FP16：
+表中 H-SCR、W-DIR、D1-SHARED-10 是清理前的實際量測；其 checkpoint 已在最終整理刪除。現存 custom checkpoints 只有 V1-BR、N1-SHIFT 與 BDCN-V3-LEARN。
+
 
 $$21{,}897{,}260\times2=43{,}794{,}520\ \text{bytes}=41.77\ \text{MiB}$$
 
-![Retained checkpoint sizes](figures/checkpoint-size.svg)
+![Measured checkpoint sizes before final cleanup](figures/checkpoint-size.svg)
 
 原始 bytes 見 [checkpoint_sizes.csv](checkpoint_sizes.csv)。
 

@@ -1,6 +1,6 @@
 # weights
 
-本目錄存放本機模型 checkpoint，不提交 Git。
+本目錄存放官方模型 checkpoint。一般新增權重不提交 Git；`yolo26m.pt` 已依使用者明確要求作為本研究可重現 baseline 提交。
 
 - `yolo26m.pt`：官方 Ultralytics YOLO26m baseline 與所有研究階段的初始權重。
 - training YAML 統一使用 `weights/yolo26m.pt`，命令應從 repository root 執行。

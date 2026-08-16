@@ -2,7 +2,7 @@
 
 稽核日期：2026-08-15
 
-> 本稽核在 artifact 清理前完成。17 個 accepted checkpoint 當時均通過 load/finite/config 檢查；清理後只保留五個階段 winner checkpoint，詳見 `CLEANUP.md`。
+> 本稽核在 artifact 清理前完成。17 個 accepted checkpoint 當時均通過 load/finite/config 檢查；最終只保留 V1-BR、N1-SHIFT、BDCN-V3-LEARN 三個必要 best checkpoints，詳見 `CLEANUP.md`。
 
 ## 結論
 

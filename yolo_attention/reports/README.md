@@ -21,4 +21,4 @@
 
 本報告中的 `d1-*-10` 是當時實際完成的 staged 5+5 歷史 runs；目前程式已簡化為 `d1-shared`、`d1-pattn`、`d1-phead` 各一次完整 10 epochs。報告保留舊名稱以維持 provenance，不把既有量測改寫成新版流程的結果。
 
-本目錄應提交 Git；原始 Ultralytics 中間圖與 queue logs 已依核准刪除，保留的五個階段 checkpoint 仍在 `../artifacts/runs/`。
+本目錄應提交 Git；原始 Ultralytics 中間圖、queue logs、所有 last 與階段中間 checkpoint 已刪除，只保留 V1-BR、N1-SHIFT、BDCN-V3-LEARN 三個必要 best checkpoints。

@@ -32,8 +32,8 @@ artifacts/runs/<run_id>/
 
 `metrics/queue-result.json` 是 queue 的標準結果 contract。Fixed-scale `checkpoints/calibrated.pt` 必須保存未融合 Conv+BN training graph 與校準完成的兩處 Attention coefficients；fused checkpoint 只可作 inference/export，不可作下一個 training parent。`profiles/analytical.json` 保存固定 shape 假設下的 operation/memory proxy，`hardware_measurement: false`；它用於相同 evaluator 的 tie-break，不代表實際板端 latency 或 energy。
 
-2026-08-15 的永久清理刪除了 invalidated tree、worker logs、last/non-winner checkpoints、calibration checkpoints 與 Ultralytics 圖；保留 queue、所有正式數值 provenance 與五個階段 winner checkpoint。既有 immutable `profiles/analytical.json` 是舊 schema-1 產物，Hadamard 總量少算第二個 binary basis；不覆寫原始 artifact，正式修正值與公式放在 `../reports/COMPUTE_AND_SIZE.md`／`compute_and_size.csv`。
+2026-08-16 最終清理刪除 invalidated tree、worker logs、所有 last、階段/non-winner/calibration checkpoints、Ultralytics 圖與空 leaf；保留 queue、所有正式數值 provenance，以及 V1-BR、N1-SHIFT、BDCN-V3-LEARN 三個必要 best checkpoints。既有 immutable `profiles/analytical.json` 是舊 schema-1 產物，Hadamard 總量少算第二個 binary basis；不覆寫原始 artifact，正式修正值與公式放在 `../reports/COMPUTE_AND_SIZE.md`／`compute_and_size.csv`。
 
 manifest 記錄 variant、training recipe、Python、PyTorch、Ultralytics、platform 與 Git revision。run directory 使用 `exist_ok=False`，避免覆寫正式 V1。
 
-`artifacts/queue/`、`artifacts/runs/`、checkpoint、ONNX、engine 與 NumPy dump 都不應提交 Git；README 本身保留作目錄契約。
+runtime artifacts 預設由 `.gitignore` 排除；本次正式 metrics/profile 與三個必要 checkpoints 經使用者明確核准提交 Git。未來的 checkpoint、ONNX、engine 與 NumPy dump 仍不得在沒有明確授權時提交。

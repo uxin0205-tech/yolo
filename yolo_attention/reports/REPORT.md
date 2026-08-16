@@ -175,7 +175,7 @@ BDCN 的 distance-indexed normalization 核心接近 IntAttention/IndexSoftmax�
 
 目前 A-FINAL 尚未建立最新 BN-fold export、ONNX、bit-true 或 FPGA reference artifact；因此 checkpoint 是演算法研究權重，不是已驗收硬體部署包。
 
-訓練中間產物已依核准清理，只保留五個階段 winner checkpoint；詳見 [CLEANUP.md](CLEANUP.md)。
+訓練中間產物已依核准清理，只保留 V1-BR、N1-SHIFT、BDCN-V3-LEARN 三個必要 best checkpoints；詳見 [CLEANUP.md](CLEANUP.md)。
 
 ## 最終判定
 
