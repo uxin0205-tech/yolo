@@ -36,7 +36,7 @@ _Avoid_: smoke model、preflight model
 _Avoid_: clean baseline、unseen baseline
 
 **嚴格公平組（Strict Fair Tier）**:
-使用同一乾淨初始化權重、固定資料集、direct 100 epochs、相同 resolved training profile 與 seeds 42/43/44 的 12 個模型：B0-Clean；P2-Direct、PaperFormula、Lite35、Lite35-F7、Partial50、Partial25；P3-M7、Lite35、Lite35-F7、Partial50、Partial25。P3 family 一律不使用 9×9/F9 分支。
+使用同一乾淨初始化權重、固定資料集、direct 100 epochs、相同 resolved training profile 與 seeds 42/43 的 12 個模型：B0-Clean；P2-Direct、PaperFormula、Lite35、Lite35-F7、Partial50、Partial25；P3-M7、Lite35、Lite35-F7、Partial50、Partial25。P3 family 一律不使用 9×9/F9 分支。
 
 **歷史測試集（Historical Test）**:
 現有固定 test；雖然 group/hash audit 通過，但結果已被研究者反覆查看並影響後續設計，只能用於歷史對照，不可再支撐 unseen claim。

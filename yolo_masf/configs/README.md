@@ -1,6 +1,6 @@
 # 設定檔
 
-目前唯一可用於新正式結論的入口是 [`clean/clean_ablation.yaml`](clean/clean_ablation.yaml)。它鎖定官方 COCO80 `yolo11m.pt` 的 SHA-256、`artifacts/locked-bbt5-dataset/`、direct 100 epochs、seeds 42/43/44，以及 Clean B0／P2／P3 模型矩陣。
+目前唯一可用於新正式結論的入口是 [`clean/clean_ablation.yaml`](clean/clean_ablation.yaml)。它鎖定官方 COCO80 `yolo11m.pt` 的 SHA-256、`artifacts/locked-bbt5-dataset/`、direct 100 epochs、seeds 42/43，以及 Clean B0／P2／P3 模型矩陣。
 
 | 路徑 | 用途 |
 |---|---|

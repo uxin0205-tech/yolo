@@ -1,0 +1,139 @@
+{
+  "ap_l": 0.9113861386138614,
+  "ap_m": 0.7403052017196475,
+  "ap_s": 0.23714187110321536,
+  "ball_ap": 0.22280369645029235,
+  "ball_ap_s": 0.184228142715595,
+  "ball_gt_count": 414,
+  "ball_recall": 0.46618357487922707,
+  "ball_subsets": {
+    "blur_proxy": {
+      "gt_count": 0,
+      "recall": null
+    },
+    "large": {
+      "gt_count": 131,
+      "recall": 0.6183206106870229
+    },
+    "small": {
+      "gt_count": 264,
+      "recall": 0.35984848484848486
+    },
+    "tiny": {
+      "gt_count": 19,
+      "recall": 0.8947368421052632
+    }
+  },
+  "checkpoint": "/home/uxin/yolo/yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed43/weights/best.pt",
+  "checkpoint_sha256": "79b8eaea9d7e05f4b30f9eea5c920ef6f47b60f14afa3c4e9d2439c47b886778",
+  "class_diagnostics": {
+    "ball": {
+      "false_positive_count": 241,
+      "gt_count": 414,
+      "missed_count": 221,
+      "precision": 0.4447004608294931,
+      "prediction_count": 434,
+      "recall": 0.46618357487922707,
+      "subsets": {
+        "blur_proxy": {
+          "gt_count": 0,
+          "recall": null
+        },
+        "large": {
+          "gt_count": 131,
+          "recall": 0.6183206106870229
+        },
+        "small": {
+          "gt_count": 264,
+          "recall": 0.35984848484848486
+        },
+        "tiny": {
+          "gt_count": 19,
+          "recall": 0.8947368421052632
+        }
+      },
+      "true_positive_count": 193
+    },
+    "bat": {
+      "false_positive_count": 701,
+      "gt_count": 685,
+      "missed_count": 55,
+      "precision": 0.473328324567994,
+      "prediction_count": 1331,
+      "recall": 0.9197080291970803,
+      "subsets": {
+        "blur_proxy": {
+          "gt_count": 293,
+          "recall": 0.9488054607508533
+        },
+        "large": {
+          "gt_count": 622,
+          "recall": 0.9356913183279743
+        },
+        "small": {
+          "gt_count": 60,
+          "recall": 0.75
+        },
+        "tiny": {
+          "gt_count": 3,
+          "recall": 1.0
+        }
+      },
+      "true_positive_count": 630
+    }
+  },
+  "comparison_tier": "strict_fair",
+  "config_hash": "42d3d82bcbb743c98ae6add102e785e7112780944b10a27a4d0f2baf31ebf12b",
+  "dataset_hash": "6e16c975941dbae2af174a2eb4b5424bffd4736c74aad56d424805da019b8fbc",
+  "evaluation_policy": {
+    "batch": 16,
+    "conf": 0.001,
+    "evaluator": "faster-coco-eval 1.7.2",
+    "half": false,
+    "imgsz": 640,
+    "iou": 0.7,
+    "rect": true
+  },
+  "evaluator": "faster-coco-eval 1.7.2",
+  "experiment": "P2-Lite35-Clean",
+  "map50": 0.6578512380970208,
+  "map50_95": 0.45978639386979875,
+  "map75": 0.491356903923827,
+  "per_class": {
+    "ball": {
+      "ap": 0.22280369645029235,
+      "ap50": 0.4205159204974632,
+      "ap75": 0.18488516398962973,
+      "ap_l": 0.9227722772277228,
+      "ap_m": 0.7554455445544555,
+      "ap_s": 0.184228142715595,
+      "ar100": 0.27294685990338163,
+      "ar_l": 0.9666666666666666,
+      "ar_m": 0.7999999999999999,
+      "ar_s": 0.2341025641025641,
+      "gt_count": 414
+    },
+    "bat": {
+      "ap": 0.6967690912893051,
+      "ap50": 0.8951865556965786,
+      "ap75": 0.7978286438580244,
+      "ap_l": 0.9,
+      "ap_m": 0.7251648588848395,
+      "ap_s": 0.2900555994908357,
+      "ar100": 0.7331386861313869,
+      "ar_l": 0.9,
+      "ar_m": 0.7544025157232703,
+      "ar_s": 0.42826086956521736,
+      "gt_count": 685
+    }
+  },
+  "seed": 43,
+  "split": "val",
+  "ultralytics": {
+    "fitness": 0.45948225895353945,
+    "metrics/mAP50(B)": 0.6594167567149973,
+    "metrics/mAP50-95(B)": 0.45948225895353945,
+    "metrics/precision(B)": 0.9049774978398339,
+    "metrics/recall(B)": 0.6227218439315495
+  }
+}

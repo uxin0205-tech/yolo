@@ -15,11 +15,11 @@ from faster_coco_eval import COCO, COCOeval_faster
 
 from masf_yolo.artifacts.io import atomic_write_json
 
+from .galleries import write_false_positive_gallery
 from .metrics import (
     summarize_class_diagnostics,
     translate_predictions_to_letterbox,
 )
-from .galleries import write_false_positive_gallery
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -144,8 +144,12 @@ def run_variant_evaluation(
 ) -> dict[str, Any]:
     from ultralytics import YOLO
 
+    checkpoint = checkpoint.resolve()
+    data_yaml = data_yaml.resolve()
+    coco_path = coco_path.resolve()
+    output_dir = output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
-    model = YOLO(str(checkpoint), task="detect")
+    model = YOLO(str(checkpoint), task="detect", verbose=False)
     ultralytics_metrics = model.val(
         data=str(data_yaml),
         split=split,
@@ -155,6 +159,14 @@ def run_variant_evaluation(
         name=output_dir.name,
         exist_ok=True,
         plots=False,
+        imgsz=640,
+        batch=16,
+        workers=8,
+        conf=0.001,
+        iou=0.7,
+        rect=True,
+        half=False,
+        verbose=False,
     )
     prediction_path = Path(ultralytics_metrics.save_dir) / "predictions.json"
     raw_predictions = json.loads(prediction_path.read_text(encoding="utf-8"))

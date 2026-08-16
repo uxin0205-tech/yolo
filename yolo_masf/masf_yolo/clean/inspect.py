@@ -68,7 +68,9 @@ def inspect_clean_study(config_path: Path) -> dict:
             ],
             "shared_schedule": {
                 key: value for key, value in clean_profile(
-                    "B0-Clean", seed=42, model="<model>", data="<train-val-only>", project="<project>"
+                    "B0-Clean", seed=42, model="<model>", data="<train-val-only>",
+                    project="<project>",
+                    patience=config.values["training"]["early_stopping_patience"],
                 ).items() if key not in {"model", "name", "project"}
             },
             "optimization_control_is_ranked_separately": True,

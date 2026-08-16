@@ -17,7 +17,7 @@ dataset:
     val: selection_only
     test: historical_already_observed
     final_holdout: null
-seeds: [42, 43, 44]
+seeds: [42, 43]
 experiments:
   - B0-Clean
   - P2-Direct-Clean
@@ -43,7 +43,8 @@ training:
   amp: true
   nbs: 64
   direct_epochs: 100
-  direct_lr0: 0.001
+  early_stopping_patience: 30
+  direct_lr0: 0.01
   control_head_epochs: 20
   control_head_lr0: 0.01
   control_full_epochs: 80

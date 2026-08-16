@@ -4,18 +4,17 @@ import pytest
 import yaml
 
 from masf_yolo.clean.contracts import CLEAN_EXPERIMENTS, load_clean_config
-from masf_yolo.clean.data_view import write_train_val_view
+from masf_yolo.clean.data_view import write_evaluation_view, write_train_val_view
 from masf_yolo.clean.plan import build_clean_plan
 from masf_yolo.clean.profiles import clean_profile
 from masf_yolo.models.builder import build_p3_model
-
 
 CONFIG = Path(__file__).parents[2] / "configs" / "clean" / "clean_ablation.yaml"
 
 
 def test_clean_config_locks_initializer_visibility_matrix_and_seeds():
     config = load_clean_config(CONFIG)
-    assert config.values["seeds"] == [42, 43, 44]
+    assert config.values["seeds"] == [42, 43]
     assert config.values["environment"]["ultralytics"] == "8.4.90"
     assert list(CLEAN_EXPERIMENTS) == config.values["experiments"]
     assert config.values["dataset"]["visibility"]["test"] == "historical_already_observed"
@@ -34,18 +33,38 @@ def test_strict_fair_profiles_have_identical_training_settings():
     reference = {key: value for key, value in profiles[0].items() if key not in ignored}
     assert all({key: value for key, value in profile.items() if key not in ignored} == reference for profile in profiles[1:])
     assert reference["epochs"] == 100
+    assert reference["lr0"] == 0.01
     assert reference["freeze"] is None
+    assert reference["patience"] == 30
+    assert reference["pretrained"] is False
+
+
+def test_smoke_profile_is_three_epochs_and_cannot_run_control():
+    profile = clean_profile(
+        "B0-Clean", seed=42, model="model", data="data", project="project", stage="smoke"
+    )
+    assert profile["epochs"] == 3
+    assert profile["name"].endswith("-smoke")
+    assert profile["patience"] == 30
+    with pytest.raises(ValueError, match="strict-fair"):
+        clean_profile(
+            "P2-Control-Clean-Head",
+            seed=42,
+            model="model",
+            data="data",
+            project="project",
+            stage="smoke",
+        )
 
 
 def test_clean_plan_is_prepared_only_and_preserves_control_dependency():
     plan = build_clean_plan(load_clean_config(CONFIG))
-    assert len(plan) == 42
+    assert len(plan) == 28
     assert {job["status"] for job in plan} == {"prepared_not_queued"}
     full = [job for job in plan if job["experiment"] == "P2-Control-Clean-Full"]
     assert [job["depends_on"] for job in full] == [
         "P2-Control-Clean-Head:seed42",
         "P2-Control-Clean-Head:seed43",
-        "P2-Control-Clean-Head:seed44",
     ]
 
 
@@ -62,6 +81,19 @@ def test_clean_p3_matrix_forbids_f9_and_factorized_f7_is_real():
     assert hasattr(paper.model[16][1], "post_fuse")
 
 
+def test_evaluation_view_relocates_and_preserves_all_locked_splits(tmp_path):
+    source = tmp_path / "locked.yaml"
+    source.write_text(yaml.safe_dump({
+        "path": "/stale", "train": "train.txt", "val": "val.txt",
+        "test": "test.txt", "nc": 2, "names": ["ball", "bat"],
+    }), encoding="utf-8")
+    output = tmp_path / "evaluation.yaml"
+    view = write_evaluation_view(source, output)
+    assert view["path"] == str(tmp_path.resolve())
+    assert (view["train"], view["val"], view["test"]) == (
+        "train.txt", "val.txt", "test.txt")
+
+
 def test_train_val_view_physically_omits_historical_test(tmp_path):
     source = tmp_path / "locked.yaml"
     source.write_text(yaml.safe_dump({
@@ -71,4 +103,5 @@ def test_train_val_view_physically_omits_historical_test(tmp_path):
     output = tmp_path / "clean" / "train_val.yaml"
     view = write_train_val_view(source, output)
     assert "test" not in view
+    assert view["path"] == str(tmp_path.resolve())
     assert "test" not in yaml.safe_load(output.read_text(encoding="utf-8"))

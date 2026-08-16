@@ -2,7 +2,7 @@
 
 ## Strict-fair
 
-12 個模型均由同一 clean initializer 開始，使用相同 direct full-model 100 epochs、資料、augmentation、optimizer 與 seeds 42/43/44。模型清單與唯一差異以 [`../../codex_plan.md`](../../codex_plan.md) 為準。
+12 個模型均由同一 clean initializer 開始，使用相同 direct full-model 最多 100 epochs、`patience=30` early stopping、資料、augmentation、optimizer 與 seeds 42/43。模型清單與唯一差異以 [`../../codex_plan.md`](../../codex_plan.md) 為準。
 
 - B0：三尺度基準。
 - P2：Direct 加上 PaperFormula、Lite35、Lite35-F7、Partial50、Partial25。

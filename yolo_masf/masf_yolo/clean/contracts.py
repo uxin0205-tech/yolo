@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 import yaml
 
@@ -72,7 +73,7 @@ class CleanStudyConfig:
     root: Path
 
     @classmethod
-    def from_mapping(cls, raw: Mapping[str, Any], *, root: Path) -> "CleanStudyConfig":
+    def from_mapping(cls, raw: Mapping[str, Any], *, root: Path) -> CleanStudyConfig:
         values = deepcopy(dict(raw))
         if values.get("schema_version") != 1 or values.get("study_name") != "clean-bbt5-ablation":
             raise ValueError("invalid clean study identity")
@@ -91,15 +92,15 @@ class CleanStudyConfig:
             raise ValueError("the existing test split must be labelled historical")
         if visibility.get("final_holdout") is not None:
             raise ValueError("final_holdout must remain null until genuinely new data is registered")
-        if tuple(values.get("seeds", ())) != (42, 43, 44):
-            raise ValueError("clean study requires seeds 42, 43, and 44")
+        if tuple(values.get("seeds", ())) != (42, 43):
+            raise ValueError("clean study requires seeds 42 and 43")
         if tuple(values.get("experiments", ())) != tuple(CLEAN_EXPERIMENTS):
             raise ValueError("clean experiment order does not match the locked matrix")
         training = values.get("training", {})
         expected = {
             "imgsz": 640, "batch": 16, "optimizer": "SGD", "momentum": 0.937,
             "cos_lr": True, "deterministic": True, "amp": True, "nbs": 64,
-            "direct_epochs": 100, "direct_lr0": 0.001,
+            "direct_epochs": 100, "early_stopping_patience": 30, "direct_lr0": 0.01,
             "control_head_epochs": 20, "control_head_lr0": 0.01,
             "control_full_epochs": 80, "control_full_lr0": 0.001,
         }

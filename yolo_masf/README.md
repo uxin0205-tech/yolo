@@ -8,8 +8,9 @@
 
 - 官方 clean initializer 已與 Ultralytics v8.3.0 release 比對，SHA-256 為 `d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95`。
 - Locked BBT5 dataset audit 已搬到 [`artifacts/locked-bbt5-dataset/`](artifacts/locked-bbt5-dataset/)。
-- Clean 模型、transfer、資料可見性與 multi-seed plan 已通過 CPU 驗證。
-- 尚未啟動 GPU、尚未產生任何 Clean 正式結果。
+- 40/40 GPU jobs 已完成：12 smoke、24 strict-fair formal、4 optimization control，錯誤為零。
+- 28/28 正式 checkpoint 已通過 SHA/lineage/resolved args 與 fresh-process reload 稽核；validation/test 各 28 組與 14 組硬體 profile 均已完成。
+- Validation selection freeze 選出 `B0-Clean`（mAP50–95 `0.46070 ± 0.01995`）；完整比較見 [`clean_bbt5_study/results/REPORT.md`](clean_bbt5_study/results/REPORT.md)。
 - 現有 test 已被過去研究反覆查看，只能作 historical report；真正 unseen claim 仍需新 final holdout。
 
 ## 從這裡開始
@@ -22,6 +23,9 @@
 | Locked split 與 leakage audit | [`artifacts/locked-bbt5-dataset/README.md`](artifacts/locked-bbt5-dataset/README.md) |
 | BBT5 baseline 資料夾 | [`bbt5-detect-baseline/README.md`](bbt5-detect-baseline/README.md) |
 | Clean module 結構 | [`masf_yolo/clean/README.md`](masf_yolo/clean/README.md) |
+| 正式中文報告 | [`clean_bbt5_study/results/REPORT.md`](clean_bbt5_study/results/REPORT.md) |
+| 兩 seed mean/std 總表 | [`clean_bbt5_study/results/comparison_mean_std.csv`](clean_bbt5_study/results/comparison_mean_std.csv) |
+| 逐實驗說明與結果 | [`clean_bbt5_study/results/experiments/`](clean_bbt5_study/results/experiments/) |
 | GPU 啟動前清單 | [`GPU_TEST_PLAN.md`](GPU_TEST_PLAN.md) |
 
 ## 主要結構
@@ -30,10 +34,11 @@
 yolo_masf/
 ├── bbt5-detect-baseline/          # 完整保留的 BBT5 detection view 與舊權重
 ├── artifacts/locked-bbt5-dataset # 固定 split、COCO JSON、manifest、audit
+├── artifacts/clean-bbt5-ablation # checkpoints、metrics、predictions、profiles、selection
 ├── configs/clean/                 # Clean 唯一有效正式設定與 feasibility
-├── masf_yolo/clean/               # Clean builder、contract、plan、worker
+├── masf_yolo/clean/               # builder、queue、audit、evaluation、report pipeline
 ├── masf_yolo/models/              # P2/P3/MFAM/SP2 架構實作
-├── clean_bbt5_study/              # 新實驗的文件與未來結果入口
+├── clean_bbt5_study/              # 中文報告、CSV 與逐實驗結果入口
 └── tests/                         # CPU 契約與模型測試
 ```
 

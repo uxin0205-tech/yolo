@@ -20,13 +20,13 @@
 bbt5-detect-baseline/dataset（只讀、完整保留）
   → artifacts/locked-bbt5-dataset（固定 train/val/historical test）
   → 官方 COCO80 yolo11m.pt clean initializer
-  → 12 個 strict-fair 架構 × 3 seeds
+  → 12 個 strict-fair 架構 × 2 seeds
   → validation-only selection freeze
   → historical test 報告
   → 未來新 final holdout（只評估一次）
 ```
 
-P3 family 一律不含 9×9/F9。完整 PaperFormula 的 F9 只存在於 P2 對照。所有 strict-fair 模型均使用相同 direct full-model 100 epochs 設定；P2 head20+full80 只列為最佳化控制，不與 strict tier 混排。
+P3 family 一律不含 9×9/F9。完整 PaperFormula 的 F9 只存在於 P2 對照。所有 strict-fair 模型均使用相同 direct full-model 最多 100 epochs 與 `patience=30` early stopping；P2 head20+full80 只列為最佳化控制，不與 strict tier 混排。
 
 ## 主要入口
 

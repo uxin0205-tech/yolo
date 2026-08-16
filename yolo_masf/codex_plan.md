@@ -1,6 +1,6 @@
 # BBT5 Clean 完整公平實驗計畫
 
-更新日期：2026-08-14。這是目前唯一有效的正式實驗計畫；尚未啟動 GPU。
+更新日期：2026-08-16。主流程 40/40 GPU jobs 與完整後處理均已完成；Selective P2 延伸與新 final holdout 尚未執行。
 
 ## 1. 固定輸入與資料規則
 
@@ -13,7 +13,9 @@
 
 ## 2. 嚴格公平組
 
-以下 12 個模型全部使用相同 direct full-model 100 epochs、imgsz 640、batch 16、SGD、momentum 0.937、cosine LR、`lr0=0.001`、AMP、Ultralytics 8.4.90 與 seeds 42/43/44。
+以下 12 個模型全部使用相同 direct full-model 最多 100 epochs、early stopping `patience=30`、imgsz 640、batch 16、SGD、momentum 0.937、cosine LR、`lr0=0.01`、AMP、Ultralytics 8.4.90 與 seeds 42/43。模型由 repo 明確完成官方 COCO80 權重轉移，因此 trainer 的 `pretrained` 設為 `false`，避免第二次隱式載入權重。
+
+執行中加入 early stopping 時，前五個 formal jobs 已用 `patience=100` 啟動，其餘 23 個使用 `patience=30`。曲線回放顯示前五組的 best checkpoint 不變，但這仍是 protocol amendment，正式報告已明確揭露。
 
 | ID | 實驗 | 唯一架構差異 |
 |---:|---|---|
@@ -43,21 +45,21 @@ P3 全部禁止 9×9；只有忠實測試完整公式的 P2 C02 保留 F9。
 - C13 `SP2-Clean`：Ball-only hidden=32 P2 head，Bat 保持 P3/P4/P5。
 - C14 `SP2P-Clean`：只使用 validation mean 選出的 P2 partial 配方。
 - 只有主矩陣 selection freeze 後才建立 C14；不得看 historical test 決定 partial ratio。
-- Selective 組同樣跑 seeds 42/43/44，但單獨報告，不混入 strict-fair 排名。
+- Selective 組同樣跑 seeds 42/43，但單獨報告，不混入 strict-fair 排名。
 
 ## 5. 執行順序
 
 1. CPU：config/hash、12 模型 build、tensor transfer、forward/backward、stride、P3 無 F9、train/val-only YAML。
 2. GPU acceptance：每個 unique graph 做 640 AMP forward/backward、optimizer step、peak memory 與 strict reload。
 3. Smoke：12 個嚴格公平模型各用 seed 42 跑 3 epochs；只判斷工程穩定，不列結果。
-4. Formal strict：12 模型 × 3 seeds，共 36 個 100-epoch runs。
-5. P2 control：Head/Full × 3 seeds，共 6 個 stages。
+4. Formal strict：12 模型 × 2 seeds，共 24 個 100-epoch runs。
+5. P2 control：Head/Full × 2 seeds，共 4 個 stages。
 6. 只用 validation 產生 mean±std、排名與 selection freeze。
-7. Selective P2：若 gate 通過，再跑 SP2/SP2P × 3 seeds，共最多 6 runs。
+7. Selective P2：若 gate 通過，再跑 SP2/SP2P × 2 seeds，共最多 4 runs。
 8. Selection 全部凍結後，才允許產生 historical-test report。
 9. 取得新影片／比賽／攝影機後，建立 final holdout 並只評估一次。
 
-主流程為 12 smoke + 36 strict formal + 6 control stages = 54 個 GPU jobs；Selective 延伸最多再加 6 個。所有工作由單一 GPU queue 線性執行。
+主流程為 12 smoke + 24 strict formal + 4 control stages = 40 個 GPU jobs；Selective 延伸最多再加 4 個。所有工作由單一 GPU queue 線性執行。
 
 ## 6. 統一指標
 
@@ -65,7 +67,7 @@ P3 全部禁止 9×9；只有忠實測試完整公式的 P2 C02 保留 F9。
 - AP_S、AP_M、AP_L。
 - Ball/Bat AP、Ball AP_S、precision、recall、FP、missed。
 - Params、GFLOPs、peak memory、FP16 batch-1 latency mean/P50/P95。
-- 每個正式最終模型報告三 seeds mean ± std，另保留逐 seed 原值。
+- 每個正式最終模型報告兩 seeds mean、std 與逐 seed 原值；兩 seeds 的 variance 證據有限，報告不得過度解讀小幅差異。
 - 保存 initializer/config/dataset/checkpoint SHA-256、resolved profile、transfer report 與 lineage。
 
 ## 7. Selection 與宣稱規則
@@ -82,7 +84,8 @@ P3 全部禁止 9×9；只有忠實測試完整公式的 P2 C02 保留 F9。
 - [x] Locked dataset evidence 搬至中立路徑。
 - [x] 官方 clean initializer provenance/hash 驗證。
 - [x] Clean contract、builder、worker、資料可見性與 CPU feasibility。
-- [ ] 擴充矩陣的最終 CPU inspect 與 GPU acceptance。
-- [ ] 建立單一可續跑 GPU queue。
-- [ ] Smoke、formal、selection、historical report。
+- [x] 擴充矩陣的最終 CPU inspect 與 GPU acceptance。
+- [x] 建立單一可續跑 GPU queue。
+- [x] Smoke 12/12、formal/control 28/28、validation/test 各 28、profiles 14/14、selection freeze 與中文報告。
+- [ ] Selective P2 延伸 SP2/SP2P（主矩陣完成後的獨立研究，不含在本輪 40 jobs）。
 - [ ] 新 final holdout。

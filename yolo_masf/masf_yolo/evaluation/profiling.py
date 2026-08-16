@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 
 import torch
 from torch import Tensor, nn
@@ -108,13 +108,17 @@ def profile_module(module: nn.Module, sample: Tensor) -> HardwareProfile:
 
     model_layers = getattr(module, "model", None)
     if model_layers is not None and len(model_layers):
+        detect = model_layers[-1]
+        strides = getattr(detect, "stride", None)
+        has_p2 = isinstance(strides, Tensor) and strides.numel() > 0 and float(strides[0]) == 4.0
         def detect_pre_hook(_detect: nn.Module, args: tuple[object, ...]) -> None:
             nonlocal p2_activation
             features = args[0]
             if isinstance(features, list) and features and isinstance(features[0], Tensor):
                 p2_activation = _bytes(features[0])
 
-        handles.append(model_layers[-1].register_forward_pre_hook(detect_pre_hook))
+        if has_p2:
+            handles.append(detect.register_forward_pre_hook(detect_pre_hook))
 
     was_training = module.training
     module.eval()

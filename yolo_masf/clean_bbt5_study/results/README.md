@@ -1,13 +1,13 @@
-# 結果
+# Clean BBT5 結果
 
-目前沒有 Clean GPU 正式結果。本目錄不得預填舊 data-exposed 數值。
+完整訓練、統一評估、selection freeze、historical test 與硬體量測均已完成。
 
-GPU 完成後，每個實驗應保存：
+- 正式中文報告：[REPORT.md](REPORT.md)
+- 逐 seed 指標：[per_seed_metrics.csv](per_seed_metrics.csv)
+- Mean/std 總表：[comparison_mean_std.csv](comparison_mean_std.csv)
+- 硬體資料：[hardware_profiles.csv](hardware_profiles.csv)
+- 最終一致性稽核：[final_audit.json](../../artifacts/clean-bbt5-ablation/final_audit.json)
+- 正式 run 稽核：[formal_run_audit.csv](formal_run_audit.csv)
+- 各實驗說明與結果：[experiments/](experiments/)
 
-- 三個 seeds 的 resolved config、initializer/dataset/checkpoint hashes。
-- validation 與 historical-test COCO 指標、AP_S/AP_M/AP_L、Ball/Bat 指標。
-- Params、GFLOPs、peak memory、FP16 latency。
-- 逐 seed 原值與 mean ± std。
-- checkpoint lineage、selection freeze、strict reload 與 final audit。
-
-預計以 `results/experiments/<experiment>/<seed>/` 保存逐 run 證據，根層再生成 comparison CSV 與中文報告；只有真實完成的輸出才能建立。
+Historical test 已被過去研究查看，不可用於 unseen claim；selection 由 validation 先行凍結。

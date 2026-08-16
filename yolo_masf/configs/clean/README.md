@@ -13,16 +13,18 @@
 
 ## 矩陣
 
-- Strict fair：B0、P2 baseline、P2 五種、P3 五種，共 12 模型 × seeds 42/43/44。
+- Strict fair：B0、P2 baseline、P2 五種、P3 五種，共 12 模型 × seeds 42/43。
 - P3 禁止 9×9；P3-M7 單 fusion 與 P3-Lite35-F7 雙 fusion 分開。
-- Optimization control：P2 head20 + full80，共 3 seeds。
+- Optimization control：P2 head20 + full80，共 2 seeds。
 - Selective extension：SP2/SP2P 僅在 validation freeze 後執行。
 - 完整規格見 [`../../codex_plan.md`](../../codex_plan.md)。
 
-## CPU 證據與狀態
+## 證據與完成狀態
 
 - 設定：[`clean_ablation.yaml`](clean_ablation.yaml)
 - Feasibility：[`FEASIBILITY.json`](FEASIBILITY.json)
-- 狀態：尚未啟動 GPU；正式結果為空。
+- GPU jobs：40/40 完成；28 個 formal/control checkpoints 完整。
+- 統一後處理：validation 28/28、historical test 28/28、hardware profiles 14/14。
+- 報告：[`../../clean_bbt5_study/results/REPORT.md`](../../clean_bbt5_study/results/REPORT.md)。
 
-CPU inspect 會驗證 initializer/environment/dataset contract、每個 unique architecture 的 stride、參數與逐 tensor transfer disposition，並輸出 42 個 formal/control jobs 為 `prepared_not_queued`。12 個 smoke jobs 只在 GPU acceptance 通過後建立，仍計入完整主流程的 54 jobs，但不列入正式結果。
+CPU inspect 驗證 initializer/environment/dataset contract、每個 unique architecture 的 stride、參數與逐 tensor transfer disposition。12 個 smoke jobs 只作工程 gate，不列入正式結果；selection 只讀 validation，historical test 在 freeze 後才執行。

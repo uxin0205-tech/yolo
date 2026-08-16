@@ -1,0 +1,139 @@
+{
+  "ap_l": 0.8736195048076236,
+  "ap_m": 0.7565651726323886,
+  "ap_s": 0.39836840884054736,
+  "ball_ap": 0.33419499270200825,
+  "ball_ap_s": 0.30178487521104214,
+  "ball_gt_count": 414,
+  "ball_recall": 0.8502415458937198,
+  "ball_subsets": {
+    "blur_proxy": {
+      "gt_count": 0,
+      "recall": null
+    },
+    "large": {
+      "gt_count": 131,
+      "recall": 0.6793893129770993
+    },
+    "small": {
+      "gt_count": 264,
+      "recall": 0.9356060606060606
+    },
+    "tiny": {
+      "gt_count": 19,
+      "recall": 0.8421052631578947
+    }
+  },
+  "checkpoint": "/home/uxin/yolo/yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed42/weights/best.pt",
+  "checkpoint_sha256": "4744ce87fc8f44ab896271c129df252548ca353ff8adb834cd16e20a83cd1f4d",
+  "class_diagnostics": {
+    "ball": {
+      "false_positive_count": 1110,
+      "gt_count": 414,
+      "missed_count": 62,
+      "precision": 0.24076607387140903,
+      "prediction_count": 1462,
+      "recall": 0.8502415458937198,
+      "subsets": {
+        "blur_proxy": {
+          "gt_count": 0,
+          "recall": null
+        },
+        "large": {
+          "gt_count": 131,
+          "recall": 0.6793893129770993
+        },
+        "small": {
+          "gt_count": 264,
+          "recall": 0.9356060606060606
+        },
+        "tiny": {
+          "gt_count": 19,
+          "recall": 0.8421052631578947
+        }
+      },
+      "true_positive_count": 352
+    },
+    "bat": {
+      "false_positive_count": 1074,
+      "gt_count": 685,
+      "missed_count": 57,
+      "precision": 0.3689776733254994,
+      "prediction_count": 1702,
+      "recall": 0.9167883211678832,
+      "subsets": {
+        "blur_proxy": {
+          "gt_count": 293,
+          "recall": 0.9180887372013652
+        },
+        "large": {
+          "gt_count": 622,
+          "recall": 0.9292604501607717
+        },
+        "small": {
+          "gt_count": 60,
+          "recall": 0.7833333333333333
+        },
+        "tiny": {
+          "gt_count": 3,
+          "recall": 1.0
+        }
+      },
+      "true_positive_count": 628
+    }
+  },
+  "comparison_tier": "optimization_control",
+  "config_hash": "42d3d82bcbb743c98ae6add102e785e7112780944b10a27a4d0f2baf31ebf12b",
+  "dataset_hash": "6e16c975941dbae2af174a2eb4b5424bffd4736c74aad56d424805da019b8fbc",
+  "evaluation_policy": {
+    "batch": 16,
+    "conf": 0.001,
+    "evaluator": "faster-coco-eval 1.7.2",
+    "half": false,
+    "imgsz": 640,
+    "iou": 0.7,
+    "rect": true
+  },
+  "evaluator": "faster-coco-eval 1.7.2",
+  "experiment": "P2-Control-Clean-Full",
+  "map50": 0.8134404238332498,
+  "map50_95": 0.5202864553331609,
+  "map75": 0.4990416127246238,
+  "per_class": {
+    "ball": {
+      "ap": 0.33419499270200825,
+      "ap50": 0.7310852045849497,
+      "ap75": 0.18162524091527318,
+      "ap_l": 0.9472390096152473,
+      "ap_m": 0.7884488448844884,
+      "ap_s": 0.30178487521104214,
+      "ar100": 0.45845410628019323,
+      "ar_l": 0.9800000000000001,
+      "ar_m": 0.8333333333333333,
+      "ar_s": 0.4297435897435897,
+      "gt_count": 414
+    },
+    "bat": {
+      "ap": 0.7063779179643133,
+      "ap50": 0.89579564308155,
+      "ap75": 0.8164579845339742,
+      "ap_l": 0.8,
+      "ap_m": 0.7246815003802887,
+      "ap_s": 0.49495194247005253,
+      "ar100": 0.744087591240876,
+      "ar_l": 0.8,
+      "ar_m": 0.7573899371069183,
+      "ar_s": 0.5565217391304348,
+      "gt_count": 685
+    }
+  },
+  "seed": 42,
+  "split": "val",
+  "ultralytics": {
+    "fitness": 0.5204871959564927,
+    "metrics/mAP50(B)": 0.8165892459656505,
+    "metrics/mAP50-95(B)": 0.5204871959564927,
+    "metrics/precision(B)": 0.8777018626079336,
+    "metrics/recall(B)": 0.7906201870184213
+  }
+}
