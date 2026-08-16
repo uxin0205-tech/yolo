@@ -14,7 +14,7 @@ production package 位於 `src/yolo_attention/`。外部主要 interface：
 | `binary_basis.py` | sign/STE、Hadamard、T5、XNOR-popcount |
 | `relative_bias.py` | none/dense/decomposed bias |
 | `normalization.py` | N0 normalization factory、N1 PMP、Optional integer LUT |
-| `bdcn.py` | distance bucket、共享/學習 codebook、PoT projection、R0/R1/R2 與 fused bucket-PV |
+| `bdcn.py` | distance bucket、fixed/unbounded/anchored monotonic codebook、PoT projection、R0/R1/R2 與 fused bucket-PV |
 | `quantization.py` | U8/S8 fake quant |
 | `attention.py` | 保留 official PV+PE(V)+projection |
 | `integration.py` | 兩個 Attention 的 YOLO conversion、D1→D2/R trained-bank state transfer、trainable scope |

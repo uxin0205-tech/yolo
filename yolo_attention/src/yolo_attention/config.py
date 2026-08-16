@@ -37,6 +37,7 @@ class ScaleMode(StringEnum):
 class BDCNCodebookKind(StringEnum):
     FIXED_EXP = "fixed_exp"
     LEARNED = "learned"
+    LEARNED_ANCHORED = "learned_anchored"
 
 
 class BDCNSharing(StringEnum):
@@ -105,6 +106,7 @@ class VariantConfig:
     bdcn_levels: int = 16
     bdcn_step: float = 0.125
     bdcn_distance_max: float | None = None
+    bdcn_log_ratio_bound: float | None = None
     bdcn_fused_value: bool = True
     bdcn_reciprocal_newton_steps: int = 0
     p_bits: int | None = None
@@ -180,11 +182,17 @@ class VariantConfig:
                 and self.bdcn_denominator is not BDCNDenominator.RECIPROCAL_LUT
             ):
                 raise ValueError("BDCN reciprocal Newton refinement requires reciprocal LUT denominator")
+            if self.bdcn_codebook is BDCNCodebookKind.LEARNED_ANCHORED:
+                if self.bdcn_log_ratio_bound is None or self.bdcn_log_ratio_bound <= 0:
+                    raise ValueError("anchored BDCN requires a positive log-ratio bound")
+            elif self.bdcn_log_ratio_bound is not None:
+                raise ValueError("BDCN log-ratio bound only applies to an anchored learned codebook")
         elif (
             any(value is not None for value in bdcn_values)
             or self.bdcn_levels != 16
             or self.bdcn_step != 0.125
             or self.bdcn_distance_max is not None
+            or self.bdcn_log_ratio_bound is not None
             or self.bdcn_reciprocal_newton_steps != 0
         ):
             raise ValueError("BDCN options only apply to BDCN normalization")

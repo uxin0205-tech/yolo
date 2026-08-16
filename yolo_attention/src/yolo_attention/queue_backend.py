@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import csv
 import json
 from collections.abc import Callable
 from dataclasses import replace
@@ -41,6 +42,27 @@ class EvaluationBackend(Protocol):
 
 
 TrainingLauncher = Callable[[object], object]
+def completed_training_checkpoint(run_dir: Path, expected_epochs: int) -> Path | None:
+    """Return best.pt only when immutable Ultralytics outputs prove training completed."""
+
+    weights = run_dir / "ultralytics" / "weights"
+    best = weights / "best.pt"
+    last = weights / "last.pt"
+    results = run_dir / "ultralytics" / "results.csv"
+    if not (best.is_file() and last.is_file() and results.is_file()):
+        return None
+    with results.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    if not rows or "epoch" not in rows[-1]:
+        return None
+    try:
+        completed_epochs = int(float(rows[-1]["epoch"]))
+    except (TypeError, ValueError):
+        return None
+    return best.resolve() if completed_epochs >= expected_epochs else None
+
+
+
 P0Runner = Callable[[QueueJob, Path], QueueResult]
 P0_REQUIRED_PATHS = (
     "model.10.m.0.attn",
@@ -136,11 +158,16 @@ class ResearchQueueBackend:
             run_id=job.id,
             project_root=self.project_root,
         )
-        launcher = self._training_launcher or launch_training
-        launcher(request)
-        best = self.runs_root / job.id / "ultralytics" / "weights" / "best.pt"
-        if not best.is_file():
-            raise FileNotFoundError(f"training did not produce best checkpoint: {best}")
+        run_dir = self.runs_root / job.id
+        best = completed_training_checkpoint(run_dir, recipe.epochs)
+        if best is None:
+            launcher = self._training_launcher or launch_training
+            launcher(request)
+            best = completed_training_checkpoint(run_dir, recipe.epochs)
+        if best is None:
+            raise FileNotFoundError(
+                f"training did not produce complete best/last/results artifacts in {run_dir}"
+            )
         # The checkpoint already contains the converted attention modules and
         # trained parameters, so evaluating it must not convert a second time.
         evaluation_request = self._request(job, checkpoint=best)

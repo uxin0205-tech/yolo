@@ -76,6 +76,27 @@ def test_bdcn_distance_range_derives_uniform_bucket_step_and_round_trips(tmp_pat
     assert VariantConfig.from_yaml(config.to_yaml(tmp_path / "range.yaml")) == config
 
 
+def test_anchored_bdcn_requires_an_explicit_positive_log_ratio_bound() -> None:
+    common = {
+        "name": "anchored",
+        "normalization": NormalizationKind.BDCN,
+        "bdcn_codebook": BDCNCodebookKind.LEARNED_ANCHORED,
+        "bdcn_sharing": BDCNSharing.GLOBAL,
+        "bdcn_projection": BDCNProjection.FLOAT,
+        "bdcn_denominator": BDCNDenominator.EXACT,
+        "bdcn_levels": 64,
+        "bdcn_distance_max": 8.0,
+    }
+
+    with pytest.raises(ValueError, match="log-ratio bound"):
+        VariantConfig(**common)
+    with pytest.raises(ValueError, match="log-ratio bound"):
+        VariantConfig(**common, bdcn_log_ratio_bound=0.0)
+
+    config = VariantConfig(**common, bdcn_log_ratio_bound=0.01)
+    assert config.resolved_bdcn_step == pytest.approx(8.0 / 63.0)
+
+
 def test_registry_encodes_the_approved_funnel() -> None:
     registry = ExperimentRegistry.default()
 

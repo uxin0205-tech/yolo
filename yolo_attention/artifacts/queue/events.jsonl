@@ -362,3 +362,22 @@
 {"at": "2026-08-15T02:01:51.034338+00:00", "details": {"attempt": 1}, "event": "running", "job_id": "a-final"}
 {"at": "2026-08-15T02:02:07.489794+00:00", "details": {}, "event": "succeeded", "job_id": "a-final"}
 {"at": "2026-08-15T09:06:13.894456+00:00", "details": {}, "event": "bdcn_v2_appended", "job_id": null}
+{"at": "2026-08-15T14:13:11.560937+00:00", "details": {}, "event": "queued", "job_id": "bdcn-v2-learn"}
+{"at": "2026-08-15T14:13:11.568859+00:00", "details": {"attempt": 1}, "event": "running", "job_id": "bdcn-v2-learn"}
+{"at": "2026-08-15T16:44:51.094933+00:00", "details": {"reason": "Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!"}, "event": "failed", "job_id": "bdcn-v2-learn"}
+{"at": "2026-08-15T17:49:15.515780+00:00", "details": {"attempts": 1}, "event": "retried", "job_id": "bdcn-v2-learn"}
+{"at": "2026-08-15T17:49:27.737203+00:00", "details": {"attempt": 2}, "event": "running", "job_id": "bdcn-v2-learn"}
+{"at": "2026-08-15T17:49:50.272048+00:00", "details": {}, "event": "succeeded", "job_id": "bdcn-v2-learn"}
+{"at": "2026-08-15T17:49:50.281324+00:00", "details": {}, "event": "queued", "job_id": "bdcn-v2-r1"}
+{"at": "2026-08-15T17:49:50.290370+00:00", "details": {"attempt": 1}, "event": "running", "job_id": "bdcn-v2-r1"}
+{"at": "2026-08-15T17:50:11.687454+00:00", "details": {}, "event": "succeeded", "job_id": "bdcn-v2-r1"}
+{"at": "2026-08-15T17:50:41.089253+00:00", "details": {}, "event": "bdcn_v3_appended", "job_id": null}
+{"at": "2026-08-15T17:50:41.799643+00:00", "details": {}, "event": "queued", "job_id": "bdcn-v3-fixed"}
+{"at": "2026-08-15T17:50:41.809357+00:00", "details": {"attempt": 1}, "event": "running", "job_id": "bdcn-v3-fixed"}
+{"at": "2026-08-15T17:51:04.035049+00:00", "details": {}, "event": "succeeded", "job_id": "bdcn-v3-fixed"}
+{"at": "2026-08-15T17:51:04.044975+00:00", "details": {}, "event": "queued", "job_id": "bdcn-v3-learn"}
+{"at": "2026-08-15T17:51:04.054138+00:00", "details": {"attempt": 1}, "event": "running", "job_id": "bdcn-v3-learn"}
+{"at": "2026-08-15T19:07:45.186160+00:00", "details": {}, "event": "succeeded", "job_id": "bdcn-v3-learn"}
+{"at": "2026-08-15T19:07:45.196229+00:00", "details": {}, "event": "queued", "job_id": "bdcn-v3-r1"}
+{"at": "2026-08-15T19:07:45.204788+00:00", "details": {"attempt": 1}, "event": "running", "job_id": "bdcn-v3-r1"}
+{"at": "2026-08-15T19:08:06.695088+00:00", "details": {}, "event": "succeeded", "job_id": "bdcn-v3-r1"}

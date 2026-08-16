@@ -17,6 +17,8 @@ configs/
 
 `bdcn-codebook.yaml` 是 D1 三個候選共用的完整 10-epoch codebook-only schedule。`bdcn-codebook-seed1.yaml` 只在排名落入 tie band 時，讓 winner 從共同 D0 parent 用 seed 1 再完整跑 10 epochs；兩者都只解凍 `BDCNCodebookBank`。`bdcn-d1-pattn.yaml`／`phead.yaml` 比較共享粒度；`bdcn-d2-1p.yaml`／`2p.yaml` 比較 codebook 投影；`bdcn-r0-div.yaml`、`r1-rlut.yaml`、`r2-pshift.yaml` 比較 denominator。這些模板目前以 Identity 為可執行 reference；正式 run 必須從實際 A0 複製其 basis、bias 與 scale，不得偷換 parent。
 
+`bdcn-codebook-stable.yaml` 是 BDCN v3 的 5-epoch、LR `5e-6` codebook-only recipe；演算法設定位於 `BCND/configs/`，不在 training YAML 重複。
+
 N0 的 `normalization` 對照如下：
 
 | Run | YAML 值 | 額外欄位 |

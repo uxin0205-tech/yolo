@@ -118,11 +118,49 @@ boundary tests 均已通過。
 ### 目前能與不能下的結論
 
 - **可以確認**：range/weight collapse、設定接線、A0 補償繼承、雙 Attention
-  replacement 與 overflow diagnostics 已在數學、CPU reference 與 regression
-  test 層級修正。
-- **尚不能確認**：COCO mAP 已恢復或 BDCN-V2 優於 A-FINAL。這需要完成
-  `bdcn-v2-learn` 的 10 epochs 與後續 `bdcn-v2-r1` evaluation；目前結果仍是
-  `not_run`，不得提前填入預估值。
+  replacement 與 overflow diagnostics 已修正；v2/R1 正式 COCO mAP 分別為
+  0.483281／0.483500。
+- **可以確認**：V3-FIXED zero-train 為 0.506566，比 V2-LEARN 高 0.023285；
+  因此 64-level fixed discretization 本身接近 A-FINAL，主要退化來自
+  unconstrained codebook learning drift。
+- **可以確認**：bounded codebook learning 為 0.506469，比 fixed table 低
+  0.000097，沒有量測到學習收益；V3-R1 為 0.506562，reciprocal LUT 幾乎無損。
+
+## v3：把 fixed table 與 codebook learning 分開
+
+v2 已排除 range-collapse bug，但 10-epoch 訓練中 mAP 長期約為 $0.483$，且
+learned table 逐步比 exponential initializer 更平。這不能直接證明 BDCN
+離散化本身失敗，因為 v2 沒有保存 epoch-0 fixed-table COCO 結果。
+
+v3 因此只處理這個可識別缺口，不增加其他 normalization 候選：
+
+```text
+A0 / V1-BR
+   ↓
+BDCN-V3-FIXED：64-level fixed exp，0 ep
+   ↓
+BDCN-V3-LEARN：同一初始化，只學 bounded codebook，5 ep
+   ↓
+BDCN-V3-R1：沿用 learned checkpoint，reciprocal LUT evaluation
+```
+
+v3 learned table 使用
+
+$$
+\log(C_{l+1}/C_l)=-\Delta+0.01\tanh(r_l),
+\qquad \Delta=8/63.
+$$
+
+這項限制不是把 table 凍結：`raw_deltas` 仍有非零、有限梯度，且
+`bdcn_codebook` scope 仍只解凍這一張跨兩處 Attention 共用的 table。
+它只是防止 detection loss 把 tail 再推回過度平均。初始化時
+$C_{63}=e^{-8}\approx0.000335$；理論最平極端仍小於 $0.001$，遠低於舊版
+$e^{-1.875}\approx0.153$。
+
+V3-FIXED 回答「不訓練的 64-level BDCN 本身多準」；V3-LEARN 與它的差值
+才回答「學 codebook 是否有益」。若 learned 不高於 fixed，就保留 fixed
+table 或放棄 BDCN，不能再把改善歸因於 codebook learning。
+
 
 ## 完整成本結論
 
@@ -133,8 +171,11 @@ boundary tests 均已通過。
 | 原始 FP QK + exact Softmax + $PV$ | 129,286,400 | 129,286,400 | 2,764,800 | reference | 0.517998 |
 | A-FINAL / SHIFT | 86,790,400 | 89,350,400 | 2,764,800 | -32.87%／-30.89% | 0.506357 |
 | 舊 BDCN R1，$L=16$ | 90,070,400 | 92,630,400 | 4,556,800 | -30.33%／-28.35% | 0.499812 |
-| BDCN-V2 learn，$L=64$ | 113,030,400 | 115,590,400 | 14,387,200 | -12.57%／-10.59% | not_run |
-| BDCN-V2 R1，$L=64$ | 113,008,000 | 115,568,000 | 14,387,200 | -12.59%／-10.61% | not_run |
+| BDCN-V2 learn，$L=64$ | 113,030,400 | 115,590,400 | 14,387,200 | -12.57%／-10.59% | 0.483281 |
+| BDCN-V2 R1，$L=64$ | 113,008,000 | 115,568,000 | 14,387,200 | -12.59%／-10.61% | 0.483500 |
+| BDCN-V3 fixed，$L=64$ | 113,030,400 | 115,590,400 | 14,387,200 | -12.57%／-10.59% | 0.506566 |
+| BDCN-V3 learn，$L=64$ | 113,030,400 | 115,590,400 | 14,387,200 | -12.57%／-10.59% | 0.506469 |
+| BDCN-V3 R1，$L=64$ | 113,008,000 | 115,568,000 | 14,387,200 | -12.59%／-10.61% | 0.506562 |
 
 Profiler arithmetic 為所有 normalization candidates 共用的正式比較範圍；它沒有
 計入 decomposed 2D bias。因 BDCN-V2 直接繼承 V1-BR bias，保守值另加
@@ -167,13 +208,16 @@ XNOR-popcount、add/sub 與 LUT 不能直接相加成實測 GFLOPs，所以 12.5
 32.87% 都是局部 analytical reduction，不能宣稱為整個 YOLO26m 的 latency、
 power 或 energy reduction。
 
-參數方面，BDCN-V2 相對 A0 新增一個 global 64-level monotonic codebook，即
-63 個 trainable ratios；若只以 FP16 parameter payload 估算是 126 bytes，不含
-buffer、alignment、optimizer state 與 checkpoint metadata。實際 checkpoint
-大小必須等訓練完成後量測。
+參數方面，BDCN-V2/V3 相對 A0 都只新增一個 global 64-level monotonic
+codebook，即 63 個 trainable values；若只以 FP16 parameter payload 估算是
+126 bytes，不含 buffer、alignment、optimizer state 與 checkpoint metadata。
+V3 learned 的 best checkpoint 已保留在標準 artifact 位置；checkpoint file 約
+55.30 MiB。它包含模型 metadata，不能直接當成純 parameter payload。
 
 跨方法公式、全模型占比與模型大小的 canonical 整合版見
 [`reports/COMPUTE_AND_SIZE.md`](../reports/COMPUTE_AND_SIZE.md)。
+V2/V3 的完整缺陷、實作、訓練、結果與判定見
+[`reports/BDCN_V3_REPORT.md`](../reports/BDCN_V3_REPORT.md)。
 
 ## 資料夾內容
 
@@ -184,7 +228,10 @@ BCND/
 └── configs/
     ├── README.md
     ├── bdcn-v2.yaml
-    └── bdcn-v2-r1.yaml
+    ├── bdcn-v2-r1.yaml
+    ├── bdcn-v3-fixed.yaml
+    ├── bdcn-v3-learn.yaml
+    └── bdcn-v3-r1.yaml
 ```
 
 ## 執行流程
@@ -194,6 +241,15 @@ BCND/
 ../.venv/bin/python -m yolo_attention.cli queue validate --json
 ../.venv/bin/python -m yolo_attention.cli queue run --execute --json
 ```
+
+v2 全部完成後，追加不覆寫歷史的 v3：
+
+```bash
+../.venv/bin/python -m yolo_attention.cli queue append-bdcn-v3 --json
+../.venv/bin/python -m yolo_attention.cli queue validate --json
+../.venv/bin/python -m yolo_attention.cli queue run --execute --json
+```
+
 
 流程直接從已完成 scale/bias 補償的 A0（V1-BR）做 10 epoch global
 learned-codebook recovery，最後評估 reciprocal-LUT denominator；不增加
@@ -209,5 +265,5 @@ learned-codebook recovery，最後評估 reciprocal-LUT denominator；不增加
 
 - `src/yolo_attention/bdcn.py`：distance/codebook/fused bucket-PV 唯一 source。
 - `src/yolo_attention/evaluation.py`：將全 validation diagnostics 寫入結果。
-- `src/yolo_attention/queue_workflow.py`：從 A0 追加這兩個 jobs。
+- `src/yolo_attention/queue_workflow.py`：從 A0 追加 v2/v3 immutable jobs。
 - `reports/COMPUTE_AND_SIZE.md`：跨方法與全模型占比的整合報告。

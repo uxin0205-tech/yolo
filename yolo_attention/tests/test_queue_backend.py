@@ -139,6 +139,11 @@ def test_training_dispatch_replaces_recipe_weight_with_parent_checkpoint(tmp_pat
         best = request.artifacts_root / request.run_id / "ultralytics" / "weights" / "best.pt"
         best.parent.mkdir(parents=True, exist_ok=True)
         best.touch()
+        (best.parent / "last.pt").touch()
+        (best.parent.parent / "results.csv").write_text(
+            "epoch,time\n1,1.0\n",
+            encoding="utf-8",
+        )
 
     class FakeEvaluation:
         def evaluate_official(self, request):
@@ -171,6 +176,81 @@ def test_training_dispatch_replaces_recipe_weight_with_parent_checkpoint(tmp_pat
 
     assert seen["request"].training.weights == str(checkpoint.resolve())
     assert result.checkpoint_path.endswith("h-scr/ultralytics/weights/best.pt")
+
+
+def test_training_dispatch_reuses_complete_run_for_postprocess_retry(tmp_path: Path) -> None:
+    checkpoint = tmp_path / "parent.pt"
+    checkpoint.touch()
+    variant_path = tmp_path / "variant.yaml"
+    VariantConfig(name="H").to_yaml(variant_path)
+    training_path = tmp_path / "training.yaml"
+    TrainingRecipe(
+        stage="screening",
+        weights="wrong.pt",
+        data="coco.yaml",
+        epochs=2,
+        batch=1,
+        imgsz=64,
+        device="cpu",
+        workers=0,
+        seed=0,
+        patience=0,
+        optimizer="AdamW",
+        lr0=0.001,
+        amp=False,
+    ).to_yaml(training_path)
+    evaluation_path = tmp_path / "configs" / "evaluation" / "coco2017.yaml"
+    evaluation_path.parent.mkdir(parents=True)
+    evaluation_path.write_text(
+        "data: coco.yaml\nimgsz: 64\nbatch: 1\ndevice: cpu\nworkers: 0\n"
+        "split: val\nplots: false\n",
+        encoding="utf-8",
+    )
+    run = tmp_path / "artifacts" / "runs" / "h-scr"
+    weights = run / "ultralytics" / "weights"
+    weights.mkdir(parents=True)
+    (weights / "best.pt").touch()
+    (weights / "last.pt").touch()
+    (run / "ultralytics" / "results.csv").write_text(
+        "epoch,time\n1,1.0\n2,2.0\n",
+        encoding="utf-8",
+    )
+
+    def should_not_retrain(_request):
+        raise AssertionError("completed training must not be launched again")
+
+    class FakeEvaluation:
+        def evaluate_official(self, request):
+            return write_standard_result(
+                request.run_dir,
+                {"map50_95": 0.4, "map50": 0.5, "map75": 0.42, "maps": []},
+                checkpoint_path=request.parent_checkpoint,
+                profile_path=None,
+                row_sum_max_error=None,
+            )
+
+    job = QueueJob(
+        id="h-scr",
+        run_name="H-SCR",
+        stage="architecture-screening",
+        kind=JobKind.TRAIN,
+        order=0,
+        status=JobStatus.RUNNING,
+        variant_path=str(variant_path),
+        training_path=str(training_path),
+        parent_checkpoint=str(checkpoint),
+    )
+    backend = ResearchQueueBackend(
+        project_root=tmp_path,
+        evaluation_backend=FakeEvaluation(),
+        training_launcher=should_not_retrain,
+    )
+
+    result = backend.execute(job, _state(job, project_root=tmp_path))
+
+    assert result.map50_95 == pytest.approx(0.4)
+    assert result.checkpoint_path == str((weights / "best.pt").resolve())
+
 
 
 def test_validate_dispatch_uses_injected_p0_runner(tmp_path: Path) -> None:

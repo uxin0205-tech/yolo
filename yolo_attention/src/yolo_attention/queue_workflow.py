@@ -404,6 +404,54 @@ def append_bdcn_v2_fix(state: QueueState) -> QueueState:
     return _append_jobs(state, jobs)
 
 
+def append_bdcn_v3_stable(state: QueueState) -> QueueState:
+    """Append fixed-exp control and bounded learned-codebook recovery without rewriting history."""
+
+    if any(job.status not in {JobStatus.SUCCEEDED, JobStatus.SKIPPED} for job in state.jobs):
+        raise ValueError("BDCN v3 can only be appended after the existing queue is complete")
+    if any(job.id.startswith("bdcn-v3-") for job in state.jobs):
+        raise ValueError("BDCN v3 stabilized branch already exists")
+    a0_id = _a0_winner(state)
+    root = Path(state.project_root)
+    order = max(job.order for job in state.jobs) + 1
+    previous = state.jobs[-1].id
+    jobs = (
+        _evaluation_job(
+            state,
+            job_id="bdcn-v3-fixed",
+            run_name="BDCN-V3-FIXED",
+            stage="bdcn-v3-control",
+            order=order,
+            variant_path=_project_path(root, "BCND/configs/bdcn-v3-fixed.yaml"),
+            parent_job_ids=(previous,),
+            model_parent_job_id=a0_id,
+        ),
+        _training_job(
+            state,
+            job_id="bdcn-v3-learn",
+            run_name="BDCN-V3-LEARN",
+            stage="bdcn-v3-recovery",
+            order=order + 1,
+            variant_path=_project_path(root, "BCND/configs/bdcn-v3-learn.yaml"),
+            training_file="configs/training/bdcn-codebook-stable.yaml",
+            parent_job_ids=("bdcn-v3-fixed",),
+            model_parent_job_id=a0_id,
+        ),
+        _evaluation_job(
+            state,
+            job_id="bdcn-v3-r1",
+            run_name="BDCN-V3-R1",
+            stage="bdcn-v3-denominator",
+            order=order + 2,
+            variant_path=_project_path(root, "BCND/configs/bdcn-v3-r1.yaml"),
+            parent_job_ids=("bdcn-v3-learn",),
+            model_parent_job_id="bdcn-v3-learn",
+        ),
+    )
+    return _append_jobs(state, jobs)
+
+
+
 def _expand_architecture(
     state: QueueState,
     decision: SelectionDecision,

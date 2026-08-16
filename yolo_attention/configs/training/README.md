@@ -8,6 +8,7 @@
 - `bdcn-codebook.yaml`：D1 三候選各自一次完整 10-epoch codebook-only training。
 - `bdcn-codebook-extension.yaml`：只供既有 staged 5+5 queue provenance 與 validation；新流程不再建立 extension jobs。
 - `bdcn-codebook-seed1.yaml`：只有排名接近時才執行的 10-epoch seed confirmation。
+- `bdcn-codebook-stable.yaml`：BDCN v3 anchored table 的 5-epoch codebook-only recovery；LR 為 `5e-6`。
 - `quantization-qat.yaml`：optional phase，未核准不得執行。
 
 以 `python -m yolo_attention.cli train --variant ... --training ... --run-id ...` 預覽；只有明確加 `--execute` 才訓練。本目錄提交 Git。

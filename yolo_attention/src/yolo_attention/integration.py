@@ -104,6 +104,7 @@ def convert_yolo26_model(
             step=config.resolved_bdcn_step,
             kind=config.bdcn_codebook,
             projection=config.bdcn_projection,
+            log_ratio_bound=config.bdcn_log_ratio_bound,
         )
         source_attentions = [modules[path] for path in paths]
         source_bdcn = [
@@ -120,6 +121,7 @@ def convert_yolo26_model(
                 and attention.config.bdcn_sharing is config.bdcn_sharing
                 and attention.config.bdcn_levels == config.bdcn_levels
                 and attention.config.resolved_bdcn_step == config.resolved_bdcn_step
+                and attention.config.bdcn_log_ratio_bound == config.bdcn_log_ratio_bound
                 for attention in source_bdcn
             )
             if compatible:

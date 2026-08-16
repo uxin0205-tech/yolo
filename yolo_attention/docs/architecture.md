@@ -118,6 +118,10 @@ ResearchQueueBackend
  └─ pure selection policies → dynamic graph expansion
 ~~~
 
+若 train job 已跑滿 recipe epochs 且 immutable run 同時存在 `best.pt`、
+`last.pt` 與最後 epoch 完整的 `results.csv`，retry 只重做 evaluation/profile
+postprocess，不重新啟動 trainer；任一證據缺失就不能套用此恢復路徑。
+
 I/H/T5 的 scheduling dependency 依序串接，避免同時跑；但三者的 `model_parent_job_id` 都是 P0，所以模型權重不會錯接前一個 screening run。D1 三個 sharing 候選也依序排程，但各自從共同 D0 parent 進行一次完整 10-epoch codebook-only training；沒有 extension job 或 checkpoint-based 5+5 resume。`d1-select` 直接比較 `d1-shared`、`d1-pattn`、`d1-phead`；只有 top-two 差距小於 0.001 時，才從 D0 parent 建立 winner 的 seed-1 10-epoch confirmation，D2 仍接 seed-0 winner。每次 selection 後，`queue_workflow.py` 從實際 winner YAML 產生下一階段設定。Optional quantization 不在這張 graph 中。
 
 COCO result 統一寫 `map50_95/map50/map75/maps`、checkpoint、profile 與 row-sum error。Custom training parent 至少需有 95% target state coverage，避免 fused inference checkpoint 靜默只載入少量權重；child mAP 低於 model parent 的 50% 時 executor fail closed。Final tie-break 只接受存在的 profile JSON；分析 profile 是固定兩個 Attention、reference shape 的比較 proxy，不是 hardware measurement。
@@ -129,6 +133,20 @@ $d_{max}=8,L=64$ 的 10-epoch learned-codebook 與 R1 reciprocal-LUT jobs，
 的 bucket histogram、true overflow、last-bucket rate 與最大 distance 到
 `metrics/queue-result.json`。`BCND/` 只保存設定與說明，唯一演算法 source 仍是
 `src/yolo_attention/bdcn.py`。
+
+BDCN v3 仍使用相同 source 與 executor，但由 `append-bdcn-v3` 追加三個
+immutable jobs：fixed-exp zero-train control、anchored-codebook recovery、R1。
+anchored bank 不直接自由學習每步 ratio，而是
+
+$$
+\log(C_{l+1}/C_l)=-\Delta+\epsilon\tanh(r_l),
+$$
+
+其中 $\Delta=8/63$、$\epsilon=0.01$。$r_l=0$ 精確重現 $e^{-l\Delta}$；
+即使參數飽和，最後一格仍小於 $0.001$，因此不可能重現舊
+$L=16,\Delta=0.125$ 將 $d\ge1.875$ 映射到約 $0.153$ 的 flat tail。v3
+training scope 仍只有 codebook，使用獨立低 LR recipe；fixed control 不訓練。
+
 
 ## 7. 尚未執行
 

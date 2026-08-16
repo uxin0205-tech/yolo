@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "status": "algorithm_mainline_complete",
+  "status": "algorithm_mainline_and_bdcn_v3_complete",
   "queue": {
-    "jobs_succeeded": 52,
+    "jobs_succeeded": 57,
     "jobs_failed": 0,
     "optional_quantization_locked": true
   },
@@ -35,6 +35,25 @@
     "exact_normalization_arithmetic_cost_proxy": 91910400,
     "arithmetic_proxy_reduction_vs_exact": 0.05570642712903007,
     "checkpoint_sha256": "6bd4b25ea36bfe453f437cec6647d7d7dbab745e1e0035b1610928a454e63ce1"
+  },
+  "bdcn_v3": {
+    "status": "complete",
+    "parent_run_id": "v1-br",
+    "fixed": {
+      "run_id": "bdcn-v3-fixed",
+      "map50_95": 0.5065660618940827
+    },
+    "learned": {
+      "run_id": "bdcn-v3-learn",
+      "epochs": 5,
+      "map50_95": 0.5064686282366477
+    },
+    "r1": {
+      "run_id": "bdcn-v3-r1",
+      "map50_95": 0.5065615009450943,
+      "row_sum_max_error": 0.001951456069946289
+    },
+    "conclusion": "fixed table preferred; bounded learning adds no measured accuracy; reciprocal LUT is effectively lossless"
   },
   "training_audit": {
     "accepted_training_runs": 17,

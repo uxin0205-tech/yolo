@@ -2,7 +2,7 @@
 
 這是一套 YOLO26m Binary Attention 演算法研究與 CPU-reference 框架。程式包含 I／Hadamard MDB／T5、Dense／Decomposed 2D bias、多種 normalization、BDCN distance-codebook 分支、modular QKV、BN fold、雙 Attention fail-closed adapter、研究工作流、artifact provenance 與安全訓練入口。
 
-本機 COCO2017 設為 `/home/uxin/yolo/coco2017`；官方權重放在 `weights/yolo26m.pt`。截至 2026-08-15，主線 52 個 queue jobs 全部成功，17 個 training checkpoint 已完成結構、數值與檔案稽核；Optional Phase Q 維持鎖定。即時狀態仍以 `artifacts/queue/queue.json` 為唯一依據。
+本機 COCO2017 設為 `/home/uxin/yolo/coco2017`；官方權重放在 `weights/yolo26m.pt`。截至 2026-08-16，主線與 BDCN V3 共 57 個 queue jobs 全部成功；Optional Phase Q 維持鎖定。即時狀態仍以 `artifacts/queue/queue.json` 為唯一依據。
 
 ## 目前成果
 
@@ -13,9 +13,11 @@
 | Baseline retention | 97.75% |
 | A-FINAL 參數量 | 21,897,260（比官方未融合模型多 1,012） |
 | A-FINAL 相對 exact binary arithmetic proxy | -5.57% |
-| Queue | 52 succeeded / 0 failed |
+| BDCN-V3-FIXED mAP50-95 | 0.506566 |
+| BDCN-V3-R1 mAP50-95 | 0.506562 |
+| Queue | 57 succeeded / 0 failed |
 
-這裡的 AP 是本 repository 對 COCO2017 val images 的 Ultralytics internal metric，不是 canonical COCO API AP，也不能直接和官方 0.525 E2E／0.531 Non-E2E 混用。完整數據與限制見 [完整實驗報告](reports/REPORT.md)、[Attention 運算量、全模型占比與大小整合報告](reports/COMPUTE_AND_SIZE.md)、[訓練稽核](reports/TRAINING_AUDIT.md)、[比較表](reports/comparison.csv) 與 [機器可讀摘要](reports/summary.json)。
+這裡的 AP 是本 repository 對 COCO2017 val images 的 Ultralytics internal metric，不是 canonical COCO API AP，也不能直接和官方 0.525 E2E／0.531 Non-E2E 混用。完整數據與限制見 [完整實驗報告](reports/REPORT.md)、[BDCN V3 完整報告](reports/BDCN_V3_REPORT.md)、[Attention 運算量、全模型占比與大小整合報告](reports/COMPUTE_AND_SIZE.md)、[訓練稽核](reports/TRAINING_AUDIT.md)、[比較表](reports/comparison.csv) 與 [機器可讀摘要](reports/summary.json)。
 
 ![Main experiment results](reports/figures/mainline-map.svg)
 
@@ -138,7 +140,11 @@ x → Attention → residual → FFN → residual
 
 `queue run --execute` 會依 gate 連續跑到沒有 ready job 或遇到失敗；研究期間較建議使用 `run-next`，逐項檢查結果。失敗 job 可用 `queue retry JOB_ID` 重新排隊。若程式錯誤使某個已完成 selection 之後的結果失效，使用 `queue rewind SELECTION_JOB_ID`；它會留下事件紀錄，並把後續 run/generated artifacts 移到 `artifacts/invalidated/`，再由該 selection 重新生成流程。selection 只讀成功 parent 的標準 `map50_95`、row-sum error 與 analytical profile，缺資料會 fail closed；一般 child 若只保留不到 model parent 50% 的 mAP，也會標成 failed 等待人工檢查。唯一例外是明列為 accuracy-bound diagnostic 的 `R2-PSHIFT`：它仍須產生有限且完整的結果 artifact，但低精度會被記錄為研究負結果，不會被誤判成 worker 故障或阻塞 R1 selection。Optional Phase Q 不會被 queue 自動建立。
 
-目前 queue 已完成到 A-FINAL，無下一個 ready job；不要再次執行或手改狀態。若只要確認：
+若訓練已跑滿 epochs，且 `best.pt`、`last.pt`、`results.csv` 都完整，
+`queue retry` 只會重做失敗的 evaluation/profile，不會重新訓練或覆寫 checkpoint。
+
+主線已完成到 A-FINAL；後續 BDCN append branch 的即時狀態只以
+`artifacts/queue/queue.json` 為準，不得手改。若只要確認：
 
 ~~~bash
 ../.venv/bin/python -m yolo_attention.cli queue status --json
@@ -155,6 +161,22 @@ x → Attention → residual → FFN → residual
 
 它直接從 A0（V1-BR）跑 10 epochs learned codebook，再做 reciprocal-LUT
 evaluation，不增加 levels screening。詳細設定與結果位置見 [BCND/README.md](BCND/README.md)。
+若 v2 完成後要比較「固定表本身」與「codebook 學習」而不延續 unconstrained drift：
+
+~~~bash
+../.venv/bin/python -m yolo_attention.cli queue append-bdcn-v3 --json
+../.venv/bin/python -m yolo_attention.cli queue validate --json
+../.venv/bin/python -m yolo_attention.cli queue run --execute --json
+~~~
+
+v3 依序執行 `BDCN-V3-FIXED` zero-train control、5-epoch
+`BDCN-V3-LEARN`、以及 `BDCN-V3-R1`。三者固定
+$L=64,d_{\max}=8,\Delta=8/63$；learned table 從 exponential table 精確初始化，
+使用 `5e-6` learning rate 與 bounded log-ratio，不能回到舊
+$L=16,\Delta=0.125$ 的 flat-tail 缺陷。append 命令只有在現有 queue 全部完成後
+才會成功，GPU 執行仍需明確加入 `--execute`。
+
+
 
 D1 依序執行 `D1-SHARED`、`D1-PATTN`、`D1-PHEAD`，每個候選都是從共同 D0 parent 開始的一次完整 10-epoch codebook-only run；`D1-SELECT` 直接比較這三個結果。只有 top-two 落在 0.001 tie band 時，queue 才加入 winner 的 seed-1 10-epoch confirmation，完成後自動接回 D2、R 與 A-FINAL。舊 artifacts 中的 `d1-*-10` 是先前已完成的 staged 5+5 歷史紀錄，不代表目前程式仍採 extension workflow。
 
@@ -171,7 +193,7 @@ yolo_attention/
 │   ├── training/          # 訓練資源與 schedule
 │   └── evaluation/        # 共用 COCO evaluator
 ├── data/coco2017.yaml
-├── weights/              # 本機 yolo26m.pt，不提交 Git
+├── weights/              # 官方 yolo26m.pt 與權重來源說明
 ├── src/yolo_attention/
 │   ├── config.py          # VariantConfig public seam
 │   ├── projection.py      # QKV gather/interleave、BN fold
@@ -220,10 +242,11 @@ yolo_attention/
 4. [reports/REPORT.md](reports/REPORT.md)：本次完整結果與分析。
 5. [reports/TRAINING_AUDIT.md](reports/TRAINING_AUDIT.md)：checkpoint、epoch、finite-value 與 provenance 稽核。
 6. [reports/COMPUTE_AND_SIZE.md](reports/COMPUTE_AND_SIZE.md)：原始 Attention、全模型占比、節省原因、corrected proxy、參數與 checkpoint 大小。
-7. [BCND/README.md](BCND/README.md)：BDCN v2 修正原因、單一路徑 config 與重跑方法。
-8. [reports/CLEANUP.md](reports/CLEANUP.md)：永久刪除與保留項目。
-9. [configs/README.md](configs/README.md)、[src/README.md](src/README.md)、[artifacts/README.md](artifacts/README.md)：局部操作與資料契約。
-10. `hardware-friendly_attention.md`：舊 YOLO11 背景，不具現行規格效力。
+7. [BCND/README.md](BCND/README.md)：BDCN v2/v3 修正原因、設定與重跑方法。
+8. [reports/BDCN_V3_REPORT.md](reports/BDCN_V3_REPORT.md)：每一步實作、正式結果、成本與最終判定。
+9. [reports/CLEANUP.md](reports/CLEANUP.md)：永久刪除與保留項目。
+10. [configs/README.md](configs/README.md)、[src/README.md](src/README.md)、[artifacts/README.md](artifacts/README.md)：局部操作與資料契約。
+11. `hardware-friendly_attention.md`：舊 YOLO11 背景，不具現行規格效力。
 
 ## 已知限制與下一步
 

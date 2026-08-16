@@ -679,6 +679,36 @@ D1 三個 sharing 候選依序排程，各自從共同 D0 parent 進行一次完
 
 D1 sharing 以與最佳者差小於 0.001 時選較簡單者；D2/R1/R2 相對 A0 的 mAP loss gate 為 0.01。所有 run 同時替換 YOLO26m 兩個 Attention，使用相同 A0、COCO evaluator 與未修改模組；除明列的 seed 1 confirmation 外均固定 seed 0。BDCN core 和 IntAttention/IndexSoftmax 接近，因此不得主張 distance-indexed normalization 為本研究首次提出；可檢驗的研究點是 Binary-QK 情境、跨兩個 Attention 的 learned sharing、PoT table projection、denominator ablation 與 fused bucket-$PV$ 組合。完整 prior-art 見 `docs/research/bdcn-prior-art.md`。
 
+#### BDCN v3：先量測 fixed table，再做受約束學習
+
+v2 的 10-epoch global table 已證明參數確實更新，但 codebook 逐步變平且 mAP
+沒有回升。為分離「distance discretization 本身」與「codebook training drift」，
+在 v2/R1 完成後追加以下 immutable branch：
+
+| 階段 | Run | 內容 | 訓練 |
+|---|---|---|---:|
+| V3-C0 | BDCN-V3-FIXED | $L=64,d_{\max}=8$ fixed $e^{-d}$；epoch-0 control | 0 |
+| V3-L | BDCN-V3-LEARN | 同一 initializer，bounded monotonic global table | 5 ep codebook-only，LR $5\times10^{-6}$ |
+| V3-R1 | BDCN-V3-R1 | 沿用 learned table，改 reciprocal LUT | 0 |
+
+受約束 parameterization 為
+
+$$
+\log\frac{C_{l+1}}{C_l}
+=
+-\Delta+\epsilon\tanh(r_l),
+\qquad
+\Delta=\frac{8}{63},\quad\epsilon=0.01.
+$$
+
+初始化 $r_l=0$ 時，$C_l=e^{-l\Delta}$。即使所有 $r_l$ 朝 flattening 極端
+飽和，$C_{63}<0.001$，因此不會延續舊版把 $d=1.875$、$d=8$ 和更大距離都
+給予約 $e^{-1.875}=0.153$ 的錯誤。$d>8$ 仍會進最後一格，但其權重接近
+$e^{-8}$ 且必須由 overflow diagnostics 報告占比。V3-FIXED 與 V3-LEARN
+使用相同 A0、兩個 Attention、COCO evaluator、seed 與其他未修改模組；
+只有 V3-LEARN 更新 codebook，因此可直接判定 codebook learning 是否有益。
+
+
 ### 6.6 Optional Phase Q：延後量化、PTQ 與 QAT
 
 量化不是主研究必做項目。A-FINAL 的完整 COCO evaluation、運算量報告與方法結論完成後，主研究即可結束。只有使用者或老師明確決定繼續 Phase Q，才啟動正式 bit-width／format 搜尋；沒有新核准時，Q0/Q1/Q2、TW0/TW1 與 SD4-0 全部保持 dormant。

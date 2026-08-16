@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import math
+
 import pytest
 import torch
 
@@ -67,6 +69,79 @@ def test_extended_range_prevents_old_tail_distance_collapse() -> None:
 
     assert old_probability[..., 1].item() == pytest.approx(old_probability[..., 2].item())
     assert fixed_probability[..., 2].item() < fixed_probability[..., 1].item() * 0.01
+
+
+def test_anchored_codebook_starts_at_exp_and_cannot_recreate_old_flat_tail() -> None:
+    step = 8.0 / 63.0
+    bound = 0.01
+    bank = BDCNCodebookBank(
+        1,
+        64,
+        step,
+        BDCNCodebookKind.LEARNED_ANCHORED,
+        BDCNProjection.FLOAT,
+        log_ratio_bound=bound,
+    )
+
+    initial = bank.codebook()[0]
+    expected = torch.exp(-torch.arange(64, dtype=initial.dtype) * step)
+    torch.testing.assert_close(initial, expected)
+
+    with torch.no_grad():
+        bank.raw_deltas.fill_(100.0)
+    flattened = bank.codebook()[0]
+    ratios = flattened[1:] / flattened[:-1]
+    maximum_ratio = math.exp(-step + bound)
+
+    assert torch.all(ratios <= maximum_ratio + 1e-6)
+    assert flattened[-1].item() < 0.001
+    assert flattened[-1].item() < math.exp(-1.875) / 100
+
+
+def test_anchored_codebook_receives_gradient_without_unfreezing_attention() -> None:
+    step = 8.0 / 63.0
+    bank = BDCNCodebookBank(
+        1,
+        64,
+        step,
+        BDCNCodebookKind.LEARNED_ANCHORED,
+        BDCNProjection.FLOAT,
+        log_ratio_bound=0.01,
+    )
+    normalizer = BDCNNormalizer(bank, torch.tensor([0]), step, BDCNDenominator.EXACT)
+    scores = torch.tensor([[[[0.0, -0.7, -2.1, -7.9]]]])
+
+    normalizer(scores).square().sum().backward()
+
+    assert bank.raw_deltas.grad is not None
+    assert torch.isfinite(bank.raw_deltas.grad).all()
+    assert bank.raw_deltas.grad.abs().sum().item() > 0
+
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA regression requires one GPU")
+def test_cuda_forward_accepts_cpu_diagnostics_restored_from_checkpoint() -> None:
+    step = 8.0 / 63.0
+    bank = BDCNCodebookBank(
+        1,
+        64,
+        step,
+        BDCNCodebookKind.FIXED_EXP,
+        BDCNProjection.FLOAT,
+    ).cuda()
+    module = BDCNNormalizer(
+        bank,
+        torch.tensor([0]),
+        step,
+        BDCNDenominator.EXACT,
+    ).cuda()
+    module.diagnostic_bucket_histogram = torch.zeros(64, dtype=torch.long)
+
+    probability = module(torch.randn(1, 1, 8, 8, device="cuda"))
+
+    assert torch.isfinite(probability).all()
+    assert module.diagnostic_bucket_histogram.device.type == "cpu"
+
 
 
 def test_bdcn_true_overflow_starts_immediately_above_representable_range() -> None:

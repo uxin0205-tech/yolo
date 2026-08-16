@@ -1,6 +1,6 @@
 # Attention 運算量節省、全模型占比與模型大小（整合版）
 
-日期：2026-08-15
+日期：2026-08-16
 
 ## 1. 最重要的結論
 
@@ -149,8 +149,8 @@ R0 exact、R1 reciprocal LUT、R2 PoT shift 的 $c_{den}$ 分別為 10、3、1�
 | BDCN R0 | 2,560,000 | 1,024,000 | 4,588,800 | 81,920,000 | 90,092,800 | 4,556,800 |
 | BDCN R1 | 2,560,000 | 1,024,000 | 4,566,400 | 81,920,000 | **90,070,400** | 4,556,800 |
 | BDCN R2 | 2,560,000 | 1,024,000 | 4,560,000 | 81,920,000 | 90,064,000 | 4,556,800 |
-| BDCN v2 learn（$L=64$） | 2,560,000 | 1,024,000 | 27,526,400 | 81,920,000 | **113,030,400** | 14,387,200 |
-| BDCN v2 R1（$L=64$） | 2,560,000 | 1,024,000 | 27,504,000 | 81,920,000 | **113,008,000** | 14,387,200 |
+| BDCN V2/V3 exact（$L=64$） | 2,560,000 | 1,024,000 | 27,526,400 | 81,920,000 | **113,030,400** | 14,387,200 |
+| BDCN V2/V3 R1（$L=64$） | 2,560,000 | 1,024,000 | 27,504,000 | 81,920,000 | **113,008,000** | 14,387,200 |
 
 SHIFT 相對 Hadamard + exact normalization：
 
@@ -166,18 +166,18 @@ BDCN memory proxy：
 
 $$M_{BDCN}=E+AHTLd_v=4{,}556{,}800$$
 
-這是元素存取 proxy，不含 datatype bytes、cache reuse、tiling 或 off-chip burst。BDCN 雖不存 dense $P$，16-level bucket buffer 使此 proxy 增加 64.8%。
+這是元素存取 proxy，不含 datatype bytes、cache reuse、tiling 或 off-chip burst。舊 16-level BDCN 的 memory proxy 為 4.557M；V2/V3 64-level 設定為 14.387M。
 
 BDCN v2 直接使用 $L=64,d_{max}=8$，令 $\Delta\approx0.127$；相對舊版
 $L=16,d_{max}=1.875$，它保留近似 bucket 解析度但擴大覆蓋範圍。$C_{table}$
 與 memory proxy 會隨 $L$ 線性增加，因此報告必須同時呈現精度恢復與成本代價。
-新結果完成前標為 `not_run`，詳見 [BCND 工作區](../BCND/README.md)。
+V3 正式結果已完成，詳見 [BDCN V3 完整報告](BDCN_V3_REPORT.md)。
 
 因此 defect fix 並非免費：BDCN v2 R1 相對舊 $L=16$ R1 增加 22.938M
 arithmetic proxy，memory proxy 從 4.557M 增至 14.387M。另一方面，它相對
-原始 129.286M Attention 分析區域仍減少 16.278M，約 12.59%。是否值得採用
-必須看本次 10-epoch recovery 的 mAP 與 overflow 是否實際改善；尚未完成前
-不能宣稱它優於 A-FINAL。
+原始 129.286M Attention 分析區域仍減少 16.278M，約 12.59%。V3-FIXED／R1
+分別為 0.506566／0.506562，精度與 A-FINAL、PWL 接近；但成本仍高於 SHIFT，
+是否採用取決於是否需要 distance-codebook/fused bucket-PV 資料流，不能只看 mAP。
 
 上述 BDCN v2 profiler 數字和其他候選一樣未含 decomposed bias。因 v2 直接
 繼承 V1-BR，保守加入 $2E=2.560$M bias additions 後，learn/R1 分別為

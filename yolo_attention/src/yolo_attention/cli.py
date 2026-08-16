@@ -36,6 +36,9 @@ def _add_queue_parser(subparsers) -> None:
     append_bdcn = commands.add_parser("append-bdcn-v2")
     append_bdcn.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
     append_bdcn.add_argument("--json", action="store_true")
+    append_bdcn_v3 = commands.add_parser("append-bdcn-v3")
+    append_bdcn_v3.add_argument("--queue-root", type=Path, default=Path("artifacts/queue"))
+    append_bdcn_v3.add_argument("--json", action="store_true")
 
 
 class _ExecutionDisabledBackend:
@@ -105,6 +108,13 @@ def _run_queue_command(args) -> int:
             return 0
         if args.queue_command == "append-bdcn-v2":
             state = executor.append_bdcn_v2()
+            _print_payload(
+                {"jobs": len(state.jobs), "next": executor.preview_next().job_id},
+                as_json=args.json,
+            )
+            return 0
+        if args.queue_command == "append-bdcn-v3":
+            state = executor.append_bdcn_v3()
             _print_payload(
                 {"jobs": len(state.jobs), "next": executor.preview_next().job_id},
                 as_json=args.json,

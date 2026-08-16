@@ -32,3 +32,8 @@ bdcn,r0-div,Exact reciprocal,0.500087547,0.670808654,0.548973068,0.000000060,fal
 bdcn,r1-rlut,Reciprocal LUT,0.499812061,0.670411175,0.548928460,0.001907468,true,BDCN denominator winner
 bdcn,r2-pshift,Nearest-PoT denominator,0.004872126,0.007387216,0.005210225,0.414062500,false,failed accuracy diagnostic
 final,a-final,N1-SHIFT,0.506356605,0.676940412,0.554141850,,true,algorithm-phase final
+bdcn-v2,bdcn-v2-learn,64-level unconstrained learned codebook,0.483280840,0.656455506,0.527090994,0.000000060,false,range fixed but table drifted
+bdcn-v2,bdcn-v2-r1,64-level learned plus reciprocal LUT,0.483499847,0.656842160,0.527586030,0.001960039,false,V2 denominator evaluation
+bdcn-v3,bdcn-v3-fixed,64-level fixed exponential codebook,0.506566062,0.677050772,0.554964873,0.000000060,true,recommended BDCN algorithm reference
+bdcn-v3,bdcn-v3-learn,64-level anchored learned codebook,0.506468628,0.677037519,0.554673931,0.000000060,false,no gain over fixed
+bdcn-v3,bdcn-v3-r1,64-level anchored codebook plus reciprocal LUT,0.506561501,0.677044149,0.554459715,0.001951456,true,recommended BDCN hardware candidate

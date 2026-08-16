@@ -295,3 +295,15 @@ class QueueExecutor:
             self.store.save(state)
             self.store.append_event("bdcn_v2_appended", job_id=None, details={})
             return state
+
+    def append_bdcn_v3(self) -> QueueState:
+        """Append the fixed-control and stabilized learned-codebook branch."""
+
+        from .queue_workflow import append_bdcn_v3_stable
+
+        with self.store.worker_lock():
+            state = append_bdcn_v3_stable(self.store.load())
+            state = refresh_readiness(state)
+            self.store.save(state)
+            self.store.append_event("bdcn_v3_appended", job_id=None, details={})
+            return state

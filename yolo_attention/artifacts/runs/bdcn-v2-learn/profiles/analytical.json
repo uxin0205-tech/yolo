@@ -1,0 +1,38 @@
+{
+  "arithmetic_cost_proxy": 113030400.0,
+  "assumptions": {
+    "attention_sites": 2,
+    "bdcn_levels": 64,
+    "hardware_measurement": false,
+    "heads": 4,
+    "key_dim": 32,
+    "tokens_per_site": 400,
+    "units": "comparable algorithmic proxy units",
+    "value_dim": 64
+  },
+  "estimated_memory_traffic": 14387200.0,
+  "kind": "analytical_proxy",
+  "operation_counts": {
+    "bdcn_codebook_value_ops": 13107200,
+    "bdcn_materialized_probability_entries": 0,
+    "bdcn_reciprocal_rows": 3200,
+    "bdcn_score_lookups": 1280000,
+    "bdcn_value_bucket_add": 81920000,
+    "dual_binary_word_ops": 2560000,
+    "fp_qk_mac": 40960000,
+    "hadamard_add_sub": 1024000,
+    "pv_mac": 81920000,
+    "score_entries": 1280000,
+    "single_binary_word_ops": 1280000
+  },
+  "schema_version": 1,
+  "selected_operation_counts": {
+    "binary_word_ops": 2560000,
+    "fp_qk_mac": 0,
+    "hadamard_add_sub": 1024000,
+    "normalization_ops": 27526400,
+    "t5_fusion_ops": 0,
+    "value_path_ops": 81920000
+  },
+  "variant": "BDCN-V2-LEARN"
+}

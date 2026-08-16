@@ -1,10 +1,10 @@
 # YOLO26m Hardware-Friendly Attention 完整實驗報告
 
-日期：2026-08-15
+日期：2026-08-16
 
 ## 摘要
 
-本研究只替換 YOLO26m 兩個 Attention 的 Q/K score 與 normalization path，保留 V、$PV+PE(V)$、output projection、PSABlock residual/FFN，以及外層 C2PSA/C3k2/Detect。主線在完整 COCO2017 上完成 52 個 queue jobs，最終 Queue 選出 Hadamard MDB、power-of-two scale、decomposed 2D relative bias 與 power-of-two normalization 的 N1-SHIFT，記為 A-FINAL。
+本研究只替換 YOLO26m 兩個 Attention 的 Q/K score 與 normalization path，保留 V、$PV+PE(V)$、output projection、PSABlock residual/FFN，以及外層 C2PSA/C3k2/Detect。主線完成 52 個 queue jobs，後續 BDCN V2/V3 defect-fix branch 再完成 5 個 jobs，目前共 57/57 succeeded。主線 Queue 選出 Hadamard MDB、power-of-two scale、decomposed 2D relative bias 與 power-of-two normalization 的 N1-SHIFT，記為 A-FINAL。
 
 | 模型 | mAP50-95 | mAP50 | mAP75 | 相對本地 baseline |
 |---|---:|---:|---:|---:|
@@ -182,9 +182,23 @@ BDCN 的 distance-indexed normalization 核心接近 IntAttention/IndexSoftmax�
 1. Binary QK 主線可行：A-FINAL 保留 97.75% 本地 baseline mAP，且只增加 1,012 parameters。
 2. Hadamard MDB、Direct recovery、PoT scale、decomposed bias 都有目前實驗支持。
 3. Normalization 最強證據是 zero-train PWL/SHIFT 幾乎無損；N1 recovery 沒有改善，不應宣稱必要。
-4. BDCN 的 1-PoT table 與 reciprocal LUT 可行，但 learned codebook 有明顯 seed instability，且整體精度低於主線。
+4. 舊 BDCN learned codebook 有 seed instability；V3 fixed table 已恢復到 0.506566，bounded learning 無額外收益，R1 reciprocal LUT 幾乎無損。
 5. R2 division-free normalization 不可用於正式模型。
 6. 現階段完成的是演算法與 analytical proxy，不是硬體實測，也不是 optional quantization 結論。
+
+### BDCN defect-fix final addendum
+
+舊 BDCN $L=16,\Delta=0.125$ 會讓所有 $d>1.875$ 共用約 0.153 的過大 tail weight。V2 將範圍改為 $L=64,d_{max}=8$，但 unconstrained training 仍把 table 拉平，只有 0.483281。V3 將「fixed discretization」與「codebook learning」分開後得到：
+
+| Run | mAP50-95 | 結論 |
+|---|---:|---|
+| BDCN-V3-FIXED | **0.506566** | 正確 range 的固定表本身可行 |
+| BDCN-V3-LEARN | 0.506469 | bounded learning 沒有優於 fixed |
+| BDCN-V3-R1 | 0.506562 | reciprocal LUT 相對 fixed 幾乎無損 |
+
+因此先前 learned BDCN 的低精度不能解讀成 distance-codebook 方法整體失敗；主要問題是 table drift。若採 BDCN，應使用 V3-FIXED 或 V3-R1，不需要 codebook QAT。完整公式、diagnostics、成本與重現方式見 [BDCN_V3_REPORT.md](BDCN_V3_REPORT.md)。
+
+V3-R1 與 A-FINAL 相差 +0.000205、與 N0-PWL 相差 −0.000210，均在 0.001 tie band 內；但 $L=64$ 的 arithmetic/memory proxy 明顯高於 SHIFT/PWL。因此 V3-R1 是可行的 distance-codebook 硬體研究候選，不取代成本更低的主線 A-FINAL。
 
 ## 下一步建議
 
