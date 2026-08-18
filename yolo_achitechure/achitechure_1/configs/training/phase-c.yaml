@@ -1,0 +1,13 @@
+name: c
+epochs: 55
+learning_rates:
+  masf: 0.00038
+  neck_detect: 0.00019
+  backbone: 0.000038
+  attention: 0.000005
+lrf: 0.1
+warmup_epochs: 1.0
+patience: 5
+cosine: true
+momentum: 0.948
+weight_decay: 0.00027
