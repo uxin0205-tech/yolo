@@ -1,0 +1,15 @@
+simulation_only: true
+targets: [C0, C_best]
+weight:
+  dtype: int8
+  qscheme: per_channel_symmetric
+  ch_axis: 0
+activation:
+  dtype: int8
+  qscheme: per_tensor_affine
+include_masf_standard_conv: true
+exclude_custom_roots: [HardwareFriendlyAttention]
+qat:
+  epochs: 15
+  patience: 5
+  observer_update_epochs: 3

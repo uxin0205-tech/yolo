@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "variant": "full35",
+  "float_checkpoint": {
+    "path": "/absolute/path/to/final-float-pwl.pt",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "map50_95": 0.0
+  },
+  "bittrue_checkpoint": {
+    "path": "/absolute/path/to/final-bittrue-pwl.pt",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "map50_95": 0.0
+  },
+  "environment": {
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.90"
+  },
+  "selection_manifest": {
+    "path": "/absolute/path/to/final-selection.json",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "model_selection": {
+    "selected_variant": "full35",
+    "basis": "formal achitechure_1 final selection manifest"
+  }
+}

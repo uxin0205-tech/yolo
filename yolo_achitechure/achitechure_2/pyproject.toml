@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yolo26m-achitechure-2"
+version = "0.1.0"
+description = "Stage-aware Lite-C3k2 experiments for the frozen YOLO26m PWL system"
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0", "torch>=2.2", "ultralytics>=8.4.90"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+evaluation = ["pycocotools>=2.0.7"]
+
+[project.scripts]
+achitechure-2 = "achitechure_2.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+markers = ["integration: requires the formal handoff and full YOLO runtime"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
