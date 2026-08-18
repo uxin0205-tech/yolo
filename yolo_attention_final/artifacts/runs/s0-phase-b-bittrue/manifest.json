@@ -1,0 +1,58 @@
+{
+  "created_at": "2026-08-17T07:12:27.687015+00:00",
+  "dataset": {
+    "path": "data/coco2017.yaml",
+    "yaml_sha256": "e6556e609f623fabc7d076262b14d7ae953a9301b9ea3db242ff01437af4ffa0"
+  },
+  "environment": {
+    "cuda": "12.8",
+    "git_revision": "3e4c5dc983ce5fe52e64e45e277883572b0648fe",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "platform": "Linux-6.8.0-134-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "torch": "2.11.0+cu128",
+    "ultralytics_git_revision": "ea920761b1c6d531c2231d0033714301690cf67d",
+    "ultralytics_source_path": "/home/uxin/yolo/yolo_p2/ultralytics",
+    "ultralytics_version": "8.4.90"
+  },
+  "kind": "full-coco-evaluation",
+  "parent": {
+    "path": "/home/uxin/yolo/yolo_attention_final/artifacts/runs/s0-phase-b/ultralytics/weights/best.pt",
+    "sha256": "bd6b185607d87112e8a1f77dd24689dbd66df5df091f537e8494278691e645f7"
+  },
+  "run_id": "s0-phase-b-bittrue",
+  "schema_version": 2,
+  "variant": {
+    "basis": "hadamard",
+    "bdcn_codebook": null,
+    "bdcn_denominator": null,
+    "bdcn_distance_max": null,
+    "bdcn_fused_value": true,
+    "bdcn_levels": 16,
+    "bdcn_log_ratio_bound": null,
+    "bdcn_projection": null,
+    "bdcn_reciprocal_newton_steps": 0,
+    "bdcn_sharing": null,
+    "bdcn_step": 0.125,
+    "bias": "decomposed_2d",
+    "exp_bits": 15,
+    "max_bias_size": 32,
+    "multimax_top_k": 5,
+    "name": "PWL-FINAL-BITTRUE",
+    "normalization": "bit_true_pwl",
+    "normalization_progressive": false,
+    "normalization_transition_epochs": 5,
+    "p_bits": null,
+    "progressive": false,
+    "projection_activation_bits": null,
+    "projection_weight_bits": null,
+    "pwl_segments": 20,
+    "relu_margin": 1.0,
+    "row_correction": "none",
+    "scale_mode": "power_of_two",
+    "score_min": -80,
+    "score_step": 0.125,
+    "use_ste": false,
+    "v_bits": null
+  }
+}

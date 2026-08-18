@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+artifacts/runs/*
+!artifacts/runs/s0-phase-b-bittrue/
+!artifacts/runs/s0-phase-b-bittrue/**
+artifacts/invalidated/
+artifacts/queue/generated/
+artifacts/*/worker.lock
+
+# Retained parent and research-provenance exports.
+!weights/
+weights/*
+!weights/v1-br-best.pt
+!pwl-attention-state.pt
+!pwl-best-observed.pt
+!pwl-lr-recovery-attention-state.pt
+
+# The clean delivery contains the only formal checkpoint.
+!final/
+!final/pwl-final-best.pt
