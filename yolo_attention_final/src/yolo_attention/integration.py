@@ -1,4 +1,4 @@
-"""Fail-closed adapters for both official YOLO26m Attention sites."""
+"""同時處理兩個官方 YOLO26m Attention sites 的 fail-closed adapters。"""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ def bdcn_table_assignment(
     sites: int,
     heads: int,
 ) -> tuple[tuple[tuple[int, ...], ...], int]:
-    """Assign codebook table IDs for global, per-site, or per-head sharing."""
+    """為 global、per-site 或 per-head sharing 指派 codebook table IDs。"""
 
     if sites < 1 or heads < 1:
         raise ValueError("sites and heads must be positive")
@@ -46,7 +46,7 @@ def bdcn_table_assignment(
 
 
 def convert_c2psa(module: C2PSA, config: VariantConfig) -> list[str]:
-    """Replace only Attention modules inside one C2PSA and return relative paths."""
+    """只替換單一 C2PSA 內的 Attention modules，並回傳 relative paths。"""
 
     converted: list[str] = []
     for block_index, block in enumerate(module.m):
@@ -72,7 +72,7 @@ def convert_yolo26_model(
     *,
     expected_paths: tuple[str, ...] | None = YOLO26M_ATTENTION_PATHS,
 ) -> list[str]:
-    """Replace all official Attention modules and reject incomplete YOLO26m conversion."""
+    """替換全部官方 Attention modules，並拒絕不完整的 YOLO26m conversion。"""
 
     official = {name: module for name, module in model.named_modules() if isinstance(module, Attention)}
     existing = {
@@ -153,7 +153,7 @@ def convert_yolo26_model(
 
 
 def fixed_scale_modules(model: nn.Module) -> tuple[HardwareFriendlyAttention, ...]:
-    """Return fixed-scale attention sites that still require zero-shot calibration."""
+    """回傳仍需 zero-shot calibration 的 fixed-scale Attention sites。"""
 
     return tuple(
         module
@@ -163,7 +163,7 @@ def fixed_scale_modules(model: nn.Module) -> tuple[HardwareFriendlyAttention, ..
 
 
 def freeze_for_stage(model: nn.Module, stage: str) -> TrainableSummary:
-    """Apply the plan's screening/add-on versus full-model trainable scopes."""
+    """套用計畫中的 screening／add-on 或 full-model trainable scopes。"""
 
     normalized = stage.lower().replace("-", "_")
     for parameter in model.parameters():

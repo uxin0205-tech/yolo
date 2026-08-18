@@ -1,4 +1,4 @@
-"""Deterministic fake-quantization primitives for Q0/Q2 simulation."""
+"""Q0／Q2 模擬使用的 deterministic fake-quantization primitives。"""
 
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ def fake_quant_symmetric(
     dim: int | tuple[int, ...] | None = None,
     eps: float = 1e-8,
 ) -> torch.Tensor:
-    """Symmetric signed fake quantization with a detached dynamic scale."""
+    """使用 detached dynamic scale 的 symmetric signed fake quantization。"""
 
     if bits < 2:
         raise ValueError("symmetric quantization requires at least 2 bits")
@@ -50,7 +50,7 @@ def fake_quant_symmetric(
 
 
 class FakeQuantConvBN(nn.Module):
-    """QAT-style W/A fake quant around one Ultralytics Conv+BN wrapper."""
+    """包住單一 Ultralytics Conv＋BN wrapper 的 QAT-style W/A fake quant。"""
 
     def __init__(self, module: Conv, *, weight_bits: int = 8, activation_bits: int = 8) -> None:
         super().__init__()
@@ -79,7 +79,7 @@ class FakeQuantConvBN(nn.Module):
 
 
 def integer_pv_accumulate(probability_u8: torch.Tensor, value_s8: torch.Tensor) -> torch.Tensor:
-    """Raw S32 accumulator for V[S8] @ P[U8]^T, without dequantization."""
+    """`V[S8] @ P[U8]^T` 的 raw S32 accumulator，不執行 dequantization。"""
 
     if probability_u8.dtype is not torch.uint8:
         raise TypeError("probability must be torch.uint8")

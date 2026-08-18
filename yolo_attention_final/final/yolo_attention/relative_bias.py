@@ -1,4 +1,4 @@
-"""Dense and decomposed two-dimensional relative-position bias."""
+"""Dense 與 decomposed 2D relative-position bias。"""
 
 from __future__ import annotations
 

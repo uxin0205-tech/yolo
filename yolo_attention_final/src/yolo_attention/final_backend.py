@@ -1,4 +1,4 @@
-"""Executable selection/gate/export backend for the static final queue."""
+"""Static final queue 使用的 selection／gate／export backend。"""
 
 from __future__ import annotations
 

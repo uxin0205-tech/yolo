@@ -1,4 +1,4 @@
-"""Static staged-recovery queue for controlled downstream PWL adaptation."""
+"""用於受控 downstream PWL adaptation 的 static staged-recovery queue。"""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ RECOVERY_STAGES = ("block", "neck", "backbone", "full")
 
 
 def create_pwl_recovery_state(project_root: str | Path) -> QueueState:
-    """Build an immutable single-seed recovery graph with Bit-True gates."""
+    """建立含 Bit-True gates 的 immutable single-seed recovery graph。"""
 
     root = Path(project_root).resolve()
     variant_float = str(root / "configs/variants/float-pwl-final.yaml")

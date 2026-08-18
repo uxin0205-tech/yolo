@@ -1,4 +1,4 @@
-"""Declarative graph construction and dynamic expansion for the experiment queue."""
+"""Experiment queue 的 declarative graph construction 與 dynamic expansion。"""
 
 from __future__ import annotations
 
@@ -368,7 +368,7 @@ def materialize_after_selection(
 
 
 def append_bdcn_v2_fix(state: QueueState) -> QueueState:
-    """Append the direct A0-derived BDCN defect fix without rewriting history."""
+    """不改寫歷史，附加直接由 A0 衍生的 BDCN defect fix。"""
 
     if any(job.status not in {JobStatus.SUCCEEDED, JobStatus.SKIPPED} for job in state.jobs):
         raise ValueError("BDCN v2 can only be appended after the existing queue is complete")
@@ -405,7 +405,7 @@ def append_bdcn_v2_fix(state: QueueState) -> QueueState:
 
 
 def append_bdcn_v3_stable(state: QueueState) -> QueueState:
-    """Append fixed-exp control and bounded learned-codebook recovery without rewriting history."""
+    """不改寫歷史，附加 fixed-exp control 與 bounded learned-codebook recovery。"""
 
     if any(job.status not in {JobStatus.SUCCEEDED, JobStatus.SKIPPED} for job in state.jobs):
         raise ValueError("BDCN v3 can only be appended after the existing queue is complete")
@@ -452,7 +452,7 @@ def append_bdcn_v3_stable(state: QueueState) -> QueueState:
 
 
 def append_pwl_validation(state: QueueState) -> QueueState:
-    """Append the no-training Exact/Float/Bit-True PWL validation branch."""
+    """附加不訓練的 Exact／Float／Bit-True PWL validation branch。"""
 
     if any(job.id.startswith("pwl-") for job in state.jobs):
         raise ValueError("PWL validation branch already exists")

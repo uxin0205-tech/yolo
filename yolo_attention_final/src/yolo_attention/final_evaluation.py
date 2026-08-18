@@ -1,4 +1,4 @@
-"""Evaluation backend that materializes the evaluated variant and provenance."""
+"""Materialize evaluated variant 與 provenance 的 evaluation backend。"""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ from .integration import convert_yolo26_model, fixed_scale_modules
 
 
 class PWLFinalEvaluationBackend(UltralyticsEvaluationBackend):
-    """Save Float/Bit-True conversion before validation and report that checkpoint."""
+    """Validation 前先儲存 Float／Bit-True conversion，並回報該 checkpoint。"""
 
     @staticmethod
     def _write_manifest(request: EvaluationRequest, variant: VariantConfig) -> None:

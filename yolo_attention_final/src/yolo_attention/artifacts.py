@@ -1,4 +1,4 @@
-"""Immutable run creation with reproducibility provenance."""
+"""建立包含 reproducibility provenance 的 immutable run。"""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""No-Attention-inspired modular Q/K/V projection and BN-fold references."""
+"""受 No-Attention 啟發的模組化 Q/K/V projection 與 BN-fold references。"""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ def qkv_channel_indices(
     head_dim: int,
     device: torch.device | None = None,
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-    """Return channel gathers for official per-head [Q,K,V] fused layout."""
+    """回傳官方 per-head `[Q,K,V]` fused layout 的 channel gathers。"""
 
     q_indices: list[int] = []
     k_indices: list[int] = []
@@ -40,7 +40,7 @@ def interleave_qkv_maps(
     *,
     num_heads: int,
 ) -> torch.Tensor:
-    """Reconstruct the official fused per-head QKV channel layout."""
+    """重建官方 fused per-head QKV channel layout。"""
 
     if q.ndim != 4 or k.ndim != 4 or v.ndim != 4:
         raise ValueError("Q/K/V maps must be BCHW tensors")
@@ -99,7 +99,7 @@ def _slice_conv_bn(source: Conv, indices: torch.Tensor) -> Conv:
 
 
 class ModularQKVProjection(nn.Module):
-    """Three Conv+BN paths initialized exactly from official fused QKV."""
+    """從官方 fused QKV 精確初始化三條 Conv＋BN paths。"""
 
     def __init__(self, q: Conv, k: Conv, v: Conv, *, num_heads: int) -> None:
         super().__init__()
@@ -141,7 +141,7 @@ class ModularQKVProjection(nn.Module):
 
 
 def fold_conv_bn(source: Conv) -> nn.Conv2d:
-    """Fold an eval Conv+BN wrapper into a biased Conv2d."""
+    """把 eval 狀態的 Conv＋BN wrapper fold 成帶 bias 的 Conv2d。"""
 
     if not isinstance(source.act, nn.Identity):
         raise TypeError("fold_conv_bn currently requires Identity activation")

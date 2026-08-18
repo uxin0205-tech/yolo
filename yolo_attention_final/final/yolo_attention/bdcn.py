@@ -1,4 +1,4 @@
-"""Binary distance-codebook normalization and fused value reference."""
+"""Binary distance-codebook normalization 與 fused value reference。"""
 
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ def project_two_pot(codebook: torch.Tensor, *, max_exponent: int = 15) -> torch.
 
 
 class BDCNCodebookBank(nn.Module):
-    """Monotonic codebook bank shared according to the configured table assignment."""
+    """依設定的 table assignment 共用 monotonic codebook bank。"""
 
     def __init__(
         self,
@@ -90,7 +90,7 @@ class BDCNCodebookBank(nn.Module):
 
 
 class BDCNNormalizer(nn.Module):
-    """Map final scores to P, or aggregate V without materializing P."""
+    """將 final scores 映射為 P，或不 materialize P 而直接 aggregate V。"""
 
     def __init__(
         self,
@@ -123,7 +123,7 @@ class BDCNNormalizer(nn.Module):
         self.reset_diagnostics()
 
     def reset_diagnostics(self) -> None:
-        """Reset validation-wide counters used by the result contract."""
+        """重設 result contract 使用的 validation-wide counters。"""
 
         self.diagnostic_bucket_histogram: torch.Tensor | None = None
         self.diagnostic_overflow_count = 0.0
@@ -145,9 +145,9 @@ class BDCNNormalizer(nn.Module):
         )
         self.last_distance_max = distance.max().detach()
         self.last_bucket_saturation = (bucket == self.bank.levels - 1).float().mean().detach()
-        # Diagnostics are checkpoint metadata, not part of the model dataflow.
-        # Keep their accumulator on CPU so a checkpoint restored on CPU can be
-        # moved to CUDA without combining stale CPU state with a CUDA batch.
+        # Diagnostics 是 checkpoint metadata，不屬於 model dataflow。
+        # Accumulator 保留在 CPU，讓 CPU restore 的 checkpoint 移到 CUDA 時，
+        # 不會把舊 CPU state 與 CUDA batch 混合。
         histogram = self.last_bucket_histogram.cpu()
         self.diagnostic_bucket_histogram = (
             histogram.clone()
@@ -187,14 +187,14 @@ class BDCNNormalizer(nn.Module):
         return probability
 
     def aggregate(self, scores: torch.Tensor, value: torch.Tensor) -> torch.Tensor:
-        """Compute grouped weighted V and apply one reciprocal per query row."""
+        """計算 grouped weighted V，並對每個 query row 套用一次 reciprocal。"""
 
         weights, bucket, tables = self._weights(scores)
         if value.ndim != 4 or value.shape[:2] != scores.shape[:2] or value.shape[-1] != scores.shape[-1]:
             raise ValueError("value must be [B,H,D,N] and align with scores")
-        # Bucket sums can exceed the FP16 range before normalization even when
-        # the final weighted average is finite. Accumulate the fused PV path in
-        # FP32 under AMP, then return to the value-path dtype at the boundary.
+        # 即使 final weighted average 有限，bucket sums 在 normalization 前仍可能超過
+        # FP16 範圍。因此 AMP 下的 fused PV path 使用 FP32 accumulate，最後再轉回
+        # value-path dtype。
         accumulation_dtype = torch.float32 if value.dtype in {torch.float16, torch.bfloat16} else value.dtype
         accumulated_value = value.to(accumulation_dtype)
         accumulated_weights = weights.to(accumulation_dtype)

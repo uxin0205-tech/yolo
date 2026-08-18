@@ -9,7 +9,7 @@ artifacts/invalidated/
 artifacts/queue/generated/
 artifacts/*/worker.lock
 
-# Retained parent and research-provenance exports.
+# 保留的 parent 與研究 provenance exports。
 !weights/
 weights/*
 !weights/v1-br-best.pt
@@ -17,6 +17,6 @@ weights/*
 !pwl-best-observed.pt
 !pwl-lr-recovery-attention-state.pt
 
-# The clean delivery contains the only formal checkpoint.
+# 乾淨交付目錄只保留唯一正式 checkpoint。
 !final/
 !final/pwl-final-best.pt

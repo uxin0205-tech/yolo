@@ -1,44 +1,43 @@
-# YOLO26m PWL Attention Final
+# YOLO26m PWL Attention 最終專案
 
-This project contains the completed Float-PWL training and Bit-True evaluation workflow for the retained V1-BR
-YOLO26m parent.
+本專案保存從 `v1-br` YOLO26m parent 到最終 Bit-True PWL 權重的完整訓練、驗證、queue 與交付流程。
 
-Fixed contract: official `yolo26m.yaml`, scale `m`, COCO 80 classes, Attention sites
-`model.10.m.0.attn` and `model.22.m.0.1.attn`, Q8.8 scores in `[-10, 0]`, 20 half-unit segments,
-and 21 UQ1.15 endpoints (336 bits per site). The denominator remains an exact floating reference.
+固定模型規格為官方 `yolo26m.yaml`、`scale: m`、COCO 80 類，且下列兩個 Attention site 必須同時存在：
 
-## Final result
+- `model.10.m.0.attn`
+- `model.22.m.0.1.attn`
 
-The authoritative LR sweep and staged-recovery queue completed 19/19 jobs. Block x1 produced the highest
-measured Bit-True mAP50-95, `0.5069387`, versus audited parent `0.5067442`. Its `+0.0001944`
-gain is below the `+0.001` robustness gate and only seed 0 was run, so the formal winner remains the
-verified zero-train fallback at `0.5067369`.
+PWL 規格為 Q8.8 score、範圍 `[-10, 0]`、20 個寬度為 `0.5` 的 segments，以及 21 個 UQ1.15 endpoints（每個 site 共 336 bits）。分母目前仍採 exact float reference。
 
-- Clean delivery with the only formal checkpoint and one command surface: [`final/`](final/README.md)
-- Algorithm and executable training method: [`final/TRAINING.md`](final/TRAINING.md)
-- Authoritative measured-results report: [`final/RESULTS.md`](final/RESULTS.md)
-- Machine-readable summary: [`final/results.json`](final/results.json)
-- Method rationale and primary sources: [`docs/research/pwl-final-training-rationale.md`](docs/research/pwl-final-training-rationale.md)
+## 最終成果
 
-## Use the delivery
+LR sweep 與 staged recovery queue 共 19 個工作，已全部完成。最高單次 Bit-True 結果來自 block x1：mAP50-95 為 `0.5069387`；audited parent 為 `0.5067442`，改善只有 `+0.0001944`。由於未達預先設定的 `+0.001` 穩健門檻，而且依使用者指示只跑 seed 0，正式 winner 保留 zero-train fallback `0.5067369`。
+
+- 最終可攜交付與唯一正式權重：[final/](final/README.md)
+- 微調方法、演算法與重跑命令：[final/TRAINING.md](final/TRAINING.md)
+- 完整實測結果與選擇理由：[final/RESULTS.md](final/RESULTS.md)
+- 機器可讀摘要：[final/results.json](final/results.json)
+- 方法依據與主要文獻：[docs/research/pwl-final-training-rationale.md](docs/research/pwl-final-training-rationale.md)
+
+## 最快使用方式
 
 ```bash
 cd final
 python run.py check
 python run.py predict path/to/images --device 0 --save
 python run.py recipe
-python run.py train                 # dry-run
-python run.py train --execute       # explicit queue/GPU execution
+python run.py train                 # 只預覽，不啟動訓練
+python run.py train --execute       # 明確啟動或續跑 GPU queue
 python run.py status
 ```
 
-## Inspect the completed research queue
+## 本次怎麼微調
+
+訓練端使用可微分 Float-PWL surrogate，候選選擇一律使用實際 materialize 的 Bit-True checkpoint 在完整 5,000 張 COCO2017 val 上驗證。流程先比較 block LR x1/x2/x4，再依序擴大到 Attention 所在 block、Neck/Detect、Backbone 最後 stage 與 full model。各層使用遞減 LR，BatchNorm running statistics 全程鎖定，並以 early stopping 控制回合數。每階段 child 若比直接 parent 低超過 `0.001` mAP50-95，就 rollback。
+
+完整 queue 可用下列命令檢查：
 
 ```bash
 PYTHONPATH=src python -m yolo_attention.cli queue validate --queue-root artifacts/lr-sweep-queue
 PYTHONPATH=src python -m yolo_attention.cli queue status --queue-root artifacts/lr-sweep-queue
 ```
-
-Training used AdamW, AMP, deterministic seed 0, constant discriminative learning rates, no warmup, locked
-BatchNorm running statistics, early stopping, and a `0.001` phase rollback tolerance. Full COCO2017 metrics
-use the Ultralytics internal evaluator; canonical COCO API was not a required gate.

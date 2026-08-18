@@ -1,4 +1,4 @@
-"""Deterministic phase gates and final winner policy."""
+"""Deterministic phase gates 與最終 winner policy。"""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ def _finite(values: Mapping[str, float]) -> dict[str, float]:
 
 
 def choose_pilot(metrics: Mapping[float, float]) -> float:
-    """Use lower LR inside a strict 0.001 tie; otherwise use higher mAP."""
+    """嚴格差距小於 0.001 時選較低 LR，否則選較高 mAP。"""
 
     values = _finite({str(lr): value for lr, value in metrics.items()})
     if set(metrics) != {1e-5, 5e-6}:

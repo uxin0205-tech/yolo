@@ -1,4 +1,4 @@
-"""Fail-closed parameter and buffer scopes for final training."""
+"""最終訓練使用的 fail-closed parameter 與 buffer scopes。"""
 
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ def _is_fixed_attention_parameter(name: str) -> bool:
 
 
 def learning_rate_group(name: str) -> str:
-    """Classify one YOLO26m parameter into a non-overlapping recovery LR group."""
+    """把一個 YOLO26m parameter 分到不重疊的 recovery LR group。"""
 
     if any(name.startswith(f"{site}.") for site in YOLO26M_ATTENTION_PATHS):
         return "attention"
@@ -71,7 +71,7 @@ def _allowed_recovery_parameter(name: str, scope: str) -> bool:
 
 
 def apply_trainable_scope(model: nn.Module, scope: str) -> TrainableSummary:
-    """Enable only the parameters named by one final-training scope."""
+    """只啟用 final-training scope 指定的 parameters。"""
 
     scope = scope.lower().replace("-", "_")
     if scope not in TRAINABLE_SCOPES:
@@ -107,10 +107,10 @@ def apply_trainable_scope(model: nn.Module, scope: str) -> TrainableSummary:
 
 
 def enforce_frozen_batchnorm(model: nn.Module, scope: str) -> None:
-    """Put every BN outside the permitted Attention paths in eval mode."""
+    """把允許 Attention paths 之外的所有 BN 設為 eval mode。"""
 
     if scope in {"block_recovery", "neck_recovery", "backbone_last_recovery", "full_model_recovery"}:
-        # Recovery trains BN affine parameters but keeps all running statistics immutable.
+        # Recovery 可訓練 BN affine parameters，但所有 running statistics 維持 immutable。
         allowed = ()
     elif scope == "bias_only":
         allowed: tuple[str, ...] = ()
@@ -126,7 +126,7 @@ def enforce_frozen_batchnorm(model: nn.Module, scope: str) -> None:
 
 
 def sync_progressive_epoch(live_model: nn.Module, ema_model: nn.Module, epoch: int) -> None:
-    """Copy integer epoch state explicitly; EMA arithmetic updates only floating state."""
+    """明確複製 integer epoch state；EMA arithmetic 只會更新 floating state。"""
 
     set_progressive_epoch(live_model, epoch)
     set_progressive_epoch(ema_model, epoch)

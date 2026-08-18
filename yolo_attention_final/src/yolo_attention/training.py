@@ -1,4 +1,4 @@
-"""Ultralytics adapter for tightly scoped Float-PWL training."""
+"""嚴格限制 scope 的 Float-PWL 訓練 Ultralytics adapter。"""
 
 from __future__ import annotations
 
@@ -121,7 +121,7 @@ class HardwareAttentionTrainer(DetectionTrainer):
         return optimizer
 
     def validate(self):
-        """Select best.pt using mAP50-95 only, independent of composite fitness changes."""
+        """只依 mAP50-95 選擇 best.pt，不受 composite fitness 變更影響。"""
 
         if self.ema and self.world_size > 1:
             import torch.distributed as dist

@@ -1,4 +1,4 @@
-"""Typed, serializable state for the single-worker experiment queue."""
+"""Single-worker experiment queue 使用的 typed、serializable state。"""
 
 from __future__ import annotations
 

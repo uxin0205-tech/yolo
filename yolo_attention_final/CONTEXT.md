@@ -1,21 +1,16 @@
-# YOLO26m PWL Final Training
+# YOLO26m PWL 最終訓練領域
 
-The final workflow trains a differentiable Float-PWL surrogate and evaluates separately materialized Bit-True
-PWL checkpoints. The completed staged-recovery queue progressively tested the containing blocks, Neck/Detect,
-the final Backbone stage, and the full model with discriminative learning rates and locked BatchNorm running
-statistics.
+本流程使用可微分 Float-PWL surrogate 訓練，再將候選權重獨立轉成 Bit-True PWL checkpoint 評估。已完成的 staged-recovery queue 以分層遞減學習率，依序測試 Attention 所在 block、Neck/Detect、Backbone 最後 stage 與 full model；BatchNorm running statistics 全程鎖定。
 
-## Vocabulary
+## 專案詞彙
 
-- **Parent**: immutable retained `v1-br` checkpoint.
-- **Float-PWL**: differentiable PWL exponential surrogate used only during training.
-- **Bit-True PWL**: Q8.8/UQ1.15 integer numerator reference used for gates and delivery.
-- **Phase gate**: accepts a child unless it loses more than 0.001 mAP50-95 to its direct parent.
-- **Recovery winner**: highest Bit-True result from one staged trajectory; exported as best-observed.
-- **Formal winner**: trained winner only when the three-seed mean improves on the zero-train parent by 0.001.
+- **Parent**：保留且不可變的 `v1-br` 起始 checkpoint。
+- **Float-PWL**：只在訓練反向傳播使用的可微分 PWL exponential surrogate。
+- **Bit-True PWL**：用於 gate 與正式交付的 Q8.8/UQ1.15 整數分子 reference。
+- **Phase gate**：child 相對直接 parent 的 mAP50-95 下降不超過 `0.001` 才接受。
+- **Best-observed**：單一路徑中實測 Bit-True 指標最高的候選。
+- **Formal winner**：只有三個 seeds 的平均值比 zero-train parent 至少高 `0.001`，訓練權重才能成為正式 winner。
 
-## Completed decision
+## 已完成決策
 
-The LR sweep/recovery queue finished 19/19 jobs. Block x1 was the best observed candidate at `0.5069387`
-mAP50-95, but its gain over the audited parent was only `0.0001944`. Seed 1/2 were intentionally not run, so
-the formal winner remains the zero-train fallback `final/pwl-final-best.pt`. The portable delivery is in `final/`.
+LR sweep／recovery queue 已完成 19/19 個工作。block x1 是最高觀測候選，mAP50-95 為 `0.5069387`，但只比 audited parent 高 `0.0001944`。依使用者指示沒有續跑 seed 1/2，因此正式 winner 仍是 zero-train fallback `final/pwl-final-best.pt`。可攜交付位於 `final/`。

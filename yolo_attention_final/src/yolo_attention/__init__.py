@@ -1,4 +1,4 @@
-"""YOLO26 hardware-friendly binary attention research framework."""
+"""YOLO26 硬體友善二值 Attention 研究框架。"""
 
 from .config import (
     BasisKind,

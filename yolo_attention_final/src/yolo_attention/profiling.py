@@ -1,4 +1,4 @@
-"""Analytical operation accounting kept separate from runtime profiling."""
+"""與 runtime profiling 分離的 analytical operation accounting。"""
 
 from __future__ import annotations
 
@@ -69,7 +69,7 @@ def write_variant_profile(
     shape: AttentionShape | None = None,
     attention_sites: int = 2,
 ) -> Path:
-    """Write comparable algorithmic proxies; these are not board measurements."""
+    """寫入可比較的 algorithmic proxies；這些不是實際板端量測。"""
 
     if attention_sites < 1:
         raise ValueError("attention_sites must be positive")
@@ -96,7 +96,7 @@ def write_variant_profile(
             selected_binary_word_ops = counts["dual_binary_word_ops"]
             selected_hadamard_add_sub = counts["hadamard_add_sub"]
         elif config.basis is BasisKind.T5:
-            # T5 residual approximation adds one binary-score fusion pass.
+            # T5 residual approximation 會增加一次 binary-score fusion pass。
             score_cost = counts["dual_binary_word_ops"]
             score_cost += score_entries
             selected_binary_word_ops = counts["dual_binary_word_ops"]

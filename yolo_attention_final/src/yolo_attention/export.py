@@ -1,4 +1,4 @@
-"""Checkpoint export contracts for the final Bit-True winner."""
+"""最終 Bit-True winner 的 checkpoint export contracts。"""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Immutable training recipe for the final PWL workflow."""
+"""最終 PWL workflow 使用的 immutable training recipe。"""
 
 from __future__ import annotations
 

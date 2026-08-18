@@ -1,4 +1,4 @@
-"""Live queue dispatch, constructed only behind the CLI ``--execute`` gate."""
+"""Live queue dispatch；只允許在 CLI `--execute` gate 後建立。"""
 
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ TrainingLauncher = Callable[[object], object]
 
 
 def completed_training_checkpoint(run_dir: Path, expected_epochs: int) -> Path | None:
-    """Return best.pt only when immutable Ultralytics outputs prove training completed."""
+    """只有 immutable Ultralytics outputs 證明訓練完成時才回傳 best.pt。"""
 
     weights = run_dir / "ultralytics" / "weights"
     best = weights / "best.pt"
@@ -82,7 +82,7 @@ P0_REQUIRED_PATHS = (
 
 
 class ResearchQueueBackend:
-    """Dispatch one already-authorized queue job; it never owns scheduling state."""
+    """分派一個已授權的 queue job；本函式不持有 scheduling state。"""
 
     N0_COST_ORDER = (
         "n0-shift",
@@ -195,8 +195,8 @@ class ResearchQueueBackend:
             raise FileNotFoundError(
                 f"training did not produce complete best/last/results artifacts in {run_dir}"
             )
-        # The checkpoint already contains the converted attention modules and
-        # trained parameters, so evaluating it must not convert a second time.
+        # Checkpoint 已包含轉換後的 Attention modules 與 trained parameters，
+        # 因此 evaluation 不可再次轉換。
         evaluation_request = self._request(job, checkpoint=best)
         result = self.evaluation.evaluate_official(evaluation_request)
         return self._attach_profile(result, variant_path, evaluation_request.run_dir)
@@ -334,7 +334,7 @@ def build_p0_equivalence_report(
     final_pairs: tuple[tuple[object, object], ...],
     tolerance: float,
 ) -> dict[str, object]:
-    """Gate research boundaries and record decoded-output amplification separately."""
+    """對 research boundaries 執行 gate，並分開記錄 decoded-output amplification。"""
 
     import torch
 
@@ -362,7 +362,7 @@ def build_p0_equivalence_report(
 
 
 def run_p0_equivalence(job: QueueJob, run_dir: Path) -> QueueResult:
-    """Compare official and P0-converted YOLO26 outputs on deterministic CPU input."""
+    """使用 deterministic CPU input 比較官方與 P0-converted YOLO26 outputs。"""
 
     import torch
     from ultralytics import YOLO

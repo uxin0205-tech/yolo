@@ -1,4 +1,4 @@
-"""Immutable registry for the approved experiment funnel."""
+"""已核准 experiment funnel 的 immutable registry。"""
 
 from __future__ import annotations
 

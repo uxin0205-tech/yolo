@@ -1,4 +1,4 @@
-"""Training schedules that are independent from the Ultralytics trainer."""
+"""不依賴 Ultralytics trainer 的訓練 schedules。"""
 
 from __future__ import annotations
 

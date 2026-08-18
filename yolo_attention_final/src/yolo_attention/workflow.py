@@ -1,4 +1,4 @@
-"""Declarative research funnel used by CLI, documentation, and future runners."""
+"""供 CLI、文件與未來 runners 共用的 declarative research funnel。"""
 
 from __future__ import annotations
 

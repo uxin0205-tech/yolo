@@ -1,4 +1,4 @@
-"""Single command surface; every mutating operation requires --execute."""
+"""單一命令入口；所有會改變狀態的操作都必須明確指定 --execute。"""
 
 from __future__ import annotations
 
@@ -62,7 +62,7 @@ def _validate_queue(state) -> dict[str, object]:
     from .run_config import TrainingRecipe
 
     errors: list[str] = []
-    warnings = ["canonical COCO API is not a gate; Ultralytics internal COCO metrics are authoritative"]
+    warnings = ["canonical COCO API 不是 gate；正式依據為 Ultralytics internal COCO metrics"]
     try:
         state.validate()
     except Exception as exc:  # noqa: BLE001
@@ -72,22 +72,22 @@ def _validate_queue(state) -> dict[str, object]:
             try:
                 VariantConfig.from_yaml(job.variant_path)
             except Exception as exc:  # noqa: BLE001
-                errors.append(f"invalid variant for {job.id}: {exc}")
+                errors.append(f"{job.id} 的 variant 無效：{exc}")
         if job.training_path:
             path = Path(job.training_path)
             if path.exists():
                 try:
                     TrainingRecipe.from_yaml(path)
                 except Exception as exc:  # noqa: BLE001
-                    errors.append(f"invalid training recipe for {job.id}: {exc}")
+                    errors.append(f"{job.id} 的訓練配方無效：{exc}")
             elif "generated" not in path.parts:
-                errors.append(f"missing training recipe for {job.id}: {path}")
+                errors.append(f"缺少 {job.id} 的訓練配方：{path}")
     root = Path(state.project_root)
     for required in (root / "weights/v1-br-best.pt", root / "data/coco2017.yaml"):
         if not required.is_file():
-            errors.append(f"missing required input: {required}")
+            errors.append(f"缺少必要輸入：{required}")
     if not (root / "artifacts/queue/generated").exists():
-        warnings.append("seed recipes are materialized immutably after pilot selection")
+        warnings.append("seed 配方會在 pilot 選擇後以 immutable 方式產生")
     return {"valid": not errors, "errors": errors, "warnings": warnings, "jobs": len(state.jobs)}
 
 
@@ -137,7 +137,7 @@ def _queue(args: argparse.Namespace) -> int:
 
         class RetryBackend:
             def execute(self, *_args):
-                raise RuntimeError("retry does not execute a job")
+                raise RuntimeError("retry 不會直接執行工作")
 
         job = QueueExecutor(store, backend=RetryBackend()).retry(args.job_id)
         _print({"job_id": job.id, "status": job.status.value, "will_execute": False})
@@ -154,7 +154,7 @@ def _queue(args: argparse.Namespace) -> int:
 
         class DryBackend:
             def execute(self, *_args):
-                raise RuntimeError("execution requires --execute")
+                raise RuntimeError("執行工作必須指定 --execute")
 
         backend = DryBackend()
     executor = QueueExecutor(store, backend=backend)
@@ -207,7 +207,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             output = model(sample)
         _print({"model": args.model, "nc": 80, "paths": paths, "output": type(output).__name__})
         return 0
-    raise AssertionError("unhandled command")
+    raise AssertionError("未處理的命令")
 
 
 if __name__ == "__main__":

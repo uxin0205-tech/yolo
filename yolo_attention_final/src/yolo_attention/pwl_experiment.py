@@ -1,4 +1,4 @@
-"""Formal PWL-only validation workflow and report generation."""
+"""正式 PWL-only validation workflow 與報告產生器。"""
 
 from __future__ import annotations
 
@@ -40,7 +40,7 @@ class PWLRangeSpec:
 
 
 def choose_pwl_range(tail_probability_mass: float) -> PWLRangeSpec:
-    """Keep [-8,0] unless clipped Exact-Softmax mass exceeds the declared gate."""
+    """除非 clipped Exact-Softmax mass 超過宣告 gate，否則維持 `[-8,0]`。"""
 
     if not 0.0 <= tail_probability_mass <= 1.0:
         raise ValueError("tail probability mass must be in [0, 1]")
@@ -192,7 +192,7 @@ def _comparison_svg(rows: list[dict[str, object]], destination: Path) -> None:
 
 
 class PWLExperimentRunner:
-    """Execute the two authorized queue jobs; never trains or changes QK/scale/bias."""
+    """執行兩個已授權 queue jobs；絕不訓練或修改 QK／scale／bias。"""
 
     def __init__(self, *, project_root: Path, model_factory: Callable[[str], Any] | None = None) -> None:
         self.project_root = project_root.resolve()
@@ -243,9 +243,8 @@ class PWLExperimentRunner:
         parent_score_path = score_run_dir / "metrics" / "score-analysis.json"
         if not parent_score_path.is_file():
             raise FileNotFoundError("PWL comparison requires the completed parent score analysis")
-        # Recollect the Exact diagnostics inside this immutable comparison run.
-        # This prevents a stale or invalid parent diagnostic artifact from being
-        # silently reused after the diagnostic implementation changes.
+        # 在這個 immutable comparison run 內重新收集 Exact diagnostics，避免
+        # diagnostic implementation 變更後，仍靜默沿用過期或無效的 parent artifact。
         refreshed_score_dir = request.run_dir / "score_analysis"
         refreshed_request = EvaluationRequest(
             run_id=f"{request.run_id}-score-analysis",

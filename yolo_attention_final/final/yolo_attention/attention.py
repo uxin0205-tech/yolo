@@ -1,4 +1,4 @@
-"""YOLO26-compatible Attention that preserves the official value path."""
+"""與 YOLO26 相容、保留官方 value path 的 Attention。"""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from .schedule import ProgressiveBlend
 
 
 class HardwareFriendlyAttention(nn.Module):
-    """One configurable attention interface for P0, I, H, T5, and V2."""
+    """統一支援 P0、I、H、T5 與 V2 的可設定 Attention 介面。"""
 
     def __init__(
         self,
@@ -91,7 +91,7 @@ class HardwareFriendlyAttention(nn.Module):
         *,
         normalizer: nn.Module | None = None,
     ) -> HardwareFriendlyAttention:
-        """Reconfigure an existing checkpoint while preserving its trained value path."""
+        """重新設定既有 checkpoint，同時保留已訓練的 value path。"""
 
         module = copy.deepcopy(source)
         module.config = config

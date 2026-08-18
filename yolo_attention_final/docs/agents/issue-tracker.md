@@ -1,3 +1,3 @@
-# Issue tracker: GitHub
+# Issue 追蹤：GitHub
 
-Use `gh` for issues in `uxin0205-tech/yolo`. Pull requests are not a request surface.
+使用 `gh` 管理 `uxin0205-tech/yolo` 的 Issues。Pull request 不作為需求入口。

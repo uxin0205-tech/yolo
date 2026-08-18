@@ -1,4 +1,4 @@
-"""Single-worker state machine; execution is impossible without an explicit gate."""
+"""Single-worker state machine；沒有明確 gate 就不能執行。"""
 
 from __future__ import annotations
 
@@ -199,7 +199,7 @@ class QueueExecutor:
             previews.append(preview)
 
     def rewind_selection(self, job_id: str) -> QueueJob:
-        """Re-run a completed selection and archive every materialized descendant."""
+        """重新執行已完成的 selection，並封存所有 materialized descendants。"""
 
         with self.store.worker_lock():
             state = self.store.load()
@@ -208,9 +208,9 @@ class QueueExecutor:
                 raise ValueError("rewind only accepts a succeeded selection job")
             if any(job.status in {JobStatus.QUEUED, JobStatus.RUNNING} for job in state.jobs):
                 raise ValueError("another queue job is already active")
-            # Dynamic workflow jobs are appended in strictly increasing order.
-            # The order boundary also repairs legacy queues whose generated D2
-            # jobs incorrectly referenced d1-select instead of d1-confirm-select.
+            # Dynamic workflow jobs 依嚴格遞增順序附加。這個 order boundary 也會修復
+            # 舊 queue：其 generated D2 jobs 曾錯誤引用 d1-select，而不是
+            # d1-confirm-select。
             removed_ids = {job.id for job in state.jobs if job.order > selection.order}
             project_root = Path(state.project_root)
             timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
@@ -285,7 +285,7 @@ class QueueExecutor:
             return retried
 
     def append_bdcn_v2(self) -> QueueState:
-        """Append the immutable post-mainline BDCN defect-fix branch."""
+        """附加 immutable 的 post-mainline BDCN defect-fix branch。"""
 
         from .queue_workflow import append_bdcn_v2_fix
 
@@ -297,7 +297,7 @@ class QueueExecutor:
             return state
 
     def append_bdcn_v3(self) -> QueueState:
-        """Append the fixed-control and stabilized learned-codebook branch."""
+        """附加 fixed-control 與 stabilized learned-codebook branch。"""
 
         from .queue_workflow import append_bdcn_v3_stable
 
@@ -309,7 +309,7 @@ class QueueExecutor:
             return state
 
     def append_pwl_validation(self) -> QueueState:
-        """Append the PWL-only score analysis and final comparison branch."""
+        """附加 PWL-only score analysis 與 final comparison branch。"""
 
         from .queue_workflow import append_pwl_validation
 

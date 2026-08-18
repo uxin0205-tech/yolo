@@ -1,4 +1,4 @@
-"""Pure, deterministic winner and gate rules for the research queue."""
+"""Research queue 的 pure、deterministic winner 與 gate rules。"""
 
 from __future__ import annotations
 

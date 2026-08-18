@@ -1,9 +1,9 @@
-## Agent skills
+## Agent 技能
 
-### Issue tracker
+### Issue 追蹤
 
-Issues and specs are tracked in GitHub Issues for `uxin0205-tech/yolo`. See `docs/agents/issue-tracker.md`.
+Issue 與規格統一記錄在 `uxin0205-tech/yolo` 的 GitHub Issues。詳見 `docs/agents/issue-tracker.md`。
 
-### Domain docs
+### 領域文件
 
-This repository uses a single-context domain documentation layout. See `docs/agents/domain.md`.
+本 repository 採單一 bounded context 的領域文件配置。詳見 `docs/agents/domain.md`。

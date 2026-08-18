@@ -1,4 +1,4 @@
-"""LR sweep followed by gated downstream recovery from one immutable parent."""
+"""從同一 immutable parent 執行 LR sweep，再進行 gated downstream recovery。"""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ DOWNSTREAM_STAGES = ("neck", "backbone", "full")
 
 
 def materialize_lr_recovery_recipes(project_root: str | Path, label: str) -> tuple[Path, ...]:
-    """Scale every discriminative LR together after the Bit-True block pilot selection."""
+    """Bit-True block pilot 選擇後，等比例調整所有 discriminative LR。"""
 
     if label not in LR_MULTIPLIERS:
         raise ValueError(f"unknown LR multiplier label: {label}")
@@ -45,7 +45,7 @@ def materialize_lr_recovery_recipes(project_root: str | Path, label: str) -> tup
 
 
 def create_lr_sweep_state(project_root: str | Path) -> QueueState:
-    """Build three same-parent block pilots before any Neck or Backbone adaptation."""
+    """在 Neck 或 Backbone adaptation 前，先建立三個同 parent 的 block pilots。"""
 
     root = Path(project_root).resolve()
     float_variant = str(root / "configs/variants/float-pwl-final.yaml")

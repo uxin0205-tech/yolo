@@ -1,4 +1,4 @@
-"""Optimizer filtering independent of Ultralytics grouping policy."""
+"""不依賴 Ultralytics grouping policy 的 optimizer filtering。"""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from .scopes import learning_rate_group
 
 
 def restrict_optimizer_to_trainable(optimizer: Any, model: nn.Module) -> None:
-    """Remove every frozen parameter and prove exact identity-set equality."""
+    """移除所有 frozen parameters，並驗證 identity sets 完全相等。"""
 
     expected = {id(parameter) for parameter in model.parameters() if parameter.requires_grad}
     for group in optimizer.param_groups:
@@ -25,7 +25,7 @@ def restrict_optimizer_to_trainable(optimizer: Any, model: nn.Module) -> None:
 def apply_layerwise_learning_rates(
     optimizer: Any, model: nn.Module, learning_rates: dict[str, float] | None
 ) -> dict[str, int]:
-    """Split Ultralytics decay groups by recovery layer while preserving all group options."""
+    """依 recovery layer 拆分 Ultralytics decay groups，同時保留所有 group options。"""
 
     if not learning_rates:
         return {}

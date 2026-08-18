@@ -1,4 +1,4 @@
-"""Typed configuration at the framework's public seam."""
+"""框架公開介面使用的 typed configuration。"""
 
 from __future__ import annotations
 
@@ -80,9 +80,9 @@ class RowCorrection(StringEnum):
 
 @dataclass(frozen=True)
 class VariantConfig:
-    """Complete attention variant configuration.
+    """完整 Attention variant configuration。
 
-    Callers select behavior here instead of constructing internal modules.
+    呼叫端在此選擇行為，不直接建立 internal modules。
     """
 
     name: str
@@ -219,7 +219,7 @@ class VariantConfig:
 
     @property
     def resolved_bdcn_step(self) -> float:
-        """Return the uniform bucket width, preserving legacy step-only configs."""
+        """回傳 uniform bucket width，並保留舊版 step-only configs 相容性。"""
 
         if self.bdcn_distance_max is None:
             return self.bdcn_step

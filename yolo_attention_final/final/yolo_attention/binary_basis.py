@@ -1,4 +1,4 @@
-"""I/H/T5 binary score implementations behind one small interface."""
+"""以單一小型介面提供 I／H／T5 binary score 實作。"""
 
 from __future__ import annotations
 
@@ -27,13 +27,13 @@ def clipped_ste_sign(value: torch.Tensor) -> torch.Tensor:
 
 
 def deterministic_sign(value: torch.Tensor) -> torch.Tensor:
-    """Map zero to +1 so float and bit-true references share one policy."""
+    """把零映射為 +1，讓 float 與 Bit-True reference 共用同一規則。"""
 
     return torch.where(value >= 0, torch.ones_like(value), -torch.ones_like(value))
 
 
 def xnor_popcount_dot(q_sign: torch.Tensor, k_sign: torch.Tensor) -> torch.Tensor:
-    """Reference XNOR+popcount for tensors shaped [B, H, D, N]."""
+    """處理 `[B, H, D, N]` tensors 的 XNOR＋popcount reference。"""
 
     if q_sign.shape[:-1] != k_sign.shape[:-1]:
         raise ValueError(f"Q/K shape mismatch: {tuple(q_sign.shape)} vs {tuple(k_sign.shape)}")
@@ -49,7 +49,7 @@ def fast_hadamard_transform(
     dim: int = -1,
     normalize: bool = False,
 ) -> torch.Tensor:
-    """Differentiable Walsh-Hadamard transform along a power-of-two axis."""
+    """沿 power-of-two axis 執行可微分 Walsh-Hadamard transform。"""
 
     dim = dim if dim >= 0 else value.ndim + dim
     size = value.shape[dim]
@@ -69,7 +69,7 @@ def fast_hadamard_transform(
 
 
 class BinaryScore(nn.Module):
-    """Produce global [B,H,N,N] scores for FP, I, H, or T5 bases."""
+    """為 FP、I、H 或 T5 bases 產生全域 `[B,H,N,N]` scores。"""
 
     def __init__(
         self,
@@ -185,9 +185,9 @@ class BinaryScore(nn.Module):
             z = xnor_popcount_dot(self._sign(q), self._sign(k))
             return self._coefficient(0, q, k, attention_scale) * z
         if self.basis is BasisKind.HADAMARD:
-            # Dynamic magnitude estimation needs normalized values in both train
-            # and eval. Fixed-scale inference only consumes the sign and may omit
-            # the positive normalization constant, matching the hardware plan.
+            # Dynamic magnitude estimation 在 train 與 eval 都需要 normalized values。
+            # Fixed-scale inference 只使用 sign，可省略正的 normalization constant，
+            # 以符合硬體規劃。
             normalize_hadamard = (
                 self.training or self.scale_mode is ScaleMode.DYNAMIC or bool(self.calibration_enabled)
             )

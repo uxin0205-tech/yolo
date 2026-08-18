@@ -1,4 +1,4 @@
-"""Atomic persistence and single-worker locking for experiment queues."""
+"""Experiment queues 的 atomic persistence 與 single-worker locking。"""
 
 from __future__ import annotations
 

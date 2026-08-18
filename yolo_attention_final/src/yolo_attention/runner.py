@@ -1,4 +1,4 @@
-"""Explicitly gated training launch; request construction is side-effect free."""
+"""有明確 gate 的訓練啟動器；建立 request 不產生 side effect。"""
 
 from __future__ import annotations
 
@@ -64,7 +64,7 @@ def launch_training(
     *,
     model_factory: Callable[[str], Any] = YOLO,
 ) -> Any:
-    """Create immutable provenance, then hand control to Ultralytics."""
+    """建立 immutable provenance，再把控制權交給 Ultralytics。"""
 
     run = ArtifactStore(request.artifacts_root).create_run(
         request.run_id,

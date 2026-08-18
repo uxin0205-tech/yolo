@@ -1,4 +1,4 @@
-"""Explicit COCO evaluation requests and standardized queue result artifacts."""
+"""明確的 COCO evaluation request 與標準化 queue result artifacts。"""
 
 from __future__ import annotations
 
@@ -68,7 +68,7 @@ class BDCNDiagnostics:
 
 
 class BDCNDiagnosticsCollector:
-    """Aggregate BDCN bucket diagnostics across every validation forward."""
+    """彙整所有 validation forward 的 BDCN bucket diagnostics。"""
 
     def __init__(self, model: object) -> None:
         self.model = model
@@ -140,7 +140,7 @@ def standardize_metrics(result: object) -> dict[str, object]:
 
 
 def collect_row_sum_max_error(model: object) -> float | None:
-    """Collect the worst available row-normalization diagnostic after validation."""
+    """收集 validation 後最差的 row-normalization diagnostic。"""
 
     import torch
 
@@ -221,7 +221,7 @@ def resolve_run_outputs(run_dir: str | Path, *, require_checkpoint: bool) -> Que
 
 
 class UltralyticsEvaluationBackend:
-    """The only evaluation object allowed to call Ultralytics val()."""
+    """唯一允許呼叫 Ultralytics `val()` 的 evaluation object。"""
 
     def __init__(self, model_factory: Callable[[str], Any] | None = None) -> None:
         self._model_factory = model_factory
@@ -262,9 +262,9 @@ class UltralyticsEvaluationBackend:
         checkpoint_path = request.parent_checkpoint
         pending = fixed_scale_modules(model.model)
         if pending:
-            # Ultralytics validation fuses Conv+BN in place. Preserve the
-            # trainable structure before calibration, then copy only the
-            # observed fixed-scale state back into it for the parent checkpoint.
+            # Ultralytics validation 會原地 fuse Conv＋BN。Calibration 前先保留
+            # trainable structure，再只把觀測到的 fixed-scale state 複製回去，
+            # 作為 parent checkpoint。
             training_model = deepcopy(model.model)
             for attention in pending:
                 attention.score.begin_calibration()

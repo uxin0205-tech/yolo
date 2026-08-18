@@ -1,4 +1,4 @@
-"""Streaming diagnostics for Exact, float-PWL and project bit-true PWL."""
+"""Exact、Float-PWL 與專案 Bit-True PWL 的 streaming diagnostics。"""
 
 from __future__ import annotations
 
@@ -172,7 +172,7 @@ class _MetricState:
 
 
 class PWLValidationAccumulator:
-    """Compare two PWL paths against Exact Softmax without storing score matrices."""
+    """不儲存 score matrices，直接比較兩條 PWL paths 與 Exact Softmax。"""
 
     def __init__(
         self,
@@ -274,7 +274,7 @@ class PWLValidationAccumulator:
 
 
 class PWLModelDiagnosticsCollector:
-    """Fail-closed hooks for the two formal YOLO26m Attention sites."""
+    """兩個正式 YOLO26m Attention sites 使用的 fail-closed hooks。"""
 
     def __init__(
         self,

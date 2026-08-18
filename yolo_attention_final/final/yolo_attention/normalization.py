@@ -1,4 +1,4 @@
-"""Probability normalization strategies behind one scores-to-P interface."""
+"""統一 scores-to-P 介面背後的 probability normalization 策略。"""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ class ExactSoftmax(nn.Module):
 
 
 class ScoreIndexedLUTSoftmax(nn.Module):
-    """Quantize score offsets for exp lookup, but keep P floating and exactly normalized."""
+    """量化 exp lookup 的 score offsets，但讓 P 保持 floating 且精確 normalization。"""
 
     def __init__(self, *, score_step: float = 0.125, score_min: int = -64) -> None:
         super().__init__()
@@ -41,7 +41,7 @@ class ScoreIndexedLUTSoftmax(nn.Module):
 
 
 class IntegerLUTSoftmax(nn.Module):
-    """Quantize scores, apply an exponential LUT, and emit U8 probabilities."""
+    """量化 scores、套用 exponential LUT，並輸出 U8 probabilities。"""
 
     def __init__(
         self,
@@ -108,7 +108,7 @@ class IntegerLUTSoftmax(nn.Module):
 
 
 class PiecewiseLinearSoftmax(nn.Module):
-    """Approximate exp with uniformly spaced linear segments, then normalize."""
+    """用等距 linear segments 近似 exp，再進行 normalization。"""
 
     def __init__(self, *, score_floor: float = -8.0, segments: int = 16) -> None:
         super().__init__()
@@ -135,11 +135,11 @@ class PiecewiseLinearSoftmax(nn.Module):
 
 
 class BitTruePiecewiseLinearSoftmax(nn.Module):
-    """Project bit-true Q8.8/UQ1.15 PWL-exp path with exact float normalization.
+    """專案的 Bit-True Q8.8/UQ1.15 PWL-exp 路徑，搭配 exact float normalization。
 
-    Endpoint lookup, indexing, interpolation and saturation reproduce the
-    intended integer datapath. The final reciprocal remains an exact software
-    reference and is not claimed as an integer or division-free implementation.
+    Endpoint lookup、indexing、interpolation 與 saturation 會重現預定的 integer
+    datapath。最後 reciprocal 仍是 exact software reference，不宣稱為 integer
+    或 division-free implementation。
     """
 
     score_fraction_bits = 8
@@ -192,7 +192,7 @@ class BitTruePiecewiseLinearSoftmax(nn.Module):
 
 
 class PowerOfTwoSoftmax(nn.Module):
-    """Project exp weights onto powers of two; a project reference, not bit-true Shiftmax."""
+    """把 exp weights 投影到 powers of two；這是專案 reference，不是 Bit-True Shiftmax。"""
 
     def __init__(self, *, score_floor: float = -8.0) -> None:
         super().__init__()
@@ -225,7 +225,7 @@ class ReluNormalize(nn.Module):
 
 
 class Multimax(nn.Module):
-    """Sparse top-k stick-breaking normalization inspired by Multimax."""
+    """受 Multimax 啟發的 sparse top-k stick-breaking normalization。"""
 
     def __init__(self, *, top_k: int) -> None:
         super().__init__()
@@ -253,7 +253,7 @@ class Multimax(nn.Module):
 
 
 class ProgressiveNormalizer(nn.Module):
-    """Normalization-level PMP: exact P transitions to a candidate P."""
+    """Normalization-level PMP：從 exact P 漸進到 candidate P。"""
 
     def __init__(self, candidate: nn.Module, *, transition_epochs: int = 5) -> None:
         super().__init__()
@@ -282,7 +282,7 @@ def build_normalizer(
     bdcn_bank: BDCNCodebookBank | None = None,
     bdcn_table_indices: torch.Tensor | None = None,
 ) -> nn.Module:
-    """Construct normalization only from the public variant configuration."""
+    """只依公開 variant configuration 建立 normalization。"""
 
     if config.normalization is NormalizationKind.BDCN:
         if bdcn_bank is None or bdcn_table_indices is None:

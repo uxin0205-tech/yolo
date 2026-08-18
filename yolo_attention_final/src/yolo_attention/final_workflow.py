@@ -1,4 +1,4 @@
-"""Static, immutable PWL-final queue graph."""
+"""Static、immutable 的 PWL-final queue graph。"""
 
 from __future__ import annotations
 
@@ -100,7 +100,7 @@ def create_pwl_final_state(project_root: str | Path) -> QueueState:
 
 
 def materialize_phase_recipes(project_root: str | Path, lr0: float) -> tuple[Path, ...]:
-    """Create seed-specific immutable recipes after the pilot decision."""
+    """Pilot 決策後建立各 seed 專屬的 immutable recipes。"""
 
     from .run_config import TrainingRecipe
 
