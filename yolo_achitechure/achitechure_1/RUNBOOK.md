@@ -66,16 +66,71 @@ $PYTHON -m achitechure_1.cli profile \
 ```
 
 The 2026-08-17 attempt stopped with OOM while the separate parent attention queue held about 15.5 GiB VRAM.
-After that queue completed, the exact probes were repeated on 2026-08-18 and both passed without batch reduction or
-accumulation: Full35 peaked at `18,397,301,760` bytes and Partial75 at `17,761,890,304` bytes. The reports are
-`artifacts/profiles/a1-train-smoke.json` and `artifacts/profiles/a2-train-smoke.json`. This readiness check is not a
-formal training run and does not include P3 MASF MACs calculation. The GPU is currently considered externally
-blocked; do not rerun GPU checks or begin formal epochs until the workspace owner explicitly clears it.
+After that queue completed, the exact probes were repeated on an RTX 5090 on 2026-08-18 and both passed without batch
+reduction or accumulation: Full35 peaked at `18,397,301,760` bytes and Partial75 at `17,761,890,304` bytes. The
+committed reports are `artifacts/profiles/a1-train-smoke.json` and `artifacts/profiles/a2-train-smoke.json`.
 
-## One architecture's A1 → A2 → B → C trajectory
+The current development host uses an RTX 4080 SUPER; formal training and final comparable profiling are intended for
+the RTX 5090. Any 4080 smoke output must use a hardware-tagged filename such as
+`a1-train-smoke-rtx4080super-YYYY-MM-DD.json` and must not overwrite the committed 5090 reports. Peak VRAM remains a
+capacity diagnostic only and is not an architecture-selection criterion. These readiness checks are not formal
+training runs and do not include P3 MASF MACs calculation. Do not begin formal epochs until the RTX 5090 is available
+and the workspace owner explicitly clears the run.
+
+## Autonomous Full35 → Partial75 trajectories
+
+For the RTX 4080 SUPER recovery path, the completed Full35 Phase A1 can feed an autonomous, fail-closed queue. It
+finishes Full35 before starting Partial75, and applies the same Bit-True validation and rollback gates to each
+architecture's A1 → A2 → B → C trajectory. Every job fixes `batch=16` and `nbs=16`. A training child uses four
+training DataLoader workers and zero simultaneously resident validation workers, preventing Ultralytics from turning
+`workers=4` into 4 training plus 8 validation workers. A standalone formal validation uses four workers. Every job
+runs in its own child process and waits for at least 3 GiB of available system RAM before launch. A completed child
+exits before its successor starts, releasing DataLoader workers, shared memory, and CUDA state.
+
+Phase C starts only when the detected GPU has that architecture's measured batch-16 peak plus one GiB of headroom.
+If Phase C cannot fit, the queue records it as pending and continues the other architecture instead of launching a
+known OOM configuration. After all currently safe work is complete, the final status is
+`waiting_for_phase_c_gpu`.
+
+```bash
+$PYTHON scripts/run_architecture_recovery_queue.py \
+  --run-tag rtx4080super-batch16-workers4-r1
+```
+
+Queue progress is written atomically to
+`artifacts/queues/architecture-rtx4080super-batch16-workers4-r1/state.json`.
+
+To continue after an already gated Full35 Phase B with at most eight resident workers, use a new hardware/settings
+tag. This path requires at least 7 GiB of available RAM before every child process, retains the Phase-C VRAM gate,
+and starts Partial75 without repeating Full35:
+
+```bash
+$PYTHON scripts/run_architecture_recovery_queue.py \
+  --run-tag rtx4080super-batch16-workers8-r2 \
+  --workers 8 \
+  --continue-after-full35-state \
+  artifacts/queues/architecture-rtx4080super-batch16-workers4-r1/state.json
+```
 
 The example below uses Full35. Repeat identically with `--variant partial75`, an `a2-partial75-*` run-id prefix,
 and `artifacts/prepared/a2-partial75.pt`.
+
+When the batch-16 queue reaches its Phase-C handoff, the recovery relay can test and run Phase C with a physical
+microbatch of 8 and `nbs=16` (two-step gradient accumulation, effective batch 16). It keeps six DataLoader workers,
+uses zero simultaneous in-training validation workers, and retains batch 16 for standalone Bit-True validation.
+Before either architecture starts formal Phase-C epochs, a two-step real-loss profile must complete and its measured
+peak plus 1 GiB must fit on the detected GPU. An OOM or insufficient margin is recorded as pending instead of being
+retried blindly. The relay also recognizes the older workers=4 manifest-verification mismatch after a completed A1
+and resumes from that completed checkpoint without interrupting or repeating the training job:
+
+```bash
+$PYTHON scripts/run_phase_c_recovery_after_queue.py \
+  --source-state artifacts/queues/architecture-rtx4080super-batch16-workers6-r3/state.json \
+  --source-run-tag rtx4080super-batch16-workers6-r3 \
+  --source-full35-state artifacts/queues/architecture-rtx4080super-batch16-workers4-r1/state.json \
+  --run-tag rtx4080super-batch8x2-workers6-r4 \
+  --workers 6
+```
 
 ### Phase A1
 
@@ -94,6 +149,9 @@ $PYTHON -m achitechure_1.cli validate \
 ```
 
 ### Phase A2 and rollback gate
+
+Phase A2 runs for at most ten epochs and stops after four consecutive Bit-True validation epochs without
+improvement. `best.pt` remains the highest-scoring observation.
 
 ```bash
 $PYTHON -m achitechure_1.cli train \
@@ -117,6 +175,8 @@ Use the selected phase's Float `best.pt` as Phase B input. A loss of exactly 0.0
 than 0.001 rolls back.
 
 ### Phase B and rollback gate
+
+Phase B uses the same patience-four rule with a maximum of ten epochs.
 
 ```bash
 $PYTHON -m achitechure_1.cli train \
@@ -153,12 +213,13 @@ $PYTHON -m achitechure_1.cli gate \
   --child-name phase-c --child-map CHILD_MAP
 ```
 
-Training itself converts a deep copy of the Float EMA to Bit-True every epoch, so `best.pt` and patience five are
-driven by Bit-True mAP50-95. Phase C retains its parent unless the child strictly improves.
+Training itself converts a deep copy of the Float EMA to Bit-True every epoch, so `best.pt` and early stopping are
+driven by Bit-True mAP50-95. Patience is four for A2/B and eight for Phase C. Phase C retains its parent unless the
+child strictly improves.
 
 ## Architecture winner
 
-Create one JSON file per A1/A2 candidate with exactly these keys:
+Create one JSON file per A1/A2 candidate with these selection keys:
 
 ```json
 {
@@ -166,10 +227,12 @@ Create one JSON file per A1/A2 candidate with exactly these keys:
   "map50_95": 0.0,
   "fp16_p50_ms": 0.0,
   "gflops": 0.0,
-  "parameters": 0,
-  "peak_vram_gib": 0.0
+  "parameters": 0
 }
 ```
+
+Latency must be measured for both candidates on the same RTX 5090 with identical settings. An optional
+`peak_vram_gib` field may be retained for diagnostics, but the selector deliberately ignores it.
 
 Then select:
 

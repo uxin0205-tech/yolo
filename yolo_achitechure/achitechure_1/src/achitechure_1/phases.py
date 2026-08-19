@@ -35,15 +35,15 @@ class ScopeReport:
 
 PHASES = {
     "a1": PhaseSpec("a1", 5, {"masf": 1.0e-3}, 1.0, 0.5, 100, False),
-    "a2": PhaseSpec("a2", 10, {"masf": 3.8e-4}, 0.5, 0.0, 100, True),
-    "b": PhaseSpec("b", 10, {"masf": 3.8e-4, "neck_detect": 1.9e-4}, 0.5, 1.0, 100, True),
+    "a2": PhaseSpec("a2", 10, {"masf": 3.8e-4}, 0.5, 0.0, 4, True),
+    "b": PhaseSpec("b", 10, {"masf": 3.8e-4, "neck_detect": 1.9e-4}, 0.5, 1.0, 4, True),
     "c": PhaseSpec(
         "c",
         55,
         {"masf": 3.8e-4, "neck_detect": 1.9e-4, "backbone": 3.8e-5, "attention": 5.0e-6},
         0.1,
         1.0,
-        5,
+        8,
         True,
     ),
 }
@@ -105,8 +105,8 @@ def enforce_frozen_modules_eval(model: nn.Module) -> None:
     """Freeze train/eval-sensitive state without changing Detect's training output contract."""
 
     for module in model.modules():
-        parameters = tuple(module.parameters(recurse=False))
-        is_frozen = not parameters or not any(parameter.requires_grad for parameter in parameters)
+        parameters = tuple(module.parameters())
+        is_frozen = not any(parameter.requires_grad for parameter in parameters)
         is_attention = module.__class__.__name__ == "HardwareFriendlyAttention"
         if is_frozen and (isinstance(module, nn.modules.batchnorm._BatchNorm) or is_attention):
             module.eval()

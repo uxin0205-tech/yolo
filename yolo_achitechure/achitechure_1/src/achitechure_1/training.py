@@ -72,8 +72,7 @@ class MASFTrainer(DetectionTrainer):
         self.phase_spec = phase_spec
         self._frozen_snapshot: dict[str, torch.Tensor] = {}
         super().__init__(*args, **kwargs)
-        self._oom_retries = 3
-        self.add_callback("on_train_epoch_start", self._on_epoch_start)
+        self.add_callback("on_train_epoch_start", self._disable_oom_fallback)
         self.add_callback("on_train_epoch_end", self._on_epoch_end)
         self.add_callback("on_train_batch_end", self._on_batch_end)
         self.add_callback("on_model_save", self._on_model_save)
@@ -91,10 +90,16 @@ class MASFTrainer(DetectionTrainer):
         return model
 
     def get_dataloader(self, dataset_path: str, batch_size: int, rank: int = 0, mode: str = "train"):
-        """Keep Bit-True validation at the same fixed global batch as training."""
+        """Keep batch fixed and prevent simultaneous validation workers."""
 
         if mode == "val":
             batch_size = min(batch_size, self.batch_size)
+            configured_workers = self.args.workers
+            self.args.workers = 0
+            try:
+                return super().get_dataloader(dataset_path, batch_size, rank, mode)
+            finally:
+                self.args.workers = configured_workers
         return super().get_dataloader(dataset_path, batch_size, rank, mode)
 
     def build_optimizer(self, model: Any, *args: Any, **kwargs: Any):
@@ -104,8 +109,17 @@ class MASFTrainer(DetectionTrainer):
         self._frozen_snapshot = snapshot_frozen_state(model)
         return optimizer
 
-    def _on_epoch_start(self, trainer: Any) -> None:
-        enforce_frozen_modules_eval(unwrap_model(trainer.model))
+    def _model_train(self) -> None:
+        """Enter train mode, then restore immutable frozen BN and attention state."""
+
+        super()._model_train()
+        enforce_frozen_modules_eval(unwrap_model(self.model))
+
+    @staticmethod
+    def _disable_oom_fallback(trainer: Any) -> None:
+        """Prevent upstream first-epoch OOM recovery from changing the fixed batch."""
+
+        trainer._oom_retries = 3
 
     def _on_epoch_end(self, trainer: Any) -> None:
         assert_frozen_state_unchanged(unwrap_model(trainer.model), self._frozen_snapshot)
@@ -194,7 +208,7 @@ def write_training_manifest(
         "parent": {"path": str(weights.resolve()), "sha256": file_sha256(weights)},
         "fresh_optimizer_scheduler_ema": True,
         "automatic_batch_fallback": False,
-        "gradient_accumulation": False,
+        "gradient_accumulation": common.gradient_accumulation,
         "environment": {
             "python": sys.version,
             "platform": platform.platform(),

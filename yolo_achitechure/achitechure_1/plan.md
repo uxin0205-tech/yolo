@@ -454,17 +454,16 @@ end2end: true
 
 ## 9.3 Epoch 與 Early Stopping
 
-正式主設定：
+目前 staged 主設定：
 
-```yaml
-epochs: 80
-patience: 15
-```
+| Phase | Max epochs | Patience |
+|---|---:|---:|
+| A1 | 5 | 固定跑完 |
+| A2 | 10 | 4 |
+| B | 10 | 4 |
+| C | 55 | 8 |
 
-含義：
-
-- `80` 是最大 epoch。
-- 若 validation fitness 連續 15 epochs 沒有改善，提早停止。
+A2/B 若 Bit-True validation mAP50-95 連續 4 epochs 沒有改善就提早停止；Phase C 的 patience 為 8。
 
 不要使用：
 
@@ -648,12 +647,14 @@ Ball AP
 overall mAP
 compute
 latency
-memory
 ```
+
+其中 latency 必須在同一張正式 GPU、相同設定下量測。Peak GPU memory 仍需記錄作為容量診斷，但因目前
+開發 smoke 使用 RTX 4080 SUPER、正式訓練與最終 profiling 預定使用 RTX 5090，VRAM 不參與 winner 排名。
 
 例如：
 
-> 如果 Partial75 只犧牲極少 accuracy，但能明顯降低 compute / memory / latency，則 Partial75 可以優先成為最終硬體導向設計。
+> 如果 Partial75 只犧牲極少 accuracy，但能明顯降低 compute / latency，則 Partial75 可以優先成為最終硬體導向設計。
 
 本研究真正要回答：
 
@@ -687,7 +688,7 @@ memory
    - baseline；
    - Full35；
    - Partial75。
-5. 使用 MuSGD、最大 80 epochs、`patience=15` 的 training config / script。
+5. 使用 MuSGD、staged 最大 80 epochs、A2/B `patience=4`、C `patience=8` 的 training config / script。
 6. Smoke-test script。
 7. Pretrained weight transfer 驗證結果或驗證 script。
 8. Parameters / FLOPs / latency benchmark script 或執行命令。
@@ -804,8 +805,8 @@ residual alpha = 0.01
 ```text
 pretrained YOLO26m
 optimizer = MuSGD
-max epochs = 80
-patience = 15
+max staged epochs = 80
+patience = A2/B: 4, C: 8
 imgsz = 640
 AMP = on
 end2end = true

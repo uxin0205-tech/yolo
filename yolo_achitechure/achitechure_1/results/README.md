@@ -7,4 +7,6 @@ The historical 2026-08-17 smoke attempt stopped because another attention proces
 With that queue complete, the unchanged batch-16/640 official-loss probes passed on 2026-08-18: Full35 peaked at
 `18,397,301,760` bytes and Partial75 at `17,761,890,304` bytes. No smaller batch, accumulation, or P3 MASF MACs run
 was used. This is historical capacity evidence only; the GPU is currently considered externally blocked and no
-formal run may start without explicit clearance.
+formal run may start without explicit clearance. Development checks may use the RTX 4080 SUPER, but formal training
+and final comparable latency profiling are reserved for the RTX 5090. Peak VRAM remains in the results table as a
+capacity diagnostic and never participates in winner selection.

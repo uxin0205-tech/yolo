@@ -105,11 +105,14 @@ def profile_training_step(
     imgsz: int = 640,
     device_name: str = "0",
     steps: int = 3,
+    accumulate: int = 1,
 ) -> Path:
-    """Measure official YOLO loss forward/backward/step at the immutable formal batch."""
+    """Measure official YOLO loss with an optional gradient-accumulation window."""
 
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is required for the formal training-step profile")
+    if accumulate < 1:
+        raise ValueError("accumulate must be positive")
     device = torch.device(f"cuda:{device_name}")
     model = YOLO(str(checkpoint.resolve())).model
     convert_yolo26_model(model, VariantConfig.from_yaml(float_attention_config))
@@ -133,14 +136,18 @@ def profile_training_step(
     for _ in range(steps):
         optimizer.zero_grad(set_to_none=True)
         start = time.perf_counter()
-        loss, _ = model(targets)
-        loss.sum().backward()
+        for _ in range(accumulate):
+            loss, _ = model(targets)
+            loss.sum().backward()
         optimizer.step()
         _sync(device)
         timings.append((time.perf_counter() - start) * 1000.0)
     payload = {
+        "status": "passed",
         "checkpoint": str(checkpoint.resolve()),
         "batch": batch,
+        "accumulate": accumulate,
+        "effective_batch": batch * accumulate,
         "imgsz": imgsz,
         "steps": steps,
         "train_step_ms": {"p50": statistics.median(timings), "mean": statistics.fmean(timings)},

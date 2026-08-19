@@ -63,23 +63,26 @@ putting a frozen Detect module into eval changes its public output from training
 | Phase | Epochs | Trainable scope | LR groups | Warmup | Schedule | Patience |
 |---|---:|---|---|---:|---|---:|
 | A1 | 5 | MASF only | MASF `1.0e-3` | 0.5 | constant | fixed phase |
-| A2 | 10 | MASF only | MASF `3.8e-4` | 0 | cosine to 50% | fixed phase |
-| B | 10 | MASF + actual Neck/Detect, attention frozen | MASF `3.8e-4`; Neck/Detect `1.9e-4` | 1 | cosine to 50% | fixed phase |
-| C | ≤55 | full model | MASF `3.8e-4`; Neck/Detect `1.9e-4`; Backbone `3.8e-5`; attention `5e-6` | 1 | cosine to 10% | 5 |
+| A2 | ≤10 | MASF only | MASF `3.8e-4` | 0 | cosine to 50% | 4 |
+| B | ≤10 | MASF + actual Neck/Detect, attention frozen | MASF `3.8e-4`; Neck/Detect `1.9e-4` | 1 | cosine to 50% | 4 |
+| C | ≤55 | full model | MASF `3.8e-4`; Neck/Detect `1.9e-4`; Backbone `3.8e-5`; attention `5e-6` | 1 | cosine to 10% | 8 |
 
 Momentum is 0.948 and Conv weight decay is 0.00027. Alpha, biases, and BatchNorm parameters have no decay.
 Every epoch's best/early-stop metric is measured on a deep-copied, actually converted Bit-True PWL EMA model;
 Float-PWL remains the differentiable training model.
 
-A2 and B roll back when the child Bit-True mAP50-95 loses more than 0.001 to its accepted parent. Phase C retains
-its parent unless it strictly improves it. Phase A/B never stop early.
+A2 and B stop after four consecutive epochs without a higher Bit-True mAP50-95, then roll back when the child loses
+more than 0.001 to its accepted parent. Phase C retains its parent unless it strictly improves it. A1 remains a
+fixed five-epoch phase.
 
 ## Winner tuning and selection
 
-A1 versus A2 is selected by Bit-True COCO2017 mAP50-95. Within 0.001, lower FP16 p50 latency wins, followed by
-lower GFLOPs, Params, and peak VRAM. The architecture winner then starts T1/T2/T3 from the exact same Float winner
-checkpoint with MASF LR 0.0002, 0.00038, or 0.0006. Other LR groups preserve Phase-C ratios. Each continuation runs
-at most ten epochs with patience five and a fresh optimizer.
+A1 versus A2 is selected by Bit-True COCO2017 mAP50-95. Within 0.001, lower same-GPU FP16 p50 latency wins,
+followed by lower GFLOPs and Params. Peak VRAM is recorded only as a capacity diagnostic and never ranks candidates,
+because development checks may run on an RTX 4080 SUPER while formal training and final profiling run on an RTX
+5090. The architecture winner then starts T1/T2/T3 from the exact same Float winner checkpoint with MASF LR 0.0002,
+0.00038, or 0.0006. Other LR groups preserve Phase-C ratios. Each continuation runs at most ten epochs with patience
+five and a fresh optimizer.
 
 Formal candidates are A0, accepted A1/A2 best, and T1/T2/T3 best. Reports must include mAP50-95, mAP50, mAP75,
 AP_S/M/L, recall, class-32 sports-ball AP, class-34 baseball-bat AP, alpha, Params, GFLOPs, FP16 p50 latency, peak

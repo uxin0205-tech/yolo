@@ -14,7 +14,7 @@ class Candidate:
     fp16_p50_ms: float
     gflops: float
     parameters: int
-    peak_vram_gib: float
+    peak_vram_gib: float | None = None
 
 
 def phase_gate(
@@ -36,8 +36,9 @@ def phase_c_candidate(parent_name: str, parent_map: float, child_name: str, chil
 
     return child_name if child_map > parent_map else parent_name
 
+
 def choose_architecture(candidates: tuple[Candidate, ...]) -> Candidate:
-    """Select by Bit-True mAP, then latency/GFLOPs/params/VRAM inside 0.001."""
+    """Select by Bit-True mAP, then same-GPU latency/GFLOPs/params inside 0.001."""
 
     if not candidates:
         raise ValueError("at least one candidate is required")
@@ -49,7 +50,6 @@ def choose_architecture(candidates: tuple[Candidate, ...]) -> Candidate:
             item.fp16_p50_ms,
             item.gflops,
             item.parameters,
-            item.peak_vram_gib,
             item.name,
         ),
     )

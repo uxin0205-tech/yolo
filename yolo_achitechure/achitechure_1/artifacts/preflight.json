@@ -7,15 +7,15 @@
   "environment": {
     "cuda_available": true,
     "cuda_runtime": "12.8",
-    "driver": "595.71.05",
-    "gpu": "NVIDIA GeForce RTX 5090",
+    "driver": null,
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
     "musgd": "ultralytics.optim.muon.MuSGD",
-    "python": "3.12.3",
+    "python": "3.14.4",
     "torch": "2.11.0+cu128",
     "ultralytics": "8.4.90",
-    "ultralytics_source": "/home/uxin/yolo/yolo_p2/ultralytics",
-    "vram_bytes": 33661911040,
-    "vram_free_bytes": 32770097152
+    "ultralytics_source": "/home/uxin/yolo/.venv/lib/python3.14/site-packages/ultralytics",
+    "vram_bytes": 17170956288,
+    "vram_free_bytes": 15761145856
   },
   "errors": [],
   "fresh_process_reload": {
@@ -111,7 +111,5 @@
     ]
   },
   "valid": true,
-  "warnings": [
-    "pycocotools is not installed; install the evaluation extra before formal AP_S/AP_M/AP_L validation"
-  ]
+  "warnings": []
 }

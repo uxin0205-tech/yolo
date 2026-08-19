@@ -42,14 +42,17 @@ class CommonTrainingConfig:
     mixup: float
     cutmix: float
     copy_paste: float
+    gradient_accumulation: bool = False
 
     def __post_init__(self) -> None:
         if self.batch < 1 or self.imgsz < 1 or self.workers < 0:
             raise ValueError("batch/imgsz must be positive and workers non-negative")
         if self.optimizer != "MuSGD":
             raise ValueError("formal experiments require optimizer=MuSGD")
-        if self.nbs != self.batch:
+        if self.nbs != self.batch and not self.gradient_accumulation:
             raise ValueError("nbs must equal batch so gradient accumulation remains disabled")
+        if self.gradient_accumulation and (self.nbs <= self.batch or self.nbs % self.batch):
+            raise ValueError("gradient accumulation requires nbs to be an integer multiple above batch")
         if not self.end2end:
             raise ValueError("end2end=True is mandatory")
 
@@ -62,6 +65,7 @@ class CommonTrainingConfig:
 
     def to_ultralytics_args(self, phase: PhaseSpec, *, project: Path, name: str) -> dict[str, Any]:
         args = asdict(self)
+        args.pop("gradient_accumulation")
         args.update(
             epochs=phase.epochs,
             patience=phase.patience,

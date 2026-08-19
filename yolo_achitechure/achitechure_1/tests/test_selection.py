@@ -20,3 +20,16 @@ def test_map_wins_when_difference_exceeds_point001() -> None:
     fast = Candidate("a2", 0.5000, 1.0, 30.0, 20_000_000, 10.0)
 
     assert choose_architecture((accurate, fast)).name == "a1"
+
+
+def test_vram_is_diagnostic_only_and_does_not_rank_architectures() -> None:
+    first = Candidate("a1", 0.5, 1.0, 30.0, 20_000_000, 30.0)
+    second = Candidate("a2", 0.5, 1.0, 30.0, 20_000_000, 10.0)
+
+    assert choose_architecture((second, first)).name == "a1"
+
+
+def test_candidate_does_not_require_a_vram_measurement() -> None:
+    candidate = Candidate("a1", 0.5, 1.0, 30.0, 20_000_000)
+
+    assert choose_architecture((candidate,)) is candidate
