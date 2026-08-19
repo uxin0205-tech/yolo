@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from achitechure_2.decisions import (
     CandidateMetrics,
     Decision,
@@ -8,6 +10,7 @@ from achitechure_2.decisions import (
     should_extend,
     trigger_c3_p5_fallback,
     trigger_r1,
+    validate_conditional_candidates,
 )
 
 
@@ -43,3 +46,17 @@ def test_conditional_requires_cost_and_pareto_sort_is_deterministic() -> None:
     assert not no_cost.eligible
     assert choose_c_best((no_cost, candidate_a, candidate_b)) == candidate_b
     assert choose_c_best((no_cost,)) is None
+
+
+def test_conditional_candidates_require_parent_trigger_and_r1_fusion() -> None:
+    c0 = metric("C0", 0.5, 10.0, 100.0)
+    c2 = classify_candidate(metric("C2", 0.493, 9.0, 90.0), c0)
+    r1 = classify_candidate(metric("R1", 0.496, 9.1, 91.0), c0)
+    c3 = classify_candidate(metric("C3", 0.49, 9.0, 90.0), c0)
+    p5 = classify_candidate(metric("C3-P5", 0.496, 9.5, 95.0), c0)
+    with pytest.raises(ValueError, match="fusion"):
+        validate_conditional_candidates((c2, r1))
+    validate_conditional_candidates((c2, r1), r1_fusion_passed=True)
+    validate_conditional_candidates((c3, p5))
+    with pytest.raises(ValueError, match="C3-P5 requires"):
+        validate_conditional_candidates((p5,))

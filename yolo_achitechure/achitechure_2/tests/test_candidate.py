@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import torch
 
-from achitechure_2.candidate import build_candidate
+from achitechure_2.candidate import build_candidate, graft_pose_candidate
 from achitechure_2.config import PROTECTED_C3K2_LAYERS, TARGET_LAYERS
 from achitechure_2.graph import inspect_graph
 from achitechure_2.lite_c3k2 import LiteC3k2
@@ -54,3 +54,21 @@ def test_c3_p5_only_and_r1_are_independent(toy_parent) -> None:
     assert {item.index for item in p5_report.graph.layers if item.class_name == "LiteC3k2"} == {8}
     assert all(item.use_rep and item.inner_n == 1 for item in r1_report.graph.layers)
     assert inspect_graph(r1).masf_variant == "full35"
+
+
+def test_pose_graft_uses_official_pose26_shell_and_preserves_candidate(
+    tmp_path, monkeypatch, toy_parent, pose_parent
+) -> None:
+    import ultralytics.nn.tasks
+
+    monkeypatch.setattr(ultralytics.nn.tasks, "PoseModel", lambda *args, **kwargs: pose_parent)
+    data = tmp_path / "pose.yaml"
+    data.write_text("nc: 2\nnames: [ball, bat]\nkpt_shape: [2, 3]\n", encoding="utf-8")
+    before = {name: value.clone() for name, value in toy_parent.state_dict().items()}
+    model, report = graft_pose_candidate(toy_parent, "C0", data_yaml=data, seed=0)
+    assert report.graph.task == "pose"
+    assert report.graph.head_type == "Pose26"
+    assert report.transfer.loaded
+    assert report.transfer.to_dict()["matched_count"] == report.transfer.loaded_count
+    assert all(torch.equal(before[name], toy_parent.state_dict()[name]) for name in before)
+    assert model.names == ["ball", "bat"]

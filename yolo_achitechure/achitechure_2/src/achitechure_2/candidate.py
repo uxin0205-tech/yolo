@@ -37,6 +37,8 @@ class TransferReport:
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
+        payload["matched"] = payload["loaded"]
+        payload["matched_count"] = self.loaded_count
         payload["loaded_count"] = self.loaded_count
         return payload
 
@@ -130,6 +132,60 @@ def build_candidate(
         if type(layers[index]) is not type(network_layers(parent)[index]):
             raise AssertionError(f"protected layer {index} changed class")
     return model, CandidateBuild(candidate_id, graph, transfer)
+
+
+def graft_pose_candidate(
+    detect_candidate: nn.Module,
+    candidate_id: str,
+    *,
+    data_yaml: str | Path,
+    seed: int = 0,
+) -> tuple[nn.Module, CandidateBuild]:
+    """Graft the validated candidate trunk into the official local YOLO26m Pose26 graph."""
+
+    from ultralytics.nn.tasks import PoseModel
+
+    candidate_id = candidate_id.upper()
+    if candidate_id not in CANDIDATES:
+        raise ValueError(f"unknown candidate {candidate_id}")
+    spec = CANDIDATES[candidate_id]
+    source_graph = assert_candidate_graph(detect_candidate, candidate_id, spec.target_layers)
+    if source_graph.task != "detect":
+        raise TypeError(f"Pose graft requires a Detect candidate, got {source_graph.task}")
+    dataset = __import__("yaml").safe_load(Path(data_yaml).read_text(encoding="utf-8"))
+    if not isinstance(dataset, dict) or dataset.get("kpt_shape") != [2, 3]:
+        raise ValueError("Pose dataset must declare kpt_shape [2, 3]")
+    names = dataset.get("names")
+    nc = int(dataset.get("nc", len(names) if isinstance(names, (list, dict)) else 0))
+    if nc <= 0:
+        raise ValueError("Pose dataset must declare nc/names")
+
+    source_state = {name: value.detach().clone() for name, value in detect_candidate.state_dict().items()}
+    source_layers = network_layers(detect_candidate)
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(seed)
+        pose = PoseModel(
+            "yolo26m-pose.yaml",
+            nc=nc,
+            data_kpt_shape=tuple(dataset["kpt_shape"]),
+            verbose=False,
+        )
+    pose_layers = network_layers(pose)
+    for index in range(23):
+        pose_layers[index] = copy.deepcopy(source_layers[index])
+    first_parameter = next(detect_candidate.parameters())
+    pose = pose.to(device=first_parameter.device, dtype=first_parameter.dtype)
+    pose.names = names
+    transfer = _transfer(pose, source_state, seed)
+    graph = assert_candidate_graph(pose, candidate_id, spec.target_layers)
+    if graph.task != "pose" or graph.head_type != "Pose26":
+        raise AssertionError(f"official Pose26 graft failed: {graph.head_type}")
+    if graph.masf_variant != source_graph.masf_variant:
+        raise AssertionError("Pose graft changed inherited MASF")
+    current = detect_candidate.state_dict()
+    if any(not torch.equal(value, current[name]) for name, value in source_state.items()):
+        raise AssertionError("Pose graft mutated the Detect candidate")
+    return pose, CandidateBuild(candidate_id, graph, transfer)
 
 
 def write_build_report(report: CandidateBuild, destination: str | Path) -> Path:

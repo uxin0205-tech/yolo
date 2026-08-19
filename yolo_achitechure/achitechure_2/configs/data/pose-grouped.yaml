@@ -1,0 +1,30 @@
+# Ultralytics dataset YAML；project_metadata 只提供本案 provenance 與中文說明。
+schema_version: 2
+spec_version: 1.2.0
+spec_sha256: 34467463b4cb7ae4b0eb4b57c1a22a04d00097a9de9b71392f6495c15b093ea7
+kind: dataset
+project_metadata:
+  title_zh: Grouped Pose 資料集
+  summary_zh: 依 .rf. 前來源群組隔離的 90/10 train/val；沒有 test split。
+  task: pose
+  ultralytics_dataset_yaml: true
+path: yolo_achitechure/achitechure_2/artifacts/datasets/pose_grouped
+train: images/train
+val: images/val
+kpt_shape:
+- 2
+- 3
+flip_idx:
+- 0
+- 1
+nc: 2
+names:
+- ball
+- bat
+source_read_only: ../../original/pose/bbt5.v1i.yolov8
+group_key: prefix_before_.rf.
+split_ratio:
+- 0.9
+- 0.1
+split_seed: 0
+test: null

@@ -1,33 +1,32 @@
-# achitechure_2 runbook
+# architecture_2 執行手冊
 
-Commands below are dry runs unless `--execute` is present. Run from this directory with the repository environment:
+所有命令都從本目錄執行，且預設只預覽。除非命令明確帶有 `--execute`，否則不寫入模型或啟動訓練；Pose 另要求 `--enable-pose`。
+訓練一律推薦使用 `--config` 指定一份完整正式 YAML；檔案總表在 `configs/README.md`。
 
 ```bash
 export PYTHONPATH="$PWD/src:$PWD/../achitechure_1/src:$PWD/../../yolo_attention_final/src"
 PY=/home/uxin/yolo/.venv/bin/python
 $PY -c "import torch, ultralytics; print(torch.__version__, ultralytics.__version__)"
-$PY -c "import pycocotools; print(pycocotools.__version__ if hasattr(pycocotools, '__version__') else 'installed')"
-$PY -m achitechure_2 preflight
+$PY -m achitechure_2 config-check
+$PY -m achitechure_2 prepare-pose-data
 $PY -m pytest
+$PY -m achitechure_2 preflight
 ```
 
-Do not start formal work if `pycocotools` is absent, CUDA/batch 16 is unavailable, the repo revision is not recorded,
-or the handoff is incomplete.
+`config-check` 必須通過。`preflight` 另外要求 CUDA、pycocotools 與已驗收上游交付。
 
-## Gate 1 — accept the final achitechure_1 handoff
+## 1. 驗收 architecture_1 交付
 
-Copy `handoff-manifest.example.json` outside tracked results, fill it with the final Float-PWL and Bit-True checkpoint
-pair, actual SHA256 values and model-selection provenance, then preview and execute:
+由 `handoff-manifest.example.json` 建立不納入版本控制的 manifest：
 
 ```bash
 $PY -m achitechure_2 intake --manifest /absolute/path/handoff.json
 $PY -m achitechure_2 intake --manifest /absolute/path/handoff.json --execute
 ```
 
-The command rejects missing MASF, the wrong variant/backend, wrong attention paths, non-YOLO26m Detect geometry,
-version/hash mismatches, and fresh-process reload failure. `artifacts/intake/accepted.json` is the only formal gate.
+正式記錄位於 `artifacts/intake/accepted.json`，會驗證 checkpoint hashes/backends、MASF、attention paths、YOLO26m 三尺度 geometry、版本、selection manifest 與 fresh-process reload。
 
-## Gate 2 — independently build C0–C3
+## 2. 獨立建立候選
 
 ```bash
 for id in C0 C1 C2 C3; do
@@ -38,77 +37,111 @@ for id in C0 C1 C2 C3; do
 done
 ```
 
-Each build reloads the same accepted Float parent, writes its own checkpoint and transfer report, and asserts class,
-channels, outer repeats, e, inner depth, kernels, Rep flag, MASF, and both attention paths.
+每個輸出包含 `transfer-report.json`、`architecture-snapshot.yaml` 與 `lineage.json`。Snapshot 只供審查，不可獨立載入。
 
-## Gate 3 — smoke, formal A, and conditional extension B
-
-Preview each command first. Smoke metrics are never used for ranking.
+## 3. Detect D0／D1／D2
 
 ```bash
-$PY -m achitechure_2 train --candidate C0 --checkpoint artifacts/candidates/c0/float-parent.pt --stage smoke --run-id c0-smoke --smoke-epochs 3 --execute
-$PY -m achitechure_2 train --candidate C0 --checkpoint artifacts/candidates/c0/float-parent.pt --stage formal --run-id c0-formal --execute
+$PY -m achitechure_2 train --config configs/training/detect/d0-smoke.yaml --candidate C0 --checkpoint artifacts/candidates/c0/float-parent.pt --run-id c0-d0 --smoke-epochs 3
+$PY -m achitechure_2 train --config configs/training/detect/d0-smoke.yaml --candidate C0 --checkpoint artifacts/candidates/c0/float-parent.pt --run-id c0-d0 --smoke-epochs 3 --execute
+$PY -m achitechure_2 train --config configs/training/detect/d1-main.yaml --candidate C0 --checkpoint artifacts/candidates/c0/float-parent.pt --run-id c0-d1 --execute
 ```
 
-Repeat unchanged for C1, C2, and C3. Materialize and validate each selected Bit-True checkpoint in separate CLI processes, then profile with identical settings:
-
-```bash
-$PY -m achitechure_2 materialize-bittrue --checkpoint /path/to/best-float.pt --output /path/to/best-bittrue.pt --execute
-$PY -m achitechure_2 validate-bittrue --checkpoint /path/to/best-bittrue.pt --run-id c0-fresh-bittrue --execute
-$PY -m achitechure_2 profile --checkpoint /path/to/best-bittrue.pt --output artifacts/runs/c0-formal/profile.json --warmup 20 --iterations 100 --execute
-```
-
-Export the 100 one-based Bit-True mAP values as a JSON array and inspect the
-extension gate:
+C1/C2/C3 使用完全相同命令與預算。D0 不排名。D1 跑滿後，用 100 個從 epoch 1 起算的 Bit-True 指標檢查延長門檻：
 
 ```bash
 $PY -m achitechure_2 extension-gate --metrics /path/to/epoch-map.json --best-epoch 91
-$PY -m achitechure_2 train --candidate C0 --checkpoint /path/to/c0/last.pt --stage extension --run-id c0-extension --execute
+$PY -m achitechure_2 train --config configs/training/detect/d2-extension.yaml --candidate C0 --checkpoint /path/to/d1/last.pt --run-id c0-d2 --execute
 ```
 
-Run the extension command only when the gate returns `extend=true`. It resumes optimizer/scheduler state from
-`last.pt`. After every run, perform validation/profile in a fresh process and record Params, GFLOPs, FP16 batch-1
-latency (same warmup/iterations/device), peak CUDA memory, resolved args, git revision, config/checkpoint hashes, best
-epoch, and stop reason.
+只有 `extend=true` 才執行 D2。選定 checkpoint 要在獨立程序 materialize、reload、validate 與 profile：
 
-## Gate 4 — decide and run conditional branches
+```bash
+$PY -m achitechure_2 materialize-bittrue --candidate C0 --checkpoint /path/best-float.pt --output /path/best-bittrue.pt --execute
+$PY -m achitechure_2 validate-bittrue --checkpoint /path/best-bittrue.pt --run-id c0-fresh --execute
+$PY -m achitechure_2 profile --checkpoint /path/best-bittrue.pt --output artifacts/runs/c0-d1/profile.json --warmup 20 --iterations 100 --execute
+```
 
-Each metrics JSON has fields `candidate_id`, `map50_95`, `latency_ms`, `gflops`, and `params`.
+## 4. 選型與條件候選
 
 ```bash
 $PY -m achitechure_2 assess --c0 /path/c0.json --candidate /path/c1.json --candidate /path/c2.json --candidate /path/c3.json
 $PY -m achitechure_2 assess --c0 /path/c0.json --candidate /path/c1.json --candidate /path/c2.json --candidate /path/c3.json --execute
 ```
 
-If `triggers.c3_p5` is true, independently build/train `C3-P5`. If `triggers.r1` is true, independently build/train R1
-and run its fusion equivalence check before selection or quantization. Never combine R1 with C1/C3. A null `c_best`
-ends the quantization mainline.
-
-## Gate 5 — Q0/Q1/Q2 for C0 and C_best only
-
-`fuse-reference` materializes Q0 and proves it reloads. `quant-prepare` refuses any candidate other than C0 and the winner in `artifacts/selection.json`; pass the fused Q0 checkpoint into Q1; prepare the trainable Q2 graph separately from the unfused Float best checkpoint.
+只有 `triggers.c3_p5` 可授權 C3-P5，只有 `triggers.r1` 可授權 R1。R1 必須先提供機器可讀的 RepConv fusion 證據：
 
 ```bash
-$PY -m achitechure_2 fuse-reference --candidate C0 --checkpoint /path/to/c0/best-float.pt --output artifacts/quant/c0/q0/fused.pt --execute
-$PY -m achitechure_2 quant-prepare --candidate C0 --checkpoint artifacts/quant/c0/q0/fused.pt --output artifacts/quant/c0/q1/prepared.pt
+$PY -m achitechure_2 rep-fusion --checkpoint /path/r1/best-float.pt --output artifacts/runs/r1/fusion.json
+$PY -m achitechure_2 rep-fusion --checkpoint /path/r1/best-float.pt --output artifacts/runs/r1/fusion.json --execute
+$PY -m achitechure_2 assess --c0 /path/c0.json --candidate /path/c1.json --candidate /path/c2.json --candidate /path/c3.json --candidate /path/r1.json --r1-fusion-report artifacts/runs/r1/fusion.json --execute
+```
+
+C_best 為 null 時，停止下游比較與量化主線。
+
+## 5. 建立 grouped Pose 資料（不執行 Pose）
+
+```bash
+$PY -m achitechure_2 prepare-pose-data
+$PY -m achitechure_2 prepare-pose-data --execute
+```
+
+執行只建立 `artifacts/datasets/pose_grouped`：影像 symlink、標籤副本、`split-manifest.json` 與 `patch-manifest.json`。來源保持唯讀，不建立 test split。這項命令完全不需要 `--enable-pose`，因為它只準備資料，不會建模或訓練。
+
+## 6. 可選的 Pose P0–P4
+
+本節全部是選用流程。未提供 `--enable-pose --execute` 就不會執行 Pose。
+
+先預覽 graft：
+
+```bash
+$PY -m achitechure_2 build-pose --candidate C0 --checkpoint artifacts/candidates/c0/float-parent.pt
+```
+
+你決定執行後才使用：
+
+```bash
+$PY -m achitechure_2 build-pose --candidate C0 --checkpoint artifacts/candidates/c0/float-parent.pt --enable-pose --execute
+$PY -m achitechure_2 train --config configs/training/pose/p0-smoke.yaml --candidate C0 --checkpoint /path/to/c0-pose-graft.pt --run-id pose-c0-p0 --enable-pose --execute
+$PY -m achitechure_2 train --config configs/training/pose/p1-head-only.yaml --candidate C0 --checkpoint /path/to/c0-pose-graft.pt --run-id pose-c0-p1 --enable-pose --execute
+$PY -m achitechure_2 train --config configs/training/pose/p2-neck-head.yaml --candidate C0 --checkpoint /path/to/p1/best.pt --run-id pose-c0-p2 --enable-pose --execute
+$PY -m achitechure_2 train --config configs/training/pose/p3-full.yaml --candidate C0 --checkpoint /path/to/p2/best.pt --run-id pose-c0-p3 --enable-pose --execute
+```
+
+P3 跑滿且通過晚期改善門檻後才可 P4：
+
+```bash
+$PY -m achitechure_2 train --config configs/training/pose/p4-extension.yaml --candidate C0 --checkpoint /path/to/p3/last.pt --run-id pose-c0-p4 --enable-pose --execute
+$PY -m achitechure_2 validate-bittrue --task pose --checkpoint /path/to/pose-bittrue.pt --run-id pose-c0-fresh --enable-pose --execute
+```
+
+實際 C_best 使用相同流程。P1/P2/P3 建立新 optimizer；P4 是真正 resume。
+
+## 7. 未來雙權重／雙架構融合
+
+先複製 `configs/fusion/source-pair.template.yaml` 到實驗產物目錄，填入來源 A/B checkpoint、architecture YAML、head contract 與 hashes。模板目前 `enabled=false`，且不得填寫 `fusion_mode` 或 `switch_policy`，直到你明確選擇以下其中一種語意：weight interpolation、ensemble、routed switch 或 staged transfer。此版本不會自動融合。
+
+## 8. Q0／Q1／Q2
+
+只允許 C0 與已記錄的 C_best：
+
+```bash
+$PY -m achitechure_2 fuse-reference --candidate C0 --checkpoint /path/c0/best-float.pt --output artifacts/quant/c0/q0/fused.pt --execute
 $PY -m achitechure_2 quant-prepare --candidate C0 --checkpoint artifacts/quant/c0/q0/fused.pt --output artifacts/quant/c0/q1/prepared.pt --execute
-$PY -m achitechure_2 quant-calibrate --checkpoint artifacts/quant/c0/q1/prepared.pt --calibration-tensors /path/to/fixed-calibration-images.pt --output artifacts/quant/c0/q1/calibrated.pt --execute
-$PY -m achitechure_2 quant-prepare --candidate C0 --checkpoint /path/to/c0/best-float.pt --output artifacts/quant/c0/q2/prepared.pt --execute
-$PY -m achitechure_2 train --candidate C0 --checkpoint artifacts/quant/c0/q2/prepared.pt --stage qat --run-id c0-q2 --execute
+$PY -m achitechure_2 quant-calibrate --checkpoint artifacts/quant/c0/q1/prepared.pt --calibration-tensors /path/fixed-images.pt --output artifacts/quant/c0/q1/calibrated.pt --execute
+$PY -m achitechure_2 quant-prepare --candidate C0 --checkpoint /path/c0/best-float.pt --output artifacts/quant/c0/q2/prepared.pt --execute
+$PY -m achitechure_2 train --config configs/training/detect/q2-qat.yaml --candidate C0 --checkpoint artifacts/quant/c0/q2/prepared.pt --run-id c0-q2 --execute
 $PY -m achitechure_2 quant-report --q0 0.50 --q1 0.49 --q2 0.497
 ```
 
-Export the fixed calibration split once as a normalized FP32 tensor with shape `[N, 3, 640, 640]`; `quant-calibrate` records the consumed batch count and freezes its observers before fake-quant Bit-True evaluation. For Q2, use the same adapter,
-fine-tune 10–15 epochs at 0.1× the inherited architecture LR; the QAT trainer calls `configure_qat_epoch` and freezes observers after epoch 3. Both checkpoints require fresh-process Bit-True validation. All tables and manifests
-must say `simulation_only=true`.
+所有量化記錄都必須保留 `simulation_only=true`。
 
-## Finalization
-
-Only after all required fresh-process validations succeed, copy `results/results-template.csv` to `results/results.csv`
-and `results/report-template.md` to `REPORT.md`, populate them without blanks, and check:
+## 9. 收尾驗證
 
 ```bash
+$PY -m achitechure_2 config-check
+$PY -m pytest
 git status --short --branch
 ```
 
-Keep datasets, weights, predictions, plots, calibration caches, and benchmark outputs out of source directories.
+完成所有 fresh-process validation 後，才由範本建立 `results/results.csv` 與 `REPORT.md`，並記錄硬體、seed、physical batch、resolved config、transfer 結果、hashes、停止原因與指標。

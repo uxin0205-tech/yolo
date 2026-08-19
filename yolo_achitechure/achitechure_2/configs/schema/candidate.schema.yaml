@@ -1,0 +1,122 @@
+# JSON Schema Draft 2020-12；可供外部 validator 使用。
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: candidate.schema.yaml
+title: architecture_2 架構候選
+type: object
+additionalProperties: false
+required:
+- schema_version
+- spec_version
+- spec_sha256
+- kind
+- title_zh
+- summary_zh
+- status
+- task_contracts
+- scale
+- candidate_id
+- parent_policy
+- target_layers
+- protected_layers
+- factors
+- inherited
+- heads
+- conditions
+- forbidden_combinations
+- standalone_loadable
+- builder
+- architecture_delta
+properties:
+  schema_version:
+    const: 2
+  spec_version:
+    const: 1.2.0
+  spec_sha256:
+    type: string
+    pattern: ^[0-9a-f]{64}$
+  kind:
+    const: architecture_candidate
+  title_zh:
+    type: string
+  summary_zh:
+    type: string
+  status:
+    enum:
+    - required
+    - conditional
+  task_contracts:
+    const:
+    - detect
+    - pose
+  scale:
+    const: m
+  candidate_id:
+    enum:
+    - C0
+    - C1
+    - C2
+    - C3
+    - C3-P5
+    - R1
+  parent_policy:
+    type: object
+  target_layers:
+    type: array
+    items:
+      type: integer
+    uniqueItems: true
+  protected_layers:
+    const:
+    - 2
+    - 4
+    - 16
+    - 22
+  factors:
+    type: object
+    additionalProperties: false
+    required:
+    - e
+    - inner_n
+    - kernel_mode
+    - use_rep
+    properties:
+      e:
+        type: number
+        exclusiveMinimum: 0
+      inner_n:
+        type: integer
+        minimum: 1
+      kernel_mode:
+        enum:
+        - 3x3_3x3
+        - 1x1_3x3
+      use_rep:
+        type: boolean
+  inherited:
+    type: object
+  heads:
+    type: object
+    properties:
+      detect:
+        type: object
+        properties:
+          type:
+            const: Detect
+      pose:
+        type: object
+        properties:
+          type:
+            const: Pose26
+  conditions:
+    type: object
+  forbidden_combinations:
+    const:
+    - C1+C2
+    - C1+C3
+    - C2+C3
+  standalone_loadable:
+    const: false
+  builder:
+    const: achitechure_2
+  architecture_delta:
+    type: object

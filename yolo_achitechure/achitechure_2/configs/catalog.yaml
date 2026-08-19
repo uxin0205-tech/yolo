@@ -1,0 +1,37 @@
+# 所有正式設定的唯一目錄；新增設定時必須在此登錄。
+schema_version: 2
+spec_version: 1.2.0
+spec_sha256: 34467463b4cb7ae4b0eb4b57c1a22a04d00097a9de9b71392f6495c15b093ea7
+kind: config_catalog
+title_zh: architecture_2 正式設定目錄
+readme: configs/README.md
+authoritative_spec: EXPERIMENT_SPEC.md
+architectures:
+  C0: configs/candidates/c0.yaml
+  C1: configs/candidates/c1-e0375.yaml
+  C2: configs/candidates/c2-n1.yaml
+  C3: configs/candidates/c3-mixed.yaml
+  C3-P5: configs/candidates/c3-p5-only.yaml
+  R1: configs/candidates/r1-rep.yaml
+training:
+  detect-d0-smoke: configs/training/detect/d0-smoke.yaml
+  detect-d1-main: configs/training/detect/d1-main.yaml
+  detect-d2-extension: configs/training/detect/d2-extension.yaml
+  detect-q2-qat: configs/training/detect/q2-qat.yaml
+  pose-p0-smoke: configs/training/pose/p0-smoke.yaml
+  pose-p1-head-only: configs/training/pose/p1-head-only.yaml
+  pose-p2-neck-head: configs/training/pose/p2-neck-head.yaml
+  pose-p3-full: configs/training/pose/p3-full.yaml
+  pose-p4-extension: configs/training/pose/p4-extension.yaml
+datasets:
+  coco2017: configs/data/coco2017.yaml
+  pose-grouped: configs/data/pose-grouped.yaml
+quantization: configs/quant/w8a8-simulation.yaml
+fusion_template: configs/fusion/source-pair.template.yaml
+schemas:
+  catalog: configs/schema/catalog.schema.yaml
+  candidate: configs/schema/candidate.schema.yaml
+  training: configs/schema/training.schema.yaml
+  dataset: configs/schema/dataset.schema.yaml
+  quantization: configs/schema/quantization.schema.yaml
+  fusion: configs/schema/fusion.schema.yaml

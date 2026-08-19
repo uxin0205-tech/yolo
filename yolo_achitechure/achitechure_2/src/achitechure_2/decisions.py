@@ -107,3 +107,24 @@ def choose_c_best(decisions: Iterable[CandidateDecision]) -> CandidateDecision |
             item.metrics.params,
         ),
     )
+
+
+def validate_conditional_candidates(
+    decisions: Iterable[CandidateDecision],
+    *,
+    r1_fusion_passed: bool = False,
+) -> None:
+    """Reject fallback/recovery results that bypass their parent trigger or R1 fusion gate."""
+
+    items = tuple(decisions)
+    by_id = {item.metrics.candidate_id: item for item in items}
+    if "C3-P5" in by_id:
+        c3 = by_id.get("C3")
+        if c3 is None or not trigger_c3_p5_fallback(c3):
+            raise ValueError("C3-P5 requires a C3 drop > 0.008 trigger")
+    if "R1" in by_id:
+        c2 = by_id.get("C2")
+        if c2 is None or not trigger_r1(c2):
+            raise ValueError("R1 requires an eligible CONDITIONAL C2 trigger")
+        if not r1_fusion_passed:
+            raise ValueError("R1 requires fusion max_abs_diff <= 1e-4 evidence")

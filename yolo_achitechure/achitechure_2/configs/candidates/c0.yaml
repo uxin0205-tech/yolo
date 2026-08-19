@@ -1,3 +1,77 @@
+# 正式架構候選；不可直接傳給 YOLO(yaml)，必須由 achitechure_2 builder graft。
+schema_version: 2
+spec_version: 1.2.0
+spec_sha256: 34467463b4cb7ae4b0eb4b57c1a22a04d00097a9de9b71392f6495c15b093ea7
+kind: architecture_candidate
+title_zh: C0：原始 C3k2 參考組
+summary_zh: 不修改目標 C3k2，作為所有成本與精度差異的比較基準。
+status: required
+task_contracts:
+- detect
+- pose
+scale: m
 candidate_id: C0
+parent_policy:
+  source: accepted_float_pwl
+  independence: same_parent
+  seed: 0
 target_layers: []
-change: none
+protected_layers:
+- 2
+- 4
+- 16
+- 22
+factors:
+  e: 0.5
+  inner_n: 2
+  kernel_mode: 3x3_3x3
+  use_rep: false
+inherited:
+  masf:
+    variant: architecture_1_selected
+    frozen: true
+    path: model.16.p3_masf
+  attention:
+    frozen: true
+    paths:
+    - model.10.m.0.attn
+    - model.22.m.0.1.attn
+heads:
+  detect:
+    type: Detect
+    inputs:
+    - 16
+    - 19
+    - 22
+    strides:
+    - 8
+    - 16
+    - 32
+  pose:
+    type: Pose26
+    inputs:
+    - 16
+    - 19
+    - 22
+    strides:
+    - 8
+    - 16
+    - 32
+conditions:
+  base_candidate: null
+  trigger: null
+forbidden_combinations:
+- C1+C2
+- C1+C3
+- C2+C3
+standalone_loadable: false
+builder: achitechure_2
+architecture_delta:
+  changed_zh:
+  - 無
+  unchanged_zh:
+  - protected layers 2、4、16、22
+  - inherited MASF 與 attention
+  - Detect/Pose26 head inputs 與 strides
+  expected_effects_zh:
+  - 參數量、FLOPs、VRAM、receptive field 與 latency 應與 parent 一致

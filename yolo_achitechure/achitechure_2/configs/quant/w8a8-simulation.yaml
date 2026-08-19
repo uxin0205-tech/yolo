@@ -1,5 +1,15 @@
+# 正式量化模擬設定；simulation_only 必須保持 true。
+schema_version: 2
+spec_version: 1.2.0
+spec_sha256: 34467463b4cb7ae4b0eb4b57c1a22a04d00097a9de9b71392f6495c15b093ea7
+kind: quantization
+title_zh: W8A8 假量化研究設定
+summary_zh: 比較 Q0 FP32、Q1 PTQ simulation 與 Q2 QAT simulation；不宣稱真實 INT8 部署。
+status: active_after_c_best
 simulation_only: true
-targets: [C0, C_best]
+targets:
+- C0
+- C_best
 weight:
   dtype: int8
   qscheme: per_channel_symmetric
@@ -8,8 +18,10 @@ activation:
   dtype: int8
   qscheme: per_tensor_affine
 include_masf_standard_conv: true
-exclude_custom_roots: [HardwareFriendlyAttention]
+exclude_custom_roots:
+- HardwareFriendlyAttention
 qat:
   epochs: 15
   patience: 5
   observer_update_epochs: 3
+  lr_ratio: 0.1

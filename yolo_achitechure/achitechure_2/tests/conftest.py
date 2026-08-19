@@ -61,6 +61,11 @@ class _C2PSA(nn.Module):
         return value
 
 
+class FlowModel(nn.Module):
+    def forward(self, value):
+        return value
+
+
 class _Detect(nn.Module):
     def __init__(self) -> None:
         super().__init__()
@@ -72,8 +77,19 @@ class _Detect(nn.Module):
         return value
 
 
+class Pose26(_Detect):
+    def __init__(self) -> None:
+        super().__init__()
+        self.flow_model = FlowModel()
+
+
 class ToyYolo(nn.Module):
-    def __init__(self, normalization: str = "piecewise_linear", masf: bool = True) -> None:
+    def __init__(
+        self,
+        normalization: str = "piecewise_linear",
+        masf: bool = True,
+        task: str = "detect",
+    ) -> None:
         super().__init__()
         layers: list[nn.Module] = [nn.Identity() for _ in range(24)]
         for index, channels in ((2, 16), (4, 24), (6, 32), (8, 32), (13, 32), (16, 24), (19, 32)):
@@ -86,7 +102,7 @@ class ToyYolo(nn.Module):
             [nn.Sequential(Bottleneck(layer22.c, layer22.c), _AttentionBlock(normalization))]
         )
         layers[22] = layer22
-        layers[23] = _Detect()
+        layers[23] = Pose26() if task == "pose" else _Detect()
         self.model = nn.Sequential(*layers)
         self.end2end = True
 
@@ -99,3 +115,8 @@ def toy_parent() -> ToyYolo:
 @pytest.fixture
 def bittrue_parent() -> ToyYolo:
     return ToyYolo("bit_true_pwl")
+
+
+@pytest.fixture
+def pose_parent() -> ToyYolo:
+    return ToyYolo(task="pose")

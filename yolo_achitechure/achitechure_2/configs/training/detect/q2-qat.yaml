@@ -1,0 +1,117 @@
+# 正式訓練設定：由 achitechure_2 launcher 讀取。
+# 所有常用訓練、資料比例、augmentation、cache 與驗證參數都在本檔。
+# Ultralytics 的 batch size 鍵名是 batch，不是 batch_size。
+schema_version: 2
+spec_version: 1.2.0
+spec_sha256: 34467463b4cb7ae4b0eb4b57c1a22a04d00097a9de9b71392f6495c15b093ea7
+kind: formal_training
+config_id: detect-q2-qat
+title_zh: Detect Q2：W8A8 假量化微調
+summary_zh: 只對 C0 與已記錄的 C_best 執行；結果只代表 simulation，不代表真實 INT8 部署。
+task: detect
+stage: Q2
+status: conditional_quantization
+candidate_policy:
+  mode: c0_or_recorded_c_best
+  allowed_roles:
+  - C0
+  - C_best
+  selection_record: artifacts/selection.json
+execution:
+  launcher: achitechure_2
+  requires_execute_flag: true
+  pose_opt_in_required: false
+  enabled_by_default: false
+  ultralytics_yaml_direct: false
+  runtime_overridable:
+  - model
+  - name
+  - project
+  - device
+  - workers
+  - cache
+dataset: configs/data/coco2017.yaml
+transition:
+  mode: fresh
+  checkpoint_role: quant_prepared_checkpoint
+  gate: c_best_selected
+  description_zh: 輸入必須含 quant-prepare 建立的 Conv fake-quant adapters。
+ranking:
+  architecture_ranking: false
+  research_metric: metrics/mAP50-95(B)
+  selection_backend: bit_true_pwl
+frozen_modules:
+- model.16.p3_masf
+- model.10.m.0.attn
+- model.22.m.0.1.attn
+derived_training:
+  lr0:
+    formula: parent_checkpoint_lr0 * 0.1
+    expected_if_parent_uses_spec: 3.8e-05
+training:
+  task: detect
+  mode: train
+  data: configs/data/coco2017.yaml
+  epochs: 15
+  time: null
+  patience: 5
+  batch: 16
+  imgsz: 640
+  save: true
+  save_period: -1
+  cache: false
+  device: '0'
+  workers: 8
+  pretrained: true
+  optimizer: MuSGD
+  verbose: true
+  seed: 0
+  deterministic: true
+  single_cls: false
+  rect: false
+  cos_lr: false
+  close_mosaic: 10
+  resume: false
+  amp: true
+  fraction: 1.0
+  profile: false
+  freeze: null
+  multi_scale: 0.0
+  compile: false
+  dropout: 0.0
+  lr0: 3.8e-05
+  lrf: 0.882
+  momentum: 0.948
+  weight_decay: 0.00027
+  warmup_epochs: 1.0
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+  nbs: 64
+  end2end: true
+  box: 9.83
+  cls: 0.65
+  dfl: 0.96
+  hsv_h: 0.013
+  hsv_s: 0.353
+  hsv_v: 0.194
+  degrees: 0.0
+  translate: 0.275
+  scale: 0.95
+  shear: 0.0
+  perspective: 0.0
+  flipud: 0.0
+  fliplr: 0.304
+  bgr: 0.0
+  mosaic: 0.992
+  mixup: 0.427
+  cutmix: 0.0
+  copy_paste: 0.304
+  val: true
+  split: val
+  save_json: false
+  conf: null
+  iou: 0.7
+  max_det: 300
+  dnn: false
+  plots: true
+  classes: null

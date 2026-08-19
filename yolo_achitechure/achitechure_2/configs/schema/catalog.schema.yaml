@@ -1,0 +1,52 @@
+# JSON Schema Draft 2020-12；可供外部 validator 使用。
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: catalog.schema.yaml
+title: architecture_2 設定目錄
+type: object
+additionalProperties: false
+required:
+- schema_version
+- spec_version
+- spec_sha256
+- kind
+- title_zh
+- readme
+- authoritative_spec
+- architectures
+- training
+- datasets
+- quantization
+- fusion_template
+- schemas
+properties:
+  schema_version:
+    const: 2
+  spec_version:
+    const: 1.2.0
+  spec_sha256:
+    type: string
+    pattern: ^[0-9a-f]{64}$
+  kind:
+    const: config_catalog
+  title_zh:
+    type: string
+  readme:
+    const: configs/README.md
+  authoritative_spec:
+    const: EXPERIMENT_SPEC.md
+  architectures:
+    type: object
+    minProperties: 6
+  training:
+    type: object
+    minProperties: 9
+  datasets:
+    type: object
+    minProperties: 2
+  quantization:
+    type: string
+  fusion_template:
+    type: string
+  schemas:
+    type: object
+    minProperties: 6

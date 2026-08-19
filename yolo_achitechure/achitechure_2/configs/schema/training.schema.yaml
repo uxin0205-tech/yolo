@@ -1,0 +1,138 @@
+# JSON Schema Draft 2020-12；可供外部 validator 使用。
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: training.schema.yaml
+title: architecture_2 正式訓練設定
+description: 每個階段一份完整設定，不需要與其他 YAML 合併。
+type: object
+additionalProperties: false
+required:
+- schema_version
+- spec_version
+- spec_sha256
+- kind
+- config_id
+- title_zh
+- summary_zh
+- task
+- stage
+- status
+- candidate_policy
+- execution
+- dataset
+- transition
+- ranking
+- frozen_modules
+- derived_training
+- training
+properties:
+  schema_version:
+    const: 2
+  spec_version:
+    const: 1.2.0
+  spec_sha256:
+    type: string
+    pattern: ^[0-9a-f]{64}$
+  kind:
+    const: formal_training
+  config_id:
+    type: string
+  title_zh:
+    type: string
+    minLength: 1
+  summary_zh:
+    type: string
+    minLength: 1
+  task:
+    enum:
+    - detect
+    - pose
+  stage:
+    enum:
+    - D0
+    - D1
+    - D2
+    - Q2
+    - P0
+    - P1
+    - P2
+    - P3
+    - P4
+  status:
+    type: string
+  candidate_policy:
+    type: object
+    minProperties: 2
+  execution:
+    type: object
+    additionalProperties: false
+    required:
+    - launcher
+    - requires_execute_flag
+    - pose_opt_in_required
+    - enabled_by_default
+    - ultralytics_yaml_direct
+    - runtime_overridable
+    properties:
+      launcher:
+        const: achitechure_2
+      requires_execute_flag:
+        const: true
+      pose_opt_in_required:
+        type: boolean
+      enabled_by_default:
+        type: boolean
+      ultralytics_yaml_direct:
+        const: false
+      runtime_overridable:
+        const:
+        - model
+        - name
+        - project
+        - device
+        - workers
+        - cache
+  dataset:
+    type: string
+  transition:
+    type: object
+    additionalProperties: false
+    required:
+    - mode
+    - checkpoint_role
+    - gate
+    - description_zh
+    properties:
+      mode:
+        enum:
+        - fresh
+        - resume
+      checkpoint_role:
+        type: string
+      gate:
+        type: string
+      description_zh:
+        type: string
+  ranking:
+    type: object
+    additionalProperties: false
+    required:
+    - architecture_ranking
+    - research_metric
+    - selection_backend
+    properties:
+      architecture_ranking:
+        type: boolean
+      research_metric:
+        type: string
+      selection_backend:
+        const: bit_true_pwl
+  frozen_modules:
+    type: array
+    items:
+      type: string
+    uniqueItems: true
+  derived_training:
+    type: object
+  training:
+    type: object
+    minProperties: 1

@@ -3,11 +3,21 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Any
 
+import yaml
 from torch import nn
 
-from .config import ATTENTION_PATHS, DETECT_INPUTS, STRIDES, TARGET_LAYERS
+from .config import (
+    ATTENTION_PATHS,
+    DETECT_INPUTS,
+    SPEC_PATH,
+    SPEC_VERSION,
+    STRIDES,
+    TARGET_LAYERS,
+    file_sha256,
+)
 from .lite_c3k2 import LiteC3k2
 
 
@@ -27,6 +37,8 @@ class LayerReport:
 
 @dataclass(frozen=True)
 class GraphReport:
+    task: str
+    head_type: str
     detect_inputs: tuple[int, ...]
     strides: tuple[int, ...]
     end2end: bool
@@ -160,7 +172,12 @@ def inspect_graph(model: nn.Module, *, require_masf: bool = True) -> GraphReport
         else:
             raise ValueError(f"unsupported P3 MASF class {type(masf).__name__}")
 
+    head_type = type(detect).__name__.lstrip("_")
+    task = "pose" if "pose" in head_type.lower() else "detect"
+
     return GraphReport(
+        task=task,
+        head_type=head_type,
         detect_inputs=inputs,
         strides=strides,
         end2end=end2end,
@@ -182,3 +199,47 @@ def assert_candidate_graph(
             f"{candidate_id} changed LiteC3k2 layers {sorted(changed)}, expected {expected_layers}"
         )
     return report
+
+
+def graph_snapshot(model: nn.Module, candidate_id: str) -> dict[str, Any]:
+    """Create a review-only Ultralytics-like snapshot from the materialized graph."""
+
+    report = inspect_graph(model)
+    layers = network_layers(model)
+    entries: list[dict[str, Any]] = []
+    reports = {item.index: item for item in report.layers}
+    for index, layer in enumerate(layers):
+        entry: dict[str, Any] = {
+            "index": index,
+            "from": getattr(layer, "f", -1),
+            "module": type(layer).__name__,
+        }
+        if index in reports:
+            entry["c3k2_contract"] = asdict(reports[index])
+        entries.append(entry)
+    return {
+        "schema_version": 1,
+        "spec_version": SPEC_VERSION,
+        "spec_sha256": file_sha256(SPEC_PATH),
+        "standalone_loadable": False,
+        "builder": "achitechure_2",
+        "candidate_id": candidate_id,
+        "task": report.task,
+        "head_contract": {
+            "type": report.head_type,
+            "inputs": list(report.detect_inputs),
+            "strides": list(report.strides),
+            "end2end": report.end2end,
+        },
+        "backbone": entries[:11],
+        "head": entries[11:],
+    }
+
+
+def write_graph_snapshot(model: nn.Module, candidate_id: str, destination: str | Path) -> Path:
+    """Write the non-standalone graph snapshot used for review and reports."""
+
+    path = Path(destination)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(yaml.safe_dump(graph_snapshot(model, candidate_id), sort_keys=False), encoding="utf-8")
+    return path

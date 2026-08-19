@@ -1,0 +1,53 @@
+# JSON Schema Draft 2020-12；可供外部 validator 使用。
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: quantization.schema.yaml
+title: architecture_2 量化模擬設定
+type: object
+additionalProperties: false
+required:
+- schema_version
+- spec_version
+- spec_sha256
+- kind
+- title_zh
+- summary_zh
+- status
+- simulation_only
+- targets
+- weight
+- activation
+- include_masf_standard_conv
+- exclude_custom_roots
+- qat
+properties:
+  schema_version:
+    const: 2
+  spec_version:
+    const: 1.2.0
+  spec_sha256:
+    type: string
+    pattern: ^[0-9a-f]{64}$
+  kind:
+    const: quantization
+  title_zh:
+    type: string
+  summary_zh:
+    type: string
+  status:
+    const: active_after_c_best
+  simulation_only:
+    const: true
+  targets:
+    const:
+    - C0
+    - C_best
+  weight:
+    type: object
+  activation:
+    type: object
+  include_masf_standard_conv:
+    const: true
+  exclude_custom_roots:
+    type: array
+  qat:
+    type: object
