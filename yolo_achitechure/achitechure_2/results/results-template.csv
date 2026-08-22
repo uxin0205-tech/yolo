@@ -1,13 +1,6 @@
-task,candidate,stage,spec_version,spec_sha256,architecture_yaml_sha256,training_yaml_sha256,dataset_yaml_sha256,parent_checkpoint_sha256,checkpoint_sha256,git_revision,seed,physical_batch,best_epoch,stop_reason,research_metric,research_map50_95,official_combined_fitness,params,gflops,latency_ms,peak_cuda_memory_bytes,decision,simulation_only
-detect,C0,D1,1.2.0,,,,,,,,0,16,,,,,,,,,,,false
-detect,C1,D1,1.2.0,,,,,,,,0,16,,,,,,,,,,,false
-detect,C2,D1,1.2.0,,,,,,,,0,16,,,,,,,,,,,false
-detect,C3,D1,1.2.0,,,,,,,,0,16,,,,,,,,,,,false
-pose,C0,P3,1.2.0,,,,,,,,0,16,,,,,,,,,,,false
-pose,C_best,P3,1.2.0,,,,,,,,0,16,,,,,,,,,,,false
-detect,C0,Q0,1.2.0,,,,,,,,0,16,,,,,,,,,,,true
-detect,C0,Q1,1.2.0,,,,,,,,0,16,,,,,,,,,,,true
-detect,C0,Q2,1.2.0,,,,,,,,0,16,,,,,,,,,,,true
-detect,C_best,Q0,1.2.0,,,,,,,,0,16,,,,,,,,,,,true
-detect,C_best,Q1,1.2.0,,,,,,,,0,16,,,,,,,,,,,true
-detect,C_best,Q2,1.2.0,,,,,,,,0,16,,,,,,,,,,,true
+run_status,formal_comparison_ready,handoff_revision,winner_id,fusion_kind,candidate_id,comparison_role,resolved_region,pose_executed,spec_version,spec_sha256,architecture_yaml_sha256,training_yaml_sha256,detect_dataset_yaml_sha256,pose_dataset_yaml_sha256,parent_checkpoint_sha256,checkpoint_sha256,git_revision,seed,batch,fraction,augmentation_scale,cache,imgsz,optimizer_steps,validation_events,coco_box_map50,coco_box_map50_95,coco_person_ap50,coco_person_ap50_95,bbat5_pose_box_map50,bbat5_pose_box_map50_95,bbat5_keypoint_map50,bbat5_keypoint_map50_95,pose_official_combined_fitness,pose_checkpoint_selection,ball_box_ap50,ball_box_ap50_95,ball_keypoint_ap50,ball_keypoint_ap50_95,ball_precision,ball_recall,ball_f1,bat_box_ap50,bat_box_ap50_95,bat_keypoint_ap50,bat_keypoint_ap50_95,bat_precision,bat_recall,bat_f1,macro_f1,micro_f1,f1_confidence_threshold,params,gflops,latency_ms,peak_vram_mb,measurement_device,selection_status,c_best,quantization_eligibility,notes
+not_run,false,,,,C0-Handoff,handoff_reference,,false,2.0.1,9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c,,,,,,,,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,pending_user_decision,,eligible_q0_q1,不訓練；只做上游 winner 精確重建與參考評估
+not_run,false,,,,C0,control,,false,2.0.1,9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c,,,,,,,,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,pending_user_decision,,eligible_q0_q1,C0-Control 使用與候選相同恢復預算
+not_run,false,,,,C1,candidate,,false,2.0.1,9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c,,,,,,,,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,pending_user_decision,,pending_user_decision,e 0.5 改為 0.375
+not_run,false,,,,C2,candidate,,false,2.0.1,9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c,,,,,,,,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,pending_user_decision,,pending_user_decision,inner_n 2 改為 1
+not_run,false,,,,C3,candidate,,false,2.0.1,9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c,,,,,,,,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,pending_user_decision,,pending_user_decision,第一個 3x3 改為 1x1

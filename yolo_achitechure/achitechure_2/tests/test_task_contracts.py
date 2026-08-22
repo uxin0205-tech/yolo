@@ -1,34 +1,43 @@
 from __future__ import annotations
 
-import pytest
-import torch
-from torch import nn
-
-from achitechure_2.lite_c3k2 import LiteC3k2, LiteC3k2Config
+from achitechure_2.cpu_validation import validate_cpu_candidate
 
 
-class _ThreeScaleTask(nn.Module):
-    def __init__(self, channels: int, outputs: int) -> None:
-        super().__init__()
-        self.block = LiteC3k2(3, channels, config=LiteC3k2Config(inner_n=1))
-        self.heads = nn.ModuleList(nn.Conv2d(channels, outputs, 1) for _ in range(3))
-
-    def forward(self, value: torch.Tensor):
-        feature = self.block(value)
-        sizes = (80, 40, 20)
-        return tuple(
-            head(nn.functional.adaptive_avg_pool2d(feature, size)) for head, size in zip(self.heads, sizes)
-        )
-
-
-@pytest.mark.parametrize("outputs", (8, 12))
-def test_640_detect_and_pose_contract_forward_loss_and_gradient(outputs: int) -> None:
-    model = _ThreeScaleTask(8, outputs)
-    predictions = model(torch.randn(1, 3, 640, 640))
-    assert tuple(value.shape[-2:] for value in predictions) == ((80, 80), (40, 40), (20, 20))
-    loss = sum(value.square().mean() for value in predictions)
-    loss.backward()
-    assert torch.isfinite(loss)
-    assert all(
-        parameter.grad is None or torch.isfinite(parameter.grad).all() for parameter in model.parameters()
+def test_cpu_dry_run_covers_tasks_loss_gradients_640_and_reload(combined_parent) -> None:
+    report = validate_cpu_candidate(
+        combined_parent,
+        builder=type(combined_parent),
+        frozen_module_paths=("trunk.layers.2",),
+        smoke_imgsz=32,
+        geometry_imgsz=640,
     )
+
+    assert report.passed
+    assert report.device == "cpu"
+    assert report.tasks == ("detect", "pose", "both")
+    assert report.output_shapes["detect"]["detect"] == (1, 80, 32, 32)
+    assert report.output_shapes["pose"]["pose"] == (1, 8, 32, 32)
+    assert set(report.output_shapes["both"]) == {"detect", "pose"}
+    assert report.geometry_shapes["detect"] == (1, 80, 640, 640)
+    assert report.geometry_shapes["pose"] == (1, 8, 640, 640)
+    assert report.loss_is_finite
+    assert report.gradients_are_finite
+    assert report.trainable_gradient_count > 0
+    assert report.frozen_gradient_count == 0
+    assert report.state_dict_reload
+    assert report.contract_unchanged
+
+
+def test_cpu_dry_run_does_not_claim_accuracy_or_latency(combined_parent) -> None:
+    report = validate_cpu_candidate(
+        combined_parent,
+        builder=type(combined_parent),
+        frozen_module_paths=("trunk.layers.2",),
+        smoke_imgsz=16,
+        geometry_imgsz=32,
+    )
+
+    payload = report.to_dict()
+    assert "latency" not in payload
+    assert "map" not in payload
+    assert payload["scope"] == "CPU 結構／數值 smoke；不代表準確度或正式效能"

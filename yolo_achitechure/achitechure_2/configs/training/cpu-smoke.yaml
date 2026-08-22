@@ -1,0 +1,74 @@
+# Phase A 唯一可直接執行的 smoke 設定；不產生正式精度或 GPU latency 結論。
+schema_version: 3
+spec_version: 2.0.1
+spec_sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
+kind: training_template
+config_id: cpu-smoke
+title_zh: CPU-only 模型契約冒煙測試
+summary_zh: 驗證 detect/pose/both、synthetic loss/backward、freeze 與 state_dict reload。
+phase: A
+status: active_cpu_only
+model_scale: m
+candidate_policy:
+  base_candidates: [C0, C1, C2, C3]
+  resolved_from_handoff: true
+  same_recipe_for_all: true
+execution:
+  device: cpu
+  force_cuda_hidden: true
+  requires_execute_flag: false
+  requires_gpu_authorization: false
+  pose_opt_in_required: false
+  formal_training: false
+routes:
+  detect:
+    enabled_by_default: true
+    loss_on_dataset: coco2017
+  pose:
+    enabled_by_default: true
+    loss_on_dataset: bbat5-pose
+formal_ranking_requires: []
+datasets:
+  detect: configs/data/coco2017.yaml
+  pose: configs/data/bbat5-pose.yaml
+  diagnostic_detect: configs/data/bbat5-detect.yaml
+recipe:
+  source: local_fixture
+  task_ratio: {source: local, value: "1:1"}
+  optimizer: {source: local, value: SGD}
+  lr0: {source: local, value: 0.001}
+  lrf: {source: local, value: 1.0}
+  momentum: {source: local, value: 0.9}
+  weight_decay: {source: local, value: 0.0}
+  warmup_epochs: {source: local, value: 0.0}
+  nbs: {source: local, value: 1}
+  losses: {source: local, value: synthetic_tensor_sum}
+  augmentation: {source: local, value: disabled}
+  freeze_policy: {source: handoff, value: null}
+  amp: {source: local, value: false}
+  deterministic: {source: local, value: true}
+  seed: {source: local, value: 0}
+  optimizer_steps: {source: local, value: 1}
+  validation_interval: {source: local, value: 1}
+adjustable:
+  batch: {source: local, value: 1}
+  fraction: {source: local, value: 1.0}
+  scale: {source: local, value: 0.0}
+  cache: {source: local, value: false}
+  imgsz: {source: local, value: 64}
+  device: {source: local, value: cpu}
+  workers: {source: local, value: 0}
+  epochs: {source: local, value: 1}
+  patience: {source: local, value: 0}
+validation:
+  fixture_sizes: [64, 128]
+  geometry_size: 640
+  claim_latency: false
+  claim_accuracy: false
+transition:
+  mode: fresh
+  input: accepted_handoff_fixture_or_candidate
+  optimizer_state: new
+lineage:
+  require_all_hashes: true
+  effective_yaml_output: artifacts/effective-configs

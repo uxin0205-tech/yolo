@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 from torch import nn
-from ultralytics.nn.modules.block import Bottleneck, C3k, C3k2, RepBottleneck
+from ultralytics.nn.modules.block import Bottleneck, C3k, C3k2
 
 
 class KernelMode(str, Enum):
@@ -35,8 +35,8 @@ class LiteC3k2Config:
             raise ValueError("e must be in (0, 1]")
         if self.inner_n < 1:
             raise ValueError("inner_n must be positive")
-        if self.use_rep and (self.inner_n != 1 or self.kernel_mode is not KernelMode.K3_K3):
-            raise ValueError("Rep recovery is only valid for inner_n=1 and 3x3_3x3")
+        if self.use_rep:
+            raise ValueError("R1/RepBottleneck 尚未核准納入本 revision")
 
 
 class LiteC3k(C3k):
@@ -52,10 +52,12 @@ class LiteC3k(C3k):
     ) -> None:
         super().__init__(channels, channels, config.inner_n, shortcut, groups, e=0.5, k=3)
         hidden = int(channels * 0.5)
-        block = RepBottleneck if config.use_rep else Bottleneck
         kernels = config.kernel_mode.kernels
         self.m = nn.Sequential(
-            *(block(hidden, hidden, shortcut, groups, k=kernels, e=1.0) for _ in range(config.inner_n))
+            *(
+                Bottleneck(hidden, hidden, shortcut, groups, k=kernels, e=1.0)
+                for _ in range(config.inner_n)
+            )
         )
         self.inner_n = config.inner_n
         self.kernel_mode = config.kernel_mode.value

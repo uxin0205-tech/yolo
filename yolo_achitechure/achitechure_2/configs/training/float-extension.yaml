@@ -1,0 +1,91 @@
+# 只有 late-improvement gate 通過且保留未 strip continuation state 時才能真正 resume。
+schema_version: 3
+spec_version: 2.0.1
+spec_sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
+kind: training_template
+config_id: float-extension
+title_zh: Float 條件式延長
+summary_zh: 沿用 float-main 完整 state；stock last.pt／best.pt 已 strip，不符合此 transition。
+phase: C
+status: blocked_until_main_late_improvement_gate
+model_scale: m
+candidate_policy:
+  base_candidates: [C0, C1, C2, C3]
+  resolved_from_handoff: true
+  same_recipe_for_all: true
+execution:
+  device: "0"
+  force_cuda_hidden: false
+  requires_execute_flag: true
+  requires_gpu_authorization: true
+  pose_opt_in_required: true
+  formal_training: true
+routes:
+  detect:
+    enabled_by_default: true
+    loss_on_dataset: coco2017
+  pose:
+    enabled_by_default: false
+    loss_on_dataset: bbat5-pose
+formal_ranking_requires: [detect, pose]
+datasets:
+  detect: configs/data/coco2017.yaml
+  pose: configs/data/bbat5-pose.yaml
+  diagnostic_detect: configs/data/bbat5-detect.yaml
+recipe:
+  source: handoff
+  task_ratio: {source: handoff, value: null}
+  optimizer: {source: handoff, value: null}
+  lr0: {source: handoff, value: null}
+  lrf: {source: handoff, value: null}
+  momentum: {source: handoff, value: null}
+  weight_decay: {source: handoff, value: null}
+  warmup_epochs: {source: handoff, value: null}
+  nbs: {source: handoff, value: null}
+  losses: {source: handoff, value: null}
+  augmentation: {source: handoff, value: null}
+  freeze_policy: {source: handoff, value: null}
+  amp: {source: handoff, value: null}
+  deterministic: {source: handoff, value: null}
+  seed: {source: local, value: 0}
+  optimizer_steps: {source: handoff, value: null}
+  validation_interval: {source: handoff, value: null}
+adjustable:
+  batch: {source: handoff, value: null}
+  fraction: {source: local, value: 1.0}
+  scale: {source: handoff, value: null}
+  cache: {source: local, value: false}
+  imgsz: {source: handoff, value: null}
+  device: {source: local, value: "0"}
+  workers: {source: local, value: 8}
+  epochs: {source: handoff, value: null}
+  patience: {source: handoff, value: null}
+validation:
+  selection_backend: float_model
+  checkpoint_selection:
+    detect: handoff_defined
+    pose_research: pose_map50_95
+    pose_official: combined_fitness_recorded_separately
+  fixed_f1_threshold_source: c0_control_search_val
+  metrics: [map50, map50_95, per_class_ap50, per_class_ap50_95, precision, recall, per_class_f1, macro_f1, micro_f1]
+  formal_split: val
+transition:
+  mode: resume
+  input: own_unstripped_continuation_checkpoint
+  optimizer_state: restore
+  gate: handoff_late_improvement
+  requires_unstripped_state: true
+  required_checkpoint_state:
+    - epoch
+    - best_fitness
+    - optimizer
+    - scaler
+    - ema
+    - updates
+  required_resume_evidence:
+    - scheduler_position
+    - optimizer_parameter_groups
+  stripped_last_or_best_policy: reject
+lineage:
+  require_all_hashes: true
+  effective_yaml_output: artifacts/effective-configs

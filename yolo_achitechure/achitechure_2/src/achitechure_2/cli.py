@@ -1,837 +1,521 @@
-"""Dry-run-first command surface for the Stage-Aware Lite-C3k2 workflow."""
+"""architecture_2 Phase A 中文命令列介面。"""
 
 from __future__ import annotations
 
 import argparse
+import importlib
+import importlib.util
 import json
-from collections.abc import Sequence
-from dataclasses import asdict
+import os
+import sys
+from collections.abc import Callable
+from dataclasses import asdict, is_dataclass
 from pathlib import Path
 from typing import Any
 
-from .config import CANDIDATES
+import yaml
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-
-class ChineseArgumentParser(argparse.ArgumentParser):
-    """以繁體中文顯示 argparse 的固定介面文字。"""
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        kwargs["add_help"] = False
-        super().__init__(*args, **kwargs)
-        self._positionals.title = "位置參數"
-        self._optionals.title = "選項"
-        self.add_argument("-h", "--help", action="help", help="顯示此說明並離開")
-
-    def format_usage(self) -> str:
-        return super().format_usage().replace("usage:", "用法:", 1)
-
-    def format_help(self) -> str:
-        return super().format_help().replace("usage:", "用法:", 1)
+DEFAULT_PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 
-def _print(value: Any) -> None:
-    print(json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False))
+def _print_json(value: Any, *, stream: Any | None = None) -> None:
+    if is_dataclass(value):
+        value = asdict(value)
+    if stream is None:
+        stream = sys.stdout
+    print(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True), file=stream)
 
 
-def _resolve(root: Path, path: Path) -> Path:
-    return path if path.is_absolute() else (root / path)
-
-
-def build_parser() -> argparse.ArgumentParser:
-    parser = ChineseArgumentParser(prog="python -m achitechure_2", description="architecture_2 可重現實驗工具")
-    parser.add_argument("--project-root", type=Path, default=PROJECT_ROOT, help="專案根目錄")
-    commands = parser.add_subparsers(dest="command", required=True)
-
-    commands.add_parser("preflight", help="檢查執行環境、設定、CUDA 與上游交付門檻")
-    commands.add_parser("config-check", help="嚴格檢查規格、YAML 與 Ultralytics 相容性")
-
-    pose_data = commands.add_parser("prepare-pose-data", help="預覽或建立來源群組隔離的 Pose 資料集")
-    pose_data.add_argument("--source", type=Path, default=Path("../../original/pose/bbt5.v1i.yolov8"))
-    pose_data.add_argument("--destination", type=Path, default=Path("artifacts/datasets/pose_grouped"))
-    pose_data.add_argument("--execute", action="store_true")
-
-    intake = commands.add_parser("intake", help="驗證 architecture_1 正式交付資料")
-    intake.add_argument("--manifest", type=Path, required=True)
-    intake.add_argument("--execute", action="store_true")
-
-    graph = commands.add_parser("inspect", help="檢查 checkpoint 模型圖")
-    graph.add_argument("--checkpoint", type=Path, required=True)
-    graph.add_argument("--allow-missing-masf", action="store_true")
-
-    build = commands.add_parser("build", help="建立互相獨立的架構候選")
-    build.add_argument("--candidate", choices=tuple(CANDIDATES), required=True)
-    build.add_argument("--output", type=Path)
-    build.add_argument("--seed", type=int, default=0)
-    build.add_argument("--execute", action="store_true")
-
-    pose_build = commands.add_parser("build-pose", help="將本機官方 Pose26 head 接到 C0/C_best；預設不執行")
-    pose_build.add_argument("--candidate", choices=tuple(CANDIDATES), required=True)
-    pose_build.add_argument("--checkpoint", type=Path, required=True)
-    pose_build.add_argument("--output", type=Path)
-    pose_build.add_argument("--seed", type=int, default=0)
-    pose_build.add_argument("--enable-pose", action="store_true", help="明確同意進入 Pose 路線")
-    pose_build.add_argument("--execute", action="store_true")
-
-    train = commands.add_parser("train", help="執行一個受門檻保護的訓練階段")
-    train.add_argument("--candidate", choices=tuple(CANDIDATES), required=True)
-    train.add_argument("--checkpoint", type=Path, required=True)
-    train.add_argument(
-        "--config",
-        type=Path,
-        help="推薦：指定一份 configs/training 下的完整正式 YAML",
+def _write_json(path: Path, value: Any) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if is_dataclass(value):
+        value = asdict(value)
+    path.write_text(
+        json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
     )
-    train.add_argument("--task", choices=("detect", "pose"), help="相容介面；未用 --config 時預設 detect")
-    train.add_argument(
-        "--stage",
-        choices=("D0", "D1", "D2", "P0", "P1", "P2", "P3", "P4", "Q2", "smoke", "formal", "extension", "qat"),
-        help="相容介面；推薦改用 --config",
-    )
-    train.add_argument("--run-id", required=True)
-    train.add_argument("--smoke-epochs", type=int, default=3)
-    train.add_argument("--enable-pose", action="store_true", help="當 task=pose 時明確同意執行")
-    train.add_argument("--execute", action="store_true")
-
-    extend = commands.add_parser("extension-gate")
-    extend.add_argument("--metrics", type=Path, required=True, help="含 100 個 mAP50-95 值的 JSON 陣列")
-    extend.add_argument("--best-epoch", type=int, required=True)
-    extend.add_argument("--early-stopped", action="store_true")
-
-    assess = commands.add_parser("assess")
-    assess.add_argument("--c0", type=Path, required=True)
-    assess.add_argument("--candidate", type=Path, action="append", required=True)
-    assess.add_argument("--r1-fusion-report", type=Path)
-    assess.add_argument("--execute", action="store_true", help="寫入 artifacts/selection.json")
-
-    rep = commands.add_parser("rep-fusion", help="驗證 R1 RepConv 融合前後等價性")
-    rep.add_argument("--checkpoint", type=Path, required=True)
-    rep.add_argument("--output", type=Path, required=True)
-    rep.add_argument("--execute", action="store_true")
-
-    fused = commands.add_parser("fuse-reference", help="建立 Q0 融合後 FP32 參考模型")
-    fused.add_argument("--candidate", required=True)
-    fused.add_argument("--checkpoint", type=Path, required=True)
-    fused.add_argument("--output", type=Path, required=True)
-    fused.add_argument("--execute", action="store_true")
-
-    quant = commands.add_parser("quant-prepare", help="準備 Conv 假量化模擬")
-    quant.add_argument("--candidate", required=True)
-    quant.add_argument("--checkpoint", type=Path, required=True)
-    quant.add_argument("--output", type=Path, required=True)
-    quant.add_argument("--execute", action="store_true")
-
-    calibrate = commands.add_parser("quant-calibrate", help="校準已準備的 Q1 模擬")
-    calibrate.add_argument("--checkpoint", type=Path, required=True)
-    calibrate.add_argument("--calibration-tensors", type=Path, required=True)
-    calibrate.add_argument("--output", type=Path, required=True)
-    calibrate.add_argument("--batch-size", type=int, default=16)
-    calibrate.add_argument("--device", default="0")
-    calibrate.add_argument("--max-batches", type=int)
-    calibrate.add_argument("--execute", action="store_true")
-
-    materialize = commands.add_parser("materialize-bittrue")
-    materialize.add_argument("--candidate", choices=tuple(CANDIDATES), required=True)
-    materialize.add_argument("--checkpoint", type=Path, required=True)
-    materialize.add_argument("--output", type=Path, required=True)
-    materialize.add_argument("--execute", action="store_true")
-
-    validate = commands.add_parser("validate-bittrue")
-    validate.add_argument("--task", choices=("detect", "pose"), default="detect")
-    validate.add_argument("--checkpoint", type=Path, required=True)
-    validate.add_argument("--run-id", required=True)
-    validate.add_argument("--enable-pose", action="store_true", help="當 task=pose 時明確同意執行")
-    validate.add_argument("--execute", action="store_true")
-
-    profile = commands.add_parser("profile")
-    profile.add_argument("--checkpoint", type=Path, required=True)
-    profile.add_argument("--output", type=Path, required=True)
-    profile.add_argument("--warmup", type=int, default=20)
-    profile.add_argument("--iterations", type=int, default=100)
-    profile.add_argument("--execute", action="store_true")
-
-    gaps = commands.add_parser("quant-report")
-    gaps.add_argument("--q0", type=float, required=True)
-    gaps.add_argument("--q1", type=float, required=True)
-    gaps.add_argument("--q2", type=float, required=True)
-    return parser
-
-
-def _load_metrics(path: Path):
-    from .decisions import CandidateMetrics
-
-    return CandidateMetrics(**json.loads(path.read_text(encoding="utf-8")))
-
-
-def _assert_c0_or_c_best(root: Path, candidate: str) -> None:
-    if candidate == "C0":
-        return
-    selection = root / "artifacts/selection.json"
-    if not selection.is_file():
-        raise RuntimeError("尚未選出 C_best；下游工作目前只允許 C0")
-    selected = json.loads(selection.read_text(encoding="utf-8")).get("c_best")
-    if not isinstance(selected, dict) or selected.get("metrics", {}).get("candidate_id") != candidate:
-        raise RuntimeError(f"下游工作只允許 C0 與已記錄的 C_best，不允許 {candidate}")
-
-
-def _lineage_payload(root: Path, candidate: str, parent: Path, stage: str = "D1") -> dict[str, Any]:
-    from .config import compose_training_config, file_sha256, manifest_hashes
-
-    training = compose_training_config(project_root=root, task="detect", candidate_id=candidate, stage=stage)
-    dataset = (root / str(training.args["data"])).resolve()
-    payload: dict[str, Any] = manifest_hashes(
-        spec_path=root / "EXPERIMENT_SPEC.md",
-        architecture_path=CANDIDATES[candidate].config_path,
-        training=training,
-        dataset_path=dataset,
-        parent_checkpoint=parent,
-    )
-    quant = root / "configs/quant/w8a8-simulation.yaml"
-    payload["quantization_yaml_sha256"] = file_sha256(quant)
-    return payload
-
-
-def _write_lineage(destination: Path, payload: dict[str, Any]) -> Path:
-    path = destination.parent / "lineage.json"
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return path
 
 
-def main(argv: Sequence[str] | None = None) -> int:
-    args = build_parser().parse_args(argv)
-    root = args.project_root.resolve()
-    if args.command in {"build", "build-pose"} and args.seed != 0:
-        raise ValueError("正式候選與 Pose head 的 seed 固定為 0")
-    if args.command == "build-pose" and args.execute and not args.enable_pose:
-        raise ValueError("執行 Pose 建構必須同時提供 --enable-pose 與 --execute")
-    if args.command == "validate-bittrue" and args.task == "pose" and args.execute and not args.enable_pose:
-        raise ValueError("執行 Pose 驗證必須同時提供 --enable-pose 與 --execute")
+def _load_callable(reference: str) -> Callable[..., Any]:
+    module_ref, separator, function_name = reference.partition(":")
+    if not separator or not module_ref or not function_name:
+        raise ValueError("loader 格式必須是 module:function 或 /path/builder.py:function")
+    if module_ref.endswith(".py") or "/" in module_ref:
+        path = Path(module_ref).resolve()
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        module_name = f"_achitechure_2_loader_{path.stem}"
+        specification = importlib.util.spec_from_file_location(module_name, path)
+        if specification is None or specification.loader is None:
+            raise ImportError(f"無法載入 builder：{path}")
+        module = importlib.util.module_from_spec(specification)
+        specification.loader.exec_module(module)
+    else:
+        module = importlib.import_module(module_ref)
+    value = getattr(module, function_name, None)
+    if not callable(value):
+        raise TypeError(f"{reference} 不是 callable")
+    return value
 
-    if args.command == "config-check":
-        from .config import check_configs
 
-        _print(check_configs(root).to_dict())
-        return 0
+def _cmd_status(args: argparse.Namespace) -> dict[str, Any]:
+    from .config import SPEC_VERSION, file_sha256
 
-    if args.command == "prepare-pose-data":
-        from .pose_data import prepare_grouped_pose_dataset
-
-        report = prepare_grouped_pose_dataset(
-            _resolve(root, args.source),
-            _resolve(root, args.destination),
-            execute=args.execute,
-            expected_patch_count=4,
+    accepted = args.project_root / "artifacts/intake/accepted.json"
+    data_root = Path("/home/uxin/yolo/original/pose/derived/bbat5-v1")
+    spec_path = args.project_root / "EXPERIMENT_SPEC.md"
+    handoff = None
+    data_lineage: dict[str, Any] | None = None
+    if accepted.is_file():
+        payload = json.loads(accepted.read_text(encoding="utf-8"))
+        handoff = payload.get("revision_id")
+    rebuild_manifest = data_root / "manifests/rebuild-manifest.json"
+    if not rebuild_manifest.is_file():
+        rebuild_manifest = (
+            args.project_root
+            / "artifacts/datasets/bbat5-v1/manifests/rebuild-manifest.json"
         )
-        _print(report.to_dict())
-        return 0
-
-    if args.command == "preflight":
-        import importlib.util
-
-        import torch
-        import ultralytics
-
-        from .config import check_configs
-
-        accepted = root / "artifacts/intake/accepted.json"
-        config_report = check_configs(root)
-        payload = {
-            "valid": bool(
-                torch.cuda.is_available()
-                and importlib.util.find_spec("pycocotools") is not None
-                and accepted.is_file()
-                and ultralytics.__version__ == "8.4.90"
-                and config_report.valid
-            ),
-            "torch": torch.__version__,
-            "ultralytics": ultralytics.__version__,
-            "cuda_available": torch.cuda.is_available(),
-            "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
-            "pycocotools_installed": importlib.util.find_spec("pycocotools") is not None,
-            "accepted_handoff": accepted.is_file(),
-            "config_check": config_report.to_dict(),
+    if rebuild_manifest.is_file():
+        payload = json.loads(rebuild_manifest.read_text(encoding="utf-8"))
+        data_lineage = {
+            "spec_version": payload.get("spec_version"),
+            "spec_sha256": payload.get("spec_sha256"),
         }
-        _print(payload)
-        return 0 if payload["valid"] else 1
+    return {
+        "current_phase": "B" if handoff else "A",
+        "readiness": (
+            "accepted_handoff_requires_candidate_cpu_validation"
+            if handoff
+            else "ready_for_upstream_handoff"
+        ),
+        "authoritative_spec": str(spec_path),
+        "spec_version": SPEC_VERSION,
+        "spec_sha256": file_sha256(spec_path),
+        "fusion_winner": handoff or "waiting_for_yolo_combine_handoff",
+        "bbat5_v1": "exists" if data_root.is_dir() else "not_built",
+        "bbat5_v1_lineage": data_lineage,
+        "pose_formal_execution": "requires_user_opt_in",
+        "gpu_actions": "blocked_until_user_authorization",
+        "formal_training": "blocked_until_handoff_and_gpu_authorization",
+        "說明": "status 不會啟動訓練、不會查占用中的 GPU，也不會自動選 C_best。",
+    }
 
-    if args.command == "intake":
-        from .intake import HandoffManifest, validate_handoff, write_intake
 
-        manifest = HandoffManifest.load(_resolve(root, args.manifest))
-        payload: dict[str, Any] = {
-            "manifest": str(manifest.source_manifest),
-            "variant": manifest.variant,
-            "float_checkpoint": str(manifest.float_checkpoint.path),
-            "bittrue_checkpoint": str(manifest.bittrue_checkpoint.path),
-            "will_execute": args.execute,
-        }
-        if args.execute:
-            report = validate_handoff(manifest.source_manifest, project_root=root)
-            destination = write_intake(report, root / "artifacts/intake/accepted.json")
-            payload.update(status="accepted", report=str(destination), validation=asdict(report))
-        _print(payload)
-        return 0
+def _cmd_config_check(args: argparse.Namespace) -> dict[str, Any]:
+    from .config import check_configs
 
-    if args.command == "inspect":
-        from ultralytics import YOLO
+    return check_configs(args.project_root).to_dict()
 
-        from .graph import inspect_graph
 
-        checkpoint = _resolve(root, args.checkpoint).resolve()
-        report = inspect_graph(YOLO(str(checkpoint)).model, require_masf=not args.allow_missing_masf)
-        _print(report.to_dict())
-        return 0
+def _cmd_show_candidates(_: argparse.Namespace) -> dict[str, Any]:
+    from .config import CANDIDATES
 
-    if args.command == "build":
-        from .intake import require_accepted_intake
-
-        intake = require_accepted_intake(root)
-        output = _resolve(
-            root,
-            args.output or Path(f"artifacts/candidates/{args.candidate.lower()}/float-parent.pt"),
-        ).resolve()
-        payload = {
-            "candidate": args.candidate,
-            "same_float_parent": intake["float_checkpoint"],
-            "output": str(output),
-            "seed": args.seed,
-            "will_execute": args.execute,
-        }
-        if args.execute:
-            from ultralytics import YOLO
-
-            from .candidate import build_candidate, write_build_report
-            from .config import compose_training_config, manifest_hashes
-            from .graph import write_graph_snapshot
-            from .intake import file_sha256
-
-            source = Path(intake["float_checkpoint"]["path"])
-            yolo = YOLO(str(source))
-            model, report = build_candidate(yolo.model, args.candidate, seed=args.seed)
-            yolo.model = model
-            output.parent.mkdir(parents=True, exist_ok=False)
-            yolo.save(str(output))
-            report_path = write_build_report(report, output.parent / "transfer-report.json")
-            snapshot_path = write_graph_snapshot(
-                model, args.candidate, output.parent / "architecture-snapshot.yaml"
-            )
-            training = compose_training_config(
-                project_root=root, task="detect", candidate_id=args.candidate, stage="D1"
-            )
-            dataset_path = root / str(training.args["data"])
-            hashes = manifest_hashes(
-                spec_path=root / "EXPERIMENT_SPEC.md",
-                architecture_path=CANDIDATES[args.candidate].config_path,
-                training=training,
-                dataset_path=dataset_path,
-                parent_checkpoint=source,
-            )
-            lineage = {
-                "schema_version": 2,
-                "candidate_id": args.candidate,
-                "lineage": hashes,
-                "architecture_yaml": str(CANDIDATES[args.candidate].config_path),
-                "formal_training_yaml": str(training.sources[0]),
-                "dataset_yaml": str(dataset_path.resolve()),
-                "parent": {"path": str(source), "sha256": file_sha256(source)},
-                "checkpoint": {"path": str(output), "sha256": file_sha256(output)},
-                "transfer_report": str(report_path),
-                "architecture_snapshot": str(snapshot_path),
-            }
-            (output.parent / "lineage.json").write_text(
-                json.dumps(lineage, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-            )
-            payload.update(status="built", report=report.to_dict(), checkpoint_sha256=file_sha256(output))
-        _print(payload)
-        return 0
-
-    if args.command == "build-pose":
-        from .intake import require_accepted_intake
-
-        require_accepted_intake(root)
-        _assert_c0_or_c_best(root, args.candidate)
-        checkpoint = _resolve(root, args.checkpoint).resolve()
-        output = _resolve(
-            root,
-            args.output or Path(f"artifacts/pose/candidates/{args.candidate.lower()}/pose-graft.pt"),
-        ).resolve()
-        payload = {
-            "candidate": args.candidate,
-            "detect_checkpoint": str(checkpoint),
-            "output": str(output),
-            "head": "official-local-Pose26",
-            "head_seed": args.seed,
-            "will_execute": args.execute,
-            "pose_opt_in_required": True,
-            "pose_enabled": args.enable_pose,
-        }
-        if args.execute:
-            from ultralytics import YOLO
-
-            from .candidate import graft_pose_candidate, write_build_report
-            from .config import compose_training_config, manifest_hashes
-            from .graph import inspect_graph, write_graph_snapshot
-            from .intake import file_sha256
-
-            data_yaml = root / "configs/data/pose-grouped.yaml"
-            yolo = YOLO(str(checkpoint))
-            pose_model, report = graft_pose_candidate(
-                yolo.model,
-                args.candidate,
-                data_yaml=data_yaml,
-                seed=args.seed,
-            )
-            yolo.model = pose_model
-            yolo.task = "pose"
-            output.parent.mkdir(parents=True, exist_ok=False)
-            yolo.save(str(output))
-            reloaded = YOLO(str(output))
-            reload_graph = inspect_graph(reloaded.model)
-            if reload_graph.task != "pose" or reload_graph.head_type != "Pose26":
-                raise AssertionError("Pose26 checkpoint 無法在新程序重新載入")
-            report_path = write_build_report(report, output.parent / "transfer-report.json")
-            snapshot_path = write_graph_snapshot(
-                pose_model, args.candidate, output.parent / "architecture-snapshot.yaml"
-            )
-            overlay_id = "C0" if args.candidate == "C0" else "C_best"
-            training = compose_training_config(
-                project_root=root, task="pose", candidate_id=overlay_id, stage="P1"
-            )
-            hashes = manifest_hashes(
-                spec_path=root / "EXPERIMENT_SPEC.md",
-                architecture_path=CANDIDATES[args.candidate].config_path,
-                training=training,
-                dataset_path=data_yaml,
-                parent_checkpoint=checkpoint,
-            )
-            lineage = {
-                "schema_version": 2,
-                "candidate_id": args.candidate,
-                "task": "pose",
-                "head": "Pose26",
-                "head_seed": args.seed,
-                "lineage": hashes,
-                "architecture_yaml": str(CANDIDATES[args.candidate].config_path),
-                "formal_training_yaml": str(training.sources[0]),
-                "dataset_yaml": str(data_yaml),
-                "parent": {"path": str(checkpoint), "sha256": file_sha256(checkpoint)},
-                "checkpoint": {"path": str(output), "sha256": file_sha256(output)},
-                "transfer_report": str(report_path),
-                "architecture_snapshot": str(snapshot_path),
-                "fresh_reload": True,
-            }
-            (output.parent / "lineage.json").write_text(
-                json.dumps(lineage, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-            )
-            payload.update(status="built-and-reloaded", report=report.to_dict(), lineage=lineage)
-        _print(payload)
-        return 0
-
-    if args.command == "train":
-        from .config import compose_training_config, load_formal_training_config
-        from .training import STAGE_RULES, normalize_stage
-
-        checkpoint = _resolve(root, args.checkpoint).resolve()
-        config_path: Path | None = None
-        if args.config is not None:
-            if args.stage is not None:
-                raise ValueError("使用 --config 時不可再提供 --stage；task/stage 已由正式 YAML 定義")
-            config_path = _resolve(root, args.config).resolve()
-            formal = load_formal_training_config(
-                config_path,
-                candidate_id=args.candidate,
-                project_root=root,
-            )
-            if args.task is not None and args.task != formal.task:
-                raise ValueError(
-                    f"--task={args.task} 與正式設定 task={formal.task} 不一致"
-                )
-        else:
-            if args.stage is None:
-                raise ValueError("請提供 --config；相容模式則必須提供 --stage")
-            task = args.task or "detect"
-            normalized = normalize_stage(args.stage, task)
-            formal = compose_training_config(
-                project_root=root,
-                task=task,
-                candidate_id=args.candidate,
-                stage=normalized,
-            )
-            config_path = formal.sources[0]
-        task = formal.task
-        normalized_stage = formal.stage
-        if task == "pose" and args.execute and not args.enable_pose:
-            raise ValueError("執行 Pose 訓練必須同時提供 --enable-pose 與 --execute")
-        payload = {
-            "config": str(config_path),
-            "config_id": formal.config_id,
-            "title_zh": formal.title_zh,
-            "candidate": args.candidate,
-            "checkpoint": str(checkpoint),
-            "task": task,
-            "stage": normalized_stage,
-            "stage_rules": STAGE_RULES[normalized_stage],
-            "run_id": args.run_id,
-            "will_execute": args.execute,
-            "pose_opt_in_required": task == "pose",
-            "pose_enabled": args.enable_pose,
-            "ultralytics_yaml_direct": False,
-        }
-        if task == "pose" or normalized_stage == "Q2":
-            _assert_c0_or_c_best(root, args.candidate)
-        if args.execute:
-            from .training import launch_training
-
-            payload["completion"] = str(
-                launch_training(
-                    project_root=root,
-                    checkpoint=checkpoint,
-                    candidate_id=args.candidate,
-                    stage=normalized_stage,
-                    run_id=args.run_id,
-                    task=task,
-                    smoke_epochs=args.smoke_epochs,
-                    pose_opt_in=args.enable_pose,
-                    training_config_path=config_path,
-                )
-            )
-        _print(payload)
-        return 0
-
-    if args.command == "extension-gate":
-        from .decisions import should_extend
-
-        metrics = json.loads(_resolve(root, args.metrics).read_text(encoding="utf-8"))
-        _print(asdict(should_extend(metrics, best_epoch=args.best_epoch, early_stopped=args.early_stopped)))
-        return 0
-
-    if args.command == "assess":
-        from .decisions import (
-            choose_c_best,
-            classify_candidate,
-            trigger_c3_p5_fallback,
-            trigger_r1,
-            validate_conditional_candidates,
-        )
-
-        c0 = _load_metrics(_resolve(root, args.c0))
-        decisions = [classify_candidate(_load_metrics(_resolve(root, path)), c0) for path in args.candidate]
-        fusion_passed = False
-        fusion_report = None
-        if args.r1_fusion_report:
-            fusion_report = json.loads(_resolve(root, args.r1_fusion_report).read_text(encoding="utf-8"))
-            fusion_passed = bool(
-                fusion_report.get("candidate_id") == "R1"
-                and fusion_report.get("passed")
-                and float(fusion_report.get("max_abs_diff", float("inf"))) <= 1e-4
-            )
-        validate_conditional_candidates(decisions, r1_fusion_passed=fusion_passed)
-        winner = choose_c_best(decisions)
-        payload = {
-            "c0": asdict(c0),
-            "decisions": [asdict(item) for item in decisions],
-            "triggers": {
-                "c3_p5": any(trigger_c3_p5_fallback(item) for item in decisions),
-                "r1": any(trigger_r1(item) for item in decisions),
-            },
-            "c_best": asdict(winner) if winner else None,
-            "r1_fusion_report": fusion_report,
-            "quantization_mainline_gated": winner is None,
-        }
-        if args.execute:
-            destination = root / "artifacts/selection.json"
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-            payload["selection_artifact"] = str(destination)
-        _print(payload)
-        return 0
-
-    if args.command == "rep-fusion":
-        from .intake import require_accepted_intake
-
-        require_accepted_intake(root)
-        checkpoint = _resolve(root, args.checkpoint).resolve()
-        output = _resolve(root, args.output).resolve()
-        payload = {
-            "candidate_id": "R1",
-            "checkpoint": str(checkpoint),
-            "output": str(output),
-            "tolerance": 1e-4,
-            "will_execute": args.execute,
-        }
-        if args.execute:
-            import torch
-            from ultralytics import YOLO
-
-            from .config import SPEC_VERSION, file_sha256
-            from .graph import assert_candidate_graph
-            from .rep import assert_rep_fuse
-
-            model = YOLO(str(checkpoint)).model.eval()
-            assert_candidate_graph(model, "R1", CANDIDATES["R1"].target_layers)
-            parameter = next(model.parameters())
-            sample = torch.zeros(
-                1,
-                3,
-                640,
-                640,
-                device=parameter.device,
-                dtype=parameter.dtype,
-            )
-            report = assert_rep_fuse(model, sample, tolerance=1e-4)
-            result = {
-                "schema_version": 1,
-                "spec_version": SPEC_VERSION,
-                "spec_sha256": file_sha256(root / "EXPERIMENT_SPEC.md"),
-                "candidate_id": "R1",
-                "checkpoint_sha256": file_sha256(checkpoint),
-                **asdict(report),
-            }
-            if output.exists():
-                raise FileExistsError(output)
-            output.parent.mkdir(parents=True, exist_ok=True)
-            output.write_text(
-                json.dumps(result, indent=2, sort_keys=True) + "\n",
-                encoding="utf-8",
-            )
-            payload.update(result)
-        _print(payload)
-        return 0
-
-    if args.command == "fuse-reference":
-        from .intake import require_accepted_intake
-
-        require_accepted_intake(root)
-        _assert_c0_or_c_best(root, args.candidate)
-        output = _resolve(root, args.output).resolve()
-        payload = {
-            "candidate": args.candidate,
-            "output": str(output),
-            "will_execute": args.execute,
-        }
-        if args.execute:
-            from ultralytics import YOLO
-
-            from .graph import inspect_graph
-            from .intake import file_sha256
-            from .quantization import make_fused_reference
-
-            yolo = YOLO(str(_resolve(root, args.checkpoint).resolve()))
-            yolo.model = make_fused_reference(yolo.model)
-            inspect_graph(yolo.model)
-            output.parent.mkdir(parents=True, exist_ok=False)
-            yolo.save(str(output))
-            inspect_graph(YOLO(str(output)).model)
-            lineage = _lineage_payload(root, args.candidate, _resolve(root, args.checkpoint).resolve())
-            lineage.update(
-                candidate_id=args.candidate,
-                checkpoint={"path": str(output), "sha256": file_sha256(output)},
-                stage="Q0",
-                simulation_only=True,
-            )
-            payload.update(
-                status="fused-and-reloaded",
-                lineage=str(_write_lineage(output, lineage)),
-            )
-        _print(payload)
-        return 0
-
-    if args.command == "quant-prepare":
-        from .intake import require_accepted_intake
-
-        require_accepted_intake(root)
-        _assert_c0_or_c_best(root, args.candidate)
-        output = _resolve(root, args.output).resolve()
-        payload = {
-            "candidate": args.candidate,
-            "checkpoint": str(_resolve(root, args.checkpoint).resolve()),
-            "output": str(output),
-            "simulation_only": True,
-            "will_execute": args.execute,
-        }
-        if args.execute:
-            import torch
-            from ultralytics import YOLO
-
-            from .quantization import prepare_w8a8_simulation, quant_scope_dict
-
-            yolo = YOLO(str(_resolve(root, args.checkpoint).resolve()))
-            prepared, scope = prepare_w8a8_simulation(yolo.model)
-            lineage = _lineage_payload(root, args.candidate, _resolve(root, args.checkpoint).resolve())
-            lineage.update(candidate_id=args.candidate, stage="Q1-or-Q2-prepare", simulation_only=True)
-            output.parent.mkdir(parents=True, exist_ok=False)
-            torch.save(
-                {
-                    "model": prepared,
-                    "simulation_only": True,
-                    "candidate_id": args.candidate,
-                    "lineage": lineage,
+    descriptions = {
+        "C0": "Fusion Winner 原樣 reference；C0-Control 使用同等恢復預算。",
+        "C1": "只把所選 C3k2 hidden expansion e：0.5 → 0.375。",
+        "C2": "只把所選 C3k2 inner bottleneck 數量：2 → 1。",
+        "C3": "只把所選 C3k2 第一個 inner kernel：3×3 → 1×1。",
+    }
+    return {
+        "target_resolution": "由 yolo_combine handoff 的 Candidate Regions 動態解析",
+        "combination_policy": "第一輪禁止組合；C3-P5/R1 等使用者看完結果再決定",
+        "candidates": {
+            candidate_id: {
+                "說明": descriptions[candidate_id],
+                "factors": {
+                    "e": spec.factors[0],
+                    "inner_n": spec.factors[1],
+                    "kernel_mode": spec.factors[2],
+                    "use_rep": spec.factors[3],
                 },
-                output,
-            )
-            scope_path = output.parent / "quant-scope.json"
-            scope_path.write_text(
-                json.dumps(quant_scope_dict(scope), indent=2, sort_keys=True) + "\n", encoding="utf-8"
-            )
-            lineage_path = _write_lineage(output, lineage)
-            payload.update(
-                scope=quant_scope_dict(scope),
-                scope_artifact=str(scope_path),
-                lineage=str(lineage_path),
-            )
-        _print(payload)
-        return 0
+                "changed_fields": list(spec.changed_fields),
+                "quantization_eligible": spec.quantization_eligible,
+            }
+            for candidate_id, spec in CANDIDATES.items()
+        },
+    }
 
-    if args.command == "quant-calibrate":
-        from .intake import require_accepted_intake
 
-        require_accepted_intake(root)
-        output = _resolve(root, args.output).resolve()
-        payload = {"output": str(output), "simulation_only": True, "will_execute": args.execute}
-        if args.execute:
-            import torch
+def _cmd_prepare_pose_data(args: argparse.Namespace) -> dict[str, Any]:
+    from .pose_data import prepare_bbat5_dataset
 
-            from .quantization import calibrate_w8a8
+    return prepare_bbat5_dataset(
+        args.pose_source,
+        args.detect_source,
+        args.destination,
+        coco_train_list=args.coco_train_list,
+        train_ratio=args.train_ratio,
+        search_val_ratio=args.search_val_ratio,
+        seed=args.seed,
+        execute=args.execute,
+        expected_patch_count=args.expected_patch_count,
+    ).to_dict()
 
-            checkpoint = torch.load(_resolve(root, args.checkpoint), map_location="cpu", weights_only=False)
-            model = checkpoint.get("model") if isinstance(checkpoint, dict) else None
-            if not isinstance(model, torch.nn.Module):
-                raise TypeError("quant calibration checkpoint must contain model")
-            images = torch.load(
-                _resolve(root, args.calibration_tensors), map_location="cpu", weights_only=True
-            )
-            if not isinstance(images, torch.Tensor) or images.ndim != 4 or images.shape[1:] != (3, 640, 640):
-                raise ValueError("校準張量形狀必須為 [N, 3, 640, 640]")
-            count = calibrate_w8a8(model, images.split(args.batch_size), max_batches=args.max_batches)
-            output.parent.mkdir(parents=True, exist_ok=False)
-            lineage = checkpoint.get("lineage") if isinstance(checkpoint, dict) else None
-            if isinstance(lineage, dict):
-                lineage = {**lineage, "stage": "Q1-calibrated", "calibration_batches": count}
-            torch.save(
-                {**checkpoint, "model": model, "calibration_batches": count, "lineage": lineage},
-                output,
-            )
-            payload["calibration_batches"] = count
-            if isinstance(lineage, dict):
-                payload["lineage"] = str(_write_lineage(output, lineage))
-        _print(payload)
-        return 0
 
-    if args.command == "materialize-bittrue":
-        from .intake import require_accepted_intake
+def _cmd_validate_pose_data(args: argparse.Namespace) -> dict[str, Any]:
+    from .pose_data import validate_bbat5_dataset
 
-        require_accepted_intake(root)
-        _assert_c0_or_c_best(root, args.candidate)
-        output = _resolve(root, args.output).resolve()
-        payload = {"candidate": args.candidate, "output": str(output), "will_execute": args.execute}
-        if args.execute:
-            from achitechure_1.checkpoint import materialize_bittrue_checkpoint
+    return validate_bbat5_dataset(args.destination)
 
-            from .intake import file_sha256
 
-            parent = _resolve(root, args.checkpoint).resolve()
-            payload["output"] = str(
-                materialize_bittrue_checkpoint(
-                    parent,
-                    root.parent / "achitechure_1/configs/attention/bittrue-pwl-final.yaml",
-                    output,
-                )
-            )
-            lineage = _lineage_payload(root, args.candidate, parent)
-            lineage.update(
-                candidate_id=args.candidate,
-                stage="bittrue-materialization",
-                checkpoint={"path": str(output), "sha256": file_sha256(output)},
-            )
-            payload["lineage"] = str(_write_lineage(output, lineage))
-        _print(payload)
-        return 0
+def _cmd_export_data_metadata(args: argparse.Namespace) -> dict[str, Any]:
+    from .pose_data import export_bbat5_metadata
 
-    if args.command == "validate-bittrue":
-        from .config import compose_training_config
-        from .intake import require_accepted_intake
+    return export_bbat5_metadata(
+        args.source,
+        args.destination,
+        execute=args.execute,
+    )
 
-        require_accepted_intake(root)
-        stage = "D1" if args.task == "detect" else "P3"
-        config = compose_training_config(
-            project_root=root,
-            task=args.task,
-            candidate_id="C0",
-            stage=stage,
+
+def _cmd_inspect_handoff(args: argparse.Namespace) -> dict[str, Any]:
+    from .intake import validate_handoff
+
+    report = validate_handoff(
+        args.manifest,
+        project_root=args.project_root,
+        loader=None,
+    )
+    payload = asdict(report)
+    payload["inspection_only"] = True
+    payload["accepted"] = False
+    return payload
+
+
+def _cmd_accept_handoff(args: argparse.Namespace) -> dict[str, Any]:
+    from .intake import validate_handoff, write_intake
+
+    loader = _load_callable(args.model_loader)
+    report = validate_handoff(
+        args.manifest,
+        project_root=args.project_root,
+        loader=loader,
+    )
+    destination = args.output or args.project_root / "artifacts/intake/accepted.json"
+    write_intake(report, destination)
+    payload = asdict(report)
+    payload["accepted_artifact"] = str(destination.resolve())
+    return payload
+
+
+def _cmd_resolve_candidates(args: argparse.Namespace) -> dict[str, Any]:
+    from .candidate import resolve_candidate_matrix
+    from .intake import HandoffManifest
+
+    manifest = HandoffManifest.load(args.manifest)
+    matrix = resolve_candidate_matrix(manifest.fusion_kind, manifest.candidate_regions)
+    return {
+        "handoff_revision": manifest.revision_id,
+        "winner_id": manifest.winner_id,
+        "fusion_kind": manifest.fusion_kind,
+        "resolved_candidates": [
+            {
+                "base_candidate": item.base_candidate_id,
+                "resolved_candidate": item.resolved_id,
+                "region_id": item.region.region_id if item.region else None,
+                "region_role": item.region.role if item.region else None,
+                "module_paths": list(item.region.module_paths) if item.region else [],
+            }
+            for item in matrix
+        ],
+    }
+
+
+def _cmd_cpu_dry_run(args: argparse.Namespace) -> dict[str, Any]:
+    from .candidate import build_candidate, resolve_candidate_matrix
+    from .cpu_validation import validate_cpu_candidate
+    from .graph import inspect_fusion_graph
+    from .intake import HandoffManifest, validate_handoff
+
+    loader = _load_callable(args.model_loader)
+    materialized: list[Any] = []
+
+    def capture(checkpoint: Path) -> Any:
+        model = loader(checkpoint)
+        materialized.append(model)
+        return model
+
+    intake = validate_handoff(
+        args.manifest,
+        project_root=args.project_root,
+        loader=capture,
+    )
+    manifest = HandoffManifest.load(args.manifest)
+    matrix = resolve_candidate_matrix(manifest.fusion_kind, manifest.candidate_regions)
+    matches = [item for item in matrix if item.resolved_id == args.candidate]
+    if len(matches) != 1:
+        available = [item.resolved_id for item in matrix]
+        raise ValueError(f"找不到唯一 resolved candidate {args.candidate!r}；可用 {available}")
+    resolved = matches[0]
+    parent = materialized[0]
+    candidate, build = build_candidate(parent, resolved, seed=args.seed)
+    graph = inspect_fusion_graph(
+        candidate,
+        fusion_kind=manifest.fusion_kind,
+        candidate_regions=manifest.candidate_regions,
+        protected_module_paths=manifest.protected_module_paths,
+        frozen_module_paths=manifest.frozen_module_paths,
+        expected_candidate=build,
+    )
+
+    def builder() -> Any:
+        fresh_parent = loader(manifest.checkpoint.path)
+        return build_candidate(fresh_parent, resolved, seed=args.seed)[0]
+
+    cpu = validate_cpu_candidate(
+        candidate,
+        builder=builder,
+        frozen_module_paths=manifest.frozen_module_paths,
+        smoke_imgsz=args.smoke_imgsz,
+        geometry_imgsz=args.geometry_imgsz,
+    )
+    payload = {
+        "handoff": asdict(intake),
+        "build": build.to_dict(),
+        "graph": graph.to_dict(),
+        "cpu_validation": cpu.to_dict(),
+    }
+    if args.output:
+        _write_json(args.output, payload)
+        payload["output"] = str(args.output.resolve())
+    return payload
+
+
+def _scalar(value: str) -> Any:
+    return yaml.safe_load(value)
+
+
+def _cmd_effective_config(args: argparse.Namespace) -> dict[str, Any]:
+    from .config import resolve_training_template, write_effective_training
+    from .intake import HandoffManifest, validate_handoff
+
+    validate_handoff(args.manifest, project_root=args.project_root, loader=None)
+    manifest = HandoffManifest.load(args.manifest)
+    recipe = yaml.safe_load(manifest.training_recipe.path.read_text(encoding="utf-8"))
+    if not isinstance(recipe, dict):
+        raise TypeError("handoff training recipe 必須是 mapping")
+    overrides = {
+        name: value
+        for name, value in {
+            "name": args.name,
+            "project": str(args.project) if args.project else None,
+            "device": args.device,
+            "workers": args.workers,
+            "cache": _scalar(args.cache) if args.cache is not None else None,
+        }.items()
+        if value is not None
+    }
+    config = resolve_training_template(
+        args.template,
+        handoff_recipe=recipe,
+        runtime_overrides=overrides,
+        project_root=args.project_root,
+    )
+    payload = {
+        "config_id": config.config_id,
+        "training": config.args,
+        "source_yaml_sha256": config.sha256,
+        "formal_execution": "仍需 --enable-pose 與 GPU 授權；此命令只解析設定",
+    }
+    if args.output:
+        write_effective_training(config, args.output)
+        payload["output"] = str(args.output.resolve())
+    return payload
+
+
+def _candidate_metrics(value: dict[str, Any]) -> Any:
+    from .decisions import CandidateMetrics, ClassMetrics
+
+    payload = dict(value)
+    classes = payload.get("classes")
+    if not isinstance(classes, dict):
+        raise TypeError("metrics.classes 必須是 ball/bat mapping")
+    payload["classes"] = {
+        name: ClassMetrics(**class_payload) for name, class_payload in classes.items()
+    }
+    return CandidateMetrics(**payload)
+
+
+def _cmd_assess(args: argparse.Namespace) -> dict[str, Any]:
+    from .decisions import evaluate_float_results
+
+    raw = json.loads(args.input.read_text(encoding="utf-8"))
+    entries = raw.get("candidates") if isinstance(raw, dict) else raw
+    if not isinstance(entries, list):
+        raise TypeError("結果 JSON 必須是 list 或含 candidates list")
+    report = evaluate_float_results(_candidate_metrics(item) for item in entries)
+    payload = report.to_dict()
+    if args.output:
+        _write_json(args.output, payload)
+        payload["output"] = str(args.output.resolve())
+    return payload
+
+
+def _cmd_quant_check(args: argparse.Namespace) -> dict[str, Any]:
+    from .quantization import require_quantization_stage
+
+    status = require_quantization_stage(
+        args.candidate,
+        args.stage,
+        user_approved=args.approved,
+        gpu_authorized=args.gpu_authorized,
+    )
+    return {
+        "candidate": args.candidate,
+        "stage": args.stage.upper(),
+        "status": status,
+        "simulation_only": True,
+        "執行": "此命令只檢查資格，不會開始 PTQ/QAT。",
+    }
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="python -m achitechure_2",
+        description="architecture_2：融合 winner 上的 C0/C1/C2/C3 評估工具",
+    )
+    parser.add_argument(
+        "--project-root",
+        type=Path,
+        default=DEFAULT_PROJECT_ROOT,
+        help="architecture_2 專案根目錄",
+    )
+    commands = parser.add_subparsers(dest="command", required=True)
+
+    commands.add_parser("status", help="顯示 Phase A、Pose/GPU 與 handoff 狀態")
+    commands.add_parser("config-check", help="驗證全部正式 YAML/schema/spec hashes")
+    commands.add_parser("show-candidates", help="以中文說明 C0/C1/C2/C3")
+
+    prepare = commands.add_parser(
+        "prepare-pose-data",
+        aliases=["prepare-bbat5-data"],
+        help="規劃或建立 BBAT5 v1；不會啟動 Pose",
+    )
+    prepare.add_argument("--pose-source", type=Path, default=Path("/home/uxin/yolo/original/pose/dataset"))
+    prepare.add_argument(
+        "--detect-source",
+        type=Path,
+        default=Path("/home/uxin/yolo/original/pose/detect_dataset"),
+    )
+    prepare.add_argument(
+        "--destination",
+        type=Path,
+        default=Path("/home/uxin/yolo/original/pose/derived/bbat5-v1"),
+    )
+    prepare.add_argument(
+        "--coco-train-list",
+        type=Path,
+        default=Path("/home/uxin/yolo/coco2017/train2017.txt"),
+    )
+    prepare.add_argument("--train-ratio", type=float, default=0.9)
+    prepare.add_argument("--search-val-ratio", type=float, default=0.1)
+    prepare.add_argument("--seed", type=int, default=0)
+    prepare.add_argument("--expected-patch-count", type=int, default=4)
+    prepare.add_argument("--execute", action="store_true", help="實際建立 immutable 衍生版本")
+
+    validate = commands.add_parser("validate-pose-data", help="驗證已建立的 BBAT5 v1")
+    validate.add_argument(
+        "--destination",
+        type=Path,
+        default=Path("/home/uxin/yolo/original/pose/derived/bbat5-v1"),
+    )
+
+    export = commands.add_parser(
+        "export-data-metadata",
+        help="只匯出 README/YAML/manifests 到 Git；不含影像或 labels",
+    )
+    export.add_argument(
+        "--source",
+        type=Path,
+        default=Path("/home/uxin/yolo/original/pose/derived/bbat5-v1"),
+    )
+    export.add_argument(
+        "--destination",
+        type=Path,
+        default=DEFAULT_PROJECT_ROOT / "artifacts/datasets/bbat5-v1",
+    )
+    export.add_argument("--execute", action="store_true")
+
+    inspect = commands.add_parser("inspect-handoff", help="只驗證 handoff metadata；不寫 accepted")
+    inspect.add_argument("--manifest", type=Path, required=True)
+
+    accept = commands.add_parser("accept-handoff", help="materialize graph 後寫入 accepted intake")
+    accept.add_argument("--manifest", type=Path, required=True)
+    accept.add_argument("--model-loader", required=True, help="module:function 或 builder.py:function")
+    accept.add_argument("--output", type=Path)
+
+    resolve = commands.add_parser("resolve-candidates", help="依 fusion kind 顯示實際候選矩陣")
+    resolve.add_argument("--manifest", type=Path, required=True)
+
+    dry_run = commands.add_parser("cpu-dry-run", help="對一個 resolved candidate 做 CPU 完整 smoke")
+    dry_run.add_argument("--manifest", type=Path, required=True)
+    dry_run.add_argument("--model-loader", required=True)
+    dry_run.add_argument("--candidate", default="C0")
+    dry_run.add_argument("--seed", type=int, default=0)
+    dry_run.add_argument("--smoke-imgsz", type=int, default=64)
+    dry_run.add_argument("--geometry-imgsz", type=int, default=640)
+    dry_run.add_argument("--output", type=Path)
+
+    effective = commands.add_parser(
+        "effective-config",
+        help="由 handoff 配方解析完整 training YAML；不執行訓練",
+    )
+    effective.add_argument("--manifest", type=Path, required=True)
+    effective.add_argument("--template", type=Path, default=Path("configs/training/float-main.yaml"))
+    effective.add_argument("--name")
+    effective.add_argument("--project", type=Path)
+    effective.add_argument("--device")
+    effective.add_argument("--workers", type=int)
+    effective.add_argument("--cache")
+    effective.add_argument("--output", type=Path)
+
+    assess = commands.add_parser("assess", help="產生 measurement-first Float/Pareto 報告")
+    assess.add_argument("--input", type=Path, required=True)
+    assess.add_argument("--output", type=Path)
+
+    quant = commands.add_parser("quant-check", help="只檢查候選 Q0/Q1/Q2 資格")
+    quant.add_argument("--candidate", required=True)
+    quant.add_argument("--stage", choices=["Q0", "Q1", "Q2", "q0", "q1", "q2"], required=True)
+    quant.add_argument("--approved", action="append", default=[])
+    quant.add_argument("--gpu-authorized", action="store_true")
+    return parser
+
+
+_HANDLERS: dict[str, Callable[[argparse.Namespace], dict[str, Any]]] = {
+    "status": _cmd_status,
+    "config-check": _cmd_config_check,
+    "show-candidates": _cmd_show_candidates,
+    "prepare-pose-data": _cmd_prepare_pose_data,
+    "prepare-bbat5-data": _cmd_prepare_pose_data,
+    "validate-pose-data": _cmd_validate_pose_data,
+    "export-data-metadata": _cmd_export_data_metadata,
+    "inspect-handoff": _cmd_inspect_handoff,
+    "accept-handoff": _cmd_accept_handoff,
+    "resolve-candidates": _cmd_resolve_candidates,
+    "cpu-dry-run": _cmd_cpu_dry_run,
+    "effective-config": _cmd_effective_config,
+    "assess": _cmd_assess,
+    "quant-check": _cmd_quant_check,
+}
+
+
+def main(argv: list[str] | None = None) -> int:
+    # 本 revision 的 CLI 沒有正式 GPU 執行命令；所有可執行 smoke 強制隱藏 CUDA。
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
+    args = build_parser().parse_args(argv)
+    args.project_root = args.project_root.resolve()
+    try:
+        payload = _HANDLERS[args.command](args)
+    except Exception as error:  # noqa: BLE001 - CLI 邊界需把所有失敗轉成結構化 JSON。
+        _print_json(
+            {
+                "ok": False,
+                "error_type": type(error).__name__,
+                "error": str(error),
+            },
+            stream=sys.stderr,
         )
-        common = config.args
-        run = root / "artifacts/validation" / args.run_id
-        payload = {
-            "task": args.task,
-            "run": str(run),
-            "will_execute": args.execute,
-            "pose_opt_in_required": args.task == "pose",
-            "pose_enabled": args.enable_pose,
-        }
-        if args.execute and args.task == "detect":
-            from achitechure_1.evaluation import validate_bittrue
-
-            payload["metrics"] = str(
-                validate_bittrue(
-                    checkpoint=_resolve(root, args.checkpoint),
-                    data=_resolve(root, Path(common["data"])),
-                    run_dir=run,
-                    imgsz=int(common["imgsz"]),
-                    batch=int(common["batch"]),
-                    device=str(common["device"]),
-                    workers=int(common["workers"]),
-                )
-            )
-        elif args.execute:
-            from ultralytics import YOLO
-
-            result = YOLO(str(_resolve(root, args.checkpoint))).val(
-                data=str(_resolve(root, Path(common["data"]))),
-                imgsz=int(common["imgsz"]),
-                batch=int(common["batch"]),
-                device=str(common["device"]),
-                workers=int(common["workers"]),
-                project=str(run),
-                name="ultralytics",
-                exist_ok=False,
-            )
-            metrics = dict(getattr(result, "results_dict", {}))
-            run.mkdir(parents=True, exist_ok=True)
-            destination = run / "metrics.json"
-            destination.write_text(
-                json.dumps(metrics, indent=2, sort_keys=True, default=float) + "\n",
-                encoding="utf-8",
-            )
-            payload["metrics"] = str(destination)
-        _print(payload)
-        return 0
-
-    if args.command == "profile":
-        from .intake import require_accepted_intake
-
-        require_accepted_intake(root)
-        payload = {"output": str(_resolve(root, args.output)), "will_execute": args.execute}
-        if args.execute:
-            from achitechure_1.profiling import profile_checkpoint
-
-            payload["output"] = str(
-                profile_checkpoint(
-                    checkpoint=_resolve(root, args.checkpoint),
-                    output=_resolve(root, args.output),
-                    warmup=args.warmup,
-                    iterations=args.iterations,
-                )
-            )
-        _print(payload)
-        return 0
-
-    if args.command == "quant-report":
-        from .quantization import robustness_report
-
-        _print(asdict(robustness_report(args.q0, args.q1, args.q2)))
-        return 0
-    raise AssertionError("未處理的命令")
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+        return 2
+    _print_json(payload)
+    return 0

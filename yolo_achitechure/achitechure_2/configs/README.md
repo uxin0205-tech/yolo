@@ -1,228 +1,174 @@
-# configs：正式設定導覽
+# configs：正式 YAML 導覽
 
-這個目錄保存 architecture_2 的所有正式設定。若不知道要選哪個檔案，先看
-[catalog.yaml](catalog.yaml)，再依本文件的表格選一份 architecture YAML 與一份 training YAML。
-
-## 最重要的規則
-
-- 一個訓練階段只需要一份 `configs/training/...yaml`。
-- 不需要，也不允許使用者自行合併 canonical、overlay 或 stage fragment。
-- `train --config ...` 是推薦入口。
-- training YAML 是 project launcher 設定，不可直接傳給 `YOLO(yaml)`。
-- dataset YAML 可以作為 Ultralytics 的 `data=...`。
-- architecture candidate YAML 必須交給 achitechure_2 builder graft，不能獨立載入。
-- 所有正式檔案都由 [catalog.yaml](catalog.yaml) 登錄，`config-check` 會拒絕未登錄或缺少的檔案。
+[catalog.yaml](catalog.yaml) 是所有正式 YAML 的唯一機器可讀索引。任何未列入 catalog 的檔案都不是
+正式實驗設定；任何未知欄位、spec hash 漂移或候選矩陣漂移都會被 config-check 拒絕。
 
 ## 目錄
 
-```text
-configs/
-├── README.md
-├── catalog.yaml
-├── candidates/
-├── training/
-│   ├── detect/
-│   └── pose/
-├── data/
-├── quant/
-├── fusion/
-└── schema/
-```
+    configs/
+    ├── catalog.yaml
+    ├── candidates/
+    │   ├── c0.yaml
+    │   ├── c1-e0375.yaml
+    │   ├── c2-n1.yaml
+    │   └── c3-mixed.yaml
+    ├── training/
+    │   ├── cpu-smoke.yaml
+    │   ├── float-main.yaml
+    │   ├── float-extension.yaml
+    │   └── quant-qat.yaml
+    ├── data/
+    │   ├── coco2017.yaml
+    │   ├── bbat5-pose.yaml
+    │   └── bbat5-detect.yaml
+    ├── quant/w8a8-simulation.yaml
+    └── schema/
 
-## catalog.yaml
+本 revision 沒有 fusion template：融合實驗與 winner 選擇屬於 yolo_combine。本 revision 也沒有
+C3-P5 或 R1 YAML；它們必須等使用者看完第一輪結果後才可能加入下一版 spec。
 
-[catalog.yaml](catalog.yaml) 是機器可讀的唯一目錄，包含：
+## Candidate YAML
 
-- `architectures`：候選 ID 到 YAML 路徑。
-- `training`：config ID 到完整 training YAML。
-- `datasets`：dataset 名稱到 YAML。
-- `quantization`：量化設定。
-- `fusion_template`：未來融合範本。
-- `schemas`：各類 JSON Schema。
+| ID | 檔案 | 唯一因素 | 量化資格 |
+|---|---|---|---|
+| C0 | [c0.yaml](candidates/c0.yaml) | 不修改 | true |
+| C1 | [c1-e0375.yaml](candidates/c1-e0375.yaml) | e 0.5 → 0.375 | pending_user_decision |
+| C2 | [c2-n1.yaml](candidates/c2-n1.yaml) | inner_n 2 → 1 | pending_user_decision |
+| C3 | [c3-mixed.yaml](candidates/c3-mixed.yaml) | 3x3_3x3 → 1x1_3x3 | pending_user_decision |
 
-新增或改名正式 YAML 時必須更新 catalog。
-
-## 架構候選
-
-| ID | 檔案 | 目標 layers | factors | 狀態 |
-|---|---|---|---|---|
-| C0 | [c0.yaml](candidates/c0.yaml) | 無 | `e=.5, n=2, 3x3_3x3, rep=false` | required |
-| C1 | [c1-e0375.yaml](candidates/c1-e0375.yaml) | 6/8/13/19 | `e=.375` | required |
-| C2 | [c2-n1.yaml](candidates/c2-n1.yaml) | 6/8/13/19 | `inner_n=1` | required |
-| C3 | [c3-mixed.yaml](candidates/c3-mixed.yaml) | 6/8/13/19 | `1x1_3x3` | required |
-| C3-P5 | [c3-p5-only.yaml](candidates/c3-p5-only.yaml) | 8 | `1x1_3x3` | conditional |
-| R1 | [r1-rep.yaml](candidates/r1-rep.yaml) | 6/8/13/19 | `inner_n=1, rep=true` | conditional |
-
-每份候選 YAML 的主要欄位：
-
-- `title_zh`／`summary_zh`：人類可讀用途。
-- `status`：required 或 conditional。
-- `target_layers`：實際改動位置。
-- `protected_layers`：禁止修改的位置。
-- `factors`：本候選唯一架構變因。
-- `inherited`：MASF 與 attention 的凍結契約。
-- `heads`：Detect/Pose26 inputs 與 strides。
-- `conditions`：條件候選的 base 與 trigger。
-- `architecture_delta`：改變、不變與預期效果。
-- `standalone_loadable=false`：不可直接 `YOLO(yaml)`。
-
-## 完整 training YAML
-
-### Detect
-
-| config ID | 檔案 | stage |
-|---|---|---|
-| detect-d0-smoke | [d0-smoke.yaml](training/detect/d0-smoke.yaml) | D0 |
-| detect-d1-main | [d1-main.yaml](training/detect/d1-main.yaml) | D1 |
-| detect-d2-extension | [d2-extension.yaml](training/detect/d2-extension.yaml) | D2 |
-| detect-q2-qat | [q2-qat.yaml](training/detect/q2-qat.yaml) | Q2 |
-
-### Pose
-
-| config ID | 檔案 | stage |
-|---|---|---|
-| pose-p0-smoke | [p0-smoke.yaml](training/pose/p0-smoke.yaml) | P0 |
-| pose-p1-head-only | [p1-head-only.yaml](training/pose/p1-head-only.yaml) | P1 |
-| pose-p2-neck-head | [p2-neck-head.yaml](training/pose/p2-neck-head.yaml) | P2 |
-| pose-p3-full | [p3-full.yaml](training/pose/p3-full.yaml) | P3 |
-| pose-p4-extension | [p4-extension.yaml](training/pose/p4-extension.yaml) | P4 |
-
-每份正式 training YAML 的 top-level interface：
+候選檔描述「改什麼」，不描述「實際第幾層」。共同欄位：
 
 | 欄位 | 意義 |
 |---|---|
-| `config_id` | catalog 使用的穩定 ID |
-| `title_zh`／`summary_zh` | 中文用途 |
-| `task`／`stage` | Detect/Pose 與 D0–P4/Q2 |
-| `status` | required、optional 或 conditional |
-| `candidate_policy` | 可用候選與 trigger |
-| `execution` | launcher、`--execute`、Pose opt-in 與是否可直接交給 Ultralytics |
-| `dataset` | dataset YAML 路徑 |
-| `transition` | fresh/resume、checkpoint role 與 gate |
-| `ranking` | 是否參與架構排名、研究指標與 backend |
-| `frozen_modules` | 全階段永久凍結 roots |
-| `derived_training` | 必須由 parent 推導的欄位；包含 Q2 lr0 與 D2/P4 resume checkpoint path |
-| `training` | 完整送入 Ultralytics 的 training arguments |
+| task_contract | Detect 80 classes、Pose 2 classes 與 keypoint shape |
+| parent_policy | 全部由同一 accepted yolo_combine winner 獨立建立 |
+| target_policy | module paths 必須由 handoff Candidate Regions 提供 |
+| scope_resolution | shared／routed／partial-shared 如何展開候選 |
+| factors / baseline_factors | 唯一架構因素與 C0 基準 |
+| protected_policy | heads、fusion topology 與 inherited modules 不得改動 |
+| architecture_delta | 中文 changed/unchanged/expected effects |
+| standalone_loadable | 永遠是 false；不可直接 YOLO(yaml) |
 
-`training:` 是完整設定，不依賴其他 YAML。Launcher 只會加入 run-specific `project/name`、解析 dataset
-絕對路徑，並在 resume 階段加入 `resume`。Q2 `lr0=0.000038` 已明確寫入 YAML；launcher 只驗證它等於
-parent architecture LR 的 0.1 倍，不再偷偷改值。
+## Training templates
 
-## 常用可調參數
+| config_id | 檔案 | 狀態 |
+|---|---|---|
+| cpu-smoke | [cpu-smoke.yaml](training/cpu-smoke.yaml) | Phase A，CPU-only |
+| float-main | [float-main.yaml](training/float-main.yaml) | 等 handoff、Pose opt-in、GPU 授權 |
+| float-extension | [float-extension.yaml](training/float-extension.yaml) | 等 late gate 與未 strip continuation checkpoint |
+| quant-qat | [quant-qat.yaml](training/quant-qat.yaml) | 等 Float 決策、量化資格、GPU 授權 |
 
-所有參數都直接放在每份 YAML 的 `training:` 區塊。以下是最常調整的欄位：
+這四份都是完整 templates，不需要自行合併 canonical、overlay 或 stage fragment。它們刻意分成：
 
-| YAML 鍵名 | 用途 | 目前正式值 | 注意事項 |
+- recipe：optimizer、LR、loss、augmentation、freeze、seed、task ratio 與 optimizer steps。
+- adjustable：batch、fraction、scale、cache、imgsz、device、workers、epochs、patience。
+- execution：CPU/GPU、Pose opt-in、是否為正式訓練。
+- routes：COCO Detect 與 BBAT5 Pose 各自在什麼資料上計 loss。
+- validation：必存的 AP/mAP/F1 與固定 threshold 來源。
+- transition：fresh 或真正 resume；extension 明確拒絕已 strip 的 stock last.pt／best.pt。
+- lineage：effective YAML 與所有 hashes 的要求。
+
+### source/value 是什麼
+
+Winner 尚未交付前，本專案不能猜 upstream training recipe。每個值都保留來源：
+
+    optimizer:
+      source: handoff
+      value: null
+
+代表「handoff 一定要提供；現在 null 是刻意阻擋」。本地已確定的值會寫成：
+
+    fraction:
+      source: local
+      value: 1.0
+
+收到 handoff 後使用 effective-config 解析；若任何 null 沒有對應上游值就停止。輸出的 effective YAML
+會是具體、可保存 hash 的單一設定，不再需要理解 source/value。
+
+## 常用參數如何調
+
+| 目的 | 正式鍵名 | Template 位置 | 允許值／提醒 |
 |---|---|---|---|
-| `batch` | physical batch size | 16 | Ultralytics 正式鍵名是 `batch`，不是 `batch_size` |
-| `imgsz` | 輸入影像尺寸 | 640 | 改動會影響 VRAM、速度與精度 |
-| `fraction` | 使用 train dataset 的比例 | 1.0 | 範圍 0–1；例如 0.1 只用 10% 資料 |
-| `scale` | 隨機縮放 augmentation 幅度 | Detect 0.95／Pose 0.5 | 不是模型 scale；會影響 augmentation |
-| `cache` | dataset cache | false | 可設 false、ram 或 disk；需確認記憶體／磁碟 |
-| `device` | 訓練裝置 | "0" | 可用 GPU index、CPU 或多 GPU 格式 |
-| `workers` | dataloader workers | 8 | Windows 或低 RAM 環境可能需要降低 |
-| `epochs` | 最大 epoch | 依 stage | D2/P4 是總 epoch，不是額外 epoch |
-| `patience` | early stopping | 依 stage | 0 代表停用需先確認本機語意 |
-| `lr0` | 初始 learning rate | 依 task | Q2 明確為 parent LR 的 0.1 倍 |
-| `lrf` | 最終 LR factor | Detect 0.882／Pose 0.01 | 與 scheduler 一起作用 |
-| `optimizer` | optimizer | MuSGD | 正式比較禁止單一候選改 optimizer |
-| `weight_decay` | weight decay | 依 task | 會受 `nbs` 與 accumulation 影響 |
-| `nbs` | nominal batch size | 64 | physical batch 仍由 `batch` 決定 |
-| `amp` | mixed precision | true | 關閉會增加 VRAM 與時間 |
-| `deterministic` | deterministic mode | true | 正式比較必須保持一致 |
-| `resume` | 是否 resume | D2/P4 true | launcher 會把 true 解析成指定的 last.pt path |
-| `freeze` | freeze layers | 依 Pose stage | P1 為 0–22，P2 為 11 |
-| `multi_scale` | multi-scale training range | 0.0 | 0.0 代表停用 |
-| `compile` | torch compile | false | 開啟前必須確認 custom graph 相容 |
-| `profile` | 訓練時 profile | false | 正式 latency 仍使用獨立 profile 流程 |
-| `rect` | rectangular batches | false | 改動可能影響 batch geometry |
-| `single_cls` | 合併為單類別 | false | 本案正式資料不可任意開啟 |
-| `mosaic`／`mixup`／`copy_paste` | augmentation | 依 task | 同一 ablation 必須完全一致 |
-| `translate`／`scale`／`fliplr` | 幾何 augmentation | 依 task | Pose `fliplr=0` 是語意安全要求 |
-| `val`／`split` | 是否驗證與 split | true／val | 目前不建立 Pose test split |
-| `iou`／`max_det`／`conf` | 驗證／推論門檻 | 0.7／300／null | 正式比較必須一致 |
-| `save`／`save_period` | checkpoint 保存 | true／-1 | best/last 仍會保存 |
+| batch size | batch | adjustable.batch.value | 不要寫 batch_size |
+| 使用資料比例 | fraction | adjustable.fraction.value | 0 < fraction ≤ 1；只截取排序後 train 前段 |
+| 幾何縮放 augmentation | scale | adjustable.scale.value | 與 model_scale=m 無關 |
+| dataset cache | cache | adjustable.cache.value | false、ram、disk |
+| input size | imgsz | adjustable.imgsz.value | 會影響精度與記憶體 |
+| 裝置 | device | adjustable.device.value | 現在 CPU smoke 固定 cpu |
+| dataloader | workers | adjustable.workers.value | CPU smoke 是 0 |
+| 訓練預算 | epochs / patience | adjustable 對應欄位 | 正式值由 winner recipe 繼承 |
+| optimizer | optimizer | recipe.optimizer.value | 不得對單一候選不同 |
+| 初始／最終 LR | lr0 / lrf | recipe 對應欄位 | 不得用 CLI 偷改 |
+| nominal batch | nbs | recipe.nbs.value | 要和 physical batch 分開記錄 |
+| task sampling | task_ratio | recipe.task_ratio.value | 要以 optimizer steps/effective samples 比較 |
 
-其他已顯式列出的欄位包括 `time`、`pretrained`、`verbose`、`cos_lr`、`close_mosaic`、
-`dropout`、`save_json`、`dnn`、`classes` 與全部 loss/augmentation 參數。
+name、project、device、workers、cache 是 runtime allowlist。batch、fraction、scale、LR、optimizer、
+augmentation 或 loss 若要改，必須修改正式 YAML、更新 spec revision/hash，並讓所有候選共用；這是
+為了防止單一候選得到不同訓練條件，不是限制 YAML 的可調性。
 
-### 怎麼調整
+fraction 不是 grouped split；BBAT5 搜尋必須使用獨立的 search dataset YAML。cache=true／ram 可能
+不是完全 deterministic，cache=disk 只允許寫入衍生資料，不能寫原始唯讀目錄。
 
-1. 打開要使用的完整 YAML，例如 `training/detect/d1-main.yaml`。
-2. 在 `training:` 下修改正式 Ultralytics 鍵名。
-3. 執行 `config-check`，不支援的鍵或型別會直接失敗。
-4. 正式 ablation 若修改共用 learning/augmentation 欄位，必須同步同 task 的相關 YAML 並升版 spec。
-5. `device/workers/cache/model/name/project` 可依機器或輸出位置調整，不列為架構學習變因。
+解析範例：
 
-`config-check` 會阻止 D0/D1/D2 或 P0–P4 在共同參數上意外漂移。這代表參數確實可在 YAML 中調整，
-但正式比較不能只替單一候選偷偷改設定。
+    $PY -m achitechure_2 effective-config --manifest /path/handoff.json --template configs/training/float-main.yaml --output artifacts/effective-configs/float-main.yaml
 
-## Dataset
+這個命令只產生設定，不會開始訓練。
 
-- [coco2017.yaml](data/coco2017.yaml)：Detect D0–D2/Q2。
-- [pose-grouped.yaml](data/pose-grouped.yaml)：Pose P0–P4。
+## Dataset YAML
 
-`project_metadata` 提供中文用途與 task；其餘 `path/train/val/names/kpt_shape` 是 Ultralytics dataset
-欄位。Pose dataset 的 `test: null` 是刻意的，因為來源沒有 test split。
+| 檔案 | 角色 | 實際資料 |
+|---|---|---|
+| [coco2017.yaml](data/coco2017.yaml) | COCO80 Detect 主線 | /home/uxin/yolo/coco2017 |
+| [bbat5-pose.yaml](data/bbat5-pose.yaml) | BBAT5 ball/bat Pose 主線 | derived/bbat5-v1/pose |
+| [bbat5-detect.yaml](data/bbat5-detect.yaml) | 2-class paired 診斷 | derived/bbat5-v1/detect |
+| [bbat5-pose-search.yaml](data/bbat5-pose-search.yaml) | formal-train-only Pose search | pose search lists |
+| [bbat5-detect-search.yaml](data/bbat5-detect-search.yaml) | formal-train-only paired diagnostic | detect search lists |
 
-## Quantization
+BBAT5 Pose 與 Detect 共用同一 grouped assignment，test 明確為 null。衍生目錄另有四份乾淨、
+可直接交給 Ultralytics 的 formal/search dataset YAML；Git 副本在
+[artifacts/datasets/bbat5-v1/configs](../artifacts/datasets/bbat5-v1/configs)。
 
-[w8a8-simulation.yaml](quant/w8a8-simulation.yaml) 定義：
+目前只有 BBAT5 有正式 train-only search config；COCO train-only search contract 尚未建立。因此
+這兩份 YAML 可用於 F1 threshold 與獲准的 BBAT5 小規模研究，不能宣稱已完成雙任務融合 recipe 搜尋。
 
-- targets：C0、C_best
-- weight：per-channel symmetric INT8
-- activation：per-tensor affine INT8
-- observers：前三個 QAT epochs 更新
-- `simulation_only=true`
+## Quantization YAML
 
-## Fusion
+[w8a8-simulation.yaml](quant/w8a8-simulation.yaml) 固定：
 
-[source-pair.template.yaml](fusion/source-pair.template.yaml) 目前只是 future-disabled 範本。它保存來源 A/B
-checkpoint、architecture、head contract 與 hashes。`fusion_mode`、`switch_policy` 必須保持 null，直到
-使用者選定實驗語意並升版 spec。
+- Q0 fused FP32 reference。
+- Q1 W8A8 PTQ simulation。
+- Q2 W8A8 QAT simulation，必須有 GPU 授權。
+- Conv weight per-channel symmetric INT8。
+- activation per-tensor affine INT8。
+- custom HardwareFriendlyAttention/BinaryQK/PWL roots 排除。
+- simulation_only=true。
 
-## Schema
+C0 預設 eligible；其他候選保持 pending_user_decision。
 
-所有 schema 都採 JSON Schema Draft 2020-12：
+## Schemas
+
+schema 皆採 JSON Schema Draft 2020-12，並保存 x-spec-version 與 x-spec-sha256：
 
 - [catalog.schema.yaml](schema/catalog.schema.yaml)
 - [candidate.schema.yaml](schema/candidate.schema.yaml)
 - [training.schema.yaml](schema/training.schema.yaml)
 - [dataset.schema.yaml](schema/dataset.schema.yaml)
 - [quantization.schema.yaml](schema/quantization.schema.yaml)
-- [fusion.schema.yaml](schema/fusion.schema.yaml)
+- [handoff.schema.yaml](schema/handoff.schema.yaml)
 
-本機沒有額外安裝 `jsonschema` 套件；專案的 `config-check` 仍會以 fail-closed 程式驗證必要欄位、
-精確矩陣、Ultralytics 支援與跨檔公平性。這些標準 schema 可供 IDE 或外部 validator 使用。
+本地 config-check 另外執行跨檔語意檢查，例如 C0–C3 唯一因素、COCO80/Pose2 類別、Pose opt-in、
+量化資格、Ultralytics 8.4.90 與 forbidden files。
 
-## 推薦命令
+## 修改正式設定
 
-```bash
-# 檢查所有設定
-$PY -m achitechure_2 config-check
+1. 先修改 [EXPERIMENT_SPEC.md](../EXPERIMENT_SPEC.md)，升版並加入 revision history。
+2. 更新相關 YAML 的 spec_version/spec_sha256。
+3. 若新增正式檔，更新 catalog 與 schema。
+4. 對所有候選同步公平性欄位。
+5. 執行：
 
-# 預覽 Detect D1
-$PY -m achitechure_2 train \
-  --config configs/training/detect/d1-main.yaml \
-  --candidate C0 \
-  --checkpoint artifacts/candidates/c0/float-parent.pt \
-  --run-id c0-d1
+       $PY -m achitechure_2 config-check
+       env CUDA_VISIBLE_DEVICES='' $PY -m pytest -q
 
-# 預覽 Pose P1（不執行）
-$PY -m achitechure_2 train \
-  --config configs/training/pose/p1-head-only.yaml \
-  --candidate C0 \
-  --checkpoint /path/to/pose-graft.pt \
-  --run-id pose-c0-p1
-```
-
-## 修改設定
-
-1. 先改 `EXPERIMENT_SPEC.md` 並升版。
-2. 修改對應完整 YAML。
-3. 共用學習欄位要同步更新同 task 的所有階段。
-4. 更新 spec hash。
-5. 更新 catalog。
-6. 執行 `config-check` 與 pytest。
-
-如果只修改一份 YAML 的 batch、optimizer、augmentation 或一般 LR，跨檔公平性檢查會中止。
+不要複製舊訓練命令，也不要把 candidate YAML 當成可獨立 YOLO architecture YAML。

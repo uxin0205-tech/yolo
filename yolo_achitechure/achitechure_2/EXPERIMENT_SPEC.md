@@ -1,197 +1,249 @@
 # architecture_2 統一實驗規格
 
-規格版本：`1.2.0`
+規格版本：`2.0.1`
 狀態：唯一正式規格
-生效日期：2026-08-19
+生效日期：2026-08-22
 
-本文件是 `achitechure_2` 的唯一規格來源，統一架構、訓練、選型、Pose、量化、資料與報告規則。
-「必須／禁止」是強制條件，「應」是預設條件，「可」是選項。本文件的門檻是本研究的工程門檻，
-不是通用研究標準。
+本專案承接 `yolo_combine` 選出的 YOLO26m Detect–Pose 融合 winner，評估 C0、C1、C2、C3 的單因子 C3k2 簡化。它不重新選擇融合方法，也不在結果出現前自動決定 C_best。
 
-## 1. 規格優先順序與版本追蹤
+## 1. 單一規格與可追溯性
 
-優先順序固定如下：
+規範優先順序如下：
 
 1. `EXPERIMENT_SPEC.md`：唯一正式定義。
-2. `configs/**/*.yaml`：由本規格衍生的可執行設定。
-3. `TRAINING_GUIDE.md`：理由、轉換與異常處理。
-4. `RUNBOOK.md`：經驗證的實際命令。
-5. `plan.pdf`、`YOLO26_Codex_Research_Protocol.md`：歷史與官方參考，不是第二份真相。
+2. `configs/**/*.yaml`：由本規格衍生的機器可讀設定。
+3. `TRAINING_GUIDE.md`：理由與操作原則。
+4. `RUNBOOK.md`：已驗證命令。
+5. `plan.md`：只指向本文件。
+6. `plan.pdf`、`YOLO26_Codex_Research_Protocol.md`：歷史參考。
 
-`plan.md` 只指向本文件。規則變更時，先修改本文件並升版，再更新 YAML。舊結果保留當時的
-`spec_version` 與 `spec_sha256`，禁止回溯改寫。
+每個正式 YAML 必須保存 `spec_version` 與 `spec_sha256`。run manifest、checkpoint lineage 與結果必須保存：
 
-所有正式 architecture、training、dataset、quantization 與 fusion YAML 都必須保存
-`spec_version`、`spec_sha256`。每個 run manifest 與 checkpoint lineage 還必須保存 architecture YAML、
-實際 training YAML、dataset YAML、parent checkpoint 的 SHA256。CLI 只允許覆寫
-`model/name/project/device/workers/cache`；未知欄位、hash 漂移或偷改 learning fields 一律停止。
+- spec、architecture YAML、effective training YAML、各 dataset YAML 的 SHA256；
+- parent checkpoint 與 handoff manifest 的 SHA256；
+- Handoff Revision、resolved candidate、seed、環境及執行裝置；
+- 狀態標記：`measured`、`simulated`、`estimated`、`not_run`、`blocked` 或 `pending`。
 
-### 修訂歷史
+規格變更必須升版並新增修訂歷史。舊結果保留原雜湊，禁止回溯改寫。
+
+## 2. 專案邊界與正式任務
+
+`yolo_combine` 擁有融合候選、雙權重／架構切換與 winner 選擇。architecture_2 只接受選定 winner，建立簡化候選並比較精度與成本。ViTPose 保持外部參考。
+
+正式模型介面為：
+
+```python
+model(images, tasks={"detect", "pose"})
+```
+
+允許 `detect`、`pose` 或 `both`。正式語意固定為：
+
+- Detect：COCO80，應用層主要消費 person，但不得把 head 改成 2 classes。
+- Pose：BBAT5，`nc=2`、`names={0: ball, 1: bat}`、`kpt_shape=[2,3]`。
+- BBAT5 2-class Detect 是獨立診斷 view，不取代 COCO80，也不得單獨決定 C_best。
+
+Pose 執行由使用者決定。未提供明確 opt-in 時，可做設定、資料、graph 與 fixture 驗證，但不得啟動 Pose 長訓練或正式 Pose validation。正式主線排名若要宣稱完整融合模型結果，必須同時具備 Detect 與 Pose 指標。
+
+## 3. 上游 Handoff Revision
+
+正式 handoff 必須 fail closed，至少包含：
+
+- producer=`yolo_combine`、唯一 revision ID、winner ID 與 `fusion_kind`；
+- state-dict-only checkpoint、builder/config、architecture、training recipe、selection、fresh-process report；
+- COCO Detect、BBAT5 Pose、BBAT5 Detect 診斷資料設定；
+- 每個檔案的路徑與 SHA256；
+- PyTorch、Ultralytics 及上游 Git revision；
+- `detect_nc=80`、COCO80 names、`pose_nc=2`、ball/bat names、`kpt_shape=[2,3]`；
+- `model(images, tasks=...)` 契約與 detect/pose/both forward 證據；
+- Candidate Regions、protected paths、head paths、inherited MASF/attention/PWL frozen paths；
+- 完整 resolved training recipe、task ratio、loss、optimizer、LR、augmentation、batch、nbs、seed 與 freeze policy。
+
+允許的 `fusion_kind`：
+
+- `shared_dual_head`：一個 shared region。
+- `routed_dual`：detect-specific 與 pose-specific regions。
+- `partial_shared`：至少一個 shared region，另可有 task-specific regions。
+
+不同 Handoff Revision 的 checkpoint、配方或結果禁止混用。沒有通過 handoff 驗收時，Phase B/C 保持 blocked。
+
+## 4. C0 與候選矩陣
+
+### 4.1 控制組
+
+- **C0-Handoff**：上游 winner 的精確重建；state_dict 與輸出必須逐張量等價，不訓練。
+- **C0-Control**：從 C0-Handoff 開始，使用與候選相同的 architecture_2 恢復訓練預算。C1–C3 只與它比較。
+
+### 4.2 候選因子
+
+| ID | 唯一變更 | 預期成本效果 | 主要精度風險 |
+|---|---|---|---|
+| C0 | 無 | 不變 | 無新增風險 |
+| C1 | `e: 0.5 → 0.375` | 隱藏通道約縮窄 25%，Params/MAC/VRAM 下降 | feature capacity、小物件 |
+| C2 | `inner_n: 2 → 1` | 減少內部 bottleneck 與深度 | context、表徵深度 |
+| C3 | `3x3_3x3 → 1x1_3x3` | 第一個 spatial conv 成本明顯下降 | receptive field、ball/bat keypoints |
+
+第一輪只允許 C1、C2、C3，禁止互相組合。C3-P5、R1、`e=0.25` 與其他組合只是未來議題；必須先看完 Float 結果、由使用者決定並升版 spec 才能加入。
+
+### 4.3 候選區域解析
+
+實際 module paths 禁止寫死，必須由 Handoff Revision 宣告並經 graph audit 驗證：
+
+- shared winner：C1/C2/C3 套用 shared region。
+- routed winner：分別解析為 D-C1..3 與 P-C1..3。
+- partial-shared winner：依實際 regions 解析為 S-C*、D-C*、P-C*。
+
+每個 resolved candidate 只能修改一個 region 與一個 factor。heads、融合 topology、MASF、BinaryQK、PWL attention、未選定 task branch 及 handoff protected paths必須保持不變。每個候選獨立從同一 C0-Handoff 建立，使用相同 deterministic seed，不得從另一候選初始化。
+
+Transfer report 必須列出 matched、missing、unexpected、shape-mismatch tensors，並證明 parent 未被修改。graph snapshot 只供閱讀與報告，必須標示：
+
+```yaml
+standalone_loadable: false
+builder: achitechure_2
+```
+
+## 5. 資料規格
+
+原始資料保持唯讀：
+
+- Detect：`/home/uxin/yolo/original/pose/detect_dataset/`
+- Pose：`/home/uxin/yolo/original/pose/dataset/`
+
+若需要修補或重分割，只能建立 immutable 衍生版本：
+
+```text
+/home/uxin/yolo/original/pose/derived/bbat5-v1/
+```
+
+該目錄必須有中文 README，並清楚列出來源、分割、修補、授權、重建命令與限制。規則如下：
+
+- Pose labels 是 ball/bat 唯一權威標註；Detect labels 由每列前五欄衍生。
+- 原始 Detect labels 只作一對一一致性 audit。
+- 依檔名 `.rf.` 前 prefix 分組，以 seed 0 做 grouped 90/10 train/val。
+- 同源影像不得跨 train/val；正式 val 不參與搜尋。
+- hyperparameter search 只能在正式 train 內再做 grouped search split。
+- 四個已知極小負座標只在衍生 Pose labels clamp 為 0，逐項寫入 patch manifest。
+- Detect/Pose 共用同一 source assignment；不建立不存在的 test split。
+- 影像使用 symlink，labels 寫入衍生版本；原始來源不得改動。
+- BBAT5 formal val 與 COCO train view 的重疊必須列入 exclusion manifest；未能證明時標示 blocked，不能假裝通過。
+- v1 建立後不可覆寫；任何規則或資料內容變更建立 v2。
+
+Git 只保存工具、YAML、README 範本、split/patch/source audit/exclusion manifests，不保存影像、labels 複本或 cache。`prepare-pose-data` 必須能從原始資料重建。
+
+## 6. 正式 YAML 契約
+
+`configs/catalog.yaml` 是正式檔案索引。候選、handoff、dataset、training、quantization 均使用標準 schema，未知欄位或 spec hash 漂移一律失敗。
+
+Training YAML 必須把常用參數放在單一檔案中並說明來源，包括：
+
+- `batch`（Ultralytics 鍵名，不是 `batch_size`）、`fraction`、augmentation `scale`、`cache`；
+- `imgsz`、task ratio、nbs、optimizer、LR、weight decay、warmup、seed；
+- loss、augmentation、workers、device、AMP、deterministic、freeze 與 validation；
+- `model_scale=m` 與 augmentation `scale` 必須分開，不得混用。
+
+Ultralytics 8.4.90 的 `fraction` 只截取排序後 train 清單的前段，不是隨機、分層或 grouped
+sampling；不得用它取代 BBAT5 grouped search split。`cache=True` 代表 RAM 且可能破壞完全
+deterministic，`cache=disk` 會在影像旁寫檔，只能指向獲授權的可寫衍生資料。
+
+在 winner handoff 前，必須由上游決定的值以 `source: handoff`、`value: null` 明示，不得捏造。handoff 通過後產生一份完整 effective YAML；所有候選共用同一份，除 candidate/name/project/device/workers/cache 外不得不同。learning field 的 CLI override 一律拒絕。
+
+`config-check` 必須：
+
+- 驗證本機 Ultralytics 8.4.90 與全部 schema/spec hashes；
+- 確認 catalog 無漏檔、無廢棄融合範本、候選只有 C0–C3；
+- 確認 candidate factor 唯一且 target paths 由 handoff 解析；
+- 列出 accepted-but-inactive、deprecated、overridden 與 blocked fields；
+- 驗證 dataset 語意、Pose opt-in、量化 eligibility 與 CPU-only policy；
+- 未知欄位、不支援值、hash 不符或 learning override 時 fail closed。
+
+## 7. 訓練與公平性
+
+本專案不宣稱重製官方內部 pretraining。C0-Control 與所有 resolved candidates 繼承 winner 的完整訓練配方，不進行 per-candidate tuning。
+
+- COCO batch 只計 Detect loss。
+- BBAT5 Pose batch 只計 Pose loss；缺少 person label 不得當成背景。
+- BBAT5 診斷 paired batch 可計 Detect+Pose，但不得取代主資料。
+- 每個候選從相同 C0-Handoff 建立新 optimizer。
+- 永久凍結 inherited MASF/attention/PWL 的 parameters、buffers 與 eval state。
+- 只解凍 changed region、相關 heads 及 handoff 允許的恢復區域；未修改 task-specific branch 保持凍結。
+- 公平性以 optimizer steps、各 task effective samples、task ratio、accumulation、physical batch 與 validation events 為準；epoch 只作估算。
+- seed 0 完成全部第一輪；需要正式確認的候選與 C0 再跑 seed 1，報告 mean 與 dispersion。
+- extension 只在 handoff recipe 定義的 late-improvement gate 通過時執行。真正 resume 必須從候選自己的
+  未 strip continuation checkpoint 恢復 optimizer、scheduler、scaler、EMA 與 epoch。Ultralytics 8.4.90
+  正常完訓後的 stock `last.pt`／`best.pt` 已被 strip，禁止把它們宣稱為真正 resume；若上游未保存
+  完整 continuation state，extension 保持 blocked，或另行升版定義「載入 weights、新 optimizer」的延長
+  fine-tune。
+
+GPU 正被其他工作使用。本 revision 只允許 CPU Phase A 驗證；任何正式訓練、CUDA smoke、GPU latency/VRAM、QAT 或 CUDA compile 都等待使用者明確授權。
+
+## 8. 指標、報告與選擇
+
+必須分開保存：
+
+- mAP50 與 mAP50-95；
+- COCO80 box overall、COCO person、BBAT5 Pose box、BBAT5 keypoint；
+- ball/bat 各類別 AP50 與 AP50-95；
+- Precision、Recall、per-class F1、Macro F1（主要）與 Micro F1（參考）；
+- F1 所用 confidence threshold。
+
+AP50 使用單一 IoU/OKS=0.50；AP50-95 平均 0.50:0.95。Pose box 使用 IoU，keypoint 使用 OKS。F1 threshold 只能用 C0-Control 的 search-val 決定一次，之後對所有候選與 formal val 固定。
+
+Ultralytics 8.4.90 的 stock Pose `best.pt` 依 Pose mAP50-95 與 Box mAP50-95 的 combined
+fitness 選擇；本案若以 Pose mAP50-95 為研究主指標，必須另外保存 pose-only best，並同時報告官方
+combined fitness。BBAT5 的非 COCO `[2,3]` keypoint schema 使用套件的均勻 OKS sigma，報告不得
+宣稱該 sigma 已經過棒球任務校準。Micro F1 是本專案依固定 confidence／OKS 規則聚合 TP/FP/FN 的
+衍生指標，不是 Ultralytics 內建 property。
+
+第一輪不使用固定精度 drop 自動淘汰。舊的 0.005/0.008 band 只能列為描述性敏感度，不得自動觸發候選或選出 winner。報告完整 Float 結果、成本與 Pareto 後：
+
+- `c_best: null`
+- `selection_status: pending_user_decision`
+- C1/C2/C3 的 `quantization_eligible: pending`
+
+由使用者決定可接受的精度—成本權衡、C_best、量化候選及是否新增 C3-P5/R1/組合。
+
+## 9. 量化
+
+C0 固定可進量化；其他候選只有使用者看完 Float 結果後明確核准才可執行。每個 eligible candidate 可依序執行：
+
+- Q0：fused FP32 reference 與等價性。
+- Q1：固定 calibration set 的 W8A8 PTQ simulation。
+- Q2：W8A8 QAT simulation；需另外取得 GPU 長訓練授權。
+
+Conv weights 採 per-channel symmetric INT8，activations 採 per-tensor affine INT8。custom BinaryQK/PWL arithmetic 排除並列明。所有結果標示 `simulation_only=true`；CPU 現階段只驗證 plumbing 與 regression，不宣稱正式部署 latency。
+
+Fake quant 仍在浮點 tensor 上模擬 quantize-dequantize；未完成 backend convert、operator coverage、
+accumulator／requantization／saturation 與目標硬體驗證前，不得稱為真實 INT8 deployment 或 Bit-True。
+
+## 10. Phase Gates 與交付
+
+### Phase A：現在執行
+
+- 規格、中文 README、正式 YAML/schema、資料工具與 manifests；
+- handoff validator、候選 scope resolver、state-dict checkpoint contract；
+- CPU-only config/data/graph/forward/loss/backward/freeze/reload/dry-run tests；
+- 64/128 fixture forward 與一次 640 geometry test；
+- 狀態完成後標示 `ready_for_upstream_handoff`。
+
+### Phase B：等待 yolo_combine winner
+
+- 驗收 handoff、建立 C0-Handoff、實際 graph audit；
+- 解析真正候選矩陣並在 CPU 驗證；GPU smoke 仍需使用者授權；
+- 完成後標示 `ready_for_formal_training`。
+
+### Phase C：使用者授權正式訓練後
+
+- C0-Control、C1、C2、C3 Float seeds；
+- 完整指標、成本、Pareto 與使用者選擇；
+- 再執行核准候選的 Q0/Q1/Q2。
+
+本輪不執行正式長訓練。成果必須輸出 `REPORT.md`、CSV/JSON、`selection.json`、profiles、figures、lineage、effective configs 與中文工作紀錄。
+
+## 修訂歷史
 
 | 版本 | 日期 | 內容 |
 |---|---|---|
-| 1.0.0 | 2026-08-18 | 建立 Detect、Pose、量化、設定驗證、grouped split 與 provenance 的統一規格。 |
-| 1.1.0 | 2026-08-18 | 全面中文化使用者文件；Pose 改為使用者明確選用；新增未決的雙來源融合研究契約。 |
-| 1.2.0 | 2026-08-19 | 訓練設定改為每階段一份完整正式 YAML；顯式列出 batch/fraction/scale/cache 等常用參數；新增設定目錄與單檔啟動介面；統一標準 schema 並修正 Pose26 head 契約。 |
-
-## 2. 專案用語與繼承邊界
-
-- **Float-PWL parent**：由 `architecture_1` 選出的可續訓 Float checkpoint，MASF variant 為 `full35`
-  或 `partial75`。每個候選都必須獨立從同一份 parent 建立。
-- **C0**：不改 C3k2 的 reference，保留 inherited MASF、BinaryQK 與 PWL attention。
-- **候選（Candidate）**：相對 C0 只包含一個已宣告架構差異的模型，禁止從另一候選初始化。
-- **C_best**：依第 5 節規則選出的 eligible 單因子候選；它不是 C0，也可能不存在。
-- **Bit-True copy**：目前 Float EMA 的深拷貝，只轉換 inherited attention normalization。
-- **新階段（Fresh stage）**：從上一階段 best weights 建立新 optimizer 與 scheduler。
-- **續訓階段（Resume stage）**：從 `last.pt` 恢復 optimizer、scheduler 與 epoch。
-- **Pose 路線（Pose route）**：選用的下游能力驗證，不是 Detect 主線的自動後續步驟。
-- **雙來源融合研究（Dual-source fusion study）**：未來以來源 A／B 的權重與架構為輸入的獨立研究。
-  本版只定義來源 provenance，不決定 weight interpolation、ensemble、routed switch 或 staged transfer。
-
-Inherited graph 是本機 Ultralytics `8.4.90` 的 YOLO26m，包含 P3 MASF、BinaryQK、Float/Bit-True PWL
-attention、head inputs `[16,19,22]`、strides `[8,16,32]`、`end2end=true`。MASF 與兩個 attention roots
-永久保持 eval-mode frozen，包含 parameters 與 buffers。Full35/Partial75 的比較屬於 `architecture_1`，
-本專案不重跑。
-
-正式執行仍需要通過 `architecture_1` handoff gate，內容包含 Float/Bit-True checkpoints、hashes、metrics、
-環境版本與 model-selection manifest。開發 fixture 不能成為正式 C0。
-
-## 3. 架構候選矩陣
-
-Baseline factors：`e=0.5`、`inner_n=2`、`kernel_mode=3x3_3x3`、`use_rep=false`。
-
-| ID | 唯一架構變因 | 目標 layers | 執行條件 |
-|---|---|---|---|
-| C0 | 無 | 無 | 必跑 reference |
-| C1 | `e: 0.5 -> 0.375` | 6、8、13、19 | 必跑 |
-| C2 | `inner_n: 2 -> 1` | 6、8、13、19 | 必跑 |
-| C3 | `3x3_3x3 -> 1x1_3x3` | 6、8、13、19 | 必跑 |
-| C3-P5 | 只在 layer 8 套用 C3 kernel delta | 8 | C3 drop > 0.008 才可執行 |
-| R1 | C2 factors 加 `RepBottleneck` | 6、8、13、19 | C2 為 CONDITIONAL 且 latency 或 GFLOPs 改善 >=8% |
-
-Layers 2、4、16 保持 upstream；layer 22 因包含 inherited attention 而排除。1.2.0 禁止 C1+C2、
-C1+C3、C2+C3 與其他組合。`e=0.25` 只有在 C1 drop <=0.005 且仍需壓縮時，才能列為未來候選。
-
-每份 `configs/candidates/*.yaml` 都是 machine-readable architecture contract。Local builder 驗證後 graft，
-並輸出 `standalone_loadable:false`、`builder:achitechure_2` 的 Ultralytics-like snapshot。Snapshot 只供
-review/report，禁止傳給共享 `YOLO(yaml)` parser。
-
-### 3.1 Architecture Delta
-
-以下效果在量測前都是假設。Transfer report 必須列出 matched、missing、unexpected、shape-mismatch tensors。
-Detect 與 Pose 共用 backbone/neck delta，但使用各自 task head。
-
-| ID | Baseline -> Modified | 改變 | 不變 | 預期影響 |
-|---|---|---|---|---|
-| C0 | parent -> 完整深拷貝 | 無 | 全 graph | 結構與成本不變，所有相容 tensors matched |
-| C1 | `e=.5 -> .375` | 6/8/13/19 hidden width | protected layers、MASF、attention、topology、head | Params/FLOPs/VRAM/latency 降低；可能損失 small-object capacity |
-| C2 | `inner_n=2 -> 1` | 6/8/13/19 inner depth | CSP shell、channels、kernels、protected modules、head | 成本與有效深度下降；可能損失 context |
-| C3 | `3x3_3x3 -> 1x1_3x3` | 6/8/13/19 第一個 inner conv | depth、width、CSP/residual、protected modules、head | 成本與 receptive field 降低；可能損失 spatial feature |
-| C3-P5 | 只改 layer 8 | P5 backbone C3k2 | 其他 backbone/neck/scales 與 head | 成本收益較小，但 small-object 風險較低 |
-| R1 | C2 Bottleneck -> RepBottleneck | 6/8/13/19 剩餘 block | C2 depth/width/kernels、protected modules、head | training 成本可能提高；fusion 必須 `max_abs_diff <=1e-4` |
-
-## 4. 正式 YAML 與 config-check 契約
-
-`configs/catalog.yaml` 是所有可用設定的機器可讀目錄；人類導覽位於 `configs/README.md`。正式設定分為：
-
-- `configs/candidates/*.yaml`：一份檔案代表一個架構候選。
-- `configs/training/detect/*.yaml`：D0、D1、D2、Q2 各一份完整訓練設定。
-- `configs/training/pose/*.yaml`：P0–P4 各一份完整訓練設定。
-- `configs/data/*.yaml`：Ultralytics dataset 設定與本案 provenance。
-- `configs/quant/*.yaml`：量化模擬範圍與參數。
-- `configs/fusion/*.yaml`：未來雙來源融合契約；本版不啟用。
-- `configs/schema/*.schema.yaml`：標準 JSON Schema 文件。
-
-訓練設定的正式外部 interface 是「每個階段一份完整 YAML」。禁止要求使用者自行合併 canonical、candidate
-overlay 與 stage fragment。每份 `formal_training` YAML 必須完整保存 task、stage、中文用途、candidate policy、
-execution policy、dataset、checkpoint transition、ranking contract、永久凍結模組與所有 forwarded Ultralytics
-training arguments，至少顯式列出 batch、fraction、scale、cache、device、workers、optimizer、LR、augmentation、resume 與 validation 相關欄位。這些檔案由 `achitechure_2` launcher 讀取，`ultralytics_yaml_direct=false`，不可直接當成
-共享 `YOLO(yaml)` 的模型架構檔。
-
-推薦啟動方式是 `train --config <formal-training.yaml> --candidate <ID> ...`。舊的 `--task/--stage` 介面可作
-相容入口，但必須解析到同一份正式 YAML，不能建立第二套設定。Runtime 仍只允許覆寫
-`model/name/project/device/workers/cache`。
-
-Schemas 位於 `configs/schema/`，全部採 JSON Schema Draft 2020-12 格式。`config-check` 必須：
-
-- 確認本機 Ultralytics 恰為 `8.4.90`，且 `training` 下的 keys/values 可被本機 `get_cfg` 接受。
-- 驗證 catalog 引用的檔案存在且完整，不允許漏列或引用未宣告的正式設定。
-- 比對候選 factors、targets、protected layers、parent policy、triggers、Pose26/Detect heads 與禁止組合。
-- 確認每個 training YAML 是完整單檔，dataset、task、stage、transition、ranking 與 execution policy 一致。
-- 明確列出 accepted-but-inactive、optional routes 與 runtime-overridable keys。
-- 對未知欄位、不支援值、缺候選、hash 漂移或 learning override fail closed。
-- 驗證 dataset、quantization 與 fusion template 仍引用同一 spec。
-
-`rle` 在 parser 層可接受，但只有 Pose head 含 `flow_model` 才 active；正式 Pose 啟動時再次檢查。
-
-## 5. Detect 訓練與選型
-
-Detect 使用 COCO2017、`imgsz=640`、physical `batch=16`、`nbs=64`、seed 0、AMP、deterministic 與
-明確 MuSGD。這是本專案基準，不宣稱完整重製未公開的官方 pretraining。
-
-- **D0**：獨立 3–5 epoch smoke，不參與排名。
-- **D1**：最多 100 epochs、patience 20。
-- **D2**：只有 D1 未 early-stop，且 best epoch 在 85–100，或 81–100 rolling best 比 61–80 至少提高
-  0.001，才從 D1 `last.pt` resume 到總 epoch 140、patience 15。
-
-每次 validation 都以 Float EMA 建立 Bit-True copy。Bit-True box mAP50-95 決定 best 與 early stopping。
-正式結果必須 fresh-process reload。Manifest 保存 requested/resolved args、optimizer groups、best/last、
-best epoch、stop reason、Params、FLOPs、latency、peak memory、hardware 與完整 hashes。
-
-相對 C0：drop <=0.005 為 PASS；0.005 < drop <=0.008 為 CONDITIONAL，且只有 latency 或 GFLOPs 改善
->=8% 才 eligible；drop >0.008 為 REJECT。C3 rejection 才能觸發 C3-P5；eligible conditional C2 才能
-觸發 R1。R1 沒有 fusion report 不得選為 C_best。C_best 依狀態、drop、latency、GFLOPs、Params 排序。
-沒有 eligible candidate 時 C_best 為空，量化主線停止。
-
-## 6. Pose：由使用者決定是否執行
-
-Pose 是 **選用路線**，`enabled_by_default=false`。建立 grouped dataset 不會建立 Pose model，也不會開始
-Pose training。只有使用者明確執行 `build-pose`、`train --task pose` 或 `validate-bittrue --task pose`，且同時提供 `--enable-pose --execute` 才能進入 Pose 路線。
-任何自動化流程禁止因 Detect 完成而自動啟動 Pose。
-
-若使用者選擇執行，正式比較仍是 C0 對 recorded C_best，兩者使用相同 grouped data、Pose26 head seed、
-stages、optimizer groups 與 budget。未來官方 `yolo26m-pose.pt` 只記為 `P_official`，不參與因果排名。
-
-Pose source 位於 `../../original/pose/bbt5.v1i.yolov8`，保持唯讀。Derived data 依檔名 `.rf.` 前 prefix
-分組，以 seed 0 做 grouped 90/10 train/val；images 使用 symlink、labels 使用 copy。所有同源增強圖必須
-在同一 split，禁止 leakage。觀察到的 4 個負座標只在 derived labels 裁切為 0，並寫入 patch manifest。
-不建立不存在的 test split。因 keypoint semantics 未被命名，`fliplr=0`；只有新 revision 記錄
-`kpt_names` 與 mirror mapping 後才能修改。
-
-PoseLoss26：`box=7.5`、`cls=0.5`、`dfl=1.5`、`pose=12`、`kobj=1`、`rle=1`。
-
-- **P0**：獨立 3 epoch smoke，不銜接 P1。
-- **P1**：head-only，最多 10、patience 5。
-- **P2**：freeze layers 0–10，neck+head，最多 20、patience 8。
-- **P3**：除 MASF/attention 外完整 fine-tune，最多 100、patience 20。
-- **P4**：通過 late-improvement gate 才從 P3 `last.pt` resume，總 epoch 130、patience 10。
-
-P1->P2、P2->P3 使用上一階段 best weights 與新 optimizer/scheduler；只有 P3->P4 是 resume。
-Pose mAP50-95 是 research best metric；官方 Pose+Box combined fitness 逐 epoch 另存。
-
-## 7. 未來雙來源融合研究
-
-本版不執行融合，只提供 `configs/fusion/source-pair.template.yaml` 保存：
-
-- source A/B 的角色、checkpoint path/hash、architecture YAML path/hash、task/head contract。
-- dataset/spec/training provenance。
-- 尚未決定的 `fusion_mode` 與 `switch_policy`。
-
-使用者未來必須先選擇融合語意：權重插值、ensemble、runtime routed switch 或 staged transfer。選定後必須
-新增 spec revision、獨立候選 ID、baseline、測試與報告；禁止把融合結果混入目前 C0/C_best 單因子排名。
-
-## 8. 量化
-
-只對 C0 與 recorded C_best 執行 Q0 fused FP32、Q1 calibrated W8A8 PTQ fake quant、Q2 10–15 epoch
-fake-quant fine-tuning（patience 5、0.1x architecture LR）。Observers 在 epochs 1–3 更新。Conv weights
-採 per-channel symmetric INT8，activations 採 per-tensor affine INT8；MASF Conv 納入，BinaryQK/PWL custom
-arithmetic 排除並列出。所有結果標示 `simulation_only=true`。報告 PTQ gap、QAT gap、recovery。
-
-## 9. 驗證與報告
-
-自動測試必須涵蓋 spec/YAML parity、single factors、conditional triggers、snapshots、Detect/Pose
-forward/loss/gradients/strides/head inputs、frozen state、transfer/reload、stage transitions、group leakage、
-MuSGD groups、Pose RLE、Bit-True selection、fusion source provenance 與 quantization regression。
-
-本次交付不執行正式長訓練。正式完成後，`REPORT.md` 必須回答 C1/e=.25、C2 對 C3、conditional
-fallback/recovery、C0/C_best quantization；Pose 只有在使用者選擇執行時才列入正式報告。
+| 1.0.0 | 2026-08-18 | 建立舊 Detect/Pose/量化規格。 |
+| 1.1.0 | 2026-08-18 | 中文化與 Pose opt-in。 |
+| 1.2.0 | 2026-08-19 | 單檔 training YAML 與設定檢查。 |
+| 2.0.0 | 2026-08-22 | 改為承接 `yolo_combine` winner；動態解析 shared/routed/partial regions；C0-Handoff/C0-Control 分離；BBAT5 v1 衍生資料；measurement-first 選擇與逐候選量化資格；CPU-only Phase A。 |
+| 2.0.1 | 2026-08-22 | 依 Ultralytics 8.4.90 官方原始碼修正 extension resume：只接受未 strip continuation state；補充 fraction/cache、Pose-only best／combined fitness、uniform OKS sigma、Micro F1 與 fake-quant 邊界。BBAT5 v1 保留建立時的 2.0.0 lineage。 |

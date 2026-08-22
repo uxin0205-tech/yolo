@@ -2,10 +2,8 @@ from __future__ import annotations
 
 import pytest
 import torch
-from ultralytics.nn.modules.block import RepBottleneck
 
 from achitechure_2.lite_c3k2 import KernelMode, LiteC3k2, LiteC3k2Config
-from achitechure_2.rep import assert_rep_fuse
 
 
 def test_config_validation() -> None:
@@ -14,7 +12,7 @@ def test_config_validation() -> None:
         LiteC3k2Config(e=0.0)
     with pytest.raises(ValueError, match="inner_n"):
         LiteC3k2Config(inner_n=0)
-    with pytest.raises(ValueError, match="Rep recovery"):
+    with pytest.raises(ValueError, match="尚未核准"):
         LiteC3k2Config(use_rep=True)
 
 
@@ -41,15 +39,3 @@ def test_shape_and_explicit_factor(config: LiteC3k2Config, inner_n: int, kernel:
     assert all(
         parameter.grad is None or torch.isfinite(parameter.grad).all() for parameter in layer.parameters()
     )
-
-
-def test_r1_uses_only_rep_bottleneck() -> None:
-    layer = LiteC3k2(32, 32, config=LiteC3k2Config(inner_n=1, use_rep=True))
-    assert isinstance(layer.m[0].m[0], RepBottleneck)
-
-
-def test_r1_rep_fuse_is_numerically_equivalent() -> None:
-    layer = LiteC3k2(32, 32, config=LiteC3k2Config(inner_n=1, use_rep=True)).eval()
-    report = assert_rep_fuse(layer, torch.randn(1, 32, 8, 8))
-    assert report.passed
-    assert report.max_abs_diff <= 1e-4

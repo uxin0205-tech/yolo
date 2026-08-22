@@ -1,122 +1,83 @@
-# JSON Schema Draft 2020-12；可供外部 validator 使用。
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: candidate.schema.yaml
-title: architecture_2 架構候選
+title: architecture_2 C0–C3 候選契約
+x-spec-version: 2.0.1
+x-spec-sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
 type: object
 additionalProperties: false
 required:
-- schema_version
-- spec_version
-- spec_sha256
-- kind
-- title_zh
-- summary_zh
-- status
-- task_contracts
-- scale
-- candidate_id
-- parent_policy
-- target_layers
-- protected_layers
-- factors
-- inherited
-- heads
-- conditions
-- forbidden_combinations
-- standalone_loadable
-- builder
-- architecture_delta
+  - schema_version
+  - spec_version
+  - spec_sha256
+  - kind
+  - candidate_id
+  - title_zh
+  - summary_zh
+  - status
+  - model_scale
+  - task_contract
+  - parent_policy
+  - target_policy
+  - scope_resolution
+  - factors
+  - baseline_factors
+  - changed_fields
+  - factor_name
+  - protected_policy
+  - forbidden_combinations
+  - quantization_eligible
+  - standalone_loadable
+  - builder
+  - architecture_delta
 properties:
-  schema_version:
-    const: 2
-  spec_version:
-    const: 1.2.0
-  spec_sha256:
-    type: string
-    pattern: ^[0-9a-f]{64}$
-  kind:
-    const: architecture_candidate
-  title_zh:
-    type: string
-  summary_zh:
-    type: string
-  status:
-    enum:
-    - required
-    - conditional
-  task_contracts:
-    const:
-    - detect
-    - pose
-  scale:
-    const: m
-  candidate_id:
-    enum:
-    - C0
-    - C1
-    - C2
-    - C3
-    - C3-P5
-    - R1
-  parent_policy:
+  schema_version: {const: 3}
+  spec_version: {const: 2.0.1}
+  spec_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+  kind: {const: architecture_candidate}
+  candidate_id: {enum: [C0, C1, C2, C3]}
+  title_zh: {type: string, minLength: 1}
+  summary_zh: {type: string, minLength: 1}
+  status: {const: required}
+  model_scale: {const: m}
+  task_contract:
     type: object
-  target_layers:
+    additionalProperties: false
+    required: [detect_nc, pose_nc, pose_kpt_shape]
+    properties:
+      detect_nc: {const: 80}
+      pose_nc: {const: 2}
+      pose_kpt_shape: {const: [2, 3]}
+  parent_policy: {type: object}
+  target_policy:
+    type: object
+    additionalProperties: false
+    required: [source, module_type, hardcoded_layer_indices]
+    properties:
+      source: {const: handoff.candidate_regions}
+      module_type: {const: C3k2-compatible}
+      hardcoded_layer_indices: {const: false}
+  scope_resolution: {type: object}
+  factors: {$ref: "#/$defs/factors"}
+  baseline_factors: {$ref: "#/$defs/factors"}
+  changed_fields:
     type: array
-    items:
-      type: integer
+    maxItems: 1
     uniqueItems: true
-  protected_layers:
-    const:
-    - 2
-    - 4
-    - 16
-    - 22
+    items: {enum: [e, inner_n, kernel_mode, use_rep]}
+  factor_name: {enum: [none, hidden_expansion, inner_depth, first_inner_kernel]}
+  protected_policy: {type: object}
+  forbidden_combinations: {const: [C1+C2, C1+C3, C2+C3]}
+  quantization_eligible: {enum: [true, pending_user_decision]}
+  standalone_loadable: {const: false}
+  builder: {const: achitechure_2}
+  architecture_delta: {type: object}
+$defs:
   factors:
     type: object
     additionalProperties: false
-    required:
-    - e
-    - inner_n
-    - kernel_mode
-    - use_rep
+    required: [e, inner_n, kernel_mode, use_rep]
     properties:
-      e:
-        type: number
-        exclusiveMinimum: 0
-      inner_n:
-        type: integer
-        minimum: 1
-      kernel_mode:
-        enum:
-        - 3x3_3x3
-        - 1x1_3x3
-      use_rep:
-        type: boolean
-  inherited:
-    type: object
-  heads:
-    type: object
-    properties:
-      detect:
-        type: object
-        properties:
-          type:
-            const: Detect
-      pose:
-        type: object
-        properties:
-          type:
-            const: Pose26
-  conditions:
-    type: object
-  forbidden_combinations:
-    const:
-    - C1+C2
-    - C1+C3
-    - C2+C3
-  standalone_loadable:
-    const: false
-  builder:
-    const: achitechure_2
-  architecture_delta:
-    type: object
+      e: {type: number, exclusiveMinimum: 0}
+      inner_n: {type: integer, minimum: 1}
+      kernel_mode: {enum: [3x3_3x3, 1x1_3x3]}
+      use_rep: {type: boolean}

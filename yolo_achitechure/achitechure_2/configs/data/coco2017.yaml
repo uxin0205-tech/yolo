@@ -1,12 +1,15 @@
 # Ultralytics dataset YAML；project_metadata 只提供本案 provenance 與中文說明。
-schema_version: 2
-spec_version: 1.2.0
-spec_sha256: 34467463b4cb7ae4b0eb4b57c1a22a04d00097a9de9b71392f6495c15b093ea7
+schema_version: 3
+spec_version: 2.0.1
+spec_sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
 kind: dataset
 project_metadata:
   title_zh: COCO2017 Detect 資料集
-  summary_zh: Detect D0–D2 與 Q2 使用的正式資料設定。
+  summary_zh: 融合 winner 與 C0–C3 正式 COCO80 Detect；應用層主要消費 person。
   task: detect
+  role: main_detect
+  original_read_only: /home/uxin/yolo/coco2017
+  overlap_exclusion_manifest: /home/uxin/yolo/original/pose/derived/bbat5-v1/manifests/coco-exclusion-manifest.json
   ultralytics_dataset_yaml: true
 path: coco2017
 train: train2017.txt

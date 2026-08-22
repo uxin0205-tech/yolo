@@ -1,317 +1,313 @@
-# architecture_2：YOLO26m 架構、訓練、Pose 與量化研究
+# architecture_2：融合 YOLO26m 的 C0–C3 架構簡化評估
 
-這個目錄是一個可重現的 YOLO26m 研究工作區。它承接 architecture_1 選出的 P3 MASF、BinaryQK 與
-PWL attention，主要比較 Lite-C3k2 架構候選，之後可選擇是否執行 Pose、量化與雙來源融合研究。
+這個資料夾不是重新做一次融合，也不是單獨訓練一個普通 Detect/Pose 模型。它的工作是：
 
-目前狀態：
+1. 等待本機 `/home/uxin/yolo/yolo_combine/` 完成「COCO80 Detect + BBAT5 Pose」融合實驗並選出 winner。
+2. 以不可變 handoff 接收該 winner。
+3. 在 winner 的可修改 C3k2 區域上，公平比較 C0、C1、C2、C3。
+4. 完整呈現精度與成本，最後由你決定 C_best、是否跑 Pose、哪些候選進量化，以及是否新增組合實驗。
 
-- 已完成正式規格、架構 builder、完整 YAML、設定驗證、測試與 Pose grouped 資料分割。
-- 已建立 Detect/Pose/量化的可執行流程，但尚未執行正式長訓練。
-- Pose 預設停用，是否建立、訓練或驗證 Pose 由使用者決定。
-- 雙權重／雙架構融合只有來源範本，尚未選定方法，也不會自動執行。
-- 尚未收到 architecture_1 正式 handoff，因此目前沒有正式 C_best 或研究結果。
+融合方式尚未由 yolo_combine 決定，可能是 shared、routed 或 partial-shared。因此本專案不固定 layer
+編號；真正修改位置由 handoff 的 candidate_regions 決定。
 
-## 第一次看這個專案，請照這個順序
+## 現在完成到哪裡
 
-1. 本 README：先了解整體目錄、流程與目前狀態。
-2. [設定導覽](configs/README.md)：選擇架構與訓練 YAML。
-3. [設定目錄](configs/catalog.yaml)：所有正式 YAML 的機器可讀索引。
-4. [統一實驗規格](EXPERIMENT_SPEC.md)：需要確認正式規則與門檻時閱讀。
-5. [執行手冊](RUNBOOK.md)：需要複製實際命令時閱讀。
-6. [訓練指南](TRAINING_GUIDE.md)：需要理解 LR、freeze、resume 與失敗處理時閱讀。
+目前是 Phase A，狀態為 ready_for_upstream_handoff：
 
-如果只想開始一個 Detect D1 dry-run，使用：
+- [EXPERIMENT_SPEC.md](EXPERIMENT_SPEC.md) 已是唯一正式規格，版本 2.0.1。
+- C0/C1/C2/C3 YAML、training templates、dataset YAML、quantization YAML 與 schemas 已建立。
+- handoff、動態候選、權重轉移、state-dict checkpoint lineage 已實作。
+- detect／pose／both、loss、gradient、freeze、BN buffer、640 geometry 與 reload 已在 CPU fixture 驗證。
+- BBAT5 v1 已實際重建並驗證：6,647 張、零 group leakage、4 個負座標修補。
+- GPU 仍未獲授權；沒有執行正式訓練、CUDA smoke、GPU latency/VRAM 或 QAT。
+- 尚未收到 yolo_combine winner，所以目前沒有正式 C0–C3 Float 結果，也沒有 C_best。
+- Pose 正式訓練與 validation 預設不執行，仍由你決定。
 
-```bash
-export PYTHONPATH="$PWD/src:$PWD/../achitechure_1/src:$PWD/../../yolo_attention_final/src"
-PY=/home/uxin/yolo/.venv/bin/python
+快速查看狀態：
 
-$PY -m achitechure_2 train \
-  --config configs/training/detect/d1-main.yaml \
-  --candidate C0 \
-  --checkpoint artifacts/candidates/c0/float-parent.pt \
-  --run-id c0-d1
-```
+    export PYTHONPATH="$PWD/src"
+    PY=/home/uxin/yolo/.venv/bin/python
+    $PY -m achitechure_2 status
+    $PY -m achitechure_2 config-check
+    env CUDA_VISIBLE_DEVICES='' $PY -m pytest -q
 
-沒有 `--execute` 時只預覽，不會開始訓練。
-
-## 規範優先順序
+## 規格優先順序
 
 1. [EXPERIMENT_SPEC.md](EXPERIMENT_SPEC.md)：唯一 authoritative spec。
-2. [configs/catalog.yaml](configs/catalog.yaml) 與 [configs/](configs/)：正式 machine-readable 設定。
-3. [TRAINING_GUIDE.md](TRAINING_GUIDE.md)：理由與操作原則。
-4. [RUNBOOK.md](RUNBOOK.md)：經驗證命令。
-5. `plan.pdf`、[YOLO26_Codex_Research_Protocol.md](YOLO26_Codex_Research_Protocol.md)：歷史參考，不是第二份規格。
+2. [configs/catalog.yaml](configs/catalog.yaml)：正式 YAML 的機器可讀索引。
+3. [TRAINING_GUIDE.md](TRAINING_GUIDE.md)：訓練與公平性理由。
+4. [RUNBOOK.md](RUNBOOK.md)：已驗證的實際命令。
+5. plan.pdf、[YOLO26_Codex_Research_Protocol.md](YOLO26_Codex_Research_Protocol.md)：歷史參考。
 
-目前規格版本是 `1.2.0`。正式 YAML 都保存 `spec_version` 與 `spec_sha256`。
+[plan.md](plan.md) 只指向正式規格，不複製第二套規則。規格變更要先升版並更新 revision history；
+舊實驗永遠保留當時的 spec hash。
 
-## 目錄總覽
+## 任務語意
 
-```text
-achitechure_2/
-├── EXPERIMENT_SPEC.md          唯一正式規格
-├── README.md                   專案總覽（本文件）
-├── RUNBOOK.md                  可複製的執行命令
-├── TRAINING_GUIDE.md           訓練策略、轉換與失敗處理
-├── configs/
-│   ├── README.md               設定專用導覽
-│   ├── catalog.yaml            所有正式設定的唯一索引
-│   ├── candidates/             C0/C1/C2/C3/C3-P5/R1 架構契約
-│   ├── training/
-│   │   ├── detect/             D0、D1、D2、Q2；每階段一份完整 YAML
-│   │   └── pose/               P0–P4；每階段一份完整 YAML
-│   ├── data/                   COCO2017 與 grouped Pose dataset YAML
-│   ├── quant/                  W8A8 simulation 設定
-│   ├── fusion/                 未啟用的雙來源融合範本
-│   └── schema/                 JSON Schema Draft 2020-12
-├── src/achitechure_2/          builder、loader、trainer、量化與資料工具
-├── tests/                      pytest 自動測試
-├── artifacts/                  產生的資料、checkpoint、run 與 manifests
-├── results/                    正式結果範本；目前沒有正式結果
-└── docs/                       官方訓練來源與對照
-```
+| 路線 | 類別／輸出 | 角色 |
+|---|---|---|
+| Detect 主線 | COCO80，class 0 是 person | 正式 Detect 訓練與評估；應用主要關注人 |
+| Pose 主線 | ball=0、bat=1，kpt_shape=[2,3] | 正式 Pose 任務，但是否執行由你決定 |
+| BBAT5 Detect | ball=0、bat=1 | 配對診斷 view，不取代 COCO80，也不能單獨決定 C_best |
 
-## 設定系統：現在只需要一份訓練 YAML
+所以「COCO80 Detect head 可以保留」和「BBAT5 有 2-class Detect」並不衝突：它們是兩個不同資料
+與用途。融合 winner 的公開介面必須支援 model(images, tasks=detect|pose|both)。
 
-舊方式需要自行理解 canonical、candidate overlay 與 stage fragment 如何合併。v1.2 已取消這個外部介面。
+## 專案邊界
 
-現在每個訓練階段都有一份完整 YAML，其中已包含：
+    yolo_combine
+      └─ 選出融合 winner（shared / routed / partial-shared 尚未確定）
+           └─ 不可變 handoff revision
+                └─ architecture_2
+                     ├─ C0-Handoff：winner 原樣
+                     ├─ C0-Control：與候選相同的恢復訓練預算
+                     ├─ C1/C2/C3：每次只改一個因素
+                     ├─ CPU 契約驗證
+                     └─ 未來 Float 結果 → 你決定 C_best／Pose／量化／新候選
 
-- 中文名稱、用途與狀態。
-- task 與 stage。
-- 可使用的候選政策。
-- 是否需要 `--execute`／`--enable-pose`。
-- dataset。
-- checkpoint transition 與 gate。
-- 是否參與架構排名、研究指標與 selection backend。
-- 永久凍結模組。
-- 完整 Ultralytics training arguments。
+yolo_combine 負責雙權重、雙架構、路由或 shared fusion 的實驗與 winner 選擇。本目錄不重做融合，
+也不提前假設最後是哪一種。
 
-正式 training YAML 由 `achitechure_2` launcher 讀取。它不是模型 architecture YAML，因此不能直接傳給
-`YOLO(yaml)`；launcher 會驗證 metadata，再只把 `training:` 內容傳給 Ultralytics。
+## C0、C1、C2、C3 在做什麼
 
-### 架構候選
-
-| ID | 設定 | 唯一變更 | 狀態 |
+| ID | 唯一變更 | 直覺 | 可能代價 |
 |---|---|---|---|
-| C0 | [c0.yaml](configs/candidates/c0.yaml) | 不修改目標 C3k2 | 必跑 reference |
-| C1 | [c1-e0375.yaml](configs/candidates/c1-e0375.yaml) | `e: 0.5 → 0.375` | 必跑 |
-| C2 | [c2-n1.yaml](configs/candidates/c2-n1.yaml) | `inner_n: 2 → 1` | 必跑 |
-| C3 | [c3-mixed.yaml](configs/candidates/c3-mixed.yaml) | `3x3_3x3 → 1x1_3x3` | 必跑 |
-| C3-P5 | [c3-p5-only.yaml](configs/candidates/c3-p5-only.yaml) | C3 kernel 只套用 layer 8 | C3 drop > 0.008 才跑 |
-| R1 | [r1-rep.yaml](configs/candidates/r1-rep.yaml) | C2 加 RepBottleneck | C2 conditional 且成本改善 ≥8% 才跑 |
+| C0 | 不修改 C3k2 | winner reference | Params／MAC 不下降 |
+| C1 | e: 0.5 → 0.375 | 縮窄 hidden channels，通常直接減少參數與運算 | feature capacity 可能下降 |
+| C2 | inner_n: 2 → 1 | 每個 C3k2 少一個 inner bottleneck | 深度與表徵能力可能下降 |
+| C3 | 3x3_3x3 → 1x1_3x3 | 第一個 3×3 改成 1×1，降低空間卷積成本 | receptive field／小物件特徵可能受影響 |
 
-這些檔案是 graft contract，`standalone_loadable=false`。必須用 `build --candidate ...` 建立 checkpoint。
+共同規則：
 
-### Detect 正式訓練設定
+- C1/C2/C3 每次只改一個因素，第一輪禁止組合。
+- Detect/Pose heads、融合 topology、inherited MASF／BinaryQK／PWL attention 都受保護。
+- shared winner 解析成 C0/C1/C2/C3。
+- routed winner 解析成 C0/D-C1…D-C3/P-C1…P-C3。
+- partial-shared winner 依實際區域解析成 S-、D-、P- 候選。
+- C3-P5、R1、e=0.25 或因素組合都不是本輪候選；看完 Float 結果後再由你決定。
 
-| 階段 | 完整 YAML | 用途 | 是否排名 | 執行條件 |
-|---|---|---|---|---|
-| D0 | [d0-smoke.yaml](configs/training/detect/d0-smoke.yaml) | 3–5 epoch 冒煙測試 | 否 | 候選建立後 |
-| D1 | [d1-main.yaml](configs/training/detect/d1-main.yaml) | 正式架構比較 | 是 | C0–C3 必跑；條件候選依 trigger |
-| D2 | [d2-extension.yaml](configs/training/detect/d2-extension.yaml) | 從 D1 last.pt 延長 | 是 | 通過 late-improvement gate |
-| Q2 | [q2-qat.yaml](configs/training/detect/q2-qat.yaml) | W8A8 假量化微調 | 否 | 只允許 C0/C_best |
+候選 YAML 在 [configs/candidates](configs/candidates)，它們是 graft contract，且刻意標記
+standalone_loadable: false；不能直接交給共享 YOLO(yaml) parser。
 
-### Pose 正式訓練設定
+## 資料分割是什麼、在哪裡
 
-Pose 全部預設停用。
+### 原始資料（唯讀）
 
-| 階段 | 完整 YAML | 用途 | checkpoint |
-|---|---|---|---|
-| P0 | [p0-smoke.yaml](configs/training/pose/p0-smoke.yaml) | 獨立 3 epoch smoke | grafted Pose26 checkpoint |
-| P1 | [p1-head-only.yaml](configs/training/pose/p1-head-only.yaml) | 凍結 0–22，只訓練 head | grafted Pose26 checkpoint |
-| P2 | [p2-neck-head.yaml](configs/training/pose/p2-neck-head.yaml) | 凍結 0–10，訓練 neck+head | P1 best.pt |
-| P3 | [p3-full.yaml](configs/training/pose/p3-full.yaml) | 正式完整微調 | P2 best.pt |
-| P4 | [p4-extension.yaml](configs/training/pose/p4-extension.yaml) | 條件式 resume | P3 last.pt |
+- BBAT5 Detect：/home/uxin/yolo/original/pose/detect_dataset/
+- BBAT5 Pose：/home/uxin/yolo/original/pose/dataset/
+- COCO2017：/home/uxin/yolo/coco2017/
 
-真正執行任何 Pose 訓練都必須同時加入 `--enable-pose --execute`。
+### 衍生資料（已建立）
 
-## 常用參數都能在 YAML 調整
+實際可訓練資料在 /home/uxin/yolo/original/pose/derived/bbat5-v1/。
 
-每份完整 training YAML 都已顯式列出常用 Ultralytics 設定，包括 `batch`、`fraction`、`scale`、
-`cache`、`device`、`workers`、`epochs`、`patience`、LR、optimizer、freeze、resume、augmentation
-與 validation 參數。
+| 項目 | 結果 |
+|---|---:|
+| 影像 | 6,647 |
+| .rf. 前 prefix 群組 | 2,578 |
+| formal train / val | 5,964 / 683 |
+| search train / val（只取 formal train） | 5,364 / 600 |
+| train/val group leakage | 0 |
+| 修補的負座標 | 4 |
+| 與 COCO train 重疊且固定留在 train 的 groups | 331 |
+| test split | 不存在，也未建立 |
 
-- Batch size 的正式鍵名是 `batch`，不是 `batch_size`。
-- `fraction=1.0` 代表使用全部訓練資料。
-- `scale` 是幾何 augmentation 幅度，不是 YOLO model scale。
-- `cache` 可依本機資源改為 false、ram 或 disk。
-- 完整欄位、型別與修改注意事項請看 [configs/README.md 的常用可調參數](configs/README.md#常用可調參數)。
+Pose labels 是唯一權威。衍生 Detect label 是每列修補後的前五欄；原始 Detect labels 只做
+一對一 audit。影像使用 symlink，labels 只寫進衍生版本，原始兩個目錄沒有被修改。
 
-正式比較時，共用 learning/augmentation 參數必須在同 task 各階段保持一致；`config-check` 會自動檢查。
+bbat5-v1 建立於 spec 2.0.0，因此五份 manifest 保留當時的
+75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b，不回溯改成目前 2.0.1。
+目前 validator 同時接受這個已知歷史 lineage 與新建資料的 current lineage，但不允許五份
+manifest 混用版本。
 
-## 資料在哪裡
+衍生目錄內有獨立中文 README、四份 Ultralytics dataset YAML 與五份 manifests。Git 只保存
+metadata 副本：
 
-### Detect
+- [BBAT5 metadata README](artifacts/datasets/bbat5-v1/README.md)
+- [split manifest](artifacts/datasets/bbat5-v1/manifests/split-manifest.json)
+- [patch manifest](artifacts/datasets/bbat5-v1/manifests/patch-manifest.json)
+- [source audit](artifacts/datasets/bbat5-v1/manifests/source-audit-manifest.json)
+- [COCO exclusion](artifacts/datasets/bbat5-v1/manifests/coco-exclusion-manifest.json)
 
-- Dataset YAML：[configs/data/coco2017.yaml](configs/data/coco2017.yaml)
-- `path: coco2017` 由本機 Ultralytics datasets directory 解析。
-- train：`train2017.txt`
-- val：`val2017.txt`
-- 類別：COCO 80 classes
+沒有上傳影像、label 副本、cache、checkpoint 或 run。prepare-pose-data 可以重建資料，但 v1
+不可覆寫；規則改變時要建立 v2。
 
-### Pose 原始資料
+正式可讀 search wrappers 在
+[BBAT5 Pose search YAML](configs/data/bbat5-pose-search.yaml) 與
+[BBAT5 Detect search YAML](configs/data/bbat5-detect-search.yaml)；兩者只引用 formal train 內的
+search lists。
 
-- 路徑：`/home/uxin/yolo/original/pose/bbt5.v1i.yolov8`
-- 使用方式：唯讀
-- 不允許直接修改原始 labels
+    # 只做唯讀規劃
+    $PY -m achitechure_2 prepare-pose-data
 
-### Pose 衍生資料
+    # v1 尚不存在時才執行
+    $PY -m achitechure_2 prepare-pose-data --execute
 
-- Dataset YAML：[configs/data/pose-grouped.yaml](configs/data/pose-grouped.yaml)
-- 實際目錄：[artifacts/datasets/pose_grouped](artifacts/datasets/pose_grouped)
-- 分割方式：依檔名 `.rf.` 前 prefix 分組，seed 0，90/10 train/val
-- train：5,988 張／2,320 groups
-- val：659 張／258 groups
-- leakage：0
-- test split：沒有
-- images：6,647 個 symlink
-- labels：複製後使用
-- 負座標：四個，只在衍生 label 裁切為 0
+    # 驗證已建立版本
+    $PY -m achitechure_2 validate-pose-data
 
-證據：
+這些命令只處理資料，不會啟動 Pose 模型或訓練。
 
-- [split-manifest.json](artifacts/datasets/pose_grouped/split-manifest.json)
-- [patch-manifest.json](artifacts/datasets/pose_grouped/patch-manifest.json)
+## YAML 設定怎麼看
 
-建立 grouped dataset 不等於執行 Pose，不會建立模型或開始訓練。
+所有正式檔案都列在 [configs/catalog.yaml](configs/catalog.yaml)。詳細欄位導覽見
+[configs/README.md](configs/README.md)。
 
-## 完整實驗流程
+### Training templates
 
-```text
-architecture_1 正式 handoff
-        │
-        ▼
-intake 驗證與 accepted.json
-        │
-        ▼
-由同一 Float-PWL parent 獨立建立 C0/C1/C2/C3
-        │
-        ▼
-D0 smoke ──不排名
-        │
-        ▼
-D1 正式比較 ──Bit-True mAP50-95 排名
-        │
-        ├── 通過晚期改善門檻 → D2 resume
-        ├── C3 rejection → 可跑 C3-P5
-        └── C2 conditional 且成本改善 ≥8% → 可跑 R1
-        │
-        ▼
-記錄 C_best（也可能沒有）
-        │
-        ├── 使用者選擇 Pose → C0/C_best 執行 P0–P4
-        ├── C0/C_best 執行 Q0/Q1/Q2 simulation
-        └── 未來另立雙來源融合研究
-```
+| 檔案 | 用途 | 現在能否執行 |
+|---|---|---|
+| [cpu-smoke.yaml](configs/training/cpu-smoke.yaml) | CPU 結構／數值驗證 | 可以 |
+| [float-main.yaml](configs/training/float-main.yaml) | C0-Control 與 C1–C3 公平 Float 比較 | 等 handoff、Pose 選擇與 GPU 授權 |
+| [float-extension.yaml](configs/training/float-extension.yaml) | late gate 後由未 strip continuation state resume | 等前一階段與完整 state |
+| [quant-qat.yaml](configs/training/quant-qat.yaml) | eligible candidate 的 Q2 | 等 Float 決策與 GPU 授權 |
 
-## 常用命令
+每份 template 都是一個完整、獨立的設定，不需要合併 overlay。winner 尚未交付前不能猜的值會明確寫成：
 
-### 1. 檢查全部設定
+    batch:
+      source: handoff
+      value: null
 
-```bash
-$PY -m achitechure_2 config-check
-```
+這不是漏填，而是 fail-closed。收到 handoff 後，effective-config 會產生所有值都已解析的平面
+effective YAML。
 
-這會檢查 catalog、全部正式 YAML、候選矩陣、共同欄位公平性、Ultralytics 8.4.90 支援、
-spec hash、Pose policy、Q2 lr0、dataset、量化與融合契約。
+### 常用可調欄位
 
-### 2. 預覽／執行 Detect D1
+| 欄位 | 位置 | 意義 |
+|---|---|---|
+| batch size | adjustable.batch.value | 正式 Ultralytics 鍵名是 batch，不是 batch_size |
+| 資料比例 | adjustable.fraction.value | 1.0 是完整 train；小於 1 只截取排序後 train 前段 |
+| augmentation scale | adjustable.scale.value | 幾何縮放幅度，不是 model scale |
+| cache | adjustable.cache.value | false、ram 或 disk |
+| 影像尺寸 | adjustable.imgsz.value | 通常由 winner recipe 繼承 |
+| 裝置／workers | adjustable.device/workers.value | 可依機器調整 |
+| epochs／patience | adjustable.epochs/patience.value | 正式預算由 handoff 繼承 |
 
-```bash
-$PY -m achitechure_2 train \
-  --config configs/training/detect/d1-main.yaml \
-  --candidate C0 \
-  --checkpoint artifacts/candidates/c0/float-parent.pt \
-  --run-id c0-d1
+model_scale: m 是 YOLO26m 模型級別，與 augmentation 的 scale 完全不同。
 
-$PY -m achitechure_2 train \
-  --config configs/training/detect/d1-main.yaml \
-  --candidate C0 \
-  --checkpoint artifacts/candidates/c0/float-parent.pt \
-  --run-id c0-d1 \
-  --execute
-```
+fraction 不是隨機、分層或 grouped sampling，也不能取代 BBAT5 的 search YAML。cache=true／ram
+可能破壞完全 deterministic；cache=disk 會在影像旁寫檔，只能使用獲授權的可寫衍生資料。
 
-### 3. 可選 Pose P1
+正式 ablation 的 learning fields 必須對所有候選一致。name/project/device/workers/cache 可在
+runtime 層覆寫；若要改 batch、fraction、scale、LR 或 optimizer，應修改正式 YAML／spec revision，
+不能只對某個候選用 CLI 偷改。
 
-```bash
-# 預覽，不執行
-$PY -m achitechure_2 train \
-  --config configs/training/pose/p1-head-only.yaml \
-  --candidate C0 \
-  --checkpoint /path/to/c0-pose-graft.pt \
-  --run-id pose-c0-p1
+## Handoff 與候選流程
 
-# 使用者明確同意後執行
-$PY -m achitechure_2 train \
-  --config configs/training/pose/p1-head-only.yaml \
-  --candidate C0 \
-  --checkpoint /path/to/c0-pose-graft.pt \
-  --run-id pose-c0-p1 \
-  --enable-pose \
-  --execute
-```
+handoff 必須包含 winner checkpoint、state-dict builder、architecture/training/dataset/selection
+hashes、fresh-process reload 證據、完整模型語意、Candidate Regions、protected/frozen paths。
+範例見 [handoff-manifest.example.json](handoff-manifest.example.json)。
 
-### 4. 測試
+    # 只看 metadata，不會接受
+    $PY -m achitechure_2 inspect-handoff --manifest /path/handoff.json
 
-```bash
-$PY -m pytest
-$PY -m ruff check .
-```
+    # 必須真的 materialize graph 才能寫 accepted.json
+    $PY -m achitechure_2 accept-handoff --manifest /path/handoff.json --model-loader yolo_combine.some_module:load_winner
 
-完整命令與階段順序請看 [RUNBOOK.md](RUNBOOK.md)。
+    # 看 winner 實際解析出哪些候選
+    $PY -m achitechure_2 resolve-candidates --manifest /path/handoff.json
 
-## 量化與融合
+    # 對指定 resolved candidate 做 CPU forward/backward/freeze/reload
+    $PY -m achitechure_2 cpu-dry-run --manifest /path/handoff.json --model-loader yolo_combine.some_module:load_winner --candidate C0
 
-量化設定：[w8a8-simulation.yaml](configs/quant/w8a8-simulation.yaml)
+沒有正式 handoff 時不能宣稱候選已建立，也不會猜測真正 layer paths。
 
-- Q0：fused FP32 reference
-- Q1：calibrated W8A8 PTQ fake-quant
-- Q2：W8A8 fake-quant fine-tuning
-- 所有結果都必須標示 `simulation_only=true`
+## Pose 是否執行由你決定
 
-融合範本：[source-pair.template.yaml](configs/fusion/source-pair.template.yaml)
+目前允許：
 
-- 目前 `enabled=false`
-- `fusion_mode=null`
-- `switch_policy=null`
-- 可保存來源 A/B checkpoint、architecture、head contract 與 hashes
-- 你選定 weight interpolation、ensemble、routed switch 或 staged transfer 前不會實作
+- 建立／驗證資料。
+- 讀取 Pose YAML。
+- 用 fixture 或 handoff model 做 CPU interface、loss、gradient smoke。
 
-## 執行後東西會放哪裡
+目前不會自動做：
 
-| 路徑 | 內容 |
-|---|---|
-| `artifacts/intake/accepted.json` | architecture_1 handoff 驗收 |
-| `artifacts/candidates/<id>/` | Detect 候選 checkpoint、transfer report、snapshot、lineage |
-| `artifacts/datasets/pose_grouped/` | grouped Pose 資料與 manifests |
-| `artifacts/pose/candidates/<id>/` | 可選 Pose26 graft 與 lineage |
-| `artifacts/runs/<run-id>/` | effective config、metrics、best/last、completion、profile |
-| `artifacts/selection.json` | C0-relative 決策與 C_best |
-| `artifacts/quant/<id>/` | Q0/Q1/Q2 simulation 產物 |
-| `results/` | 正式結果表與報告範本 |
+- Pose 長訓練。
+- 正式 Pose validation。
+- 因缺少 Pose 結果而偷偷只用 Detect 選 C_best。
 
-產生的資料、weights、runs 與 benchmarks 不放進 `src/`。
+將來若你選擇不跑 Pose，可以先得到 Detect 與成本成果，但報告必須標示「融合模型正式排名尚不完整」。
+若你選擇跑 Pose，C0-Control 與所有候選必須使用相同 Pose 資料、head seed、task ratio、optimizer
+steps 與 validation events。
 
-## 修改設定時的規則
+## 子訓練、搜尋與 validation
 
-1. 先更新 [EXPERIMENT_SPEC.md](EXPERIMENT_SPEC.md) 並升版。
-2. 修改對應的完整正式 YAML；不要重新引入 canonical/overlay/stage 拼接。
-3. 如果是同 task 共用欄位，所有相關完整 YAML 必須同步。
-4. 更新 `spec_version` 與 `spec_sha256`。
-5. 新檔必須登錄到 [configs/catalog.yaml](configs/catalog.yaml)。
-6. 執行 `config-check` 與 pytest。
+可以做小規模子訓練與超參數搜尋，但現在沒有 winner／GPU 授權，因此 Phase A 只執行 CPU smoke。
+進入正式階段後：
 
-`config-check` 會比較完整 YAML 的共同欄位，因此單一階段偷偷改 LR、augmentation、batch 或 optimizer 會失敗。
+- BBAT5 搜尋只用 pose-search／detect-search YAML；它們完全位於 formal train 內。
+- BBAT5 搜尋結果若用來決定設定，必須形成一份共用 recipe，再鎖定給 C0-Control 與所有候選；
+  禁止每個候選各自調參。
+- adjustable.fraction 小於 1 可作快速 plumbing，但不是 grouped search，也不能產生正式排名。
+- formal val 不參與搜尋；鎖定設定後才用相同 validation events 比較候選。
+- 是否把 Pose 納入搜尋與正式 validation 仍由你 opt-in；不會因為資料已準備好就自動執行。
+- COCO train-only search contract 尚未建立，所以目前不能宣稱已具備完整雙任務融合超參數搜尋。
 
-## 目前尚未完成的外部條件
+## AP、AP50、mAP 與 F1
 
-- architecture_1 正式 handoff 尚未提供。
-- C0/C1/C2/C3 正式長訓練尚未執行。
-- C_best 尚未選出。
-- Pose 尚未執行。
-- Q0/Q1/Q2 尚未執行。
-- 雙來源融合模式尚未由使用者決定。
+- AP50：單一 IoU（box）或 OKS（keypoint）= 0.50 的 Average Precision。
+- AP50-95：0.50 到 0.95 多個 threshold 的 AP 平均；通常更嚴格。
+- mAP：對多個 classes 的 AP 再平均。本案會明確寫 mAP50 或 mAP50-95，不只寫模糊的 mAP。
+- Macro F1：ball、bat 的 F1 未加權平均，是主要 F1，可避免多數類別掩蓋另一類。
+- Micro F1：先合併所有 TP/FP/FN 再計算，保留整體應用表現。
 
-因此目前不能宣稱任何正式架構 winner、Pose 改善或 INT8 部署結果。
+結果必須分開記錄 COCO80 overall、COCO person、BBAT5 Pose box/keypoint、ball/bat per-class、
+Precision、Recall、per-class F1、Macro F1、Micro F1 與 confidence threshold。F1 threshold 只用
+C0-Control search-val 決定一次，之後所有候選固定相同值。
+
+Stock Ultralytics Pose best.pt 依 Pose mAP50-95 + Box mAP50-95 combined fitness 選擇。本案若執行
+Pose，必須另外保存 pose-only mAP50-95 best，並把 combined fitness 分欄報告。BBAT5 的兩點
+keypoint 目前使用套件均勻 OKS sigma，不能宣稱已針對棒球校準。
+
+第一輪不做自動 PASS/REJECT，也不自動選 C_best。舊 0.005/0.008 drop 只作描述性敏感度。完整
+Float 與 Pareto 報告產出後，狀態固定是 c_best: null、selection_status: pending_user_decision。
+
+## 量化
+
+[w8a8-simulation.yaml](configs/quant/w8a8-simulation.yaml) 定義 Q0/Q1/Q2：
+
+- C0：預設可做 Q0/Q1。
+- C1/C2/C3 或 resolved variants：先等你看完 Float 結果後核准。
+- Q2：任何候選都還需要額外 GPU 長訓練授權。
+- standard Conv 使用 W8A8 fake quant；custom BinaryQK/PWL attention 排除。
+- 全部標示 simulation_only=true，CPU plumbing 結果不是部署 latency。
+- Fake quant 仍輸出浮點 tensor；沒有 backend convert 與目標硬體驗證時，不稱為 Bit-True 或部署 INT8。
+
+    $PY -m achitechure_2 quant-check --candidate C0 --stage Q1
+    # C1 尚未核准時會 fail closed
+    $PY -m achitechure_2 quant-check --candidate C1 --stage Q1
+
+## 目錄
+
+    achitechure_2/
+    ├── AGENTS.md / CONTEXT.md      本目錄工作規範與領域詞彙
+    ├── EXPERIMENT_SPEC.md          唯一正式規格
+    ├── README.md                   全專案入口
+    ├── RUNBOOK.md                  可複製命令
+    ├── TRAINING_GUIDE.md           訓練、公平性與失敗處理
+    ├── configs/                    candidates/training/data/quant/schema
+    ├── src/achitechure_2/          handoff、builder、資料、CPU、checkpoint、metrics、quant
+    ├── tests/                      CPU pytest
+    ├── artifacts/datasets/bbat5-v1/ 可提交 metadata；沒有影像／labels
+    ├── results/                    空白結果與報告模板
+    └── docs/                       ADR、官方參考、工作紀錄
+
+## Git 會上傳與不會上傳的東西
+
+會提交：
+
+- 程式、測試、正式 YAML/schema。
+- README、規格、ADR、工作紀錄。
+- BBAT5 split／patch／source audit／COCO exclusion／rebuild manifests。
+
+不會提交：
+
+- 影像、衍生 labels、cache。
+- .pt checkpoint、runs、GPU profiles。
+- 未驗證的 accepted.json 或正式結果。
+
+本次完整修改、資料處理、驗證與未解風險記錄在
+[2026-08-22 architecture_2 Phase A 工作紀錄](../../docs/worklogs/2026-08-22-architecture-2-phase-a.md)。
+
+最後操作與驗證順序見 [RUNBOOK.md](RUNBOOK.md)。目前可以可靠宣稱的是 Phase A 與資料成果；
+正式架構精度、C_best、Pose 改善與量化可接受性都尚待後續實驗與你的決策。

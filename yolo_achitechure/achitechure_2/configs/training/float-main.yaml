@@ -1,0 +1,87 @@
+# Phase C 正式 Float 模板。null 代表必須由 yolo_combine winner handoff 解析，不是缺省值。
+schema_version: 3
+spec_version: 2.0.1
+spec_sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
+kind: training_template
+config_id: float-main
+title_zh: C0-Control／C1／C2／C3 Float 公平比較
+summary_zh: 完整繼承 winner 配方；每個 resolved candidate 從相同 C0-Handoff 建立新 optimizer。
+phase: C
+status: blocked_until_handoff_and_user_gpu_authorization
+model_scale: m
+candidate_policy:
+  base_candidates: [C0, C1, C2, C3]
+  resolved_from_handoff: true
+  same_recipe_for_all: true
+execution:
+  device: "0"
+  force_cuda_hidden: false
+  requires_execute_flag: true
+  requires_gpu_authorization: true
+  pose_opt_in_required: true
+  formal_training: true
+routes:
+  detect:
+    enabled_by_default: true
+    loss_on_dataset: coco2017
+  pose:
+    enabled_by_default: false
+    loss_on_dataset: bbat5-pose
+formal_ranking_requires: [detect, pose]
+datasets:
+  detect: configs/data/coco2017.yaml
+  pose: configs/data/bbat5-pose.yaml
+  diagnostic_detect: configs/data/bbat5-detect.yaml
+recipe:
+  source: handoff
+  task_ratio: {source: handoff, value: null}
+  optimizer: {source: handoff, value: null}
+  lr0: {source: handoff, value: null}
+  lrf: {source: handoff, value: null}
+  momentum: {source: handoff, value: null}
+  weight_decay: {source: handoff, value: null}
+  warmup_epochs: {source: handoff, value: null}
+  nbs: {source: handoff, value: null}
+  losses: {source: handoff, value: null}
+  augmentation: {source: handoff, value: null}
+  freeze_policy: {source: handoff, value: null}
+  amp: {source: handoff, value: null}
+  deterministic: {source: handoff, value: null}
+  seed: {source: local, value: 0}
+  optimizer_steps: {source: handoff, value: null}
+  validation_interval: {source: handoff, value: null}
+adjustable:
+  batch: {source: handoff, value: null}
+  fraction: {source: local, value: 1.0}
+  scale: {source: handoff, value: null}
+  cache: {source: local, value: false}
+  imgsz: {source: handoff, value: null}
+  device: {source: local, value: "0"}
+  workers: {source: local, value: 8}
+  epochs: {source: handoff, value: null}
+  patience: {source: handoff, value: null}
+validation:
+  selection_backend: float_model
+  checkpoint_selection:
+    detect: handoff_defined
+    pose_research: pose_map50_95
+    pose_official: combined_fitness_recorded_separately
+  fixed_f1_threshold_source: c0_control_search_val
+  metrics:
+    - map50
+    - map50_95
+    - per_class_ap50
+    - per_class_ap50_95
+    - precision
+    - recall
+    - per_class_f1
+    - macro_f1
+    - micro_f1
+  formal_split: val
+transition:
+  mode: fresh
+  input: c0_handoff
+  optimizer_state: new
+lineage:
+  require_all_hashes: true
+  effective_yaml_output: artifacts/effective-configs

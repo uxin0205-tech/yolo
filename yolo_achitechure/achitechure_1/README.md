@@ -30,6 +30,12 @@ Bit-True 候選、8 個 Float checkpoint，以及 COCO2017／BBT5 `detect_datase
 - `results/README.md`：結果索引與報告邊界。
 - `final/README.md`：可複製至其他資料夾的程式碼、權重、設定與驗證入口。
 
+## 全域研究規範
+
+- [BBAT5／BBT5 固定資料集政策](../../docs/agents/bbat5-datasets.md)：detect 與 pose 必須使用固定來源，不自行重切或替換。
+- [全域工作紀錄](../../docs/worklogs/README.md)：所有變更、驗證、困難與解法均以中文留存。
+- [根層 README](../../README.md)：共用規則與文件總入口。
+
 正式環境固定 Python 3.12、PyTorch `2.11.0+cu128`、Ultralytics `8.4.90`。A1／A2／B 使用 physical
 batch 16；C 使用 physical batch 8、`nbs=16`；validation 固定 batch 8。Peak VRAM 只作容量診斷，不參與
 候選排名。

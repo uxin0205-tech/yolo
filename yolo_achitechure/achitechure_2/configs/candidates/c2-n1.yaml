@@ -1,82 +1,56 @@
-# 正式架構候選；不可直接傳給 YOLO(yaml)，必須由 achitechure_2 builder graft。
-schema_version: 2
-spec_version: 1.2.0
-spec_sha256: 34467463b4cb7ae4b0eb4b57c1a22a04d00097a9de9b71392f6495c15b093ea7
+# 正式候選契約。實際 module paths 必須由 yolo_combine handoff 解析。
+schema_version: 3
+spec_version: 2.0.1
+spec_sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
 kind: architecture_candidate
-title_zh: C2：減少 inner depth
-summary_zh: 只把 layers 6、8、13、19 的 inner_n 從 2 改成 1。
-status: required
-task_contracts:
-- detect
-- pose
-scale: m
 candidate_id: C2
+title_zh: C2：減少 C3k2 內部深度
+summary_zh: 只將所選 Candidate Region 的 inner_n 從 2 改成 1。
+status: required
+model_scale: m
+task_contract:
+  detect_nc: 80
+  pose_nc: 2
+  pose_kpt_shape: [2, 3]
 parent_policy:
-  source: accepted_float_pwl
-  independence: same_parent
+  source: accepted_yolo_combine_winner
+  checkpoint_role: c0_handoff
+  independent_build: true
   seed: 0
-target_layers:
-- 6
-- 8
-- 13
-- 19
-protected_layers:
-- 2
-- 4
-- 16
-- 22
+target_policy:
+  source: handoff.candidate_regions
+  module_type: C3k2-compatible
+  hardcoded_layer_indices: false
+scope_resolution:
+  shared_dual_head: [shared]
+  routed_dual: [detect_specific, pose_specific]
+  partial_shared: [shared, detect_specific, pose_specific]
 factors:
   e: 0.5
   inner_n: 1
   kernel_mode: 3x3_3x3
   use_rep: false
-inherited:
-  masf:
-    variant: architecture_1_selected
-    frozen: true
-    path: model.16.p3_masf
-  attention:
-    frozen: true
-    paths:
-    - model.10.m.0.attn
-    - model.22.m.0.1.attn
-heads:
-  detect:
-    type: Detect
-    inputs:
-    - 16
-    - 19
-    - 22
-    strides:
-    - 8
-    - 16
-    - 32
-  pose:
-    type: Pose26
-    inputs:
-    - 16
-    - 19
-    - 22
-    strides:
-    - 8
-    - 16
-    - 32
-conditions:
-  base_candidate: null
-  trigger: null
-forbidden_combinations:
-- C1+C2
-- C1+C3
-- C2+C3
+baseline_factors:
+  e: 0.5
+  inner_n: 2
+  kernel_mode: 3x3_3x3
+  use_rep: false
+changed_fields: [inner_n]
+factor_name: inner_depth
+protected_policy:
+  source: handoff.protected_module_paths
+  preserve_heads: true
+  preserve_fusion_topology: true
+  preserve_inherited_modules: true
+forbidden_combinations: [C1+C2, C1+C3, C2+C3]
+quantization_eligible: pending_user_decision
 standalone_loadable: false
 builder: achitechure_2
 architecture_delta:
   changed_zh:
-  - layers 6、8、13、19 的 inner depth
+    - Candidate Region 的 C3k2 inner bottleneck 數量
   unchanged_zh:
-  - protected layers 2、4、16、22
-  - inherited MASF 與 attention
-  - Detect/Pose26 head inputs 與 strides
+    - 其他 regions、兩個 heads、融合 topology、MASF、BinaryQK 與 PWL attention
   expected_effects_zh:
-  - 預期降低成本與有效深度
-  - 可能降低 context capacity
+    - 預期降低 Params、MAC 與有效深度
+    - 可能降低 context capacity

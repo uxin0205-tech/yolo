@@ -1,15 +1,29 @@
-# 正式量化模擬設定；simulation_only 必須保持 true。
-schema_version: 2
-spec_version: 1.2.0
-spec_sha256: 34467463b4cb7ae4b0eb4b57c1a22a04d00097a9de9b71392f6495c15b093ea7
+# 正式量化模擬設定；C1–C3 需由使用者看完 Float 結果後明確核准。
+schema_version: 3
+spec_version: 2.0.1
+spec_sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
 kind: quantization
-title_zh: W8A8 假量化研究設定
-summary_zh: 比較 Q0 FP32、Q1 PTQ simulation 與 Q2 QAT simulation；不宣稱真實 INT8 部署。
-status: active_after_c_best
+title_zh: 逐候選 Q0／Q1／Q2 W8A8 模擬
+summary_zh: C0 固定 eligible；其他 resolved candidates 保持 pending_user_decision。
+status: blocked_until_float_results_and_user_selection
 simulation_only: true
-targets:
-- C0
-- C_best
+eligibility:
+  C0: true
+  C1: pending_user_decision
+  C2: pending_user_decision
+  C3: pending_user_decision
+stages:
+  Q0:
+    kind: fused_fp32_reference
+    equivalence_max_abs_diff: 0.0001
+  Q1:
+    kind: w8a8_ptq_simulation
+    calibration_set: fixed_from_c0_search_train
+  Q2:
+    kind: w8a8_qat_simulation
+    requires_gpu_authorization: true
+    recipe_source: handoff
+    lr_ratio: 0.1
 weight:
   dtype: int8
   qscheme: per_channel_symmetric
@@ -17,11 +31,5 @@ weight:
 activation:
   dtype: int8
   qscheme: per_tensor_affine
-include_masf_standard_conv: true
-exclude_custom_roots:
-- HardwareFriendlyAttention
-qat:
-  epochs: 15
-  patience: 5
-  observer_update_epochs: 3
-  lr_ratio: 0.1
+include_standard_convs_in_masf: true
+exclude_custom_roots: [HardwareFriendlyAttention]

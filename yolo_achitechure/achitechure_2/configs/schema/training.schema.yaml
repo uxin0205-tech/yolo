@@ -1,138 +1,111 @@
-# JSON Schema Draft 2020-12；可供外部 validator 使用。
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: training.schema.yaml
-title: architecture_2 正式訓練設定
-description: 每個階段一份完整設定，不需要與其他 YAML 合併。
+title: architecture_2 訓練模板
+description: 一個檔案包含完整專案控制；handoff fields 以 source/value 明示。
+x-spec-version: 2.0.1
+x-spec-sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
 type: object
 additionalProperties: false
 required:
-- schema_version
-- spec_version
-- spec_sha256
-- kind
-- config_id
-- title_zh
-- summary_zh
-- task
-- stage
-- status
-- candidate_policy
-- execution
-- dataset
-- transition
-- ranking
-- frozen_modules
-- derived_training
-- training
+  - schema_version
+  - spec_version
+  - spec_sha256
+  - kind
+  - config_id
+  - title_zh
+  - summary_zh
+  - phase
+  - status
+  - model_scale
+  - candidate_policy
+  - execution
+  - routes
+  - formal_ranking_requires
+  - datasets
+  - recipe
+  - adjustable
+  - validation
+  - transition
+  - lineage
 properties:
-  schema_version:
-    const: 2
-  spec_version:
-    const: 1.2.0
-  spec_sha256:
-    type: string
-    pattern: ^[0-9a-f]{64}$
-  kind:
-    const: formal_training
-  config_id:
-    type: string
-  title_zh:
-    type: string
-    minLength: 1
-  summary_zh:
-    type: string
-    minLength: 1
-  task:
-    enum:
-    - detect
-    - pose
-  stage:
-    enum:
-    - D0
-    - D1
-    - D2
-    - Q2
-    - P0
-    - P1
-    - P2
-    - P3
-    - P4
-  status:
-    type: string
-  candidate_policy:
+  schema_version: {const: 3}
+  spec_version: {const: 2.0.1}
+  spec_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+  kind: {const: training_template}
+  config_id: {enum: [cpu-smoke, float-main, float-extension, quant-qat]}
+  title_zh: {type: string}
+  summary_zh: {type: string}
+  phase: {enum: [A, C]}
+  status: {type: string}
+  model_scale: {const: m}
+  candidate_policy: {type: object}
+  execution: {type: object}
+  routes: {type: object}
+  formal_ranking_requires: {type: array}
+  datasets: {type: object}
+  recipe: {type: object}
+  adjustable:
     type: object
-    minProperties: 2
-  execution:
-    type: object
-    additionalProperties: false
-    required:
-    - launcher
-    - requires_execute_flag
-    - pose_opt_in_required
-    - enabled_by_default
-    - ultralytics_yaml_direct
-    - runtime_overridable
-    properties:
-      launcher:
-        const: achitechure_2
-      requires_execute_flag:
-        const: true
-      pose_opt_in_required:
-        type: boolean
-      enabled_by_default:
-        type: boolean
-      ultralytics_yaml_direct:
-        const: false
-      runtime_overridable:
-        const:
-        - model
-        - name
-        - project
-        - device
-        - workers
-        - cache
-  dataset:
-    type: string
-  transition:
-    type: object
-    additionalProperties: false
-    required:
-    - mode
-    - checkpoint_role
-    - gate
-    - description_zh
-    properties:
-      mode:
-        enum:
-        - fresh
-        - resume
-      checkpoint_role:
-        type: string
-      gate:
-        type: string
-      description_zh:
-        type: string
-  ranking:
-    type: object
-    additionalProperties: false
-    required:
-    - architecture_ranking
-    - research_metric
-    - selection_backend
-    properties:
-      architecture_ranking:
-        type: boolean
-      research_metric:
-        type: string
-      selection_backend:
-        const: bit_true_pwl
-  frozen_modules:
-    type: array
-    items:
-      type: string
-    uniqueItems: true
-  derived_training:
-    type: object
-  training:
-    type: object
-    minProperties: 1
+    required: [batch, fraction, scale, cache, imgsz, device, workers, epochs, patience]
+  validation: {type: object}
+  transition: {type: object}
+  lineage: {type: object}
+allOf:
+  - if:
+      properties:
+        config_id:
+          enum: [float-main, float-extension]
+    then:
+      properties:
+        validation:
+          type: object
+          required: [selection_backend, checkpoint_selection]
+          properties:
+            selection_backend: {const: float_model}
+            checkpoint_selection:
+              type: object
+              additionalProperties: false
+              required: [detect, pose_research, pose_official]
+              properties:
+                detect: {const: handoff_defined}
+                pose_research: {const: pose_map50_95}
+                pose_official: {const: combined_fitness_recorded_separately}
+  - if:
+      properties:
+        config_id: {const: float-extension}
+    then:
+      properties:
+        transition:
+          type: object
+          additionalProperties: false
+          required:
+            - mode
+            - input
+            - optimizer_state
+            - gate
+            - requires_unstripped_state
+            - required_checkpoint_state
+            - required_resume_evidence
+            - stripped_last_or_best_policy
+          properties:
+            mode: {const: resume}
+            input: {const: own_unstripped_continuation_checkpoint}
+            optimizer_state: {const: restore}
+            gate: {const: handoff_late_improvement}
+            requires_unstripped_state: {const: true}
+            required_checkpoint_state:
+              const: [epoch, best_fitness, optimizer, scaler, ema, updates]
+            required_resume_evidence:
+              const: [scheduler_position, optimizer_parameter_groups]
+            stripped_last_or_best_policy: {const: reject}
+  - if:
+      properties:
+        config_id: {const: quant-qat}
+    then:
+      properties:
+        validation:
+          type: object
+          required: [selection_backend, simulation_only]
+          properties:
+            selection_backend: {const: w8a8_simulation}
+            simulation_only: {const: true}

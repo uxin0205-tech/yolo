@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yolo26m-achitechure-2"
-version = "0.1.0"
-description = "Stage-aware Lite-C3k2 experiments for the frozen YOLO26m PWL system"
+version = "2.0.1"
+description = "Measurement-first C3k2 simplification of a selected YOLO26m Detect-Pose fusion winner"
 requires-python = ">=3.10"
-dependencies = ["PyYAML>=6.0", "torch>=2.2", "ultralytics>=8.4.90"]
+dependencies = ["PyYAML>=6.0,<7", "torch>=2.2", "ultralytics==8.4.90"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6"]
+dev = ["pytest>=8", "ruff>=0.6", "jsonschema>=4.23"]
 evaluation = ["pycocotools>=2.0.7"]
 
 [project.scripts]

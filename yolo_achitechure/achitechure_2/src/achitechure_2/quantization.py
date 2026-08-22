@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+from collections.abc import Iterable, Mapping
 from dataclasses import asdict, dataclass
 from typing import Any
 
@@ -154,27 +155,83 @@ def configure_qat_epoch(model: nn.Module, epoch: int) -> bool:
     return observers_enabled
 
 
+def require_quantization_stage(
+    candidate_id: str,
+    stage: str,
+    *,
+    user_approved: Iterable[str] = (),
+    gpu_authorized: bool = False,
+) -> str:
+    """Fail closed：C0 預設 eligible，其餘候選與 Q2 需要額外授權。"""
+
+    normalized_stage = stage.upper()
+    if normalized_stage not in {"Q0", "Q1", "Q2"}:
+        raise ValueError(f"未知量化 stage：{stage}")
+    approved = set(user_approved)
+    if candidate_id != "C0" and candidate_id not in approved:
+        raise PermissionError(
+            f"{candidate_id} 尚未取得使用者核准；需先檢視完整 Float 結果"
+        )
+    if normalized_stage == "Q2" and not gpu_authorized:
+        raise PermissionError("Q2 正式 QAT 需要使用者明確 GPU 長訓練授權")
+    return "allowed"
+
+
 @dataclass(frozen=True)
-class RobustnessReport:
+class QuantizationGapReport:
     simulation_only: bool
-    q0_map50_95: float
-    q1_map50_95: float
-    q2_map50_95: float
-    ptq_gap: float
-    qat_gap: float
-    qat_recovery: float
-    verdict: str
+    q0: dict[str, float]
+    q1: dict[str, float]
+    q2: dict[str, float]
+    q1_drop: dict[str, float]
+    q2_drop: dict[str, float]
+    qat_recovery: dict[str, float]
+    selection_status: str
+    accepted: None
 
 
-def robustness_report(q0: float, q1: float, q2: float) -> RobustnessReport:
-    qat_gap = q0 - q2
-    if qat_gap <= 0.005:
-        verdict = "robust"
-    elif qat_gap <= 0.008:
-        verdict = "acceptable_but_sensitive"
-    else:
-        verdict = "quantization_sensitive"
-    return RobustnessReport(True, q0, q1, q2, q0 - q1, qat_gap, q2 - q1, verdict)
+def quantization_gap_report(
+    *,
+    q0: Mapping[str, float],
+    q1: Mapping[str, float],
+    q2: Mapping[str, float],
+) -> QuantizationGapReport:
+    """逐指標呈現 Q0/Q1/Q2 差距，不用固定 drop 自動接受量化。"""
+
+    if not q0 or set(q0) != set(q1) or set(q0) != set(q2):
+        raise ValueError("Q0/Q1/Q2 必須提供相同且非空的 metric keys")
+    normalized = {
+        stage: {name: float(value) for name, value in values.items()}
+        for stage, values in (("q0", q0), ("q1", q1), ("q2", q2))
+    }
+    invalid = {
+        f"{stage}.{name}": value
+        for stage, values in normalized.items()
+        for name, value in values.items()
+        if not 0 <= value <= 1
+    }
+    if invalid:
+        raise ValueError(f"量化精度指標必須介於 [0,1]：{invalid}")
+    return QuantizationGapReport(
+        simulation_only=True,
+        q0=normalized["q0"],
+        q1=normalized["q1"],
+        q2=normalized["q2"],
+        q1_drop={
+            name: normalized["q0"][name] - normalized["q1"][name]
+            for name in normalized["q0"]
+        },
+        q2_drop={
+            name: normalized["q0"][name] - normalized["q2"][name]
+            for name in normalized["q0"]
+        },
+        qat_recovery={
+            name: normalized["q2"][name] - normalized["q1"][name]
+            for name in normalized["q0"]
+        },
+        selection_status="pending_user_decision",
+        accepted=None,
+    )
 
 
 def quant_scope_dict(scope: QuantScope) -> dict[str, Any]:

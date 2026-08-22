@@ -6,222 +6,136 @@ from pathlib import Path
 import pytest
 import yaml
 
-from achitechure_2.cli import main
 from achitechure_2.config import (
     ConfigContractError,
     check_configs,
-    compose_training_config,
     load_candidate_specs,
-    load_formal_training_config,
+    load_training_template,
     validate_runtime_overrides,
 )
-from achitechure_2.graph import graph_snapshot
-from achitechure_2.training import (
-    require_c0_or_c_best,
-    require_pose_opt_in,
-    validate_stage_transition,
-)
 
 
-def test_config_check_covers_matrix_local_version_and_inactive_keys() -> None:
+def test_config_check_describes_v2_matrix_and_blocked_handoff_values() -> None:
     report = check_configs()
+
     assert report.valid
+    assert report.spec_version == "2.0.1"
     assert report.ultralytics_version == "8.4.90"
-    assert report.candidate_ids == ("C0", "C1", "C2", "C3", "C3-P5", "R1")
-    assert report.accepted_but_inactive == ("pose:rle（只有 Pose.flow_model 存在時才生效）",)
-    assert report.catalog_file == "configs/catalog.yaml"
-    assert report.spec_version == "1.2.0"
-    assert "pose（必須由使用者明確啟用）" in report.optional_routes
-    assert report.runtime_overridable == ("cache", "device", "model", "name", "project", "workers")
-    assert len(report.checked_training_files) == 9
+    assert report.candidate_ids == ("C0", "C1", "C2", "C3")
+    assert report.checked_training_files == (
+        "configs/training/cpu-smoke.yaml",
+        "configs/training/float-extension.yaml",
+        "configs/training/float-main.yaml",
+        "configs/training/quant-qat.yaml",
+    )
+    assert "Pose 正式執行：等待使用者 opt-in" in report.accepted_but_inactive
+    assert "batch_size：請使用 Ultralytics 正式鍵名 batch" in report.deprecated
+    assert "上游 winner training recipe 尚未 handoff" in report.blocked
+    assert "Float extension：等待 late gate 與未 strip continuation state" in report.blocked
+    assert "Pose RLE active evidence：等待 handoff model/loss dry-run" in report.blocked
+    assert "fusion template：融合選型屬於 yolo_combine" in report.deprecated
+    assert report.runtime_overridable == (
+        "cache",
+        "device",
+        "name",
+        "project",
+        "workers",
+    )
 
 
-def test_candidate_yaml_matrix_fails_closed_on_factor_drift(tmp_path: Path) -> None:
-    source = Path("configs/candidates")
+def test_candidate_yaml_has_one_factor_and_resolves_paths_from_handoff() -> None:
+    candidates = load_candidate_specs()
+
+    assert tuple(candidates) == ("C0", "C1", "C2", "C3")
+    assert candidates["C0"].factor_name == "none"
+    assert candidates["C1"].changed_fields == ("e",)
+    assert candidates["C2"].changed_fields == ("inner_n",)
+    assert candidates["C3"].changed_fields == ("kernel_mode",)
+    assert all(candidate.target_source == "handoff.candidate_regions" for candidate in candidates.values())
+    assert all(not candidate.hardcoded_layer_indices for candidate in candidates.values())
+
+
+def test_candidate_matrix_and_spec_hash_fail_closed(tmp_path: Path) -> None:
     destination = tmp_path / "candidates"
-    shutil.copytree(source, destination)
-    path = destination / "c1-e0375.yaml"
-    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
-    payload["factors"]["inner_n"] = 1
-    path.write_text(yaml.safe_dump(payload), encoding="utf-8")
-    with pytest.raises(ConfigContractError, match="matrix entry drift"):
+    shutil.copytree("configs/candidates", destination)
+    c1_path = destination / "c1-e0375.yaml"
+    c1 = yaml.safe_load(c1_path.read_text(encoding="utf-8"))
+    c1["factors"]["inner_n"] = 1
+    c1_path.write_text(yaml.safe_dump(c1, sort_keys=False), encoding="utf-8")
+
+    with pytest.raises(ConfigContractError, match="只能改變一個 factor"):
         load_candidate_specs(destination, spec_path=Path("EXPERIMENT_SPEC.md"))
 
-
-def test_spec_hash_drift_and_learning_cli_override_fail_closed(tmp_path: Path) -> None:
-    source = Path("configs/candidates")
-    destination = tmp_path / "candidates"
-    shutil.copytree(source, destination)
     altered_spec = tmp_path / "EXPERIMENT_SPEC.md"
-    altered_spec.write_text(Path("EXPERIMENT_SPEC.md").read_text() + "\nchanged\n", encoding="utf-8")
+    altered_spec.write_text(Path("EXPERIMENT_SPEC.md").read_text(encoding="utf-8") + "\nchanged\n")
     with pytest.raises(ConfigContractError, match="spec_sha256"):
-        load_candidate_specs(destination, spec_path=altered_spec)
-    with pytest.raises(ConfigContractError, match="learning-field"):
-        validate_runtime_overrides({"lr0": 0.1})
-    assert validate_runtime_overrides({"device": "1", "workers": 4}) == {
-        "device": "1",
-        "workers": 4,
+        load_candidate_specs(Path("configs/candidates"), spec_path=altered_spec)
+
+
+def test_training_yaml_exposes_common_controls_without_inventing_handoff_recipe() -> None:
+    main = load_training_template("configs/training/float-main.yaml")
+
+    assert main["model_scale"] == "m"
+    assert main["execution"]["requires_gpu_authorization"] is True
+    assert main["routes"]["pose"]["enabled_by_default"] is False
+    assert main["formal_ranking_requires"] == ["detect", "pose"]
+    assert main["adjustable"]["batch"] == {"source": "handoff", "value": None}
+    assert main["adjustable"]["fraction"] == {"source": "local", "value": 1.0}
+    assert main["adjustable"]["scale"] == {"source": "handoff", "value": None}
+    assert main["adjustable"]["cache"] == {"source": "local", "value": False}
+    assert main["adjustable"]["imgsz"] == {"source": "handoff", "value": None}
+    assert main["recipe"]["optimizer"] == {"source": "handoff", "value": None}
+    assert main["recipe"]["task_ratio"] == {"source": "handoff", "value": None}
+    assert main["validation"]["selection_backend"] == "float_model"
+    assert main["validation"]["checkpoint_selection"] == {
+        "detect": "handoff_defined",
+        "pose_research": "pose_map50_95",
+        "pose_official": "combined_fitness_recorded_separately",
     }
 
 
-def test_detect_ablation_composition_differs_only_by_name() -> None:
-    configs = [
-        compose_training_config(task="detect", candidate_id=candidate, stage="D1")
-        for candidate in ("C0", "C1", "C2", "C3")
-    ]
-    canonical = {key: value for key, value in configs[0].args.items() if key != "name"}
-    assert all(
-        {key: value for key, value in config.args.items() if key != "name"} == canonical
-        for config in configs[1:]
+def test_catalog_exposes_formal_train_only_bbat5_search_yamls() -> None:
+    catalog = yaml.safe_load(Path("configs/catalog.yaml").read_text(encoding="utf-8"))
+    assert catalog["datasets"]["bbat5-pose-search"] == (
+        "configs/data/bbat5-pose-search.yaml"
     )
-    assert canonical["batch"] == 16
-    assert canonical["nbs"] == 64
-    assert canonical["optimizer"] == "MuSGD"
-
-
-def test_pose_recipe_and_stage_transitions_are_explicit(tmp_path: Path) -> None:
-    p1 = compose_training_config(task="pose", candidate_id="C0", stage="P1")
-    p2 = compose_training_config(task="pose", candidate_id="C0", stage="P2")
-    p3 = compose_training_config(task="pose", candidate_id="C0", stage="P3")
-    p4 = compose_training_config(task="pose", candidate_id="C0", stage="P4")
-    assert (p1.args["box"], p1.args["cls"], p1.args["dfl"]) == (7.5, 0.5, 1.5)
-    assert (p1.args["pose"], p1.args["kobj"], p1.args["rle"]) == (12.0, 1.0, 1.0)
-    assert p1.args["fliplr"] == 0.0
-    assert p2.args["freeze"] == 11
-    assert p3.args["freeze"] is None
-    best = tmp_path / "best.pt"
-    last = tmp_path / "last.pt"
-    best.touch()
-    last.touch()
-    validate_stage_transition(p2, best)
-    validate_stage_transition(p3, best)
-    validate_stage_transition(p4, last)
-    with pytest.raises(ValueError, match="last.pt resume"):
-        validate_stage_transition(p4, best)
-
-
-def test_graph_snapshot_is_review_only_and_matches_graph(toy_parent, pose_parent) -> None:
-    detect = graph_snapshot(toy_parent, "C0")
-    pose = graph_snapshot(pose_parent, "C0")
-    assert not detect["standalone_loadable"]
-    assert detect["builder"] == "achitechure_2"
-    assert detect["head_contract"]["inputs"] == [16, 19, 22]
-    assert detect["task"] == "detect"
-    assert pose["task"] == "pose"
-    assert pose["head_contract"]["type"] == "Pose26"
-
-
-def test_training_unknown_top_level_and_nonzero_formal_seed_fail_closed(tmp_path: Path) -> None:
-    root = tmp_path / "project"
-    shutil.copytree("configs", root / "configs")
-    root.mkdir(exist_ok=True)
-    shutil.copy2("EXPERIMENT_SPEC.md", root / "EXPERIMENT_SPEC.md")
-    formal = root / "configs/training/detect/d1-main.yaml"
-    payload = yaml.safe_load(formal.read_text(encoding="utf-8"))
-    payload["silent_typo"] = True
-    formal.write_text(yaml.safe_dump(payload), encoding="utf-8")
-    with pytest.raises(ConfigContractError, match="正式訓練欄位不完整"):
-        check_configs(root)
-    with pytest.raises(ValueError, match="seed 固定為 0"):
-        main(["build", "--candidate", "C0", "--seed", "1"])
-
-
-def test_pose_and_q2_downstream_gate_uses_recorded_c_best(tmp_path: Path) -> None:
-    require_c0_or_c_best(tmp_path, "C0")
-    with pytest.raises(RuntimeError, match="尚未選出 C_best"):
-        require_c0_or_c_best(tmp_path, "C2")
-    selection = tmp_path / "artifacts/selection.json"
-    selection.parent.mkdir(parents=True)
-    selection.write_text(
-        '{"c_best": {"metrics": {"candidate_id": "C2"}}}\n',
-        encoding="utf-8",
+    assert catalog["datasets"]["bbat5-detect-search"] == (
+        "configs/data/bbat5-detect-search.yaml"
     )
-    require_c0_or_c_best(tmp_path, "C2")
-    with pytest.raises(RuntimeError, match="已記錄的 C_best"):
-        require_c0_or_c_best(tmp_path, "C1")
-
-
-
-def test_pose_is_user_opt_in_at_cli_and_python_entry() -> None:
-    require_pose_opt_in("detect", False)
-    require_pose_opt_in("pose", True)
-    with pytest.raises(ValueError, match="Pose 預設停用"):
-        require_pose_opt_in("pose", False)
-    with pytest.raises(ValueError, match="--enable-pose"):
-        main(
-            [
-                "build-pose",
-                "--candidate",
-                "C0",
-                "--checkpoint",
-                "unused.pt",
-                "--execute",
-            ]
-        )
-    assert main(
-        [
-            "train",
-            "--candidate",
-            "C0",
-            "--checkpoint",
-            "unused.pt",
-            "--task",
-            "pose",
-            "--stage",
-            "P0",
-            "--run-id",
-            "dry-only",
-        ]
-    ) == 0
-
-
-def test_fusion_template_is_disabled_and_mode_is_unset() -> None:
-    payload = yaml.safe_load(Path("configs/fusion/source-pair.template.yaml").read_text(encoding="utf-8"))
-    assert payload["enabled"] is False
-    assert payload["fusion_mode"] is None
-    assert payload["switch_policy"] is None
-    assert set(payload["source_a"]) == set(payload["source_b"])
-
-
-
-def test_formal_training_yaml_is_single_source_and_cli_accepts_config() -> None:
-    formal = load_formal_training_config(
-        "configs/training/detect/d1-main.yaml",
-        candidate_id="C0",
+    pose = yaml.safe_load(
+        Path(catalog["datasets"]["bbat5-pose-search"]).read_text(encoding="utf-8")
     )
-    assert formal.config_id == "detect-d1-main"
-    assert formal.title_zh == "Detect D1：正式候選比較"
-    assert len(formal.sources) == 1
-    assert formal.sources[0].name == "d1-main.yaml"
-    assert formal.args["epochs"] == 100
-    assert formal.args["batch"] == 16
-    assert formal.args["fraction"] == 1.0
-    assert formal.args["scale"] == pytest.approx(0.95)
-    assert formal.args["cache"] is False
-    assert formal.args["multi_scale"] == 0.0
-    assert main(
-        [
-            "train",
-            "--config",
-            "configs/training/detect/d1-main.yaml",
-            "--candidate",
-            "C0",
-            "--checkpoint",
-            "unused.pt",
-            "--run-id",
-            "dry-formal-config",
-        ]
-    ) == 0
-
-
-def test_q2_lr_is_explicit_in_formal_yaml() -> None:
-    q2 = load_formal_training_config(
-        "configs/training/detect/q2-qat.yaml",
-        candidate_id="C0",
+    detect = yaml.safe_load(
+        Path(catalog["datasets"]["bbat5-detect-search"]).read_text(encoding="utf-8")
     )
-    assert q2.args["lr0"] == pytest.approx(0.000038)
-    payload = yaml.safe_load(q2.sources[0].read_text(encoding="utf-8"))
-    assert payload["derived_training"]["lr0"] == {
-        "formula": "parent_checkpoint_lr0 * 0.1",
-        "expected_if_parent_uses_spec": pytest.approx(0.000038),
+    assert pose["project_metadata"]["role"] == "search_pose"
+    assert detect["project_metadata"]["role"] == "search_diagnostic_detect"
+    assert pose["project_metadata"]["formal_val_excluded"] is True
+    assert detect["project_metadata"]["formal_val_excluded"] is True
+    assert pose["group_key"] == detect["group_key"] == "prefix_before_.rf."
+    assert Path(pose["train"]).name == Path(detect["train"]).name == "search-train.txt"
+    assert Path(pose["val"]).name == Path(detect["val"]).name == "search-val.txt"
+
+
+def test_float_extension_requires_unstripped_continuation_state(tmp_path: Path) -> None:
+    extension = load_training_template("configs/training/float-extension.yaml")
+
+    assert extension["transition"]["input"] == "own_unstripped_continuation_checkpoint"
+    assert extension["transition"]["requires_unstripped_state"] is True
+    assert extension["transition"]["stripped_last_or_best_policy"] == "reject"
+
+    altered = tmp_path / "float-extension.yaml"
+    extension["transition"]["input"] = "own_float_main_last_checkpoint"
+    altered.write_text(yaml.safe_dump(extension, sort_keys=False), encoding="utf-8")
+    with pytest.raises(ConfigContractError, match="unstripped continuation"):
+        load_training_template(altered)
+
+
+def test_learning_cli_override_fails_closed() -> None:
+    with pytest.raises(ConfigContractError, match="learning-field"):
+        validate_runtime_overrides({"lr0": 0.1})
+    assert validate_runtime_overrides({"device": "cpu", "workers": 2, "cache": False}) == {
+        "device": "cpu",
+        "workers": 2,
+        "cache": False,
     }

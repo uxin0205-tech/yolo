@@ -107,6 +107,54 @@ class ToyYolo(nn.Module):
         self.end2end = True
 
 
+class CombinedToy(nn.Module):
+    """小型 shared winner fixture，公開介面與 yolo_combine 相同。"""
+
+    model_kind = "shared_dual_head"
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.stem = nn.Conv2d(3, 8, 1)
+        self.trunk = nn.Module()
+        self.trunk.layers = nn.ModuleList(
+            [
+                C3k2(8, 8, n=1, c3k=True, e=0.5),
+                C3k2(8, 8, n=1, c3k=True, e=0.5),
+                nn.BatchNorm2d(8),
+            ]
+        )
+        self.detect_head = nn.Conv2d(8, 80, 1)
+        self.pose_head = nn.Conv2d(8, 8, 1)
+
+    def forward(self, images: torch.Tensor, tasks=None):
+        selected = {"detect", "pose"} if tasks in (None, "both") else (
+            {tasks} if isinstance(tasks, str) else set(tasks)
+        )
+        value = self.stem(images)
+        for layer in self.trunk.layers:
+            value = layer(value)
+        outputs = {}
+        if "detect" in selected:
+            outputs["detect"] = self.detect_head(value)
+        if "pose" in selected:
+            outputs["pose"] = self.pose_head(value)
+        return outputs
+
+    def contract(self) -> dict:
+        names = {index: f"class-{index}" for index in range(80)}
+        names[0] = "person"
+        return {
+            "interface": "model(images, tasks=detect|pose|both)",
+            "model_kind": self.model_kind,
+            "head_inputs": [16, 19, 22],
+            "detect_nc": 80,
+            "pose_nc": 2,
+            "kpt_shape": [2, 3],
+            "detect_names": names,
+            "pose_names": {0: "ball", 1: "bat"},
+        }
+
+
 @pytest.fixture
 def toy_parent() -> ToyYolo:
     return ToyYolo()
@@ -120,3 +168,8 @@ def bittrue_parent() -> ToyYolo:
 @pytest.fixture
 def pose_parent() -> ToyYolo:
     return ToyYolo(task="pose")
+
+
+@pytest.fixture
+def combined_parent() -> CombinedToy:
+    return CombinedToy()

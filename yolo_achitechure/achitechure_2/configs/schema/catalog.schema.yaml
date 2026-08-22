@@ -1,52 +1,47 @@
-# JSON Schema Draft 2020-12；可供外部 validator 使用。
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: catalog.schema.yaml
-title: architecture_2 設定目錄
+title: architecture_2 正式設定目錄
+x-spec-version: 2.0.1
+x-spec-sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
 type: object
 additionalProperties: false
 required:
-- schema_version
-- spec_version
-- spec_sha256
-- kind
-- title_zh
-- readme
-- authoritative_spec
-- architectures
-- training
-- datasets
-- quantization
-- fusion_template
-- schemas
+  - schema_version
+  - spec_version
+  - spec_sha256
+  - kind
+  - title_zh
+  - readme
+  - authoritative_spec
+  - handoff_example
+  - architectures
+  - training
+  - datasets
+  - quantization
+  - schemas
 properties:
-  schema_version:
-    const: 2
-  spec_version:
-    const: 1.2.0
-  spec_sha256:
-    type: string
-    pattern: ^[0-9a-f]{64}$
-  kind:
-    const: config_catalog
-  title_zh:
-    type: string
-  readme:
-    const: configs/README.md
-  authoritative_spec:
-    const: EXPERIMENT_SPEC.md
+  schema_version: {const: 3}
+  spec_version: {const: 2.0.1}
+  spec_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+  kind: {const: config_catalog}
+  title_zh: {type: string}
+  readme: {const: configs/README.md}
+  authoritative_spec: {const: EXPERIMENT_SPEC.md}
+  handoff_example: {const: handoff-manifest.example.json}
   architectures:
     type: object
-    minProperties: 6
+    minProperties: 4
+    maxProperties: 4
   training:
     type: object
-    minProperties: 9
+    minProperties: 4
+    maxProperties: 4
   datasets:
     type: object
-    minProperties: 2
-  quantization:
-    type: string
-  fusion_template:
-    type: string
+    minProperties: 3
+    maxProperties: 3
+  quantization: {const: configs/quant/w8a8-simulation.yaml}
   schemas:
     type: object
     minProperties: 6
+    maxProperties: 6

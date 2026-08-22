@@ -1,0 +1,29 @@
+# BBAT5 Pose 搜尋只使用 formal train 內的 grouped 子分割；不會接觸 formal val。
+schema_version: 3
+spec_version: 2.0.1
+spec_sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
+kind: dataset
+project_metadata:
+  title_zh: BBAT5 v1 Pose 搜尋資料
+  summary_zh: search train/val 都來自 formal train；用於固定 F1 threshold 與獲准的小規模研究。
+  task: pose
+  role: search_pose
+  original_read_only: /home/uxin/yolo/original/pose/dataset
+  derived_version: bbat5-v1
+  source_scope: formal_train_only
+  formal_val_excluded: true
+  ultralytics_dataset_yaml: true
+path: /home/uxin/yolo/original/pose/derived/bbat5-v1/pose
+train: /home/uxin/yolo/original/pose/derived/bbat5-v1/pose/splits/search-train.txt
+val: /home/uxin/yolo/original/pose/derived/bbat5-v1/pose/splits/search-val.txt
+test: null
+nc: 2
+names:
+  0: ball
+  1: bat
+kpt_shape: [2, 3]
+flip_idx: [0, 1]
+fliplr_policy: disabled_until_keypoint_mirror_semantics_confirmed
+group_key: prefix_before_.rf.
+split_seed: 0
+search_val_ratio_within_formal_train: 0.1

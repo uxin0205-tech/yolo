@@ -1,130 +1,257 @@
-"""Reproducible extension, candidate gating, and C_best selection rules."""
+"""第一輪 Float 結果的描述性比較；不自動淘汰或選出 C_best。"""
 
 from __future__ import annotations
 
 from collections.abc import Iterable
-from dataclasses import dataclass
-from enum import Enum
-
-
-class Decision(str, Enum):
-    PASS = "PASS"
-    CONDITIONAL = "CONDITIONAL"
-    REJECT = "REJECT"
+from dataclasses import asdict, dataclass
+from typing import Any
 
 
 @dataclass(frozen=True)
-class ExtensionDecision:
-    extend: bool
-    reason: str
-    best_epoch: int
-    late_gain: float | None
+class ClassMetrics:
+    """一個 BBAT5 class 的 box/keypoint AP 與偵測 F1。"""
 
+    ap50: float
+    ap50_95: float
+    keypoint_ap50: float
+    keypoint_ap50_95: float
+    precision: float
+    recall: float
+    f1: float
 
-def should_extend(metrics: Iterable[float], *, best_epoch: int, early_stopped: bool) -> ExtensionDecision:
-    """Apply the exact 100→140 epoch gate to one-based epoch metrics."""
-
-    values = tuple(float(value) for value in metrics)
-    if early_stopped:
-        return ExtensionDecision(False, "formal-a-early-stopped", best_epoch, None)
-    if len(values) < 100:
-        raise ValueError("extension gate requires 100 epoch metrics")
-    earlier_best = max(values[60:80])
-    later_best = max(values[80:100])
-    gain = later_best - earlier_best
-    if 85 <= best_epoch <= 100:
-        return ExtensionDecision(True, "best-epoch-in-85-100", best_epoch, gain)
-    if gain >= 0.001:
-        return ExtensionDecision(True, "rolling-best-gain-at-least-0.001", best_epoch, gain)
-    return ExtensionDecision(False, "tail-converged", best_epoch, gain)
+    def __post_init__(self) -> None:
+        _validate_rates(asdict(self), "class metrics")
 
 
 @dataclass(frozen=True)
 class CandidateMetrics:
+    """正式報告要求的精度、F1 與成本欄位。"""
+
     candidate_id: str
-    map50_95: float
-    latency_ms: float
-    gflops: float
+    coco_box_map50: float
+    coco_box_map50_95: float
+    coco_person_ap50: float
+    coco_person_ap50_95: float
+    bbat5_pose_box_map50: float
+    bbat5_pose_box_map50_95: float
+    bbat5_keypoint_map50: float
+    bbat5_keypoint_map50_95: float
+    pose_official_combined_fitness: float
+    classes: dict[str, ClassMetrics]
+    macro_f1: float
+    micro_f1: float
+    f1_confidence_threshold: float
     params: int
+    gflops: float
+    latency_ms: float | None
+    peak_vram_mb: float | None
+
+    def __post_init__(self) -> None:
+        if not self.candidate_id:
+            raise ValueError("candidate_id 不得為空")
+        accuracy = {
+            "coco_box_map50": self.coco_box_map50,
+            "coco_box_map50_95": self.coco_box_map50_95,
+            "coco_person_ap50": self.coco_person_ap50,
+            "coco_person_ap50_95": self.coco_person_ap50_95,
+            "bbat5_pose_box_map50": self.bbat5_pose_box_map50,
+            "bbat5_pose_box_map50_95": self.bbat5_pose_box_map50_95,
+            "bbat5_keypoint_map50": self.bbat5_keypoint_map50,
+            "bbat5_keypoint_map50_95": self.bbat5_keypoint_map50_95,
+            "macro_f1": self.macro_f1,
+            "micro_f1": self.micro_f1,
+            "f1_confidence_threshold": self.f1_confidence_threshold,
+        }
+        _validate_rates(accuracy, self.candidate_id)
+        if not 0 <= self.pose_official_combined_fitness <= 2:
+            raise ValueError("Pose official combined fitness 必須介於 [0,2]")
+        if set(self.classes) != {"ball", "bat"}:
+            raise ValueError("classes 必須正好包含 ball 與 bat")
+        expected_macro = sum(item.f1 for item in self.classes.values()) / 2
+        if abs(self.macro_f1 - expected_macro) > 1e-6:
+            raise ValueError(
+                f"Macro F1 必須是 ball/bat 未加權平均：{expected_macro} != {self.macro_f1}"
+            )
+        if self.params <= 0 or self.gflops <= 0:
+            raise ValueError("Params 與 GFLOPs 必須為正數")
+        for name, value in (
+            ("latency_ms", self.latency_ms),
+            ("peak_vram_mb", self.peak_vram_mb),
+        ):
+            if value is not None and value <= 0:
+                raise ValueError(f"{name} 必須為正數或 null")
+
+
+def _validate_rates(values: dict[str, float], label: str) -> None:
+    invalid = {name: value for name, value in values.items() if not 0 <= value <= 1}
+    if invalid:
+        raise ValueError(f"{label} 的比例欄位必須介於 [0,1]：{invalid}")
+
+
+ACCURACY_FIELDS = (
+    "coco_box_map50",
+    "coco_box_map50_95",
+    "coco_person_ap50",
+    "coco_person_ap50_95",
+    "bbat5_pose_box_map50",
+    "bbat5_pose_box_map50_95",
+    "bbat5_keypoint_map50",
+    "bbat5_keypoint_map50_95",
+    "macro_f1",
+    "micro_f1",
+)
+
+DESCRIPTIVE_BAND_FIELDS = (
+    "coco_box_map50_95",
+    "bbat5_pose_box_map50_95",
+    "bbat5_keypoint_map50_95",
+)
 
 
 @dataclass(frozen=True)
-class CandidateDecision:
+class CandidateAssessment:
     metrics: CandidateMetrics
-    c0_map50_95: float
-    drop: float
-    decision: Decision
-    cost_improvement: float
-    eligible: bool
-    reason: str
+    metric_delta_vs_c0: dict[str, float]
+    cost_reduction_vs_c0: dict[str, float | None]
+    descriptive_bands: dict[str, str]
+    decision: None
+    quantization_eligible: bool | str
 
 
-def classify_candidate(candidate: CandidateMetrics, c0: CandidateMetrics) -> CandidateDecision:
-    if candidate.candidate_id == "C0":
-        return CandidateDecision(candidate, c0.map50_95, 0.0, Decision.PASS, 0.0, False, "reference")
-    drop = c0.map50_95 - candidate.map50_95
-    latency_gain = 1.0 - candidate.latency_ms / c0.latency_ms
-    flop_gain = 1.0 - candidate.gflops / c0.gflops
-    cost_gain = max(latency_gain, flop_gain)
+@dataclass(frozen=True)
+class FloatEvaluationReport:
+    candidates: tuple[CandidateAssessment, ...]
+    f1_threshold_source: str
+    f1_confidence_threshold: float
+    pareto_front: tuple[str, ...]
+    pareto_pending: tuple[str, ...]
+    selection_status: str
+    c_best: None
+    quantization_eligibility: dict[str, bool | str]
+    notes_zh: tuple[str, ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+def _band(drop: float) -> str:
     epsilon = 1e-12
+    if drop <= epsilon:
+        return "no_drop_or_gain"
     if drop <= 0.005 + epsilon:
-        return CandidateDecision(candidate, c0.map50_95, drop, Decision.PASS, cost_gain, True, "drop<=0.005")
+        return "drop_le_0.005"
     if drop <= 0.008 + epsilon:
-        eligible = cost_gain >= 0.08
-        reason = "conditional-cost>=8%" if eligible else "conditional-cost<8%"
-        return CandidateDecision(
-            candidate, c0.map50_95, drop, Decision.CONDITIONAL, cost_gain, eligible, reason
-        )
-    return CandidateDecision(candidate, c0.map50_95, drop, Decision.REJECT, cost_gain, False, "drop>0.008")
+        return "drop_0.005_to_0.008"
+    return "drop_gt_0.008"
 
 
-def trigger_c3_p5_fallback(decision: CandidateDecision) -> bool:
-    return decision.metrics.candidate_id == "C3" and decision.drop > 0.008
+def _reduction(candidate: float | None, baseline: float | None) -> float | None:
+    if candidate is None or baseline is None:
+        return None
+    return 1 - float(candidate) / float(baseline)
 
 
-def trigger_r1(decision: CandidateDecision) -> bool:
-    return (
-        decision.metrics.candidate_id == "C2"
-        and decision.decision is Decision.CONDITIONAL
-        and decision.cost_improvement >= 0.08
+def _assessment(candidate: CandidateMetrics, c0: CandidateMetrics) -> CandidateAssessment:
+    deltas = {
+        field: float(getattr(candidate, field)) - float(getattr(c0, field))
+        for field in ACCURACY_FIELDS
+    }
+    bands = {
+        field: _band(float(getattr(c0, field)) - float(getattr(candidate, field)))
+        for field in DESCRIPTIVE_BAND_FIELDS
+    }
+    quantization: bool | str = (
+        True if candidate.candidate_id == "C0" else "pending_user_decision"
+    )
+    return CandidateAssessment(
+        metrics=candidate,
+        metric_delta_vs_c0=deltas,
+        cost_reduction_vs_c0={
+            "params": _reduction(candidate.params, c0.params),
+            "gflops": _reduction(candidate.gflops, c0.gflops),
+            "latency_ms": _reduction(candidate.latency_ms, c0.latency_ms),
+            "peak_vram_mb": _reduction(candidate.peak_vram_mb, c0.peak_vram_mb),
+        },
+        descriptive_bands=bands,
+        decision=None,
+        quantization_eligible=quantization,
     )
 
 
-def choose_c_best(decisions: Iterable[CandidateDecision]) -> CandidateDecision | None:
-    """Select an eligible single-factor candidate; never fall back to C0."""
+def _dominates(left: CandidateMetrics, right: CandidateMetrics) -> bool:
+    accuracy_fields = (
+        "coco_box_map50_95",
+        "bbat5_pose_box_map50_95",
+        "bbat5_keypoint_map50_95",
+        "macro_f1",
+    )
+    cost_fields = ("params", "gflops", "latency_ms")
+    accuracy_pairs = [
+        (float(getattr(left, field)), float(getattr(right, field)))
+        for field in accuracy_fields
+    ]
+    cost_pairs = [
+        (float(getattr(left, field)), float(getattr(right, field)))
+        for field in cost_fields
+    ]
+    no_worse = all(first >= second for first, second in accuracy_pairs) and all(
+        first <= second for first, second in cost_pairs
+    )
+    strictly_better = any(first > second for first, second in accuracy_pairs) or any(
+        first < second for first, second in cost_pairs
+    )
+    return no_worse and strictly_better
 
-    eligible = [item for item in decisions if item.metrics.candidate_id != "C0" and item.eligible]
-    if not eligible:
-        return None
-    rank = {Decision.PASS: 0, Decision.CONDITIONAL: 1, Decision.REJECT: 2}
-    return min(
-        eligible,
-        key=lambda item: (
-            rank[item.decision],
-            item.drop,
-            item.metrics.latency_ms,
-            item.metrics.gflops,
-            item.metrics.params,
+
+def evaluate_float_results(
+    metrics: Iterable[CandidateMetrics],
+    *,
+    c0_id: str = "C0",
+) -> FloatEvaluationReport:
+    """產生完整比較與 Pareto 描述，永遠把 C_best 留給使用者。"""
+
+    values = tuple(metrics)
+    if not values:
+        raise ValueError("至少需要一個 CandidateMetrics")
+    ids = tuple(item.candidate_id for item in values)
+    if len(set(ids)) != len(ids):
+        raise ValueError("candidate_id 不得重複")
+    try:
+        c0 = next(item for item in values if item.candidate_id == c0_id)
+    except StopIteration as error:
+        raise ValueError(f"結果缺少 {c0_id} reference") from error
+    thresholds = {round(item.f1_confidence_threshold, 12) for item in values}
+    if len(thresholds) != 1:
+        raise ValueError("所有候選必須共用 C0-Control search-val 決定的 F1 threshold")
+
+    complete = tuple(item for item in values if item.latency_ms is not None)
+    pending = tuple(item.candidate_id for item in values if item.latency_ms is None)
+    pareto = tuple(
+        item.candidate_id
+        for item in complete
+        if not any(
+            other.candidate_id != item.candidate_id and _dominates(other, item)
+            for other in complete
+        )
+    )
+    eligibility = {
+        item.candidate_id: (
+            True if item.candidate_id == c0_id else "pending_user_decision"
+        )
+        for item in values
+    }
+    return FloatEvaluationReport(
+        candidates=tuple(_assessment(item, c0) for item in values),
+        f1_threshold_source="c0_control_search_val",
+        f1_confidence_threshold=c0.f1_confidence_threshold,
+        pareto_front=pareto,
+        pareto_pending=pending,
+        selection_status="pending_user_decision",
+        c_best=None,
+        quantization_eligibility=eligibility,
+        notes_zh=(
+            "0.005/0.008 只作描述性敏感度，不是 PASS/REJECT gate。",
+            "Pareto 不會自動選出 C_best。",
+            "C1/C2/C3 是否量化、是否新增 C3-P5/R1/組合都等待使用者決定。",
         ),
     )
-
-
-def validate_conditional_candidates(
-    decisions: Iterable[CandidateDecision],
-    *,
-    r1_fusion_passed: bool = False,
-) -> None:
-    """Reject fallback/recovery results that bypass their parent trigger or R1 fusion gate."""
-
-    items = tuple(decisions)
-    by_id = {item.metrics.candidate_id: item for item in items}
-    if "C3-P5" in by_id:
-        c3 = by_id.get("C3")
-        if c3 is None or not trigger_c3_p5_fallback(c3):
-            raise ValueError("C3-P5 requires a C3 drop > 0.008 trigger")
-    if "R1" in by_id:
-        c2 = by_id.get("C2")
-        if c2 is None or not trigger_r1(c2):
-            raise ValueError("R1 requires an eligible CONDITIONAL C2 trigger")
-        if not r1_fusion_passed:
-            raise ValueError("R1 requires fusion max_abs_diff <= 1e-4 evidence")

@@ -1,53 +1,42 @@
-# JSON Schema Draft 2020-12；可供外部 validator 使用。
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: quantization.schema.yaml
-title: architecture_2 量化模擬設定
+title: architecture_2 W8A8 模擬
+x-spec-version: 2.0.1
+x-spec-sha256: 9897ece524fd62cd55e3afc46b6bd810abbef5858f75493d1a4ba895585a4f0c
 type: object
 additionalProperties: false
 required:
-- schema_version
-- spec_version
-- spec_sha256
-- kind
-- title_zh
-- summary_zh
-- status
-- simulation_only
-- targets
-- weight
-- activation
-- include_masf_standard_conv
-- exclude_custom_roots
-- qat
+  - schema_version
+  - spec_version
+  - spec_sha256
+  - kind
+  - title_zh
+  - summary_zh
+  - status
+  - simulation_only
+  - eligibility
+  - stages
+  - weight
+  - activation
+  - include_standard_convs_in_masf
+  - exclude_custom_roots
 properties:
-  schema_version:
-    const: 2
-  spec_version:
-    const: 1.2.0
-  spec_sha256:
-    type: string
-    pattern: ^[0-9a-f]{64}$
-  kind:
-    const: quantization
-  title_zh:
-    type: string
-  summary_zh:
-    type: string
-  status:
-    const: active_after_c_best
-  simulation_only:
-    const: true
-  targets:
+  schema_version: {const: 3}
+  spec_version: {const: 2.0.1}
+  spec_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+  kind: {const: quantization}
+  title_zh: {type: string}
+  summary_zh: {type: string}
+  status: {const: blocked_until_float_results_and_user_selection}
+  simulation_only: {const: true}
+  eligibility:
     const:
-    - C0
-    - C_best
-  weight:
-    type: object
-  activation:
-    type: object
-  include_masf_standard_conv:
-    const: true
-  exclude_custom_roots:
-    type: array
-  qat:
-    type: object
+      C0: true
+      C1: pending_user_decision
+      C2: pending_user_decision
+      C3: pending_user_decision
+  stages: {type: object}
+  weight: {type: object}
+  activation: {type: object}
+  include_standard_convs_in_masf: {const: true}
+  exclude_custom_roots: {type: array}

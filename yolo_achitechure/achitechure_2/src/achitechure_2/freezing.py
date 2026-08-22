@@ -1,155 +1,102 @@
-"""Immutable MASF and attention scope enforcement."""
+"""依 Fusion Winner handoff 路徑凍結不可變模組。"""
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 
 import torch
 from torch import nn
 
-FROZEN_CLASS_NAMES = frozenset({"HardwareFriendlyAttention", "P3MASFFull35", "P3MASFPartial75"})
+
+def _validated_paths(model: nn.Module, paths: Iterable[str]) -> tuple[str, ...]:
+    result = tuple(paths)
+    if not result:
+        raise ValueError("frozen module paths 不得為空")
+    if len(set(result)) != len(result):
+        raise ValueError("frozen module paths 不得重複")
+    ordered = sorted(result)
+    for index, path in enumerate(ordered):
+        if not path or path.startswith(".") or path.endswith("."):
+            raise ValueError(f"無效 frozen module path：{path!r}")
+        try:
+            model.get_submodule(path)
+        except AttributeError as error:
+            raise ValueError(f"frozen module path 不存在：{path}") from error
+        for other in ordered[index + 1 :]:
+            if other.startswith(path + "."):
+                raise ValueError(f"frozen module paths 有父子重疊：{path} / {other}")
+    return result
 
 
-def frozen_modules(model: nn.Module) -> tuple[tuple[str, nn.Module], ...]:
-    selected: list[tuple[str, nn.Module]] = []
-    for name, module in model.named_modules():
-        if type(module).__name__ in FROZEN_CLASS_NAMES and not any(
-            name == parent or name.startswith(parent + ".") for parent, _ in selected
-        ):
-            selected.append((name, module))
-    paths = tuple(name for name, _ in selected)
-    expected_attention = ("model.10.m.0.attn", "model.22.m.0.1.attn")
-    if tuple(name for name in paths if name.endswith("attn")) != expected_attention:
-        raise ValueError(f"expected frozen attention paths {expected_attention}, got {paths}")
-    if "model.16.p3_masf" not in paths:
-        raise ValueError("P3 MASF is missing from frozen scope")
-    return tuple(selected)
+def apply_frozen_paths(
+    model: nn.Module,
+    paths: Iterable[str],
+    *,
+    reset_trainable: bool = True,
+) -> tuple[str, ...]:
+    """凍結 handoff 宣告路徑，並讓其 BN/dropout 維持 eval。"""
 
-
-def apply_frozen_scope(model: nn.Module, *, reset_trainable: bool = True) -> tuple[str, ...]:
-    """Freeze MASF/attention while optionally preserving a stage's broader freeze."""
-
+    selected = _validated_paths(model, paths)
     if reset_trainable:
         for parameter in model.parameters():
             parameter.requires_grad_(True)
-    modules = frozen_modules(model)
-    for _, module in modules:
+    for path in selected:
+        module = model.get_submodule(path)
         module.eval()
         for parameter in module.parameters():
             parameter.requires_grad_(False)
-    return tuple(name for name, _ in modules)
+    return selected
 
 
-def enforce_frozen_eval(model: nn.Module) -> None:
-    for _, module in frozen_modules(model):
-        module.eval()
+def enforce_frozen_eval(model: nn.Module, paths: Iterable[str]) -> None:
+    """在外部呼叫 model.train() 後重新鎖住 frozen module mode。"""
+
+    for path in _validated_paths(model, paths):
+        model.get_submodule(path).eval()
 
 
 @dataclass
 class FrozenStateGuard:
-    """Snapshot frozen parameters and BN buffers and reject any drift."""
+    """拒絕 frozen parameters、buffers 或 train/eval mode 漂移。"""
 
     paths: tuple[str, ...]
     state: dict[str, torch.Tensor]
 
     @classmethod
-    def capture(cls, model: nn.Module) -> FrozenStateGuard:
-        paths = apply_frozen_scope(model)
+    def capture(
+        cls,
+        model: nn.Module,
+        paths: Iterable[str],
+        *,
+        reset_trainable: bool = True,
+    ) -> FrozenStateGuard:
+        selected = apply_frozen_paths(
+            model,
+            paths,
+            reset_trainable=reset_trainable,
+        )
         state: dict[str, torch.Tensor] = {}
-        for path, module in frozen_modules(model):
+        for path in selected:
+            module = model.get_submodule(path)
             for name, value in module.state_dict().items():
                 state[f"{path}.{name}"] = value.detach().cpu().clone()
-        return cls(paths, state)
-
-    @classmethod
-    def capture_preserving_stage(cls, model: nn.Module) -> FrozenStateGuard:
-        paths = apply_frozen_scope(model, reset_trainable=False)
-        state: dict[str, torch.Tensor] = {}
-        for path, module in frozen_modules(model):
-            for name, value in module.state_dict().items():
-                state[f"{path}.{name}"] = value.detach().cpu().clone()
-        return cls(paths, state)
+        return cls(selected, state)
 
     def assert_unchanged(self, model: nn.Module) -> None:
         current: dict[str, torch.Tensor] = {}
-        for path, module in frozen_modules(model):
+        for path in _validated_paths(model, self.paths):
+            module = model.get_submodule(path)
+            if module.training:
+                raise AssertionError(f"frozen module 進入 train mode：{path}")
             for name, value in module.state_dict().items():
                 current[f"{path}.{name}"] = value.detach().cpu()
-            if module.training:
-                raise AssertionError(f"frozen module entered training mode: {path}")
         if current.keys() != self.state.keys():
-            raise AssertionError("frozen state keys changed")
-        changed = [name for name, value in current.items() if not torch.equal(value, self.state[name])]
+            raise AssertionError("frozen state keys 改變")
+        changed = [
+            name
+            for name, value in current.items()
+            if not torch.equal(value, self.state[name])
+        ]
         if changed:
-            raise AssertionError(f"frozen parameters or buffers changed: {changed[:10]}")
-
-
-def apply_stage_freeze(model: nn.Module, stage: str) -> tuple[int, ...]:
-    """Apply the explicit Pose stage scope before the permanent inherited freeze."""
-
-    stage = stage.upper()
-    if stage == "P1":
-        indices = tuple(range(23))
-    elif stage == "P2":
-        indices = tuple(range(11))
-    elif stage in {"P0", "P3", "P4", "D0", "D1", "D2", "Q2"}:
-        indices = ()
-    else:
-        raise ValueError(f"unknown freeze stage {stage}")
-    layers = getattr(model, "model", None)
-    if not isinstance(layers, nn.Sequential):
-        raise TypeError("stage freeze requires an Ultralytics Sequential graph")
-    for parameter in model.parameters():
-        parameter.requires_grad_(True)
-    for index in indices:
-        layers[index].eval()
-        for parameter in layers[index].parameters():
-            parameter.requires_grad_(False)
-    apply_frozen_scope(model, reset_trainable=False)
-    return indices
-
-
-def enforce_stage_eval(model: nn.Module, stage: str) -> None:
-    """Keep stage-frozen BN/dropout buffers out of train mode."""
-
-    indices = (
-        tuple(range(23)) if stage.upper() == "P1" else (tuple(range(11)) if stage.upper() == "P2" else ())
-    )
-    layers = getattr(model, "model", None)
-    if not isinstance(layers, nn.Sequential):
-        raise TypeError("stage eval requires an Ultralytics Sequential graph")
-    for index in indices:
-        layers[index].eval()
-
-
-@dataclass
-class StageFrozenStateGuard:
-    """Reject parameter/buffer or mode drift in P1/P2 frozen layers."""
-
-    stage: str
-    indices: tuple[int, ...]
-    state: dict[str, torch.Tensor]
-
-    @classmethod
-    def capture(cls, model: nn.Module, stage: str) -> StageFrozenStateGuard:
-        indices = apply_stage_freeze(model, stage)
-        layers = model.model
-        state: dict[str, torch.Tensor] = {}
-        for index in indices:
-            for name, value in layers[index].state_dict().items():
-                state[f"model.{index}.{name}"] = value.detach().cpu().clone()
-        return cls(stage.upper(), indices, state)
-
-    def assert_unchanged(self, model: nn.Module) -> None:
-        layers = model.model
-        current: dict[str, torch.Tensor] = {}
-        for index in self.indices:
-            if layers[index].training:
-                raise AssertionError(f"stage-frozen layer entered training mode: {index}")
-            for name, value in layers[index].state_dict().items():
-                current[f"model.{index}.{name}"] = value.detach().cpu()
-        if current.keys() != self.state.keys():
-            raise AssertionError("stage-frozen state keys changed")
-        changed = [name for name, value in current.items() if not torch.equal(value, self.state[name])]
-        if changed:
-            raise AssertionError(f"stage-frozen parameters or buffers changed: {changed[:10]}")
+            raise AssertionError(f"frozen parameters 或 buffers 改變：{changed[:10]}")

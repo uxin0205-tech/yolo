@@ -1,28 +1,19 @@
-"""Fail-closed graph inspection for the inherited YOLO26m system."""
+"""融合模型的動態 graph 契約與 C3k2 結構稽核。"""
 
 from __future__ import annotations
 
+import copy
+from collections.abc import Iterable
 from dataclasses import asdict, dataclass
-from pathlib import Path
 from typing import Any
 
-import yaml
 from torch import nn
-
-from .config import (
-    ATTENTION_PATHS,
-    DETECT_INPUTS,
-    SPEC_PATH,
-    SPEC_VERSION,
-    STRIDES,
-    TARGET_LAYERS,
-    file_sha256,
-)
-from .lite_c3k2 import LiteC3k2
 
 
 @dataclass(frozen=True)
 class LayerReport:
+    """一個可被 C1–C3 改寫的 C3k2 結構。"""
+
     index: int
     class_name: str
     input_channels: int
@@ -36,34 +27,27 @@ class LayerReport:
 
 
 @dataclass(frozen=True)
-class GraphReport:
-    task: str
-    head_type: str
-    detect_inputs: tuple[int, ...]
-    strides: tuple[int, ...]
-    end2end: bool
-    masf_variant: str
-    masf_path: str
-    attention_paths: tuple[str, ...]
-    attention_normalizations: tuple[str, ...]
-    layers: tuple[LayerReport, ...]
+class ModuleReport:
+    path: str
+    class_name: str
+    parameter_count: int
+    buffer_count: int
+    c3k2: LayerReport | None
+
+
+@dataclass(frozen=True)
+class FusionGraphReport:
+    fusion_kind: str
+    tasks: tuple[str, ...]
+    model_contract: dict[str, Any]
+    candidate_modules: tuple[ModuleReport, ...]
+    protected_modules: tuple[ModuleReport, ...]
+    frozen_module_paths: tuple[str, ...]
+    resolved_candidate_id: str | None
+    changed_fields: tuple[str, ...]
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
-
-
-def network_layers(model: nn.Module) -> nn.Sequential:
-    layers = getattr(model, "model", None)
-    if not isinstance(layers, nn.Sequential):
-        raise TypeError("expected an Ultralytics model with a Sequential .model graph")
-    return layers
-
-
-def _normalization_name(module: nn.Module) -> str:
-    config = getattr(module, "config", None)
-    normalization = getattr(config, "normalization", None)
-    value = getattr(normalization, "value", normalization)
-    return str(value) if value is not None else "unknown"
 
 
 def _inner_blocks(layer: nn.Module) -> tuple[nn.Module, ...]:
@@ -71,7 +55,9 @@ def _inner_blocks(layer: nn.Module) -> tuple[nn.Module, ...]:
     for outer in getattr(layer, "m", ()):
         inner = getattr(outer, "m", None)
         if not isinstance(inner, (nn.Sequential, nn.ModuleList)):
-            raise TypeError(f"target layer contains non-C3k inner module {type(outer).__name__}")
+            raise TypeError(
+                f"target layer contains non-C3k inner module {type(outer).__name__}"
+            )
         blocks.extend(inner)
     if not blocks:
         raise ValueError("target C3k2 has no inner Bottleneck")
@@ -100,6 +86,8 @@ def _kernel_size(block: nn.Module, name: str) -> int:
 
 
 def inspect_c3k2_layer(index: int, layer: nn.Module) -> LayerReport:
+    """以實際 module 內容辨認 C3k2/LiteC3k2，不依賴固定 layer index。"""
+
     cv1 = getattr(getattr(layer, "cv1", None), "conv", None)
     cv2 = getattr(getattr(layer, "cv2", None), "conv", None)
     if cv1 is None or cv2 is None or not hasattr(layer, "c"):
@@ -107,11 +95,13 @@ def inspect_c3k2_layer(index: int, layer: nn.Module) -> LayerReport:
     cv1 = _raw_conv(cv1)
     cv2 = _raw_conv(cv2)
     blocks = _inner_blocks(layer)
-    kernels = {(_kernel_size(block, "cv1"), _kernel_size(block, "cv2")) for block in blocks}
+    kernels = {
+        (_kernel_size(block, "cv1"), _kernel_size(block, "cv2")) for block in blocks
+    }
     if len(kernels) != 1:
         raise ValueError(f"layer {index} uses mixed inner kernels: {kernels}")
     kernel_pair = kernels.pop()
-    kernel_mode = {((3, 3)): "3x3_3x3", ((1, 3)): "1x1_3x3"}.get(kernel_pair)
+    kernel_mode = {(3, 3): "3x3_3x3", (1, 3): "1x1_3x3"}.get(kernel_pair)
     if kernel_mode is None:
         raise ValueError(f"layer {index} has unsupported kernel pair {kernel_pair}")
     output_channels = int(cv2.out_channels)
@@ -130,116 +120,127 @@ def inspect_c3k2_layer(index: int, layer: nn.Module) -> LayerReport:
     )
 
 
-def inspect_graph(model: nn.Module, *, require_masf: bool = True) -> GraphReport:
-    """Validate the inherited graph, including both attention paths and P3 MASF."""
+def _contract(model: nn.Module) -> dict[str, Any]:
+    method = getattr(model, "contract", None)
+    if not callable(method):
+        raise TypeError("Fusion Winner 必須提供 contract()")
+    contract = method()
+    if not isinstance(contract, dict):
+        raise TypeError("Fusion Winner contract() 必須回傳 mapping")
+    return copy.deepcopy(contract)
 
-    layers = network_layers(model)
-    if len(layers) != 24:
-        raise ValueError(f"expected 24 YOLO26m layers, got {len(layers)}")
-    detect = layers[23]
-    inputs = tuple(int(index) for index in getattr(detect, "f", ()))
-    if inputs != DETECT_INPUTS:
-        raise ValueError(f"expected Detect inputs {DETECT_INPUTS}, got {inputs}")
-    stride = getattr(detect, "stride", None)
-    strides = tuple(int(value) for value in stride.detach().cpu().tolist()) if stride is not None else ()
-    if strides != STRIDES:
-        raise ValueError(f"expected Detect strides {STRIDES}, got {strides}")
-    end2end = bool(getattr(model, "end2end", False) and getattr(detect, "end2end", False))
-    if not end2end:
-        raise ValueError("YOLO26 end2end=True is required")
 
-    attention = tuple(
-        (name, module)
-        for name, module in model.named_modules()
-        if type(module).__name__ == "HardwareFriendlyAttention"
-    )
-    paths = tuple(name for name, _ in attention)
-    if paths != ATTENTION_PATHS:
-        raise ValueError(f"expected attention paths {ATTENTION_PATHS}, got {paths}")
+def _module(model: nn.Module, path: str) -> nn.Module:
+    try:
+        return model.get_submodule(path)
+    except AttributeError as error:
+        raise ValueError(f"module path 不存在：{path}") from error
 
-    p3 = layers[16]
-    masf = getattr(p3, "p3_masf", None)
-    if masf is None:
-        if require_masf:
-            raise ValueError("formal parent must contain P3 MASF at model.16.p3_masf")
-        variant = "missing"
-    else:
-        name = type(masf).__name__.lower()
-        if "full35" in name:
-            variant = "full35"
-        elif "partial75" in name:
-            variant = "partial75"
-        else:
-            raise ValueError(f"unsupported P3 MASF class {type(masf).__name__}")
 
-    head_type = type(detect).__name__.lstrip("_")
-    task = "pose" if "pose" in head_type.lower() else "detect"
-
-    return GraphReport(
-        task=task,
-        head_type=head_type,
-        detect_inputs=inputs,
-        strides=strides,
-        end2end=end2end,
-        masf_variant=variant,
-        masf_path="model.16.p3_masf",
-        attention_paths=paths,
-        attention_normalizations=tuple(_normalization_name(module) for _, module in attention),
-        layers=tuple(inspect_c3k2_layer(index, layers[index]) for index in TARGET_LAYERS),
+def _module_report(model: nn.Module, path: str, *, c3k2: bool) -> ModuleReport:
+    module = _module(model, path)
+    c3k2_report = inspect_c3k2_layer(-1, module) if c3k2 else None
+    return ModuleReport(
+        path=path,
+        class_name=type(module).__name__,
+        parameter_count=sum(parameter.numel() for parameter in module.parameters()),
+        buffer_count=sum(buffer.numel() for buffer in module.buffers()),
+        c3k2=c3k2_report,
     )
 
 
-def assert_candidate_graph(
-    model: nn.Module, candidate_id: str, expected_layers: tuple[int, ...]
-) -> GraphReport:
-    report = inspect_graph(model)
-    changed = {entry.index for entry in report.layers if entry.class_name == LiteC3k2.__name__}
-    if changed != set(expected_layers):
-        raise AssertionError(
-            f"{candidate_id} changed LiteC3k2 layers {sorted(changed)}, expected {expected_layers}"
-        )
-    return report
+def _unique(values: Iterable[str], label: str) -> tuple[str, ...]:
+    result = tuple(values)
+    if len(set(result)) != len(result):
+        raise ValueError(f"{label} 含重複 module path")
+    return result
 
 
-def graph_snapshot(model: nn.Module, candidate_id: str) -> dict[str, Any]:
-    """Create a review-only Ultralytics-like snapshot from the materialized graph."""
+def inspect_fusion_graph(
+    model: nn.Module,
+    *,
+    fusion_kind: str,
+    candidate_regions: Iterable[Any],
+    protected_module_paths: Iterable[str],
+    frozen_module_paths: Iterable[str],
+    expected_candidate: Any | None = None,
+) -> FusionGraphReport:
+    """依 handoff 宣告的路徑稽核 graph，不猜測 winner 的固定層號。"""
 
-    report = inspect_graph(model)
-    layers = network_layers(model)
-    entries: list[dict[str, Any]] = []
-    reports = {item.index: item for item in report.layers}
-    for index, layer in enumerate(layers):
-        entry: dict[str, Any] = {
-            "index": index,
-            "from": getattr(layer, "f", -1),
-            "module": type(layer).__name__,
-        }
-        if index in reports:
-            entry["c3k2_contract"] = asdict(reports[index])
-        entries.append(entry)
-    return {
-        "schema_version": 1,
-        "spec_version": SPEC_VERSION,
-        "spec_sha256": file_sha256(SPEC_PATH),
-        "standalone_loadable": False,
-        "builder": "achitechure_2",
-        "candidate_id": candidate_id,
-        "task": report.task,
-        "head_contract": {
-            "type": report.head_type,
-            "inputs": list(report.detect_inputs),
-            "strides": list(report.strides),
-            "end2end": report.end2end,
-        },
-        "backbone": entries[:11],
-        "head": entries[11:],
-    }
+    contract = _contract(model)
+    if contract.get("model_kind") != fusion_kind:
+        raise ValueError("model contract 與 fusion_kind 不一致")
+    if contract.get("interface") != "model(images, tasks=detect|pose|both)":
+        raise ValueError("model contract 不支援 detect/pose/both")
 
+    regions = tuple(candidate_regions)
+    candidate_paths = _unique(
+        (path for region in regions for path in region.module_paths),
+        "candidate regions",
+    )
+    protected_paths = _unique(protected_module_paths, "protected modules")
+    frozen_paths = _unique(frozen_module_paths, "frozen modules")
+    if set(candidate_paths) & set(protected_paths):
+        raise ValueError("candidate 與 protected module paths 重疊")
+    if not set(frozen_paths).issubset(protected_paths):
+        raise ValueError("frozen module paths 必須是 protected paths 的子集合")
+    head_paths = {path for region in regions for path in region.head_paths}
+    if not head_paths.issubset(protected_paths):
+        raise ValueError("所有 Detect/Pose head 都必須列入 protected paths")
 
-def write_graph_snapshot(model: nn.Module, candidate_id: str, destination: str | Path) -> Path:
-    """Write the non-standalone graph snapshot used for review and reports."""
+    candidate_reports = tuple(
+        _module_report(model, path, c3k2=True) for path in candidate_paths
+    )
+    protected_reports = tuple(
+        _module_report(model, path, c3k2=False) for path in protected_paths
+    )
+    for path in frozen_paths:
+        _module(model, path)
 
-    path = Path(destination)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(yaml.safe_dump(graph_snapshot(model, candidate_id), sort_keys=False), encoding="utf-8")
-    return path
+    resolved_id: str | None = None
+    changed_fields: tuple[str, ...] = ()
+    changed_paths: tuple[str, ...] = ()
+    if expected_candidate is not None:
+        if expected_candidate.fusion_kind != fusion_kind:
+            raise ValueError("candidate build report 與 fusion_kind 不一致")
+        resolved_id = str(expected_candidate.resolved_id)
+        changed_fields = tuple(expected_candidate.changed_fields)
+        changed_paths = tuple(expected_candidate.changed_module_paths)
+        if not set(changed_paths).issubset(candidate_paths):
+            raise ValueError("candidate build report 逸出 handoff Candidate Region")
+        actual = {item.path: asdict(item.c3k2) for item in candidate_reports}
+        for expected in expected_candidate.module_contracts:
+            path = expected["path"]
+            observed = actual[path]
+            for field in (
+                "e",
+                "inner_n",
+                "kernel_mode",
+                "use_rep",
+                "input_channels",
+                "output_channels",
+            ):
+                if observed[field] != expected[field]:
+                    raise ValueError(f"{path}: candidate graph 的 {field} 與 build report 不一致")
+
+    for item in candidate_reports:
+        factors = item.c3k2
+        assert factors is not None
+        if item.path not in changed_paths and (
+            factors.e != 0.5
+            or factors.inner_n != 2
+            or factors.kernel_mode != "3x3_3x3"
+            or factors.use_rep
+        ):
+            raise ValueError(f"{item.path}: 未選取的 C0 factor 已漂移")
+
+    return FusionGraphReport(
+        fusion_kind=fusion_kind,
+        tasks=("detect", "pose", "both"),
+        model_contract=contract,
+        candidate_modules=candidate_reports,
+        protected_modules=protected_reports,
+        frozen_module_paths=frozen_paths,
+        resolved_candidate_id=resolved_id,
+        changed_fields=changed_fields,
+    )
