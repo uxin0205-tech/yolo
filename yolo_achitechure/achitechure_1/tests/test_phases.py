@@ -29,10 +29,11 @@ def _model():
     return model
 
 
-def test_training_process_keeps_only_four_resident_data_workers(monkeypatch) -> None:
+def test_training_process_caps_validation_batch_and_workers(monkeypatch) -> None:
     trainer = object.__new__(MASFTrainer)
     trainer.args = SimpleNamespace(workers=4)
     trainer.batch_size = 16
+    trainer.validation_batch = 8
     calls: list[tuple[str, int, int]] = []
 
     def fake_get_dataloader(self, dataset_path, batch_size, rank, mode):
@@ -43,7 +44,7 @@ def test_training_process_keeps_only_four_resident_data_workers(monkeypatch) -> 
     trainer.get_dataloader("train", 16, mode="train")
     trainer.get_dataloader("val", 32, mode="val")
 
-    assert calls == [("train", 16, 4), ("val", 16, 0)]
+    assert calls == [("train", 16, 4), ("val", 8, 0)]
     assert trainer.args.workers == 4
 
 
@@ -53,7 +54,7 @@ def test_fixed_phase_contract_matches_the_experiment_spec() -> None:
     assert PHASES["a2"].epochs == 10 and PHASES["a2"].lrf == 0.5
     assert PHASES["a2"].patience == 4
     assert PHASES["b"].epochs == 10 and PHASES["b"].patience == 4
-    assert PHASES["c"].epochs == 55 and PHASES["c"].patience == 8
+    assert PHASES["c"].epochs == 70 and PHASES["c"].patience == 9
 
 
 def test_phase_scopes_freeze_attention_until_full_model_finetuning() -> None:

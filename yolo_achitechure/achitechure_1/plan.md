@@ -1,4 +1,22 @@
-# AGENTS.md — YOLO26m P3-MFAM 研究實作規範
+# plan.md — YOLO26m P3-MFAM 研究實作規範
+
+## 目前執行狀態（2026-08-22）
+
+本節記錄已落地且經實跑驗證的契約；若下方早期規劃文字與本節衝突，以本節與 `EXPERIMENT_SPEC.md`
+為準。
+
+- 實際架構名稱為 P3 MASF-inspired Full35／Partial75；Partial75 是 25% context、75% bit-exact bypass。
+- DW3 與 DW5 相加後必須經 dense `C→C` 1×1 projection，再乘 alpha 做 residual。
+- 正式環境固定 Python 3.12、PyTorch 2.11.0+cu128、Ultralytics 8.4.90；GPU 為 RTX 5060 Ti 16 GiB。
+- Seed 0、imgsz 640、workers 6、AMP、MuSGD；A1／A2／B physical batch 16，C physical batch 8、
+  `nbs=16`，validation batch 8。
+- 基準 Phase C 是 70 epochs、patience 9；目前完整資料 Phase C queue 依使用者要求留下 manifest 化的
+  patience 7 override。
+- 30% B/C 與完整資料 B 已完成，所有 child 均 rollback 到各自 accepted A2。完整資料 Phase C 的
+  Full35 嘗試在第一個 epoch 尚未產生 checkpoint 前失敗，不納入結論。
+- 目前結論與機器可讀數字在 `results/rtx5060ti-half-0822.md`、`.json`、`.csv`。
+- `final/` 已封裝 Full35／Partial75 程式碼、9 個 Bit-True 比較候選、8 個 Float checkpoint，以及
+  COCO2017／BBT5 detect_dataset 的 9 × 2 完整 AP 矩陣。
 
 ## 0. 目的
 
@@ -130,7 +148,7 @@ YOLO26m 在此位置預期 `C≈256`，但實作時應盡量從模型建構參�
 
 ```text
                  ┌─ DWConv 3x3 ─┐
-x ───────────────┤              ├─ sum ─ alpha - conv 1*1 ─┐
+x ───────────────┤              ├─ sum ─ conv 1x1 ─ alpha ─┐
                  └─ DWConv 5x5 ─┘                          │
                                                            +
 x ──────────────────────────────────────────────-----------┘
@@ -139,7 +157,7 @@ x ──────────────────────────
 數學表示：
 
 ```text
-delta = DW3(x) + DW5(x)
+delta = Conv1x1(DW3(x) + DW5(x))
 y = x + alpha * delta
 ```
 
@@ -151,6 +169,7 @@ y = x + alpha * delta
 - 兩個 branch 以 **element-wise sum** 融合。
 - 第一版不要使用 concat。
 - 第一版不要加入完整 channel 的 `1x1 2C -> C` fusion convolution。
+- branch sum 後必須有 dense `C→C` 1×1 projection；它不是 concat 後的 `2C→C` fusion。
 - norm / activation 優先沿用 repository 內 YOLO 原本慣例。
 - `alpha` 是可學習 scalar。
 - `alpha` 初始值為 `0.01`。
@@ -192,6 +211,7 @@ x
 │      ├─ DWConv 3x3
 │      └─ DWConv 5x5
 │          -> sum
+│          -> 1x1 projection
 │          -> alpha residual
 │
 └─ 後 75% channels -> identity bypass
@@ -204,7 +224,7 @@ concat(enhanced_context, identity_bypass) -> y
 ```text
 x_ctx, x_id = split(x)
 
-delta_ctx = DW3(x_ctx) + DW5(x_ctx)
+delta_ctx = Conv1x1(DW3(x_ctx) + DW5(x_ctx))
 y_ctx = x_ctx + alpha * delta_ctx
 
 y = concat(y_ctx, x_id, dim=1)
@@ -461,9 +481,9 @@ end2end: true
 | A1 | 5 | 固定跑完 |
 | A2 | 10 | 4 |
 | B | 10 | 4 |
-| C | 55 | 8 |
+| C | 70 | 9（完整資料對照 queue 覆寫為 7） |
 
-A2/B 若 Bit-True validation mAP50-95 連續 4 epochs 沒有改善就提早停止；Phase C 的 patience 為 8。
+A2/B 若 Bit-True validation mAP50-95 連續 4 epochs 沒有改善就提早停止；Phase C 基準 patience 為 9。
 
 不要使用：
 
@@ -475,10 +495,12 @@ patience: 0
 
 ## 9.4 Batch Size
 
-YOLO26m 建議初始範圍：
+本機實測後的固定值：
 
 ```text
-16–32
+A1 / A2 / B: physical batch 16, nbs 16
+C: physical batch 8, nbs 16, accumulate 2
+Validation: batch 8
 ```
 
 原則：
@@ -506,13 +528,13 @@ Partial75
 
 如果必須建立一套偏小物體的 fine-tuning recipe，三個模型都要完全一致。
 
-目前候選：
+目前固定設定：
 
 ```yaml
-mosaic: 0.5
+mosaic: 1.0
 mixup: 0.0
 copy_paste: 0.0
-scale: 0.3
+scale: 0.5
 close_mosaic: 10
 ```
 
@@ -526,9 +548,9 @@ close_mosaic: 10
 
 | ID | Model | P3 Module | Context Channels | Seed |
 |---|---|---|---:|---:|
-| A0 | YOLO26m | None | 0% | 42 |
-| A1 | YOLO26m-P3-MFAM-Full35 | DW3 + DW5 | 100% | 42 |
-| A2 | YOLO26m-P3-MFAM-Partial75 | DW3 + DW5 | 75% | 42 |
+| A0 | YOLO26m | None | 0% | 0 |
+| A1 | YOLO26m-P3-MASF-Full35 | DW3 + DW5 + projection | 100% | 0 |
+| A2 | YOLO26m-P3-MASF-Partial75 | DW3 + DW5 + projection | 25% | 0 |
 
 以下條件必須保持一致：
 
@@ -638,19 +660,10 @@ bypass channel count
 
 ## 14. Architecture Selection Rule
 
-winner 不一定是 overall mAP 最高者。
-
-必須一起考慮：
-
-```text
-Ball AP
-overall mAP
-compute
-latency
-```
-
-其中 latency 必須在同一張正式 GPU、相同設定下量測。Peak GPU memory 仍需記錄作為容量診斷，但因目前
-開發 smoke 使用 RTX 4080 SUPER、正式訓練與最終 profiling 預定使用 RTX 5090，VRAM 不參與 winner 排名。
+Full35 與 Partial75 先比較 Bit-True COCO2017 mAP50-95；差距在 `0.001` 內時，依序以同一張正式 GPU、
+相同設定的 FP16 p50 latency、GFLOPs、Params 打破平手。Ball AP 是必須報告的研究指標，但不能繞過
+overall gate 單獨選 winner。Peak GPU memory 只作容量診斷；目前正式比較 GPU 為 RTX 5060 Ti，但 VRAM
+不參與 winner 排名。
 
 例如：
 
@@ -688,7 +701,7 @@ latency
    - baseline；
    - Full35；
    - Partial75。
-5. 使用 MuSGD、staged 最大 80 epochs、A2/B `patience=4`、C `patience=8` 的 training config / script。
+5. 使用 MuSGD、A2/B `patience=4`、C 最多 70 epochs／基準 `patience=9` 的 training config / script。
 6. Smoke-test script。
 7. Pretrained weight transfer 驗證結果或驗證 script。
 8. Parameters / FLOPs / latency benchmark script 或執行命令。
@@ -729,7 +742,7 @@ latency
 
 如果出現以下任一情況，先停止並回報：
 
-1. Repository 中的 `Partial75` 被定義為 25% context / 75% bypass。
+1. Repository 中的 `Partial75` 被改成不是 25% context / 75% bypass。
 2. 目前 repository 不支援 MuSGD。
 3. 目前 YOLO26 graph 與預期 P3/P4/P5 差異很大。
 4. 修改 YAML 後造成大量 pretrained weight transfer failure。
@@ -779,6 +792,8 @@ DWConv 5x5
 +
 sum fusion
 +
+1x1 projection
++
 residual alpha = 0.01
 ```
 
@@ -787,8 +802,8 @@ residual alpha = 0.01
 ```text
 YOLO26m + P3 Partial75
 
-75% P3 channels 進行 context enhancement
-25% identity bypass
+25% P3 channels 進行 context enhancement
+75% identity bypass
 
 context path:
 DWConv 3x3
@@ -796,6 +811,8 @@ DWConv 3x3
 DWConv 5x5
 +
 sum fusion
++
+1x1 projection
 +
 residual alpha = 0.01
 ```
@@ -805,12 +822,12 @@ residual alpha = 0.01
 ```text
 pretrained YOLO26m
 optimizer = MuSGD
-max staged epochs = 80
-patience = A2/B: 4, C: 8
+Phase C max epochs = 70
+patience = A2/B: 4, C baseline: 9
 imgsz = 640
 AMP = on
 end2end = true
-first screening seed = 42
+first screening seed = 0
 ```
 
 ### 研究優先順序

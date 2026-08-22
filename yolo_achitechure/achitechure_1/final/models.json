@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "comparison_backend": "bit_true_pwl",
+  "models": [
+    {
+      "id": "a0",
+      "architecture": "baseline-attention",
+      "stage": "a0",
+      "train_fraction": null,
+      "gate": "immutable",
+      "bittrue": "weights/bittrue/a0.pt",
+      "bittrue_sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+      "state_dict_sha256": "9af9ea1c3c4d47d3d18e9ebb609e76758ec40ceea6e6fde648e586b518387663",
+      "float": null,
+      "float_sha256": null
+    },
+    {
+      "id": "full35-a2",
+      "architecture": "full35",
+      "stage": "a2",
+      "train_fraction": null,
+      "gate": "retained",
+      "bittrue": "weights/bittrue/full35-a2.pt",
+      "bittrue_sha256": "5ca57319d3708e5639c4852bac0898038d61ac793a4973015f1b6be8b764582d",
+      "state_dict_sha256": "7a751010fd1d065da51773d6264debf0c87dbd03f1893452ec8677d0c221bc4a",
+      "float": "weights/float/full35-a2.pt",
+      "float_sha256": "af390ec43cadb5aaac47a22ebf58c710106c3f8dd143fbd2bbcb0eb2b76ebf26"
+    },
+    {
+      "id": "full35-b-f03",
+      "architecture": "full35",
+      "stage": "b",
+      "train_fraction": 0.3,
+      "gate": "rollback",
+      "bittrue": "weights/bittrue/full35-b-f03.pt",
+      "bittrue_sha256": "9eb84288e6594f980c301c57aff7c25b52c85e21f855a68e5b0f6ea63be5a7fb",
+      "state_dict_sha256": "8b1fa6dd1da4005d4af30b19aa9daf20fba4a2409c11a0a4124aa6f831624210",
+      "float": "weights/float/full35-b-f03.pt",
+      "float_sha256": "bae03f4b260a71dbdc47876afbf78f86eb24deeb1e774f41d6c450349402d7f0"
+    },
+    {
+      "id": "full35-c-f03",
+      "architecture": "full35",
+      "stage": "c",
+      "train_fraction": 0.3,
+      "gate": "rollback",
+      "bittrue": "weights/bittrue/full35-c-f03.pt",
+      "bittrue_sha256": "8cfdb532599c27ded718ef27a1b504a5716875bdea9777b875103948a672fe5a",
+      "state_dict_sha256": "c319f824ce752c3003094f93a4e63055dfddf991b98f3d8d2eb4639c4a6f7549",
+      "float": "weights/float/full35-c-f03.pt",
+      "float_sha256": "5e4530dbfaab34d45a18d8a40f82c29897b2666b86254302f596796fd16bb8f0"
+    },
+    {
+      "id": "full35-b-f10",
+      "architecture": "full35",
+      "stage": "b",
+      "train_fraction": 1.0,
+      "gate": "rollback",
+      "bittrue": "weights/bittrue/full35-b-f10.pt",
+      "bittrue_sha256": "a8780ae988e61905fa78134b16bf362d2392d2a71f43941f770769bd42265cae",
+      "state_dict_sha256": "cd481554faebe52f341a4e8c43f91c104ecddfcdf817092990db4078bba084f9",
+      "float": "weights/float/full35-b-f10.pt",
+      "float_sha256": "81dc8629fc6db2915242ba950c522c249d89ba1aa6d53ab39389c9b5a4ed0047"
+    },
+    {
+      "id": "partial75-a2",
+      "architecture": "partial75",
+      "stage": "a2",
+      "train_fraction": null,
+      "gate": "retained",
+      "bittrue": "weights/bittrue/partial75-a2.pt",
+      "bittrue_sha256": "aa878765518efa6a3801c03e39ce5a3d78bea0fa09c70a3cbd41a83f7c6b77e8",
+      "state_dict_sha256": "45deefd5d13c895135c40307d93ac92a1014f5eaa9b1299f0eb2445fea60eb80",
+      "float": "weights/float/partial75-a2.pt",
+      "float_sha256": "070b571d1a52b1e7d13acc25d4c77278e38395d975fe6bff5e9bbd1bdc01e568"
+    },
+    {
+      "id": "partial75-b-f03",
+      "architecture": "partial75",
+      "stage": "b",
+      "train_fraction": 0.3,
+      "gate": "rollback",
+      "bittrue": "weights/bittrue/partial75-b-f03.pt",
+      "bittrue_sha256": "ef21d05d83d65e4949dd486e30b4bf411e36d3a59cf787e25fd647bfa69932da",
+      "state_dict_sha256": "a5c51e256e96f5564ebcb7dab97b1a8427414653d984d0ef0b2e84774e20b4da",
+      "float": "weights/float/partial75-b-f03.pt",
+      "float_sha256": "f9dddcc7aed2d9cf17927c93577192bb58d9ba84a514d6d51284bb8489f2cb80"
+    },
+    {
+      "id": "partial75-c-f03",
+      "architecture": "partial75",
+      "stage": "c",
+      "train_fraction": 0.3,
+      "gate": "rollback",
+      "bittrue": "weights/bittrue/partial75-c-f03.pt",
+      "bittrue_sha256": "510f70c8bfd6d45a217fdf4626cfcf349587d75b8dc965a0d1fcbcf019c36e2b",
+      "state_dict_sha256": "184db54d52149a1aeea4d5b0cffc82e9d23042841d0d603605112cce9c172f3a",
+      "float": "weights/float/partial75-c-f03.pt",
+      "float_sha256": "a6e47d546ee239800bac2b6f8b046d5881607da137bfab5eaf95637ae17154d9"
+    },
+    {
+      "id": "partial75-b-f10",
+      "architecture": "partial75",
+      "stage": "b",
+      "train_fraction": 1.0,
+      "gate": "rollback",
+      "bittrue": "weights/bittrue/partial75-b-f10.pt",
+      "bittrue_sha256": "05070ec4e7661de5980d51451c49f39192f01783ac7746b9a9ce038fe7cdb74f",
+      "state_dict_sha256": "9ea31021b54506228a013edd7ea47ce761262d66a66eac05054d76b831d90364",
+      "float": "weights/float/partial75-b-f10.pt",
+      "float_sha256": "f6bc0591ac05d842a491e1c0ea32c4a8aaeda7fc6e6f88a6a2e1df88dc894841"
+    }
+  ]
+}

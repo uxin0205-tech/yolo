@@ -1,0 +1,50 @@
+{
+  "class_mapping": {
+    "0": {
+      "coco80_class": 32,
+      "source_name": "ball",
+      "target_name": "sports ball"
+    },
+    "1": {
+      "coco80_class": 34,
+      "source_name": "bat",
+      "target_name": "baseball bat"
+    }
+  },
+  "created_at": "2026-08-21T05:27:36.867775+00:00",
+  "derived": {
+    "data_yaml": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/ball-bat-dataset/data.yaml",
+    "label_tree_sha256": "dd6ef38dc1ec63d7c72454e26da7295f8a306c648251b02108d24b0610419a55",
+    "root": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/ball-bat-dataset"
+  },
+  "independence_warning": {
+    "coco_train2017_id_overlap_images": 93,
+    "examples": [
+      "000000005614_jpg.rf.962054456b085c76be3e71cb0709b487.jpg",
+      "000000007615_jpg.rf.3172c58cce7b200acb473529cb05ed4d.jpg",
+      "000000008329_jpg.rf.9a50929a625330f3d8ff0ad11364bacf.jpg",
+      "000000009460_jpg.rf.e07c6fe44b8afd94dbca6225a924253e.jpg",
+      "000000009960_jpg.rf.60c2482ca20b5a957f1ca17587afdb12.jpg",
+      "000000010710_jpg.rf.8f021e94be439aa2b2c6432dda2b3acc.jpg",
+      "000000010817_jpg.rf.3e587d78199227f867545e6449865171.jpg",
+      "000000011107_jpg.rf.7beef039d304e3fd830d017e51fadeb0.jpg",
+      "000000013195_jpg.rf.30890edbc30232ea257cec50ac50b74e.jpg",
+      "000000016827_jpg.rf.f27358d22dc66cc8f005caaeb2bb5484.jpg"
+    ],
+    "fraction_of_validation_images": 0.164021164021164
+  },
+  "instances": {
+    "baseball_bat": 484,
+    "sports_ball": 301
+  },
+  "purpose": "將 ball/bat pose bbox 以 COCO80 sports ball/baseball bat 類別進行 detection 驗證",
+  "schema_version": 1,
+  "source": {
+    "data_yaml": "/home/uxin0/yolo/original/pose/dataset/data.yaml",
+    "empty_labels": 2,
+    "images": 567,
+    "label_tree_sha256": "f7915692c9cf8181bc19d19fbfa2d54c92a454a3c863de4f786bf81bcbb0db53",
+    "labels": 567,
+    "root": "/home/uxin0/yolo/original/pose/dataset"
+  }
+}

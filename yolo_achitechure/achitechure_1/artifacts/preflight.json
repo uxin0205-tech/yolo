@@ -1,21 +1,21 @@
 {
   "dataset": {
     "baseball_bat": "baseball bat",
-    "path": "/home/uxin/yolo/coco2017",
+    "path": "/home/uxin0/yolo/coco2017",
     "sports_ball": "sports ball"
   },
   "environment": {
     "cuda_available": true,
     "cuda_runtime": "12.8",
-    "driver": null,
-    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "driver": "591.86",
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
     "musgd": "ultralytics.optim.muon.MuSGD",
-    "python": "3.14.4",
+    "python": "3.12.13",
     "torch": "2.11.0+cu128",
     "ultralytics": "8.4.90",
-    "ultralytics_source": "/home/uxin/yolo/.venv/lib/python3.14/site-packages/ultralytics",
-    "vram_bytes": 17170956288,
-    "vram_free_bytes": 15761145856
+    "ultralytics_source": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/.venv/lib/python3.12/site-packages/ultralytics",
+    "vram_bytes": 17102864384,
+    "vram_free_bytes": 15894315008
   },
   "errors": [],
   "fresh_process_reload": {
@@ -43,7 +43,7 @@
     ]
   },
   "parent": {
-    "path": "/home/uxin/yolo/yolo_achitechure/achitechure_1/inputs/parent/best.pt",
+    "path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/parent/best.pt",
     "sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123"
   },
   "parent_study": {
@@ -68,12 +68,22 @@
     }
   },
   "training_contract": {
-    "accumulation": false,
+    "a1_a2_b_accumulation": false,
+    "a1_a2_b_batch": 16,
+    "a1_a2_b_nbs": 16,
     "amp": true,
-    "batch": 16,
+    "expected_torch": "2.11.0+cu128",
+    "expected_ultralytics": "8.4.90",
+    "fraction": 0.3,
     "imgsz": 640,
+    "phase_c_accumulation": true,
+    "phase_c_batch": 8,
+    "phase_c_epochs": 70,
+    "phase_c_nbs": 16,
+    "phase_c_patience": 9,
     "seed": 0,
-    "workers": 8
+    "validation_batch": 8,
+    "workers": 6
   },
   "transfer": {
     "compatible_tensors": 804,

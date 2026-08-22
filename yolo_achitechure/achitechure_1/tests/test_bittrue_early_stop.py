@@ -5,7 +5,7 @@ from pathlib import Path
 from ultralytics import YOLO
 
 from achitechure_1.checkpoint import build_training_model
-from achitechure_1.training import make_bittrue_validation_copy
+from achitechure_1.training import _historical_best_fitness, make_bittrue_validation_copy
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -32,3 +32,17 @@ def test_early_stopping_validation_uses_bittrue_copy_without_mutating_float_mode
     assert "piecewise_linear" in source_kinds
     assert "bit_true_pwl" in target_kinds
     assert bittrue.model[16].p3_masf is not model.model[16].p3_masf
+
+
+def test_resume_restores_historical_best_epoch(tmp_path: Path) -> None:
+    results = tmp_path / "results.csv"
+    results.write_text(
+        "epoch,metrics/mAP50-95(B)\n"
+        "1,0.49693\n"
+        "2,0.49415\n"
+        "3,0.49259\n"
+        "4,0.49350\n",
+        encoding="utf-8",
+    )
+
+    assert _historical_best_fitness(results) == (1, 0.49693)

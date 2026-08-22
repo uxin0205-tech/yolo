@@ -1,6 +1,8 @@
 __pycache__/
 .pytest_cache/
 .ruff_cache/
+.runtime/
+.venv/
 *.py[cod]
 artifacts/checkpoints/
 artifacts/handoff/
@@ -11,5 +13,7 @@ artifacts/queues/
 artifacts/runs/
 artifacts/validation/
 /*.pt
+inputs/continuation/**/*.pt
+inputs/continuation/*/candidate.json
 results/best.pt
 results/masf-only.pt
