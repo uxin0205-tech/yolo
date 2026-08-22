@@ -19,7 +19,7 @@ def test_config_check_describes_v2_matrix_and_blocked_handoff_values() -> None:
     report = check_configs()
 
     assert report.valid
-    assert report.spec_version == "2.0.1"
+    assert report.spec_version == "2.0.2"
     assert report.ultralytics_version == "8.4.90"
     assert report.candidate_ids == ("C0", "C1", "C2", "C3")
     assert report.checked_training_files == (

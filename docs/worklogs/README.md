@@ -31,5 +31,6 @@
 - [2026-08-22：建立 BBAT5 固定資料集與中文紀錄全域規則](2026-08-22-bbat5-global-memory.md)
 - [2026-08-22：完成 architecture_2 Phase A 與 BBAT5 v1](2026-08-22-architecture-2-phase-a.md)
 - [2026-08-22：以 Initial 0822 發布全域基本規則](2026-08-22-initial-0822-publish.md)
+- [2026-08-22：發布 architecture_2 完整 BBAT5 GitHub Dataset](2026-08-22-architecture-2-github-dataset.md)
 
 返回[根層 README](../../README.md)。

@@ -19,7 +19,8 @@
 - BBAT5 Detect 原始資料：`/home/uxin/yolo/original/pose/detect_dataset/`。
 - BBAT5 Pose 原始資料：`/home/uxin/yolo/original/pose/dataset/`。
 - 原始資料唯讀；任何分割或修補只能建立於版本化衍生目錄，且必須附中文 README 與 manifests。
-- Git 只提交程式、YAML、README、split／patch manifests，不提交影像、labels 複本、checkpoint 或 runs。
+- 預設 Git 只提交程式、YAML、README 與 manifests。使用者已明確授權的完整資料 snapshot 只能放在 `artifacts/datasets/bbat5-v1/github-dataset/`，必須物化為可攜的一般檔案並附 README／publication manifest。
+- 即使發布完整資料，仍禁止提交 checkpoint、weights、cache、runs、`.pt`、`.pth`、`.onnx` 或 deployment engine。
 
 ## 驗證與提交
 

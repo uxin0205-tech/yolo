@@ -14,7 +14,7 @@
 
 目前是 Phase A，狀態為 ready_for_upstream_handoff：
 
-- [EXPERIMENT_SPEC.md](EXPERIMENT_SPEC.md) 已是唯一正式規格，版本 2.0.1。
+- [EXPERIMENT_SPEC.md](EXPERIMENT_SPEC.md) 已是唯一正式規格，版本 2.0.2。
 - C0/C1/C2/C3 YAML、training templates、dataset YAML、quantization YAML 與 schemas 已建立。
 - handoff、動態候選、權重轉移、state-dict checkpoint lineage 已實作。
 - detect／pose／both、loss、gradient、freeze、BN buffer、640 geometry 與 reload 已在 CPU fixture 驗證。
@@ -116,12 +116,13 @@ Pose labels 是唯一權威。衍生 Detect label 是每列修補後的前五欄
 一對一 audit。影像使用 symlink，labels 只寫進衍生版本，原始兩個目錄沒有被修改。
 
 bbat5-v1 建立於 spec 2.0.0，因此五份 manifest 保留當時的
-75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b，不回溯改成目前 2.0.1。
+75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b，不回溯改成目前 2.0.2。
 目前 validator 同時接受這個已知歷史 lineage 與新建資料的 current lineage，但不允許五份
 manifest 混用版本。
 
-衍生目錄內有獨立中文 README、四份 Ultralytics dataset YAML 與五份 manifests。Git 只保存
-metadata 副本：
+衍生目錄內有獨立中文 README、四份 Ultralytics dataset YAML 與五份 manifests。Git 保存兩層：
+
+1. 可稽核 metadata：
 
 - [BBAT5 metadata README](artifacts/datasets/bbat5-v1/README.md)
 - [split manifest](artifacts/datasets/bbat5-v1/manifests/split-manifest.json)
@@ -129,8 +130,12 @@ metadata 副本：
 - [source audit](artifacts/datasets/bbat5-v1/manifests/source-audit-manifest.json)
 - [COCO exclusion](artifacts/datasets/bbat5-v1/manifests/coco-exclusion-manifest.json)
 
-沒有上傳影像、label 副本、cache、checkpoint 或 run。prepare-pose-data 可以重建資料，但 v1
-不可覆寫；規則改變時要建立 v2。
+2. 使用者明確核准的[完整 GitHub dataset snapshot](artifacts/datasets/bbat5-v1/github-dataset/README.md)：
+   物化 Pose／Detect 影像與 labels，提供 portable YAML/splits，沒有 symlink、絕對 split path、test、
+   cache、checkpoint、weight 或 run。
+
+本機 canonical v1 仍可用 prepare-pose-data 重建且不可覆寫；GitHub snapshot 只改變儲存形式，
+不改變既有 group assignment、四筆 patch 或 2.0.0 資料 lineage。
 
 正式可讀 search wrappers 在
 [BBAT5 Pose search YAML](configs/data/bbat5-pose-search.yaml) 與
@@ -145,6 +150,11 @@ search lists。
 
     # 驗證已建立版本
     $PY -m achitechure_2 validate-pose-data
+
+    # 預覽／物化／驗證完整 GitHub snapshot；都不會啟動 Pose
+    $PY -m achitechure_2 export-github-dataset
+    $PY -m achitechure_2 export-github-dataset --execute
+    $PY -m achitechure_2 validate-github-dataset
 
 這些命令只處理資料，不會啟動 Pose 模型或訓練。
 
@@ -288,7 +298,7 @@ Float 與 Pareto 報告產出後，狀態固定是 c_best: null、selection_stat
     ├── configs/                    candidates/training/data/quant/schema
     ├── src/achitechure_2/          handoff、builder、資料、CPU、checkpoint、metrics、quant
     ├── tests/                      CPU pytest
-    ├── artifacts/datasets/bbat5-v1/ 可提交 metadata；沒有影像／labels
+    ├── artifacts/datasets/bbat5-v1/ metadata + 獨立 github-dataset 完整 snapshot
     ├── results/                    空白結果與報告模板
     └── docs/                       ADR、官方參考、工作紀錄
 
@@ -299,15 +309,19 @@ Float 與 Pareto 報告產出後，狀態固定是 c_best: null、selection_stat
 - 程式、測試、正式 YAML/schema。
 - README、規格、ADR、工作紀錄。
 - BBAT5 split／patch／source audit／COCO exclusion／rebuild manifests。
+- 僅限 `artifacts/datasets/bbat5-v1/github-dataset/` 的完整物化影像、labels、portable YAML/splits
+  與 publication manifest。
 
 不會提交：
 
-- 影像、衍生 labels、cache。
-- .pt checkpoint、runs、GPU profiles。
+- 上述固定 snapshot 以外的影像、labels 與 cache。
+- `.pt`／`.pth`／`.onnx`／engine、checkpoint、runs、GPU profiles。
 - 未驗證的 accepted.json 或正式結果。
 
 本次完整修改、資料處理、驗證與未解風險記錄在
 [2026-08-22 architecture_2 Phase A 工作紀錄](../../docs/worklogs/2026-08-22-architecture-2-phase-a.md)。
+完整資料發布另見
+[2026-08-22 GitHub dataset 工作紀錄](../../docs/worklogs/2026-08-22-architecture-2-github-dataset.md)。
 
 最後操作與驗證順序見 [RUNBOOK.md](RUNBOOK.md)。目前可以可靠宣稱的是 Phase A 與資料成果；
 正式架構精度、C_best、Pose 改善與量化可接受性都尚待後續實驗與你的決策。

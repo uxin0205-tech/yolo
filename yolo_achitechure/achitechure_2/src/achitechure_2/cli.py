@@ -169,6 +169,22 @@ def _cmd_export_data_metadata(args: argparse.Namespace) -> dict[str, Any]:
     )
 
 
+def _cmd_export_github_dataset(args: argparse.Namespace) -> dict[str, Any]:
+    from .pose_data import export_bbat5_github_dataset
+
+    return export_bbat5_github_dataset(
+        args.source,
+        args.destination,
+        execute=args.execute,
+    )
+
+
+def _cmd_validate_github_dataset(args: argparse.Namespace) -> dict[str, Any]:
+    from .pose_data import validate_bbat5_github_dataset
+
+    return validate_bbat5_github_dataset(args.destination)
+
+
 def _cmd_inspect_handoff(args: argparse.Namespace) -> dict[str, Any]:
     from .intake import validate_handoff
 
@@ -437,6 +453,42 @@ def build_parser() -> argparse.ArgumentParser:
     )
     export.add_argument("--execute", action="store_true")
 
+    github_export = commands.add_parser(
+        "export-github-dataset",
+        help="物化完整可攜 BBAT5 v1；含影像/labels，不含 weights",
+    )
+    github_export.add_argument(
+        "--source",
+        type=Path,
+        default=Path("/home/uxin/yolo/original/pose/derived/bbat5-v1"),
+    )
+    github_export.add_argument(
+        "--destination",
+        type=Path,
+        default=(
+            DEFAULT_PROJECT_ROOT
+            / "artifacts/datasets/bbat5-v1/github-dataset"
+        ),
+    )
+    github_export.add_argument(
+        "--execute",
+        action="store_true",
+        help="實際建立不可覆寫 snapshot；省略時只顯示計畫",
+    )
+
+    github_validate = commands.add_parser(
+        "validate-github-dataset",
+        help="驗證 GitHub dataset 無 symlink/權重且 split 可攜",
+    )
+    github_validate.add_argument(
+        "--destination",
+        type=Path,
+        default=(
+            DEFAULT_PROJECT_ROOT
+            / "artifacts/datasets/bbat5-v1/github-dataset"
+        ),
+    )
+
     inspect = commands.add_parser("inspect-handoff", help="只驗證 handoff metadata；不寫 accepted")
     inspect.add_argument("--manifest", type=Path, required=True)
 
@@ -490,6 +542,8 @@ _HANDLERS: dict[str, Callable[[argparse.Namespace], dict[str, Any]]] = {
     "prepare-bbat5-data": _cmd_prepare_pose_data,
     "validate-pose-data": _cmd_validate_pose_data,
     "export-data-metadata": _cmd_export_data_metadata,
+    "export-github-dataset": _cmd_export_github_dataset,
+    "validate-github-dataset": _cmd_validate_github_dataset,
     "inspect-handoff": _cmd_inspect_handoff,
     "accept-handoff": _cmd_accept_handoff,
     "resolve-candidates": _cmd_resolve_candidates,

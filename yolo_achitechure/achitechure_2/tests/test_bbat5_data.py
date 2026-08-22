@@ -8,10 +8,12 @@ import pytest
 import yaml
 
 from achitechure_2.pose_data import (
+    export_bbat5_github_dataset,
     export_bbat5_metadata,
     prepare_bbat5_dataset,
     source_group,
     validate_bbat5_dataset,
+    validate_bbat5_github_dataset,
 )
 
 
@@ -234,6 +236,75 @@ def test_metadata_export_contains_only_readme_configs_and_manifests(tmp_path: Pa
     assert not any(path.is_symlink() for path in destination.rglob("*"))
     with pytest.raises(FileExistsError, match="不可覆寫"):
         export_bbat5_metadata(source, destination, execute=True)
+
+
+def test_github_export_materializes_portable_dataset_without_weights(
+    tmp_path: Path,
+) -> None:
+    pose, detect, coco = _sources(tmp_path)
+    source = tmp_path / "derived/bbat5-v1"
+    destination = tmp_path / "git/bbat5-v1/github-dataset"
+    prepare_bbat5_dataset(
+        pose,
+        detect,
+        source,
+        coco_train_list=coco,
+        execute=True,
+        expected_patch_count=1,
+    )
+
+    plan = export_bbat5_github_dataset(source, destination)
+    assert not plan["execute"]
+    assert not destination.exists()
+
+    report = export_bbat5_github_dataset(source, destination, execute=True)
+
+    assert report["execute"]
+    assert report["counts"]["unique_images"] == 5
+    assert report["validation"]["destination"] == str(destination.resolve())
+    assert not any(path.is_symlink() for path in destination.rglob("*"))
+    assert not any(
+        path.suffix.lower() in {".pt", ".pth", ".onnx", ".engine"}
+        for path in destination.rglob("*")
+        if path.is_file()
+    )
+    pose_yaml = yaml.safe_load(
+        (destination / "pose/data.yaml").read_text(encoding="utf-8")
+    )
+    assert "path" not in pose_yaml
+    assert pose_yaml["train"] == "splits/formal-train.txt"
+    search_lines = (
+        destination / "pose/splits/search-train.txt"
+    ).read_text(encoding="utf-8").splitlines()
+    assert search_lines
+    assert all(line.startswith("./../images/train/") for line in search_lines)
+    validation = validate_bbat5_github_dataset(destination)
+    assert validation["valid"]
+    assert validation["unique_images"] == 5
+    assert validation["symlinks"] == 0
+    assert validation["forbidden_files"] == 0
+    assert validation["test_split"] is None
+    with pytest.raises(FileExistsError, match="不可覆寫"):
+        export_bbat5_github_dataset(source, destination, execute=True)
+
+
+def test_github_dataset_validation_rejects_weight_file(tmp_path: Path) -> None:
+    pose, detect, coco = _sources(tmp_path)
+    source = tmp_path / "derived/bbat5-v1"
+    destination = tmp_path / "github-dataset"
+    prepare_bbat5_dataset(
+        pose,
+        detect,
+        source,
+        coco_train_list=coco,
+        execute=True,
+        expected_patch_count=1,
+    )
+    export_bbat5_github_dataset(source, destination, execute=True)
+    (destination / "accidental.pt").write_bytes(b"forbidden")
+
+    with pytest.raises(AssertionError, match="禁止檔案"):
+        validate_bbat5_github_dataset(destination)
 
 
 def test_validation_preserves_immutable_v1_historical_spec_lineage(tmp_path: Path) -> None:

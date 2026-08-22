@@ -1,6 +1,6 @@
 # architecture_2 統一實驗規格
 
-規格版本：`2.0.1`
+規格版本：`2.0.2`
 狀態：唯一正式規格
 生效日期：2026-08-22
 
@@ -123,11 +123,18 @@ builder: achitechure_2
 - hyperparameter search 只能在正式 train 內再做 grouped search split。
 - 四個已知極小負座標只在衍生 Pose labels clamp 為 0，逐項寫入 patch manifest。
 - Detect/Pose 共用同一 source assignment；不建立不存在的 test split。
-- 影像使用 symlink，labels 寫入衍生版本；原始來源不得改動。
+- 本機 canonical 衍生版的影像使用 symlink，labels 寫入衍生版本；原始來源不得改動。
 - BBAT5 formal val 與 COCO train view 的重疊必須列入 exclusion manifest；未能證明時標示 blocked，不能假裝通過。
 - v1 建立後不可覆寫；任何規則或資料內容變更建立 v2。
 
-Git 只保存工具、YAML、README 範本、split/patch/source audit/exclusion manifests，不保存影像、labels 複本或 cache。`prepare-pose-data` 必須能從原始資料重建。
+`prepare-pose-data` 必須能從原始資料重建本機 canonical 版本。依使用者 2026-08-22 的明確授權，GitHub 另保存一份不可覆寫、可攜且不含 symlink 的完整 snapshot：
+
+- 固定位置為 `artifacts/datasets/bbat5-v1/github-dataset/`，不得散落到專案其他位置。
+- 允許提交 Pose／Detect 兩個 view 的影像、labels、portable dataset YAML、split lists、README 與 publication manifest。
+- snapshot 只改變儲存形式，不改變 bbat5-v1 的 2.0.0 資料 lineage、group assignment 或四筆 patch。
+- Pose／Detect 影像內容必須逐檔相同；匯出時不得留下指向 `/home/uxin/...` 的 symlink 或絕對 split path。
+- 禁止提交 checkpoint、weight、cache、run、`.pt`、`.pth`、`.onnx` 或 deployment engine。
+- `export-github-dataset` 必須預設只規劃，只有 `--execute` 才能建立 snapshot，且目的地存在時 fail closed。
 
 ## 6. 正式 YAML 契約
 
@@ -247,3 +254,4 @@ accumulator／requantization／saturation 與目標硬體驗證前，不得稱�
 | 1.2.0 | 2026-08-19 | 單檔 training YAML 與設定檢查。 |
 | 2.0.0 | 2026-08-22 | 改為承接 `yolo_combine` winner；動態解析 shared/routed/partial regions；C0-Handoff/C0-Control 分離；BBAT5 v1 衍生資料；measurement-first 選擇與逐候選量化資格；CPU-only Phase A。 |
 | 2.0.1 | 2026-08-22 | 依 Ultralytics 8.4.90 官方原始碼修正 extension resume：只接受未 strip continuation state；補充 fraction/cache、Pose-only best／combined fitness、uniform OKS sigma、Micro F1 與 fake-quant 邊界。BBAT5 v1 保留建立時的 2.0.0 lineage。 |
+| 2.0.2 | 2026-08-22 | 依使用者明確授權增加完整 GitHub dataset snapshot；影像與 labels 物化於獨立 `github-dataset/`，保留 bbat5-v1 既有 split／patch lineage，並持續禁止權重、checkpoint、cache 與 runs。 |

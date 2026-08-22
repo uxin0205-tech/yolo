@@ -48,7 +48,7 @@ This repository uses a single-context domain documentation layout. See `docs/age
 - BBAT5 pose 一律使用 `/home/uxin/yolo/original/pose/dataset/`。
 - 後續凡是使用 BBAT5、BBT5 或棒球專用資料集的工作，必須依任務類型使用上述既有資料集與既有 split；不得自行重新切分、抽樣、複製成另一份資料集、替換來源或改動影像與標註，除非使用者明確授權。
 - 若路徑或設定有問題，先記錄問題並只修正必要的路徑或設定，不得用另建 split 規避。
-- 完整規範與使用者已核准的 `bbat5-v1` 例外見 `docs/agents/bbat5-datasets.md`。
+- 完整規範與使用者已核准的 `bbat5-v1`／GitHub snapshot 例外見 `docs/agents/bbat5-datasets.md`。
 
 ## 語言與工作紀錄
 

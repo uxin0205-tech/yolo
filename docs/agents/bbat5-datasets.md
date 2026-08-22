@@ -55,8 +55,15 @@ bbat5-v1 的固定契約：
     export PYTHONPATH="$PWD/src"
     /home/uxin/yolo/.venv/bin/python -m achitechure_2 prepare-pose-data --execute
 
-Git 只提交 README、dataset YAML 與 split／patch／source-audit／COCO-exclusion／rebuild
-manifests；不提交影像、衍生 labels、cache 或 symlink。
+預設 Git 只提交 README、dataset YAML 與 split／patch／source-audit／COCO-exclusion／rebuild
+manifests。2026-08-22 使用者另明確核准 architecture_2 上傳同一份 bbat5-v1 的完整可攜 snapshot：
+
+- 唯一位置：`/home/uxin/yolo/yolo_achitechure/achitechure_2/artifacts/datasets/bbat5-v1/github-dataset/`。
+- 允許物化 Pose／Detect 影像與 labels，但不得改變既有 assignment、四筆 patch 或 2.0.0 lineage。
+- snapshot 必須使用一般檔案與相對 split path，不得提交會在 GitHub clone 後失效的 symlink。
+- 仍禁止 checkpoint、weights、cache、runs、`.pt`、`.pth`、`.onnx` 與 deployment engine。
+- 建立與驗證使用 `export-github-dataset --execute`、`validate-github-dataset`；是否跑 Pose 仍是
+  獨立的使用者決定，資料上傳不代表授權訓練。
 
 ## 可追溯性
 

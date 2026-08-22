@@ -82,6 +82,22 @@ config/spec 前，不得用 COCO formal val 做融合 recipe 搜尋。
 目的地是 artifacts/datasets/bbat5-v1，只包含 README、dataset YAML 與 manifests；不包含 images、
 labels 或 symlink。目的地存在時同樣拒絕覆寫。
 
+### 匯出完整 GitHub dataset
+
+這是使用者明確核准的獨立 publication snapshot，不會改寫本機 canonical v1，也不會啟動 Pose：
+
+    # 只計畫與驗證來源
+    $PY -m achitechure_2 export-github-dataset
+
+    # 物化一般影像檔、Pose/Detect labels、portable YAML/splits 與 manifest
+    $PY -m achitechure_2 export-github-dataset --execute
+
+    # 驗證零 symlink、零權重、零 test、split 可攜及整體 tree SHA256
+    $PY -m achitechure_2 validate-github-dataset
+
+固定目的地是 `artifacts/datasets/bbat5-v1/github-dataset/`。目的地存在時拒絕覆寫；需要重做時
+不得直接刪除或覆蓋已發布版本，必須先確認 recovery path 與新版本政策。
+
 ## 3. yolo_combine handoff
 
 將 [handoff-manifest.example.json](handoff-manifest.example.json) 複製到實驗產物目錄，換成
@@ -198,6 +214,7 @@ simulation_only。
     env CUDA_VISIBLE_DEVICES='' PYTHONPATH="$PWD/src" $PY -m pytest -q
     $PY -m achitechure_2 config-check
     $PY -m achitechure_2 validate-pose-data
+    $PY -m achitechure_2 validate-github-dataset
     $PY -m ruff check .
     git status --short --branch
 
@@ -205,10 +222,11 @@ integration test 在沒有 ARCHITECHURE_2_HANDOFF 時會明確 skip，不能把 
 
 ## 10. Git 上傳範圍
 
-提交程式、測試、YAML/schema、中文文件與 artifacts/datasets/bbat5-v1 metadata。禁止提交：
+提交程式、測試、YAML/schema、中文文件、bbat5-v1 metadata，以及使用者核准的
+`artifacts/datasets/bbat5-v1/github-dataset/` 完整 snapshot。禁止提交：
 
-- pose/detect images 或 labels。
-- .pt/.onnx/cache。
+- snapshot 固定目錄以外的 pose/detect images 或 labels。
+- `.pt`／`.pth`／`.onnx`／engine／cache。
 - runs、GPU profiles。
 - 未經驗收的 accepted handoff。
 

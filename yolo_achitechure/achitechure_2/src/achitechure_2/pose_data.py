@@ -22,6 +22,9 @@ DEFAULT_POSE_SOURCE = Path("/home/uxin/yolo/original/pose/dataset")
 DEFAULT_DETECT_SOURCE = Path("/home/uxin/yolo/original/pose/detect_dataset")
 DEFAULT_DESTINATION = Path("/home/uxin/yolo/original/pose/derived/bbat5-v1")
 DEFAULT_COCO_TRAIN_LIST = Path("/home/uxin/yolo/coco2017/train2017.txt")
+DEFAULT_GITHUB_DATASET = (
+    PROJECT_ROOT / "artifacts/datasets/bbat5-v1/github-dataset"
+)
 POSE_DATASET_YAML = PROJECT_ROOT / "configs/data/bbat5-pose.yaml"
 DETECT_DATASET_YAML = PROJECT_ROOT / "configs/data/bbat5-detect.yaml"
 
@@ -38,6 +41,9 @@ BBAT5_V1_HISTORICAL_SPEC_LINEAGES = frozenset(
 )
 
 IMAGE_SUFFIXES = frozenset({".jpg", ".jpeg", ".png", ".bmp", ".webp"})
+FORBIDDEN_PUBLICATION_SUFFIXES = frozenset(
+    {".pt", ".pth", ".onnx", ".engine", ".cache", ".npy", ".npz"}
+)
 COORDINATE_TOKEN_INDICES = frozenset({1, 2, 3, 4, 5, 6, 8, 9})
 VISIBILITY_TOKEN_INDICES = (7, 10)
 
@@ -897,6 +903,361 @@ def export_bbat5_metadata(
     ):
         raise AssertionError("metadata export 意外包含 images/labels")
     return report
+
+
+def _portable_dataset_yaml(view: str, *, search: bool) -> dict[str, Any]:
+    names = {0: "ball", 1: "bat"}
+    prefix = "search" if search else "formal"
+    payload: dict[str, Any] = {
+        "train": f"splits/{prefix}-train.txt",
+        "val": f"splits/{prefix}-val.txt",
+        "names": names,
+    }
+    if view == "pose":
+        payload.update(kpt_shape=[2, 3], flip_idx=[0, 1])
+    return payload
+
+
+def _portable_split_lines(source_root: Path, view: str, name: str) -> tuple[str, ...]:
+    split_file = source_root / view / "splits" / name
+    if not split_file.is_file():
+        raise FileNotFoundError(f"BBAT5 split 不存在：{split_file}")
+    portable: list[str] = []
+    seen: set[str] = set()
+    for line in split_file.read_text(encoding="utf-8").splitlines():
+        image_name = Path(line).name
+        matches = [
+            split
+            for split in ("train", "val")
+            if (source_root / view / "images" / split / image_name).is_file()
+        ]
+        if len(matches) != 1:
+            raise AssertionError(
+                f"{view}/{name} 的 {image_name} 無法唯一對應 formal split"
+            )
+        if image_name in seen:
+            raise AssertionError(f"{view}/{name} 重複列出 {image_name}")
+        seen.add(image_name)
+        portable.append(f"./../images/{matches[0]}/{image_name}")
+    return tuple(portable)
+
+
+def _github_dataset_readme(counts: dict[str, int]) -> str:
+    return f"""# BBAT5 v1 GitHub 完整資料 Snapshot
+
+此目錄是使用者於 2026-08-22 明確核准上傳的可攜 snapshot。它只改變儲存形式，不改變
+`bbat5-v1` 的 grouped split、四筆座標修補或 2.0.0 資料 lineage，也不會啟動 Pose 訓練。
+
+## 內容
+
+- 唯一影像：{counts['unique_images']:,} 張。
+- Pose／Detect 各有 formal train {counts['formal_train_images']:,}、val {counts['formal_val_images']:,}。
+- Pose／Detect 各自保存 labels；Detect labels 仍是 Pose 每列前五欄。
+- `data.yaml` 是 formal split；`data-search.yaml` 的搜尋範圍只在 formal train 內。
+- 所有 split 路徑均為相對路徑；影像是一般檔案，不含指向 `/home/uxin/...` 的 symlink。
+- 不含 test split、weights、checkpoint、cache、runs、`.pt`、`.pth`、`.onnx` 或 engine。
+
+## 使用
+
+Detection 診斷 view：
+
+    data=artifacts/datasets/bbat5-v1/github-dataset/detect/data.yaml
+
+Pose view（正式執行仍需使用者另外決定）：
+
+    data=artifacts/datasets/bbat5-v1/github-dataset/pose/data.yaml
+
+搜尋設定分別使用同一目錄下的 `data-search.yaml`。完整來源、split、patch 與 COCO 排除證據在
+上一層 `../manifests/`；本 snapshot 的檔案樹雜湊與數量在 `publication-manifest.json`。
+"""
+
+
+def _snapshot_files(root: Path) -> tuple[Path, ...]:
+    return tuple(
+        sorted(
+            path
+            for path in root.rglob("*")
+            if path.is_file() and path.name != "publication-manifest.json"
+        )
+    )
+
+
+def validate_bbat5_github_dataset(
+    destination: str | Path = DEFAULT_GITHUB_DATASET,
+) -> dict[str, Any]:
+    """驗證 GitHub snapshot 可攜、完整、無 symlink 且不含權重。"""
+
+    root = Path(destination).resolve()
+    manifest_path = root / "publication-manifest.json"
+    if not manifest_path.is_file():
+        raise FileNotFoundError(f"缺少 publication manifest：{manifest_path}")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    symlinks = [path for path in root.rglob("*") if path.is_symlink()]
+    if symlinks:
+        raise AssertionError(f"GitHub dataset 不得含 symlink：{symlinks[:3]}")
+    forbidden = [
+        path
+        for path in root.rglob("*")
+        if path.is_file() and path.suffix.lower() in FORBIDDEN_PUBLICATION_SUFFIXES
+    ]
+    if forbidden:
+        raise AssertionError(f"GitHub dataset 含禁止檔案：{forbidden[:3]}")
+
+    view_names: dict[str, dict[str, set[str]]] = {}
+    label_count = 0
+    materialized_image_bytes = 0
+    label_bytes = 0
+    for view in ("pose", "detect"):
+        view_names[view] = {}
+        for split in ("train", "val"):
+            image_dir = root / view / "images" / split
+            label_dir = root / view / "labels" / split
+            images = tuple(
+                sorted(path for path in image_dir.iterdir() if path.suffix.lower() in IMAGE_SUFFIXES)
+            )
+            labels = tuple(sorted(label_dir.glob("*.txt")))
+            if {path.stem for path in images} != {path.stem for path in labels}:
+                raise AssertionError(f"{view}/{split} 的影像與 label 不一對一")
+            view_names[view][split] = {path.name for path in images}
+            label_count += len(labels)
+            materialized_image_bytes += sum(path.stat().st_size for path in images)
+            label_bytes += sum(path.stat().st_size for path in labels)
+        if (root / view / "images/test").exists() or (root / view / "labels/test").exists():
+            raise AssertionError("原始資料沒有 test，不得在 GitHub snapshot 建立 test split")
+        for config_name in ("data.yaml", "data-search.yaml"):
+            payload = yaml.safe_load((root / view / config_name).read_text(encoding="utf-8"))
+            if "path" in payload:
+                raise AssertionError(f"{view}/{config_name} 不得含機器限定 path")
+            if payload["names"] != {0: "ball", 1: "bat"}:
+                raise AssertionError(f"{view}/{config_name} class contract 錯誤")
+            if view == "pose" and payload.get("kpt_shape") != [2, 3]:
+                raise AssertionError(f"{view}/{config_name} kpt_shape 錯誤")
+
+    for split in ("train", "val"):
+        if view_names["pose"][split] != view_names["detect"][split]:
+            raise AssertionError(f"Pose/Detect {split} 影像 assignment 不一致")
+        for name in sorted(view_names["pose"][split]):
+            pose_image = root / "pose/images" / split / name
+            detect_image = root / "detect/images" / split / name
+            if not os.path.samefile(pose_image, detect_image) and (
+                pose_image.stat().st_size != detect_image.stat().st_size
+                or _sha256(pose_image) != _sha256(detect_image)
+            ):
+                raise AssertionError(f"Pose/Detect 影像內容不一致：{name}")
+            pose_label = root / "pose/labels" / split / f"{Path(name).stem}.txt"
+            detect_label = root / "detect/labels" / split / f"{Path(name).stem}.txt"
+            expected = [
+                " ".join(line.split()[:5])
+                for line in pose_label.read_text(encoding="utf-8").splitlines()
+            ]
+            if detect_label.read_text(encoding="utf-8").splitlines() != expected:
+                raise AssertionError(f"Detect view 不是 Pose 前五欄：{name}")
+
+    split_names: dict[str, dict[str, set[str]]] = {"pose": {}, "detect": {}}
+    for view in ("pose", "detect"):
+        for split_file_name in (
+            "formal-train.txt",
+            "formal-val.txt",
+            "search-train.txt",
+            "search-val.txt",
+        ):
+            split_file = root / view / "splits" / split_file_name
+            names: set[str] = set()
+            for line in split_file.read_text(encoding="utf-8").splitlines():
+                if not line.startswith("./../images/"):
+                    raise AssertionError(f"{split_file} 含非 portable path：{line}")
+                image = (split_file.parent / line).resolve()
+                try:
+                    image.relative_to(root)
+                except ValueError as error:
+                    raise AssertionError(f"{split_file} path 逃出 snapshot：{line}") from error
+                if not image.is_file():
+                    raise FileNotFoundError(f"{split_file} 指向不存在影像：{line}")
+                if image.name in names:
+                    raise AssertionError(f"{split_file} 重複列出 {image.name}")
+                names.add(image.name)
+            split_names[view][split_file_name] = names
+        if split_names[view]["formal-train.txt"] != view_names[view]["train"]:
+            raise AssertionError(f"{view} formal train list 與目錄不一致")
+        if split_names[view]["formal-val.txt"] != view_names[view]["val"]:
+            raise AssertionError(f"{view} formal val list 與目錄不一致")
+        search_train = split_names[view]["search-train.txt"]
+        search_val = split_names[view]["search-val.txt"]
+        if search_train & search_val or search_train | search_val != view_names[view]["train"]:
+            raise AssertionError(f"{view} search split 不是 formal train 的完整無洩漏分割")
+    if split_names["pose"] != split_names["detect"]:
+        raise AssertionError("Pose/Detect portable split lists 不一致")
+
+    tree_sha256 = _tree_sha256(root, _snapshot_files(root))
+    if tree_sha256 != manifest.get("tree_sha256"):
+        raise AssertionError("GitHub dataset tree SHA256 與 publication manifest 不符")
+    unique_images = len(view_names["pose"]["train"] | view_names["pose"]["val"])
+    expected_counts = manifest.get("counts", {})
+    observed_counts = {
+        "unique_images": unique_images,
+        "image_paths": unique_images * 2,
+        "label_paths": label_count,
+        "formal_train_images": len(view_names["pose"]["train"]),
+        "formal_val_images": len(view_names["pose"]["val"]),
+    }
+    if any(expected_counts.get(key) != value for key, value in observed_counts.items()):
+        raise AssertionError("GitHub dataset counts 與 publication manifest 不符")
+    return {
+        "valid": True,
+        "destination": str(root),
+        **observed_counts,
+        "materialized_image_bytes": materialized_image_bytes,
+        "label_bytes": label_bytes,
+        "symlinks": 0,
+        "forbidden_files": 0,
+        "test_split": None,
+        "tree_sha256": tree_sha256,
+        "dataset_spec_version": manifest["dataset_lineage"]["spec_version"],
+        "publication_spec_version": manifest["publication_lineage"]["spec_version"],
+    }
+
+
+def export_bbat5_github_dataset(
+    source: str | Path = DEFAULT_DESTINATION,
+    destination: str | Path = DEFAULT_GITHUB_DATASET,
+    *,
+    execute: bool = False,
+) -> dict[str, Any]:
+    """物化完整、可攜且不含權重的 GitHub dataset snapshot。"""
+
+    source_root = Path(source).resolve()
+    output_root = Path(destination).resolve()
+    source_validation = validate_bbat5_dataset(source_root)
+    counts = {
+        "unique_images": source_validation["pose_images"],
+        "image_paths": source_validation["pose_images"] * 2,
+        "label_paths": source_validation["pose_images"] * 2,
+        "formal_train_images": source_validation["formal_train_images"],
+        "formal_val_images": source_validation["formal_val_images"],
+    }
+    report: dict[str, Any] = {
+        "source": str(source_root),
+        "destination": str(output_root),
+        "execute": execute,
+        "storage": "regular_files_with_pose_detect_image_content_deduplicated_when_supported",
+        "counts": counts,
+        "excluded": ["weights", "checkpoints", "cache", "runs", "test"],
+    }
+    if not execute:
+        return report
+    if output_root.exists():
+        raise FileExistsError(f"GitHub dataset snapshot 不可覆寫：{output_root}")
+    output_root.parent.mkdir(parents=True, exist_ok=True)
+    temporary = Path(
+        tempfile.mkdtemp(prefix=f".{output_root.name}-building-", dir=output_root.parent)
+    )
+    try:
+        for view in ("pose", "detect"):
+            for split in ("train", "val"):
+                (temporary / view / "images" / split).mkdir(parents=True, exist_ok=True)
+                (temporary / view / "labels" / split).mkdir(parents=True, exist_ok=True)
+            (temporary / view / "splits").mkdir(parents=True, exist_ok=True)
+
+        hardlinked_pairs = 0
+        for split in ("train", "val"):
+            pose_images = {
+                path.name: path
+                for path in (source_root / "pose/images" / split).iterdir()
+                if path.suffix.lower() in IMAGE_SUFFIXES
+            }
+            detect_names = {
+                path.name
+                for path in (source_root / "detect/images" / split).iterdir()
+                if path.suffix.lower() in IMAGE_SUFFIXES
+            }
+            if set(pose_images) != detect_names:
+                raise AssertionError(f"Pose/Detect {split} 來源影像不一致")
+            for name, source_image in sorted(pose_images.items()):
+                pose_image = temporary / "pose/images" / split / name
+                detect_image = temporary / "detect/images" / split / name
+                shutil.copy2(source_image.resolve(strict=True), pose_image)
+                try:
+                    os.link(pose_image, detect_image)
+                    hardlinked_pairs += 1
+                except OSError:
+                    shutil.copy2(pose_image, detect_image)
+                for view in ("pose", "detect"):
+                    source_label = source_root / view / "labels" / split / f"{Path(name).stem}.txt"
+                    target_label = temporary / view / "labels" / split / source_label.name
+                    shutil.copy2(source_label, target_label)
+
+        for view in ("pose", "detect"):
+            for split_name in (
+                "formal-train.txt",
+                "formal-val.txt",
+                "search-train.txt",
+                "search-val.txt",
+            ):
+                _write_lines(
+                    temporary / view / "splits" / split_name,
+                    _portable_split_lines(source_root, view, split_name),
+                )
+            _yaml_write(temporary / view / "data.yaml", _portable_dataset_yaml(view, search=False))
+            _yaml_write(
+                temporary / view / "data-search.yaml",
+                _portable_dataset_yaml(view, search=True),
+            )
+
+        (temporary / "README.md").write_text(
+            _github_dataset_readme(counts),
+            encoding="utf-8",
+        )
+        dataset_manifest = json.loads(
+            (source_root / "manifests/rebuild-manifest.json").read_text(encoding="utf-8")
+        )
+        snapshot_files = _snapshot_files(temporary)
+        unique_image_bytes = sum(
+            path.stat().st_size
+            for path in (temporary / "pose/images").rglob("*")
+            if path.is_file()
+        )
+        materialized_image_bytes = sum(
+            path.stat().st_size
+            for view in ("pose", "detect")
+            for path in (temporary / view / "images").rglob("*")
+            if path.is_file()
+        )
+        label_bytes = sum(
+            path.stat().st_size
+            for view in ("pose", "detect")
+            for path in (temporary / view / "labels").rglob("*.txt")
+        )
+        publication_manifest = {
+            "schema_version": 1,
+            "publication_kind": "materialized-github-dataset",
+            "derived_version": "bbat5-v1",
+            "dataset_lineage": {
+                "spec_version": dataset_manifest["spec_version"],
+                "spec_sha256": dataset_manifest["spec_sha256"],
+            },
+            "publication_lineage": {
+                "spec_version": SPEC_VERSION,
+                "spec_sha256": file_sha256(SPEC_PATH),
+            },
+            "counts": counts,
+            "unique_image_bytes": unique_image_bytes,
+            "materialized_image_bytes": materialized_image_bytes,
+            "label_bytes": label_bytes,
+            "hardlinked_view_pairs_during_export": hardlinked_pairs,
+            "checkout_note": "Git stores identical image blobs once; checkout may materialize two regular paths.",
+            "symlinks": 0,
+            "test_split": None,
+            "forbidden_weight_files": 0,
+            "tree_sha256": _tree_sha256(temporary, snapshot_files),
+        }
+        _json_write(temporary / "publication-manifest.json", publication_manifest)
+        validation = validate_bbat5_github_dataset(temporary)
+        os.replace(temporary, output_root)
+        validation["destination"] = str(output_root)
+    except Exception:
+        shutil.rmtree(temporary, ignore_errors=True)
+        raise
+    return {**report, "validation": validation}
 
 
 # 中文 CLI 名稱仍為 prepare-pose-data；函式別名方便既有自動化逐步遷移。
