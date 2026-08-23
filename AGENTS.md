@@ -44,11 +44,17 @@ This repository uses a single-context domain documentation layout. See `docs/age
 
 ## BBAT5 棒球資料集
 
-- BBAT5 detection 一律使用 `/home/uxin/yolo/original/pose/detect_dataset/`。
-- BBAT5 pose 一律使用 `/home/uxin/yolo/original/pose/dataset/`。
-- 後續凡是使用 BBAT5、BBT5 或棒球專用資料集的工作，必須依任務類型使用上述既有資料集與既有 split；不得自行重新切分、抽樣、複製成另一份資料集、替換來源或改動影像與標註，除非使用者明確授權。
+- 所有新 BBAT5 detection、pose 與融合實驗一律使用不可變的 `/home/uxin/yolo/original/pose/derived/bbat5-v1/`。
+- 正式 Pose YAML 是 `configs/pose.yaml`；正式 ball/bat Detect YAML 是 `configs/detect.yaml`；全域 machine-readable registry 是 `/home/uxin/yolo/configs/datasets/bbat5-v1.yaml`。
+- `/home/uxin/yolo/original/pose/dataset/` 與 `detect_dataset/` 是唯讀原始／歷史來源，只用於稽核與重建，不得再作新訓練入口。
+- 子專案 `artifacts/datasets/` 只可建立保留 bbat5-v1 assignment 與 labels 的可重建 runtime View，不得成為另一個資料版本。
+- 後續凡是使用 BBAT5、BBT5 或棒球專用資料集的工作，不得自行重新切分、抽樣、替換來源或改動影像與標註，除非使用者明確授權建立新版本。
 - 若路徑或設定有問題，先記錄問題並只修正必要的路徑或設定，不得用另建 split 規避。
-- 完整規範與使用者已核准的 `bbat5-v1`／GitHub snapshot 例外見 `docs/agents/bbat5-datasets.md`。
+- 完整規範與 GitHub snapshot 的發行邊界見 `docs/agents/bbat5-datasets.md`。
+- 依使用者 2026-08-23 明確授權，GitHub 另保存 `original/` 的原始 Pose、歷史 Detect 與
+  canonical lineage；這只增加可追溯來源，不把 raw/basic split 升格為正式訓練入口。
+- `original/` 發布永久排除 weights、checkpoint、cache、run 與重複 archive；Git 中既有的
+  `original/**/*.pt` 必須移除，本機權重不得因此刪除。
 
 ## 語言與工作紀錄
 

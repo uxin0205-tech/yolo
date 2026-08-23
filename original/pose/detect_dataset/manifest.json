@@ -1,0 +1,91 @@
+{
+  "created_at": "2026-08-21T05:29:58.491403+00:00",
+  "independence_warning": {
+    "coco_train2017_id_overlap_images": 93,
+    "examples": [
+      "000000005614_jpg.rf.962054456b085c76be3e71cb0709b487.jpg",
+      "000000007615_jpg.rf.3172c58cce7b200acb473529cb05ed4d.jpg",
+      "000000008329_jpg.rf.9a50929a625330f3d8ff0ad11364bacf.jpg",
+      "000000009460_jpg.rf.e07c6fe44b8afd94dbca6225a924253e.jpg",
+      "000000009960_jpg.rf.60c2482ca20b5a957f1ca17587afdb12.jpg",
+      "000000010710_jpg.rf.8f021e94be439aa2b2c6432dda2b3acc.jpg",
+      "000000010817_jpg.rf.3e587d78199227f867545e6449865171.jpg",
+      "000000011107_jpg.rf.7beef039d304e3fd830d017e51fadeb0.jpg",
+      "000000013195_jpg.rf.30890edbc30232ea257cec50ac50b74e.jpg",
+      "000000016827_jpg.rf.f27358d22dc66cc8f005caaeb2bb5484.jpg"
+    ],
+    "fraction_of_validation_images": 0.164021164021164
+  },
+  "schema_version": 1,
+  "source": {
+    "data_yaml": "/home/uxin0/yolo/original/pose/dataset/data.yaml",
+    "root": "/home/uxin0/yolo/original/pose/dataset"
+  },
+  "storage": "影像為逐檔相對 symlink；detection labels 為獨立的 5 欄文字檔",
+  "views": {
+    "coco80": {
+      "class_mapping": {
+        "32": "sports ball",
+        "34": "baseball bat"
+      },
+      "data_yaml": "/home/uxin0/yolo/original/pose/detect_dataset/coco80/data.yaml",
+      "root": "/home/uxin0/yolo/original/pose/detect_dataset/coco80",
+      "splits": {
+        "train": {
+          "derived_label_tree_sha256": "73597dfae9c42e933b44bd9bfc2d7fa224de284063242ef58acdf1bd603ff780",
+          "empty_labels": 36,
+          "images": 6080,
+          "instances_by_class": {
+            "32": 3312,
+            "34": 4969
+          },
+          "labels": 6080,
+          "source_label_tree_sha256": "2e4c25b148046df4a8a470833553b771fe91a8989422c0c20c5c4a037f09da20"
+        },
+        "valid": {
+          "derived_label_tree_sha256": "dd6ef38dc1ec63d7c72454e26da7295f8a306c648251b02108d24b0610419a55",
+          "empty_labels": 2,
+          "images": 567,
+          "instances_by_class": {
+            "32": 301,
+            "34": 484
+          },
+          "labels": 567,
+          "source_label_tree_sha256": "f7915692c9cf8181bc19d19fbfa2d54c92a454a3c863de4f786bf81bcbb0db53"
+        }
+      }
+    },
+    "two_class": {
+      "class_mapping": {
+        "0": "ball",
+        "1": "bat"
+      },
+      "data_yaml": "/home/uxin0/yolo/original/pose/detect_dataset/data.yaml",
+      "root": "/home/uxin0/yolo/original/pose/detect_dataset",
+      "splits": {
+        "train": {
+          "derived_label_tree_sha256": "c90421f38114fda0e7dc450294f0da9a678f8240c6a5730b1137b311efe40bd1",
+          "empty_labels": 36,
+          "images": 6080,
+          "instances_by_class": {
+            "0": 3312,
+            "1": 4969
+          },
+          "labels": 6080,
+          "source_label_tree_sha256": "2e4c25b148046df4a8a470833553b771fe91a8989422c0c20c5c4a037f09da20"
+        },
+        "valid": {
+          "derived_label_tree_sha256": "600d53b8222278b2d0c89dc85f13b570c55cda1b90afea926d76e14b97d9285f",
+          "empty_labels": 2,
+          "images": 567,
+          "instances_by_class": {
+            "0": 301,
+            "1": 484
+          },
+          "labels": 567,
+          "source_label_tree_sha256": "f7915692c9cf8181bc19d19fbfa2d54c92a454a3c863de4f786bf81bcbb0db53"
+        }
+      }
+    }
+  }
+}

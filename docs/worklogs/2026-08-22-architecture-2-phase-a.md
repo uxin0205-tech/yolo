@@ -1,5 +1,9 @@
 # 2026-08-22：完成 architecture_2 Phase A 與 BBAT5 v1
 
+> 0823 資料位置註記：本紀錄中的 `artifacts/datasets/bbat5-v1` 是 0822 當時的 metadata 位置。
+> 現行 tree 已移除整個副本；唯一資料、YAML 與 manifests 位於
+> `/home/uxin/yolo/original/pose/derived/bbat5-v1/`。
+
 ## 任務與範圍
 
 重新定義 /home/uxin/yolo/yolo_achitechure/achitechure_2 的責任：承接 yolo_combine 最後選出的

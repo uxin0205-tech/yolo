@@ -1,0 +1,30 @@
+schema_version: 1
+architecture: full35
+status: blocked_until_architecture_matched_pose_baseline_is_accepted
+initialization:
+  detect_checkpoint: /home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/float/full35-a2.pt
+  available_pose_checkpoint: /home/uxin/yolo/yolo_combine/artifacts/runs/p0/p0-full35-p1-seed0/weights/best.pt
+  approved_pose_checkpoint: null
+  note: P1 is head-only and provisional; P2/P3 plus validation gate remain
+ratios:
+  - name: 1to1
+    detect_microbatches: 1
+    pose_microbatches: 1
+    detect_loss_reduction: mean
+  - name: 2to1
+    detect_microbatches: 2
+    pose_microbatches: 1
+    detect_loss_reduction: mean
+accuracy_gate:
+  maximum_map50_95_drop: 0.08
+  comparison: each_metric_against_matching_independent_baseline
+  metrics:
+    - person_box
+    - ball_box
+    - bat_box
+    - ball_pose
+    - bat_pose
+seed_policy:
+  primary: 0
+  optional_second: 1
+run_root: artifacts/fusion

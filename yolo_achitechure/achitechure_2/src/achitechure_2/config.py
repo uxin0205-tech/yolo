@@ -12,7 +12,7 @@ import yaml
 
 from .lite_c3k2 import LiteC3k2Config
 
-SPEC_VERSION = "2.0.2"
+SPEC_VERSION = "2.0.3"
 EXPECTED_ULTRALYTICS_VERSION = "8.4.90"
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SPEC_PATH = PROJECT_ROOT / "EXPERIMENT_SPEC.md"

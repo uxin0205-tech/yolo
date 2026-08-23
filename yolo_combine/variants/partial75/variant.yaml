@@ -1,0 +1,22 @@
+schema_version: 2
+architecture: partial75
+role: fallback
+source:
+  bundle: /home/uxin/yolo/yolo_achitechure/achitechure_1/final
+  float_checkpoint: /home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/float/partial75-a2.pt
+  float_sha256: 070b571d1a52b1e7d13acc25d4c77278e38395d975fe6bff5e9bbd1bdc01e568
+  bittrue_checkpoint: /home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/partial75-a2.pt
+  bittrue_sha256: aa878765518efa6a3801c03e39ce5a3d78bea0fa09c70a3cbd41a83f7c6b77e8
+dataset_contract:
+  registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+  version: bbat5-v1
+datasets:
+  coco_detect: /home/uxin/yolo/coco2017.yaml
+  bbt5_pose: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  bbt5_detect: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml
+runs:
+  root: artifacts
+documents:
+  baseline: baselines/independent.json
+  training: configs/training.yaml
+  fusion: configs/fusion.yaml

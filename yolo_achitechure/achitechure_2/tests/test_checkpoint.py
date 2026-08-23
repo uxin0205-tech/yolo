@@ -19,7 +19,7 @@ def _region() -> CandidateRegion:
 
 def _lineage() -> dict[str, str]:
     return {
-        "spec_version": "2.0.2",
+        "spec_version": "2.0.3",
         "spec_sha256": "a" * 64,
         "handoff_revision": "winner-r1",
         "handoff_manifest_sha256": "b" * 64,

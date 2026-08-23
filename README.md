@@ -10,17 +10,38 @@
 - [領域文件規範](docs/agents/domain.md)
 - [GitHub Issue 使用規範](docs/agents/issue-tracker.md)
 
-## BBAT5 固定資料來源
+## BBAT5 v1 正式資料版本：同時包含 Pose 與 Detect
 
-| 任務 | 唯一預設資料集 |
-| --- | --- |
-| Detection | `/home/uxin/yolo/original/pose/detect_dataset/` |
-| Pose | `/home/uxin/yolo/original/pose/dataset/` |
+`bbat5-v1` 不是「只給 Pose」或「只給 Detect」的單一 YAML，而是一個成對版本容器。
+Pose 與 ball/bat 二類 Detect 共用 6,647 張影像及完全相同的 train/val assignment，只使用
+不同格式的 labels。根目錄本身不能直接交給 Ultralytics，請依任務選擇入口：
 
-為控制實驗變因，後續不得自行重切、抽樣、複製、替換或重建這兩套資料集。需要例外時，必須先取得使用者明確授權，並在[工作紀錄](docs/worklogs/README.md)寫明原因、範圍與影響。
+| 要執行的任務 | 正式入口 | 說明 |
+| --- | --- | --- |
+| ball/bat Pose | `/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml` | 2 classes、2 個 keypoints |
+| ball/bat 二類 Detect | `/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml` | 2 classes，只使用 bbox |
+| COCO80／person Detect | `/home/uxin/yolo/coco2017.yaml` | 不屬於 BBAT5，不可改用二類 YAML |
+| Detect–Pose 融合 | [`configs/datasets/bbat5-v1.yaml`](configs/datasets/bbat5-v1.yaml) 加上任務所需的 COCO 設定 | 由程式解析各 Task View |
 
-使用者已核准 architecture_2 將既有 `bbat5-v1` 以不改 split／patch 的方式物化為完整 GitHub
-snapshot；固定位置與禁止權重規則見[BBAT5 資料集規範](docs/agents/bbat5-datasets.md)。
+全專案 BBAT5 registry 是 [`configs/datasets/bbat5-v1.yaml`](configs/datasets/bbat5-v1.yaml)。
+`original/pose/dataset` 與 `detect_dataset` 是唯讀來源／歷史資料；新訓練不得直接使用。
+各專案只可在 `artifacts/cache-views/` 建立 symlink-only runtime View 以隔離 cache；split、labels
+與 lineage 必須完全來自 `bbat5-v1`，不得形成第二套資料版本或使用 `artifacts/datasets/`。
+
+資料目錄角色見 [`original/pose/README.md`](original/pose/README.md)，選型理由見
+[ADR 0001](docs/adr/0001-use-bbat5-v1-as-canonical-dataset.md)。自 2026-08-23 起，
+`original/pose/` 是唯一 BBAT5 資料資產庫；各專案的 `artifacts/datasets/` 不得再保存正式副本。
+
+### GitHub 的 original 發布範圍
+
+依 2026-08-23 授權，GitHub 保存 `original/pose/dataset/`、`detect_dataset/` 與
+`derived/bbat5-v1/` 的可用資料內容，供稽核與重建。這不改變正式訓練入口：新 run 仍只讀取
+`bbat5-v1` registry。發布永久排除 `.pt`／checkpoint、Ultralytics cache、run，以及超過
+GitHub 單檔限制且與已解壓目錄重複的 `detect_dataset.zip`；詳細範圍見
+[`original/README.md`](original/README.md) 與 [ADR 0002](docs/adr/0002-publish-original-data-without-weights.md)。
+
+2026-08-22 曾發布於 `yolo_achitechure/achitechure_2/artifacts/datasets/` 的可攜副本只保留在
+Git 歷史；目前 tree 已移除，避免同一資料出現兩個可被誤認為正式入口的位置。
 
 ## 報告與變更
 

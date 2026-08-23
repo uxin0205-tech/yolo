@@ -13,8 +13,15 @@ def test_cli_exposes_phase_a_commands_and_no_guessing_train_command() -> None:
     assert parser.parse_args(["config-check"]).command == "config-check"
     assert parser.parse_args(["prepare-pose-data"]).command == "prepare-pose-data"
     assert parser.parse_args(["validate-pose-data"]).command == "validate-pose-data"
-    assert parser.parse_args(["export-github-dataset"]).command == "export-github-dataset"
-    assert parser.parse_args(["validate-github-dataset"]).command == "validate-github-dataset"
+    deprecated_commands = (
+        "export-data-metadata",
+        "export-github-dataset",
+        "validate-github-dataset",
+    )
+    for command in deprecated_commands:
+        with pytest.raises(SystemExit):
+            parser.parse_args([command])
+
     assert parser.parse_args(["show-candidates"]).command == "show-candidates"
     with pytest.raises(SystemExit):
         parser.parse_args(["train"])
@@ -27,7 +34,7 @@ def test_status_is_chinese_cpu_phase_a_and_pose_is_user_choice(capsys) -> None:
     assert payload["gpu_actions"] == "blocked_until_user_authorization"
     assert payload["pose_formal_execution"] == "requires_user_opt_in"
     assert payload["fusion_winner"] == "waiting_for_yolo_combine_handoff"
-    assert payload["spec_version"] == "2.0.2"
+    assert payload["spec_version"] == "2.0.3"
     assert len(payload["spec_sha256"]) == 64
     assert payload["bbat5_v1_lineage"]["spec_version"] == "2.0.0"
 

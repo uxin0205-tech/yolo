@@ -1,0 +1,14 @@
+path: /home/uxin/yolo/original/pose/derived/bbat5-v1/pose
+train: images/train
+val: images/val
+
+kpt_shape: [2, 3]
+flip_idx: [0, 1]
+
+names:
+  0: ball
+  1: bat
+
+dataset_id: bbat5-v1
+canonical_data_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml

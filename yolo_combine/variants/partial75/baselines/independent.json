@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "architecture": "partial75",
+  "captured_on": "2026-08-22",
+  "evidence_status": "existing_artifacts_only_no_gpu_rerun",
+  "original_bbt5_pose": {
+    "status": "historical_existing_checkpoint",
+    "task": "pose",
+    "model": "YOLO11m Pose",
+    "classes": {
+      "0": "ball",
+      "1": "bat"
+    },
+    "kpt_shape": [
+      2,
+      3
+    ],
+    "parameters": 20904360,
+    "checkpoint": {
+      "path": "/home/uxin/yolo/original/pose/weight/yolo11m_bat.pt",
+      "bytes": 42235795,
+      "sha256": "7a8c720b8f5acef3a3cb465fbffb1b41b2dd3fee4519600389cdcd0d58c54009",
+      "ultralytics_version": "8.3.75",
+      "stripped_inference_checkpoint": true
+    },
+    "dataset": {
+      "path": "/home/uxin/yolo/original/pose/dataset",
+      "detect_derivation": "/home/uxin/yolo/original/pose/detect_dataset",
+      "train_images": 6080,
+      "val_images": 567,
+      "train_empty_labels": 36,
+      "val_empty_labels": 2,
+      "train_instances": {
+        "ball": 3312,
+        "bat": 4969
+      },
+      "val_instances": {
+        "ball": 301,
+        "bat": 484
+      },
+      "label_columns": 11,
+      "ball_second_keypoint_masked": true
+    },
+    "training": {
+      "epochs": 30,
+      "physical_batch": 16,
+      "nbs": 64,
+      "imgsz": 640,
+      "optimizer": "auto",
+      "pretrained": true,
+      "seed": 0,
+      "lr0": 0.01,
+      "lrf": 0.01,
+      "pose_loss_weight": 12,
+      "keypoint_objectness_weight": 1
+    },
+    "validation": {
+      "box": {
+        "precision": 0.88661,
+        "recall": 0.88319,
+        "map50": 0.88083,
+        "map50_95": 0.63036
+      },
+      "pose": {
+        "precision": 0.89017,
+        "recall": 0.88858,
+        "map50": 0.88697,
+        "map50_95": 0.88204
+      },
+      "losses": {
+        "box": 0.90915,
+        "pose": 0.09696,
+        "keypoint_objectness": 0.05172,
+        "cls": 0.57739,
+        "dfl": 0.97115
+      }
+    },
+    "caveats": [
+      "Metrics are embedded historical metrics; no per-class results.csv or plots are present beside the checkpoint.",
+      "The original Roboflow train/valid split has 10 source-group overlaps, so this is provisional rather than a leakage-safe final baseline.",
+      "YOLO11m weights are a historical baseline or teacher; they are not graph-compatible Pose26 head weights."
+    ]
+  },
+  "coco_detect": {
+    "status": "authoritative_existing_checkpoint_and_report",
+    "task": "detect",
+    "model_id": "partial75-a2",
+    "classes": 80,
+    "application_consumes_class": {
+      "id": 0,
+      "name": "person"
+    },
+    "dataset": {
+      "path": "/home/uxin/yolo/coco2017.yaml",
+      "train_images": 118287,
+      "val_images": 5000,
+      "train_instances": {
+        "person": 257252,
+        "sports_ball": 6299,
+        "baseball_bat": 3273
+      },
+      "val_instances": {
+        "person": 10777,
+        "sports_ball": 260,
+        "baseball_bat": 145
+      },
+      "head_classes": 80
+    },
+    "parameters": 21903917,
+    "gflops_imgsz640": 75.4794496,
+    "checkpoints": {
+      "float_training_source": {
+        "path": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/float/partial75-a2.pt",
+        "sha256": "070b571d1a52b1e7d13acc25d4c77278e38395d975fe6bff5e9bbd1bdc01e568"
+      },
+      "bittrue_validation_source": {
+        "path": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/partial75-a2.pt",
+        "sha256": "aa878765518efa6a3801c03e39ce5a3d78bea0fa09c70a3cbd41a83f7c6b77e8"
+      }
+    },
+    "training_metadata": {
+      "epochs": 10,
+      "physical_batch": 16,
+      "nbs": 16,
+      "imgsz": 640,
+      "optimizer": "MuSGD",
+      "lr0": 0.00038,
+      "lrf": 0.5,
+      "pretrained": true,
+      "seed": 0,
+      "note": "Custom retained A2 training; not a reproduction of the upstream 80-epoch, batch-128 YOLO26m COCO pretraining recipe."
+    },
+    "checkpoint_embedded_metrics": {
+      "precision": 0.72386,
+      "recall": 0.62001,
+      "map50": 0.67698,
+      "map50_95": 0.50661
+    },
+    "coco_internal_bittrue": {
+      "overall": {
+        "map50": 0.6771173033193066,
+        "map50_95": 0.5067544912590529,
+        "map75": 0.5545770005115477,
+        "recall": 0.6203587307192543
+      },
+      "person": {
+        "class_id": 0,
+        "ap50_95": 0.6264457848890177
+      },
+      "sports_ball": {
+        "class_id": 32,
+        "ap50_95": 0.5154387443
+      },
+      "baseball_bat": {
+        "class_id": 34,
+        "ap50_95": 0.4869511011
+      }
+    },
+    "coco_canonical_bittrue": {
+      "overall": {
+        "ap50_95": 0.5126887795127215,
+        "ap50": 0.6848114403338108,
+        "ap75": 0.5600861364106079
+      },
+      "sports_ball": {
+        "ap50_95": 0.5188192774335422,
+        "ap50": 0.7099405095501736,
+        "ap75": 0.5756992646635375
+      },
+      "baseball_bat": {
+        "ap50_95": 0.4886606392109285,
+        "ap50": 0.7120928191261156,
+        "ap75": 0.5291253226951836
+      }
+    },
+    "bbt5_detect_internal_bittrue": {
+      "overall": {
+        "map50_95": 0.4015543271763919,
+        "map50": 0.653643150154672,
+        "map75": 0.4133577357
+      },
+      "ball": {
+        "ap50_95": 0.3136717598,
+        "ap50": 0.5841499994,
+        "ap75": 0.2720618596
+      },
+      "bat": {
+        "ap50_95": 0.4894368945,
+        "ap50": 0.7231363009,
+        "ap75": 0.5546536117
+      }
+    },
+    "performance_context": {
+      "hardware": "RTX 5060 Ti 16 GiB",
+      "imgsz": 640,
+      "validation_batch": 8,
+      "workers": 6,
+      "backend": "Bit-True PWL",
+      "coco_inference_ms_per_image": 10.932461019599987,
+      "coco_peak_vram_bytes": 2645623296,
+      "bbt5_inference_ms_per_image": 10.950368082817484
+    },
+    "evidence": {
+      "summary": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/reports/FULL35_PARTIAL75_AP.md",
+      "raw_directory": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/reports/raw/partial75-a2"
+    },
+    "caveats": [
+      "All ranking AP values above come from the Bit-True checkpoint; the Float checkpoint is the continuation-training source.",
+      "RTX 5060 Ti validation latency and VRAM are context evidence, not RTX 5090 or FPGA deployment measurements.",
+      "BBT5 Detect valid has 93/567 images whose COCO IDs appear in COCO train2017; use it for relative comparison, not independent generalization."
+    ]
+  },
+  "architecture_matched_pose26": {
+    "status": "not_run",
+    "model": "YOLO26m Pose26 with Partial75 trunk",
+    "parameters": 23538605,
+    "checkpoint": null,
+    "training": {
+      "epochs": null,
+      "physical_batch": null,
+      "nbs": null,
+      "steady_state_accumulate": null,
+      "approximate_optimizer_batch": null,
+      "imgsz": 640,
+      "optimizer": null,
+      "seed": null,
+      "frozen_layers": null,
+      "trainable_scope": null
+    },
+    "validation": {
+      "box": null,
+      "pose": null,
+      "reported_per_class_pose_map50_95": null,
+      "durable_per_class_json_present": false
+    },
+    "caveats": [
+      "No Partial75 Pose26 P1/P2/P3 training has been run.",
+      "Full35 P1 metrics must not be reused as Partial75 accuracy.",
+      "The graph and parameter count are construction evidence only."
+    ]
+  },
+  "graph_size_comparison": {
+    "comparison_scope": "architecture-matched Detect plus fresh Pose26 versus shared dual-head graph",
+    "detect_parameters": 21903917,
+    "fresh_pose26_parameters": 23538605,
+    "independent_pair_parameters": 45442522,
+    "shared_dual_head_parameters": 26460581,
+    "removed_duplicate_trunk_parameters": 18981941,
+    "parameter_reduction_percent": 41.7713,
+    "historical_detect_plus_yolo11_pose_parameters": 42808277,
+    "warning": "The 41.8% figure is a graph parameter reduction, not an accuracy, MAC, latency, energy, or FPGA resource result."
+  },
+  "acceptance": {
+    "maximum_map50_95_drop": 0.08,
+    "rule": "Every tracked task metric is compared against its matching independent baseline; averaging cannot hide a failed task."
+  }
+}

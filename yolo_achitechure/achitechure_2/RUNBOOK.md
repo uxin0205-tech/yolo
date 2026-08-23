@@ -29,8 +29,9 @@
 
 來源固定唯讀：
 
-- Pose：/home/uxin/yolo/original/pose/dataset/
-- Detect audit：/home/uxin/yolo/original/pose/detect_dataset/
+- Pose 原始來源（只供重建）：/home/uxin/yolo/original/pose/dataset/
+- Detect audit 原始來源（只供重建）：/home/uxin/yolo/original/pose/detect_dataset/
+- 全專案正式 registry：/home/uxin/yolo/configs/datasets/bbat5-v1.yaml
 
 ### 唯讀 dry-plan
 
@@ -69,34 +70,11 @@ v1 已存在時命令會拒絕覆寫。任何新規則必須建立 bbat5-v2，�
 兩者都只引用 formal train 內的 search lists。COCO train-only search 尚未定義；在新增正式
 config/spec 前，不得用 COCO formal val 做融合 recipe 搜尋。
 
-### 匯出 Git metadata
+### 唯一資料發布位置
 
-只預覽：
+Git tree 與本機都只以 `/home/uxin/yolo/original/pose/` 保存 BBAT5 資料；正式 YAML／manifests
+位於 `derived/bbat5-v1/`。`artifacts/datasets/` 不得保存或匯出第二份資料。
 
-    $PY -m achitechure_2 export-data-metadata
-
-實際匯出：
-
-    $PY -m achitechure_2 export-data-metadata --execute
-
-目的地是 artifacts/datasets/bbat5-v1，只包含 README、dataset YAML 與 manifests；不包含 images、
-labels 或 symlink。目的地存在時同樣拒絕覆寫。
-
-### 匯出完整 GitHub dataset
-
-這是使用者明確核准的獨立 publication snapshot，不會改寫本機 canonical v1，也不會啟動 Pose：
-
-    # 只計畫與驗證來源
-    $PY -m achitechure_2 export-github-dataset
-
-    # 物化一般影像檔、Pose/Detect labels、portable YAML/splits 與 manifest
-    $PY -m achitechure_2 export-github-dataset --execute
-
-    # 驗證零 symlink、零權重、零 test、split 可攜及整體 tree SHA256
-    $PY -m achitechure_2 validate-github-dataset
-
-固定目的地是 `artifacts/datasets/bbat5-v1/github-dataset/`。目的地存在時拒絕覆寫；需要重做時
-不得直接刪除或覆蓋已發布版本，必須先確認 recovery path 與新版本政策。
 
 ## 3. yolo_combine handoff
 
@@ -214,7 +192,6 @@ simulation_only。
     env CUDA_VISIBLE_DEVICES='' PYTHONPATH="$PWD/src" $PY -m pytest -q
     $PY -m achitechure_2 config-check
     $PY -m achitechure_2 validate-pose-data
-    $PY -m achitechure_2 validate-github-dataset
     $PY -m ruff check .
     git status --short --branch
 
@@ -222,13 +199,15 @@ integration test 在沒有 ARCHITECHURE_2_HANDOFF 時會明確 skip，不能把 
 
 ## 10. Git 上傳範圍
 
-提交程式、測試、YAML/schema、中文文件、bbat5-v1 metadata，以及使用者核准的
-`artifacts/datasets/bbat5-v1/github-dataset/` 完整 snapshot。禁止提交：
+提交程式、測試、YAML/schema 與中文文件。BBAT5 影像、labels、YAML、split 與 manifests 只在
+根 repository `original/pose/` 發布；`artifacts/datasets/` 不得提交資料副本。禁止提交：
 
-- snapshot 固定目錄以外的 pose/detect images 或 labels。
-- `.pt`／`.pth`／`.onnx`／engine／cache。
+- `.pt`／`.pth`／`.onnx`／engine／cache 或任何權重。
+- `original/pose/detect_dataset.zip`；它超過 100 MB 且與解壓目錄重複。
 - runs、GPU profiles。
 - 未經驗收的 accepted handoff。
+
+0822 architecture_2 portable snapshot 只保留在 Git 歷史，不是現行資料入口。
 
 GitHub Issue／push 若因 gh 未登入或遠端分支落後而阻擋，先保留本地範圍明確的 commit，不能用
 destructive reset 或強制 push 覆蓋遠端。

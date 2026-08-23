@@ -125,9 +125,9 @@ fraction 不是 grouped split；BBAT5 搜尋必須使用獨立的 search dataset
 | [bbat5-pose-search.yaml](data/bbat5-pose-search.yaml) | formal-train-only Pose search | pose search lists |
 | [bbat5-detect-search.yaml](data/bbat5-detect-search.yaml) | formal-train-only paired diagnostic | detect search lists |
 
-BBAT5 Pose 與 Detect 共用同一 grouped assignment，test 明確為 null。衍生目錄另有四份乾淨、
-可直接交給 Ultralytics 的 formal/search dataset YAML；Git 副本在
-[artifacts/datasets/bbat5-v1/configs](../artifacts/datasets/bbat5-v1/configs)。
+BBAT5 Pose 與 Detect 共用同一 grouped assignment，test 明確為 null。可直接交給 Ultralytics 的
+formal/search dataset YAML 只保存在 `/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/`；
+本目錄的檔案是 architecture_2 契約 wrapper，不是第二份資料集。
 
 目前只有 BBAT5 有正式 train-only search config；COCO train-only search contract 尚未建立。因此
 這兩份 YAML 可用於 F1 threshold 與獲准的 BBAT5 小規模研究，不能宣稱已完成雙任務融合 recipe 搜尋。

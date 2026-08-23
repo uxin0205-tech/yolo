@@ -1,41 +1,12 @@
 # 產物目錄
 
-本目錄保存可重建 metadata，以及使用者於 2026-08-22 明確核准的完整 GitHub dataset snapshot。
-完整資料只能出現在指定子目錄；cache、checkpoint、weights、training runs 與 GPU profile 仍一律
-留在版本控制之外。
+本目錄只保存執行時產物，不擁有資料集、正式 YAML、split、labels 或 lineage。
 
-## 已提交的資料 metadata
+BBAT5 的唯一資料資產庫是 `/home/uxin/yolo/original/pose/`；正式入口是
+`/home/uxin/yolo/configs/datasets/bbat5-v1.yaml`。2026-08-22 曾存在於 `artifacts/datasets/`
+的可攜快照已由 2026-08-23 統一決策取代，僅保留在 Git 歷史。
 
-artifacts/datasets/bbat5-v1 是
-/home/uxin/yolo/original/pose/derived/bbat5-v1 的唯讀副本索引，只包含：
-
-- 中文資料說明。
-- formal Pose／Detect 與 search Pose／Detect dataset YAML。
-- split manifest。
-- patch manifest。
-- source audit manifest。
-- COCO exclusion manifest。
-- rebuild manifest。
-
-metadata 層不含 images、labels 或 symlink。實際資料可用以下命令重建：
-
-    export PYTHONPATH="$PWD/src"
-    /home/uxin/yolo/.venv/bin/python -m achitechure_2 prepare-pose-data --execute
-
-bbat5-v1 是不可覆寫版本。規則或來源改變時必須建立 bbat5-v2。
-其 manifests 保留建立時 spec 2.0.0 的 hash；專案升到 2.0.2 後不回溯改寫。
-
-## 已核准的完整 GitHub snapshot
-
-唯一允許提交完整資料的位置是 `datasets/bbat5-v1/github-dataset/`，其中包含：
-
-- 6,647 張唯一影像在 Pose／Detect 兩個可直接對應 labels 的一般檔案路徑。
-- Pose 與 Detect labels；Detect 每列仍等於 Pose 前五欄。
-- formal/search portable split lists 與各 view 的 `data.yaml`／`data-search.yaml`。
-- 中文 README 與 `publication-manifest.json`。
-
-此 snapshot 不含 symlink、絕對 split path、test、weight、checkpoint、cache 或 run。它只改變發布
-儲存形式，不建立新 split，也不改寫 bbat5-v1 的 2.0.0 lineage。
+本目錄中的內容原則上可由 handoff、設定或 run 重建，且預設不提交。
 
 ## 執行時可能產生但不提交的目錄
 
@@ -54,9 +25,7 @@ plumbing 都不能當成正式實驗結果。
 
 ## 禁止放入本目錄
 
-- `datasets/bbat5-v1/github-dataset/` 以外的原始或衍生影像／labels。
-- pt、onnx、engine checkpoint。
-- Ultralytics cache、runs 或第三方原始碼副本。
+- 任一資料集副本、images、labels、dataset YAML、split 或 dataset manifests。
+- `.pt`、`.pth`、`.onnx`、engine checkpoint 或未獲准的權重。
+- Git 要追蹤的 Ultralytics cache、runs 或第三方原始碼副本。
 - 未通過 materialized graph 驗收的 accepted.json。
-
-舊 artifacts/datasets/pose_grouped 已淘汰；正式名稱與位置只有 bbat5-v1。

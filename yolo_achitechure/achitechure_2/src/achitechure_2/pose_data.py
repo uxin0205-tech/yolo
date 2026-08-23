@@ -22,9 +22,6 @@ DEFAULT_POSE_SOURCE = Path("/home/uxin/yolo/original/pose/dataset")
 DEFAULT_DETECT_SOURCE = Path("/home/uxin/yolo/original/pose/detect_dataset")
 DEFAULT_DESTINATION = Path("/home/uxin/yolo/original/pose/derived/bbat5-v1")
 DEFAULT_COCO_TRAIN_LIST = Path("/home/uxin/yolo/coco2017/train2017.txt")
-DEFAULT_GITHUB_DATASET = (
-    PROJECT_ROOT / "artifacts/datasets/bbat5-v1/github-dataset"
-)
 POSE_DATASET_YAML = PROJECT_ROOT / "configs/data/bbat5-pose.yaml"
 DETECT_DATASET_YAML = PROJECT_ROOT / "configs/data/bbat5-detect.yaml"
 
@@ -41,7 +38,7 @@ BBAT5_V1_HISTORICAL_SPEC_LINEAGES = frozenset(
 )
 
 IMAGE_SUFFIXES = frozenset({".jpg", ".jpeg", ".png", ".bmp", ".webp"})
-FORBIDDEN_PUBLICATION_SUFFIXES = frozenset(
+FORBIDDEN_EXPORT_SUFFIXES = frozenset(
     {".pt", ".pth", ".onnx", ".engine", ".cache", ".npy", ".npz"}
 )
 COORDINATE_TOKEN_INDICES = frozenset({1, 2, 3, 4, 5, 6, 8, 9})
@@ -856,16 +853,27 @@ def validate_bbat5_dataset(destination: str | Path = DEFAULT_DESTINATION) -> dic
     }
 
 
+def _explicit_external_export_destination(destination: str | Path | None) -> Path:
+    """拒絕隱含目的地與 architecture_2 內的資料副本。"""
+
+    if destination is None:
+        raise ValueError("相容匯出必須明確指定 architecture_2 之外的目的地")
+    output_root = Path(destination).resolve()
+    project_root = PROJECT_ROOT.resolve()
+    if output_root == project_root or project_root in output_root.parents:
+        raise ValueError("不得在 architecture_2 內建立資料副本；正式資料只在 original/pose")
+    return output_root
+
 def export_bbat5_metadata(
     source: str | Path = DEFAULT_DESTINATION,
-    destination: str | Path = PROJECT_ROOT / "artifacts/datasets/bbat5-v1",
+    destination: str | Path | None = None,
     *,
     execute: bool = False,
 ) -> dict[str, Any]:
-    """只匯出 Git 所需 README、YAML 與 manifests；永不匯出影像或 labels。"""
+    """相容用低階 metadata 匯出；不得在 architecture_2 建立副本。"""
 
     source_root = Path(source).resolve()
-    output_root = Path(destination).resolve()
+    output_root = _explicit_external_export_destination(destination)
     relative_files = (
         Path("README.md"),
         Path("configs/pose.yaml"),
@@ -961,11 +969,11 @@ def _github_dataset_readme(counts: dict[str, int]) -> str:
 
 Detection 診斷 view：
 
-    data=artifacts/datasets/bbat5-v1/github-dataset/detect/data.yaml
+    data=/明確指定的外部匯出目錄/detect/data.yaml
 
 Pose view（正式執行仍需使用者另外決定）：
 
-    data=artifacts/datasets/bbat5-v1/github-dataset/pose/data.yaml
+    data=/明確指定的外部匯出目錄/pose/data.yaml
 
 搜尋設定分別使用同一目錄下的 `data-search.yaml`。完整來源、split、patch 與 COCO 排除證據在
 上一層 `../manifests/`；本 snapshot 的檔案樹雜湊與數量在 `publication-manifest.json`。
@@ -983,11 +991,11 @@ def _snapshot_files(root: Path) -> tuple[Path, ...]:
 
 
 def validate_bbat5_github_dataset(
-    destination: str | Path = DEFAULT_GITHUB_DATASET,
+    destination: str | Path | None = None,
 ) -> dict[str, Any]:
-    """驗證 GitHub snapshot 可攜、完整、無 symlink 且不含權重。"""
+    """驗證明確指定的相容匯出；不是正式資料入口。"""
 
-    root = Path(destination).resolve()
+    root = _explicit_external_export_destination(destination)
     manifest_path = root / "publication-manifest.json"
     if not manifest_path.is_file():
         raise FileNotFoundError(f"缺少 publication manifest：{manifest_path}")
@@ -998,7 +1006,7 @@ def validate_bbat5_github_dataset(
     forbidden = [
         path
         for path in root.rglob("*")
-        if path.is_file() and path.suffix.lower() in FORBIDDEN_PUBLICATION_SUFFIXES
+        if path.is_file() and path.suffix.lower() in FORBIDDEN_EXPORT_SUFFIXES
     ]
     if forbidden:
         raise AssertionError(f"GitHub dataset 含禁止檔案：{forbidden[:3]}")
@@ -1119,14 +1127,14 @@ def validate_bbat5_github_dataset(
 
 def export_bbat5_github_dataset(
     source: str | Path = DEFAULT_DESTINATION,
-    destination: str | Path = DEFAULT_GITHUB_DATASET,
+    destination: str | Path | None = None,
     *,
     execute: bool = False,
 ) -> dict[str, Any]:
-    """物化完整、可攜且不含權重的 GitHub dataset snapshot。"""
+    """相容用低階匯出；目的地必須明確指定且不得位於 architecture_2。"""
 
     source_root = Path(source).resolve()
-    output_root = Path(destination).resolve()
+    output_root = _explicit_external_export_destination(destination)
     source_validation = validate_bbat5_dataset(source_root)
     counts = {
         "unique_images": source_validation["pose_images"],

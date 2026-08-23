@@ -1,6 +1,6 @@
 # architecture_2 統一實驗規格
 
-規格版本：`2.0.2`
+規格版本：`2.0.3`
 狀態：唯一正式規格
 生效日期：2026-08-22
 
@@ -127,14 +127,23 @@ builder: achitechure_2
 - BBAT5 formal val 與 COCO train view 的重疊必須列入 exclusion manifest；未能證明時標示 blocked，不能假裝通過。
 - v1 建立後不可覆寫；任何規則或資料內容變更建立 v2。
 
-`prepare-pose-data` 必須能從原始資料重建本機 canonical 版本。依使用者 2026-08-22 的明確授權，GitHub 另保存一份不可覆寫、可攜且不含 symlink 的完整 snapshot：
+`prepare-pose-data` 必須能從原始資料重建本機 canonical 版本。
 
-- 固定位置為 `artifacts/datasets/bbat5-v1/github-dataset/`，不得散落到專案其他位置。
-- 允許提交 Pose／Detect 兩個 view 的影像、labels、portable dataset YAML、split lists、README 與 publication manifest。
-- snapshot 只改變儲存形式，不改變 bbat5-v1 的 2.0.0 資料 lineage、group assignment 或四筆 patch。
-- Pose／Detect 影像內容必須逐檔相同；匯出時不得留下指向 `/home/uxin/...` 的 symlink 或絕對 split path。
-- 禁止提交 checkpoint、weight、cache、run、`.pt`、`.pth`、`.onnx` 或 deployment engine。
-- `export-github-dataset` 必須預設只規劃，只有 `--execute` 才能建立 snapshot，且目的地存在時 fail closed。
+依使用者 2026-08-23 的明確授權，資料發布與位置契約固定如下：
+
+- `/home/uxin/yolo/original/pose/` 是全 repository 唯一 BBAT5 資料資產庫。
+- Git 發布 raw Pose `dataset/`、歷史 Detect `detect_dataset/` 與 canonical `derived/bbat5-v1/` 的
+  影像、labels、YAML、README、split lists 與 lineage manifests。
+- raw/basic split 只供重建與歷史稽核；所有新 run 只能使用 `bbat5-v1` registry／Task View YAML。
+- canonical image links 在 Git tree 使用 repository-relative symlink，且解析到同一份 raw image；
+  不得新增資料副本、改寫 labels、改變 split 或修改 2.0.0 data lineage。
+- 各專案 `artifacts/datasets/` 不得提交或保存資料、dataset YAML、split、labels 或 manifests 副本。
+- 2.0.2 的 architecture_2 portable snapshot 只保留於 Git 歷史；目前 tree 移除該目錄，
+  `export-data-metadata`、`export-github-dataset` 與 `validate-github-dataset` 不再是正式 CLI。
+- 永久排除 weights、checkpoint、cache、runs、`.pt`、`.pth`、`.onnx`、engine 與 deployment artifact；
+  Git 已追蹤的 original 權重從 0823 tree 移除，但本機檔案保留。
+- `detect_dataset.zip` 為解壓目錄的重複封裝且超過 GitHub 100 MB 單檔限制；
+  發布完整解壓目錄但不提交 zip。
 
 ## 6. 正式 YAML 契約
 
@@ -255,3 +264,4 @@ accumulator／requantization／saturation 與目標硬體驗證前，不得稱�
 | 2.0.0 | 2026-08-22 | 改為承接 `yolo_combine` winner；動態解析 shared/routed/partial regions；C0-Handoff/C0-Control 分離；BBAT5 v1 衍生資料；measurement-first 選擇與逐候選量化資格；CPU-only Phase A。 |
 | 2.0.1 | 2026-08-22 | 依 Ultralytics 8.4.90 官方原始碼修正 extension resume：只接受未 strip continuation state；補充 fraction/cache、Pose-only best／combined fitness、uniform OKS sigma、Micro F1 與 fake-quant 邊界。BBAT5 v1 保留建立時的 2.0.0 lineage。 |
 | 2.0.2 | 2026-08-22 | 依使用者明確授權增加完整 GitHub dataset snapshot；影像與 labels 物化於獨立 `github-dataset/`，保留 bbat5-v1 既有 split／patch lineage，並持續禁止權重、checkpoint、cache 與 runs。 |
+| 2.0.3 | 2026-08-23 | 依使用者明確授權發布 `original/` 的 raw Pose、歷史 Detect 與 canonical lineage，並將 `/home/uxin/yolo/original/pose/` 定為唯一 BBAT5 資料資產庫；移除 2.0.2 architecture_2 重複 snapshot 與正式匯出 CLI，禁止 artifacts 保存資料副本；Git tree 排除權重、cache、run 與重複超限 zip，canonical images 使用相對 symlink，正式訓練入口固定為 bbat5-v1 registry。 |

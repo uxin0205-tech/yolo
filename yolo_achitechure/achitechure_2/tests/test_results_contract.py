@@ -21,7 +21,7 @@ def test_results_template_is_rectangular_pending_and_metric_complete() -> None:
     assert all(row["formal_comparison_ready"] == "false" for row in rows)
     assert all(row["selection_status"] == "pending_user_decision" for row in rows)
     assert all(row["c_best"] == "" for row in rows)
-    assert all(row["spec_version"] == "2.0.2" for row in rows)
+    assert all(row["spec_version"] == "2.0.3" for row in rows)
     required = {
         "coco_box_map50",
         "coco_box_map50_95",

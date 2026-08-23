@@ -31,6 +31,9 @@
 - [2026-08-22：建立 BBAT5 固定資料集與中文紀錄全域規則](2026-08-22-bbat5-global-memory.md)
 - [2026-08-22：完成 architecture_2 Phase A 與 BBAT5 v1](2026-08-22-architecture-2-phase-a.md)
 - [2026-08-22：以 Initial 0822 發布全域基本規則](2026-08-22-initial-0822-publish.md)
-- [2026-08-22：發布 architecture_2 完整 BBAT5 GitHub Dataset](2026-08-22-architecture-2-github-dataset.md)
+- [2026-08-22：發布 architecture_2 完整 BBAT5 GitHub Dataset（歷史，0823 已取代）](2026-08-22-architecture-2-github-dataset.md)
+- [2026-08-22：統一全專案 BBAT5 資料集](2026-08-22-bbat5-dataset-unification.md)
+- [2026-08-23：釐清 BBAT5 Pose／Detect Task View](2026-08-23-bbat5-task-views-clarification.md)
+- [2026-08-23：發布 original 資料並清除 Git 權重](2026-08-23-original-data-publication.md)
 
 返回[根層 README](../../README.md)。

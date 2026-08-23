@@ -238,6 +238,17 @@ def test_metadata_export_contains_only_readme_configs_and_manifests(tmp_path: Pa
         export_bbat5_metadata(source, destination, execute=True)
 
 
+def test_compat_exports_refuse_architecture_dataset_copy(tmp_path: Path) -> None:
+    project_root = Path(__file__).resolve().parents[1]
+    forbidden = project_root / "artifacts/datasets/bbat5-v1"
+
+    with pytest.raises(ValueError, match="不得在 architecture_2"):
+        export_bbat5_metadata(tmp_path / "source", forbidden)
+    with pytest.raises(ValueError, match="不得在 architecture_2"):
+        export_bbat5_github_dataset(tmp_path / "source", forbidden)
+    with pytest.raises(ValueError, match="不得在 architecture_2"):
+        validate_bbat5_github_dataset(forbidden)
+
 def test_github_export_materializes_portable_dataset_without_weights(
     tmp_path: Path,
 ) -> None:

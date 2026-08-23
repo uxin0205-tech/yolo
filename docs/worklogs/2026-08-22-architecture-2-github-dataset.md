@@ -1,5 +1,9 @@
 # 2026-08-22：發布 architecture_2 完整 BBAT5 GitHub Dataset
 
+> 歷史狀態：本紀錄描述 0822 當時的發行方式。0823 已將 `/home/uxin/yolo/original/pose/`
+> 定為唯一資料位置，並從目前 tree 移除此 snapshot；詳見
+> [0823 original 資料發布紀錄](2026-08-23-original-data-publication.md)。
+
 ## 任務與範圍
 
 依使用者最新明確授權，將既有不可變 `bbat5-v1` 除 metadata 外，也以完整可攜 dataset snapshot
