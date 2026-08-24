@@ -21,6 +21,7 @@ def main() -> int:
     parser.add_argument("--source-state", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--workers", type=int, choices=range(1, 9), default=6)
     parser.add_argument("--patience", type=int, default=7)
+    parser.add_argument("--minimum-available-ram-gib", type=float, default=0.5)
     parser.add_argument("--minimum-free-vram-gib", type=float, default=9.0)
     args = parser.parse_args()
     state = run_fraction10_phase_c_queue(
@@ -29,6 +30,7 @@ def main() -> int:
         source_state=args.source_state,
         workers=args.workers,
         patience=args.patience,
+        minimum_available_ram_bytes=int(args.minimum_available_ram_gib * (1 << 30)),
         minimum_free_vram_bytes=int(args.minimum_free_vram_gib * (1 << 30)),
     )
     print(f"queue state: {state}", flush=True)

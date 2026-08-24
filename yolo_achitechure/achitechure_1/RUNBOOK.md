@@ -95,8 +95,10 @@ committed reports are `artifacts/profiles/a1-train-smoke.json` and `artifacts/pr
 已使用 physical batch 8、`nbs=16` 通過：Full35 峰值 `9,474,681,856` bytes，Partial75 峰值
 `9,161,244,672` bytes。報告分別位於
 `artifacts/profiles/a1-phase-c-train-smoke-rtx5060ti-2026-08-19.json` 與
-`artifacts/profiles/a2-phase-c-train-smoke-rtx5060ti-2026-08-19.json`。這些檢查不是正式訓練；最終候選
-latency 仍須在同一張 GPU 與相同設定下量測。Peak VRAM 只作容量診斷，不參與架構排名。
+`artifacts/profiles/a2-phase-c-train-smoke-rtx5060ti-2026-08-19.json`。這些檢查不是正式訓練。最終 A0、
+Full35 A2、Partial75 A2 已於 2026-08-24 在同一張 RTX 5060 Ti，以 FP16、batch 1、imgsz 640、20 warmup、
+100 iterations 補齊正式 latency；原始 JSON 位於
+`artifacts/profiles/*bittrue-inference-fp16-rtx5060ti-2026-08-24.json`。Peak VRAM 只作容量診斷，不參與架構排名。
 
 同日補測與正式 `amp=true` 一致的 official-loss probe，physical batch 16 可安全使用；先前 FP32 probe
 超過實體 VRAM 的配置量不代表 AMP 正式訓練會 OOM：
@@ -173,7 +175,7 @@ parent path、SHA256、phase 專屬 batch、validation batch、workers、fractio
 每個 GPU job 啟動前至少要有 8 GiB 可用 RAM 與 12 GiB 可用 VRAM；不足時每 30 秒等待。訓練期間每
 100 batches 記錄一次資源，每個 epoch 在 validation/checkpoint 後執行 GC、CUDA cache 清理與
 `malloc_trim`。各 run 的紀錄在 `artifacts/runs/<run-id>/resource-telemetry.jsonl`。若可用 RAM 低於
-1.5 GiB 或可用 VRAM 低於 1 GiB，該子程序會 fail closed；不會自動縮 batch。每個子程序退出後，佇列也
+0.5 GiB 或可用 VRAM 低於 1 GiB，該子程序會 fail closed；不會自動縮 batch。每個子程序退出後，佇列也
 會等 RAM/VRAM 回到啟動門檻才執行下一步。
 
 這裡不執行 Linux `drop_caches`：檔案 cache 本來就包含於 `MemAvailable` 的可回收估算，強制清除會讓
@@ -202,21 +204,26 @@ Phase C 從上述 completed state 的 accepted candidates 接續，使用 physic
 
 ```bash
 $PYTHON scripts/run_fraction10_phase_c_queue.py \
-  --run-tag rtx5060ti-fraction10-phasec8x2-workers6-patience7-r1 \
+  --run-tag rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2 \
   --source-state \
   artifacts/queues/fraction10-phase-b-rtx5060ti-fraction10-b16-workers6-r1/state.json \
   --workers 6 \
   --patience 7 \
+  --minimum-available-ram-gib 0.5 \
   --minimum-free-vram-gib 9
 ```
 
 State 位於
-`artifacts/queues/fraction10-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-r1/state.json`。
+`artifacts/queues/fraction10-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2/state.json`。
+先前 `patience7-r1` 在第一個 epoch 完成前觸發舊的 1.5 GiB RAM floor，沒有可續接的 `last.pt`；其 run
+目錄保留為中斷證據。`ram05-r2` 因此從相同 accepted Phase B checkpoint 重啟 Phase C，不重跑 Phase B。
 重開 shell、WSL 或主機後，以相同命令接續；存在合法 `manifest.json` 與 `last.pt` 時，queue 會驗證契約後
 傳入 `--resume-incomplete`，不從 epoch 1 重跑。不要用不同 run tag 指向同一個 incomplete run。
 
-截至 2026-08-22 的階段性報告刻意排除這個仍在跑的 Phase C，見
-`results/rtx5060ti-half-0822.md`。Phase C 完成後應新增後續報告，不可把部分 epoch 數字混入既有報告。
+此 queue 已於 2026-08-23 完成。Full35／Partial75 分別在 10／11 epochs early stopping；Bit-True
+COCO mAP50-95 為 `0.5013946996`／`0.5004282491`，均低於各自 A2，因此 rollback。最終報告位於
+`final/reports/RTX5060TI_FINAL_0824.md`；`results/rtx5060ti-half-0822.md` 保留為當時刻意排除 Phase C 的
+階段性快照，不回填或改寫。
 
 ## Ball／bat detection 驗證
 

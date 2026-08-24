@@ -6,6 +6,7 @@ from pathlib import Path
 
 import achitechure_1.queue as queue_module
 from achitechure_1.queue import (
+    FRACTION10_MIN_AVAILABLE_RAM_BYTES,
     PHASE_C_HEADROOM_BYTES,
     PHASE_C_PROFILE_PEAK_BYTES,
     QueueJournal,
@@ -72,6 +73,10 @@ def test_fraction03_queue_records_ram_vram_and_amp_contract() -> None:
     assert settings["phase_c_batch"] == settings["validation_batch"] == 8
     assert settings["phase_c_effective_batch"] == 16
     assert settings["phase_c_gradient_accumulation"] is True
+
+
+def test_fraction10_phase_c_ram_floor_is_half_gib() -> None:
+    assert FRACTION10_MIN_AVAILABLE_RAM_BYTES == 1 << 29
 
 
 def test_continuation_descriptor_binds_variant_boundary_and_checkpoint(tmp_path: Path) -> None:

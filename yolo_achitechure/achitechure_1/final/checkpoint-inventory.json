@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "scope": "artifacts/checkpoints 中的 16 個 Bit-True checkpoint",
+  "scope": "artifacts/checkpoints 中與本報告相關的 18 個 Bit-True checkpoint",
   "deduplication": "file_sha256 追蹤封裝檔；state_dict_sha256 判斷實際模型是否相同",
   "records": [
     {
@@ -52,6 +52,12 @@
       "tested_as": "full35-b-f10"
     },
     {
+      "source": "artifacts/checkpoints/a1-full35-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue.pt",
+      "file_sha256": "5996dbc49cfb44f5f13ed60908cf2fd9c29144666967a08cf49a5c8e428d2b85",
+      "state_dict_sha256": "0a09843d65dcfaac2d0230abae0e7348f565b8260281c8823eddcf36890070b1",
+      "tested_as": "full35-c-f10"
+    },
+    {
       "source": "artifacts/checkpoints/a2-partial75-phase-a2-rtx4080super-batch16-workers6-r3-bittrue.pt",
       "file_sha256": "5e3330e8c236ced4f50199126dcdb6470fc39afd64f1c99738dd49ff42f10d21",
       "state_dict_sha256": "45deefd5d13c895135c40307d93ac92a1014f5eaa9b1299f0eb2445fea60eb80",
@@ -98,6 +104,12 @@
       "file_sha256": "05070ec4e7661de5980d51451c49f39192f01783ac7746b9a9ce038fe7cdb74f",
       "state_dict_sha256": "9ea31021b54506228a013edd7ea47ce761262d66a66eac05054d76b831d90364",
       "tested_as": "partial75-b-f10"
+    },
+    {
+      "source": "artifacts/checkpoints/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue.pt",
+      "file_sha256": "206fca76f09f30d812b4255def123601417a3c545867606f40ac53f815b94364",
+      "state_dict_sha256": "5793fdacf579acf8a8fc2b1ac5c697de99d864201995bd647937542ba8af6a6d",
+      "tested_as": "partial75-c-f10"
     }
   ]
 }

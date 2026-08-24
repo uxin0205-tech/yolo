@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "path": "/home/uxin0/yolo/coco2017/annotations/instances_val2017.json",
+    "sha256": "e8c7f7908f1d7278341fae127d0da654f102f11bd7b21d8aeefa635b8c810b6f"
+  },
+  "category_contract": {
+    "baseball_bat": {
+      "coco_category_id": 39,
+      "ultralytics_index": 34
+    },
+    "sports_ball": {
+      "coco_category_id": 37,
+      "ultralytics_index": 32
+    }
+  },
+  "created_at": "2026-08-23T16:40:12.347180+00:00",
+  "evaluator": "pycocotools COCOeval bbox",
+  "metrics": {
+    "baseball_bat": {
+      "ap50": 0.693572686063981,
+      "ap50_95": 0.4804574608876652,
+      "ap75": 0.54163250622518,
+      "ap_l": 0.005008005513586752,
+      "ap_m": 0.5154970615745601,
+      "ap_s": 0.5150411037967845,
+      "ar100": 0.6910344827586206,
+      "images": 97,
+      "instances": 146
+    },
+    "overall": {
+      "ap50": 0.6794714045157414,
+      "ap50_95": 0.5071504614433096,
+      "ap75": 0.5551093987736334,
+      "ap_l": 0.6462020358270963,
+      "ap_m": 0.5527828551291378,
+      "ap_s": 0.3454741619333584,
+      "ar100": 0.7085927405825367,
+      "images": 5000,
+      "instances": 36781
+    },
+    "sports_ball": {
+      "ap50": 0.7046354882151089,
+      "ap50_95": 0.5156207810779861,
+      "ap75": 0.5808704734009468,
+      "ap_l": 0.6399079381622372,
+      "ap_m": 0.8507071061202497,
+      "ap_s": 0.4733134999902509,
+      "ar100": 0.6215384615384616,
+      "images": 169,
+      "instances": 263
+    }
+  },
+  "model_id": "full35-c-f10",
+  "predictions": {
+    "path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a1-full35-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue/ultralytics/predictions.json",
+    "sha256": "4f8b7f1d4e1b09a66bb1d1feb6c65895537ae257bfc8ea3025430433afc529b4"
+  },
+  "schema_version": 1
+}

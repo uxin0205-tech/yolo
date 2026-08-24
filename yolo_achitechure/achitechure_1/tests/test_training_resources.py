@@ -10,7 +10,7 @@ from achitechure_1.training import (
 
 
 def test_runtime_resource_floor_accepts_safe_snapshot() -> None:
-    assert RUNTIME_MIN_AVAILABLE_RAM_BYTES == 3 << 29
+    assert RUNTIME_MIN_AVAILABLE_RAM_BYTES == 1 << 29
     _assert_resource_floor(
         {
             "ram_available_bytes": RUNTIME_MIN_AVAILABLE_RAM_BYTES,

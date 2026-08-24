@@ -95,7 +95,7 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--batch", type=int, default=8)
     parser.add_argument("--workers", type=int, choices=range(0, 9), default=6)
-    parser.add_argument("--minimum-ram-gib", type=float, default=1.5)
+    parser.add_argument("--minimum-ram-gib", type=float, default=0.5)
     parser.add_argument("--minimum-free-vram-gib", type=float, default=4.0)
     parser.add_argument("--worker", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--checkpoint", help=argparse.SUPPRESS)

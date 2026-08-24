@@ -33,6 +33,7 @@ PHASE_C_HEADROOM_BYTES = 1 << 30
 MIN_AVAILABLE_RAM_BYTES = 3 << 30
 FRACTION03_MIN_AVAILABLE_RAM_BYTES = 8 << 30
 FRACTION03_MIN_FREE_VRAM_BYTES = 12 << 30
+FRACTION10_MIN_AVAILABLE_RAM_BYTES = 1 << 29
 FRACTION10_MIN_FREE_VRAM_BYTES = 9 << 30
 RESOURCE_POLL_SECONDS = 30
 FRACTION03_SOURCE_DESCRIPTORS = {
@@ -1640,6 +1641,7 @@ def run_fraction10_phase_c_queue(
     source_state: Path,
     workers: int = 6,
     patience: int = 7,
+    minimum_available_ram_bytes: int = FRACTION10_MIN_AVAILABLE_RAM_BYTES,
     minimum_free_vram_bytes: int = FRACTION10_MIN_FREE_VRAM_BYTES,
 ) -> Path:
     """從 fraction=1.0 Phase-B gate 結果執行 C batch8×accumulate2。"""
@@ -1661,7 +1663,7 @@ def run_fraction10_phase_c_queue(
         phase_c_training_batch=8,
         phase_c_nbs=16,
         validation_batch=8,
-        minimum_available_ram_bytes=FRACTION03_MIN_AVAILABLE_RAM_BYTES,
+        minimum_available_ram_bytes=minimum_available_ram_bytes,
         minimum_free_vram_bytes=minimum_free_vram_bytes,
         fraction=1.0,
         amp=True,

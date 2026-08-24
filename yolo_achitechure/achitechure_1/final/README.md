@@ -1,59 +1,61 @@
 # Full35／Partial75 最終可攜式交付包
 
-此目錄封裝本次比較實際使用的程式碼、設定、權重與 AP 證據，可整個複製到其他工作目錄。比較單位是 9 個已保存的 Bit-True 候選：A0、Full35 的 A2／B-30%／C-30%／B-100%，以及 Partial75 的 A2／B-30%／C-30%／B-100%。
+此目錄封裝本研究實際使用的程式碼、設定、權重、完整 AP、訓練曲線與 RAM／VRAM 證據，可整個複製到其他工作目錄。比較單位是 11 個已保存 Bit-True 候選：A0，以及 Full35／Partial75 各自的 A2、B-30%、C-30%、B-100%、C-100%。
 
-`artifacts/checkpoints/` 原有 16 個 Bit-True 檔案，其中多個 `source-accepted-a2` 只是同一 A2 權重在不同 queue 中重新封裝。`models.json` 以模型 state-dict SHA256 合併這些重複項，因此不會把相同模型重測多次。所有 8 個不同的 Full35／Partial75 Bit-True 權重，加上 A0，都已在 COCO2017 與 BBT5 上完成驗證。
+最終結論如下：
+
+- 完整資料 Phase C 已完成，Full35／Partial75 均 rollback 到 A2；accepted checkpoint 沒有改變。
+- 依既定 overall COCO gate 與同機 latency tie-break，Partial75 是 Full35／Partial75 兩個 P3-MASF 架構中的正式工程 winner。
+- Partial75 A2 沒有相對 A0 顯示實質整體 accuracy 提升，A0 latency 也較快，因此不宣稱 P3-MASF 優於 baseline。
+- 使用者指定的 BBT5 `detect_dataset` 指標優先完整保存；overall／bat AP50-95 最高是 Full35 C-30%，ball AP50-95 最高仍是 A0。
+- `EXPERIMENT_SPEC.md` 規劃的 winner LR tuning T1／T2／T3 尚未執行；本交付只宣告架構 winner，不虛構 tuning 結果。
 
 ## 目錄
 
-- `code/achitechure_1/`：本實驗的完整 Python package snapshot，包含 Full35、Partial75、checkpoint、驗證與 queue 邏輯。
-- `code/yolo_attention/`：checkpoint 反序列化與 Bit-True PWL 所需的確切 attention package snapshot。
-- `weights/bittrue/`：9 個已驗證候選；AP 報告一律使用這些檔案。
-- `weights/float/`：8 個 Full35／Partial75 最佳 Float checkpoint，供接續訓練或重新 materialize；A0 沒有在此工作區保存對應 Float 版本。
+- `code/achitechure_1/`：本實驗完整 Python package snapshot，包含 Full35、Partial75、checkpoint、驗證與 queue 邏輯。
+- `code/yolo_attention/`：checkpoint 反序列化與 Bit-True PWL 所需的 attention package snapshot。
+- `weights/`：唯一正式權重入口；11 個 Bit-True、10 個 Float best，以及 JSON／CSV 權重索引。
 - `configs/`：attention 與兩份資料集設定。
-- `reports/`：人類可讀、JSON、CSV 與逐候選 raw metrics。
-- `models.json`：候選、權重 SHA256、state-dict fingerprint、來源與 gate 決策。
-- `MANIFEST.json`：整包檔案的 SHA256 manifest。
+- `reports/RTX5060TI_FINAL_0824.md`：完整結論、訓練、資源、效率與限制。
+- `reports/FULL35_PARTIAL75_AP.md`：11 個候選的 COCO2017／BBT5 完整 AP、P、R、F1 表。
+- `reports/training/`：8 次 B/C 訓練各自的 `results.csv`、訓練圖、四種 box curve、confusion matrix、manifest 與 telemetry。
+- `reports/figures/`：跨 run 訓練軌跡、BBT5 AP 與資源比較圖。
+- `models.json`：可驗證候選與權重 fingerprint。
+- `MANIFEST.json`：整包檔案 SHA256 manifest；最後驗證後產生。
 
-## 環境
+## 環境與資料契約
 
-正式契約是 Python 3.12、PyTorch `2.11.0+cu128`、Ultralytics `8.4.90`。可在新的 virtual environment 安裝：
+正式契約是 Python 3.12、PyTorch `2.11.0+cu128`、Ultralytics `8.4.90`、imgsz 640、validation batch 8、workers 6。可在新的 virtual environment 安裝：
 
 ```bash
 python -m pip install -r requirements-lock.txt
 ```
 
-兩份 dataset YAML 保留本次實驗的絕對路徑。複製到別台主機後，先把 `configs/datasets/*.yaml` 的 `path` 改成當地實際位置；不要修改類別順序。BBT5 必須維持 `sports ball=32`、`baseball bat=34`。
+兩份 dataset YAML 保留本次實驗的絕對路徑。複製到別台主機後，先修改 `configs/datasets/*.yaml` 的 `path`；不要改類別順序。BBT5 必須維持 `sports ball=32`、`baseball bat=34`。
 
-## 驗證權重與程式碼
+## 驗證與重建報告
 
-先做 CPU 結構與雜湊稽核，不會跑 inference：
+先做 CPU 結構與雜湊稽核：
 
 ```bash
 python scripts/inspect_models.py
 python scripts/verify_bundle.py
 ```
 
-單獨驗證或依序驗證所有模型：
+依序驗證所有模型或單一模型：
 
 ```bash
 python scripts/validate_all.py --dataset all
 python scripts/validate_all.py --dataset bbt5 --model partial75-a2
 ```
 
-驗證固定使用 `imgsz=640`、batch 8、workers 6。controller 每個 model／dataset 啟動獨立 child process，結束後由作業系統回收 CUDA 與 host RAM；啟動前若 RAM 低於 1.5 GiB 或 free VRAM 低於 4 GiB 就 fail closed。可用 `--workers`、`--batch` 明確覆寫，但這會形成新契約，不能直接和本報告混用。
+controller 每個 model／dataset 啟動獨立 child process；啟動前若 RAM 低於 0.5 GiB 或 free VRAM 低於 4 GiB 就 fail closed。這個驗證門檻和訓練 queue 的啟動門檻是不同用途。
 
-完整 COCO validation 會產生 `predictions.json`。若需要重算 canonical COCO API AP：
+由既有 raw evidence 重建 AP 與最終報告：
 
 ```bash
-python scripts/compute_coco_ap.py \
-  --annotations /path/to/coco2017/annotations/instances_val2017.json \
-  --predictions /path/to/predictions.json \
-  --output /path/to/coco-canonical.json
+PYTHONPATH=scripts:code python scripts/build_report.py
+PYTHONPATH=scripts:code python scripts/build_training_report.py
 ```
 
-## 結果入口
-
-請先看 [`reports/FULL35_PARTIAL75_AP.md`](reports/FULL35_PARTIAL75_AP.md)。JSON 保留完整精度，CSV 是逐 dataset／evaluator／scope 的長格式資料。
-
-COCO 的「Ultralytics internal」與「canonical COCO API」不可混成同一欄比較；BBT5 沒有 COCO JSON ground truth，使用 Ultralytics internal evaluator。BBT5 valid 有 93/567 張影像的 COCO ID 出現在 COCO train2017，因此只適合候選間的相對比較，不是獨立泛化測試。
+COCO 的 Ultralytics internal 與 canonical COCO API 不可混成同一排名欄。BBT5 valid 有 93/567 張影像的 COCO ID 出現在 COCO train2017，因此適合候選間相對比較，不是完全獨立泛化測試。

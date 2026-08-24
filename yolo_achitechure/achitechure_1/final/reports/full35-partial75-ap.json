@@ -1,6 +1,6 @@
 {
   "comparison_backend": "bit_true_pwl",
-  "created_at": "2026-08-22T04:01:11.062088+00:00",
+  "created_at": "2026-08-23T16:53:22.388927+00:00",
   "datasets": {
     "bbt5": "configs/datasets/bbt5-coco80.yaml",
     "coco2017": "configs/datasets/coco2017.yaml"
@@ -22,6 +22,7 @@
           "recall": 0.6508264462809917
         },
         "cuda_peak_vram_bytes": 2644207104,
+        "f1": 0.6587078873565863,
         "map50": 0.6567005996102171,
         "map50_95": 0.4052561620399051,
         "map75": 0.41778400449651,
@@ -154,6 +155,7 @@
           "recall": 0.6446280991735537
         },
         "cuda_peak_vram_bytes": 2644824064,
+        "f1": 0.6598130556733294,
         "map50": 0.6522401173309731,
         "map50_95": 0.3994477601128667,
         "map75": 0.4108315719441147,
@@ -286,6 +288,7 @@
           "recall": 0.6246546558511238
         },
         "cuda_peak_vram_bytes": 2644824576,
+        "f1": 0.6509865910287755,
         "map50": 0.6405321711579747,
         "map50_95": 0.38693695028314573,
         "map75": 0.39691468638926447,
@@ -418,6 +421,7 @@
           "recall": 0.6776859504132231
         },
         "cuda_peak_vram_bytes": 2644827648,
+        "f1": 0.6600251824018217,
         "map50": 0.6614487253930506,
         "map50_95": 0.41251067028395827,
         "map75": 0.42600966197834256,
@@ -550,6 +554,7 @@
           "recall": 0.6735537190082644
         },
         "cuda_peak_vram_bytes": 2644824576,
+        "f1": 0.6529173550111668,
         "map50": 0.653109707827127,
         "map50_95": 0.4042520600227963,
         "map75": 0.42195730239787854,
@@ -667,6 +672,139 @@
       "train_fraction": 1.0
     },
     {
+      "architecture": "full35",
+      "bbt5_internal": {
+        "baseball_bat": {
+          "ap50": 0.7315557144233307,
+          "ap50_95": 0.5005112135458839,
+          "ap75": 0.5702978668359426,
+          "class_id": 34,
+          "f1": 0.737730146963134,
+          "images": 480,
+          "instances": 484,
+          "name": "baseball bat",
+          "precision": 0.8376773766622775,
+          "recall": 0.6590909090909091
+        },
+        "cuda_peak_vram_bytes": 2644823552,
+        "f1": 0.6629258098318437,
+        "map50": 0.6532137350736827,
+        "map50_95": 0.4048432194678031,
+        "map75": 0.42164472723547297,
+        "precision": 0.7023859571532475,
+        "recall": 0.6276635769221617,
+        "speed_ms": {
+          "inference": 11.350531773879874,
+          "loss": 0.00037573933120113936,
+          "postprocess": 0.25896477242816746,
+          "preprocess": 0.25840985328591437
+        },
+        "sports_ball": {
+          "ap50": 0.5748717557240348,
+          "ap50_95": 0.3091752253897223,
+          "ap75": 0.2729915876350033,
+          "class_id": 32,
+          "f1": 0.5813003879228398,
+          "images": 279,
+          "instances": 301,
+          "name": "sports ball",
+          "precision": 0.5670945376442175,
+          "recall": 0.5962362447534144
+        }
+      },
+      "bittrue": "weights/bittrue/full35-c-f10.pt",
+      "bittrue_sha256": "5996dbc49cfb44f5f13ed60908cf2fd9c29144666967a08cf49a5c8e428d2b85",
+      "coco_canonical": {
+        "annotations": {
+          "path": "/home/uxin0/yolo/coco2017/annotations/instances_val2017.json",
+          "sha256": "e8c7f7908f1d7278341fae127d0da654f102f11bd7b21d8aeefa635b8c810b6f"
+        },
+        "category_contract": {
+          "baseball_bat": {
+            "coco_category_id": 39,
+            "ultralytics_index": 34
+          },
+          "sports_ball": {
+            "coco_category_id": 37,
+            "ultralytics_index": 32
+          }
+        },
+        "created_at": "2026-08-23T16:40:12.347180+00:00",
+        "evaluator": "pycocotools COCOeval bbox",
+        "metrics": {
+          "baseball_bat": {
+            "ap50": 0.693572686063981,
+            "ap50_95": 0.4804574608876652,
+            "ap75": 0.54163250622518,
+            "ap_l": 0.005008005513586752,
+            "ap_m": 0.5154970615745601,
+            "ap_s": 0.5150411037967845,
+            "ar100": 0.6910344827586206,
+            "images": 97,
+            "instances": 146
+          },
+          "overall": {
+            "ap50": 0.6794714045157414,
+            "ap50_95": 0.5071504614433096,
+            "ap75": 0.5551093987736334,
+            "ap_l": 0.6462020358270963,
+            "ap_m": 0.5527828551291378,
+            "ap_s": 0.3454741619333584,
+            "ar100": 0.7085927405825367,
+            "images": 5000,
+            "instances": 36781
+          },
+          "sports_ball": {
+            "ap50": 0.7046354882151089,
+            "ap50_95": 0.5156207810779861,
+            "ap75": 0.5808704734009468,
+            "ap_l": 0.6399079381622372,
+            "ap_m": 0.8507071061202497,
+            "ap_s": 0.4733134999902509,
+            "ar100": 0.6215384615384616,
+            "images": 169,
+            "instances": 263
+          }
+        },
+        "model_id": "full35-c-f10",
+        "predictions": {
+          "path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a1-full35-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue/ultralytics/predictions.json",
+          "sha256": "4f8b7f1d4e1b09a66bb1d1feb6c65895537ae257bfc8ea3025430433afc529b4"
+        },
+        "schema_version": 1
+      },
+      "coco_internal": {
+        "ap50": 0.6717525604087504,
+        "ap50_95": 0.5013946996070097,
+        "ap75": 0.5493737744093471,
+        "ap_l": 0.6462020358270963,
+        "ap_m": 0.5527828551291378,
+        "ap_s": 0.3454741619333584,
+        "baseball_bat": {
+          "ap50_95": 0.4788531872509732
+        },
+        "cuda_peak_vram_bytes": 2645119488,
+        "precision": null,
+        "recall": 0.6125221840391173,
+        "speed_ms": {
+          "inference": 10.660811562795423,
+          "loss": 0.00037770220660604537,
+          "postprocess": 0.20617089323932306,
+          "preprocess": 0.3133180834411178
+        },
+        "sports_ball": {
+          "ap50_95": 0.51267248532084
+        }
+      },
+      "float": "weights/float/full35-c-f10.pt",
+      "float_sha256": "d4190ba525635c5b8d95fb4d95e388021f9466e5149632ed588e031170910502",
+      "gate": "rollback",
+      "id": "full35-c-f10",
+      "stage": "c",
+      "state_dict_sha256": "0a09843d65dcfaac2d0230abae0e7348f565b8260281c8823eddcf36890070b1",
+      "train_fraction": 1.0
+    },
+    {
       "architecture": "partial75",
       "bbt5_internal": {
         "baseball_bat": {
@@ -682,6 +820,7 @@
           "recall": 0.6549586776859504
         },
         "cuda_peak_vram_bytes": 2644644352,
+        "f1": 0.6590760755230711,
         "map50": 0.653643150154672,
         "map50_95": 0.4015543271763919,
         "map75": 0.4133577356646763,
@@ -814,6 +953,7 @@
           "recall": 0.628099173553719
         },
         "cuda_peak_vram_bytes": 2644645888,
+        "f1": 0.6489034673104987,
         "map50": 0.6359904565964721,
         "map50_95": 0.37977776074034186,
         "map75": 0.38977801623484193,
@@ -946,6 +1086,7 @@
           "recall": 0.6962809917355371
         },
         "cuda_peak_vram_bytes": 2644644864,
+        "f1": 0.660007768184666,
         "map50": 0.6594743794920852,
         "map50_95": 0.41139773696635584,
         "map75": 0.43069272545863857,
@@ -1078,6 +1219,7 @@
           "recall": 0.6611570247933884
         },
         "cuda_peak_vram_bytes": 2644643328,
+        "f1": 0.6623258826904833,
         "map50": 0.6576551974474243,
         "map50_95": 0.4028833419229264,
         "map75": 0.4227261973602915,
@@ -1192,6 +1334,139 @@
       "id": "partial75-b-f10",
       "stage": "b",
       "state_dict_sha256": "9ea31021b54506228a013edd7ea47ce761262d66a66eac05054d76b831d90364",
+      "train_fraction": 1.0
+    },
+    {
+      "architecture": "partial75",
+      "bbt5_internal": {
+        "baseball_bat": {
+          "ap50": 0.7260720669459725,
+          "ap50_95": 0.49907737707753136,
+          "ap75": 0.5688533779930656,
+          "class_id": 34,
+          "f1": 0.7210287985175646,
+          "images": 480,
+          "instances": 484,
+          "name": "baseball bat",
+          "precision": 0.7898731007675902,
+          "recall": 0.6632231404958677
+        },
+        "cuda_peak_vram_bytes": 2644644864,
+        "f1": 0.653648938791937,
+        "map50": 0.65015507574171,
+        "map50_95": 0.4026809608858553,
+        "map75": 0.42198350947825924,
+        "precision": 0.6746259115713198,
+        "recall": 0.6339371516432827,
+        "speed_ms": {
+          "inference": 10.723652414311498,
+          "loss": 0.00041159088731574213,
+          "postprocess": 0.208545712365258,
+          "preprocess": 0.29911115667840216
+        },
+        "sports_ball": {
+          "ap50": 0.5742380845374477,
+          "ap50_95": 0.3062845446941792,
+          "ap75": 0.2751136409634529,
+          "class_id": 32,
+          "f1": 0.5811345554522216,
+          "images": 279,
+          "instances": 301,
+          "name": "sports ball",
+          "precision": 0.5593787223750495,
+          "recall": 0.6046511627906976
+        }
+      },
+      "bittrue": "weights/bittrue/partial75-c-f10.pt",
+      "bittrue_sha256": "206fca76f09f30d812b4255def123601417a3c545867606f40ac53f815b94364",
+      "coco_canonical": {
+        "annotations": {
+          "path": "/home/uxin0/yolo/coco2017/annotations/instances_val2017.json",
+          "sha256": "e8c7f7908f1d7278341fae127d0da654f102f11bd7b21d8aeefa635b8c810b6f"
+        },
+        "category_contract": {
+          "baseball_bat": {
+            "coco_category_id": 39,
+            "ultralytics_index": 34
+          },
+          "sports_ball": {
+            "coco_category_id": 37,
+            "ultralytics_index": 32
+          }
+        },
+        "created_at": "2026-08-23T16:40:55.199900+00:00",
+        "evaluator": "pycocotools COCOeval bbox",
+        "metrics": {
+          "baseball_bat": {
+            "ap50": 0.7041546246216492,
+            "ap50_95": 0.482536908245322,
+            "ap75": 0.54650104126584,
+            "ap_l": 0.010198425020686486,
+            "ap_m": 0.5224781358607432,
+            "ap_s": 0.508575914235823,
+            "ar100": 0.6813793103448276,
+            "images": 97,
+            "instances": 146
+          },
+          "overall": {
+            "ap50": 0.6800219599481133,
+            "ap50_95": 0.5063213136627053,
+            "ap75": 0.553550374882913,
+            "ap_l": 0.6442652450642066,
+            "ap_m": 0.5527188646014615,
+            "ap_s": 0.3454177213821786,
+            "ar100": 0.7086424755250821,
+            "images": 5000,
+            "instances": 36781
+          },
+          "sports_ball": {
+            "ap50": 0.7056830103552044,
+            "ap50_95": 0.5149659289655599,
+            "ap75": 0.5736951582076507,
+            "ap_l": 0.6245874587458745,
+            "ap_m": 0.8522993571571593,
+            "ap_s": 0.47347347400773615,
+            "ar100": 0.6084615384615384,
+            "images": 169,
+            "instances": 263
+          }
+        },
+        "model_id": "partial75-c-f10",
+        "predictions": {
+          "path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue/ultralytics/predictions.json",
+          "sha256": "a3c7a37d99c729892d78b348cbe8b020a37e4f87d1e5e144816e63c662dc8d29"
+        },
+        "schema_version": 1
+      },
+      "coco_internal": {
+        "ap50": 0.6720994326678941,
+        "ap50_95": 0.5004282490623231,
+        "ap75": 0.5478996611886551,
+        "ap_l": 0.6442652450642066,
+        "ap_m": 0.5527188646014615,
+        "ap_s": 0.3454177213821786,
+        "baseball_bat": {
+          "ap50_95": 0.4799520701699846
+        },
+        "cuda_peak_vram_bytes": 2645624832,
+        "precision": null,
+        "recall": 0.6183469217330134,
+        "speed_ms": {
+          "inference": 10.421396769414422,
+          "loss": 0.00039074139785952864,
+          "postprocess": 0.21939430906204507,
+          "preprocess": 0.35344196173828096
+        },
+        "sports_ball": {
+          "ap50_95": 0.5112262747517515
+        }
+      },
+      "float": "weights/float/partial75-c-f10.pt",
+      "float_sha256": "9e7639e555b95c9ccb984d2db16109ecd614b7fd4f3156249626df56fc9788cb",
+      "gate": "rollback",
+      "id": "partial75-c-f10",
+      "stage": "c",
+      "state_dict_sha256": "5793fdacf579acf8a8fc2b1ac5c697de99d864201995bd647937542ba8af6a6d",
       "train_fraction": 1.0
     }
   ],

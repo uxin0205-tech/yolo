@@ -1,9 +1,9 @@
 # achitechure_1 experiment contract
 
-Status: implementation complete。兩個 accepted A2 已從 commit `7f0bd61` 匯入並重新驗證；
-`fraction=0.3` 的對稱 B／C 與 `fraction=1.0` Phase B 對照均完成，所有 child 均由 gate rollback 到 A2。
-`fraction=1.0` Phase C 正以 batch 8 × accumulate 2、workers 6、patience 7 執行；完成前不得納入
-2026-08-22 階段性結論。
+Status: implementation and experiment complete。兩個 accepted A2 已從 commit `7f0bd61` 匯入並重新驗證；
+`fraction=0.3` 與 `fraction=1.0` 的對稱 B／C 均完成，八個 child 全部由 gate rollback 到 A2。
+完整資料 Phase C 使用 batch 8 × accumulate 2、workers 6、patience 7，Full35／Partial75 分別在
+10／11 epochs early stopping。最終報告位於 `final/reports/RTX5060TI_FINAL_0824.md`。
 
 ## Scope and authority
 
@@ -77,11 +77,12 @@ putting a frozen Detect module into eval changes its public output from training
 
 ## Resource safety and queue contract
 
-所有 train、materialize、validate 與 profile job 都在獨立子程序執行。每個 GPU job 啟動前至少需要
-8 GiB 可用系統 RAM；30% queue 的預設 VRAM 門檻為 12 GiB，完整資料 B／C 對照依 queue state 明確覆寫
-為 9 GiB。資源不足時佇列每 30 秒重新檢查，不啟動工作。子程序退出後也要恢復到同一 queue 的門檻，
+所有 train、materialize、validate 與 profile job 都在獨立子程序執行。30% queue 啟動前至少需要
+8 GiB 可用系統 RAM 與 12 GiB free VRAM；2026-08-22 的完整資料 Phase C 接續 run 依使用者要求，明確
+覆寫為 0.5 GiB 可用 RAM 與 9 GiB free VRAM。資源不足時佇列每 30 秒重新檢查，不啟動工作。子程序退出後也要恢復到同一 queue 的門檻，
 才可啟動下一個 job。訓練內每 100 batches 記錄一次 RAM、process RSS/PSS、VRAM
-free/allocated/reserved/peak；可用 RAM 低於 1.5 GiB 或可用 VRAM 低於 1 GiB 時 fail closed。
+free/allocated/reserved/peak；自 2026-08-22 的 Phase C 接續 run 起，可用 RAM 低於 0.5 GiB 或可用 VRAM
+低於 1 GiB 時 fail closed。
 
 每個 epoch 的 validation 與 checkpoint 完成後會執行 Python GC、`torch.cuda.empty_cache()` 與 Linux
 `malloc_trim(0)`，並留下清理前後的 telemetry。這只釋放未使用的 allocator cache，不會卸載仍被模型或

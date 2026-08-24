@@ -1,6 +1,6 @@
 # plan.md — YOLO26m P3-MFAM 研究實作規範
 
-## 目前執行狀態（2026-08-22）
+## 目前執行狀態（2026-08-24）
 
 本節記錄已落地且經實跑驗證的契約；若下方早期規劃文字與本節衝突，以本節與 `EXPERIMENT_SPEC.md`
 為準。
@@ -12,11 +12,17 @@
   `nbs=16`，validation batch 8。
 - 基準 Phase C 是 70 epochs、patience 9；目前完整資料 Phase C queue 依使用者要求留下 manifest 化的
   patience 7 override。
-- 30% B/C 與完整資料 B 已完成，所有 child 均 rollback 到各自 accepted A2。完整資料 Phase C 的
-  Full35 嘗試在第一個 epoch 尚未產生 checkpoint 前失敗，不納入結論。
-- 目前結論與機器可讀數字在 `results/rtx5060ti-half-0822.md`、`.json`、`.csv`。
-- `final/` 已封裝 Full35／Partial75 程式碼、9 個 Bit-True 比較候選、8 個 Float checkpoint，以及
-  COCO2017／BBT5 detect_dataset 的 9 × 2 完整 AP 矩陣。
+- 30% 與完整資料的 B/C 均已完成，八個 child 全部 rollback 到各自 accepted A2；完整資料 C 的
+  Full35／Partial75 分別在 10／11 epochs early stopping，沒有 OOM、NaN 或 Inf。
+- 同機 RTX 5060 Ti、FP16、batch 1 latency 已完成。Full35 與 Partial75 的 COCO 差距小於 0.001；
+  Partial75 的 p50 latency、GFLOPs、Params 均較低，因此依第 14 節規則成為兩個 P3-MASF 架構的 winner。
+- Partial75 A2 與 A0 的 COCO mAP50-95 幾乎相同，且 A0 latency 較快，不能主張 P3-MASF 相對 baseline
+  有實質整體 accuracy 或效率提升。
+- 第 12 節規劃的 winner LR tuning T1／T2／T3 尚未執行；目前結論只涵蓋架構 selection。
+- 最終結論、機器可讀數字、訓練曲線與資源圖位於 `final/reports/RTX5060TI_FINAL_0824.md`、`.json`、
+  `training-summary.csv` 與 `figures/`；先前 `results/rtx5060ti-half-0822.*` 保留為階段性歷史快照。
+- `final/` 已封裝確切程式碼、11 個 Bit-True 比較候選、10 個 Float best checkpoint，以及
+  COCO2017／BBT5 detect_dataset 的 11 × 2 完整 AP 矩陣與八次 B/C 訓練原始圖表。
 
 ## 0. 目的
 

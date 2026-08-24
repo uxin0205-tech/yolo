@@ -1,0 +1,64 @@
+{
+  "checkpoint": {
+    "path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a1-full35-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue.pt",
+    "sha256": "5996dbc49cfb44f5f13ed60908cf2fd9c29144666967a08cf49a5c8e428d2b85"
+  },
+  "contract": {
+    "attention_backends": [
+      "bit_true_pwl",
+      "bit_true_pwl"
+    ],
+    "batch": 8,
+    "classes": [
+      32,
+      34
+    ],
+    "device": "0",
+    "imgsz": 640,
+    "task": "detect",
+    "workers": 6
+  },
+  "created_at": "2026-08-23T16:39:38.698459+00:00",
+  "cuda_peak_vram_bytes": 2644823552,
+  "data": "/home/uxin0/yolo/original/pose/detect_dataset/coco80/data.yaml",
+  "overall": {
+    "map50": 0.6532137350736827,
+    "map50_95": 0.4048432194678031,
+    "map75": 0.42164472723547297,
+    "precision": 0.7023859571532475,
+    "recall": 0.6276635769221617
+  },
+  "per_class": {
+    "baseball_bat": {
+      "ap50": 0.7315557144233307,
+      "ap50_95": 0.5005112135458839,
+      "ap75": 0.5702978668359426,
+      "class_id": 34,
+      "f1": 0.737730146963134,
+      "images": 480,
+      "instances": 484,
+      "name": "baseball bat",
+      "precision": 0.8376773766622775,
+      "recall": 0.6590909090909091
+    },
+    "sports_ball": {
+      "ap50": 0.5748717557240348,
+      "ap50_95": 0.3091752253897223,
+      "ap75": 0.2729915876350033,
+      "class_id": 32,
+      "f1": 0.5813003879228398,
+      "images": 279,
+      "instances": 301,
+      "name": "sports ball",
+      "precision": 0.5670945376442175,
+      "recall": 0.5962362447534144
+    }
+  },
+  "schema_version": 1,
+  "speed_ms": {
+    "inference": 11.350531773879874,
+    "loss": 0.00037573933120113936,
+    "postprocess": 0.25896477242816746,
+    "preprocess": 0.25840985328591437
+  }
+}

@@ -1,8 +1,9 @@
 # RTX 5060 Ti HALF 階段性結論（2026-08-22）
 
-> 此文件保留 `fraction=1.0` Phase B 完成當下的時間截面。後續 Phase C 嘗試未產生可驗證 checkpoint
-> 就失敗；9 個保存候選在 COCO2017 與 BBT5 detect_dataset 的補齊報告請見
-> [`../final/reports/FULL35_PARTIAL75_AP.md`](../final/reports/FULL35_PARTIAL75_AP.md)。
+> 此文件保留 `fraction=1.0` Phase B 完成當下的歷史時間截面。當時失敗的是舊 1.5 GiB RAM floor 的
+> `patience7-r1`；後續 `ram05-r2` 已完成兩個 Phase C。請以
+> [`rtx5060ti-final-0824.md`](rtx5060ti-final-0824.md) 與
+> [`../final/reports/FULL35_PARTIAL75_AP.md`](../final/reports/FULL35_PARTIAL75_AP.md) 作為最終結論。
 
 本報告在 `fraction=1.0` Phase B 完成後截斷。正在執行的 Phase C（physical batch 8、`nbs=16`、
 workers 6、patience 7）只記錄為進行中，不使用任何未完成 epoch 或 checkpoint 下結論。

@@ -48,8 +48,12 @@ def internal_coco(raw: dict[str, Any]) -> dict[str, Any]:
 def internal_bbt5(raw: dict[str, Any]) -> dict[str, Any]:
     """擷取 detect_dataset BBT5 metrics。"""
 
+    overall = dict(raw["overall"])
+    precision = overall["precision"]
+    recall = overall["recall"]
+    overall["f1"] = 2 * precision * recall / (precision + recall)
     return {
-        **raw["overall"],
+        **overall,
         "sports_ball": raw["per_class"]["sports_ball"],
         "baseball_bat": raw["per_class"]["baseball_bat"],
         "cuda_peak_vram_bytes": raw.get("cuda_peak_vram_bytes"),
@@ -81,6 +85,7 @@ def long_rows(model: dict[str, Any], coco: dict[str, Any], canonical: dict[str, 
                 "instances": values.get("instances"),
                 "precision": values.get("precision"),
                 "recall": values.get("recall"),
+                "f1": values.get("f1"),
                 "ap50": values.get("ap50"),
                 "ap75": values.get("ap75"),
                 "ap50_95": values.get("ap50_95"),
@@ -108,7 +113,7 @@ def build_markdown(models: list[dict[str, Any]]) -> str:
     lines = [
         "# Full35／Partial75 兩資料集 AP 總報告",
         "",
-        "本報告涵蓋 9 個已保存 Bit-True 候選，測試矩陣為 9 × 2 datasets，沒有缺值。Full35／Partial75 的 A2 重複轉檔已用 state-dict SHA256 合併；16 個原始 checkpoint 的映射見 `../checkpoint-inventory.json`。",
+        f"本報告涵蓋 {len(models)} 個已保存 Bit-True 候選，測試矩陣為 {len(models)} × 2 datasets，沒有缺值。Full35／Partial75 的 A2 重複轉檔已用 state-dict SHA256 合併；原始 checkpoint 的映射見 `../checkpoint-inventory.json`。",
         "",
         "固定環境為 Python 3.12.13、PyTorch 2.11.0+cu128、Ultralytics 8.4.90、RTX 5060 Ti 16 GiB；imgsz 640、validation batch 8、workers 6、Bit-True PWL。",
         "",
@@ -149,25 +154,44 @@ def build_markdown(models: list[dict[str, Any]]) -> str:
         "",
         "資料契約是 `/home/uxin0/yolo/original/pose/detect_dataset/coco80/data.yaml`；不是直接使用 pose dataset。Valid 有 567 images、301 sports-ball instances、484 baseball-bat instances。",
         "",
-        "| Model | Overall AP | AP50 | AP75 | Ball AP | Ball AP50 | Ball AP75 | Bat AP | Bat AP50 | Bat AP75 |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "### Overall",
+        "",
+        "| Model | Precision | Recall | F1 | AP50-95 | AP50 | AP75 |",
+        "|---|---:|---:|---:|---:|---:|---:|",
     ]
     for item in models:
         b = item["bbt5_internal"]
-        ball = b["sports_ball"]
-        bat = b["baseball_bat"]
         lines.append(
-            f"| {item['id']} | {fmt(b['map50_95'])} | {fmt(b['map50'])} | {fmt(b['map75'])} | "
-            f"{fmt(ball['ap50_95'])} | {fmt(ball['ap50'])} | {fmt(ball['ap75'])} | "
-            f"{fmt(bat['ap50_95'])} | {fmt(bat['ap50'])} | {fmt(bat['ap75'])} |"
+            f"| {item['id']} | {fmt(b['precision'])} | {fmt(b['recall'])} | {fmt(b['f1'])} | "
+            f"{fmt(b['map50_95'])} | {fmt(b['map50'])} | {fmt(b['map75'])} |"
         )
+    for title, key in (("Sports ball（COCO class 32）", "sports_ball"), ("Baseball bat（COCO class 34）", "baseball_bat")):
+        lines += [
+            "",
+            f"### {title}",
+            "",
+            "| Model | Images | Instances | Precision | Recall | F1 | AP50-95 | AP50 | AP75 |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|",
+        ]
+        for item in models:
+            values = item["bbt5_internal"][key]
+            lines.append(
+                f"| {item['id']} | {values['images']} | {values['instances']} | "
+                f"{fmt(values['precision'])} | {fmt(values['recall'])} | {fmt(values['f1'])} | "
+                f"{fmt(values['ap50_95'])} | {fmt(values['ap50'])} | {fmt(values['ap75'])} |"
+            )
+    coco_winner = max(models, key=lambda item: item["coco_internal"]["ap50_95"])
+    bbt5_winner = max(models, key=lambda item: item["bbt5_internal"]["map50_95"])
+    ball_winner = max(models, key=lambda item: item["bbt5_internal"]["sports_ball"]["ap50_95"])
+    bat_winner = max(models, key=lambda item: item["bbt5_internal"]["baseball_bat"]["ap50_95"])
     lines += [
         "",
         "## 結論",
         "",
-        "- 正式 COCO internal 仍由 Partial75 A2 最高（0.506754），但只比本次同機 A0 的 0.506754 高約 0.000001，不能主張實質 accuracy 提升。Full35 A2 為 0.506391。",
-        "- BBT5 overall 最高是 Full35 C-30%（0.412511），bat AP50-95 也是它最高（0.515345）；sports-ball AP50-95 最高仍是 A0（0.318082）。",
+        f"- 正式 COCO internal 最高是 {coco_winner['id']}（{coco_winner['coco_internal']['ap50_95']:.6f}），但相對 A0 沒有可主張的實質 accuracy 提升。",
+        f"- 使用者提供的 BBT5 `detect_dataset`：overall 最高是 {bbt5_winner['id']}（{bbt5_winner['bbt5_internal']['map50_95']:.6f}）；sports-ball AP50-95 最高是 {ball_winner['id']}（{ball_winner['bbt5_internal']['sports_ball']['ap50_95']:.6f}）；baseball-bat AP50-95 最高是 {bat_winner['id']}（{bat_winner['bbt5_internal']['baseball_bat']['ap50_95']:.6f}）。",
         "- Full35／Partial75 C-30% 的 BBT5 局部收益沒有轉成 COCO 整體收益，兩者 COCO internal AP50-95 都約 0.497，因此 gate rollback 合理。",
+        "- 完整資料 C-100% 的 Full35／Partial75 也都低於各自 A2，沒有改變 rollback 或 accepted checkpoint。",
         "- BBT5 valid 有 93/567 images（16.4%）的 COCO ID 出現在 COCO train2017；結果適合模型間相對比較，不代表獨立資料泛化。",
         "- 報告所有 AP 都來自 `weights/bittrue/`；`weights/float/` 只供接續訓練／重新 materialize，沒有拿 Float 與 Bit-True 混成同一張排名表。",
         "",

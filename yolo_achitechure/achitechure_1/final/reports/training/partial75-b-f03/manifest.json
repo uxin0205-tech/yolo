@@ -1,0 +1,82 @@
+{
+  "automatic_batch_fallback": false,
+  "common": {
+    "amp": true,
+    "batch": 16,
+    "bgr": 0.0,
+    "close_mosaic": 10,
+    "copy_paste": 0.0,
+    "cutmix": 0.0,
+    "data": "configs/coco2017.yaml",
+    "degrees": 0.0,
+    "deterministic": true,
+    "device": "0",
+    "end2end": true,
+    "fliplr": 0.5,
+    "flipud": 0.0,
+    "fraction": 0.3,
+    "gradient_accumulation": false,
+    "hsv_h": 0.015,
+    "hsv_s": 0.7,
+    "hsv_v": 0.4,
+    "imgsz": 640,
+    "mixup": 0.0,
+    "mosaic": 1.0,
+    "nbs": 16,
+    "optimizer": "MuSGD",
+    "perspective": 0.0,
+    "scale": 0.5,
+    "seed": 0,
+    "shear": 0.0,
+    "translate": 0.1,
+    "warmup_bias_lr": 0.0,
+    "warmup_momentum": 0.8,
+    "workers": 6
+  },
+  "created_at": "2026-08-20T09:24:53.529800+00:00",
+  "environment": {
+    "cuda": "12.8",
+    "driver": "591.86",
+    "git_revision": "ca36be5234f7ece1a762100dd8a21d8c0c0c1884",
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "gpu_free_vram_bytes_at_start": 15894315008,
+    "gpu_vram_bytes": 17102864384,
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "python": "3.12.13 | packaged by conda-forge | (main, Aug 11 2026, 10:27:28) [GCC 14.4.0]",
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.90",
+    "ultralytics_source": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/.venv/lib/python3.12/site-packages/ultralytics"
+  },
+  "fresh_optimizer_scheduler_ema": true,
+  "gradient_accumulation": false,
+  "in_training_validation_batch": 8,
+  "parent": {
+    "path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/continuation/partial75-accepted-a2/float-best.pt",
+    "sha256": "070b571d1a52b1e7d13acc25d4c77278e38395d975fe6bff5e9bbd1bdc01e568"
+  },
+  "phase": {
+    "cosine": true,
+    "epochs": 10,
+    "learning_rates": {
+      "masf": 0.00038,
+      "neck_detect": 0.00019
+    },
+    "lrf": 0.5,
+    "momentum": 0.948,
+    "name": "b",
+    "patience": 4,
+    "warmup_epochs": 1.0,
+    "weight_decay": 0.00027
+  },
+  "resource_safety": {
+    "check_interval_batches": 100,
+    "epoch_end_cuda_empty_cache": true,
+    "epoch_end_gc": true,
+    "epoch_end_malloc_trim": true,
+    "minimum_available_ram_bytes": 1610612736,
+    "minimum_free_vram_bytes": 1073741824,
+    "telemetry": "resource-telemetry.jsonl"
+  },
+  "schema_version": 1,
+  "variant": "partial75"
+}
