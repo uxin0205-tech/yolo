@@ -1,12 +1,17 @@
-# 最小 checkpoint runtime
+# `yolo_attention` 套件
 
-本套件只包含載入與執行最終 Bit-True checkpoint 所需的 source modules，刻意與完整 training／queue implementation 分離。
+正式套件的公開入口是 `python -m yolo_attention.cli`。各模組維持單一責任：設定集中在 `config.py`；數學方法位於 basis、bias、normalization 與 BDCN 模組；`integration.py` 負責兩處模型轉換；`pwl_validation.py` 與 `pwl_experiment.py` 分別處理 PWL streaming diagnostics 與正式報告；訓練及 queue side effects 只允許出現在 runner、backend 與 executor。
 
-- `attention.py`：完整 Attention dataflow。
-- `binary_basis.py`：Hadamard Binary Q/K score block。
-- `normalization.py`：Bit-True Q8.8/UQ1.15 PWL normalization block。
-- `projection.py`、`relative_bias.py`：Q/K/V projection 與 decomposed 2D bias。
-- `config.py`：serialized model contract。
-- `quantization.py`、`schedule.py`、`bdcn.py`：checkpoint import 相容所需的支援模組。
+資料流如下：
 
-每個模組開頭都有簡短的中文區塊說明。這些檔案與 `src/yolo_attention/` 對應的 production modules 維持相同演算法；公開操作入口統一使用上一層的 `run.py`。
+~~~text
+VariantConfig → HardwareFriendlyAttention → convert_yolo26_model
+              → 兩個 site 的 fail-closed 模型 → trainer/evaluator
+
+queue_workflow → queue_store → queue_executor → queue_backend
+
+pwl-score-analysis → adaptive range gate → Float/Bit-True PWL compare
+                   → PWL results CSV/SVG/report
+~~~
+
+不得複製完整 Attention class、不得把演算法直接寫進 CLI，也不得讓只轉換單一 Attention site 的模型靜默通過。新增方法必須同步更新測試、factory 接線與文件。本目錄需納入 Git。

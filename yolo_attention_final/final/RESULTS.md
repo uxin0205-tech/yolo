@@ -4,7 +4,8 @@
 
 19 個 LR sweep／staged-recovery queue jobs 全部成功。正式 winner 仍是 zero-train Bit-True
 `pwl-final-best.pt`；單一 seed 的最高實測 checkpoint 是 block x1
-`../pwl-best-observed.pt`（保留在上層研究 artifacts，不放入單一權重交付），mAP50-95 `0.5069387`。它比同輪 audited parent 高 `0.0001944`，
+best-observed research export（不包含在可攜交付包；SHA-256 見 `results.json`），
+mAP50-95 `0.5069387`。它比同輪 audited parent 高 `0.0001944`，
 未達 `0.001` 穩健門檻，也沒有三個 seeds 的 mean，因此只能稱為 best-observed。
 
 ## 正式 Bit-True COCO2017 val 結果
@@ -43,8 +44,9 @@ Phase gate 的含義是「child 相對直接 parent 下降不超過 0.001」，�
 - Retained parent SHA-256：`9e2ca0d93793785f0f7e514d876580204070bac57b4163d7c5f0c5ca352b9c3f`
 - Queue state：`artifacts/lr-sweep-queue` revision 95，19/19 succeeded。
 
-完整 per-class AP 位於各 run 的 `metrics/queue-result.json`；`metrics.csv` 提供精簡比較。
-Manifest、best/last checkpoints、training curves、phase gates 與 queue events 保留在 `artifacts/`。
+`metrics.csv` 提供精簡比較，`results.json` 保存正式 winner 與 best-observed provenance。
+完整 per-class AP、training curves、phase gates 與歷史 queue events 保留在原研究 repository，
+不複製到可攜交付包；交付包只保留重跑必要的 Phase-B parent record。
 
 ## 限制與未完成項目
 

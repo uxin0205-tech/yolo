@@ -67,8 +67,13 @@
   },
   "delivery": {
     "directory": "final",
-    "checkpoint_count": 1,
+    "checkpoint_count": 3,
+    "formal_checkpoint_count": 1,
     "checkpoint": "pwl-final-best.pt",
+    "training_parent_checkpoints": [
+      "weights/v1-br-best.pt",
+      "artifacts/runs/s0-phase-b-bittrue/checkpoints/evaluated-variant.pt"
+    ],
     "command": "python run.py"
   }
 }

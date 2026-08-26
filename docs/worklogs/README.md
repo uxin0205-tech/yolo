@@ -35,5 +35,6 @@
 - [2026-08-22：統一全專案 BBAT5 資料集](2026-08-22-bbat5-dataset-unification.md)
 - [2026-08-23：釐清 BBAT5 Pose／Detect Task View](2026-08-23-bbat5-task-views-clarification.md)
 - [2026-08-23：發布 original 資料並清除 Git 權重](2026-08-23-original-data-publication.md)
+- [2026-08-27：YOLO26m Attention final GitHub 發布](2026-08-27-yolo-attention-final-github-publication.md)
 
 返回[根層 README](../../README.md)。

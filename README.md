@@ -45,4 +45,8 @@ Git 歷史；目前 tree 已移除，避免同一資料出現兩個可被誤認�
 
 ## 報告與變更
 
+YOLO26m Binary Q/K＋Bit-True PWL 的完整可攜 workspace、程式碼、權重與文件見
+[`yolo_attention_final/final/`](yolo_attention_final/final/README.md)；本次 GitHub 發布過程見
+[2026-08-27 工作紀錄](docs/worklogs/2026-08-27-yolo-attention-final-github-publication.md)。
+
 所有進度、報告、實驗結果、變更紀錄，以及困難與解法都使用中文。每份新工作紀錄都必須加入[工作紀錄索引](docs/worklogs/README.md)，讓 README 保持可追溯的入口。

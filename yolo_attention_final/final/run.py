@@ -8,9 +8,16 @@ import json
 import sys
 from pathlib import Path
 
-from training_recipe import DEFAULT_QUEUE_ROOT, print_recipe, queue_status, run_training
 from ultralytics import YOLO
 
+from training_recipe import (
+    DEFAULT_QUEUE_ROOT,
+    configure_runtime,
+    doctor_report,
+    print_recipe,
+    queue_status,
+    run_training,
+)
 from yolo_attention.attention import HardwareFriendlyAttention
 from yolo_attention.config import NormalizationKind
 
@@ -79,7 +86,14 @@ def build_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command")
 
     commands.add_parser("check", help="驗證 SHA-256 與完整模型規格")
+    commands.add_parser("doctor", help="檢查訓練包檔案與 COCO2017 路徑")
     commands.add_parser("recipe", help="顯示完整訓練階段與學習率")
+
+    configure = commands.add_parser("configure", help="設定本機 COCO2017 與訓練裝置")
+    configure.add_argument("--data-root", type=Path, required=True)
+    configure.add_argument("--device", default="0", help="例如 0、1 或 cpu")
+    configure.add_argument("--batch", type=int, default=16)
+    configure.add_argument("--workers", type=int, default=8)
 
     predict = commands.add_parser("predict", help="執行 Ultralytics 推論")
     predict.add_argument("source", help="圖片、目錄、影片或串流來源")
@@ -103,6 +117,19 @@ def main() -> int:
     command = args.command or "check"
     if command == "check":
         _, report = load_and_check()
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+        return 0
+    if command == "doctor":
+        report = doctor_report()
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+        return 0 if report["required_inputs_ok"] and report["dataset_ok"] else 1
+    if command == "configure":
+        report = configure_runtime(
+            data_root=args.data_root,
+            device=args.device,
+            batch=args.batch,
+            workers=args.workers,
+        )
         print(json.dumps(report, indent=2, ensure_ascii=False))
         return 0
     if command == "recipe":

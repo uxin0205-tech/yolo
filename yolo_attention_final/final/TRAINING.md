@@ -2,6 +2,9 @@
 
 ## Attention 演算法
 
+完整公式、Bit-True 位寬與資料流另見
+[BINARY_QK_PWL_ALGORITHM.md](BINARY_QK_PWL_ALGORITHM.md)。
+
 交付模型只替換 YOLO26m 的兩個指定 Attention sites，而且兩處必須同時存在：
 
 - `model.10.m.0.attn`
@@ -68,24 +71,28 @@ Bit-True forward 包含 Q8.8 rounding、saturation、integer cast 與離散 segm
 
 ## 如何執行
 
-在 `final/` 目錄執行：
+在 `final/` 目錄先設定資料與裝置：
 
 ```bash
-# 驗證唯一正式 checkpoint 的 SHA-256、模型架構與 PWL 規格。
-python run.py check
+python run.py configure \
+  --data-root /path/to/coco2017 \
+  --device 0 \
+  --batch 16 \
+  --workers 8
+```
 
-# 顯示完整配方；不會變更任何狀態。
+接著檢查、預覽並執行：
+
+```bash
+python run.py doctor
+python run.py check
 python run.py recipe
 python run.py train
-
-# 建立或續跑新的 immutable GPU queue。
 python run.py train --execute
-
-# 查看 reproduction queue 狀態。
 python run.py status
-
-# 執行推論。
 python run.py predict path/to/images --device 0 --save
 ```
 
-訓練 wrapper 預設只 dry-run，必須明確加上 `--execute` 才會呼叫上層 repository 中已測試的 production engine。fresh clone 重跑所需的歷史 Phase-B parent 已保存在 `../artifacts/runs/s0-phase-b-bittrue/`，因此不需要在 `final/` 內複製第二個 `.pt`。
+訓練 wrapper 預設只 dry-run，必須明確加上 `--execute` 才會呼叫本交付包內的
+production engine。重跑所需的歷史 Phase-B parent 已保存在
+`artifacts/runs/s0-phase-b-bittrue/`，不需要上一層 repository。

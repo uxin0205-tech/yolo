@@ -1,0 +1,25 @@
+phase: lr-block-x1
+parent: lr-parent-bittrue
+trainable_scope: block_recovery
+weights: weights/v1-br-best.pt
+data: data/coco2017.yaml
+epochs: 8
+batch: 16
+imgsz: 640
+device: '0'
+workers: 8
+seed: 0
+patience: 3
+optimizer: AdamW
+lr0: 0.000005
+layer_lrs:
+  attention: 0.000005
+  adjacent_block: 0.000001
+scheduler: constant
+lrf: 1.0
+warmup_epochs: 0.0
+warmup_bias_lr: 0.0
+weight_decay: 0.0005
+selection_metric: metrics/mAP50-95(B)
+amp: true
+deterministic: true
