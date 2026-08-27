@@ -1,9 +1,5 @@
 # Full35 / Partial75 CPU validation audit
 
-> 0823 路徑註記：本稽核保留當時的 `artifacts/datasets/` 路徑作歷史證據；現行程式已改用
-> `artifacts/cache-views/`，正式資料仍只讀取 `/home/uxin/yolo/original/pose/derived/bbat5-v1/`。
-> 此改名不改變當時的樣本、split、labels 或驗證結論。
-
 - 日期：2026-08-22
 - 裝置：CPU；所有命令皆以 `CUDA_VISIBLE_DEVICES=""` 執行
 - 正式 GPU training：未啟動

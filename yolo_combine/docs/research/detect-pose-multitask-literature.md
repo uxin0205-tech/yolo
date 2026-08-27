@@ -1,6 +1,6 @@
 # Detect + Pose 多任務模型：學術與實務做法
 
-> 研究範圍：以 YOLO26m 為基礎，共享 backbone + neck；Detect head 只做人員偵測，Pose head 做 ball / bat 的 bbox 與 2 個 keypoints。兩個任務使用不同資料集，先在 GPU 驗證，最終考慮 FPGA。
+> 研究範圍：以 YOLO26m 為基礎，共享 backbone + neck；Detect head 只做人員偵測，Pose head 做 ball / bat 的 bbox 與 2 個 keypoints。兩個任務使用不同資料集，先在 GPU 驗證，最終考慮 FPGA。  
 > 日期：2026-08-13。本文只採用論文、官方文件及官方原始碼。
 
 ## 結論先行

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TypeVar
 
 import torch
 from ultralytics.nn.modules.head import Detect, Pose26
@@ -11,6 +12,8 @@ from ultralytics.nn.tasks import DetectionModel, PoseModel
 from .contracts import Task
 from .models import SharedDualHeadModel
 from .source import CheckpointKind, SourceBundle
+
+TaskModel = TypeVar("TaskModel", DetectionModel, PoseModel)
 
 
 @dataclass(frozen=True)
@@ -47,7 +50,7 @@ def _shared_name(target_name: str, *, head_index: int, task: Task) -> str | None
     return None
 
 
-def materialize_task_model[TaskModel: (DetectionModel, PoseModel)](
+def materialize_task_model(
     shared: SharedDualHeadModel,
     target: TaskModel,
     task: Task | str,

@@ -58,7 +58,7 @@ class InheritedFreezeGuard:
     state: dict[str, torch.Tensor]
 
     @classmethod
-    def capture(cls, model: nn.Module) -> InheritedFreezeGuard:
+    def capture(cls, model: nn.Module) -> "InheritedFreezeGuard":
         paths = freeze_inherited(model)
         state: dict[str, torch.Tensor] = {}
         for path, module in inherited_modules(model):

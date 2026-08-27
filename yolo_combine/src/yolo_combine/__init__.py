@@ -1,70 +1,37 @@
-"""YOLO26 Detect/Pose fusion modules."""
+"""YOLO26 Detect/Pose fusion public API."""
 
-from .checkpoint import load_checkpoint, save_checkpoint
-from .contracts import Task, normalize_tasks
-from .data import (
-    BBT5AuditReport,
-    CanonicalBBAT5,
-    DatasetContractError,
-    PreparedDataset,
-    PreparedDetectSubset,
-    audit_bbt5,
-    prepare_bbt5_view,
-    prepare_coco_detect_subset,
-)
-from .freezing import InheritedFreezeGuard, freeze_inherited
-from .joint import JointRunReport, run_joint_steps
-from .loaders import JointLoaders, TaskLoader, build_joint_train_loaders
-from .materialize import (
-    MaterializedTaskModels,
-    TaskMaterializationReport,
-    build_validation_models,
-)
-from .models import RoutedDualModel, SharedDualHeadModel
-from .pose_stages import POSE_STAGES, PoseStageSpec, pose_stage
-from .source import (
-    HeadTransferReport,
-    SourceBundle,
-    TrunkTransferReport,
-    transfer_pose_head,
-)
-from .training import TaskLossRouter
-from .variants import VariantAudit, VariantWorkspace, load_variant
+from ._legacy_init import *  # noqa: F403
+from ._legacy_init import __all__ as _legacy_all
+from .factory import FusionModelFactory
+from .formal_training import FormalJointTrainingSession
+from .fusion_model import GraphSharedDualHeadModel, assemble_graph_shared_model
+from .inference import SharedDualPredictor, load_combined_weights
+from .joint_config import JointExperimentConfig
+from .joint_data import JointEpochScheduler, TaskLoaderSettings, build_task_loader
+from .joint_loss import MacroStepEngine, NativeTaskLossRouter
+from .metrics import AccuracyGate, CheckpointSelectors
+from .standalone_baseline import StandaloneBaselineValidator
+from .validation import JointValidator
+from .xnor import XNORExecutionConfig, install_xnor_backend
 
-__all__ = [
-    "POSE_STAGES",
-    "BBT5AuditReport",
-    "CanonicalBBAT5",
-    "DatasetContractError",
-    "HeadTransferReport",
-    "InheritedFreezeGuard",
-    "JointLoaders",
-    "JointRunReport",
-    "MaterializedTaskModels",
-    "PoseStageSpec",
-    "PreparedDataset",
-    "PreparedDetectSubset",
-    "RoutedDualModel",
-    "SharedDualHeadModel",
-    "SourceBundle",
-    "Task",
-    "TaskLoader",
-    "TaskLossRouter",
-    "TaskMaterializationReport",
-    "TrunkTransferReport",
-    "VariantAudit",
-    "VariantWorkspace",
-    "audit_bbt5",
-    "build_joint_train_loaders",
-    "build_validation_models",
-    "freeze_inherited",
-    "load_checkpoint",
-    "load_variant",
-    "normalize_tasks",
-    "pose_stage",
-    "prepare_bbt5_view",
-    "prepare_coco_detect_subset",
-    "run_joint_steps",
-    "save_checkpoint",
-    "transfer_pose_head",
-]
+__all__ = tuple(_legacy_all) + (
+    "AccuracyGate",
+    "CheckpointSelectors",
+    "FormalJointTrainingSession",
+    "FusionModelFactory",
+    "GraphSharedDualHeadModel",
+    "JointEpochScheduler",
+    "JointExperimentConfig",
+    "JointValidator",
+    "MacroStepEngine",
+    "NativeTaskLossRouter",
+    "SharedDualPredictor",
+    "StandaloneBaselineValidator",
+    "TaskLoaderSettings",
+    "XNORExecutionConfig",
+    "assemble_graph_shared_model",
+    "build_task_loader",
+    "install_xnor_backend",
+    "load_combined_weights",
+)
+

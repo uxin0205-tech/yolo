@@ -18,7 +18,7 @@ def test_p1_is_locked_to_head_only_formal_defaults():
     assert stage.val and stage.plots
     assert overrides["freeze"] == list(range(23))
     assert overrides["optimizer"] == "MuSGD"
-    assert overrides["patience"] == 0
+    assert overrides["patience"] == 10
     assert overrides["fliplr"] == 0.0
     assert stage.validate_transition(None) is None
 
@@ -37,10 +37,12 @@ def test_staged_checkpoint_transition_is_fail_closed(tmp_path: Path):
 def test_stage_freeze_progression_and_unknown_name():
     p2 = pose_stage("p2")
     p3 = pose_stage("p3")
-    assert (p2.epochs, p2.batch) == (22, 128)
-    assert (p3.epochs, p3.batch) == (100, 128)
+    assert (p2.epochs, p2.batch) == (22, 64)
+    assert (p3.epochs, p3.batch) == (100, 32)
+    assert round(p2.trainer_overrides()["nbs"] / p2.batch) == 2
+    assert round(p3.trainer_overrides()["nbs"] / p3.batch) == 4
     assert p2.trainer_overrides()["freeze"] == 11
-    assert p2.trainer_overrides()["patience"] == 0
+    assert p2.trainer_overrides()["patience"] == 12
     assert p3.trainer_overrides()["freeze"] is None
     assert p3.trainer_overrides()["patience"] == 20
 

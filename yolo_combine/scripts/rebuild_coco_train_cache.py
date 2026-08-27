@@ -20,6 +20,7 @@ from ultralytics.data.dataset import DATASET_CACHE_VERSION, YOLODataset
 from ultralytics.data.utils import get_hash, img2label_paths, load_dataset_cache_file
 from ultralytics.utils import YAML
 
+
 EXPECTED_IMAGES = 118_287
 EXPECTED_RESULTS = (117_266, 1_021, 0, 0, 118_287)
 

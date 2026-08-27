@@ -17,7 +17,16 @@ def _files(name: str) -> set[Path]:
     files: set[Path] = set()
     for path in root.rglob("*"):
         relative = path.relative_to(root)
-        if path.is_file() and "artifacts" not in relative.parts:
+        generated_baseline = (
+            relative.parent == Path("baselines")
+            and relative.name.startswith("formal-gate-")
+            and relative.suffix == ".json"
+        )
+        if (
+            path.is_file()
+            and "artifacts" not in relative.parts
+            and not generated_baseline
+        ):
             files.add(relative)
     return files
 
@@ -49,10 +58,7 @@ def test_variant_workspaces_load_and_reference_existing_inputs() -> None:
     assert partial.pose_run_root == partial.root / "artifacts" / "pose"
     assert full.fusion_run_root == full.root / "artifacts" / "fusion"
     assert partial.fusion_run_root == partial.root / "artifacts" / "fusion"
-    assert full.pose_view_root == full.run_root / "cache-views" / "bbat5-v1"
-    assert (
-        partial.pose_view_root == partial.run_root / "cache-views" / "bbat5-v1"
-    )
+    assert full.pose_view_root.name == partial.pose_view_root.name == "bbat5-v1-runtime"
     assert full.cpu_report_path != partial.cpu_report_path
     assert full.joint_smoke_report_path != partial.joint_smoke_report_path
     assert full.audit().ok
@@ -105,12 +111,27 @@ def test_training_configs_distinguish_official_reference_from_actual_p1() -> Non
         assert observed["nbs"] == 64
         assert observed["steady_state_accumulate"] == 4
         assert observed["epochs"] == 10
-        assert schedule["batch_argument"] == 128
+        if name == "full35":
+            assert schedule["p1"]["physical_batch"] == 128
+            assert schedule["p1"]["accumulate"] == 1
+            assert schedule["p2"]["physical_batch"] == 64
+            assert schedule["p2"]["accumulate"] == 2
+            assert schedule["p3"]["physical_batch"] == 32
+            assert schedule["p3"]["accumulate"] == 4
+        else:
+            assert schedule["batch_argument"] == 128
         assert schedule["p1"]["epochs"] == 17
         assert schedule["p2"]["epochs"] == 22
         assert schedule["p3"]["epochs"] == 100
-        assert config["batch_decision"]["status"] == "locked_by_user"
-        assert config["gpu_execution"]["performed_by_workspace_setup"] is False
+        expected_status = (
+            "locked_after_gpu_memory_gates"
+            if name == "full35"
+            else "locked_by_user"
+        )
+        assert config["batch_decision"]["status"] == expected_status
+        assert config["gpu_execution"]["performed_by_workspace_setup"] is (
+            name == "full35"
+        )
 
 
 def test_fusion_configs_keep_the_same_ratios_and_accuracy_gate() -> None:

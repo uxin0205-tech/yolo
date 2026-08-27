@@ -134,7 +134,7 @@ class SharedDualHeadModel(nn.Module):
         cls,
         detect_model: DetectionModel,
         pose_model: PoseModel,
-    ) -> SharedDualHeadModel:
+    ) -> "SharedDualHeadModel":
         """Consume two compatible task models while retaining only the Detect trunk."""
 
         detect_layers = detect_model.model

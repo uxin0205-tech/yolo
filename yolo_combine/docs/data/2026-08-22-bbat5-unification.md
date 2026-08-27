@@ -39,7 +39,7 @@ hash 證據保留，不回溯改寫。
 ## 新 runtime View
 
 新程式只接受全域 registry，先驗證 task YAML 與五份 lineage manifests 的 SHA256，再建立
-`artifacts/cache-views/bbat5-v1`。影像與 labels 都是 symlink；Ultralytics cache 留在 workspace，正式
+`bbat5-v1-runtime`。影像與 labels 都是 symlink；Ultralytics cache 留在 workspace，正式
 資料保持唯讀。偵測到 registry hash 漂移、不同資料路徑、跨 split group 或負座標時會
 fail closed。
 

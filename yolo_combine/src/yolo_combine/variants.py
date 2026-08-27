@@ -198,9 +198,9 @@ class VariantWorkspace:
 
     @property
     def pose_view_root(self) -> Path:
-        """Symlink-only cache view derived from the canonical BBAT5 asset root."""
+        """Generated BBT5 view owned only by this architecture workspace."""
 
-        return self.run_root / "cache-views" / "bbat5-v1"
+        return self.run_root / "datasets" / "bbat5-v1-runtime"
 
     @property
     def pose_run_root(self) -> Path:

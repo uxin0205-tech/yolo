@@ -1,7 +1,7 @@
 # YOLO26 Detect–Pose 融合實作計畫
 
 - 日期：2026-08-22
-- 狀態：第一階段工程完成；正式 batch128、P1 17、P2 22、P3 最多100 已鎖定，等待 GPU
+- 狀態：P1正式完成；P2/P3依空卡memory gate使用64×2／32×4並已恢復GPU pipeline
 - 主線：Full35-A2 Float；Partial75-A2 備案
 
 ## Module 與 seam
@@ -66,9 +66,9 @@ tests/              # tests only through the modules' interfaces
 - [x] 完成兩架構 Float/Bit-True independent→shared CPU 逐值驗證。
 - [x] 完成兩架構 synthetic 與 workspace-local 真實 COCO/BBT5 2:1 CPU step。
 - [ ] 取得授權後復原被第一次 direct smoke 重建的 COCO source cache。
-- [ ] 從頭完成正式 Full35 P1（batch128、head-only 17 epochs）。
-- [ ] 完成正式 Full35 P2（batch128、neck+head 22 epochs）。
-- [ ] 完成正式 Full35 P3（batch128、最多100 epochs、patience 20）。
+- [x] 完成正式 Full35 P1（physical128、head-only 17 epochs）。
+- [ ] 完成正式 Full35 P2（physical64、accumulate2、neck+head 22 epochs）。
+- [ ] 完成正式 Full35 P3（physical32、accumulate4、最多100 epochs、patience20）。
 - [ ] 鎖定正式 F1 loop 的 AMP、EMA、scheduler、定期雙任務 validation。
 - [ ] 跑 F1 1:1 與 2:1 正式比較。
 - [ ] 視時間與候選結果決定第二 seed。
@@ -105,7 +105,7 @@ tests/              # tests only through the modules' interfaces
 ## 第二階段實驗順序
 
 1. D0：既有 Full35-A2 Detect baseline 重驗。
-2. P0：依 batch128、17 → 22 → 最多100 的 staged profile 訓練 Full35 Pose26。
+2. P0：依128×1、64×2、32×4的logical128 staged profile訓練 Full35 Pose26。
 3. F0.5：D0 + P0 routed bundle。
 4. F1-80 R1：full COCO Detect : BBT5 Pose = 1:1。
 5. F1-80 R2：2:1，Detect microbatch loss先平均。

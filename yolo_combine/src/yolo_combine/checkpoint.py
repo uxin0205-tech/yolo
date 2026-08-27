@@ -66,7 +66,7 @@ def load_checkpoint(
         raise ValueError(f"checkpoint contract mismatch: {payload.get('contract')} != {expected}")
     state_dict = payload.get("state_dict")
     if not isinstance(state_dict, dict):
-        raise TypeError("checkpoint contains no state_dict")
+        raise ValueError("checkpoint contains no state_dict")
     model.load_state_dict(state_dict, strict=strict)
     return {
         "schema_version": payload["schema_version"],

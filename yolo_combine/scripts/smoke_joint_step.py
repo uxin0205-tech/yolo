@@ -54,7 +54,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--pose-view",
         type=Path,
-        default=PROJECT_ROOT / "artifacts/cache-views/bbat5-v1",
+        default=PROJECT_ROOT / "artifacts/datasets/bbat5-v1-runtime",
     )
     return parser.parse_args()
 

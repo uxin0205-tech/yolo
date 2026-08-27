@@ -1,172 +1,212 @@
-# YOLO26 Detect–Pose Fusion
+# YOLO26m Detect–Pose Shared-Trunk
 
-YOLO26m Detect–Pose 研究工程：一次抽取 Backbone + Neck 特徵，再分別送入
-COCO80 Detect head 與 ball/bat Pose26 head。
-
-## 已固定的架構決策
-
-- 主線：**Full35-A2 Float**。
-- 備案：Partial75-A2；不與 Full35 混用，也不自動切換。
-- Detect：第一版保留 COCO80 head；應用層只消費 person。
-- Pose：ball/bat，`kpt_shape=[2,3]`。
-- F1：一份真正共享的 layers 0–22，加兩個獨立 head。
-- 共享是建立新的 F1 graph 並移除重複 trunk，不是平均、剪枝或覆寫原始 Full35；
-  「逐值相同」只在兩個 task trunk 權重尚一致、且尚未 joint training 時成立。詳見
-  [ADR 0001](docs/adr/0001-share-full35-trunk-with-independent-heads.md)。
-- 精度 gate：person box、ball box、bat box、ball pose、bat pose 各自不得比對應
-  獨立 baseline 低超過 0.08 mAP50-95。
-
-權威來源維持唯讀：
+本 repository 實作 Full35 YOLO26m 的一份 shared backbone/neck 與兩個任務 head：
 
 ```text
-/home/uxin/yolo/yolo_achitechure/achitechure_1/final
+image
+  └─ shared Full35 YOLO26m layers 0–22
+       ├─ COCO80 Detect head（應用層取 person）
+       └─ Pose26 head（ball、bat，kpt_shape=[2,3]）
 ```
 
-## 唯一 BBAT5 資料契約
+這不是在 forward 內跑兩個完整 YOLO，也不是平均權重。Ultralytics 原 graph executor、
+skip connection、Concat 與 `from` indices 全部保留；只把最後 prediction module 換成
+dual-head wrapper。初始化時兩個獨立模型合計 45,580,762 parameters，共享 graph 為
+26,529,701，少 19,051,061（41.796%）。這是參數／weight storage 減少，不等同於
+精度、latency、能耗或 FPGA resource 已改善。
 
-所有新實驗的 BBAT5 部分只讀取：
+## 目前完成狀態
+
+- 完整 pre-head graph compatibility audit，以及 shared/detect-head/pose-head 逐 tensor
+  loading report。
+- `task=detect`、`task=pose`、`task=both`；`both` 只抽一次 shared features。
+- current Ultralytics 8.4.90 原生 Detect／Pose26 E2E loss、progressive loss、RLE 與
+  visibility mask，沒有自行簡化。
+- 兩個 native dataloader、2 Detect : 1 Pose macro、依 actual batch size 正規化、三次
+  sequential backward 後一次 optimizer step。
+- J0 Pose-head適應、J1保守neck融合、J2後段backbone/MASF融合與J3全backbone／attention
+  可微部分低學習率refinement均已完成。AdamW是正式主線；MuSGD仍是未執行challenger。
+- J3 global epoch58通過八項gate並超越J2，已升格；J2完整保留作rollback。
+- Float training，Float 與 Bit-True 每 epoch 各自驗證；Bit-True 才是 checkpoint
+  selection 與精度 gate 的正式口徑。
+- exact token-tiled XNOR、shared BN policy、EMA、gradient norm/cosine、八項 hard gate、
+  JSONL/CSV/PNG/TensorBoard capability、四種完整 resume checkpoint。
+- Full35 真實 COCO/BBAT5 CPU macro與完整測試已通過；CPU驗收明確隱藏CUDA，不會占用
+  正在執行的GPU工作。
+- Partial75 有完全隔離且預設 `enabled: false` 的同型設定，未執行。
+
+詳細架構見[正式設計](docs/design/2026-08-24-yolo26-joint-training-spec.md)，實際操作見
+[Full35 runbook](docs/runbooks/2026-08-24-full35-joint-runbook.md)，本輪全部變更與驗證見
+[工作紀錄](docs/worklogs/2026-08-24-full35-joint-implementation.md)。
+新版保守重訓的原因、stage政策、測試與舊run保留方式見
+[v2工作紀錄](docs/worklogs/2026-08-26-full35-joint-v2-retraining.md)。
+J2完成後的獨立低學習率attention/full-backbone微調見
+[J3 challenger工作紀錄](docs/worklogs/2026-08-27-full35-j3-challenger.md)。
+
+## Final 交付
+
+目前可執行的Full35交付包位於[final/full35](final/full35/README.md)。它封裝J3 accepted
+權重、完整resume／inference權重、J2 rollback、獨立Detect/Pose回退、程式碼快照、
+Float／Bit-True AP、訓練logs與全檔案SHA256。J3最佳Bit-True joint score為
+`0.7111747389752653`，八項gate全部通過；相對J2改善`+0.0011365230476836`。
+
+J3 `best_joint`目前只是固定實驗selector的預設；實際部署checkpoint尚待使用者比較
+COCO person AP後選定。報告另列獨立Detect、shared `best_detect`、J2 `best_joint`、
+J3 `best_joint`／`best_pose`／`last`的person AP50-95、AP50、AP75、precision與recall，
+並說明哪些權重能同時通過兩任務gate。此次只增加分析，沒有更換任何權重。
+
+完整結論、問題根因、訓練改法、設定、person候選CSV與八張圖見
+[最終分析報告](reports/full35/FINAL_ANALYSIS.md)。
+
+final不複製COCO或BBAT5資料本體，只保存registry／YAML snapshot；詳細封裝邊界、驗證、
+困難與風險見[工作紀錄](docs/worklogs/2026-08-27-full35-final-package.md)。
+
+## 唯一資料契約
+
+新 BBAT5 實驗只使用 machine-readable registry：
 
 ```text
 /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
 ```
 
-registry 是同時管理 Pose 與二類 Detect Task View 的版本入口，不會取代 COCO80：
-
-| 模型 route | 資料入口 |
+| route | 正式入口 |
 | --- | --- |
-| COCO80 Detect 主線 | `/home/uxin/yolo/coco2017.yaml` |
-| BBAT5 Pose 主線 | registry 的 `tasks.pose` |
-| BBAT5 ball/bat Detect 診斷 | registry 的 `tasks.detect_2class` |
+| COCO80 Detect | `/home/uxin/yolo/coco2017.yaml` |
+| ball/bat Pose | `/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml` |
+| ball/bat Detect 診斷 | `/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml` |
 
-因此融合 run 會記錄 COCO 與 BBAT5 兩種資料契約；不能把 `detect_2class` YAML 當成
-COCO80 head 的訓練資料。
+BBAT5 共 6,647 張，formal train/val 為 5,964/683。runtime View 只保留既有 assignment
+與 labels，讓 cache 留在 variant 的 `artifacts/`；舊 6,080/567 basic split 只用於歷史
+checkpoint 稽核，不能成為新 run 輸入。
 
-registry 鎖定 6,647 張影像、formal train/val 5,964/683、零同源群組 leakage、四筆
-座標修補，以及 task YAML／lineage manifest 的 SHA256。各 workspace 只建立
-`artifacts/cache-views/bbat5-v1/` symlink-only View 來隔離 cache，不再複製 labels 或建立資料入口。
-舊 `bbt5_pose_basic` 的 6,080/567 split 有 10 個 overlap groups，只用來解釋既有
-checkpoint；完整核對見[資料統一紀錄](docs/data/2026-08-22-bbat5-unification.md)。
+### 30% 診斷抽樣
 
-## 已完成
+前期 Pose 流程／loss／收斂方向檢查可明確傳入 `--fraction 0.3`。這不是 Ultralytics
+原生的排序前綴抽樣，而是固定 seed、以 `.rf.` 前的 source group 為單位隨機抽樣；完整
+683 張 canonical validation 仍全部使用。Full35 seed0 已固定為 696 groups、1,777 train
+images、991 ball 與1,457 bat instances，manifest 位於
+`variants/full35/artifacts/datasets/diagnostic/pose/f0p3-seed0/manifest.json`。
 
-- `SourceBundle` 驗證 121-file manifest 並載入 Full35/Partial75。
-- Full35 Detect → Pose26 layers 0–22 完整移植：587/587 tensors。
-- P0 checkpoint → F1 Pose head 嚴格移植：411/411 tensors。
-- `RoutedDualModel`：兩個完整模型的統一 task interface。
-- `SharedDualHeadModel`：一份共享 trunk，Detect/Pose 兩個 head。
-- 共享模型參數 26,529,701；雙完整模型合計 45,580,762，減少約 41.8%。
-- task-aware loss routing；未標註的另一任務不會被當成背景。
-- 1:1 與 2:1 joint step；2:1 的兩個 Detect loss 先平均。
-- inherited attention/PWL 與 Full35 MASF 凍結、eval-mode 與 drift guard。
-- state-dict-only checkpoint，以及轉回官方 Detect/Pose graph 的 validation/export seam。
-- 建立 Full35/Partial75 完全隔離的 folder-locked 工作區；設定、cache、report、
-  checkpoint 與 run outputs 不會交叉。
-- Full35/Partial75 Float 與 Bit-True 的獨立模型 → 共享模型 CPU forward 均逐值相同。
-- 兩架構的 synthetic 及真實 COCO/BBT5 2:1 CPU optimizer step 均通過。
-- 現有 41 項測試；本輪 CUDA 隱藏回歸為 38 passed、3 GPU tests skipped。
+所有此模式輸出的 run 都寫入 `artifacts/pose/diagnostic/` 並帶有
+`diagnostic-run.json`；它可產生 AP/mAP 供趨勢診斷，但不能作正式 P3、八項 baseline、
+0.08 gate 或解除 JOINT preflight。正式 P1→P3 與 validation 一律使用100%。完整設計、
+真實抽樣統計與驗證見[工作紀錄](docs/worklogs/2026-08-25-fraction-0p3-diagnostic-sampling.md)。
 
-## 目前正式進度
+## 正式設定
 
-- 舊 Full35 P1（seed 0、batch 16、10 epochs）已完成，但只保留為 provisional 歷史 run。
-- 最佳完整驗證：box mAP50-95 0.521；pose mAP50-95 0.816。
-- 分類 pose mAP50-95：ball 0.796、bat 0.836。
-- P1 `best.pt` 已通過 schema 檢查與 411/411 Pose-head tensor transfer。
-- 舊 P1 → P2 transition smoke 已通過；先前 batch16 P2 嘗試 OOM，沒有接受其 checkpoint。
-- 新正式排程已鎖定 batch128、P1 17、P2 22、P3 最多100；等待共用 GPU 空閒。
+Full35 的唯一 joint 設定是
+[joint.yaml](variants/full35/configs/joint.yaml)：
 
-這些既有數字仍是 provisional，因為產生它們的舊 run 使用有已知 source-group overlap
-的 BBT5 basic split；它們不能冒充後續 `bbat5-v1` 正式結果。所有新 run 已切換到
-leakage-safe `bbat5-v1`，歷史數字不回溯改寫。
+- Detect logical train batch固定為128；空卡實測後，每個logical batch由physical
+  microbatch64×2執行。Pose physical batch為16；驗證固定Detect32、Pose16。
+- 每macro仍是2個Detect logical batch128，再1個Pose batch16；實際依序執行4×64與1×16
+  forward/backward，只step一次。每次update的Detect exposure仍為256張。
+- `reference_batch_size=64` 只控制 backward 尺度，不是 physical 或 effective batch。
+- Joint stage的Detect/Pose task weights為1.0/0.25；J0只有Pose是active task，因此不會
+  再被0.25額外縮小。
+- Detect 與 Pose `mosaic=0`；Detect `fliplr=0.5`，Pose `fliplr=0`；Pose visibility 0/2
+  原樣交給 native augmentation/loss。
+- shared BN running statistics 固定；affine 預設可訓練且可由 YAML 關閉；head BN 正常
+  train。
+- XNOR 使用逐值相同的 `token_tile=32`；Q/K STE challenger 關閉。
+- 獨立 Pose P1/P2/P3 的 patience 分別為10/12/20。
+- 獨立 Pose stage實測設定為P1 physical128×accumulate1、P2 64×2、P3 32×4；
+  `nbs=128`，三者logical images/update與effective weight decay維持一致。
+- J0固定8 epochs且只訓練Pose head；J1最多20、patience8，只開neck與兩heads；
+  J2最多80、patience17，才開backbone layers9+與MASF；J3最多20、patience5且必須
+  明確`--enable-j3`，才開attention可微部分。
+- J0/J1/J2 warmup各1 epoch；J3保留3 epochs。
+- J2以 Bit-True joint score 判斷；連續8個 epoch 無至少1e-4改善時只降一次 LR ×0.5，
+  momentum/beta保持不變。
 
-### P1 batch 與 epoch 的精確口徑
+COCO 與 BBAT5 train image ratio 約19.83:1；2:1 是 batch-call ratio，不是 image ratio。
+以2×logical128／1×physical16計算，每個完整macro的Detect:Pose exposure是256:16，即16:1。
 
-P1 確實重新訓練 10 epochs，但 layers 0–22 全凍結，只更新 fresh Pose26 head。
-每個 forward 的 physical batch 是 16；`nbs=64` 使穩態 gradient accumulation 約為
-4，因此每次 optimizer update 約涵蓋 64 張。官方 YOLO26m COCO pretraining recipe
-列出的 batch 128、80 epochs 是上游參考，不是這次 ball/bat P1 已重現的設定。
-正式替代 run 將直接使用 batch128：P1、P2 分別固定跑滿 17、22 epochs；P3 最多
-100 epochs，patience 20。舊 batch16 P1 不會被覆寫或冒充新結果。
+## 正式 preflight
 
-兩個 workspace 的介面、輸出與 CPU 報告已完全分開，詳見
-[variants](variants/README.md)。CPU 驗證期間發現的 COCO cache 來源副作用與待授權
-復原事項記錄於 [CPU validation audit](docs/audits/2026-08-22-cpu-variant-validation.md)。
-
-## Environment
-
-專案已有依照權威 bundle 建立的 `.venv`。若需重建：
+執行：
 
 ```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r /home/uxin/yolo/yolo_achitechure/achitechure_1/final/requirements-lock.txt
-.venv/bin/python -m pip install --no-deps -e .
+CUDA_VISIBLE_DEVICES=-1 .venv/bin/python variants/full35/joint.py preflight
 ```
 
-## 回歸測試
+目前已回傳 `ready=true`，兩項正式前置均已完成：
+
+- canonical `bbat5-v1` 的 P1→P2→P3 Pose26 best checkpoint。
+- 同一 Float/Bit-True validator 產生的八項獨立 baseline。
+
+正式JOINT v2已完成J0 8、J1 20與J2 25 epochs；J2因patience17正常early stop，最佳
+Bit-True joint score為`0.7100382159275817`，八項hard gate全部通過。
+J3另跑11/20 epochs，global epoch58創下`0.7111747389752653`，其後patience5正常停止；
+八項gate全通過後已正式升格。
+
+## GPU 空閒串接佇列
+
+Full35 seed0已排定持久佇列。GPU 0必須沒有compute process、free memory至少30,000 MiB、
+utilization不超過10%，並連續2次poll都成立才開始。順序不是只有短測，而是：30% P1
+健全性檢查 → 正式P1→P2→P3 → Float/Bit-True獨立baseline → preflight → 舊版JOINT J1→J2
+AdamW → best_joint Float/Bit-True final validation。任何OOM、NaN、缺檔或preflight失敗都會
+停止，不會自動改batch或繞過gate。
+
+狀態與log位於`variants/full35/artifacts/queue/full35-seed0-pipeline/`；完整設計與停止／查詢
+方式見[佇列工作紀錄](docs/worklogs/2026-08-26-full35-seed0-gpu-queue.md)。
+
+新版v2 service與狀態：
 
 ```bash
-.venv/bin/python -m pytest
+systemctl --user status yolo-full35-v2-seed0.service
+cat variants/full35/artifacts/queue/full35-v2-seed0/queue-status.json
+journalctl --user -u yolo-full35-v2-seed0.service -f
 ```
 
-本輪以 `CUDA_VISIBLE_DEVICES=""` 執行：`38 passed, 3 skipped`；三項 GPU test
-刻意略過，沒有干擾正在執行的 GPU 任務。
+v2使用獨立run
+`full35-joint-adamw-v2-j0e8-j1e20-j2e80-seed0`；舊run不會被覆寫。J3不在v2 queue
+自動啟用，但已由使用者另行授權以`yolo-full35-v2-j3-b32-seed0.service`完成。
+queue已是`completed`；J3通過八項gate且joint score超越J2，決選完成。
 
-## Folder-locked CPU acceptance
+2026-08-26執行快照：30%診斷已完成；正式 P1 原先在 epoch7 validation因原生
+`train batch128 → val batch256`自動加倍而OOM。P1已用train128/val16完成17 epochs；
+P2/P3 memory gate另證實需使用64×2／32×4來維持logical128，並由持久service接續其餘
+pipeline。P3與八項baseline已完成；JOINT logical batch128的單次physical forward在空卡
+實測OOM，因此保留logical128，但改由microbatch64×2執行；每macro兩個logical batch，
+仍保留256張Detect exposure。修正、strict checkpoint驗證、測試與
+目前指標見[P1續跑工作紀錄](docs/worklogs/2026-08-26-full35-p1-resume-and-val-batch-cap.md)；
+JOINT 啟動、logical128／physical64×2 的區分、AMP overflow 復原與現行服務則見
+[JOINT啟動工作紀錄](docs/worklogs/2026-08-26-full35-joint-startup-batch128-and-amp-recovery.md)。
 
-每個入口從所在資料夾鎖定架構，且把 view/cache/report 寫回自己的 `artifacts/`：
+## 下一步命令
 
-```bash
-CUDA_VISIBLE_DEVICES="" .venv/bin/python variants/full35/run.py audit --verify-hashes
-CUDA_VISIBLE_DEVICES="" .venv/bin/python variants/full35/run.py cpu-check
-CUDA_VISIBLE_DEVICES="" .venv/bin/python variants/full35/run.py joint-smoke --ratio 2:1
-
-CUDA_VISIBLE_DEVICES="" .venv/bin/python variants/partial75/run.py audit --verify-hashes
-CUDA_VISIBLE_DEVICES="" .venv/bin/python variants/partial75/run.py cpu-check
-CUDA_VISIBLE_DEVICES="" .venv/bin/python variants/partial75/run.py joint-smoke --ratio 2:1
-```
-
-需要測試已訓練的 Pose26 head 時：
-
-```bash
-CUDA_VISIBLE_DEVICES="" .venv/bin/python variants/full35/run.py joint-smoke \
-  --ratio 2:1 \
-  --pose-head-checkpoint variants/full35/artifacts/pose/NAME/weights/best.pt
-```
-
-CPU smoke 不是正式精度結果。正式比較仍須使用 640 輸入、完整 `bbat5-v1`、完整
-validation 與獨立 baseline；只有歷史 basic split 結果維持 provisional。
-
-## Pose baseline stages
-
-正式 profile 固定為 batch128：head-only 17 → neck+head 22 → full 最多100。
-P1/P2 關閉 early stopping、必須跑滿；P3 patience 20。P2/P3 都從前一階段
-`best.pt` 建立新的 optimizer，不沿用舊 optimizer state。
+完整命令與路徑在 runbook。順序為：
 
 ```bash
-# P1：固定 17 epochs，只訓練 Pose26 head
-.venv/bin/python variants/full35/run.py pose \
-  --stage p1 --batch 128 --epochs 17 \
+# 1. GPU 空閒時跑 Full35 P1/P2/P3
+.venv/bin/python variants/full35/run.py pose --stage p1 --device 0 \
   --name p0-full35-p1-b128-e17-seed0
 
-# P2：固定 22 epochs，解凍 neck + head
-.venv/bin/python variants/full35/run.py pose \
-  --stage p2 --batch 128 --epochs 22 \
-  --name p0-full35-p2-b128-e22-seed0 \
-  --initial-checkpoint variants/full35/artifacts/pose/p0-full35-p1-b128-e17-seed0/weights/best.pt
+# 2. P3 完成後，同口徑產生獨立 baseline
+.venv/bin/python variants/full35/baseline.py --device 0 \
+  --pose-checkpoint PATH_TO_P3_BEST
 
-# P3：最多 100 epochs，patience 20
-.venv/bin/python variants/full35/run.py pose \
-  --stage p3 --batch 128 --epochs 100 \
-  --name p0-full35-p3-b128-e100max-seed0 \
-  --initial-checkpoint variants/full35/artifacts/pose/p0-full35-p2-b128-e22-seed0/weights/best.pt
+# 3. 將 P3 checkpoint 與 formal-gate JSON 填入 joint.yaml，再檢查
+.venv/bin/python variants/full35/joint.py preflight
+
+# 4. 新版 J0→J1→J2（J3不自動啟用）
+.venv/bin/python variants/full35/joint.py train --device 0 \
+  --name full35-joint-adamw-v2-j0e8-j1e20-j2e80-seed0
 ```
 
-CLI 會保存 registry、dataset ID、runtime View manifest、resolved training 參數與輸入
-checkpoint SHA256。正式 run 使用 `bbat5-v1`；profile smoke 的 override 結果仍不能當成
-正式 baseline。
+## CPU 驗收
 
-## 下一個實驗
+```bash
+CUDA_VISIBLE_DEVICES=-1 .venv/bin/python variants/full35/cpu_joint_smoke.py \
+  --steps 2 --imgsz 64
+CUDA_VISIBLE_DEVICES=-1 .venv/bin/python -m pytest -q
+```
 
-依 `bbat5-v1` 從頭執行 Full35 P1 17 → P2 22 → P3 最多100，再以最佳 Pose head初始化
-F1，比較 1:1 與 2:1。五個逐項 gate 都通過後，才進入第二 seed、Partial75 或量化。
+真實資料 smoke 證據在
+[formal-joint-cpu-smoke.json](variants/full35/artifacts/formal-joint-cpu-smoke.json)。它只驗
+graph/loss/gradient/BN/EMA contract，不是640精度結果。
 
-See [the implementation plan](docs/plans/2026-08-22-yolo26-fusion-implementation.md) and [source acceptance audit](docs/audits/2026-08-22-source-acceptance.md).
+## 工作紀錄
+
+所有新變更、驗證、困難與風險記錄於 [docs/worklogs](docs/worklogs/README.md)。

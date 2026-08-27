@@ -31,7 +31,7 @@ def test_pose_factory_transfers_every_shared_tensor(full35_models: BuiltTaskMode
     assert int(detect_head.nc) == 80
     assert int(pose_head.nc) == 2
     assert tuple(pose_head.kpt_shape) == (2, 3)
-    assert type(full35_models.detect.model[16].p3_masf).__name__ == "P3MASFFull35"
+    assert type(getattr(full35_models.detect.model[16], "p3_masf")).__name__ == "P3MASFFull35"
 
 
 @pytest.mark.integration

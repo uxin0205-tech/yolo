@@ -1,10 +1,24 @@
-schema_version: 1
+schema_version: 2
 architecture: partial75
+joint_config: joint.yaml
+pose_stage_source: yolo_combine.pose_stages.POSE_STAGES
+
 gpu_execution:
   performed_by_workspace_setup: false
-  reason: preserve the unrelated GPU job already running
+  reason: Partial75 是停用備案，只有使用者明確要求才執行。
+
+diagnostic_sampling:
+  capability_available: true
+  materialized: false
+  executed: false
+  default_if_user_enables:
+    fraction: 0.3
+    seed: 0
+    strategy: seeded_random_source_group
+    validation_fraction: 1.0
+    formal_eligible: false
+
 official_yolo26m_coco_reference:
-  source: https://github.com/ultralytics/ultralytics/blob/main/docs/en/guides/yolo26-training-recipe.md
   scope: reference_only
   task: detect
   dataset: COCO
@@ -12,72 +26,63 @@ official_yolo26m_coco_reference:
   published_batch: 128
   epochs: 80
   optimizer: MuSGD
-  warning: this is upstream COCO pretraining, not the local ball/bat P1 recipe
+
 local_detect_source:
-  task: detect
   checkpoint: /home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/float/partial75-a2.pt
-  epochs: 10
   physical_batch: 16
   nbs: 16
-  imgsz: 640
+  configured_max_epochs: 10
   optimizer: MuSGD
   lr0: 0.00038
   lrf: 0.5
-  seed: 0
+
 observed_full35_p1:
   applies_to_this_variant: false
   status: reference_from_full35_only
   run: artifacts/runs/p0/p0-full35-p1-seed0
-  task: pose
-  dataset: BBT5 basic split
-  train_images: 6080
-  val_images: 567
+  dataset: BBT5 basic split（僅歷史證據，不可作新 run 輸入）
   epochs: 10
   physical_batch: 16
   nbs: 64
   steady_state_accumulate: 4
-  approximate_optimizer_batch: 64
-  imgsz: 640
-  optimizer: MuSGD
-  seed: 0
-  freeze_layers: 0-22
   trainable_scope: fresh Pose26 head only
-  checkpoint_sha256: bf8f1f902fed64231447718c6eca3f2bd659ae9bdf56f4cd6acf934e918b280b
+
 pose_schedule:
   batch_argument: 128
-  nbs: 64
-  single_gpu_physical_batch: 128
-  single_gpu_steady_state_accumulate: 1
+  nbs: 128
+  effective_weight_decay: 0.00027
+  optimizer: MuSGD
+  lr0: 0.00038
+  lrf: 0.5
+  momentum: 0.948
+  cosine: true
   p1:
     epochs: 17
+    patience: 10
     trainable_scope: Pose26 head
-    initial_checkpoint: null
-    early_stopping: false
   p2:
     epochs: 22
-    trainable_scope: neck and Pose26 head
-    initial_checkpoint: p1_best
-    early_stopping: false
+    patience: 12
+    trainable_scope: neck、Pose26 head、MASF 與 attention 可訓練部分
   p3:
     epochs: 100
-    trainable_scope: all except inherited attention and MASF
-    initial_checkpoint: p2_best
-    early_stopping: true
+    trainable_scope: full graph；Q/K sign path、gamma、PWL/PoT constants 鎖定
     patience: 20
   transition_rule: each stage starts a new optimizer from the previous best checkpoint
+
 batch_decision:
   status: locked_by_user
   selected:
-    batch_argument: 128
-    single_gpu_physical_batch: 128
-    nbs: 64
-    steady_state_accumulate: 1
-  legacy_provisional_p1:
-    physical_batch: 16
-    nbs: 64
-    steady_state_accumulate: 4
-  note: workspace setup records this decision but does not launch GPU training
+    physical_batch: 128
+    nbs: 128
+    accumulate: 1
+  rationale: nbs與physical batch相同，避免Ultralytics把weight decay由2.7e-4放大兩倍。
+  validation_batch: independently capped
+  xnor_backend: exact tiled token reduction
+  xnor_token_tile: 32
+  warning: Partial75 未啟用，也未執行任何 GPU profile。
+
 seed_policy:
   required_first_seed: 0
   optional_second_seed: 1
-  second_seed_condition: time budget and first-seed gate
+  second_seed_condition: 時間允許且 seed0 通過逐項精度 gate
