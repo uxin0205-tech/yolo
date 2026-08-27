@@ -1,0 +1,84 @@
+schema_version: 1
+architecture: full35
+enabled: true
+description: Full35 正式 v2 主線；J0 Pose-head 適應後才進入 J1/J2 共享訓練。
+dependencies:
+  ultralytics: 8.4.90
+  torch: 2.11.0+cu128
+  compile: false
+  ddp: false
+source:
+  bundle: ../source_bundle
+  pose_checkpoint: ../weights/standalone/pose-full35-p3.pt
+  provisional_pose_checkpoint: null
+  baseline_metrics: ../metrics/standalone-baseline-bittrue.json
+data:
+  registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+  detect: /home/uxin/yolo/coco2017.yaml
+  pose: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  imgsz: 640
+  detect_train_batch: 128
+  detect_train_microbatch: 64
+  pose_train_batch: 16
+  detect_val_batch: 32
+  pose_val_batch: 16
+  detect_workers: 4
+  pose_workers: 8
+  detect_mosaic: 0.0
+  pose_mosaic: 0.0
+  detect_fliplr: 0.5
+  pose_fliplr: 0.0
+xnor:
+  backend: tiled_exact
+  token_tile: 32
+  qk_ste: false
+  bittrue_validation: true
+training:
+  stages:
+  - j0
+  - j1
+  - j2
+  enable_j3: false
+  optimizer: AdamW
+  challenger_optimizer: MuSGD
+  seed: 0
+  optional_second_seed: 1
+  amp: true
+  detect_batches_per_macro: 2
+  amp_max_overflow_retries: 16
+  pose_batches_per_macro: 1
+  reference_batch_size: 64
+  detect_weight: 1.0
+  pose_weight: 0.25
+  gradient_clip_norm: 10.0
+  gradient_statistics_interval: 100
+  weight_decay: 0.00027
+  beta1: 0.948
+  beta2: 0.999
+  warmup_epochs: 1
+  warmup_start_factor: 0.1
+  cosine_final_lr_factor: 0.5
+  j2_plateau:
+    monitor: bittrue_joint_score
+    patience: 17
+    recovery_after: 8
+    min_delta: 0.0001
+    lr_factor: 0.5
+    max_reductions: 1
+    adjust_momentum: false
+  shared_bn_affine_trainable: true
+validation:
+  backends:
+  - float
+  - bittrue
+  selection_backend: bittrue
+  maximum_map50_95_drop: 0.08
+  plots: true
+  save_coco_json: false
+logging:
+  tensorboard: auto
+  jsonl: true
+  csv: true
+  png: true
+runs:
+  root: ../runtime

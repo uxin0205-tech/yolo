@@ -1,0 +1,296 @@
+{
+  "accepted_candidate": {
+    "best_detect_source": "parent_j2",
+    "best_global_epoch": 58,
+    "best_j3_local_epoch_zero_based": 5,
+    "full_resume_weight": "weights/combined/full-resume/best_joint.pt",
+    "inference_weight": "weights/combined/inference/best_joint.pt",
+    "joint_score": 0.7111747389752653,
+    "resume_last_weight": "weights/combined/full-resume/last.pt",
+    "run": "full35-joint-adamw-v2-j3-b32-challenger-seed0",
+    "selection_backend": "bittrue",
+    "stage": "j3"
+  },
+  "analysis": {
+    "figures": [
+      "figures/01-joint-score-by-epoch.png",
+      "figures/02-validation-map-by-epoch.png",
+      "figures/03-training-loss-by-epoch.png",
+      "figures/04-gate-deltas-j2-j3.png",
+      "figures/05-final-metric-comparison.png",
+      "figures/06-shared-gradient-by-epoch.png",
+      "figures/07-coco-person-ap-by-epoch.png",
+      "figures/08-coco-person-candidate-comparison.png"
+    ],
+    "report": "analysis/FINAL_ANALYSIS.md",
+    "summary": "analysis/SUMMARY.json"
+  },
+  "architecture": "YOLO26m Full35 shared trunk + Detect80 + Pose26(ball, bat)",
+  "bittrue_key_metrics": {
+    "bbat/ball/box/map50_95": 0.5074370361873287,
+    "bbat/ball/pose/map50_95": 0.8599087151917765,
+    "bbat/bat/box/map50_95": 0.7526340073268026,
+    "bbat/bat/pose/map50_95": 0.9475256330341134,
+    "bbat/box/map50_95": 0.6300355217570656,
+    "bbat/pose/map50_95": 0.9037171741129448,
+    "coco/box/map50_95": 0.49802233647092214,
+    "coco/person/box/map50_95": 0.6203814884224489
+  },
+  "data_policy": {
+    "bbat5_id": "bbat5-v1",
+    "dataset_payload_copied": false,
+    "detect": "/home/uxin/yolo/coco2017.yaml",
+    "pose": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml",
+    "reason": "資料本體維持 canonical 唯一來源；final 僅保存 YAML/registry snapshot。"
+  },
+  "dependencies": {
+    "compile": false,
+    "ddp": false,
+    "python": ">=3.12,<3.13",
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.90"
+  },
+  "deployment_selection": {
+    "candidates": [
+      {
+        "all_eight_gates_passed": null,
+        "candidate_id": "standalone_detect",
+        "checkpoint": "final/full35/weights/standalone/detect-full35-a2-bittrue.pt",
+        "coco_overall_ap50_95": 0.506400885642831,
+        "decision_role": "person-only accuracy baseline",
+        "global_epoch": null,
+        "joint_score": null,
+        "label": "Standalone Detect",
+        "person_ap50": 0.841473115942069,
+        "person_ap50_95": 0.6261855612319002,
+        "person_ap50_95_delta_vs_standalone": 0.0,
+        "person_ap50_delta_vs_standalone": 0.0,
+        "person_ap75": 0.6844410144010236,
+        "person_ap75_delta_vs_standalone": 0.0,
+        "person_precision": 0.7952573592903847,
+        "person_recall": 0.7694836455608027,
+        "validation_source": "independent formal Bit-True validation"
+      },
+      {
+        "all_eight_gates_passed": false,
+        "candidate_id": "shared_best_detect",
+        "checkpoint": "final/full35/weights/combined/inference/best_detect.pt",
+        "coco_overall_ap50_95": 0.5065545722728799,
+        "decision_role": "person-first shared checkpoint; Pose not ready",
+        "global_epoch": 0,
+        "joint_score": 0.580499232014127,
+        "label": "Shared best_detect",
+        "person_ap50": 0.8414635236977497,
+        "person_ap50_95": 0.6260570359526075,
+        "person_ap50_95_delta_vs_standalone": -0.00012852527929263502,
+        "person_ap50_delta_vs_standalone": -9.592244319289733e-06,
+        "person_ap75": 0.6842281574428801,
+        "person_ap75_delta_vs_standalone": -0.00021285695814343697,
+        "person_precision": 0.7972449460594129,
+        "person_recall": 0.7687668182239955,
+        "validation_source": "full per-epoch Bit-True validation"
+      },
+      {
+        "all_eight_gates_passed": true,
+        "candidate_id": "j2_best_joint",
+        "checkpoint": "final/full35/weights/rollback/j2/inference/best_joint.pt",
+        "coco_overall_ap50_95": 0.497345631101744,
+        "decision_role": "balanced rollback",
+        "global_epoch": 35,
+        "joint_score": 0.7100382159275817,
+        "label": "J2 best_joint",
+        "person_ap50": 0.8376039819377257,
+        "person_ap50_95": 0.618511145604136,
+        "person_ap50_95_delta_vs_standalone": -0.007674415627764164,
+        "person_ap50_delta_vs_standalone": -0.0038691340043433,
+        "person_ap75": 0.6767283516436382,
+        "person_ap75_delta_vs_standalone": -0.007712662757385358,
+        "person_precision": 0.7994756604609816,
+        "person_recall": 0.7653335807738703,
+        "validation_source": "independent final Bit-True revalidation"
+      },
+      {
+        "all_eight_gates_passed": true,
+        "candidate_id": "j3_best_joint",
+        "checkpoint": "final/full35/weights/combined/inference/best_joint.pt",
+        "coco_overall_ap50_95": 0.49802233647092214,
+        "decision_role": "current joint-score default",
+        "global_epoch": 58,
+        "joint_score": 0.7111747389752653,
+        "label": "J3 best_joint",
+        "person_ap50": 0.8394095874767435,
+        "person_ap50_95": 0.6203814884224489,
+        "person_ap50_95_delta_vs_standalone": -0.005804072809451277,
+        "person_ap50_delta_vs_standalone": -0.002063528465325426,
+        "person_ap75": 0.679217515089811,
+        "person_ap75_delta_vs_standalone": -0.005223499311212576,
+        "person_precision": 0.8058975060100467,
+        "person_recall": 0.7631994061427113,
+        "validation_source": "independent final Bit-True revalidation"
+      },
+      {
+        "all_eight_gates_passed": true,
+        "candidate_id": "j3_best_pose",
+        "checkpoint": "final/full35/weights/combined/inference/best_pose.pt",
+        "coco_overall_ap50_95": 0.4980718349147051,
+        "decision_role": "pose-first balanced alternative",
+        "global_epoch": 59,
+        "joint_score": 0.7111415212904801,
+        "label": "J3 best_pose",
+        "person_ap50": 0.8393924966826347,
+        "person_ap50_95": 0.6205126845454989,
+        "person_ap50_95_delta_vs_standalone": -0.0056728766864012625,
+        "person_ap50_delta_vs_standalone": -0.0020806192594342576,
+        "person_ap75": 0.678979365075057,
+        "person_ap75_delta_vs_standalone": -0.0054616493259666,
+        "person_precision": 0.8042538077592797,
+        "person_recall": 0.7652407905725156,
+        "validation_source": "full per-epoch Bit-True validation"
+      },
+      {
+        "all_eight_gates_passed": true,
+        "candidate_id": "j3_last",
+        "checkpoint": "final/full35/weights/combined/inference/last.pt",
+        "coco_overall_ap50_95": 0.497832813314694,
+        "decision_role": "stage-complete endpoint",
+        "global_epoch": 63,
+        "joint_score": 0.7099739723667974,
+        "label": "J3 last",
+        "person_ap50": 0.8391565590821739,
+        "person_ap50_95": 0.6203983615542289,
+        "person_ap50_95_delta_vs_standalone": -0.005787199677671273,
+        "person_ap50_delta_vs_standalone": -0.002316556859895069,
+        "person_ap75": 0.6787115099885845,
+        "person_ap75_delta_vs_standalone": -0.005729504412439024,
+        "person_precision": 0.8066272942830769,
+        "person_recall": 0.7629210355386471,
+        "validation_source": "full per-epoch Bit-True validation"
+      }
+    ],
+    "current_default": "j3_best_joint",
+    "note": "J3 best_joint remains the experiment-selector default; no deployment checkpoint is locked until the user reviews the person AP comparison.",
+    "state": "pending_user_choice"
+  },
+  "float_key_metrics": {
+    "bbat/ball/box/map50_95": 0.5070138889334017,
+    "bbat/ball/pose/map50_95": 0.8599478063758449,
+    "bbat/bat/box/map50_95": 0.7528332492657271,
+    "bbat/bat/pose/map50_95": 0.9475482213885578,
+    "bbat/box/map50_95": 0.6299235690995644,
+    "bbat/pose/map50_95": 0.9037480138822014,
+    "coco/box/map50_95": 0.49809360477516296,
+    "coco/person/box/map50_95": 0.6203973463678485
+  },
+  "generated_at": "2026-08-27T04:07:58.815334+00:00",
+  "hard_gate": {
+    "metrics": [
+      {
+        "combined": 0.49802233647092214,
+        "delta": -0.008378549171908889,
+        "metric": "coco/box/map50_95",
+        "passed": true,
+        "standalone": 0.506400885642831
+      },
+      {
+        "combined": 0.6203814884224489,
+        "delta": -0.005804072809451277,
+        "metric": "coco/person/box/map50_95",
+        "passed": true,
+        "standalone": 0.6261855612319002
+      },
+      {
+        "combined": 0.6300355217570656,
+        "delta": -0.0009280912609916925,
+        "metric": "bbat/box/map50_95",
+        "passed": true,
+        "standalone": 0.6309636130180573
+      },
+      {
+        "combined": 0.9037171741129448,
+        "delta": -0.008443373868243897,
+        "metric": "bbat/pose/map50_95",
+        "passed": true,
+        "standalone": 0.9121605479811887
+      },
+      {
+        "combined": 0.5074370361873287,
+        "delta": -0.0033098636992267005,
+        "metric": "bbat/ball/box/map50_95",
+        "passed": true,
+        "standalone": 0.5107468998865554
+      },
+      {
+        "combined": 0.7526340073268026,
+        "delta": 0.0014536811772437597,
+        "metric": "bbat/bat/box/map50_95",
+        "passed": true,
+        "standalone": 0.7511803261495589
+      },
+      {
+        "combined": 0.8599087151917765,
+        "delta": -0.016354364920575293,
+        "metric": "bbat/ball/pose/map50_95",
+        "passed": true,
+        "standalone": 0.8762630801123518
+      },
+      {
+        "combined": 0.9475256330341134,
+        "delta": -0.0005323828159121691,
+        "metric": "bbat/bat/pose/map50_95",
+        "passed": true,
+        "standalone": 0.9480580158500256
+      }
+    ],
+    "passed": true,
+    "threshold": -0.08
+  },
+  "model_contract": {
+    "detect_nc": 80,
+    "feature_channels": [
+      256,
+      512,
+      512
+    ],
+    "head_inputs": [
+      16,
+      19,
+      22
+    ],
+    "independent_parameters": 45580762,
+    "parameter_reduction_fraction": 0.41796275806007804,
+    "pose_kpt_shape": [
+      2,
+      3
+    ],
+    "pose_nc": 2,
+    "shared_layers": 23,
+    "shared_parameters": 26529701,
+    "strides": [
+      8.0,
+      16.0,
+      32.0
+    ],
+    "xnor": {
+      "backend": "bool_tiled",
+      "module": "yolo_attention.binary_basis",
+      "newly_installed": true,
+      "token_tile": 32
+    }
+  },
+  "promotion_record": {
+    "candidate_improved_parent_best": true,
+    "decision": "promoted_after_all_eight_gates_passed",
+    "improvement_over_parent": 0.0011365230476836352,
+    "parent_joint_score": 0.7100382159275817,
+    "queue_status": "completed"
+  },
+  "release_state": "accepted_j3_with_j2_rollback",
+  "rollback": {
+    "full_resume": "weights/rollback/j2/full-resume/best_joint.pt",
+    "inference": "weights/rollback/j2/inference/best_joint.pt",
+    "joint_score": 0.7100382159275817,
+    "run": "full35-joint-adamw-v2-j0e8-j1e20-j2e80-seed0",
+    "stage": "j2"
+  },
+  "schema_version": 1
+}
