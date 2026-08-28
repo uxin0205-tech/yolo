@@ -1,7 +1,7 @@
 # 所有正式設定的唯一機器可讀索引。
 schema_version: 3
-spec_version: 2.0.3
-spec_sha256: 8b07bdb4195e88c8c9bf4a95dab782c75a77854ef5022ede4757290348a95471
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
 kind: config_catalog
 title_zh: architecture_2 正式設定目錄
 readme: configs/README.md
@@ -16,13 +16,21 @@ training:
   cpu-smoke: configs/training/cpu-smoke.yaml
   float-extension: configs/training/float-extension.yaml
   float-main: configs/training/float-main.yaml
+  float-screen-20: configs/training/float-screen-20.yaml
+  quant-qat-lite: configs/training/quant-qat-lite.yaml
   quant-qat: configs/training/quant-qat.yaml
+runs:
+  full35-float-screen-20: configs/runs/full35-float-screen-20.yaml
+  full35-c2-c3-auto-continuation: configs/runs/full35-c2-c3-auto-continuation.yaml
 datasets:
   coco2017: configs/data/coco2017.yaml
+  coco2017-screen-20: configs/data/coco2017-screen-20.yaml
   bbat5-pose: configs/data/bbat5-pose.yaml
   bbat5-detect: configs/data/bbat5-detect.yaml
   bbat5-pose-search: configs/data/bbat5-pose-search.yaml
   bbat5-detect-search: configs/data/bbat5-detect-search.yaml
+  bbat5-pose-screen-20: configs/data/bbat5-pose-screen-20.yaml
+  bbat5-detect-screen-20: configs/data/bbat5-detect-screen-20.yaml
 quantization: configs/quant/w8a8-simulation.yaml
 schemas:
   catalog: configs/schema/catalog.schema.yaml
@@ -31,3 +39,5 @@ schemas:
   dataset: configs/schema/dataset.schema.yaml
   quantization: configs/schema/quantization.schema.yaml
   handoff: configs/schema/handoff.schema.yaml
+  screen-run: configs/schema/screen-run.schema.yaml
+  continuation-run: configs/schema/continuation-run.schema.yaml

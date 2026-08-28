@@ -166,7 +166,7 @@ def _normalize_contract(value: Any) -> Any:
 
 
 def _validate_model_contract(contract: Any, fusion_kind: str) -> dict[str, Any]:
-    required = {
+    legacy_required = {
         "interface",
         "model_kind",
         "head_inputs",
@@ -176,13 +176,49 @@ def _validate_model_contract(contract: Any, fusion_kind: str) -> dict[str, Any]:
         "detect_names",
         "pose_names",
     }
-    if not isinstance(contract, dict) or set(contract) != required:
-        raise ValueError(f"model_contract fields must be exactly {sorted(required)}")
+    full35_required = {
+        "model_kind",
+        "shared_layers",
+        "head_inputs",
+        "feature_channels",
+        "strides",
+        "reg_max",
+        "end2end",
+        "detect_nc",
+        "pose_nc",
+        "kpt_shape",
+        "detect_names",
+        "pose_names",
+        "pose_flow_module",
+    }
+    if not isinstance(contract, dict) or set(contract) not in {
+        frozenset(legacy_required),
+        frozenset(full35_required),
+    }:
+        raise ValueError(
+            "model_contract fields must match the legacy handoff or actual Full35 graph contract"
+        )
     normalized = _normalize_contract(contract)
-    if normalized["interface"] != "model(images, tasks=detect|pose|both)":
-        raise ValueError("model_contract interface must support detect/pose/both")
-    if normalized["model_kind"] != fusion_kind:
-        raise ValueError("model_contract.model_kind must match fusion_kind")
+    if set(contract) == legacy_required:
+        if normalized["interface"] != "model(images, tasks=detect|pose|both)":
+            raise ValueError("model_contract interface must support detect/pose/both")
+        if normalized["model_kind"] != fusion_kind:
+            raise ValueError("model_contract.model_kind must match fusion_kind")
+    else:
+        if fusion_kind != "shared_dual_head":
+            raise ValueError("actual Full35 graph contract only supports shared_dual_head")
+        if normalized["model_kind"] != "graph_shared_dual_head":
+            raise ValueError("actual Full35 model_kind must be graph_shared_dual_head")
+        if normalized["shared_layers"] != 23:
+            raise ValueError("actual Full35 shared_layers must be 23")
+        if normalized["feature_channels"] != [256, 512, 512]:
+            raise ValueError("actual Full35 feature_channels drifted")
+        if normalized["strides"] != [8.0, 16.0, 32.0]:
+            raise ValueError("actual Full35 strides drifted")
+        if normalized["reg_max"] != 1 or normalized["end2end"] is not True:
+            raise ValueError("actual Full35 Detect head contract drifted")
+        if normalized["pose_flow_module"] != "RealNVP":
+            raise ValueError("actual Full35 Pose RLE module drifted")
     if normalized["detect_nc"] != 80:
         raise ValueError("main Detect contract requires detect_nc=80")
     detect_names = _normalize_names(normalized["detect_names"])
@@ -489,11 +525,18 @@ def validate_handoff(
         )
     recipe = _load_training_recipe(manifest.training_recipe.path)
     fresh = _load_json_object(manifest.fresh_process_report.path, "fresh-process report")
-    if (
-        fresh.get("passed") is not True
-        or fresh.get("state_dict_reload") is not True
-        or fresh.get("tasks") != ["detect", "pose", "both"]
-    ):
+    legacy_fresh = (
+        fresh.get("passed") is True
+        and fresh.get("state_dict_reload") is True
+        and fresh.get("tasks") == ["detect", "pose", "both"]
+    )
+    full35_fresh = (
+        fresh.get("result") == "passed"
+        and fresh.get("strict_load") is True
+        and fresh.get("task") == "both"
+        and fresh.get("output_tasks") == ["detect", "pose"]
+    )
+    if not (legacy_fresh or full35_fresh):
         raise ValueError("fresh-process report must pass state_dict reload for detect/pose/both")
     graph_audit: dict[str, Any] = {
         "candidate_module_paths": [

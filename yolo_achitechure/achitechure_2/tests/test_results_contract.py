@@ -21,7 +21,7 @@ def test_results_template_is_rectangular_pending_and_metric_complete() -> None:
     assert all(row["formal_comparison_ready"] == "false" for row in rows)
     assert all(row["selection_status"] == "pending_user_decision" for row in rows)
     assert all(row["c_best"] == "" for row in rows)
-    assert all(row["spec_version"] == "2.0.3" for row in rows)
+    assert all(row["spec_version"] == "2.3.0" for row in rows)
     required = {
         "coco_box_map50",
         "coco_box_map50_95",
@@ -31,6 +31,12 @@ def test_results_template_is_rectangular_pending_and_metric_complete() -> None:
         "bbat5_pose_box_map50_95",
         "bbat5_keypoint_map50",
         "bbat5_keypoint_map50_95",
+        "detect_logical_batch",
+        "detect_physical_microbatch",
+        "pose_train_batch",
+        "detect_validation_batch",
+        "pose_validation_batch",
+        "micro_f1_method",
         "pose_official_combined_fitness",
         "ball_f1",
         "bat_f1",

@@ -15,24 +15,29 @@ from achitechure_2.config import (
 )
 
 
-def test_config_check_describes_v2_matrix_and_blocked_handoff_values() -> None:
+def test_config_check_describes_v2_matrix_and_authorized_pose_values() -> None:
     report = check_configs()
 
     assert report.valid
-    assert report.spec_version == "2.0.3"
+    assert report.spec_version == "2.3.0"
     assert report.ultralytics_version == "8.4.90"
     assert report.candidate_ids == ("C0", "C1", "C2", "C3")
     assert report.checked_training_files == (
         "configs/training/cpu-smoke.yaml",
         "configs/training/float-extension.yaml",
         "configs/training/float-main.yaml",
+        "configs/training/float-screen-20.yaml",
+        "configs/training/quant-qat-lite.yaml",
         "configs/training/quant-qat.yaml",
     )
-    assert "Pose 正式執行：等待使用者 opt-in" in report.accepted_but_inactive
+    assert all("Pose 正式執行" not in item for item in report.accepted_but_inactive)
     assert "batch_size：請使用 Ultralytics 正式鍵名 batch" in report.deprecated
-    assert "上游 winner training recipe 尚未 handoff" in report.blocked
-    assert "Float extension：等待 late gate 與未 strip continuation state" in report.blocked
-    assert "Pose RLE active evidence：等待 handoff model/loss dry-run" in report.blocked
+    assert all("Float20 GPU 佇列" not in item for item in report.blocked)
+    assert "Float extension：本 revision 已封存且不執行" in report.blocked
+    assert (
+        "C2/C3完整訓練、PTQ與Q2L：已封存且不採用，不得排入queue"
+        in report.accepted_but_inactive
+    )
     assert "fusion template：融合選型屬於 yolo_combine" in report.deprecated
     assert report.runtime_overridable == (
         "cache",

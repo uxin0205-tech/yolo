@@ -40,6 +40,16 @@ _Avoid_: BBAT5 2-class Detect main task
 由權威 Pose labels 前五欄衍生的 ball/bat Detect view，用來檢查棒球類別，不參與主線 C_best 因果排名。
 _Avoid_: COCO80 replacement、second source of labels
 
+**固定20%篩選 View（Architecture Screen 20）**:
+從既有 COCO train 與 BBAT5 search-train 產生的不可變、run-specific manifest View；只作
+C0–C3初篩，不擁有新資料語意，也不使用正式 val。
+_Avoid_: fraction=0.2、new canonical split、formal ranking dataset
+
+**QAT-lite（Q2L）**:
+eligible candidate 在 Q1 後使用固定20% View進行的200-step W8A8 fake-quant短恢復；只描述
+PTQ gap能否部分恢復，不取代正式 Q2。
+_Avoid_: official QAT recipe、Bit-True、deployment INT8、automatic acceptance
+
 **量化資格（Quantization Eligibility）**:
-Float 結果完成後，由使用者明確指定某候選是否進入 Q0/Q1/Q2；C0 固定具資格。
+Float 結果完成後，由使用者明確指定某候選是否進入 Q0/Q1/Q2L/Q2；C0 固定具資格。
 _Avoid_: automatic threshold、C_best-only quantization

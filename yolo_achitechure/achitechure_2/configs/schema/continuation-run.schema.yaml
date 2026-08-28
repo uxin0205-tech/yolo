@@ -1,0 +1,175 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: continuation-run.schema.yaml
+title: architecture_2 C2/C3完整訓練與量化自動接續設定
+description: Float20封存後，完整資料訓練、PTQ、QAT-lite及最終選型的closed schema。
+x-spec-version: 2.3.0
+x-spec-sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - spec_version
+  - spec_sha256
+  - kind
+  - config_id
+  - title_zh
+  - status
+  - authorization
+  - source_screen_run
+  - float_results
+  - candidates
+  - datasets
+  - training
+  - quantization
+  - queue
+  - lineage
+properties:
+  schema_version: {const: 1}
+  spec_version: {const: 2.3.0}
+  spec_sha256: {const: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216}
+  kind: {const: float_full_quant_continuation}
+  config_id: {const: full35-j3-c2-c3-auto-seed0}
+  title_zh: {type: string, minLength: 1}
+  status: {const: closed_rejected_by_user}
+  authorization:
+    type: object
+    additionalProperties: false
+    required: [gpu, pose, full_training, ptq, qat_lite, authorized_at, note_zh]
+    properties:
+      gpu: {const: true}
+      pose: {const: true}
+      full_training: {const: true}
+      ptq: {const: true}
+      qat_lite: {const: true}
+      authorized_at: {const: "2026-08-27"}
+      note_zh: {type: string, minLength: 1}
+  source_screen_run: {const: configs/runs/full35-float-screen-20.yaml}
+  float_results: {const: results/full35-j3-float20-seed0}
+  candidates: {const: [C2, C3]}
+  datasets:
+    type: object
+    additionalProperties: false
+    required: [detect, pose, diagnostic_detect, note_zh]
+    properties:
+      detect: {const: configs/data/coco2017.yaml}
+      pose: {const: configs/data/bbat5-pose.yaml}
+      diagnostic_detect: {const: configs/data/bbat5-detect.yaml}
+      note_zh: {type: string, minLength: 1}
+  training:
+    type: object
+    additionalProperties: false
+    required: [run_root, epochs, patience, runtime_cache_root]
+    properties:
+      run_root: {const: artifacts/runs/full35-j3-c2-c3-full-seed0}
+      epochs: {const: 100}
+      patience: {const: 20}
+      runtime_cache_root: {const: artifacts/datasets/runtime/full35-j3-c2-c3-full-seed0}
+  quantization:
+    type: object
+    additionalProperties: false
+    required:
+      - simulation_only
+      - calibration_batches_per_task
+      - qat_lite_steps
+      - observer_update_steps
+      - validation_interval_steps
+      - max_accuracy_drop
+      - accuracy_fields
+      - require_cost_reduction
+      - result_root
+    properties:
+      simulation_only: {const: true}
+      calibration_batches_per_task: {type: integer, minimum: 1}
+      qat_lite_steps: {const: 200}
+      observer_update_steps: {const: 50}
+      validation_interval_steps: {const: 50}
+      max_accuracy_drop: {const: 0.008}
+      accuracy_fields:
+        type: array
+        uniqueItems: true
+        minItems: 4
+        maxItems: 4
+        items:
+          enum:
+            - coco_box_map50_95
+            - bbat5_pose_box_map50_95
+            - bbat5_keypoint_map50_95
+            - macro_f1
+      require_cost_reduction: {const: true}
+      result_root: {const: results/full35-j3-c2-c3-quant-seed0}
+  queue:
+    type: object
+    additionalProperties: false
+    required: [full_training, quantization, continuation]
+    properties:
+      full_training:
+        allOf:
+          - {$ref: "#/$defs/queue"}
+          - type: object
+            properties:
+              queue_id: {const: architecture2-full35-j3-c2-c3-full-seed0}
+              lock: {const: artifacts/queue/full35-j3-c2-c3-full-seed0.lock}
+              state: {const: artifacts/queue/full35-j3-c2-c3-full-seed0.json}
+              log: {const: artifacts/queue/full35-j3-c2-c3-full-seed0.log}
+      quantization:
+        allOf:
+          - {$ref: "#/$defs/queue"}
+          - type: object
+            properties:
+              queue_id: {const: architecture2-full35-j3-c2-c3-quant-seed0}
+              lock: {const: artifacts/queue/full35-j3-c2-c3-quant-seed0.lock}
+              state: {const: artifacts/queue/full35-j3-c2-c3-quant-seed0.json}
+              log: {const: artifacts/queue/full35-j3-c2-c3-quant-seed0.log}
+      continuation:
+        type: object
+        additionalProperties: false
+        required: [service, waits_for, fail_closed]
+        properties:
+          service: {const: yolo-architecture2-full35-j3-c2-c3-auto-seed0.service}
+          waits_for: {const: yolo-architecture2-full35-j3-float20-postprocess-seed0.service}
+          fail_closed: {const: true}
+  lineage:
+    type: object
+    additionalProperties: false
+    required:
+      - require_spec_sha256
+      - require_source_screen_yaml_sha256
+      - require_architecture_yaml_sha256
+      - require_training_yaml_sha256
+      - require_dataset_yaml_sha256
+      - require_handoff_manifest_sha256
+      - require_parent_checkpoint_sha256
+      - transition
+    properties:
+      require_spec_sha256: {const: true}
+      require_source_screen_yaml_sha256: {const: true}
+      require_architecture_yaml_sha256: {const: true}
+      require_training_yaml_sha256: {const: true}
+      require_dataset_yaml_sha256: {const: true}
+      require_handoff_manifest_sha256: {const: true}
+      require_parent_checkpoint_sha256: {const: true}
+      transition: {type: string, minLength: 1}
+$defs:
+  queue:
+    type: object
+    additionalProperties: false
+    required:
+      - queue_id
+      - gpu_index
+      - min_free_memory_mib
+      - max_utilization_percent
+      - stable_polls
+      - poll_seconds
+      - lock
+      - state
+      - log
+    properties:
+      queue_id: {type: string, minLength: 1}
+      gpu_index: {const: 0}
+      min_free_memory_mib: {const: 30000}
+      max_utilization_percent: {const: 10}
+      stable_polls: {const: 3}
+      poll_seconds: {const: 60}
+      lock: {type: string, minLength: 1}
+      state: {type: string, minLength: 1}
+      log: {type: string, minLength: 1}

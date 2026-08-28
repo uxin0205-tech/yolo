@@ -1,32 +1,32 @@
 # architecture_2：融合 YOLO26m 的 C0–C3 架構簡化評估
 
-這個資料夾不是重新做一次融合，也不是單獨訓練一個普通 Detect/Pose 模型。它的工作是：
+> **封存決策（2026-08-28）**：C1～C3 的精度下降過大，使用者決定不採用本階段候選。
+> C2/C3 full、PTQ 與 QAT-lite 永久不執行；本目錄只保留負結果、重建工具與 BBAT5 v1 資料血緣。
+> 這不否定上游 Full35 C0，也不影響獨立的 `yolo_activation` 工作。
 
-1. 等待本機 `/home/uxin/yolo/yolo_combine/` 完成「COCO80 Detect + BBAT5 Pose」融合實驗並選出 winner。
-2. 以不可變 handoff 接收該 winner。
-3. 在 winner 的可修改 C3k2 區域上，公平比較 C0、C1、C2、C3。
-4. 完整呈現精度與成本，最後由你決定 C_best、是否跑 Pose、哪些候選進量化，以及是否新增組合實驗。
+這個資料夾承接 `/home/uxin/yolo/yolo_combine/final/full35/` 已選定的 YOLO26m Full35 融合模型，不重新做融合選型。它只做四件事：
 
-融合方式尚未由 yolo_combine 決定，可能是 shared、routed 或 partial-shared。因此本專案不固定 layer
-編號；真正修改位置由 handoff 的 candidate_regions 決定。
+1. 驗證並鎖定 immutable Full35 J3 EMA handoff。
+2. 從同一 parent 各自建立 C0、C1、C2、C3。
+3. 先用固定20% train-only資料公平比較架構精度與成本。
+4. 封存 C1～C3 負結果，並禁止本 revision 接續 C2/C3 完整訓練、PTQ 與 QAT-lite。
 
-**一句話定位：**這裡是「融合 winner 的架構瘦身評估站」，不是融合專案，也不是資料集倉庫。
-
-資料只讀 `/home/uxin/yolo/original/pose/`，融合結果只收 `/home/uxin/yolo/yolo_combine/` 的 handoff；
-本資料夾只管理 C0–C3 規格、YAML、CPU 驗證、後續實驗結果與可重建的執行產物。
+目前 Full35 已確定是 23 層 shared graph 加 Detect／Pose 雙 head；本輪修改路徑固定由 handoff 驗證為 layers 6、8、13、19。`yolo_combine` 仍負責融合與雙權重／架構切換，本目錄不重做那些工作。
 
 ## 現在完成到哪裡
 
-目前是 Phase A，狀態為 ready_for_upstream_handoff：
+本專案已封存：J3 handoff、CPU驗收與Pose=true的Float20訓練／profile／匯出均已完成；後續GPU工作永久關閉：
 
-- [EXPERIMENT_SPEC.md](EXPERIMENT_SPEC.md) 已是唯一正式規格，版本 2.0.3。
-- C0/C1/C2/C3 YAML、training templates、dataset YAML、quantization YAML 與 schemas 已建立。
-- handoff、動態候選、權重轉移、state-dict checkpoint lineage 已實作。
-- detect／pose／both、loss、gradient、freeze、BN buffer、640 geometry 與 reload 已在 CPU fixture 驗證。
-- BBAT5 v1 已實際重建並驗證：6,647 張、零 group leakage、4 個負座標修補。
-- GPU 仍未獲授權；沒有執行正式訓練、CUDA smoke、GPU latency/VRAM 或 QAT。
-- 尚未收到 yolo_combine winner，所以目前沒有正式 C0–C3 Float 結果，也沒有 C_best。
-- Pose 正式訓練與 validation 預設不執行，仍由你決定。
+- [EXPERIMENT_SPEC.md](EXPERIMENT_SPEC.md) 是唯一正式規格，版本 2.3.0。
+- Full35 J3 EMA checkpoint 已嚴格載入 1,238 tensors；model contract 是 Detect nc=80、Pose nc=2、kpt_shape=[2,3]。
+- C0～C3 都已通過 CPU 640×640 Detect／Pose／both forward、finite loss/gradient、freeze 與 fresh reload。
+- Float20的C0～C3各完成20 epochs；正式結果在 [Float20報告](results/full35-j3-float20-seed0/REPORT.md)。
+- 正式執行設定是 [full35-float-screen-20.yaml](configs/runs/full35-float-screen-20.yaml)，batch、fraction、scale、cache、LR、loss、workers、OOM 與 queue 全部集中在同一檔。
+- profiling的CPU/GPU動態cache裝置錯誤已修正，正式RTX 5090 profile與hash manifest已成功產生。
+- [後續設定](configs/runs/full35-c2-c3-auto-continuation.yaml)目前是`closed_rejected_by_user`；程式入口會fail closed，不得排入queue。
+- Float20保留`c_best=null`。C2是三個簡化候選中最佳者，但四項精度下降都超過0.008門檻，因此沒有候選依原gate取得full／PTQ／QAT-lite資格。
+- Pose gate仍是`true`；這只保存本輪已執行的Pose語意，不代表已授權新的GPU工作。
+- BBAT5 v1、固定20% assignments 與 leakage 驗證均已完成；runtime label cache 只寫在子專案 artifacts，不寫 canonical 資料。
 
 快速查看狀態：
 
@@ -52,26 +52,24 @@
 | 路線 | 類別／輸出 | 角色 |
 |---|---|---|
 | Detect 主線 | COCO80，class 0 是 person | 正式 Detect 訓練與評估；應用主要關注人 |
-| Pose 主線 | ball=0、bat=1，kpt_shape=[2,3] | 正式 Pose 任務，但是否執行由你決定 |
+| Pose 主線 | ball=0、bat=1，kpt_shape=[2,3] | 正式 Pose 任務；本輪已選擇執行 |
 | BBAT5 Detect | ball=0、bat=1 | 配對診斷 view，不取代 COCO80，也不能單獨決定 C_best |
 
 所以「COCO80 Detect head 可以保留」和「BBAT5 有 2-class Detect」並不衝突：它們是兩個不同資料
-與用途。融合 winner 的公開介面必須支援 model(images, tasks=detect|pose|both)。
+與用途。融合 winner 的公開介面必須支援 model(images, task=detect|pose|both)。
 
 ## 專案邊界
 
-    yolo_combine
-      └─ 選出融合 winner（shared / routed / partial-shared 尚未確定）
-           └─ 不可變 handoff revision
-                └─ architecture_2
-                     ├─ C0-Handoff：winner 原樣
-                     ├─ C0-Control：與候選相同的恢復訓練預算
-                     ├─ C1/C2/C3：每次只改一個因素
-                     ├─ CPU 契約驗證
-                     └─ 未來 Float 結果 → 你決定 C_best／Pose／量化／新候選
+    yolo_combine/final/full35
+      └─ accepted J3 shared-dual-head EMA parent（不可變）
+           └─ architecture_2
+                ├─ C0：結構不改、同預算 control
+                ├─ C1：只縮 e
+                ├─ C2：只減 inner_n
+                ├─ C3：只換第一個 kernel
+                └─ Float20報告（已完成）→ 本階段不採用並封存
 
-yolo_combine 負責雙權重、雙架構、路由或 shared fusion 的實驗與 winner 選擇。本目錄不重做融合，
-也不提前假設最後是哪一種。
+`yolo_combine` 負責融合、雙權重與架構切換；`architecture_2` 只評估這四個共享 C3k2 候選，不實作或挑選融合方式。
 
 ## C0、C1、C2、C3 在做什麼
 
@@ -86,9 +84,7 @@ yolo_combine 負責雙權重、雙架構、路由或 shared fusion 的實驗與 
 
 - C1/C2/C3 每次只改一個因素，第一輪禁止組合。
 - Detect/Pose heads、融合 topology、inherited MASF／BinaryQK／PWL attention 都受保護。
-- shared winner 解析成 C0/C1/C2/C3。
-- routed winner 解析成 C0/D-C1…D-C3/P-C1…P-C3。
-- partial-shared winner 依實際區域解析成 S-、D-、P- 候選。
+- Full35 handoff 固定解析成 C0/C1/C2/C3；本目錄不再展開 routed 或 partial-shared 候選。
 - C3-P5、R1、e=0.25 或因素組合都不是本輪候選；看完 Float 結果後再由你決定。
 
 候選 YAML 在 [configs/candidates](configs/candidates)，它們是 graft contract，且刻意標記
@@ -118,6 +114,8 @@ dataset YAML。Pose 使用 `configs/pose.yaml`，ball/bat 二類 Detect 診斷�
 | .rf. 前 prefix 群組 | 2,578 |
 | formal train / val | 5,964 / 683 |
 | search train / val（只取 formal train） | 5,364 / 600 |
+| architecture screen train（seed 0） | COCO 23,657；BBAT5 1,073 / 410 groups |
+| architecture screen search-val | COCO train-only 5,000；BBAT5 600 |
 | train/val group leakage | 0 |
 | 修補的負座標 | 4 |
 | 與 COCO train 重疊且固定留在 train 的 groups | 331 |
@@ -127,23 +125,38 @@ Pose labels 是唯一權威。衍生 Detect label 是每列修補後的前五欄
 一對一 audit。影像使用 symlink，labels 只寫進衍生版本，原始兩個目錄沒有被修改。
 
 bbat5-v1 建立於 spec 2.0.0，因此五份 manifest 保留當時的
-75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b，不回溯改成目前 2.0.3。
+75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b，不回溯改成目前 2.3.0。
 目前 validator 同時接受這個已知歷史 lineage 與新建資料的 current lineage，但不允許五份
 manifest 混用版本。
 
-衍生目錄內有獨立中文 README、四份 Ultralytics dataset YAML 與五份 manifests。目前 Git 與本機的
-唯一 BBAT5 資料位置是 [`original/pose/`](../../original/pose/)，正式 YAML 與證據分別在
-[`derived/bbat5-v1/configs/`](../../original/pose/derived/bbat5-v1/configs/) 與
-[`derived/bbat5-v1/manifests/`](../../original/pose/derived/bbat5-v1/manifests/)。
+衍生目錄內有獨立中文 README、四份 Ultralytics dataset YAML 與五份 manifests。Git 保存兩層：
 
-本機 canonical v1 仍可用 `prepare-pose-data` 重建且不可覆寫。2026-08-23 起，
-`architecture_2/artifacts/datasets/` 的重複 snapshot 已從目前 tree 移除；0822 發布只保留在 Git
-歷史，不是可用入口，也不得再建立第二套 split、labels 或 lineage。
+1. 可稽核 metadata：
+
+- [BBAT5 metadata README](artifacts/datasets/bbat5-v1/README.md)
+- [split manifest](artifacts/datasets/bbat5-v1/manifests/split-manifest.json)
+- [patch manifest](artifacts/datasets/bbat5-v1/manifests/patch-manifest.json)
+- [source audit](artifacts/datasets/bbat5-v1/manifests/source-audit-manifest.json)
+- [COCO exclusion](artifacts/datasets/bbat5-v1/manifests/coco-exclusion-manifest.json)
+
+2. 使用者明確核准的[完整 GitHub dataset snapshot](artifacts/datasets/bbat5-v1/github-dataset/README.md)：
+   物化 Pose／Detect 影像與 labels，提供 portable YAML/splits，沒有 symlink、絕對 split path、test、
+   cache、checkpoint、weight 或 run。
+
+本機 canonical v1 仍可用 prepare-pose-data 重建且不可覆寫；它是正式訓練權威。
+GitHub snapshot 只作可攜發行，不是第二個訓練來源，也不改變既有 group assignment、
+四筆 patch 或 2.0.0 資料 lineage。
 
 正式可讀 search wrappers 在
 [BBAT5 Pose search YAML](configs/data/bbat5-pose-search.yaml) 與
 [BBAT5 Detect search YAML](configs/data/bbat5-detect-search.yaml)；兩者只引用 formal train 內的
-search lists。
+search lists。固定20% View 另由 [screening README](artifacts/datasets/architecture-screen-20-v1/README.md)
+與 [screening manifest](artifacts/datasets/architecture-screen-20-v1/screening-manifest.json) 定義；只保存清單，
+不複製影像或標註。
+
+Ultralytics 的 label index 由本專案 adapter 固定寫到
+`artifacts/datasets/architecture-screen-20-v1/runtime-cache/`。這是可刪除、可重建且不提交 Git 的
+runtime View；不會在 `/home/uxin/yolo/coco2017/` 或 canonical `bbat5-v1` 旁建立 `.cache`。
 
     # 只做唯讀規劃
     $PY -m achitechure_2 prepare-pose-data
@@ -154,7 +167,17 @@ search lists。
     # 驗證已建立版本
     $PY -m achitechure_2 validate-pose-data
 
-以上三個命令只處理／驗證資料，不會啟動 Pose 模型或訓練。
+    # 預覽／建立／驗證固定20%篩選 manifests；不啟動訓練
+    $PY -m achitechure_2 prepare-screening-data
+    $PY -m achitechure_2 prepare-screening-data --execute
+    $PY -m achitechure_2 validate-screening-data
+
+    # 預覽／物化／驗證完整 GitHub snapshot；都不會啟動 Pose
+    $PY -m achitechure_2 export-github-dataset
+    $PY -m achitechure_2 export-github-dataset --execute
+    $PY -m achitechure_2 validate-github-dataset
+
+這些命令只處理資料，不會啟動 Pose 模型或訓練。
 
 ## YAML 設定怎麼看
 
@@ -163,38 +186,35 @@ search lists。
 
 ### Training templates
 
-| 檔案 | 用途 | 現在能否執行 |
+| 檔案 | 用途 | 現在狀態 |
 |---|---|---|
-| [cpu-smoke.yaml](configs/training/cpu-smoke.yaml) | CPU 結構／數值驗證 | 可以 |
-| [float-main.yaml](configs/training/float-main.yaml) | C0-Control 與 C1–C3 公平 Float 比較 | 等 handoff、Pose 選擇與 GPU 授權 |
-| [float-extension.yaml](configs/training/float-extension.yaml) | late gate 後由未 strip continuation state resume | 等前一階段與完整 state |
-| [quant-qat.yaml](configs/training/quant-qat.yaml) | eligible candidate 的 Q2 | 等 Float 決策與 GPU 授權 |
+| [full35-float-screen-20.yaml](configs/runs/full35-float-screen-20.yaml) | 本輪Float20正式設定 | C0～C3訓練、profile與匯出已完成 |
+| [full35-c2-c3-auto-continuation.yaml](configs/runs/full35-c2-c3-auto-continuation.yaml) | C2/C3 full、PTQ、QAT-lite與最終選型 | `closed_rejected_by_user`；封存且禁止執行 |
+| [cpu-smoke.yaml](configs/training/cpu-smoke.yaml) | 通用 CPU 結構／數值模板 | 可以 |
+| [float-screen-20.yaml](configs/training/float-screen-20.yaml) | 通用 Float20 契約模板 | 已由上列 Full35 run 具體化 |
+| [float-main.yaml](configs/training/float-main.yaml) | 後續完整 Float | 通用模板；本 revision 不執行 |
+| [float-extension.yaml](configs/training/float-extension.yaml) | late gate resume | 通用模板；本 revision 不執行 |
+| [quant-qat-lite.yaml](configs/training/quant-qat-lite.yaml) | Q2L 通用模板 | 通用模板；本 revision 不執行 |
+| [quant-qat.yaml](configs/training/quant-qat.yaml) | 正式 Q2 | 等使用者另行核准 |
 
-每份 template 都是一個完整、獨立的設定，不需要合併 overlay。winner 尚未交付前不能猜的值會明確寫成：
-
-    batch:
-      source: handoff
-      value: null
-
-這不是漏填，而是 fail-closed。收到 handoff 後，effective-config 會產生所有值都已解析的平面
-effective YAML。
+Float20參數只看`configs/runs/full35-float-screen-20.yaml`；後續門檻、100 epochs／patience20、校正batch與QAT-lite steps只看`configs/runs/full35-c2-c3-auto-continuation.yaml`。`configs/training/`保留通用模板；`source: handoff, value: null`不是本輪run漏填。
 
 ### 常用可調欄位
 
 | 欄位 | 位置 | 意義 |
 |---|---|---|
-| batch size | adjustable.batch.value | 正式 Ultralytics 鍵名是 batch，不是 batch_size |
-| 資料比例 | adjustable.fraction.value | 1.0 是完整 train；小於 1 只截取排序後 train 前段 |
-| augmentation scale | adjustable.scale.value | 幾何縮放幅度，不是 model scale |
-| cache | adjustable.cache.value | false、ram 或 disk |
-| 影像尺寸 | adjustable.imgsz.value | 通常由 winner recipe 繼承 |
-| 裝置／workers | adjustable.device/workers.value | 可依機器調整 |
-| epochs／patience | adjustable.epochs/patience.value | 正式預算由 handoff 繼承 |
+| batch size | training.batch | 正式 Ultralytics 鍵名是 batch，不是 batch_size |
+| 資料比例 | training.fraction | 必須1.0；20%由 immutable manifest決定 |
+| augmentation scale | training.scale | 幾何縮放幅度，不是 model scale |
+| cache | training.cache | false、true 或 ram；禁止 disk |
+| 影像尺寸 | training.imgsz | 本輪固定640 |
+| 裝置／workers | training.device 與 training.workers | GPU 0；Detect 4、Pose 8 |
+| epochs | training.epochs | 本輪固定20；四候選相同 |
+| OOM microbatch | training.batch.detect_physical_microbatch | 先32；C0完整macro OOM才全矩陣改16 |
 
 model_scale: m 是 YOLO26m 模型級別，與 augmentation 的 scale 完全不同。
 
-fraction 不是隨機、分層或 grouped sampling，也不能取代 BBAT5 的 search YAML。cache=true／ram
-可能破壞完全 deterministic；cache=disk 會在影像旁寫檔，只能使用獲授權的可寫衍生資料。
+fraction 必須保持1.0，因為20%已固定在 manifest；不可再次抽樣。`cache: false` 只控制 image cache，label index 仍由 adapter 寫到可重建 runtime-cache，正式 run 禁止 source-adjacent disk cache。
 
 正式 ablation 的 learning fields 必須對所有候選一致。name/project/device/workers/cache 可在
 runtime 層覆寫；若要改 batch、fraction、scale、LR 或 optimizer，應修改正式 YAML／spec revision，
@@ -202,54 +222,76 @@ runtime 層覆寫；若要改 batch、fraction、scale、LR 或 optimizer，應�
 
 ## Handoff 與候選流程
 
-handoff 必須包含 winner checkpoint、state-dict builder、architecture/training/dataset/selection
-hashes、fresh-process reload 證據、完整模型語意、Candidate Regions、protected/frozen paths。
+本輪正式內容見[Full35 J3 handoff README](handoffs/full35-j3-seed0/README.md)。每個handoff revision
+必須包含winner checkpoint、state-dict builder、architecture/training/dataset/selection hashes、
+fresh-process reload證據、完整模型語意、Candidate Regions、protected/frozen paths。
 範例見 [handoff-manifest.example.json](handoff-manifest.example.json)。
 
     # 只看 metadata，不會接受
-    $PY -m achitechure_2 inspect-handoff --manifest /path/handoff.json
+    $PY -m achitechure_2 inspect-handoff --manifest handoffs/full35-j3-seed0/manifest.json
 
     # 必須真的 materialize graph 才能寫 accepted.json
-    $PY -m achitechure_2 accept-handoff --manifest /path/handoff.json --model-loader yolo_combine.some_module:load_winner
+    $PY -m achitechure_2 accept-handoff --manifest handoffs/full35-j3-seed0/manifest.json --model-loader achitechure_2.full35_adapter:load_full35_parent
 
     # 看 winner 實際解析出哪些候選
-    $PY -m achitechure_2 resolve-candidates --manifest /path/handoff.json
+    $PY -m achitechure_2 resolve-candidates --manifest handoffs/full35-j3-seed0/manifest.json
 
     # 對指定 resolved candidate 做 CPU forward/backward/freeze/reload
-    $PY -m achitechure_2 cpu-dry-run --manifest /path/handoff.json --model-loader yolo_combine.some_module:load_winner --candidate C0
+    $PY -m achitechure_2 cpu-dry-run --manifest handoffs/full35-j3-seed0/manifest.json --model-loader achitechure_2.full35_adapter:load_full35_parent --candidate C0
 
-沒有正式 handoff 時不能宣稱候選已建立，也不會猜測真正 layer paths。
+本輪 handoff 已 materialize 驗收通過；accepted.json 是本機可重建驗收產物，不提交 checkpoint。
 
-## Pose 是否執行由你決定
+## Float20 計畫與安全佇列
 
-目前允許：
+正式計畫只讀檢查：
 
-- 建立／驗證資料。
-- 讀取 Pose YAML。
-- 用 fixture 或 handoff model 做 CPU interface、loss、gradient smoke。
+    $PY -m achitechure_2 float20-plan
+    $PY -m achitechure_2 queue-status
 
-目前不會自動做：
+目前完整設定是 logical Detect batch 128、physical microbatch 32、Pose batch 16、Detect／Pose validation batch 16、imgsz 640、20 epochs。佇列需同時滿足 GPU 無 compute process、free memory 至少30,000 MiB、utilization不超過10%，連續3次、每次間隔60秒才啟動。C0會先跑一個完整macro作 OOM probe；32若 OOM，整個 C0～C3 矩陣統一改16，禁止只替單一候選降batch。
 
-- Pose 長訓練。
-- 正式 Pose validation。
-- 因缺少 Pose 結果而偷偷只用 Detect 選 C_best。
+`float20-run`不能直接啟動：它必須驗證父程序是持鎖的`yolo_combine.gpu_queue`。Float20後以同一安全gate執行`float20-profile`；原始Float20匯出本身仍不改寫C_best。
 
-將來若你選擇不跑 Pose，可以先得到 Detect 與成本成果，但報告必須標示「融合模型正式排名尚不完整」。
-若你選擇跑 Pose，C0-Control 與所有候選必須使用相同 Pose 資料、head seed、task ratio、optimizer
-steps 與 validation events。
+matrix 與 profile 都完成後，`$PY -m achitechure_2 export-float20-results --execute` 會產生
+`results/full35-j3-float20-seed0/` 的 JSON、CSV、中文報告、lineage、Pareto 與圖表；任何 hash、候選順序、
+F1 threshold 或 Pose 契約漂移都會 fail closed。
+
+## 已取消後續：C2/C3 full、PTQ 與 QAT-lite
+
+正式設定 [full35-c2-c3-auto-continuation.yaml](configs/runs/full35-c2-c3-auto-continuation.yaml)
+已固定為 `closed_rejected_by_user`。背景服務保持 inactive，full／quant 執行入口皆會 fail closed，
+不得重新排入 queue。
+
+原計畫會先以四項精度下降不超過 0.008 且至少一項成本下降作 gate，再執行完整 Float、PTQ 與
+200-step QAT-lite；但 C2 與 C3 都未通過 gate，且使用者已決定不採用本階段，所以這些工作沒有執行，
+也不存在可宣稱的下游量化結果或 C_best。
+
+已完成的 Float20 結果與 hash manifest 保留原樣，供負結果稽核。若未來要重訪架構簡化，必須建立新的
+專案或 spec revision 與新的 run ID，不能切回本封存設定。
+
+    $PY -m achitechure_2 config-check
+
+
+## 本輪 Pose 決策
+
+本輪已收到明確 opt-in，正式 run YAML 的 `authorization.pose` 與 `training.pose_enabled` 都固定為
+`true`。因此 C0-Control、C1、C2、C3 都會執行相同的 BBAT5 Pose 訓練與正式 Pose validation，
+並共用資料 assignment、head seed、task ratio、optimizer steps 與 validation events。
+
+資料準備與CPU smoke本身仍不等於Pose長訓練；本輪與後續run都已明確固定Pose=true，且只有持鎖queue可解鎖CUDA。未來若建立另一份run仍須重新授權，兩個Pose gate不一致時一律fail closed。
 
 ## 子訓練、搜尋與 validation
 
-可以做小規模子訓練與超參數搜尋，但現在沒有 winner／GPU 授權，因此 Phase A 只執行 CPU smoke。
-進入正式階段後：
+可以做小規模子訓練與搜尋；Full35 J3 handoff、Pose=true 與 GPU queue 均已就緒。正式規則如下：
 
 - BBAT5 搜尋只用 pose-search／detect-search YAML；它們完全位於 formal train 內。
 - BBAT5 搜尋結果若用來決定設定，必須形成一份共用 recipe，再鎖定給 C0-Control 與所有候選；
   禁止每個候選各自調參。
-- adjustable.fraction 小於 1 可作快速 plumbing，但不是 grouped search，也不能產生正式排名。
+- Float20 必須使用已提交的固定 manifests 且 training.fraction 維持1.0；小於1只可作 plumbing，不能產生初篩或正式排名。
 - formal val 不參與搜尋；鎖定設定後才用相同 validation events 比較候選。
-- 是否把 Pose 納入搜尋與正式 validation 仍由你 opt-in；不會因為資料已準備好就自動執行。
-- COCO train-only search contract 尚未建立，所以目前不能宣稱已具備完整雙任務融合超參數搜尋。
+- 本輪正式 Float20 已明確納入 Pose；未來新 run 仍須各自記錄 opt-in，不會沿用本輪授權。
+- COCO train-only 固定20% contract 已建立於 architecture-screen-20-v1；使用23,657張 train 與互斥的5,000張
+  train-only search-val，官方 val2017 不參與初篩。此 contract 只支援架構初篩，不升格為一般超參數搜尋集。
 
 ## AP、AP50、mAP 與 F1
 
@@ -257,31 +299,32 @@ steps 與 validation events。
 - AP50-95：0.50 到 0.95 多個 threshold 的 AP 平均；通常更嚴格。
 - mAP：對多個 classes 的 AP 再平均。本案會明確寫 mAP50 或 mAP50-95，不只寫模糊的 mAP。
 - Macro F1：ball、bat 的 F1 未加權平均，是主要 F1，可避免多數類別掩蓋另一類。
-- Micro F1：先合併所有 TP/FP/FN 再計算，保留整體應用表現。
+- Micro F1：在固定 threshold 下，由官方 precision/recall curves 與 class supports 估算合併 TP/FP/FN 後的整體 F1；報告會明標 estimated。
 
 結果必須分開記錄 COCO80 overall、COCO person、BBAT5 Pose box/keypoint、ball/bat per-class、
 Precision、Recall、per-class F1、Macro F1、Micro F1 與 confidence threshold。F1 threshold 只用
-C0-Control search-val 決定一次，之後所有候選固定相同值。
+C0-Control search-val 決定一次，之後所有候選的同一 search-val 固定相同值。
 
 Stock Ultralytics Pose best.pt 依 Pose mAP50-95 + Box mAP50-95 combined fitness 選擇。本案若執行
 Pose，必須另外保存 pose-only mAP50-95 best，並把 combined fitness 分欄報告。BBAT5 的兩點
 keypoint 目前使用套件均勻 OKS sigma，不能宣稱已針對棒球校準。
 
-第一輪不做自動 PASS/REJECT，也不自動選 C_best。舊 0.005/0.008 drop 只作描述性敏感度。完整
-Float 與 Pareto 報告產出後，狀態固定是 c_best: null、selection_status: pending_user_decision。
+Float20原始報告不改寫C_best。後續run-specific gate原定要求C2/C3四項主要精度相對C0下降均不超過0.008且至少一項成本下降；本次沒有候選通過，流程已依使用者決定永久封存。
 
 ## 量化
 
-[w8a8-simulation.yaml](configs/quant/w8a8-simulation.yaml) 定義 Q0/Q1/Q2：
+[w8a8-simulation.yaml](configs/quant/w8a8-simulation.yaml) 定義 Q0/Q1/Q2L/Q2：
 
 - C0：預設可做 Q0/Q1。
-- C1/C2/C3 或 resolved variants：先等你看完 Float 結果後核准。
-- Q2：任何候選都還需要額外 GPU 長訓練授權。
+- C2/C3：本次未通過Float20 gate，且本 revision 已封存；不執行full、PTQ或QAT-lite。
+- Q2L：只保留200-step短QAT通用模板，本 revision 不執行。
+- Q2：只保留完整QAT通用模板，本 revision 不執行。
 - standard Conv 使用 W8A8 fake quant；custom BinaryQK/PWL attention 排除。
 - 全部標示 simulation_only=true，CPU plumbing 結果不是部署 latency。
 - Fake quant 仍輸出浮點 tensor；沒有 backend convert 與目標硬體驗證時，不稱為 Bit-True 或部署 INT8。
 
     $PY -m achitechure_2 quant-check --candidate C0 --stage Q1
+    $PY -m achitechure_2 qat-lite-check --candidate C0
     # C1 尚未核准時會 fail closed
     $PY -m achitechure_2 quant-check --candidate C1 --stage Q1
 
@@ -293,12 +336,15 @@ Float 與 Pareto 報告產出後，狀態固定是 c_best: null、selection_stat
     ├── README.md                   全專案入口
     ├── RUNBOOK.md                  可複製命令
     ├── TRAINING_GUIDE.md           訓練、公平性與失敗處理
-    ├── configs/                    candidates/training/data/quant/schema
-    ├── src/achitechure_2/          handoff、builder、資料、CPU、checkpoint、metrics、quant
+    ├── configs/                    runs/candidates/training/data/quant/schema
+    ├── handoffs/full35-j3-seed0/  Full35 immutable handoff manifest 與 recipe
+    ├── src/achitechure_2/          Full35 adapter、候選、training、validation、queue gate
     ├── tests/                      CPU pytest
-    ├── artifacts/                  僅放未提交的 handoff、run、驗證與報告產物
+    ├── artifacts/datasets/bbat5-v1/ metadata + 獨立 github-dataset 完整 snapshot
+    ├── artifacts/datasets/architecture-screen-20-v1/ 固定20%清單、統計、hash與runtime cache
     ├── results/                    空白結果與報告模板
-    └── docs/                       ADR、官方參考、工作紀錄
+    ├── docs/                       本子專案ADR與官方訓練參考
+    └── ../../docs/worklogs/        根repository中文工作紀錄
 
 ## Git 會上傳與不會上傳的東西
 
@@ -306,9 +352,11 @@ Float 與 Pareto 報告產出後，狀態固定是 c_best: null、selection_stat
 
 - 程式、測試、正式 YAML/schema。
 - README、規格、ADR、工作紀錄。
-- 依 2026-08-23 明確授權，BBAT5 的 raw Pose、歷史 Detect、canonical Task Views、YAML、split、
-  patch 與 lineage 只提交在根 repository `original/pose/`。
-- 0822 architecture_2 snapshot 只保留在 Git 歷史，不再存在於目前 tree。
+- BBAT5 split／patch／source audit／COCO exclusion／rebuild manifests。
+- 僅限 `artifacts/datasets/bbat5-v1/github-dataset/` 的完整物化影像、labels、portable YAML/splits
+  與 publication manifest。
+- 依 2026-08-23 明確授權，根 repository `original/` 的 raw Pose、歷史 Detect 與 canonical
+  lineage；此發布只供稽核／重建，不改變正式訓練入口。
 
 不會提交：
 
@@ -318,10 +366,25 @@ Float 與 Pareto 報告產出後，狀態固定是 c_best: null、selection_stat
 
 本次完整修改、資料處理、驗證與未解風險記錄在
 [2026-08-22 architecture_2 Phase A 工作紀錄](../../docs/worklogs/2026-08-22-architecture-2-phase-a.md)。
-0822 的重複 snapshot 是已被取代的歷史紀錄，見
-[2026-08-22 GitHub dataset 工作紀錄](../../docs/worklogs/2026-08-22-architecture-2-github-dataset.md)；
-現行唯一資料位置、original source 發布與移除副本的決策見
+完整資料發布另見
+[2026-08-22 GitHub dataset 工作紀錄](../../docs/worklogs/2026-08-22-architecture-2-github-dataset.md)。
+original source 發布另見
 [2026-08-23 original 資料發布工作紀錄](../../docs/worklogs/2026-08-23-original-data-publication.md)。
 
-最後操作與驗證順序見 [RUNBOOK.md](RUNBOOK.md)。目前可以可靠宣稱的是 Phase A 與資料成果；
-正式架構精度、C_best、Pose 改善與量化可接受性都尚待後續實驗與你的決策。
+固定20%初篩與 QAT-lite 的完整變更、驗證、困難及未解風險見
+[2026-08-26 工作紀錄](../../docs/worklogs/2026-08-26-architecture-2-float20-qat-lite.md)。
+
+本次 Full35 handoff、正式 Float20 runner、CPU 驗證、runtime cache 修正與 queue gate 見
+[2026-08-27 工作紀錄](../../docs/worklogs/2026-08-27-architecture2-full35-float20-queue.md)。
+
+C2／C3完整訓練、PTQ／QAT-lite自動接續、有限重試與未解風險見
+[2026-08-27 自動接續工作紀錄](../../docs/worklogs/2026-08-27-architecture2-c2-c3-auto-continuation.md)。
+
+Float20正式匯出、profiling裝置修正與結果判讀見
+[2026-08-27成果與修正工作紀錄](../../docs/worklogs/2026-08-27-architecture2-float20-profile-device-fix.md)。
+
+最終封存、清理與發布決策見
+[2026-08-28封存工作紀錄](../../docs/worklogs/2026-08-28-architecture2-archive-and-publication.md)。
+
+最後操作與驗證順序見 [RUNBOOK.md](RUNBOOK.md)。目前可可靠宣稱Float20訓練、RTX 5090成本profile與
+正式匯出均完成；C1～C3不採用，C2／C3完整訓練、PTQ、QAT-lite與C_best均未執行並已封存。

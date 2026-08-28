@@ -168,10 +168,18 @@ def inspect_fusion_graph(
     """依 handoff 宣告的路徑稽核 graph，不猜測 winner 的固定層號。"""
 
     contract = _contract(model)
-    if contract.get("model_kind") != fusion_kind:
+    expected_kinds = {
+        "shared_dual_head": {"shared_dual_head", "graph_shared_dual_head"},
+        "routed_dual": {"routed_dual"},
+        "partial_shared": {"partial_shared"},
+    }
+    if contract.get("model_kind") not in expected_kinds.get(fusion_kind, set()):
         raise ValueError("model contract 與 fusion_kind 不一致")
-    if contract.get("interface") != "model(images, tasks=detect|pose|both)":
+    interface = contract.get("interface")
+    if interface not in {None, "model(images, tasks=detect|pose|both)"}:
         raise ValueError("model contract 不支援 detect/pose/both")
+    if interface is None and contract.get("model_kind") != "graph_shared_dual_head":
+        raise ValueError("缺少 interface 的 contract 只允許 actual Full35 graph")
 
     regions = tuple(candidate_regions)
     candidate_paths = _unique(

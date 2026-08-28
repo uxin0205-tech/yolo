@@ -30,8 +30,16 @@ artifacts/pose/
 artifacts/quant/
 artifacts/validation/
 
-artifacts/datasets/
-artifacts/cache-views/
+artifacts/datasets/*
+!artifacts/datasets/bbat5-v1/
+!artifacts/datasets/bbat5-v1/**
+artifacts/datasets/bbat5-v1/**/images/
+artifacts/datasets/bbat5-v1/**/labels/
+!artifacts/datasets/bbat5-v1/github-dataset/
+!artifacts/datasets/bbat5-v1/github-dataset/**
+!artifacts/datasets/architecture-screen-20-v1/
+artifacts/datasets/architecture-screen-20-v1/**/images/
+artifacts/datasets/architecture-screen-20-v1/**/labels/
 
 results/results.csv
 results/*.generated.json

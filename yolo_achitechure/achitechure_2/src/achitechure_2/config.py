@@ -12,7 +12,7 @@ import yaml
 
 from .lite_c3k2 import LiteC3k2Config
 
-SPEC_VERSION = "2.0.3"
+SPEC_VERSION = "2.3.0"
 EXPECTED_ULTRALYTICS_VERSION = "8.4.90"
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SPEC_PATH = PROJECT_ROOT / "EXPERIMENT_SPEC.md"
@@ -24,6 +24,8 @@ TRAINING_FILES = (
     "configs/training/cpu-smoke.yaml",
     "configs/training/float-extension.yaml",
     "configs/training/float-main.yaml",
+    "configs/training/float-screen-20.yaml",
+    "configs/training/quant-qat-lite.yaml",
     "configs/training/quant-qat.yaml",
 )
 
@@ -370,7 +372,7 @@ def load_training_template(
         payload["schema_version"] != 3
         or payload["kind"] != "training_template"
         or payload["model_scale"] != "m"
-        or payload["config_id"] not in {"cpu-smoke", "float-main", "float-extension", "quant-qat"}
+        or payload["config_id"] not in {"cpu-smoke", "float-screen-20", "float-main", "float-extension", "quant-qat-lite", "quant-qat"}
     ):
         raise ConfigContractError(f"{resolved}: training template metadata 漂移")
     policy = payload["candidate_policy"]
@@ -385,11 +387,18 @@ def load_training_template(
     if not isinstance(routes, dict) or set(routes) != {"detect", "pose"}:
         raise ConfigContractError(f"{resolved}: routes 必須恰好是 detect/pose")
     datasets = payload["datasets"]
-    expected_datasets = {
-        "detect": "configs/data/coco2017.yaml",
-        "pose": "configs/data/bbat5-pose.yaml",
-        "diagnostic_detect": "configs/data/bbat5-detect.yaml",
-    }
+    if payload["config_id"] in {"float-screen-20", "quant-qat-lite"}:
+        expected_datasets = {
+            "detect": "configs/data/coco2017-screen-20.yaml",
+            "pose": "configs/data/bbat5-pose-screen-20.yaml",
+            "diagnostic_detect": "configs/data/bbat5-detect-screen-20.yaml",
+        }
+    else:
+        expected_datasets = {
+            "detect": "configs/data/coco2017.yaml",
+            "pose": "configs/data/bbat5-pose.yaml",
+            "diagnostic_detect": "configs/data/bbat5-detect.yaml",
+        }
     if datasets != expected_datasets:
         raise ConfigContractError(f"{resolved}: 主任務與診斷 dataset 契約漂移")
     recipe = payload["recipe"]
@@ -412,6 +421,37 @@ def load_training_template(
             or payload["validation"].get("selection_backend") != "float_model"
     ):
         raise ConfigContractError(f"{resolved}: Float 正式排名與 Pose opt-in policy 漂移")
+    if payload["config_id"] == "float-screen-20" and (
+            payload["formal_ranking_requires"] != []
+            or routes["pose"].get("enabled_by_default") is not False
+            or payload["execution"].get("formal_training") is not False
+            or payload["execution"].get("requires_gpu_authorization") is not True
+            or payload["validation"].get("selection_backend") != "screening_float_model"
+            or payload["validation"].get("automatic_acceptance") is not False
+            or adjustable["fraction"] != {"source": "local", "value": 1.0}
+            or adjustable["patience"] != {"source": "local", "value": 0}
+    ):
+        raise ConfigContractError(f"{resolved}: Float20 必須使用固定 manifests 且只作初篩")
+    if payload["config_id"] == "quant-qat-lite" and (
+            payload["formal_ranking_requires"] != []
+            or payload["execution"].get("formal_training") is not False
+            or payload["execution"].get("requires_gpu_authorization") is not True
+            or payload["validation"].get("selection_backend")
+            != "w8a8_qat_lite_simulation"
+            or payload["validation"].get("simulation_only") is not True
+            or payload["validation"].get("automatic_acceptance") is not False
+            or payload["validation"].get("observer_update_steps") != 50
+            or recipe["optimizer_steps"] != {"source": "local", "value": 200}
+            or recipe["validation_interval"] != {"source": "local", "value": 50}
+            or adjustable["epochs"] != {"source": "local", "value": 3}
+            or adjustable["patience"] != {"source": "local", "value": 0}
+            or payload["transition"] != {
+                "mode": "fresh",
+                "input": "candidate_q1_calibrated_checkpoint",
+                "optimizer_state": "new",
+            }
+    ):
+        raise ConfigContractError(f"{resolved}: QAT-lite 固定短預算或 simulation 契約漂移")
     if payload["config_id"] == "cpu-smoke" and (
             payload["execution"].get("device") != "cpu"
             or payload["execution"].get("force_cuda_hidden") is not True
@@ -504,14 +544,23 @@ _EXPECTED_CATALOG = {
         "cpu-smoke": "configs/training/cpu-smoke.yaml",
         "float-extension": "configs/training/float-extension.yaml",
         "float-main": "configs/training/float-main.yaml",
+        "float-screen-20": "configs/training/float-screen-20.yaml",
+        "quant-qat-lite": "configs/training/quant-qat-lite.yaml",
         "quant-qat": "configs/training/quant-qat.yaml",
+    },
+    "runs": {
+        "full35-float-screen-20": "configs/runs/full35-float-screen-20.yaml",
+        "full35-c2-c3-auto-continuation": "configs/runs/full35-c2-c3-auto-continuation.yaml",
     },
     "datasets": {
         "coco2017": "configs/data/coco2017.yaml",
+        "coco2017-screen-20": "configs/data/coco2017-screen-20.yaml",
         "bbat5-pose": "configs/data/bbat5-pose.yaml",
         "bbat5-detect": "configs/data/bbat5-detect.yaml",
         "bbat5-pose-search": "configs/data/bbat5-pose-search.yaml",
         "bbat5-detect-search": "configs/data/bbat5-detect-search.yaml",
+        "bbat5-pose-screen-20": "configs/data/bbat5-pose-screen-20.yaml",
+        "bbat5-detect-screen-20": "configs/data/bbat5-detect-screen-20.yaml",
     },
     "quantization": "configs/quant/w8a8-simulation.yaml",
     "schemas": {
@@ -521,6 +570,8 @@ _EXPECTED_CATALOG = {
         "dataset": "configs/schema/dataset.schema.yaml",
         "quantization": "configs/schema/quantization.schema.yaml",
         "handoff": "configs/schema/handoff.schema.yaml",
+        "screen-run": "configs/schema/screen-run.schema.yaml",
+        "continuation-run": "configs/schema/continuation-run.schema.yaml",
     },
 }
 
@@ -544,6 +595,7 @@ def _validate_catalog(root: Path) -> dict[str, Any]:
     referenced: list[str] = [
         *payload["architectures"].values(),
         *payload["training"].values(),
+        *payload["runs"].values(),
         *payload["datasets"].values(),
         payload["quantization"],
         *payload["schemas"].values(),
@@ -584,6 +636,9 @@ def _validate_datasets(root: Path, catalog: Mapping[str, Any]) -> None:
     detect = datasets["bbat5-detect"]
     pose_search = datasets["bbat5-pose-search"]
     detect_search = datasets["bbat5-detect-search"]
+    coco_screen = datasets["coco2017-screen-20"]
+    pose_screen = datasets["bbat5-pose-screen-20"]
+    detect_screen = datasets["bbat5-detect-screen-20"]
     expected_names = {0: "ball", 1: "bat"}
     if (
         _normalize_names(pose.get("names")) != expected_names
@@ -622,7 +677,41 @@ def _validate_datasets(root: Path, catalog: Mapping[str, Any]) -> None:
         or Path(str(detect_search.get("val"))).name != "search-val.txt"
     ):
         raise ConfigContractError("BBAT5 Detect search 必須維持 formal-train-only 診斷角色")
-    grouped = (pose, detect, pose_search, detect_search)
+    coco_screen_metadata = coco_screen.get("project_metadata", {})
+    if (
+        _normalize_names(coco_screen.get("names")) != coco_names
+        or coco_screen_metadata.get("role") != "screening_detect"
+        or coco_screen_metadata.get("source_scope") != "train2017_only"
+        or coco_screen_metadata.get("formal_val_excluded") is not True
+        or coco_screen.get("screening_fraction") != 0.2
+        or coco_screen.get("split_seed") != 0
+        or Path(str(coco_screen.get("train"))).name != "train.txt"
+        or Path(str(coco_screen.get("val"))).name != "search-val.txt"
+    ):
+        raise ConfigContractError("COCO20 必須是固定 train-only screening View")
+    if (
+        _normalize_names(pose_screen.get("names")) != expected_names
+        or pose_screen.get("kpt_shape") != [2, 3]
+        or pose_screen.get("test") is not None
+        or pose_screen.get("project_metadata", {}).get("role") != "screening_pose"
+        or pose_screen.get("project_metadata", {}).get("formal_val_excluded") is not True
+        or pose_screen.get("screening_fraction") != 0.2
+        or Path(str(pose_screen.get("train"))).name != "pose-train.txt"
+        or Path(str(pose_screen.get("val"))).name != "search-val.txt"
+    ):
+        raise ConfigContractError("BBAT5 Pose20 screening 契約漂移")
+    if (
+        _normalize_names(detect_screen.get("names")) != expected_names
+        or detect_screen.get("test") is not None
+        or detect_screen.get("project_metadata", {}).get("role")
+        != "screening_diagnostic_detect"
+        or detect_screen.get("project_metadata", {}).get("formal_val_excluded") is not True
+        or detect_screen.get("screening_fraction") != 0.2
+        or Path(str(detect_screen.get("train"))).name != "detect-train.txt"
+        or Path(str(detect_screen.get("val"))).name != "search-val.txt"
+    ):
+        raise ConfigContractError("BBAT5 Detect20 screening 診斷契約漂移")
+    grouped = (pose, detect, pose_search, detect_search, pose_screen, detect_screen)
     if len({item.get("group_key") for item in grouped}) != 1 or len(
         {item.get("split_seed") for item in grouped}
     ) != 1:
@@ -644,9 +733,103 @@ def _validate_quantization(root: Path, relative: str) -> None:
         or payload.get("kind") != "quantization"
         or payload.get("simulation_only") is not True
         or payload.get("eligibility") != expected
-        or set(payload.get("stages", {})) != {"Q0", "Q1", "Q2"}
+        or set(payload.get("stages", {})) != {"Q0", "Q1", "Q2L", "Q2"}
     ):
         raise ConfigContractError(f"{path}: 逐候選量化契約漂移")
+
+
+def _validate_screen_runs(root: Path, runs: Mapping[str, str]) -> None:
+    expected = {
+        "full35-float-screen-20": "configs/runs/full35-float-screen-20.yaml",
+        "full35-c2-c3-auto-continuation": "configs/runs/full35-c2-c3-auto-continuation.yaml",
+    }
+    if dict(runs) != expected:
+        raise ConfigContractError("catalog.runs 正式矩陣漂移")
+    path = root / runs["full35-float-screen-20"]
+    payload = load_yaml(path)
+    validate_spec_metadata(payload, path, spec_path=root / "EXPERIMENT_SPEC.md")
+    authorization = payload.get("authorization")
+    training = payload.get("training")
+    queue = payload.get("queue")
+    if (
+        payload.get("schema_version") != 1
+        or payload.get("kind") != "float_screen_run"
+        or payload.get("candidates") != ["C0", "C1", "C2", "C3"]
+        or not isinstance(authorization, dict)
+        or authorization.get("gpu") is not True
+        or not isinstance(training, dict)
+        or not isinstance(queue, dict)
+    ):
+        raise ConfigContractError(f"{path}: Float20 run 基本契約漂移")
+    pose = authorization.get("pose")
+    if pose not in {True, False, "pending_user_decision"}:
+        raise ConfigContractError(f"{path}: authorization.pose 必須是 true/false/pending")
+    if training.get("pose_enabled") != pose:
+        raise ConfigContractError(f"{path}: Pose authorization/training gate 不一致")
+    batch = training.get("batch")
+    if (
+        training.get("fraction") != 1.0
+        or training.get("optimizer") != "MuSGD"
+        or training.get("imgsz") != 640
+        or not isinstance(batch, dict)
+        or batch.get("detect_logical") != 128
+        or batch.get("detect_physical_microbatch") != 32
+        or batch.get("detect_oom_fallback_microbatch") != 16
+        or batch.get("validation_detect") != 16
+        or batch.get("validation_pose") != 16
+        or training.get("learning_rates", {}).get("masf") != 0.0
+        or training.get("learning_rates", {}).get("attention") != 0.0
+    ):
+        raise ConfigContractError(f"{path}: batch/optimizer/frozen policy 漂移")
+    if (
+        queue.get("queue_id") != "architecture2-full35-j3-float20-seed0"
+        or queue.get("min_free_memory_mib") != 30000
+        or queue.get("max_utilization_percent") != 10
+        or queue.get("stable_polls") != 3
+        or queue.get("automatic_post_float_quantization") is not False
+    ):
+        raise ConfigContractError(f"{path}: GPU queue 或量化停止 gate 漂移")
+    continuation_path = root / runs["full35-c2-c3-auto-continuation"]
+    continuation = load_yaml(continuation_path)
+    validate_spec_metadata(
+        continuation,
+        continuation_path,
+        spec_path=root / "EXPERIMENT_SPEC.md",
+    )
+    continuation_authorization = continuation.get("authorization")
+    if (
+        continuation.get("schema_version") != 1
+        or continuation.get("kind") != "float_full_quant_continuation"
+        or continuation.get("candidates") != ["C2", "C3"]
+        or not isinstance(continuation_authorization, dict)
+        or any(
+            continuation_authorization.get(name) is not True
+            for name in ("gpu", "pose", "full_training", "ptq", "qat_lite")
+        )
+    ):
+        raise ConfigContractError(f"{continuation_path}: 自動接續基本契約漂移")
+
+    schema_path = root / "configs/schema/screen-run.schema.yaml"
+    try:
+        import jsonschema
+    except ModuleNotFoundError:
+        return
+    schema = load_yaml(schema_path)
+    try:
+        jsonschema.validate(payload, schema)
+    except jsonschema.ValidationError as error:
+        raise ConfigContractError(
+            f"{path}: screen-run JSON Schema 驗證失敗：{error.message}"
+        ) from error
+    continuation_schema = load_yaml(
+        root / "configs/schema/continuation-run.schema.yaml"
+    )
+    try:
+        jsonschema.validate(continuation, continuation_schema)
+    except jsonschema.ValidationError as error:
+        raise ConfigContractError(
+            f"{continuation_path}: continuation JSON Schema 驗證失敗：{error.message}"
+        ) from error
 
 
 def _validate_schema_metadata(root: Path, schemas: Mapping[str, str]) -> None:
@@ -680,6 +863,7 @@ def check_configs(project_root: str | Path = PROJECT_ROOT) -> ConfigCheckReport:
         checked_training.append(relative)
     _validate_datasets(root, catalog)
     _validate_quantization(root, catalog["quantization"])
+    _validate_screen_runs(root, catalog["runs"])
     _validate_schema_metadata(root, catalog["schemas"])
 
     forbidden_formal = [
@@ -689,6 +873,20 @@ def check_configs(project_root: str | Path = PROJECT_ROOT) -> ConfigCheckReport:
     ]
     if any(path.exists() for path in forbidden_formal):
         raise ConfigContractError("v2 不得保留重複融合範本或未獲使用者核准的條件候選")
+    screen_run = load_yaml(root / catalog["runs"]["full35-float-screen-20"])
+    pose_gate = screen_run["authorization"]["pose"]
+    accepted_but_inactive = [
+        "C2/C3完整訓練、PTQ與Q2L：已封存且不採用，不得排入queue",
+        "Q2 正式 QAT：本 revision 已封存且不執行",
+    ]
+    blocked = [
+        "Float extension：本 revision 已封存且不執行",
+    ]
+    if pose_gate is False:
+        accepted_but_inactive.insert(0, "Pose 正式執行：本輪由使用者明確關閉")
+    elif not isinstance(pose_gate, bool):
+        accepted_but_inactive.insert(0, "Pose 正式執行：等待使用者 opt-in")
+        blocked.insert(0, "Float20 GPU 佇列：等待使用者明確設定 Pose gate")
     return ConfigCheckReport(
         valid=True,
         spec_version=SPEC_VERSION,
@@ -697,10 +895,7 @@ def check_configs(project_root: str | Path = PROJECT_ROOT) -> ConfigCheckReport:
         catalog_file="configs/catalog.yaml",
         candidate_ids=tuple(candidates),
         checked_training_files=tuple(checked_training),
-        accepted_but_inactive=(
-            "Pose 正式執行：等待使用者 opt-in",
-            "Q2 QAT：等待 Float 結果、量化資格與 GPU 授權",
-        ),
+        accepted_but_inactive=tuple(accepted_but_inactive),
         deprecated=(
             "architecture_1 direct handoff：改由 yolo_combine winner handoff",
             "batch_size：請使用 Ultralytics 正式鍵名 batch",
@@ -709,12 +904,7 @@ def check_configs(project_root: str | Path = PROJECT_ROOT) -> ConfigCheckReport:
         overridden=(
             "name/project/device/workers/cache：只允許在 effective config 的 runtime 層覆寫",
         ),
-        blocked=(
-            "上游 winner training recipe 尚未 handoff",
-            "Float extension：等待 late gate 與未 strip continuation state",
-            "Pose RLE active evidence：等待 handoff model/loss dry-run",
-            "正式 CUDA/GPU 測試與長訓練尚未獲授權",
-        ),
+        blocked=tuple(blocked),
         runtime_overridable=tuple(sorted(RUNTIME_OVERRIDE_ALLOWLIST)),
     )
 

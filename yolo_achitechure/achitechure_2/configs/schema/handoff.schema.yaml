@@ -2,8 +2,8 @@ $schema: https://json-schema.org/draft/2020-12/schema
 $id: handoff.schema.yaml
 title: yolo_combine Winner Handoff Revision
 description: architecture_2 只接受通過此契約且能在新程序重建的不可變 winner revision。
-x-spec-version: 2.0.3
-x-spec-sha256: 8b07bdb4195e88c8c9bf4a95dab782c75a77854ef5022ede4757290348a95471
+x-spec-version: 2.3.0
+x-spec-sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
 type: object
 additionalProperties: false
 required:
@@ -77,6 +77,20 @@ properties:
         type: string
         minLength: 1
   model_contract:
+    oneOf:
+      - $ref: "#/$defs/legacy_model_contract"
+      - $ref: "#/$defs/full35_graph_contract"
+  candidate_regions:
+    type: array
+    minItems: 1
+    items:
+      $ref: "#/$defs/candidate_region"
+  protected_module_paths:
+    $ref: "#/$defs/module_paths"
+  frozen_module_paths:
+    $ref: "#/$defs/module_paths"
+$defs:
+  legacy_model_contract:
     type: object
     additionalProperties: false
     required:
@@ -89,8 +103,7 @@ properties:
       - detect_names
       - pose_names
     properties:
-      interface:
-        const: "model(images, tasks=detect|pose|both)"
+      interface: {const: "model(images, tasks=detect|pose|both)"}
       model_kind:
         enum: [shared_dual_head, routed_dual, partial_shared]
       head_inputs:
@@ -102,55 +115,72 @@ properties:
             - type: integer
             - type: string
               minLength: 1
-      detect_nc:
-        const: 80
-      pose_nc:
-        const: 2
-      kpt_shape:
-        const: [2, 3]
-      detect_names:
-        oneOf:
-          - type: array
-            minItems: 80
-            maxItems: 80
-            prefixItems:
-              - const: person
-            items:
-              type: string
-              minLength: 1
-          - type: object
-            minProperties: 80
-            maxProperties: 80
-            required: ["0"]
-            propertyNames:
-              pattern: "^(?:[0-9]|[1-6][0-9]|7[0-9])$"
-            properties:
-              "0":
-                const: person
-            additionalProperties:
-              type: string
-              minLength: 1
-      pose_names:
-        oneOf:
-          - const: [ball, bat]
-          - type: object
-            additionalProperties: false
-            required: ["0", "1"]
-            properties:
-              "0":
-                const: ball
-              "1":
-                const: bat
-  candidate_regions:
-    type: array
-    minItems: 1
-    items:
-      $ref: "#/$defs/candidate_region"
-  protected_module_paths:
-    $ref: "#/$defs/module_paths"
-  frozen_module_paths:
-    $ref: "#/$defs/module_paths"
-$defs:
+      detect_nc: {const: 80}
+      pose_nc: {const: 2}
+      kpt_shape: {const: [2, 3]}
+      detect_names: {$ref: "#/$defs/detect_names"}
+      pose_names: {$ref: "#/$defs/pose_names"}
+  full35_graph_contract:
+    type: object
+    additionalProperties: false
+    required:
+      - model_kind
+      - shared_layers
+      - head_inputs
+      - feature_channels
+      - strides
+      - reg_max
+      - end2end
+      - detect_nc
+      - pose_nc
+      - kpt_shape
+      - detect_names
+      - pose_names
+      - pose_flow_module
+    properties:
+      model_kind: {const: graph_shared_dual_head}
+      shared_layers: {const: 23}
+      head_inputs: {const: [16, 19, 22]}
+      feature_channels: {const: [256, 512, 512]}
+      strides: {const: [8.0, 16.0, 32.0]}
+      reg_max: {const: 1}
+      end2end: {const: true}
+      detect_nc: {const: 80}
+      pose_nc: {const: 2}
+      kpt_shape: {const: [2, 3]}
+      detect_names: {$ref: "#/$defs/detect_names"}
+      pose_names: {$ref: "#/$defs/pose_names"}
+      pose_flow_module: {const: RealNVP}
+  detect_names:
+    oneOf:
+      - type: array
+        minItems: 80
+        maxItems: 80
+        prefixItems:
+          - const: person
+        items:
+          type: string
+          minLength: 1
+      - type: object
+        minProperties: 80
+        maxProperties: 80
+        required: ["0"]
+        propertyNames:
+          pattern: "^(?:[0-9]|[1-6][0-9]|7[0-9])$"
+        properties:
+          "0": {const: person}
+        additionalProperties:
+          type: string
+          minLength: 1
+  pose_names:
+    oneOf:
+      - const: [ball, bat]
+      - type: object
+        additionalProperties: false
+        required: ["0", "1"]
+        properties:
+          "0": {const: ball}
+          "1": {const: bat}
   artifact:
     type: object
     additionalProperties: false

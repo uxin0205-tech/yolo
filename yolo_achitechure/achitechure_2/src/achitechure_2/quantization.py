@@ -155,6 +155,24 @@ def configure_qat_epoch(model: nn.Module, epoch: int) -> bool:
     return observers_enabled
 
 
+def configure_qat_lite_step(
+    model: nn.Module,
+    step: int,
+    *,
+    observer_update_steps: int = 50,
+) -> bool:
+    """QAT-lite 使用 one-based step；短暫更新 observer 後固定量化範圍。"""
+
+    if step < 1:
+        raise ValueError("step is one-based")
+    if observer_update_steps < 1:
+        raise ValueError("observer_update_steps must be positive")
+    observers_enabled = step <= observer_update_steps
+    set_observers(model, enabled=observers_enabled)
+    set_fake_quant(model, enabled=True)
+    return observers_enabled
+
+
 def require_quantization_stage(
     candidate_id: str,
     stage: str,
@@ -170,7 +188,7 @@ def require_quantization_stage(
     approved = set(user_approved)
     if candidate_id != "C0" and candidate_id not in approved:
         raise PermissionError(
-            f"{candidate_id} 尚未取得使用者核准；需先檢視完整 Float 結果"
+            f"{candidate_id} 尚未取得使用者核准；需先檢視適用階段的 Float 結果並明確核准"
         )
     if normalized_stage == "Q2" and not gpu_authorized:
         raise PermissionError("Q2 正式 QAT 需要使用者明確 GPU 長訓練授權")

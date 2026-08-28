@@ -1,8 +1,8 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: catalog.schema.yaml
 title: architecture_2 正式設定目錄
-x-spec-version: 2.0.3
-x-spec-sha256: 8b07bdb4195e88c8c9bf4a95dab782c75a77854ef5022ede4757290348a95471
+x-spec-version: 2.3.0
+x-spec-sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
 type: object
 additionalProperties: false
 required:
@@ -16,12 +16,13 @@ required:
   - handoff_example
   - architectures
   - training
+  - runs
   - datasets
   - quantization
   - schemas
 properties:
   schema_version: {const: 3}
-  spec_version: {const: 2.0.3}
+  spec_version: {const: 2.3.0}
   spec_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
   kind: {const: config_catalog}
   title_zh: {type: string}
@@ -34,14 +35,21 @@ properties:
     maxProperties: 4
   training:
     type: object
-    minProperties: 4
-    maxProperties: 4
+    minProperties: 6
+    maxProperties: 6
+  runs:
+    type: object
+    additionalProperties: false
+    required: [full35-float-screen-20, full35-c2-c3-auto-continuation]
+    properties:
+      full35-float-screen-20: {const: configs/runs/full35-float-screen-20.yaml}
+      full35-c2-c3-auto-continuation: {const: configs/runs/full35-c2-c3-auto-continuation.yaml}
   datasets:
     type: object
-    minProperties: 3
-    maxProperties: 3
+    minProperties: 8
+    maxProperties: 8
   quantization: {const: configs/quant/w8a8-simulation.yaml}
   schemas:
     type: object
-    minProperties: 6
-    maxProperties: 6
+    minProperties: 8
+    maxProperties: 8

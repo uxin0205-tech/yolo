@@ -1,0 +1,197 @@
+{
+  "schema_version": 2,
+  "producer": "yolo_combine",
+  "revision_id": "full35-final-j3-seed0-d67fb45c",
+  "winner_id": "full35-j3-best-joint-seed0",
+  "fusion_kind": "shared_dual_head",
+  "checkpoint_format": "state_dict_only",
+  "checkpoint": {
+    "path": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+    "sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c"
+  },
+  "builder": {
+    "path": "/home/uxin/yolo/yolo_combine/final/full35/code/project/src/yolo_combine/factory.py",
+    "sha256": "02d4cd7106efd968adacf6b9f263f509a74222fe4f4ef731c51ba3c7154af358"
+  },
+  "architecture": {
+    "path": "/home/uxin/yolo/yolo_combine/final/full35/configs/experiment-joint.yaml",
+    "sha256": "5d19d1067e25a517acb44d9a81dfc20615e0846d5aae7b8d2558bfe46bcd409a"
+  },
+  "training_recipe": {
+    "path": "training-recipe.yaml",
+    "sha256": "5410e5dc9ae5b949e6019635e2e1952e0b820934f97adbc0f50d061d5bb5df3a"
+  },
+  "datasets": {
+    "coco_detect": {
+      "path": "/home/uxin/yolo/coco2017.yaml",
+      "sha256": "1ed971749ec00b84db8ffe850b05e34e0acfd63a9654a9224ac8d80f5e068068"
+    },
+    "bbat5_pose": {
+      "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml",
+      "sha256": "dece3f4665fad86c2b0b3e3941b1cde9668cbfc6db1208c0e3d10638b3f5b888"
+    },
+    "bbat5_detect": {
+      "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml",
+      "sha256": "222f61f7800be52086218bc4e6880f23917abc33382714f8a737013b75aa6aa5"
+    }
+  },
+  "selection": {
+    "path": "/home/uxin/yolo/yolo_combine/final/full35/RELEASE_STATUS.json",
+    "sha256": "b9c4eb9443756da3cb7d612ab3077ada789963be45b0b42bb2281d2af0bf09e0"
+  },
+  "fresh_process_report": {
+    "path": "fresh-process-report.json",
+    "sha256": "08ddae6ad9c3ae76fb1710e42d7120e488ed136209adcecd494e6f84c67319fb"
+  },
+  "environment": {
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.90",
+    "git_revision": "uncommitted-final-bundle-manifest-cb6c94e085c06df503da33200a3ad736b71382f88bc22928767ca0235f728fa5"
+  },
+  "model_contract": {
+    "model_kind": "graph_shared_dual_head",
+    "shared_layers": 23,
+    "head_inputs": [
+      16,
+      19,
+      22
+    ],
+    "feature_channels": [
+      256,
+      512,
+      512
+    ],
+    "strides": [
+      8,
+      16,
+      32
+    ],
+    "reg_max": 1,
+    "end2end": true,
+    "detect_nc": 80,
+    "pose_nc": 2,
+    "kpt_shape": [
+      2,
+      3
+    ],
+    "detect_names": {
+      "0": "person",
+      "1": "bicycle",
+      "2": "car",
+      "3": "motorcycle",
+      "4": "airplane",
+      "5": "bus",
+      "6": "train",
+      "7": "truck",
+      "8": "boat",
+      "9": "traffic light",
+      "10": "fire hydrant",
+      "11": "stop sign",
+      "12": "parking meter",
+      "13": "bench",
+      "14": "bird",
+      "15": "cat",
+      "16": "dog",
+      "17": "horse",
+      "18": "sheep",
+      "19": "cow",
+      "20": "elephant",
+      "21": "bear",
+      "22": "zebra",
+      "23": "giraffe",
+      "24": "backpack",
+      "25": "umbrella",
+      "26": "handbag",
+      "27": "tie",
+      "28": "suitcase",
+      "29": "frisbee",
+      "30": "skis",
+      "31": "snowboard",
+      "32": "sports ball",
+      "33": "kite",
+      "34": "baseball bat",
+      "35": "baseball glove",
+      "36": "skateboard",
+      "37": "surfboard",
+      "38": "tennis racket",
+      "39": "bottle",
+      "40": "wine glass",
+      "41": "cup",
+      "42": "fork",
+      "43": "knife",
+      "44": "spoon",
+      "45": "bowl",
+      "46": "banana",
+      "47": "apple",
+      "48": "sandwich",
+      "49": "orange",
+      "50": "broccoli",
+      "51": "carrot",
+      "52": "hot dog",
+      "53": "pizza",
+      "54": "donut",
+      "55": "cake",
+      "56": "chair",
+      "57": "couch",
+      "58": "potted plant",
+      "59": "bed",
+      "60": "dining table",
+      "61": "toilet",
+      "62": "tv",
+      "63": "laptop",
+      "64": "mouse",
+      "65": "remote",
+      "66": "keyboard",
+      "67": "cell phone",
+      "68": "microwave",
+      "69": "oven",
+      "70": "toaster",
+      "71": "sink",
+      "72": "refrigerator",
+      "73": "book",
+      "74": "clock",
+      "75": "vase",
+      "76": "scissors",
+      "77": "teddy bear",
+      "78": "hair drier",
+      "79": "toothbrush"
+    },
+    "pose_names": {
+      "0": "ball",
+      "1": "bat"
+    },
+    "pose_flow_module": "RealNVP"
+  },
+  "candidate_regions": [
+    {
+      "region_id": "shared-c3k2",
+      "role": "shared",
+      "tasks": [
+        "detect",
+        "pose"
+      ],
+      "module_paths": [
+        "graph.model.6",
+        "graph.model.8",
+        "graph.model.13",
+        "graph.model.19"
+      ],
+      "head_paths": [
+        "graph.model.23.detect_head",
+        "graph.model.23.pose_head"
+      ]
+    }
+  ],
+  "protected_module_paths": [
+    "graph.model.10.m.0.attn",
+    "graph.model.16.p3_masf",
+    "graph.model.22.m.0.1.attn",
+    "graph.model.23.detect_head",
+    "graph.model.23.pose_head"
+  ],
+  "frozen_module_paths": [
+    "graph.model.10.m.0.attn",
+    "graph.model.16.p3_masf",
+    "graph.model.22.m.0.1.attn"
+  ]
+}

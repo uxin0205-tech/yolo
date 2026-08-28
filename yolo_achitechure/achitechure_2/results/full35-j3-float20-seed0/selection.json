@@ -1,0 +1,289 @@
+{
+  "c_best": null,
+  "candidates": [
+    {
+      "cost_reduction_vs_c0": {
+        "gflops": 0.0,
+        "latency_ms": 0.0,
+        "params": 0.0,
+        "peak_vram_mb": 0.0
+      },
+      "decision": null,
+      "descriptive_bands": {
+        "bbat5_keypoint_map50_95": "no_drop_or_gain",
+        "bbat5_pose_box_map50_95": "no_drop_or_gain",
+        "coco_box_map50_95": "no_drop_or_gain"
+      },
+      "metric_delta_vs_c0": {
+        "bbat5_keypoint_map50": 0.0,
+        "bbat5_keypoint_map50_95": 0.0,
+        "bbat5_pose_box_map50": 0.0,
+        "bbat5_pose_box_map50_95": 0.0,
+        "coco_box_map50": 0.0,
+        "coco_box_map50_95": 0.0,
+        "coco_person_ap50": 0.0,
+        "coco_person_ap50_95": 0.0,
+        "macro_f1": 0.0,
+        "micro_f1": 0.0
+      },
+      "metrics": {
+        "bbat5_keypoint_map50": 0.9817264968330357,
+        "bbat5_keypoint_map50_95": 0.9817080109603218,
+        "bbat5_pose_box_map50": 0.9806312246998325,
+        "bbat5_pose_box_map50_95": 0.8322749403258266,
+        "candidate_id": "C0",
+        "classes": {
+          "ball": {
+            "ap50": 0.968324111704576,
+            "ap50_95": 0.7772878018951116,
+            "f1": 0.9459358910263999,
+            "keypoint_ap50": 0.970202602782535,
+            "keypoint_ap50_95": 0.9701968363559521,
+            "precision": 0.9601625845709167,
+            "recall": 0.9321246347486005
+          },
+          "bat": {
+            "ap50": 0.9929383376950891,
+            "ap50_95": 0.8872620787565415,
+            "f1": 0.9723509537573563,
+            "keypoint_ap50": 0.9932503908835364,
+            "keypoint_ap50_95": 0.9932191855646917,
+            "precision": 0.9753957036884227,
+            "recall": 0.9693251533742331
+          }
+        },
+        "coco_box_map50": 0.7828413936120749,
+        "coco_box_map50_95": 0.6042583884428668,
+        "coco_person_ap50": 0.8629707186026779,
+        "coco_person_ap50_95": 0.6543307805851757,
+        "f1_confidence_threshold": 0.45545545545545546,
+        "gflops": 96.4450304,
+        "latency_ms": 23.171520233154297,
+        "macro_f1": 0.959143422391878,
+        "micro_f1": 0.9611892417671245,
+        "params": 26529701,
+        "peak_vram_mb": 205.61181640625,
+        "pose_official_combined_fitness": 1.8139829512861483
+      },
+      "quantization_eligible": true
+    },
+    {
+      "cost_reduction_vs_c0": {
+        "gflops": 0.05510455000074321,
+        "latency_ms": 0.0123613929234353,
+        "params": 0.07607714840057944,
+        "peak_vram_mb": 0.02640746818398787
+      },
+      "decision": null,
+      "descriptive_bands": {
+        "bbat5_keypoint_map50_95": "drop_gt_0.008",
+        "bbat5_pose_box_map50_95": "drop_gt_0.008",
+        "coco_box_map50_95": "drop_gt_0.008"
+      },
+      "metric_delta_vs_c0": {
+        "bbat5_keypoint_map50": -0.4860124728874444,
+        "bbat5_keypoint_map50_95": -0.5249919830121768,
+        "bbat5_pose_box_map50": -0.531327251238773,
+        "bbat5_pose_box_map50_95": -0.5806738172444642,
+        "coco_box_map50": -0.744826255629589,
+        "coco_box_map50_95": -0.5821658430973147,
+        "coco_person_ap50": -0.656179014244973,
+        "coco_person_ap50_95": -0.5645228459212782,
+        "macro_f1": -0.5233587994002264,
+        "micro_f1": -0.5394033816859719
+      },
+      "metrics": {
+        "bbat5_keypoint_map50": 0.4957140239455913,
+        "bbat5_keypoint_map50_95": 0.456716027948145,
+        "bbat5_pose_box_map50": 0.44930397346105955,
+        "bbat5_pose_box_map50_95": 0.2516011230813624,
+        "candidate_id": "C1",
+        "classes": {
+          "ball": {
+            "ap50": 0.5861284189852043,
+            "ap50_95": 0.3403194635626156,
+            "f1": 0.5198621497751623,
+            "keypoint_ap50": 0.6177602639022314,
+            "keypoint_ap50_95": 0.6046297910603955,
+            "precision": 0.90414925033148,
+            "recall": 0.364808841873367
+          },
+          "bat": {
+            "ap50": 0.31247952793691475,
+            "ap50_95": 0.16288278260010913,
+            "f1": 0.3517070962081409,
+            "keypoint_ap50": 0.3736677839889512,
+            "keypoint_ap50_95": 0.30880226483589457,
+            "precision": 0.5631388926069293,
+            "recall": 0.25570286546072646
+          }
+        },
+        "coco_box_map50": 0.038015137982485944,
+        "coco_box_map50_95": 0.02209254534555212,
+        "coco_person_ap50": 0.20679170435770483,
+        "coco_person_ap50_95": 0.08980793466389743,
+        "f1_confidence_threshold": 0.45545545545545546,
+        "gflops": 91.1304704,
+        "latency_ms": 22.885087966918945,
+        "macro_f1": 0.4357846229916516,
+        "micro_f1": 0.4217858600811526,
+        "params": 24511397,
+        "peak_vram_mb": 200.18212890625,
+        "pose_official_combined_fitness": 0.7083171510295074
+      },
+      "quantization_eligible": "pending_user_decision"
+    },
+    {
+      "cost_reduction_vs_c0": {
+        "gflops": 0.031911798744168385,
+        "latency_ms": 0.025303513588041393,
+        "params": 0.0445423791244387,
+        "peak_vram_mb": 0.017402331551462535
+      },
+      "decision": null,
+      "descriptive_bands": {
+        "bbat5_keypoint_map50_95": "drop_gt_0.008",
+        "bbat5_pose_box_map50_95": "drop_gt_0.008",
+        "coco_box_map50_95": "drop_gt_0.008"
+      },
+      "metric_delta_vs_c0": {
+        "bbat5_keypoint_map50": -0.08101480725372645,
+        "bbat5_keypoint_map50_95": -0.08921582718439436,
+        "bbat5_pose_box_map50": -0.09440828031666548,
+        "bbat5_pose_box_map50_95": -0.17698719555283404,
+        "coco_box_map50": -0.21952732490574567,
+        "coco_box_map50_95": -0.22055288844193977,
+        "coco_person_ap50": -0.1048340174828778,
+        "coco_person_ap50_95": -0.14482798078489645,
+        "macro_f1": -0.11958582936371531,
+        "micro_f1": -0.12579162381018205
+      },
+      "metrics": {
+        "bbat5_keypoint_map50": 0.9007116895793092,
+        "bbat5_keypoint_map50_95": 0.8924921837759274,
+        "bbat5_pose_box_map50": 0.8862229443831671,
+        "bbat5_pose_box_map50_95": 0.6552877447729926,
+        "candidate_id": "C2",
+        "classes": {
+          "ball": {
+            "ap50": 0.8858961634866548,
+            "ap50_95": 0.6160416623140947,
+            "f1": 0.8665539642253621,
+            "keypoint_ap50": 0.9014820143606109,
+            "keypoint_ap50_95": 0.8958610519005603,
+            "precision": 0.9359078039774823,
+            "recall": 0.8067696830421284
+          },
+          "bat": {
+            "ap50": 0.8865497252796793,
+            "ap50_95": 0.6945338272318903,
+            "f1": 0.8125612218309632,
+            "keypoint_ap50": 0.8999413647980075,
+            "keypoint_ap50_95": 0.8891233156512947,
+            "precision": 0.8676345205510106,
+            "recall": 0.7640621997531226
+          }
+        },
+        "coco_box_map50": 0.5633140687063293,
+        "coco_box_map50_95": 0.38370550000092707,
+        "coco_person_ap50": 0.7581367011198001,
+        "coco_person_ap50_95": 0.5095027998002792,
+        "f1_confidence_threshold": 0.45545545545545546,
+        "gflops": 93.367296,
+        "latency_ms": 22.5851993560791,
+        "macro_f1": 0.8395575930281627,
+        "micro_f1": 0.8353976179569425,
+        "params": 25348005,
+        "peak_vram_mb": 202.03369140625,
+        "pose_official_combined_fitness": 1.54777992854892
+      },
+      "quantization_eligible": "pending_user_decision"
+    },
+    {
+      "cost_reduction_vs_c0": {
+        "gflops": 0.028267890929090322,
+        "latency_ms": 0.004988208469323463,
+        "params": 0.03952460677939795,
+        "peak_vram_mb": 0.014875573804361553
+      },
+      "decision": null,
+      "descriptive_bands": {
+        "bbat5_keypoint_map50_95": "drop_gt_0.008",
+        "bbat5_pose_box_map50_95": "drop_gt_0.008",
+        "coco_box_map50_95": "drop_gt_0.008"
+      },
+      "metric_delta_vs_c0": {
+        "bbat5_keypoint_map50": -0.1877742651565556,
+        "bbat5_keypoint_map50_95": -0.20595673023503336,
+        "bbat5_pose_box_map50": -0.22763083765625303,
+        "bbat5_pose_box_map50_95": -0.3321283314443674,
+        "coco_box_map50": -0.4109807896569315,
+        "coco_box_map50_95": -0.3865027376397714,
+        "coco_person_ap50": -0.27931044941642347,
+        "coco_person_ap50_95": -0.3356175701953898,
+        "macro_f1": -0.244500350680799,
+        "micro_f1": -0.2563297551658821
+      },
+      "metrics": {
+        "bbat5_keypoint_map50": 0.7939522316764801,
+        "bbat5_keypoint_map50_95": 0.7757512807252884,
+        "bbat5_pose_box_map50": 0.7530003870435795,
+        "bbat5_pose_box_map50_95": 0.5001466088814592,
+        "candidate_id": "C3",
+        "classes": {
+          "ball": {
+            "ap50": 0.8015625428368559,
+            "ap50_95": 0.5237377657646823,
+            "f1": 0.7922374484735641,
+            "keypoint_ap50": 0.845518389611696,
+            "keypoint_ap50_95": 0.8412699493642665,
+            "precision": 0.933985530510151,
+            "recall": 0.6878453038674033
+          },
+          "bat": {
+            "ap50": 0.704438231250303,
+            "ap50_95": 0.47655545199823585,
+            "f1": 0.637048694948594,
+            "keypoint_ap50": 0.7423860737412642,
+            "keypoint_ap50_95": 0.7102326120863107,
+            "precision": 0.8037754339001449,
+            "recall": 0.5276073619631901
+          }
+        },
+        "coco_box_map50": 0.3718606039551434,
+        "coco_box_map50_95": 0.21775565080309547,
+        "coco_person_ap50": 0.5836602691862545,
+        "coco_person_ap50_95": 0.3187132103897859,
+        "f1_confidence_threshold": 0.45545545545545546,
+        "gflops": 93.7187328,
+        "latency_ms": 23.055935859680176,
+        "macro_f1": 0.714643071711079,
+        "micro_f1": 0.7048594866012424,
+        "params": 25481125,
+        "peak_vram_mb": 202.55322265625,
+        "pose_official_combined_fitness": 1.2758978896067477
+      },
+      "quantization_eligible": "pending_user_decision"
+    }
+  ],
+  "f1_confidence_threshold": 0.45545545545545546,
+  "f1_threshold_source": "c0_control_search_val",
+  "notes_zh": [
+    "0.005/0.008 只作描述性敏感度，不是 PASS/REJECT gate。",
+    "Pareto 不會自動選出 C_best。",
+    "C1/C2/C3 是否量化、是否新增 C3-P5/R1/組合都等待使用者決定。"
+  ],
+  "pareto_front": [
+    "C0",
+    "C1",
+    "C2"
+  ],
+  "pareto_pending": [],
+  "quantization_eligibility": {
+    "C0": true,
+    "C1": "pending_user_decision",
+    "C2": "pending_user_decision",
+    "C3": "pending_user_decision"
+  },
+  "selection_status": "pending_user_decision"
+}

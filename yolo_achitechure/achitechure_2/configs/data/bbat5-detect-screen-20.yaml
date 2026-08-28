@@ -1,0 +1,29 @@
+# Pose labels 前五欄衍生的二類診斷 View；與 Pose 20% 使用相同影像 assignment。
+schema_version: 3
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+kind: dataset
+project_metadata:
+  title_zh: BBAT5 v1 Detect 固定20%診斷篩選
+  summary_zh: 只診斷 ball/bat boxes；不得取代 COCO80 Detect 或單獨決定 C_best。
+  task: detect
+  role: screening_diagnostic_detect
+  original_read_only: /home/uxin/yolo/original/pose/detect_dataset
+  derived_version: bbat5-v1
+  labels_source: pose_first_five_columns
+  runtime_view: architecture-screen-20-v1
+  source_scope: formal_train_only
+  formal_val_excluded: true
+  ultralytics_dataset_yaml: true
+path: /home/uxin/yolo/original/pose/derived/bbat5-v1/detect
+train: /home/uxin/yolo/yolo_achitechure/achitechure_2/artifacts/datasets/architecture-screen-20-v1/bbat5/detect-train.txt
+val: /home/uxin/yolo/original/pose/derived/bbat5-v1/detect/splits/search-val.txt
+test: null
+nc: 2
+names:
+  0: ball
+  1: bat
+group_key: prefix_before_.rf.
+split_seed: 0
+screening_fraction: 0.2
+screening_manifest: artifacts/datasets/architecture-screen-20-v1/screening-manifest.json

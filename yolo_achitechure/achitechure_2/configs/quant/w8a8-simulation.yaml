@@ -1,7 +1,7 @@
 # 正式量化模擬設定；C1–C3 需由使用者看完 Float 結果後明確核准。
 schema_version: 3
-spec_version: 2.0.3
-spec_sha256: 8b07bdb4195e88c8c9bf4a95dab782c75a77854ef5022ede4757290348a95471
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
 kind: quantization
 title_zh: 逐候選 Q0／Q1／Q2 W8A8 模擬
 summary_zh: C0 固定 eligible；其他 resolved candidates 保持 pending_user_decision。
@@ -19,6 +19,16 @@ stages:
   Q1:
     kind: w8a8_ptq_simulation
     calibration_set: fixed_from_c0_search_train
+  Q2L:
+    kind: w8a8_qat_lite_simulation
+    prerequisite_stages: [Q0, Q1]
+    training_template: configs/training/quant-qat-lite.yaml
+    max_optimizer_steps: 200
+    observer_update_steps: 50
+    validation_interval_steps: 50
+    requires_gpu_authorization: true
+    screening_only: true
+    automatic_acceptance: false
   Q2:
     kind: w8a8_qat_simulation
     requires_gpu_authorization: true

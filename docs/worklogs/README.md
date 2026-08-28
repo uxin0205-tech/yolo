@@ -36,5 +36,10 @@
 - [2026-08-23：釐清 BBAT5 Pose／Detect Task View](2026-08-23-bbat5-task-views-clarification.md)
 - [2026-08-23：發布 original 資料並清除 Git 權重](2026-08-23-original-data-publication.md)
 - [2026-08-27：YOLO26m Attention final GitHub 發布](2026-08-27-yolo-attention-final-github-publication.md)
+- [2026-08-26：architecture_2 固定20%初篩與 QAT-lite](2026-08-26-architecture-2-float20-qat-lite.md)
+- [2026-08-27：architecture_2 C2／C3完整訓練與量化自動接續](2026-08-27-architecture2-c2-c3-auto-continuation.md)
+- [2026-08-27：architecture_2 Full35 Float20 與安全 GPU 佇列](2026-08-27-architecture2-full35-float20-queue.md)
+- [2026-08-27：architecture_2 Float20 成果匯出與 profiling 裝置修正](2026-08-27-architecture2-float20-profile-device-fix.md)
+- [2026-08-28：architecture_2 不採用、清理與發布](2026-08-28-architecture2-archive-and-publication.md)
 
 返回[根層 README](../../README.md)。

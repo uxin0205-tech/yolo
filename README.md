@@ -25,12 +25,13 @@ Pose 與 ball/bat 二類 Detect 共用 6,647 張影像及完全相同的 train/v
 
 全專案 BBAT5 registry 是 [`configs/datasets/bbat5-v1.yaml`](configs/datasets/bbat5-v1.yaml)。
 `original/pose/dataset` 與 `detect_dataset` 是唯讀來源／歷史資料；新訓練不得直接使用。
-各專案只可在 `artifacts/cache-views/` 建立 symlink-only runtime View 以隔離 cache；split、labels
-與 lineage 必須完全來自 `bbat5-v1`，不得形成第二套資料版本或使用 `artifacts/datasets/`。
+各專案可以建立隔離 cache 的 runtime View，但 split、labels 與 lineage 必須完全來自
+`bbat5-v1`，不得形成第二套資料版本。architecture_2 另保留使用者已核准的 Portable GitHub
+Snapshot 作 clone／稽核用途，不是正式訓練入口。
 
 資料目錄角色見 [`original/pose/README.md`](original/pose/README.md)，選型理由見
-[ADR 0001](docs/adr/0001-use-bbat5-v1-as-canonical-dataset.md)。自 2026-08-23 起，
-`original/pose/` 是唯一 BBAT5 資料資產庫；各專案的 `artifacts/datasets/` 不得再保存正式副本。
+[ADR 0001](docs/adr/0001-use-bbat5-v1-as-canonical-dataset.md)。`original/pose/` 是唯一正式
+BBAT5 資料資產庫；portable snapshot 只改變發布形式，不改變 canonical assignment 或 lineage。
 
 ### GitHub 的 original 發布範圍
 
@@ -40,13 +41,18 @@ Pose 與 ball/bat 二類 Detect 共用 6,647 張影像及完全相同的 train/v
 GitHub 單檔限制且與已解壓目錄重複的 `detect_dataset.zip`；詳細範圍見
 [`original/README.md`](original/README.md) 與 [ADR 0002](docs/adr/0002-publish-original-data-without-weights.md)。
 
-2026-08-22 曾發布於 `yolo_achitechure/achitechure_2/artifacts/datasets/` 的可攜副本只保留在
-Git 歷史；目前 tree 已移除，避免同一資料出現兩個可被誤認為正式入口的位置。
+2026-08-22 核准的可攜副本固定在
+`yolo_achitechure/achitechure_2/artifacts/datasets/bbat5-v1/github-dataset/`；完整影像與 labels 可發布，
+但不得作為本機 canonical 訓練來源，也不得包含 weight、checkpoint、cache 或 run。
 
 ## 報告與變更
 
 YOLO26m Binary Q/K＋Bit-True PWL 的完整可攜 workspace、程式碼、權重與文件見
 [`yolo_attention_final/final/`](yolo_attention_final/final/README.md)；本次 GitHub 發布過程見
 [2026-08-27 工作紀錄](docs/worklogs/2026-08-27-yolo-attention-final-github-publication.md)。
+
+architecture_2 的 C1～C3 已因 Float20 精度下降過大而不採用；C2／C3 full、PTQ 與 QAT-lite
+已永久關閉。完整負結果、清理與發布範圍見
+[2026-08-28 architecture_2 封存工作紀錄](docs/worklogs/2026-08-28-architecture2-archive-and-publication.md)。
 
 所有進度、報告、實驗結果、變更紀錄，以及困難與解法都使用中文。每份新工作紀錄都必須加入[工作紀錄索引](docs/worklogs/README.md)，讓 README 保持可追溯的入口。

@@ -1,8 +1,8 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: quantization.schema.yaml
 title: architecture_2 W8A8 模擬
-x-spec-version: 2.0.3
-x-spec-sha256: 8b07bdb4195e88c8c9bf4a95dab782c75a77854ef5022ede4757290348a95471
+x-spec-version: 2.3.0
+x-spec-sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
 type: object
 additionalProperties: false
 required:
@@ -22,7 +22,7 @@ required:
   - exclude_custom_roots
 properties:
   schema_version: {const: 3}
-  spec_version: {const: 2.0.3}
+  spec_version: {const: 2.3.0}
   spec_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
   kind: {const: quantization}
   title_zh: {type: string}

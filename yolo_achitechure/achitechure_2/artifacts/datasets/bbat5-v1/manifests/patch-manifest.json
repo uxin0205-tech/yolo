@@ -1,0 +1,50 @@
+{
+  "derived_version": "bbat5-v1",
+  "patch_count": 4,
+  "patches": [
+    {
+      "detect_output": "/home/uxin/yolo/original/pose/derived/bbat5-v1/detect/labels/train/Pasquantino_mp4-0000_jpg.rf.5e174f90f946c15c726f1374b5bf9854.txt",
+      "line": 1,
+      "new": 0.0,
+      "old": -0.0010866666666666666,
+      "pose_output": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/Pasquantino_mp4-0000_jpg.rf.5e174f90f946c15c726f1374b5bf9854.txt",
+      "source": "/home/uxin/yolo/original/pose/dataset/train/labels/Pasquantino_mp4-0000_jpg.rf.5e174f90f946c15c726f1374b5bf9854.txt",
+      "source_sha256": "eccb013fccd58edcdd177a9a861e8832412021ebef3f0324bf60e0f432b6151a",
+      "token": 6
+    },
+    {
+      "detect_output": "/home/uxin/yolo/original/pose/derived/bbat5-v1/detect/labels/train/Pasquantino_mp4-0000_jpg.rf.602e2f8ad693b5f0a15c90bbda8406d6.txt",
+      "line": 1,
+      "new": 0.0,
+      "old": -0.0010866666666666666,
+      "pose_output": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/Pasquantino_mp4-0000_jpg.rf.602e2f8ad693b5f0a15c90bbda8406d6.txt",
+      "source": "/home/uxin/yolo/original/pose/dataset/train/labels/Pasquantino_mp4-0000_jpg.rf.602e2f8ad693b5f0a15c90bbda8406d6.txt",
+      "source_sha256": "eccb013fccd58edcdd177a9a861e8832412021ebef3f0324bf60e0f432b6151a",
+      "token": 6
+    },
+    {
+      "detect_output": "/home/uxin/yolo/original/pose/derived/bbat5-v1/detect/labels/train/Pasquantino_mp4-0000_jpg.rf.bb49e91550537a3edf10f220ddf9a976.txt",
+      "line": 1,
+      "new": 0.0,
+      "old": -0.0010866666666666666,
+      "pose_output": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/Pasquantino_mp4-0000_jpg.rf.bb49e91550537a3edf10f220ddf9a976.txt",
+      "source": "/home/uxin/yolo/original/pose/dataset/train/labels/Pasquantino_mp4-0000_jpg.rf.bb49e91550537a3edf10f220ddf9a976.txt",
+      "source_sha256": "eccb013fccd58edcdd177a9a861e8832412021ebef3f0324bf60e0f432b6151a",
+      "token": 6
+    },
+    {
+      "detect_output": "/home/uxin/yolo/original/pose/derived/bbat5-v1/detect/labels/train/ohtani_mp4-0004_jpg.rf.20b1512e4dd969cdde1de53f5133261c.txt",
+      "line": 1,
+      "new": 0.0,
+      "old": -1.388888888888889e-07,
+      "pose_output": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/ohtani_mp4-0004_jpg.rf.20b1512e4dd969cdde1de53f5133261c.txt",
+      "source": "/home/uxin/yolo/original/pose/dataset/valid/labels/ohtani_mp4-0004_jpg.rf.20b1512e4dd969cdde1de53f5133261c.txt",
+      "source_sha256": "7e30c5d6b163a64bb41a7dd606f7d9fa3f70ad6b2146a7fb44e035657b53129d",
+      "token": 6
+    }
+  ],
+  "rule": "只在衍生 Pose label 將負座標 clamp 成 0；Detect 再由修補後前五欄產生",
+  "schema_version": 1,
+  "spec_sha256": "75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b",
+  "spec_version": "2.0.0"
+}

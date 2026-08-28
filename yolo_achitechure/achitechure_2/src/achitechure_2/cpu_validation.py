@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import inspect
 from collections.abc import Callable, Iterable
 from dataclasses import asdict, dataclass
 from typing import Any
@@ -45,7 +46,13 @@ def _contract(model: nn.Module) -> Any:
 
 
 def _task_forward(model: nn.Module, images: torch.Tensor, task: str) -> dict[str, Any]:
-    outputs = model(images, tasks=task)
+    parameters = inspect.signature(model.forward).parameters
+    if "tasks" in parameters:
+        outputs = model(images, tasks=task)
+    elif "task" in parameters:
+        outputs = model(images, task=task)
+    else:
+        raise TypeError("模型 forward 必須提供 task 或 tasks 參數")
     if not isinstance(outputs, dict):
         raise TypeError(f"task={task} 必須回傳 dict")
     expected = {"detect", "pose"} if task == "both" else {task}

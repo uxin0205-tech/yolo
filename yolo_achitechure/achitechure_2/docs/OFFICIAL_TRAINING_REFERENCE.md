@@ -168,19 +168,20 @@ PyTorch `FakeQuantize` 的定義是在 training time 模擬 quantize→dequantiz
 
 這些限制直接來自 FakeQuantize 仍執行 quantize-dequantize simulation、而非 `convert` 後 backend graph 的官方定義。
 
-### 6.2 architecture_2 的 Q0／Q1／Q2 邊界
+### 6.2 architecture_2 的 Q0／Q1／Q2L／Q2 邊界
 
 | Stage | 本案實際工作 | 允許的結論 | 禁止的結論 |
 |---|---|---|---|
 | Q0 | 建立 fused FP32 reference，檢查融合前後等價性 | FP32 graph reference 與數值差距 | INT8 已部署 |
 | Q1 | 固定 calibration batches 收集 observers，凍結 range，啟用 W8A8 fake quant | PTQ-style simulation 的精度差距 | backend PTQ artifact、INT8 latency |
+| Q2L | 本案自訂200-step短 QAT、前50 steps更新observer | 只檢查是否能恢復部分Q1差距 | Ultralytics官方recipe、正式QAT或自動量化接受 |
 | Q2 | 在 fake quant 開啟時重新訓練，之後用相同 validation 比較 | QAT simulation 對 Q1 的精度恢復 | 已完成 `convert`、可部署 QAT model |
 
-本案目前只包裝標準 `Conv2d`：weights 使用 per-channel symmetric qint8、axis 0；activations 使用 per-tensor affine qint8。BinaryQK／PWL／HardwareFriendlyAttention 等 custom roots 排除在 fake-quant scope 外。因此結果必須標示 `simulation_only=true`，並附 quantized／unquantized node 清單。即使標準 Conv 的 Q1/Q2 精度良好，也不能推論被排除的 custom arithmetic 已具有整數等價性。
+本案目前只包裝標準 `Conv2d`：weights 使用 per-channel symmetric qint8、axis 0；activations 使用 per-tensor affine qint8。BinaryQK／PWL／HardwareFriendlyAttention 等 custom roots 排除在 fake-quant scope 外。因此結果必須標示 `simulation_only=true`，並附 quantized／unquantized node 清單。即使標準 Conv 的 Q1/Q2L/Q2 精度良好，也不能推論被排除的 custom arithmetic 已具有整數等價性。
 
 本模擬也沒有逐項證明 target backend 的 rounding、accumulator width、saturation、requantization 與 custom op 次序，因此不得稱為 backend `bit-true`；「Float EMA 轉 Bit-True copy」若由上游 handoff 提供，必須是另一個有明確算術契約與 regression evidence 的 validator，不能用本案 FakeQuantize 結果代替。
 
-要升級為「部署 INT8」至少還需要：明確 target backend、可轉換 graph、operator coverage、conversion/export artifact、fresh-process correctness、相同資料的正式精度驗證，以及目標硬體 latency／memory profiling；目前都不在 Phase A 可宣稱範圍內。
+要升級為「部署 INT8」至少還需要：明確 target backend、可轉換 graph、operator coverage、conversion/export artifact、fresh-process correctness、相同資料的正式精度驗證，以及目標硬體 latency／memory profiling；目前都不在本輪 Float20 可宣稱範圍內。
 
 ## 7. Effective YAML 與 run manifest 的查核清單
 

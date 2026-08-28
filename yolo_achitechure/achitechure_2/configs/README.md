@@ -12,15 +12,25 @@
     │   ├── c1-e0375.yaml
     │   ├── c2-n1.yaml
     │   └── c3-mixed.yaml
+    ├── runs/
+    │   ├── full35-float-screen-20.yaml
+    │   └── full35-c2-c3-auto-continuation.yaml
     ├── training/
     │   ├── cpu-smoke.yaml
+    │   ├── float-screen-20.yaml
     │   ├── float-main.yaml
     │   ├── float-extension.yaml
+    │   ├── quant-qat-lite.yaml
     │   └── quant-qat.yaml
     ├── data/
     │   ├── coco2017.yaml
+    │   ├── coco2017-screen-20.yaml
     │   ├── bbat5-pose.yaml
-    │   └── bbat5-detect.yaml
+    │   ├── bbat5-pose-screen-20.yaml
+    │   ├── bbat5-detect-screen-20.yaml
+    │   ├── bbat5-detect.yaml
+    │   ├── bbat5-pose-search.yaml
+    │   └── bbat5-detect-search.yaml
     ├── quant/w8a8-simulation.yaml
     └── schema/
 
@@ -36,29 +46,36 @@ C3-P5 或 R1 YAML；它們必須等使用者看完第一輪結果後才可能加
 | C2 | [c2-n1.yaml](candidates/c2-n1.yaml) | inner_n 2 → 1 | pending_user_decision |
 | C3 | [c3-mixed.yaml](candidates/c3-mixed.yaml) | 3x3_3x3 → 1x1_3x3 | pending_user_decision |
 
-候選檔描述「改什麼」，不描述「實際第幾層」。共同欄位：
+候選檔描述「改什麼」；實際 module path 必須由 handoff 驗證。本輪 Full35 J3 已固定解析為
+`graph.model.6`、`graph.model.8`、`graph.model.13`、`graph.model.19`，四個位置都在 shared trunk。
+共同欄位：
 
 | 欄位 | 意義 |
 |---|---|
 | task_contract | Detect 80 classes、Pose 2 classes 與 keypoint shape |
-| parent_policy | 全部由同一 accepted yolo_combine winner 獨立建立 |
-| target_policy | module paths 必須由 handoff Candidate Regions 提供 |
-| scope_resolution | shared／routed／partial-shared 如何展開候選 |
+| parent_policy | 全部由同一 immutable Full35 J3 EMA parent 獨立建立 |
+| target_policy | module paths 由 accepted handoff Candidate Region 提供並驗證 |
 | factors / baseline_factors | 唯一架構因素與 C0 基準 |
-| protected_policy | heads、fusion topology 與 inherited modules 不得改動 |
+| protected_policy | Detect/Pose heads、shared topology、MASF 與 attention 不得改動 |
 | architecture_delta | 中文 changed/unchanged/expected effects |
 | standalone_loadable | 永遠是 false；不可直接 YOLO(yaml) |
 
-## Training templates
+## 正式 Run 與通用 templates
 
 | config_id | 檔案 | 狀態 |
 |---|---|---|
-| cpu-smoke | [cpu-smoke.yaml](training/cpu-smoke.yaml) | Phase A，CPU-only |
-| float-main | [float-main.yaml](training/float-main.yaml) | 等 handoff、Pose opt-in、GPU 授權 |
+| full35-j3-float20-seed0 | [full35-float-screen-20.yaml](runs/full35-float-screen-20.yaml) | Pose=true；C0～C3訓練、profile與匯出已完成 |
+| full35-j3-c2-c3-auto-seed0 | [full35-c2-c3-auto-continuation.yaml](runs/full35-c2-c3-auto-continuation.yaml) | `closed_rejected_by_user`；封存且不得執行full、PTQ或QAT-lite |
+| cpu-smoke | [cpu-smoke.yaml](training/cpu-smoke.yaml) | 通用 CPU-only 契約；Full35 實測已通過 |
+| float-screen-20 | [float-screen-20.yaml](training/float-screen-20.yaml) | 通用 Float20 template；已由上列 run 具體化 |
+| float-main | [float-main.yaml](training/float-main.yaml) | 等使用者決策 |
 | float-extension | [float-extension.yaml](training/float-extension.yaml) | 等 late gate 與未 strip continuation checkpoint |
+| quant-qat-lite | [quant-qat-lite.yaml](training/quant-qat-lite.yaml) | 已建置但暫停，等候選重新核准／GPU |
 | quant-qat | [quant-qat.yaml](training/quant-qat.yaml) | 等 Float 決策、量化資格、GPU 授權 |
 
-這四份都是完整 templates，不需要自行合併 canonical、overlay 或 stage fragment。它們刻意分成：
+Float20只讀取 `configs/runs/full35-float-screen-20.yaml`；封存狀態只讀取
+`configs/runs/full35-c2-c3-auto-continuation.yaml`。兩者不需手動合併。`training/` 下的六份是
+通用模板與後續階段契約，刻意分成：
 
 - recipe：optimizer、LR、loss、augmentation、freeze、seed、task ratio 與 optimizer steps。
 - adjustable：batch、fraction、scale、cache、imgsz、device、workers、epochs、patience。
@@ -68,69 +85,75 @@ C3-P5 或 R1 YAML；它們必須等使用者看完第一輪結果後才可能加
 - transition：fresh 或真正 resume；extension 明確拒絕已 strip 的 stock last.pt／best.pt。
 - lineage：effective YAML 與所有 hashes 的要求。
 
-### source/value 是什麼
+### 為什麼 templates 仍有 source/value
 
-Winner 尚未交付前，本專案不能猜 upstream training recipe。每個值都保留來源：
+`configs/training/` 是可供未來 handoff revision 重用的通用契約，因此必須保留值的來源：
 
     optimizer:
       source: handoff
       value: null
 
-代表「handoff 一定要提供；現在 null 是刻意阻擋」。本地已確定的值會寫成：
-
-    fraction:
-      source: local
-      value: 1.0
-
-收到 handoff 後使用 effective-config 解析；若任何 null 沒有對應上游值就停止。輸出的 effective YAML
-會是具體、可保存 hash 的單一設定，不再需要理解 source/value。
+這表示解析 template 時 handoff 一定要提供該值，缺值就停止。本輪 Full35 handoff 已交付並驗收，
+所以可執行數字已直接寫進 `configs/runs/full35-float-screen-20.yaml`；實際排隊時不需要理解或修改
+`source/value`。`effective-config` 仍保留給未來完整 Float／extension template 使用。
 
 ## 常用參數如何調
 
-| 目的 | 正式鍵名 | Template 位置 | 允許值／提醒 |
-|---|---|---|---|
-| batch size | batch | adjustable.batch.value | 不要寫 batch_size |
-| 使用資料比例 | fraction | adjustable.fraction.value | 0 < fraction ≤ 1；只截取排序後 train 前段 |
-| 幾何縮放 augmentation | scale | adjustable.scale.value | 與 model_scale=m 無關 |
-| dataset cache | cache | adjustable.cache.value | false、ram、disk |
-| input size | imgsz | adjustable.imgsz.value | 會影響精度與記憶體 |
-| 裝置 | device | adjustable.device.value | 現在 CPU smoke 固定 cpu |
-| dataloader | workers | adjustable.workers.value | CPU smoke 是 0 |
-| 訓練預算 | epochs / patience | adjustable 對應欄位 | 正式值由 winner recipe 繼承 |
-| optimizer | optimizer | recipe.optimizer.value | 不得對單一候選不同 |
-| 初始／最終 LR | lr0 / lrf | recipe 對應欄位 | 不得用 CLI 偷改 |
-| nominal batch | nbs | recipe.nbs.value | 要和 physical batch 分開記錄 |
-| task sampling | task_ratio | recipe.task_ratio.value | 要以 optimizer steps/effective samples 比較 |
+Float20參數請改 [full35-float-screen-20.yaml](runs/full35-float-screen-20.yaml)；完整訓練、資格門檻、
+PTQ與QAT-lite參數請改
+[full35-c2-c3-auto-continuation.yaml](runs/full35-c2-c3-auto-continuation.yaml)。下面表格是Float20欄位；
+兩份closed schema都會拒絕拼錯、未知或與本輪公平性契約衝突的欄位。
 
-name、project、device、workers、cache 是 runtime allowlist。batch、fraction、scale、LR、optimizer、
-augmentation 或 loss 若要改，必須修改正式 YAML、更新 spec revision/hash，並讓所有候選共用；這是
-為了防止單一候選得到不同訓練條件，不是限制 YAML 的可調性。
+| 目的 | 正式 YAML 位置 | 目前值／提醒 |
+|---|---|---|
+| Detect logical batch | `training.batch.detect_logical` | 128；不是一次放進 GPU 的 physical batch |
+| Detect physical batch | `training.batch.detect_physical_microbatch` | 32；C0 probe OOM 時全矩陣改用 fallback 16 |
+| Pose train batch | `training.batch.pose_physical` | 16；只在 Pose=true 時使用 |
+| validation batch | `training.batch.validation_detect/pose` | 兩者固定16，沿用 Full35 OOM 經驗 |
+| 使用資料比例 | `training.fraction` | 固定1.0；20%已由 immutable manifest完成 |
+| 幾何縮放 | `training.scale` 與 `training.augmentation.*.scale` | 0.5；不是 model scale |
+| image cache | `training.cache` | false、true、ram；禁止 disk |
+| input size | `training.imgsz` | 本輪固定640 |
+| 裝置 | `training.device` | GPU 0；只由持鎖 queue 解鎖 |
+| dataloader | `training.workers.detect/pose` | 4／8，可依主機 I/O 同步調整 |
+| 訓練預算 | `training.epochs` | 20；四候選完全相同 |
+| optimizer／nominal batch | `training.optimizer`／`training.nbs` | MuSGD／64 |
+| LR groups | `training.learning_rates` | backbone、neck、heads 分開；MASF/attention 為0 |
+| loss／augmentation | `training.loss_overrides`／`training.augmentation` | Detect 與 Pose 分開列全 |
 
-fraction 不是 grouped split；BBAT5 搜尋必須使用獨立的 search dataset YAML。cache=true／ram 可能
-不是完全 deterministic，cache=disk 只允許寫入衍生資料，不能寫原始唯讀目錄。
+Ultralytics 的正式鍵名是 `batch`，不是 `batch_size`。logical 128 由 microbatch 與 gradient
+accumulation 實現；報告會同時保存 requested／effective physical batch。
 
-解析範例：
+`fraction` 不是隨機、分層或 grouped split。本輪20%樣本已鎖在 manifest，因此必須保持1.0；
+BBAT5 其他搜尋只能使用既有 grouped search YAML，不可再次抽樣。
 
-    $PY -m achitechure_2 effective-config --manifest /path/handoff.json --template configs/training/float-main.yaml --output artifacts/effective-configs/float-main.yaml
+`cache` 控制 image cache；label index 無論如何都由 adapter 寫到子專案 `runtime-cache/`，不會寫進
+COCO 或 immutable bbat5-v1。`disk` 不在正式 schema 中，避免 source-adjacent cache。
 
-這個命令只產生設定，不會開始訓練。
+所有 learning fields 都必須寫入正式 YAML、保存新 hash，並同時套用 C0～C3。queue CLI 不接受
+臨時覆寫 batch、fraction、scale、LR、optimizer、loss 或 augmentation；修改方法級契約時還必須先
+升級 [EXPERIMENT_SPEC.md](../EXPERIMENT_SPEC.md)。
 
 ## Dataset YAML
 
 | 檔案 | 角色 | 實際資料 |
 |---|---|---|
 | [coco2017.yaml](data/coco2017.yaml) | COCO80 Detect 主線 | /home/uxin/yolo/coco2017 |
+| [coco2017-screen-20.yaml](data/coco2017-screen-20.yaml) | COCO80 train-only 20%初篩 | 固定 manifests |
 | [bbat5-pose.yaml](data/bbat5-pose.yaml) | BBAT5 ball/bat Pose 主線 | derived/bbat5-v1/pose |
 | [bbat5-detect.yaml](data/bbat5-detect.yaml) | 2-class paired 診斷 | derived/bbat5-v1/detect |
+| [bbat5-pose-screen-20.yaml](data/bbat5-pose-screen-20.yaml) | grouped20% Pose 初篩 | 固定 manifest + search-val |
+| [bbat5-detect-screen-20.yaml](data/bbat5-detect-screen-20.yaml) | grouped20% paired 診斷 | 與 Pose 同 assignment |
 | [bbat5-pose-search.yaml](data/bbat5-pose-search.yaml) | formal-train-only Pose search | pose search lists |
 | [bbat5-detect-search.yaml](data/bbat5-detect-search.yaml) | formal-train-only paired diagnostic | detect search lists |
 
-BBAT5 Pose 與 Detect 共用同一 grouped assignment，test 明確為 null。可直接交給 Ultralytics 的
-formal/search dataset YAML 只保存在 `/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/`；
-本目錄的檔案是 architecture_2 契約 wrapper，不是第二份資料集。
+BBAT5 Pose 與 Detect 共用同一 grouped assignment，test 明確為 null。衍生目錄另有四份乾淨、
+可直接交給 Ultralytics 的 formal/search dataset YAML；Git 副本在
+[artifacts/datasets/bbat5-v1/configs](../artifacts/datasets/bbat5-v1/configs)。
 
-目前只有 BBAT5 有正式 train-only search config；COCO train-only search contract 尚未建立。因此
-這兩份 YAML 可用於 F1 threshold 與獲准的 BBAT5 小規模研究，不能宣稱已完成雙任務融合 recipe 搜尋。
+BBAT5 formal-train-only search YAML 繼續供 F1 threshold 與獲准的小規模研究。COCO 則新增專供
+architecture-screen-20-v1 的 train-only 20%／5,000 search-val contract；它只作架構初篩，不升格為
+一般超參數搜尋集，也不使用官方 val2017。
 
 ## Quantization YAML
 
@@ -138,13 +161,14 @@ formal/search dataset YAML 只保存在 `/home/uxin/yolo/original/pose/derived/b
 
 - Q0 fused FP32 reference。
 - Q1 W8A8 PTQ simulation。
-- Q2 W8A8 QAT simulation，必須有 GPU 授權。
+- Q2L W8A8 QAT-lite simulation：固定200 steps、observer前50 steps更新，只作相容性檢查。
+- Q2 完整 W8A8 QAT simulation，必須另有 GPU 授權。
 - Conv weight per-channel symmetric INT8。
 - activation per-tensor affine INT8。
 - custom HardwareFriendlyAttention/BinaryQK/PWL roots 排除。
 - simulation_only=true。
 
-C0 預設 eligible；其他候選保持 pending_user_decision。
+C0維持全域預設eligible；本次run的C2/C3未通過四項精度下降≤0.008 gate，且已封存不採用，因此不會執行Q0/Q1/Q2L；C1與正式Q2亦未執行。
 
 ## Schemas
 
@@ -155,6 +179,8 @@ schema 皆採 JSON Schema Draft 2020-12，並保存 x-spec-version 與 x-spec-sh
 - [training.schema.yaml](schema/training.schema.yaml)
 - [dataset.schema.yaml](schema/dataset.schema.yaml)
 - [quantization.schema.yaml](schema/quantization.schema.yaml)
+- [screen-run.schema.yaml](schema/screen-run.schema.yaml)
+- [continuation-run.schema.yaml](schema/continuation-run.schema.yaml)
 - [handoff.schema.yaml](schema/handoff.schema.yaml)
 
 本地 config-check 另外執行跨檔語意檢查，例如 C0–C3 唯一因素、COCO80/Pose2 類別、Pose opt-in、

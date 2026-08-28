@@ -1,0 +1,31 @@
+# 20% manifest 是 runtime screening View；canonical bbat5-v1 不變。
+schema_version: 3
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+kind: dataset
+project_metadata:
+  title_zh: BBAT5 v1 Pose 固定20%架構篩選
+  summary_zh: 從既有 search-train 依 .rf. 群組固定抽樣；沿用 search-val，不接觸 formal val。
+  task: pose
+  role: screening_pose
+  original_read_only: /home/uxin/yolo/original/pose/dataset
+  derived_version: bbat5-v1
+  runtime_view: architecture-screen-20-v1
+  source_scope: formal_train_only
+  formal_val_excluded: true
+  ultralytics_dataset_yaml: true
+path: /home/uxin/yolo/original/pose/derived/bbat5-v1/pose
+train: /home/uxin/yolo/yolo_achitechure/achitechure_2/artifacts/datasets/architecture-screen-20-v1/bbat5/pose-train.txt
+val: /home/uxin/yolo/original/pose/derived/bbat5-v1/pose/splits/search-val.txt
+test: null
+nc: 2
+names:
+  0: ball
+  1: bat
+kpt_shape: [2, 3]
+flip_idx: [0, 1]
+fliplr_policy: disabled_until_keypoint_mirror_semantics_confirmed
+group_key: prefix_before_.rf.
+split_seed: 0
+screening_fraction: 0.2
+screening_manifest: artifacts/datasets/architecture-screen-20-v1/screening-manifest.json

@@ -4,9 +4,9 @@
 
 ## 1. 結論摘要
 
-- Handoff revision：
-- yolo_combine winner：
-- Fusion kind：
+- Handoff revision：full35-final-j3-seed0-d67fb45c
+- yolo_combine winner：full35-j3-best-joint-seed0
+- Fusion kind：shared_dual_head
 - 實際 resolved candidates：
 - Detect 是否完成：
 - Pose 是否經使用者 opt-in 並完成：
@@ -46,8 +46,9 @@ protected／frozen path 證據。
 | C2 | | inner_n 2 → 1 | | | |
 | C3 | | 3x3_3x3 → 1x1_3x3 | | | |
 
-routed／partial-shared 時依實際 D-／P-／S- 候選展開。記錄 matched、missing、unexpected、
-shape-mismatch tensors；融合 topology、heads、MASF、BinaryQK、PWL attention 必須不變。
+本輪region固定為`shared-c3k2`，changed paths固定為`graph.model.6/8/13/19`。記錄
+matched、missing、unexpected、shape-mismatch tensors；融合topology、heads、MASF、BinaryQK、
+PWL attention必須不變，不加入routed／partial-shared候選。
 
 ## 4. 資料與公平性
 
@@ -57,6 +58,7 @@ shape-mismatch tensors；融合 topology、heads、MASF、BinaryQK、PWL attenti
 - BBAT5 version：bbat5-v1。
 - formal train／val：5,964／683 images。
 - search train／val：5,364／600 images，只取 formal train。
+- architecture-screen-20-v1：COCO train/search-val 23,657／5,000；BBAT5 train/search-val 1,073／600；screening manifest SHA256：。
 - group leakage：0。
 - patched negative coordinates：4。
 - test split：null。
@@ -64,6 +66,8 @@ shape-mismatch tensors；融合 topology、heads、MASF、BinaryQK、PWL attenti
 列出每個候選完全相同的 optimizer steps、validation events、seed、head seed、batch、fraction、
 scale、cache、imgsz、task ratio、augmentation 與 freeze policy。Runtime 的 device、workers、
 project、name、cache 差異需揭露但不得改變 learning budget。
+另列Detect logical128、selected physical32或fallback16、accumulation、Pose train16，以及
+Detect/Pose validation16；不可只寫一個含糊的batch欄位。
 
 ## 5. 精度與 F1
 
@@ -94,14 +98,15 @@ project、name、cache 差異需揭露但不得改變 learning budget。
 | C0 | ball | | | | | | | |
 | C0 | bat | | | | | | | |
 
-| Candidate | Fixed confidence threshold | Macro F1 | Micro F1 |
-|---|---:|---:|---:|
-| C0 | | | |
-| C1 | | | |
-| C2 | | | |
-| C3 | | | |
+| Candidate | Fixed confidence threshold | Macro F1 | Micro F1 | Micro F1 method |
+|---|---:|---:|---:|---|
+| C0 | | | | estimated_from_precision_recall_curves_and_supports |
+| C1 | | | | estimated_from_precision_recall_curves_and_supports |
+| C2 | | | | estimated_from_precision_recall_curves_and_supports |
+| C3 | | | | estimated_from_precision_recall_curves_and_supports |
 
-說明 AP50、AP50-95、mAP 與 F1 不可互相替代；附 metric exporter 與固定 threshold 證據。
+說明AP50、AP50-95、mAP與F1不可互相替代；附metric exporter與固定threshold證據，並明記
+Micro F1是由curves/supports估算，不是逐預測exact重新配對。
 
 ## 6. 成本
 
@@ -127,19 +132,20 @@ C3-P5、R1、e=0.25 或因素組合。附 Pareto front 與被支配理由。
 - 使用者可接受的精度／成本取捨：
 - 是否需要補跑 Pose：
 - 是否新增未來候選：
-- 核准進 Q1／Q2 的候選：
+- 核准進 Q1／Q2L／Q2 的候選：
 
 此節只能在使用者看完完整結果後更新。
 
 ## 9. 量化
 
-對每個已核准 candidate 分開記錄 Q0 Float、Q1 PTQ simulation、Q2 QAT simulation：
+對每個已核准 candidate 分開記錄 Q0 Float、Q1 PTQ simulation、Q2L QAT-lite simulation、Q2完整QAT simulation：
 
 | Candidate | Stage | mAP／F1 gap | Quantized nodes | Excluded custom nodes | simulation_only |
 |---|---|---:|---|---|---|
 | | | | | | true |
 
-不得以 simulation latency 宣稱真實 INT8 deployment。Q2 必須另有 GPU 授權。
+不得以 simulation latency 宣稱真實 INT8 deployment。Q2L／Q2 都必須另有 GPU 執行授權；Q2L
+固定200 steps且只作相容性檢查。
 
 ## 10. 限制與下一步
 
