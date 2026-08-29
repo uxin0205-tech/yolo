@@ -1,1 +1,4 @@
 yolo_achitechure/achitechure_1/final/weights/**/*.pt filter=lfs diff=lfs merge=lfs -text
+# Preserve checksummed generated activation evidence byte-for-byte.
+yolo_quantize/artifacts/reports/activation-smoke-v2-summary.csv -text -diff
+yolo_quantize/deliverables/activation-preselection-teacher-v1.svg -text -diff

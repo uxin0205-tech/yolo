@@ -51,6 +51,11 @@ Full35 activation 数学、完整 COCO2017 + Canonical BBAT5 v1 实验、可重�
 量化交接见 [`yolo_activation/`](yolo_activation/README.md)；最终逐项分析见
 [2026-08-29 收尾报告](yolo_activation/reports/full35-activation-final-analysis.md)。
 
+Full35 activation-output A3至A8量化預選、老師版圖表、30格source evidence與SD4公平實驗設計見
+[`yolo_quantize/`](yolo_quantize/README.md)；主要論證見
+[2026-08-29 activation預選報告](yolo_quantize/docs/reports/2026-08-29-activation-preselection-report.md)。
+這是無訓練proxy先行發布，不是完整mAP、QAT或硬體結果。
+
 YOLO26m Binary Q/K＋Bit-True PWL 的完整可攜 workspace、程式碼、權重與文件見
 [`yolo_attention_final/final/`](yolo_attention_final/final/README.md)；本次 GitHub 發布過程見
 [2026-08-27 工作紀錄](docs/worklogs/2026-08-27-yolo-attention-final-github-publication.md)。

@@ -1,0 +1,91 @@
+schema_version: 1
+publication_id: full35-activation-preselection-teacher-v1
+date: '2026-08-29'
+git:
+  base: origin/main
+  base_commit: df1083219e709f0aefdc05780746d2485ee2c471
+  branch: codex/activation-preselection-0829
+  commit_subject: 5090 Profile 0829
+scope: activation-output A3-A8 smoke、預選論證、老師版圖表及重建證據
+formal_training: false
+gpu_work_during_publication: false
+data_contract:
+  detect: COCO2017
+  pose: Canonical BBAT5 v1
+  bbat5_assignment_changed: false
+included:
+- 30格activation smoke JSON與CSV
+- smoke與preselection machine-readable契約
+- 完整中文報告與工作紀錄
+- 老師版PNG、SVG與PDF
+- 圖表重建腳本與資料夾README
+excluded:
+- checkpoint與weights
+- dataset副本與cache
+- PTQ、W6、QAT與正式訓練產物
+- SD4量測結果（尚未執行）
+- raw GPU smoke runner與外部Full35／yolo_activation bundle
+files:
+- path: README.md
+  bytes: 4251
+  sha256: 91085783394ba99cde6a72e86298b6b85c744ccc6389310127c14a38740766a2
+- path: artifacts/reports/README.md
+  bytes: 535
+  sha256: 1e7563413bfb757e0795987f8451ca936ad3f39d42eb0e9acb65b2ec15267cbd
+- path: artifacts/reports/activation-smoke-v2-summary.csv
+  bytes: 8694
+  sha256: e5d76871d3119e681cdcb7707dc2c4a6a24ad3e35c54815c666c6c72a2f51ab6
+- path: artifacts/reports/activation-smoke-v2.json
+  bytes: 1058343
+  sha256: 3c9301adaa1937f50bdd0c059f7d8000ea4699ce229e98c8ddb387651340c1f1
+- path: configs/experiments/README.md
+  bytes: 442
+  sha256: c587648209bdbff1b555f3ca448bf4c67b97ccddbb2ebde303a07ac4d9b1a55f
+- path: configs/experiments/activation-preselection-v1.yaml
+  bytes: 2752
+  sha256: db6117aea9b3d5bdb02ca809e3a78c98d8df35919f9b12e2967a8ec5188e9c98
+- path: configs/experiments/activation-smoke-v2.yaml
+  bytes: 2145
+  sha256: 63bffa50d49078f777fd497f120c18777271525f1d3d5f9cf2936b382071cb1b
+- path: deliverables/README.md
+  bytes: 876
+  sha256: 825f36fd6cc1c123ebbdfcaa39f1b8b8d260e3357ab1ad4caf2527909a2040ae
+- path: deliverables/activation-preselection-teacher-v1.pdf
+  bytes: 119989
+  sha256: 8b1ca9e44cf1679d924cfe08197782ce575d2c9d1c2ee41965b22e791002a551
+- path: deliverables/activation-preselection-teacher-v1.png
+  bytes: 505835
+  sha256: 3bfe999ce0fd9ed2fde79500cc03a5484d3459647ced29a28ae58023d5c50684
+- path: deliverables/activation-preselection-teacher-v1.svg
+  bytes: 304305
+  sha256: 82ea786c5be8558659a790f3a85ee834a48bb12f8b77e191ddbe15459b7ec103
+- path: docs/reports/2026-08-29-activation-output-smoke-v2.md
+  bytes: 6148
+  sha256: 2d2292f6a819aadbe579282ab349d3b7764a3ac6b15bf79d7306748a6c7bb3d6
+- path: docs/reports/2026-08-29-activation-preselection-report.md
+  bytes: 9585
+  sha256: 89c968ecc47f32f59da0d325f617549de3871f07d20038ce0df5f228bddf0709
+- path: docs/reports/README.md
+  bytes: 491
+  sha256: 4541d4d191856af4d2145d916082f38fac36c1847af4cbc0ec4553081479e733
+- path: docs/worklogs/2026-08-29-activation-coupled-smoke-matrix.md
+  bytes: 5319
+  sha256: e6fba393edd76e2090aba37a61475f9eaa8dbcbdd4279e24802ae24af8fba66b
+- path: docs/worklogs/2026-08-29-activation-preselection-figure.md
+  bytes: 4026
+  sha256: 5d7f07a64ec69154fe39406985edaed6e598f4692abeea5b3a0842796405afd7
+- path: docs/worklogs/2026-08-29-activation-preselection-github-publication.md
+  bytes: 4007
+  sha256: 333d26437d05d99dcff027d9e53f014c54b21d875b42269967ed728ae69f8677
+- path: docs/worklogs/README.md
+  bytes: 531
+  sha256: 3ba74a6b7aba0f7987ebb7f477db5f20a6bd8d3ce78c6956c762c7c6bfd0c8e4
+- path: requirements-report.txt
+  bytes: 19
+  sha256: 48ee9dbf164ec7438470efa7b3847688dc1010a88d020a7777ace4934c1fcace
+- path: scripts/README.md
+  bytes: 492
+  sha256: 6b3e9802177aecf95d489701a366339e24aebbfad0e3eb57cb3b63f725fe90e9
+- path: scripts/render_activation_preselection.py
+  bytes: 11165
+  sha256: ee1f7d3fa80a33451faeebdfa61722ed8eb74fe658e6dfb8d2f7b7af4cd2bbd4
