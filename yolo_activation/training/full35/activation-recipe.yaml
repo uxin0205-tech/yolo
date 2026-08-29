@@ -1,0 +1,149 @@
+schema_version: 1
+experiment_id: full35-sipa-bcsp-v1
+release_root: /home/uxin/yolo/yolo_combine/final/full35
+joint_config: /home/uxin/yolo/yolo_combine/final/full35/configs/joint.yaml
+region_rules: configs/region-rules.yaml
+manifest: contracts/activation-manifest.yaml
+run_root: ../../artifacts/runs/full35
+baseline:
+  checkpoint: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt
+  checkpoint_sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+  metrics_contract: contracts/accepted-full35-baseline.yaml
+  metrics_contract_sha256: 821f2d5b789911f5bc3368b11d0aca168b36ce73b0826994a6be4264419c6545
+  full_resume_checkpoint: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/full-resume/best_joint.pt
+  full_resume_sha256: 26e648432388060cb75a67875d956a022114e36f731ff9b5de04953e053b413d
+  release_manifest_sha256: cb6c94e085c06df503da33200a3ad736b71382f88bc22928767ca0235f728fa5
+data:
+  fraction: 1.0
+  resampling: false
+  coco_detect: /home/uxin/yolo/coco2017.yaml
+  bbat5_registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+  bbat5_pose: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  bbat5_detect: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml
+  imgsz: 640
+batching:
+  detect_logical_batch: 128
+  detect_physical_microbatch: 32
+  detect_logical_batches_per_macro: 2
+  pose_physical_batch: 16
+  pose_batches_per_macro: 1
+  detect_val_batch: 32
+  pose_val_batch: 16
+optimizer:
+  name: AdamW
+  weight_decay: 0.00027
+  beta1: 0.948
+  beta2: 0.999
+  gradient_clip_norm: 10.0
+  amp: true
+  warmup_start_factor: 0.1
+  cosine_final_lr_factor: 0.5
+  learning_rates:
+    backbone: 0.0000038
+    neck: 0.000019
+    masf: 0.000038
+    attention: 0.0000005
+    detect_head: 0.00005
+    pose_head: 0.00005
+comparison:
+  accuracy_reference: silu
+  uniform_candidates: [hardswish, relu, qsilu_pq, poly_shift, poly_quality]
+  recovery_candidates: [hardswish, qsilu_pq, poly_shift, poly_quality]
+  region_search_candidates: [poly_shift]
+  primary_seed: 1
+  optional_seed: 2
+  maximum_map50_95_drop: 0.015
+  fusion_safety_gate: 0.08
+  max_mixed_jobs: 8
+  max_finalists: 2
+  finalist_extension:
+    enabled: true
+    trigger: best_joint_in_last_3_epochs_and_curve_still_improving
+    extra_epochs: 10
+    maximum_epochs: 30
+    require_matched_silu_control: true
+phases:
+  baseline_reproduction:
+    mode: validation
+    epochs: 0
+    seed: 0
+  activation_profile:
+    mode: profiling
+    epochs: 0
+    seed: 1
+    full_training_split: true
+  region_zero_shot_sensitivity:
+    mode: validation
+    epochs: 0
+    seed: 1
+    full_validation_split: true
+  uniform_zero_shot:
+    mode: validation
+    epochs: 0
+    seed: 1
+  short_recovery:
+    mode: recovery
+    epochs: 10
+    patience: 0
+    warmup_epochs: 1
+    seed: 1
+    learning_rate_scale: 0.1
+  region_sensitivity:
+    mode: recovery
+    epochs: 10
+    patience: 0
+    warmup_epochs: 1
+    seed: 1
+    learning_rate_scale: 0.1
+  policy_search:
+    mode: recovery
+    epochs: 10
+    patience: 0
+    warmup_epochs: 1
+    seed: 1
+    learning_rate_scale: 0.1
+  finalist_seed1:
+    mode: recovery
+    epochs: 20
+    patience: 5
+    warmup_epochs: 3
+    seed: 1
+    learning_rate_scale: 1.0
+  finalist_seed2:
+    mode: recovery
+    epochs: 20
+    patience: 5
+    warmup_epochs: 3
+    seed: 2
+    learning_rate_scale: 1.0
+  claim_ablation:
+    mode: recovery
+    epochs: 20
+    patience: 5
+    warmup_epochs: 3
+    seed: 1
+    learning_rate_scale: 1.0
+  ptq:
+    mode: calibration
+    epochs: 0
+    seed: 1
+    full_training_split: true
+  qat_if_needed:
+    mode: qat
+    epochs: 10
+    patience: 0
+    warmup_epochs: 1
+    seed: 1
+    learning_rate_scale: 0.5
+  board_validation:
+    mode: benchmark
+    epochs: 0
+    seed: 1
+confirmatory_from_source:
+  enabled: false
+  reason: 只有 finalist recovery 通過後才啟動，避免先浪費完整 128-epoch 預算。
+  stages:
+    - {name: j0, epochs: 8, patience: 0, warmup_epochs: 1}
+    - {name: j1, epochs: 20, patience: 8, warmup_epochs: 1}
+    - {name: j2, epochs: 80, patience: 17, warmup_epochs: 1}
+    - {name: j3, epochs: 20, patience: 5, warmup_epochs: 3}

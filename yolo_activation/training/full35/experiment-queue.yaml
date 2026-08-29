@@ -1,0 +1,237 @@
+schema_version: 1
+queue_id: full35-activation-seed1-v1
+execution:
+  mode: serial
+  device: "0"
+  monitor: scripts/full35_monitor.py
+  verbose_logs: artifacts/runs/full35/queue/logs
+  state: artifacts/runs/full35/queue/queue-state.json
+  maximum_concurrent_gpu_jobs: 1
+accuracy_gate:
+  baseline: contracts/accepted-full35-baseline.yaml
+  maximum_map50_95_drop: 0.015
+  metrics:
+    - coco/box/map50_95
+    - coco/person/box/map50_95
+    - bbat/box/map50_95
+    - bbat/pose/map50_95
+    - bbat/ball/box/map50_95
+    - bbat/bat/box/map50_95
+    - bbat/ball/pose/map50_95
+    - bbat/bat/pose/map50_95
+completed_prerequisites:
+  - baseline-reproduction
+  - full-training-profile
+  - region-zero-shot-sensitivity
+  - zero-shot-uniform-relu
+  - zero-shot-uniform-hardswish
+  - zero-shot-uniform-poly-shift
+  - zero-shot-uniform-poly-quality
+  - short-recovery-uniform-silu-control
+jobs:
+  - id: zero-shot-uniform-qsilu-pq
+    kind: validate
+    activation: qsilu_pq
+    run_name: zero-shot-uniform-qsilu-pq-seed1
+    backend: both
+    depends_on: []
+    require_dependency_gate: false
+  - id: short-recovery-uniform-qsilu-pq
+    kind: train
+    activation: qsilu_pq
+    phase: short_recovery
+    detect_physical_microbatch: 16
+    run_name: short-recovery-v2-lr01-uniform-qsilu-pq-seed1
+    depends_on: [zero-shot-uniform-qsilu-pq]
+    require_dependency_gate: true
+  - id: short-recovery-uniform-hardswish
+    kind: train
+    activation: hardswish
+    phase: short_recovery
+    run_name: short-recovery-v2-lr01-uniform-hardswish-seed1
+    depends_on: []
+    require_dependency_gate: false
+  - id: short-recovery-uniform-poly-shift
+    kind: train
+    activation: poly_shift
+    phase: short_recovery
+    detect_physical_microbatch: 16
+    run_name: short-recovery-v2-lr01-uniform-poly-shift-seed1
+    depends_on: []
+    require_dependency_gate: false
+  - id: short-recovery-uniform-poly-quality
+    kind: train
+    activation: poly_quality
+    phase: short_recovery
+    detect_physical_microbatch: 16
+    run_name: short-recovery-v2-lr01-uniform-poly-quality-seed1
+    depends_on: []
+    require_dependency_gate: false
+  - id: region-recovery-backbone-attention
+    kind: train
+    activation: silu
+    regions: [backbone_attention=poly_shift]
+    phase: region_sensitivity
+    run_name: region-recovery-poly-shift-backbone-attention-seed1
+    depends_on: [short-recovery-uniform-poly-shift]
+    require_dependency_gate: true
+  - id: region-recovery-backbone-deep
+    kind: train
+    activation: silu
+    regions: [backbone_deep=poly_shift]
+    phase: region_sensitivity
+    run_name: region-recovery-poly-shift-backbone-deep-seed1
+    depends_on: [short-recovery-uniform-poly-shift]
+    require_dependency_gate: true
+  - id: region-recovery-backbone-early
+    kind: train
+    activation: silu
+    regions: [backbone_early=poly_shift]
+    phase: region_sensitivity
+    run_name: region-recovery-poly-shift-backbone-early-seed1
+    depends_on: [short-recovery-uniform-poly-shift]
+    require_dependency_gate: true
+  - id: region-recovery-masf
+    kind: train
+    activation: silu
+    regions: [masf=poly_shift]
+    phase: region_sensitivity
+    run_name: region-recovery-poly-shift-masf-seed1
+    depends_on: [short-recovery-uniform-poly-shift]
+    require_dependency_gate: true
+  - id: region-recovery-neck-attention
+    kind: train
+    activation: silu
+    regions: [neck_attention=poly_shift]
+    phase: region_sensitivity
+    run_name: region-recovery-poly-shift-neck-attention-seed1
+    depends_on: [short-recovery-uniform-poly-shift]
+    require_dependency_gate: true
+  - id: region-recovery-detect-one2one
+    kind: train
+    activation: silu
+    regions: [detect_one2one=poly_shift]
+    phase: region_sensitivity
+    run_name: region-recovery-poly-shift-detect-one2one-seed1
+    depends_on: [short-recovery-uniform-poly-shift]
+    require_dependency_gate: true
+  - id: region-recovery-neck
+    kind: train
+    activation: silu
+    regions: [neck=poly_shift]
+    phase: region_sensitivity
+    run_name: region-recovery-poly-shift-neck-seed1
+    depends_on: [short-recovery-uniform-poly-shift]
+    require_dependency_gate: true
+  - id: region-recovery-pose-one2one
+    kind: train
+    activation: silu
+    regions: [pose_one2one=poly_shift]
+    phase: region_sensitivity
+    run_name: region-recovery-poly-shift-pose-one2one-seed1
+    depends_on: [short-recovery-uniform-poly-shift]
+    require_dependency_gate: true
+  - id: mixed-low-risk-small
+    kind: train
+    activation: silu
+    regions:
+      - backbone_attention=poly_shift
+      - masf=poly_shift
+      - neck_attention=poly_shift
+    phase: policy_search
+    run_name: mixed-low-risk-small-seed1
+    depends_on:
+      - region-recovery-backbone-attention
+      - region-recovery-masf
+      - region-recovery-neck-attention
+    require_dependency_gate: true
+  - id: mixed-low-risk-deep
+    kind: train
+    activation: silu
+    regions:
+      - backbone_attention=poly_shift
+      - backbone_deep=poly_shift
+      - masf=poly_shift
+      - neck_attention=poly_shift
+    phase: policy_search
+    run_name: mixed-low-risk-deep-seed1
+    depends_on:
+      - region-recovery-backbone-attention
+      - region-recovery-backbone-deep
+      - region-recovery-masf
+      - region-recovery-neck-attention
+    require_dependency_gate: true
+  - id: mixed-early-only
+    kind: train
+    activation: silu
+    regions: [backbone_early=poly_shift]
+    phase: policy_search
+    run_name: mixed-early-only-seed1
+    depends_on: [region-recovery-backbone-early]
+    require_dependency_gate: true
+  - id: mixed-early-low-risk
+    kind: train
+    activation: silu
+    regions:
+      - backbone_attention=poly_shift
+      - backbone_early=poly_shift
+      - masf=poly_shift
+      - neck_attention=poly_shift
+    phase: policy_search
+    run_name: mixed-early-low-risk-seed1
+    depends_on:
+      - region-recovery-backbone-attention
+      - region-recovery-backbone-early
+      - region-recovery-masf
+      - region-recovery-neck-attention
+    require_dependency_gate: true
+  - id: mixed-shared-hardware-extreme
+    kind: train
+    activation: silu
+    regions:
+      - backbone_attention=poly_shift
+      - backbone_deep=poly_shift
+      - backbone_early=poly_shift
+      - masf=poly_shift
+      - neck_attention=poly_shift
+    phase: policy_search
+    run_name: mixed-shared-hardware-extreme-seed1
+    depends_on:
+      - region-recovery-backbone-attention
+      - region-recovery-backbone-deep
+      - region-recovery-backbone-early
+      - region-recovery-masf
+      - region-recovery-neck-attention
+    require_dependency_gate: true
+  - id: mixed-detect-hardware-extreme
+    kind: train
+    activation: silu
+    regions:
+      - backbone_attention=poly_shift
+      - backbone_deep=poly_shift
+      - backbone_early=poly_shift
+      - detect_one2one=poly_shift
+      - masf=poly_shift
+      - neck_attention=poly_shift
+    phase: policy_search
+    run_name: mixed-detect-hardware-extreme-seed1
+    depends_on:
+      - region-recovery-backbone-attention
+      - region-recovery-backbone-deep
+      - region-recovery-backbone-early
+      - region-recovery-detect-one2one
+      - region-recovery-masf
+      - region-recovery-neck-attention
+    require_dependency_gate: true
+conditional_tail:
+  adaptive_policy_slots: 2
+  finalist_selection:
+    maximum: 2
+    roles: [accuracy_extreme, hardware_extreme]
+  finalist_seed1: {epochs: 20, patience: 5, warmup_epochs: 3}
+  finalist_seed2: {optional: true, epochs: 20, patience: 5, warmup_epochs: 3}
+  extension:
+    trigger: best_joint_in_last_3_epochs_and_curve_still_improving
+    extra_epochs: 10
+    maximum_epochs: 30
+  post_training: [ptq, qat_if_needed, board_validation, final_report]

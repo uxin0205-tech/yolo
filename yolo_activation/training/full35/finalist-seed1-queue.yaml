@@ -1,0 +1,53 @@
+schema_version: 1
+queue_id: full35-finalist-seed1-v1
+execution:
+  mode: serial
+  device: "0"
+  monitor: scripts/full35_monitor.py
+  verbose_logs: artifacts/runs/full35/queue/finalist-seed1/logs
+  state: artifacts/runs/full35/queue/finalist-seed1/queue-state.json
+  maximum_concurrent_gpu_jobs: 1
+accuracy_gate:
+  baseline: contracts/accepted-full35-baseline.yaml
+  maximum_map50_95_drop: 0.015
+  metrics:
+    - coco/box/map50_95
+    - coco/person/box/map50_95
+    - bbat/box/map50_95
+    - bbat/pose/map50_95
+    - bbat/ball/box/map50_95
+    - bbat/bat/box/map50_95
+    - bbat/ball/pose/map50_95
+    - bbat/bat/pose/map50_95
+completed_prerequisites:
+  - full35-activation-seed1-v1-static-complete
+  - short-recovery-uniform-qsilu-pq-gate-passed
+selection:
+  maximum_finalists: 2
+  selected:
+    - activation: qsilu_pq
+      roles: [accuracy_extreme, hardware_extreme]
+      reason: 唯一通過 uniform short-recovery 八項 hard gate 的非 SiLU 候選。
+  excluded:
+    - {activation: hardswish, reason: short_recovery_gate_failed}
+    - {activation: poly_shift, reason: short_recovery_gate_failed}
+    - {activation: poly_quality, reason: short_recovery_gate_failed}
+jobs:
+  - id: finalist-seed1-silu-control
+    kind: train
+    activation: silu
+    phase: finalist_seed1
+    metric_selection: best_joint
+    detect_physical_microbatch: 32
+    run_name: finalist-seed1-uniform-silu-seed1
+    depends_on: []
+    require_dependency_gate: false
+  - id: finalist-seed1-qsilu-pq
+    kind: train
+    activation: qsilu_pq
+    phase: finalist_seed1
+    metric_selection: best_joint
+    detect_physical_microbatch: 16
+    run_name: finalist-seed1-uniform-qsilu-pq-seed1
+    depends_on: [finalist-seed1-silu-control]
+    require_dependency_gate: false

@@ -1,0 +1,1138 @@
+{
+  "baseline": {
+    "checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+    "id": "full35-j3-best-joint-bittrue-epoch58",
+    "metrics": {
+      "bbat/ball/box/map50_95": 0.5074370361873287,
+      "bbat/ball/pose/map50_95": 0.8599087151917765,
+      "bbat/bat/box/map50_95": 0.7526340073268026,
+      "bbat/bat/pose/map50_95": 0.9475256330341134,
+      "bbat/box/map50_95": 0.6300355217570656,
+      "bbat/pose/map50_95": 0.9037171741129448,
+      "coco/box/map50_95": 0.49802233647092214,
+      "coco/person/box/map50_95": 0.6203814884224489
+    }
+  },
+  "data": {
+    "bbat5_formal_train_images": 5964,
+    "bbat5_formal_val_images": 683,
+    "bbat5_version": "canonical bbat5-v1",
+    "coco_train_images": 118287,
+    "coco_val_images": 5000,
+    "fraction": 1.0,
+    "resampling": false
+  },
+  "experiment_id": "full35-sipa-bcsp-v1",
+  "finalist_queue": {
+    "completed_results": [
+      {
+        "deltas": {
+          "bbat/ball/box/map50_95": -0.012871507949098415,
+          "bbat/ball/pose/map50_95": -0.004738949063589404,
+          "bbat/bat/box/map50_95": -0.007959927113398657,
+          "bbat/bat/pose/map50_95": -0.0028434078363280824,
+          "bbat/box/map50_95": -0.01041571753124837,
+          "bbat/pose/map50_95": -0.0037911784499586876,
+          "coco/box/map50_95": -0.008334306128126412,
+          "coco/person/box/map50_95": -0.0028015571382703497
+        },
+        "failed_metrics": [],
+        "id": "finalist-seed1-silu-control",
+        "metrics": {
+          "bbat/ball/box/map50_95": 0.4945655282382303,
+          "bbat/ball/pose/map50_95": 0.8551697661281871,
+          "bbat/bat/box/map50_95": 0.744674080213404,
+          "bbat/bat/pose/map50_95": 0.9446822251977853,
+          "bbat/box/map50_95": 0.6196198042258172,
+          "bbat/pose/map50_95": 0.8999259956629861,
+          "coco/box/map50_95": 0.48968803034279573,
+          "coco/person/box/map50_95": 0.6175799312841785
+        },
+        "passed": true,
+        "run": "finalist-seed1-uniform-silu-seed1",
+        "status": "completed",
+        "worst_delta": -0.012871507949098415
+      }
+    ],
+    "counts": {
+      "blocked": 0,
+      "completed": 1,
+      "pending": 1
+    },
+    "provisional_stopped_results": [
+      {
+        "completion_marker": false,
+        "deltas": {
+          "bbat/ball/box/map50_95": -0.01596629449486242,
+          "bbat/ball/pose/map50_95": -0.014353782640705304,
+          "bbat/bat/box/map50_95": -0.003059983644483899,
+          "bbat/bat/pose/map50_95": 0.00242939563468203,
+          "bbat/box/map50_95": -0.009513139069672993,
+          "bbat/pose/map50_95": -0.005962193503011526,
+          "coco/box/map50_95": -0.003773846718476137,
+          "coco/person/box/map50_95": -0.0011975243830033566
+        },
+        "failed_metrics": [
+          "bbat/ball/box/map50_95"
+        ],
+        "id": "finalist-seed1-qsilu-pq",
+        "metrics": {
+          "bbat/ball/box/map50_95": 0.4914707416924663,
+          "bbat/ball/pose/map50_95": 0.8455549325510712,
+          "bbat/bat/box/map50_95": 0.7495740236823187,
+          "bbat/bat/pose/map50_95": 0.9499550286687954,
+          "bbat/box/map50_95": 0.6205223826873926,
+          "bbat/pose/map50_95": 0.8977549806099333,
+          "coco/box/map50_95": 0.494248489752446,
+          "coco/person/box/map50_95": 0.6191839640394455
+        },
+        "passed": false,
+        "publish_as_final": false,
+        "run": "finalist-seed1-uniform-qsilu-pq-seed1",
+        "score_best_joint": 0.7058929595398302,
+        "status": "stopped_by_user_after_epoch_1_and_epoch_2_macro_106",
+        "worst_delta": -0.01596629449486242
+      }
+    ]
+  },
+  "physical_batch_probes": [
+    {
+      "batch": 128,
+      "free_mib": 326.31,
+      "next_allocation_mib": 400,
+      "process_gib": 30.66,
+      "result": "oom_first_forward"
+    },
+    {
+      "batch": 64,
+      "free_mib": 400.31,
+      "next_allocation_mib": 400,
+      "process_gib": 30.59,
+      "result": "oom_first_forward"
+    },
+    {
+      "batch": 32,
+      "free_mib": 62.31,
+      "next_allocation_mib": 100,
+      "process_gib": 30.92,
+      "result": "oom_first_forward"
+    },
+    {
+      "batch": 16,
+      "result": "stable_full_training"
+    }
+  ],
+  "poly_shift_region_zero_shot": {
+    "activation": "poly_shift",
+    "baseline": {
+      "bbat/box/map50_95": 0.6300355217570656,
+      "bbat/pose/map50_95": 0.9037171741129448,
+      "coco/box/map50_95": 0.49802233647092214
+    },
+    "checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+    "checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+    "data_fraction": 1.0,
+    "joint_config": "/home/uxin/yolo/yolo_combine/final/full35/configs/joint.yaml",
+    "regions_completed": 11,
+    "regions_requested": [
+      "backbone_attention",
+      "backbone_deep",
+      "backbone_early",
+      "detect_one2many",
+      "detect_one2one",
+      "masf",
+      "neck",
+      "neck_attention",
+      "pose_flow",
+      "pose_one2many",
+      "pose_one2one"
+    ],
+    "resampling": false,
+    "rows": [
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 3,
+        "deltas": {
+          "bbat/box/map50_95": -0.0007753700752458625,
+          "bbat/pose/map50_95": 0.0005705594228470057,
+          "coco/box/map50_95": -0.0002283552654583354
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6292601516818197,
+          "bbat/pose/map50_95": 0.9042877335357918,
+          "coco/box/map50_95": 0.4977939812054638
+        },
+        "region": "backbone_attention",
+        "run_name": "sensitivity-zero-shot-poly_shift-backbone_attention-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 21,
+        "deltas": {
+          "bbat/box/map50_95": -0.0012473251639476546,
+          "bbat/pose/map50_95": -0.001273248335299626,
+          "coco/box/map50_95": -0.0011905640329827882
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6287881965931179,
+          "bbat/pose/map50_95": 0.9024439257776452,
+          "coco/box/map50_95": 0.49683177243793936
+        },
+        "region": "backbone_deep",
+        "run_name": "sensitivity-zero-shot-poly_shift-backbone_deep-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 21,
+        "deltas": {
+          "bbat/box/map50_95": 0.00046466800798738994,
+          "bbat/pose/map50_95": -0.0025199738321181053,
+          "coco/box/map50_95": 0.00025495008368514593
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.630500189765053,
+          "bbat/pose/map50_95": 0.9011972002808267,
+          "coco/box/map50_95": 0.4982772865546073
+        },
+        "region": "backbone_early",
+        "run_name": "sensitivity-zero-shot-poly_shift-backbone_early-seed1",
+        "status": "reused"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 18,
+        "deltas": {
+          "bbat/box/map50_95": 0.0,
+          "bbat/pose/map50_95": 0.0,
+          "coco/box/map50_95": 0.0
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6300355217570656,
+          "bbat/pose/map50_95": 0.9037171741129448,
+          "coco/box/map50_95": 0.49802233647092214
+        },
+        "region": "detect_one2many",
+        "run_name": "sensitivity-zero-shot-poly_shift-detect_one2many-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 18,
+        "deltas": {
+          "bbat/box/map50_95": 0.0,
+          "bbat/pose/map50_95": 0.0,
+          "coco/box/map50_95": -0.0012195755044599466
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6300355217570656,
+          "bbat/pose/map50_95": 0.9037171741129448,
+          "coco/box/map50_95": 0.4968027609664622
+        },
+        "region": "detect_one2one",
+        "run_name": "sensitivity-zero-shot-poly_shift-detect_one2one-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 3,
+        "deltas": {
+          "bbat/box/map50_95": 0.00020230177048896625,
+          "bbat/pose/map50_95": -0.000331651297515001,
+          "coco/box/map50_95": -6.499126561643198e-06
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6302378235275545,
+          "bbat/pose/map50_95": 0.9033855228154298,
+          "coco/box/map50_95": 0.4980158373443605
+        },
+        "region": "masf",
+        "run_name": "sensitivity-zero-shot-poly_shift-masf-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 33,
+        "deltas": {
+          "bbat/box/map50_95": -0.0030982649722240962,
+          "bbat/pose/map50_95": -0.007104090637956029,
+          "coco/box/map50_95": -0.0009336044977545366
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6269372567848415,
+          "bbat/pose/map50_95": 0.8966130834749888,
+          "coco/box/map50_95": 0.4970887319731676
+        },
+        "region": "neck",
+        "run_name": "sensitivity-zero-shot-poly_shift-neck-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 1,
+        "deltas": {
+          "bbat/box/map50_95": -4.4947511994353206e-05,
+          "bbat/pose/map50_95": -1.2625227384654991e-06,
+          "coco/box/map50_95": -7.497351258345386e-05
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6299905742450712,
+          "bbat/pose/map50_95": 0.9037159115902064,
+          "coco/box/map50_95": 0.4979473629583387
+        },
+        "region": "neck_attention",
+        "run_name": "sensitivity-zero-shot-poly_shift-neck_attention-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 24,
+        "deltas": {
+          "bbat/box/map50_95": 0.0,
+          "bbat/pose/map50_95": 0.0,
+          "coco/box/map50_95": 0.0
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6300355217570656,
+          "bbat/pose/map50_95": 0.9037171741129448,
+          "coco/box/map50_95": 0.49802233647092214
+        },
+        "region": "pose_flow",
+        "run_name": "sensitivity-zero-shot-poly_shift-pose_flow-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 24,
+        "deltas": {
+          "bbat/box/map50_95": 0.0,
+          "bbat/pose/map50_95": 0.0,
+          "coco/box/map50_95": 0.0
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6300355217570656,
+          "bbat/pose/map50_95": 0.9037171741129448,
+          "coco/box/map50_95": 0.49802233647092214
+        },
+        "region": "pose_one2many",
+        "run_name": "sensitivity-zero-shot-poly_shift-pose_one2many-seed1",
+        "status": "completed"
+      },
+      {
+        "activation": "poly_shift",
+        "changed_site_count": 24,
+        "deltas": {
+          "bbat/box/map50_95": -0.012351601521622957,
+          "bbat/pose/map50_95": -0.0001414368446625014,
+          "coco/box/map50_95": 0.0
+        },
+        "metrics": {
+          "bbat/box/map50_95": 0.6176839202354426,
+          "bbat/pose/map50_95": 0.9035757372682823,
+          "coco/box/map50_95": 0.49802233647092214
+        },
+        "region": "pose_one2one",
+        "run_name": "sensitivity-zero-shot-poly_shift-pose_one2one-seed1",
+        "status": "completed"
+      }
+    ],
+    "schema_version": 1,
+    "selection_backend": "bittrue"
+  },
+  "profile": {
+    "checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+    "joint_config": "/home/uxin/yolo/yolo_combine/final/full35/configs/joint.yaml",
+    "schema_version": 1,
+    "tasks": {
+      "detect": {
+        "data_yaml": "/home/uxin/yolo/coco2017.yaml",
+        "dataset_images": 118287,
+        "images_seen": 118287,
+        "missing_sites": [],
+        "observed_site_count": 118
+      },
+      "pose": {
+        "data_yaml": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/profiling/profile-full-train-seed1/datasets/bbat5-v1-runtime/data.yaml",
+        "dataset_images": 5964,
+        "images_seen": 5964,
+        "missing_sites": [],
+        "observed_site_count": 154
+      }
+    }
+  },
+  "published_weights": [
+    {
+      "bytes": 106825541,
+      "role": "accepted_silu_quantization_parent",
+      "sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c"
+    },
+    {
+      "bytes": 106825541,
+      "role": "qsilu_pq_10epoch_recovery_quantization_candidate",
+      "sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e"
+    }
+  ],
+  "release_date": "2026-08-29",
+  "schema_version": 1,
+  "selection": {
+    "backend": "bittrue",
+    "maximum_map50_95_drop": 0.015,
+    "metrics": [
+      "coco/box/map50_95",
+      "coco/person/box/map50_95",
+      "bbat/box/map50_95",
+      "bbat/pose/map50_95",
+      "bbat/ball/box/map50_95",
+      "bbat/bat/box/map50_95",
+      "bbat/ball/pose/map50_95",
+      "bbat/bat/pose/map50_95"
+    ],
+    "rule": "每一项相对 accepted SiLU baseline delta 均不得低于 -0.015"
+  },
+  "static_queue": {
+    "blocked_job_ids": [
+      "region-recovery-backbone-attention",
+      "region-recovery-backbone-deep",
+      "region-recovery-backbone-early",
+      "region-recovery-masf",
+      "region-recovery-neck-attention",
+      "region-recovery-detect-one2one",
+      "region-recovery-neck",
+      "region-recovery-pose-one2one",
+      "mixed-low-risk-small",
+      "mixed-low-risk-deep",
+      "mixed-early-only",
+      "mixed-early-low-risk",
+      "mixed-shared-hardware-extreme",
+      "mixed-detect-hardware-extreme"
+    ],
+    "completed_results": [
+      {
+        "deltas": {
+          "bbat/ball/box/map50_95": -0.01309105300758484,
+          "bbat/ball/pose/map50_95": -0.013004735243914545,
+          "bbat/bat/box/map50_95": -0.0027754324822464316,
+          "bbat/bat/pose/map50_95": 0.0004608956671846576,
+          "bbat/box/map50_95": -0.00793324274491558,
+          "bbat/pose/map50_95": -0.0062719197883647215,
+          "coco/box/map50_95": -0.002750425571888482,
+          "coco/person/box/map50_95": -0.0017874935670149084
+        },
+        "failed_metrics": [],
+        "id": "zero-shot-uniform-qsilu-pq",
+        "metrics": {
+          "bbat/ball/box/map50_95": 0.4943459831797439,
+          "bbat/ball/pose/map50_95": 0.8469039799478619,
+          "bbat/bat/box/map50_95": 0.7498585748445562,
+          "bbat/bat/pose/map50_95": 0.9479865287012981,
+          "bbat/box/map50_95": 0.62210227901215,
+          "bbat/pose/map50_95": 0.8974452543245801,
+          "coco/box/map50_95": 0.49527191089903366,
+          "coco/person/box/map50_95": 0.618593994855434
+        },
+        "passed": true,
+        "run": "zero-shot-uniform-qsilu-pq-seed1",
+        "status": "completed",
+        "worst_delta": -0.01309105300758484
+      },
+      {
+        "deltas": {
+          "bbat/ball/box/map50_95": -0.008635405318129619,
+          "bbat/ball/pose/map50_95": -0.0017023641693709735,
+          "bbat/bat/box/map50_95": 6.59228852003535e-05,
+          "bbat/bat/pose/map50_95": -0.001759947627807179,
+          "bbat/box/map50_95": -0.004284741216464494,
+          "bbat/pose/map50_95": -0.0017311558985891873,
+          "coco/box/map50_95": -0.0027494424426359743,
+          "coco/person/box/map50_95": -0.0008764592757793954
+        },
+        "failed_metrics": [],
+        "id": "short-recovery-uniform-qsilu-pq",
+        "metrics": {
+          "bbat/ball/box/map50_95": 0.4988016308691991,
+          "bbat/ball/pose/map50_95": 0.8582063510224055,
+          "bbat/bat/box/map50_95": 0.752699930212003,
+          "bbat/bat/pose/map50_95": 0.9457656854063062,
+          "bbat/box/map50_95": 0.6257507805406011,
+          "bbat/pose/map50_95": 0.9019860182143556,
+          "coco/box/map50_95": 0.49527289402828617,
+          "coco/person/box/map50_95": 0.6195050291466695
+        },
+        "passed": true,
+        "run": "short-recovery-v2-lr01-uniform-qsilu-pq-seed1",
+        "status": "completed",
+        "worst_delta": -0.008635405318129619
+      },
+      {
+        "deltas": {
+          "bbat/ball/box/map50_95": -0.009262526176049168,
+          "bbat/ball/pose/map50_95": 0.006487536113566783,
+          "bbat/bat/box/map50_95": -0.014360420219052483,
+          "bbat/bat/pose/map50_95": -0.016884422501412644,
+          "bbat/box/map50_95": -0.011811473197550604,
+          "bbat/pose/map50_95": -0.005198443193922819,
+          "coco/box/map50_95": -0.014160976263635605,
+          "coco/person/box/map50_95": -0.012111381973035962
+        },
+        "failed_metrics": [
+          "bbat/bat/pose/map50_95"
+        ],
+        "id": "short-recovery-uniform-hardswish",
+        "metrics": {
+          "bbat/ball/box/map50_95": 0.49817451001127955,
+          "bbat/ball/pose/map50_95": 0.8663962513053433,
+          "bbat/bat/box/map50_95": 0.7382735871077502,
+          "bbat/bat/pose/map50_95": 0.9306412105327008,
+          "bbat/box/map50_95": 0.618224048559515,
+          "bbat/pose/map50_95": 0.898518730919022,
+          "coco/box/map50_95": 0.48386136020728654,
+          "coco/person/box/map50_95": 0.6082701064494129
+        },
+        "passed": false,
+        "run": "short-recovery-v2-lr01-uniform-hardswish-seed1",
+        "status": "completed",
+        "worst_delta": -0.016884422501412644
+      },
+      {
+        "deltas": {
+          "bbat/ball/box/map50_95": -0.03013808101441856,
+          "bbat/ball/pose/map50_95": -0.020128729876904727,
+          "bbat/bat/box/map50_95": -0.003141908802296922,
+          "bbat/bat/pose/map50_95": -0.008899675573776245,
+          "bbat/box/map50_95": -0.016639994908357547,
+          "bbat/pose/map50_95": -0.014514202725340652,
+          "coco/box/map50_95": -0.005477393789799279,
+          "coco/person/box/map50_95": -0.002263162022723142
+        },
+        "failed_metrics": [
+          "bbat/box/map50_95",
+          "bbat/ball/box/map50_95",
+          "bbat/ball/pose/map50_95"
+        ],
+        "id": "short-recovery-uniform-poly-shift",
+        "metrics": {
+          "bbat/ball/box/map50_95": 0.47729895517291016,
+          "bbat/ball/pose/map50_95": 0.8397799853148717,
+          "bbat/bat/box/map50_95": 0.7494920985245057,
+          "bbat/bat/pose/map50_95": 0.9386259574603372,
+          "bbat/box/map50_95": 0.613395526848708,
+          "bbat/pose/map50_95": 0.8892029713876042,
+          "coco/box/map50_95": 0.49254494268112287,
+          "coco/person/box/map50_95": 0.6181183263997257
+        },
+        "passed": false,
+        "run": "short-recovery-v2-lr01-uniform-poly-shift-seed1",
+        "status": "completed",
+        "worst_delta": -0.03013808101441856
+      },
+      {
+        "deltas": {
+          "bbat/ball/box/map50_95": -0.020969880945195307,
+          "bbat/ball/pose/map50_95": -0.006707538173834737,
+          "bbat/bat/box/map50_95": -0.0035562945678090374,
+          "bbat/bat/pose/map50_95": -0.0046553287142592215,
+          "bbat/box/map50_95": -0.012263087756501978,
+          "bbat/pose/map50_95": -0.005681433444046591,
+          "coco/box/map50_95": -0.0012678356701206206,
+          "coco/person/box/map50_95": -0.00030701252284204283
+        },
+        "failed_metrics": [
+          "bbat/ball/box/map50_95"
+        ],
+        "id": "short-recovery-uniform-poly-quality",
+        "metrics": {
+          "bbat/ball/box/map50_95": 0.4864671552421334,
+          "bbat/ball/pose/map50_95": 0.8532011770179417,
+          "bbat/bat/box/map50_95": 0.7490777127589936,
+          "bbat/bat/pose/map50_95": 0.9428703043198542,
+          "bbat/box/map50_95": 0.6177724340005636,
+          "bbat/pose/map50_95": 0.8980357406688982,
+          "coco/box/map50_95": 0.4967545008008015,
+          "coco/person/box/map50_95": 0.6200744758996068
+        },
+        "passed": false,
+        "run": "short-recovery-v2-lr01-uniform-poly-quality-seed1",
+        "status": "completed",
+        "worst_delta": -0.020969880945195307
+      }
+    ],
+    "counts": {
+      "blocked": 14,
+      "completed": 5,
+      "pending": 0
+    }
+  },
+  "uniform_zero_shot": [
+    {
+      "activation": "hardswish",
+      "changed_sites": 190,
+      "full_metrics": {
+        "bittrue": {
+          "bbat/ball/box/map50": 0.709254220489056,
+          "bbat/ball/box/map50_95": 0.36500158424132295,
+          "bbat/ball/box/map75": 0.29543162403045253,
+          "bbat/ball/box/precision": 0.7994244769371818,
+          "bbat/ball/box/recall": 0.7301962335637714,
+          "bbat/ball/pose/map50": 0.8281069191316827,
+          "bbat/ball/pose/map50_95": 0.819726647896806,
+          "bbat/ball/pose/map75": 0.8230407156178785,
+          "bbat/ball/pose/precision": 0.8604077537715532,
+          "bbat/ball/pose/recall": 0.8040712468193384,
+          "bbat/bat/box/map50": 0.8858416533503382,
+          "bbat/bat/box/map50_95": 0.5764044626879757,
+          "bbat/bat/box/map75": 0.6917374576499673,
+          "bbat/bat/box/precision": 0.8741303514527383,
+          "bbat/bat/box/recall": 0.8503755463160827,
+          "bbat/bat/pose/map50": 0.9381706453192503,
+          "bbat/bat/pose/map50_95": 0.933203001301797,
+          "bbat/bat/pose/map75": 0.937461678260642,
+          "bbat/bat/pose/precision": 0.8929072540497213,
+          "bbat/bat/pose/recall": 0.8817240936537045,
+          "bbat/box/map50": 0.797547936919697,
+          "bbat/box/map50_95": 0.4707030234646493,
+          "bbat/box/map75": 0.4935845408402099,
+          "bbat/box/precision": 0.83677741419496,
+          "bbat/box/recall": 0.790285889939927,
+          "bbat/pose/map50": 0.8831387822254665,
+          "bbat/pose/map50_95": 0.8764648245993014,
+          "bbat/pose/map75": 0.8802511969392602,
+          "bbat/pose/precision": 0.8766575039106372,
+          "bbat/pose/recall": 0.8428976702365214,
+          "coco/box/map50": 0.6091908032904447,
+          "coco/box/map50_95": 0.42032409795043457,
+          "coco/box/map75": 0.4609934430498406,
+          "coco/box/precision": 0.6756856819305543,
+          "coco/box/recall": 0.562073024175022,
+          "coco/person/box/map50": 0.8044117561789745,
+          "coco/person/box/map50_95": 0.5517377520541925,
+          "coco/person/box/map75": 0.605301387961445,
+          "coco/person/box/precision": 0.7706502361065363,
+          "coco/person/box/recall": 0.7426819914094976
+        },
+        "float": {
+          "bbat/ball/box/map50": 0.7089856392233065,
+          "bbat/ball/box/map50_95": 0.36467091318017236,
+          "bbat/ball/box/map75": 0.2954384382541003,
+          "bbat/ball/box/precision": 0.7981075674234837,
+          "bbat/ball/box/recall": 0.7342986205875311,
+          "bbat/ball/pose/map50": 0.8280893526299382,
+          "bbat/ball/pose/map50_95": 0.8198164983382394,
+          "bbat/ball/pose/map75": 0.8230950383819315,
+          "bbat/ball/pose/precision": 0.8616981832544208,
+          "bbat/ball/pose/recall": 0.8040712468193384,
+          "bbat/bat/box/map50": 0.8857794001238297,
+          "bbat/bat/box/map50_95": 0.5764766079940729,
+          "bbat/bat/box/map75": 0.692005755269276,
+          "bbat/bat/box/precision": 0.8728540974696796,
+          "bbat/bat/box/recall": 0.8533464826181734,
+          "bbat/bat/pose/map50": 0.9381762242643706,
+          "bbat/bat/pose/map50_95": 0.9331624468948974,
+          "bbat/bat/pose/map75": 0.9374461378943687,
+          "bbat/bat/pose/precision": 0.892555242330872,
+          "bbat/bat/pose/recall": 0.8812615955473099,
+          "bbat/box/map50": 0.7973825196735681,
+          "bbat/box/map50_95": 0.4705737605871227,
+          "bbat/box/map75": 0.49372209676168816,
+          "bbat/box/precision": 0.8354808324465817,
+          "bbat/box/recall": 0.7938225516028523,
+          "bbat/pose/map50": 0.8831327884471545,
+          "bbat/pose/map50_95": 0.8764894726165684,
+          "bbat/pose/map75": 0.8802705881381501,
+          "bbat/pose/precision": 0.8771267127926464,
+          "bbat/pose/recall": 0.8426664211833241,
+          "coco/box/map50": 0.6091903271306118,
+          "coco/box/map50_95": 0.4203405832416992,
+          "coco/box/map75": 0.4608471892664926,
+          "coco/box/precision": 0.6763027286287487,
+          "coco/box/recall": 0.5614045466329254,
+          "coco/person/box/map50": 0.8046392904454622,
+          "coco/person/box/map50_95": 0.5516704020416582,
+          "coco/person/box/map75": 0.6052138331028133,
+          "coco/person/box/precision": 0.7709935966153364,
+          "coco/person/box/recall": 0.7417648696297671
+        }
+      },
+      "passed": false,
+      "run": "zero-shot-uniform-hardswish-seed1",
+      "selector_backend": "bittrue",
+      "selector_deltas": {
+        "bbat/ball/box/map50_95": -0.14243545194600576,
+        "bbat/ball/pose/map50_95": -0.040182067294970425,
+        "bbat/bat/box/map50_95": -0.1762295446388269,
+        "bbat/bat/pose/map50_95": -0.014322631732316404,
+        "bbat/box/map50_95": -0.15933249829241625,
+        "bbat/pose/map50_95": -0.027252349513643415,
+        "coco/box/map50_95": -0.07769823852048757,
+        "coco/person/box/map50_95": -0.06864373636825638
+      },
+      "selector_metrics": {
+        "bbat/ball/box/map50_95": 0.36500158424132295,
+        "bbat/ball/pose/map50_95": 0.819726647896806,
+        "bbat/bat/box/map50_95": 0.5764044626879757,
+        "bbat/bat/pose/map50_95": 0.933203001301797,
+        "bbat/box/map50_95": 0.4707030234646493,
+        "bbat/pose/map50_95": 0.8764648245993014,
+        "coco/box/map50_95": 0.42032409795043457,
+        "coco/person/box/map50_95": 0.5517377520541925
+      },
+      "worst_delta": -0.1762295446388269
+    },
+    {
+      "activation": "poly_quality",
+      "changed_sites": 190,
+      "full_metrics": {
+        "bittrue": {
+          "bbat/ball/box/map50": 0.8536322040489834,
+          "bbat/ball/box/map50_95": 0.5033417846252338,
+          "bbat/ball/box/map75": 0.47670581722030714,
+          "bbat/ball/box/precision": 0.8724567926305709,
+          "bbat/ball/box/recall": 0.870290261857263,
+          "bbat/ball/pose/map50": 0.8612699809826447,
+          "bbat/ball/pose/map50_95": 0.8591672551581734,
+          "bbat/ball/pose/map75": 0.859885061240752,
+          "bbat/ball/pose/precision": 0.8778560112135284,
+          "bbat/ball/pose/recall": 0.877808824401576,
+          "bbat/bat/box/map50": 0.9302592338185212,
+          "bbat/bat/box/map50_95": 0.7471333261684634,
+          "bbat/bat/box/map75": 0.8709231334505199,
+          "bbat/bat/box/precision": 0.8850407320829445,
+          "bbat/bat/box/recall": 0.8998519989580364,
+          "bbat/bat/pose/map50": 0.9503244228001787,
+          "bbat/bat/pose/map50_95": 0.9459187572605634,
+          "bbat/bat/pose/map75": 0.9501105254806522,
+          "bbat/bat/pose/precision": 0.8943179274005836,
+          "bbat/bat/pose/recall": 0.9106051146542247,
+          "bbat/box/map50": 0.8919457189337523,
+          "bbat/box/map50_95": 0.6252375553968486,
+          "bbat/box/map75": 0.6738144753354135,
+          "bbat/box/precision": 0.8787487623567577,
+          "bbat/box/recall": 0.8850711304076497,
+          "bbat/pose/map50": 0.9057972018914118,
+          "bbat/pose/map50_95": 0.9025430062093683,
+          "bbat/pose/map75": 0.9049977933607021,
+          "bbat/pose/precision": 0.886086969307056,
+          "bbat/pose/recall": 0.8942069695279004,
+          "coco/box/map50": 0.6705615863013075,
+          "coco/box/map50_95": 0.4981452508211959,
+          "coco/box/map75": 0.5437225299532386,
+          "coco/box/precision": 0.7302589907325171,
+          "coco/box/recall": 0.6127822660771068,
+          "coco/person/box/map50": 0.8387036750501213,
+          "coco/person/box/map50_95": 0.6200295533805322,
+          "coco/person/box/map75": 0.679236625661914,
+          "coco/person/box/precision": 0.7945950363021397,
+          "coco/person/box/recall": 0.7692307692307693
+        },
+        "float": {
+          "bbat/ball/box/map50": 0.8537465669602715,
+          "bbat/ball/box/map50_95": 0.5040551175888803,
+          "bbat/ball/box/map75": 0.4765798941308751,
+          "bbat/ball/box/precision": 0.8748548202351304,
+          "bbat/ball/box/recall": 0.8716180094032769,
+          "bbat/ball/pose/map50": 0.8613883222713108,
+          "bbat/ball/pose/map50_95": 0.8593042393175049,
+          "bbat/ball/pose/map75": 0.8600180062805867,
+          "bbat/ball/pose/precision": 0.8799912538066496,
+          "bbat/ball/pose/recall": 0.8769432869607924,
+          "bbat/bat/box/map50": 0.9302754238437478,
+          "bbat/bat/box/map50_95": 0.7471921380223899,
+          "bbat/bat/box/map75": 0.8708956053112594,
+          "bbat/bat/box/precision": 0.8852610615944734,
+          "bbat/bat/box/recall": 0.9018045630783409,
+          "bbat/bat/pose/map50": 0.9503657931724085,
+          "bbat/bat/pose/map50_95": 0.9459578300733285,
+          "bbat/bat/pose/map75": 0.9501898364407049,
+          "bbat/bat/pose/precision": 0.8944083958911998,
+          "bbat/bat/pose/recall": 0.9114776770311491,
+          "bbat/box/map50": 0.8920109954020097,
+          "bbat/box/map50_95": 0.6256236278056351,
+          "bbat/box/map75": 0.6737377497210673,
+          "bbat/box/precision": 0.8800579409148019,
+          "bbat/box/recall": 0.8867112862408089,
+          "bbat/pose/map50": 0.9058770577218597,
+          "bbat/pose/map50_95": 0.9026310346954165,
+          "bbat/pose/map75": 0.9051039213606458,
+          "bbat/pose/precision": 0.8871998248489247,
+          "bbat/pose/recall": 0.8942104819959708,
+          "coco/box/map50": 0.6705595343165517,
+          "coco/box/map50_95": 0.49811430101824655,
+          "coco/box/map75": 0.543479533068074,
+          "coco/box/precision": 0.7301461667444161,
+          "coco/box/recall": 0.6128129071300228,
+          "coco/person/box/map50": 0.8387101677045563,
+          "coco/person/box/map50_95": 0.6199978703335914,
+          "coco/person/box/map75": 0.6791126915081858,
+          "coco/person/box/precision": 0.7947280564518145,
+          "coco/person/box/recall": 0.769503385522201
+        }
+      },
+      "passed": true,
+      "run": "zero-shot-uniform-poly-quality-seed1",
+      "selector_backend": "bittrue",
+      "selector_deltas": {
+        "bbat/ball/box/map50_95": -0.004095251562094893,
+        "bbat/ball/pose/map50_95": -0.0007414600336030919,
+        "bbat/bat/box/map50_95": -0.005500681158339238,
+        "bbat/bat/pose/map50_95": -0.0016068757735500094,
+        "bbat/box/map50_95": -0.00479796636021701,
+        "bbat/pose/map50_95": -0.0011741679035764951,
+        "coco/box/map50_95": 0.00012291435027372843,
+        "coco/person/box/map50_95": -0.00035193504191666225
+      },
+      "selector_metrics": {
+        "bbat/ball/box/map50_95": 0.5033417846252338,
+        "bbat/ball/pose/map50_95": 0.8591672551581734,
+        "bbat/bat/box/map50_95": 0.7471333261684634,
+        "bbat/bat/pose/map50_95": 0.9459187572605634,
+        "bbat/box/map50_95": 0.6252375553968486,
+        "bbat/pose/map50_95": 0.9025430062093683,
+        "coco/box/map50_95": 0.4981452508211959,
+        "coco/person/box/map50_95": 0.6200295533805322
+      },
+      "worst_delta": -0.005500681158339238
+    },
+    {
+      "activation": "poly_shift",
+      "changed_sites": 190,
+      "full_metrics": {
+        "bittrue": {
+          "bbat/ball/box/map50": 0.8270777343214508,
+          "bbat/ball/box/map50_95": 0.4853728315331479,
+          "bbat/ball/box/map75": 0.46686446417679006,
+          "bbat/ball/box/precision": 0.8528728939296706,
+          "bbat/ball/box/recall": 0.8371501272264631,
+          "bbat/ball/pose/map50": 0.8529018399654772,
+          "bbat/ball/pose/map50_95": 0.8472065598603434,
+          "bbat/ball/pose/map75": 0.8463489521889876,
+          "bbat/ball/pose/precision": 0.8708711049223727,
+          "bbat/ball/pose/recall": 0.8549618320610687,
+          "bbat/bat/box/map50": 0.9297830295240741,
+          "bbat/bat/box/map50_95": 0.7380437856825155,
+          "bbat/bat/box/map75": 0.868316591514068,
+          "bbat/bat/box/precision": 0.8919503781914792,
+          "bbat/bat/box/recall": 0.9109461966604824,
+          "bbat/bat/pose/map50": 0.9501142280639409,
+          "bbat/bat/pose/map50_95": 0.9451128837457684,
+          "bbat/bat/pose/map75": 0.9491496837151665,
+          "bbat/bat/pose/precision": 0.9017329168312469,
+          "bbat/bat/pose/recall": 0.922077922077922,
+          "bbat/box/map50": 0.8784303819227625,
+          "bbat/box/map50_95": 0.6117083086078318,
+          "bbat/box/map75": 0.667590527845429,
+          "bbat/box/precision": 0.8724116360605749,
+          "bbat/box/recall": 0.8740481619434728,
+          "bbat/pose/map50": 0.901508034014709,
+          "bbat/pose/map50_95": 0.8961597218030558,
+          "bbat/pose/map75": 0.897749317952077,
+          "bbat/pose/precision": 0.8863020108768098,
+          "bbat/pose/recall": 0.8885198770694953,
+          "coco/box/map50": 0.67019991232782,
+          "coco/box/map50_95": 0.49570547408647514,
+          "coco/box/map75": 0.5401710550254764,
+          "coco/box/precision": 0.7312168573536992,
+          "coco/box/recall": 0.6109965912432896,
+          "coco/person/box/map50": 0.8389508808438522,
+          "coco/person/box/map50_95": 0.6175363570971775,
+          "coco/person/box/map75": 0.6745860513826212,
+          "coco/person/box/precision": 0.7988379240746176,
+          "coco/person/box/recall": 0.7693875921819694
+        },
+        "float": {
+          "bbat/ball/box/map50": 0.8268354405249321,
+          "bbat/ball/box/map50_95": 0.48596686715367204,
+          "bbat/ball/box/map75": 0.47352450012617975,
+          "bbat/ball/box/precision": 0.8528471131430017,
+          "bbat/ball/box/recall": 0.8371501272264631,
+          "bbat/ball/pose/map50": 0.852013500358606,
+          "bbat/ball/pose/map50_95": 0.846731867525734,
+          "bbat/ball/pose/map75": 0.8460338695684928,
+          "bbat/ball/pose/precision": 0.8708484435036933,
+          "bbat/ball/pose/recall": 0.8549618320610687,
+          "bbat/bat/box/map50": 0.9297832545538798,
+          "bbat/bat/box/map50_95": 0.7380686507400046,
+          "bbat/bat/box/map75": 0.8682870399241152,
+          "bbat/bat/box/precision": 0.8923855228897645,
+          "bbat/bat/box/recall": 0.9109461966604824,
+          "bbat/bat/pose/map50": 0.9501558773281239,
+          "bbat/bat/pose/map50_95": 0.9451315579408112,
+          "bbat/bat/pose/map75": 0.9491508946733785,
+          "bbat/bat/pose/precision": 0.902785370547742,
+          "bbat/bat/pose/recall": 0.922077922077922,
+          "bbat/box/map50": 0.8783093475394059,
+          "bbat/box/map50_95": 0.6120177589468384,
+          "bbat/box/map75": 0.6709057700251475,
+          "bbat/box/precision": 0.8726163180163831,
+          "bbat/box/recall": 0.8740481619434728,
+          "bbat/pose/map50": 0.901084688843365,
+          "bbat/pose/map50_95": 0.8959317127332727,
+          "bbat/pose/map75": 0.8975923821209357,
+          "bbat/pose/precision": 0.8868169070257177,
+          "bbat/pose/recall": 0.8885198770694953,
+          "coco/box/map50": 0.6701259248662577,
+          "coco/box/map50_95": 0.495713043997154,
+          "coco/box/map75": 0.5401311659999287,
+          "coco/box/precision": 0.7311980939447806,
+          "coco/box/recall": 0.6111226124310665,
+          "coco/person/box/map50": 0.839038236190139,
+          "coco/person/box/map50_95": 0.6175872772876283,
+          "coco/person/box/map75": 0.6746287055215543,
+          "coco/person/box/precision": 0.7990422440380974,
+          "coco/person/box/recall": 0.7692599909321597
+        }
+      },
+      "passed": false,
+      "run": "zero-shot-uniform-poly-shift-seed1",
+      "selector_backend": "bittrue",
+      "selector_deltas": {
+        "bbat/ball/box/map50_95": -0.022064204654180797,
+        "bbat/ball/pose/map50_95": -0.01270215533143304,
+        "bbat/bat/box/map50_95": -0.014590221644287138,
+        "bbat/bat/pose/map50_95": -0.0024127492883450063,
+        "bbat/box/map50_95": -0.0183272131492338,
+        "bbat/pose/map50_95": -0.007557452309889023,
+        "coco/box/map50_95": -0.002316862384447005,
+        "coco/person/box/map50_95": -0.0028451313252714217
+      },
+      "selector_metrics": {
+        "bbat/ball/box/map50_95": 0.4853728315331479,
+        "bbat/ball/pose/map50_95": 0.8472065598603434,
+        "bbat/bat/box/map50_95": 0.7380437856825155,
+        "bbat/bat/pose/map50_95": 0.9451128837457684,
+        "bbat/box/map50_95": 0.6117083086078318,
+        "bbat/pose/map50_95": 0.8961597218030558,
+        "coco/box/map50_95": 0.49570547408647514,
+        "coco/person/box/map50_95": 0.6175363570971775
+      },
+      "worst_delta": -0.022064204654180797
+    },
+    {
+      "activation": "qsilu_pq",
+      "changed_sites": 190,
+      "full_metrics": {
+        "bittrue": {
+          "bbat/ball/box/map50": 0.8299730077334209,
+          "bbat/ball/box/map50_95": 0.4943459831797439,
+          "bbat/ball/box/map75": 0.48640801663477745,
+          "bbat/ball/box/precision": 0.863403276999013,
+          "bbat/ball/box/recall": 0.8549618320610687,
+          "bbat/ball/pose/map50": 0.8524297120954539,
+          "bbat/ball/pose/map50_95": 0.8469039799478619,
+          "bbat/ball/pose/map75": 0.8461541164801849,
+          "bbat/ball/pose/precision": 0.8795250908982677,
+          "bbat/ball/pose/recall": 0.8730865200084915,
+          "bbat/bat/box/map50": 0.9303998343585305,
+          "bbat/bat/box/map50_95": 0.7498585748445562,
+          "bbat/bat/box/map75": 0.8726604672666904,
+          "bbat/bat/box/precision": 0.8868617456479988,
+          "bbat/bat/box/recall": 0.8998144712430427,
+          "bbat/bat/pose/map50": 0.9524256352758913,
+          "bbat/bat/pose/map50_95": 0.9479865287012981,
+          "bbat/bat/pose/map75": 0.9517474526899112,
+          "bbat/bat/pose/precision": 0.8982477856442816,
+          "bbat/bat/pose/recall": 0.9171743784620846,
+          "bbat/box/map50": 0.8801864210459757,
+          "bbat/box/map50_95": 0.62210227901215,
+          "bbat/box/map75": 0.679534241950734,
+          "bbat/box/precision": 0.8751325113235059,
+          "bbat/box/recall": 0.8773881516520556,
+          "bbat/pose/map50": 0.9024276736856727,
+          "bbat/pose/map50_95": 0.8974452543245801,
+          "bbat/pose/map75": 0.8989507845850481,
+          "bbat/pose/precision": 0.8888864382712747,
+          "bbat/pose/recall": 0.8951304492352881,
+          "coco/box/map50": 0.668925012847881,
+          "coco/box/map50_95": 0.49527191089903366,
+          "coco/box/map75": 0.5400064082897286,
+          "coco/box/precision": 0.7235173057809637,
+          "coco/box/recall": 0.6096868432672757,
+          "coco/person/box/map50": 0.8395741600311046,
+          "coco/person/box/map50_95": 0.618593994855434,
+          "coco/person/box/map75": 0.6743330224351951,
+          "coco/person/box/precision": 0.8011259169423921,
+          "coco/person/box/recall": 0.7670038043982556
+        },
+        "float": {
+          "bbat/ball/box/map50": 0.8332045388496304,
+          "bbat/ball/box/map50_95": 0.4948686193977334,
+          "bbat/ball/box/map75": 0.4863132401634873,
+          "bbat/ball/box/precision": 0.866005944948576,
+          "bbat/ball/box/recall": 0.8575063613231552,
+          "bbat/ball/pose/map50": 0.8522478601037762,
+          "bbat/ball/pose/map50_95": 0.8466103962519147,
+          "bbat/ball/pose/map75": 0.8458125776989897,
+          "bbat/ball/pose/precision": 0.8795822282680118,
+          "bbat/ball/pose/recall": 0.8735582257911929,
+          "bbat/bat/box/map50": 0.9303911382815502,
+          "bbat/bat/box/map50_95": 0.7498981941126414,
+          "bbat/bat/box/map75": 0.8726981609726289,
+          "bbat/bat/box/precision": 0.88844129159197,
+          "bbat/bat/box/recall": 0.9012942312552381,
+          "bbat/bat/pose/map50": 0.9524880713041215,
+          "bbat/bat/pose/map50_95": 0.9480207076646175,
+          "bbat/bat/pose/map75": 0.9517964025799405,
+          "bbat/bat/pose/precision": 0.8973615630206043,
+          "bbat/bat/pose/recall": 0.9165120593692022,
+          "bbat/box/map50": 0.8817978385655902,
+          "bbat/box/map50_95": 0.6223834067551876,
+          "bbat/box/map75": 0.679505700568058,
+          "bbat/box/precision": 0.8772236182702731,
+          "bbat/box/recall": 0.8794002962891967,
+          "bbat/pose/map50": 0.9023679657039488,
+          "bbat/pose/map50_95": 0.8973155519582662,
+          "bbat/pose/map75": 0.8988044901394651,
+          "bbat/pose/precision": 0.8884718956443081,
+          "bbat/pose/recall": 0.8950351425801976,
+          "coco/box/map50": 0.6687472146339172,
+          "coco/box/map50_95": 0.49524394892984414,
+          "coco/box/map75": 0.5401202169255741,
+          "coco/box/precision": 0.7225557619597259,
+          "coco/box/recall": 0.6112685024970201,
+          "coco/person/box/map50": 0.8395705901421153,
+          "coco/person/box/map50_95": 0.6185351062496455,
+          "coco/person/box/map75": 0.6742124302914754,
+          "coco/person/box/precision": 0.7996282220575145,
+          "coco/person/box/recall": 0.7687668182239955
+        }
+      },
+      "passed": true,
+      "run": "zero-shot-uniform-qsilu-pq-seed1",
+      "selector_backend": "bittrue",
+      "selector_deltas": {
+        "bbat/ball/box/map50_95": -0.01309105300758484,
+        "bbat/ball/pose/map50_95": -0.013004735243914545,
+        "bbat/bat/box/map50_95": -0.0027754324822464316,
+        "bbat/bat/pose/map50_95": 0.0004608956671846576,
+        "bbat/box/map50_95": -0.00793324274491558,
+        "bbat/pose/map50_95": -0.0062719197883647215,
+        "coco/box/map50_95": -0.002750425571888482,
+        "coco/person/box/map50_95": -0.0017874935670149084
+      },
+      "selector_metrics": {
+        "bbat/ball/box/map50_95": 0.4943459831797439,
+        "bbat/ball/pose/map50_95": 0.8469039799478619,
+        "bbat/bat/box/map50_95": 0.7498585748445562,
+        "bbat/bat/pose/map50_95": 0.9479865287012981,
+        "bbat/box/map50_95": 0.62210227901215,
+        "bbat/pose/map50_95": 0.8974452543245801,
+        "coco/box/map50_95": 0.49527191089903366,
+        "coco/person/box/map50_95": 0.618593994855434
+      },
+      "worst_delta": -0.01309105300758484
+    },
+    {
+      "activation": "relu",
+      "changed_sites": 190,
+      "full_metrics": {
+        "bittrue": {
+          "bbat/ball/box/map50": 0.0,
+          "bbat/ball/box/map50_95": 0.0,
+          "bbat/ball/box/map75": 0.0,
+          "bbat/ball/box/precision": 0.0,
+          "bbat/ball/box/recall": 0.0,
+          "bbat/ball/pose/map50": 0.0,
+          "bbat/ball/pose/map50_95": 0.0,
+          "bbat/ball/pose/map75": 0.0,
+          "bbat/ball/pose/precision": 0.0,
+          "bbat/ball/pose/recall": 0.0,
+          "bbat/bat/box/map50": 0.0,
+          "bbat/bat/box/map50_95": 0.0,
+          "bbat/bat/box/map75": 0.0,
+          "bbat/bat/box/precision": 0.0,
+          "bbat/bat/box/recall": 0.0,
+          "bbat/bat/pose/map50": 0.0,
+          "bbat/bat/pose/map50_95": 0.0,
+          "bbat/bat/pose/map75": 0.0,
+          "bbat/bat/pose/precision": 0.0,
+          "bbat/bat/pose/recall": 0.0,
+          "bbat/box/map50": 0.0,
+          "bbat/box/map50_95": 0.0,
+          "bbat/box/map75": 0.0,
+          "bbat/box/precision": 0.0,
+          "bbat/box/recall": 0.0,
+          "bbat/pose/map50": 0.0,
+          "bbat/pose/map50_95": 0.0,
+          "bbat/pose/map75": 0.0,
+          "bbat/pose/precision": 0.0,
+          "bbat/pose/recall": 0.0,
+          "coco/box/map50": 0.0,
+          "coco/box/map50_95": 0.0,
+          "coco/box/map75": 0.0,
+          "coco/box/precision": 0.0,
+          "coco/box/recall": 0.0,
+          "coco/person/box/map50": 0.0,
+          "coco/person/box/map50_95": 0.0,
+          "coco/person/box/map75": 0.0,
+          "coco/person/box/precision": 0.0,
+          "coco/person/box/recall": 0.0
+        },
+        "float": {
+          "bbat/ball/box/map50": 0.0,
+          "bbat/ball/box/map50_95": 0.0,
+          "bbat/ball/box/map75": 0.0,
+          "bbat/ball/box/precision": 0.0,
+          "bbat/ball/box/recall": 0.0,
+          "bbat/ball/pose/map50": 0.0,
+          "bbat/ball/pose/map50_95": 0.0,
+          "bbat/ball/pose/map75": 0.0,
+          "bbat/ball/pose/precision": 0.0,
+          "bbat/ball/pose/recall": 0.0,
+          "bbat/bat/box/map50": 0.0,
+          "bbat/bat/box/map50_95": 0.0,
+          "bbat/bat/box/map75": 0.0,
+          "bbat/bat/box/precision": 0.0,
+          "bbat/bat/box/recall": 0.0,
+          "bbat/bat/pose/map50": 0.0,
+          "bbat/bat/pose/map50_95": 0.0,
+          "bbat/bat/pose/map75": 0.0,
+          "bbat/bat/pose/precision": 0.0,
+          "bbat/bat/pose/recall": 0.0,
+          "bbat/box/map50": 0.0,
+          "bbat/box/map50_95": 0.0,
+          "bbat/box/map75": 0.0,
+          "bbat/box/precision": 0.0,
+          "bbat/box/recall": 0.0,
+          "bbat/pose/map50": 0.0,
+          "bbat/pose/map50_95": 0.0,
+          "bbat/pose/map75": 0.0,
+          "bbat/pose/precision": 0.0,
+          "bbat/pose/recall": 0.0,
+          "coco/box/map50": 0.0,
+          "coco/box/map50_95": 0.0,
+          "coco/box/map75": 0.0,
+          "coco/box/precision": 0.0,
+          "coco/box/recall": 0.0,
+          "coco/person/box/map50": 0.0,
+          "coco/person/box/map50_95": 0.0,
+          "coco/person/box/map75": 0.0,
+          "coco/person/box/precision": 0.0,
+          "coco/person/box/recall": 0.0
+        }
+      },
+      "passed": false,
+      "run": "zero-shot-uniform-relu-seed1",
+      "selector_backend": "bittrue",
+      "selector_deltas": {
+        "bbat/ball/box/map50_95": -0.5074370361873287,
+        "bbat/ball/pose/map50_95": -0.8599087151917765,
+        "bbat/bat/box/map50_95": -0.7526340073268026,
+        "bbat/bat/pose/map50_95": -0.9475256330341134,
+        "bbat/box/map50_95": -0.6300355217570656,
+        "bbat/pose/map50_95": -0.9037171741129448,
+        "coco/box/map50_95": -0.49802233647092214,
+        "coco/person/box/map50_95": -0.6203814884224489
+      },
+      "selector_metrics": {
+        "bbat/ball/box/map50_95": 0.0,
+        "bbat/ball/pose/map50_95": 0.0,
+        "bbat/bat/box/map50_95": 0.0,
+        "bbat/bat/pose/map50_95": 0.0,
+        "bbat/box/map50_95": 0.0,
+        "bbat/pose/map50_95": 0.0,
+        "coco/box/map50_95": 0.0,
+        "coco/person/box/map50_95": 0.0
+      },
+      "worst_delta": -0.9475256330341134
+    }
+  ]
+}

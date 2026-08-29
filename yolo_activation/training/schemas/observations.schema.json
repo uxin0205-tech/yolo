@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "observations.schema.json",
+  "title": "SIPA-BCSP Observations",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "observations"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["dataset_id", "stage", "policy", "map_loss", "failed"],
+        "properties": {
+          "dataset_id": {"type": "string", "minLength": 1},
+          "stage": {"type": "string", "minLength": 1},
+          "map_loss": {"type": ["number", "null"]},
+          "ap_s_loss": {"type": ["number", "null"]},
+          "latency_ms": {"type": ["number", "null"], "minimum": 0},
+          "failed": {"type": "boolean"},
+          "policy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["policy_id", "default_activation", "region_assignments", "site_assignments"],
+            "properties": {
+              "policy_id": {"type": "string", "minLength": 1},
+              "default_activation": {"enum": ["silu", "hardswish", "relu", "poly_shift", "poly_quality"]},
+              "region_assignments": {"type": "object", "additionalProperties": {"enum": ["silu", "hardswish", "relu", "poly_shift", "poly_quality"]}},
+              "site_assignments": {"type": "object", "additionalProperties": {"enum": ["silu", "hardswish", "relu", "poly_shift", "poly_quality"]}}
+            }
+          }
+        }
+      }
+    }
+  }
+}

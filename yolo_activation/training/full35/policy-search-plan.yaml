@@ -1,0 +1,90 @@
+schema_version: 1
+experiment_id: full35-sipa-bcsp-v1
+recipe: activation-recipe.yaml
+evidence:
+  profile: ../../artifacts/runs/full35/profiling/profile-full-train-seed1/decision-support.json
+  sensitivity: ../../artifacts/runs/full35/sensitivity/sensitivity-zero-shot-poly_shift/sensitivity-summary.json
+deployment_contract:
+  training_only_regions: [detect_one2many, pose_one2many, pose_flow]
+  initially_protected_silu_regions: [neck, pose_one2one]
+  explanation:
+    neck: BBAT pose zero-shot delta -0.007104；先保留 SiLU，只有同預算 region recovery 通過才解鎖。
+    pose_one2one: BBAT box zero-shot delta -0.012352；先保留 SiLU，只有同預算 region recovery 通過才解鎖。
+short_recovery:
+  control_first: silu
+  candidate_order: [hardswish, qsilu_pq, poly_shift, poly_quality]
+  epochs: 10
+  seed: 1
+  learning_rate_scale: 0.1
+  matched_budget_required: true
+  accuracy_budget_status: frozen_after_silu_control
+  accuracy_gate:
+    baseline_contract: contracts/accepted-full35-baseline.yaml
+    maximum_map50_95_drop: 0.015
+    applies_to_all_eight_metrics: true
+  matched_control:
+    run_name: short-recovery-v2-lr01-uniform-silu-seed1
+    selection: best_joint
+    epoch: 9
+    joint_score: 0.708882843
+    metrics:
+      coco/box/map50_95: 0.496785583
+      coco/person/box/map50_95: 0.620225168
+      bbat/box/map50_95: 0.623433044
+      bbat/pose/map50_95: 0.901985210
+    worst_eight_metric_delta_vs_accepted: -0.012341198
+    interpretation: 只作同預算 fresh-optimizer control，不取代 delivered baseline。
+region_recovery:
+  activation: poly_shift
+  queue:
+    - backbone_attention
+    - backbone_deep
+    - backbone_early
+    - masf
+    - neck_attention
+    - detect_one2one
+    - neck
+    - pose_one2one
+  epochs: 10
+  seed: 1
+  learning_rate_scale: 0.1
+  training_only_regions_excluded: true
+mixed_search:
+  activation: poly_shift
+  maximum_trials: 8
+  maximum_changed_regions: 6
+  fixed_training_only_activation: silu
+  preregistered_trials:
+    - id: low-risk-small
+      regions: [backbone_attention, masf, neck_attention]
+    - id: low-risk-deep
+      regions: [backbone_attention, backbone_deep, masf, neck_attention]
+    - id: early-only
+      regions: [backbone_early]
+    - id: early-low-risk
+      regions: [backbone_attention, backbone_early, masf, neck_attention]
+    - id: shared-hardware-extreme
+      regions: [backbone_attention, backbone_deep, backbone_early, masf, neck_attention]
+    - id: detect-hardware-extreme
+      regions: [backbone_attention, backbone_deep, backbone_early, detect_one2one, masf, neck_attention]
+  adaptive_slots: 2
+  adaptive_rule: 只能依同預算 region recovery 的 non-dominated 結果擴充；不得超過總 trial 上限。
+finalists:
+  maximum: 2
+  roles: [accuracy_extreme, hardware_extreme]
+  seed1:
+    epochs: 20
+    patience: 5
+    warmup_epochs: 3
+    learning_rate_scale: 1.0
+  seed2:
+    optional: true
+    epochs: 20
+    patience: 5
+    warmup_epochs: 3
+    learning_rate_scale: 1.0
+  extension:
+    trigger: best_joint_in_last_3_epochs_and_curve_still_improving
+    extra_epochs: 10
+    maximum_epochs: 30
+    require_matched_silu_control: true

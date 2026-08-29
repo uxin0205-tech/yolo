@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "delivery.schema.json",
+  "title": "Immutable Activation Baseline Delivery",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "delivery_id", "model", "activation_manifest_path", "datasets", "hardware_target"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "delivery_id": {"type": "string", "minLength": 1},
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "config_path", "checkpoint_path", "checkpoint_sha256", "framework_commit", "python_version", "torch_version", "framework_version"],
+      "properties": {
+        "source_id": {"type": "string", "minLength": 1},
+        "config_path": {"type": "string", "minLength": 1},
+        "checkpoint_path": {"type": "string", "minLength": 1},
+        "checkpoint_sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+        "framework_commit": {"type": "string", "minLength": 1},
+        "python_version": {"type": "string", "minLength": 1},
+        "torch_version": {"type": "string", "minLength": 1},
+        "framework_version": {"type": "string", "minLength": 1}
+      }
+    },
+    "activation_manifest_path": {"type": "string", "minLength": 1},
+    "datasets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["dataset_id", "yaml_path", "dataset_fingerprint", "baseline_checkpoint_path", "baseline_checkpoint_sha256", "baseline_metrics", "recipe_path"],
+        "properties": {
+          "dataset_id": {"type": "string", "minLength": 1},
+          "yaml_path": {"type": "string", "minLength": 1},
+          "dataset_fingerprint": {"type": "string", "minLength": 1},
+          "baseline_checkpoint_path": {"type": "string", "minLength": 1},
+          "baseline_checkpoint_sha256": {"type": "string", "pattern": "^[0-9a-fA-F]{64}$"},
+          "baseline_metrics": {"type": "object", "required": ["map50_95"]},
+          "recipe_path": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "hardware_target": {"type": ["object", "null"]}
+  }
+}
