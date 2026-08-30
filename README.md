@@ -48,8 +48,9 @@ GitHub 單檔限制且與已解壓目錄重複的 `detect_dataset.zip`；詳細�
 ## 報告與變更
 
 Full35 activation 數學、完整 COCO2017 + Canonical BBAT5 v1 實驗、可重建 SiLU／qSiLU 權重與
-量化交接見 [`yolo_activation/`](yolo_activation/README.md)；目前完成範圍、逐式推導與實驗結論見
-[已完成 Activation 權威整合報告](yolo_activation/reports/completed-activation-integrated-report.md)。
+量化交接見 [`yolo_activation/`](yolo_activation/README.md)。2026-08-30 已完成繁體中文與文件結構整理；
+閱讀順序見[文件導覽](yolo_activation/docs/README.md)，目前結論見
+[Activation 權威整合報告](yolo_activation/reports/completed-activation-integrated-report.md)。
 
 Full35 activation-output A3至A8量化預選、老師版圖表、30格source evidence與SD4公平實驗設計見
 [`yolo_quantize/`](yolo_quantize/README.md)；主要論證見

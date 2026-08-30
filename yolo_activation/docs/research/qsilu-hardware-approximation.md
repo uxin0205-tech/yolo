@@ -91,7 +91,7 @@ y=x\max(0,\min(1,x/6+1/2)),
 
 關鍵成本事實是：二次函數 $ax^2+bx+c$ 就算 $a,b,c$ 全能用 shift-add，$x^2$ 仍是一個
 data-by-data squaring。故 `qsilu_pq` 的正確主張應是「一個平方器、沒有一般常數乘法器」，而不是
-「零乘法器」；是否占用 FPGA DSP 取決於目標 RTL/HLS lowering 與 synthesis。
+「零乘法器」；是否佔用 FPGA DSP 取決於目標 RTL/HLS lowering 與 synthesis。
 
 ## 4. 首選候選 `qsilu_pq`
 

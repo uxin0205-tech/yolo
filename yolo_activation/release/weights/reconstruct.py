@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""安全重建并校验 GitHub 分片权重。"""
+"""安全重建並校驗 GitHub 分片權重。"""
 
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ def reconstruct(weight_id: str, output: Path | None, force: bool) -> Path:
 
     target = output or (ROOT / weight_id / entry["output_filename"])
     if target.exists() and not force:
-        raise SystemExit(f"拒绝覆盖既有档案：{target}；确认后可加 --force")
+        raise SystemExit(f"拒絕覆蓋既有檔案：{target}；確認後可加 --force")
     target.parent.mkdir(parents=True, exist_ok=True)
 
     digest = hashlib.sha256()
@@ -52,7 +52,7 @@ def reconstruct(weight_id: str, output: Path | None, force: bool) -> Path:
 
     if total_bytes != entry["bytes"] or digest.hexdigest() != entry["sha256"]:
         target.unlink(missing_ok=True)
-        raise SystemExit("重建后的大小或 SHA-256 不符；已移除无效输出")
+        raise SystemExit("重建後的大小或 SHA-256 不符；已移除無效輸出")
     print(
         json.dumps(
             {"output": str(target), "bytes": total_bytes, "sha256": digest.hexdigest()}

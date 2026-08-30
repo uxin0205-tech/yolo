@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""从本机 Full35 artifacts 产生可提交的最终 JSON／CSV 摘要。"""
+"""從本機 Full35 artifacts 產生可提交的最終 JSON／CSV 摘要。"""
 
 from __future__ import annotations
 
@@ -140,7 +140,7 @@ def build_results() -> dict[str, Any]:
             "backend": "bittrue",
             "maximum_map50_95_drop": 0.015,
             "metrics": list(SELECTOR_METRICS),
-            "rule": "每一项相对 accepted SiLU baseline delta 均不得低于 -0.015",
+            "rule": "每一項相對 accepted SiLU baseline delta 均不得低於 -0.015",
         },
         "data": {
             "fraction": 1.0,

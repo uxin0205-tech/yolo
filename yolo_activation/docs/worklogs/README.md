@@ -9,8 +9,9 @@
 
 ## 索引
 
-- [2026-08-30：已完成 Activation 权威整合报告](2026-08-30-completed-activation-report.md)
-- [2026-08-29：Full35 Activation 收尾、权重发布与量化交接](2026-08-29-full35-activation-final-handoff.md)
+- [2026-08-30：Activation 子專案完整整理與重新發布](2026-08-30-folder-consolidation-publication.md)
+- [2026-08-30：已完成 Activation 權威整合報告](2026-08-30-completed-activation-report.md)
+- [2026-08-29：Full35 Activation 收尾、權重發布與量化交接](2026-08-29-full35-activation-final-handoff.md)
 - [2026-08-28：Hardswish CIoU Backward 數值穩定修復](2026-08-28-hardswish-ciou-stability.md)
 - [2026-08-28：Full35 Activation Gate 與 Serial Queue](2026-08-28-full35-accuracy-gate-queue.md)
 - [2026-08-27：Full35 Recovery 修正與 Sensitivity 優先執行](2026-08-27-full35-recovery-correction-sensitivity.md)

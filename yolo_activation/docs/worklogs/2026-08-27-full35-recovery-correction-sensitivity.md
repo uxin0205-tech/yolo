@@ -91,7 +91,7 @@ training split activation profile 才凍結。
 - COCO Detect train 118,287／118,287、BBAT5 formal Pose train 5,964／5,964 均已完成；沒有抽樣。
 - Detect training graph 觀察 118 sites；Pose 透過正式 `NativeTaskLossRouter` 觀察 154 sites，包含 24 個
   loss-only `pose_flow` sites；兩者 `missing_sites=[]`，合併涵蓋完整 190-site manifest。
-- 排除 one-to-many 與 flow 訓練期分支後，部署 activation elements 的主要占比為：
+- 排除 one-to-many 與 flow 訓練期分支後，部署 activation elements 的主要佔比為：
   `backbone_early` Detect/Pose `50.36%/49.61%`、`neck` `19.96%/19.66%`、Detect one-to-one
   `14.23%`、Pose one-to-one `15.50%`。
 - `poly_quality` 在所有部署 region 的分布加權 MAE 都低於 `poly_shift`，和 uniform zero-shot 較佳的

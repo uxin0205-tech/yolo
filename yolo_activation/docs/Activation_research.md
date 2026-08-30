@@ -1,5 +1,9 @@
 # Codex 任務規格：YOLO26m Activation 選擇與硬體友善共同設計
 
+> **文件狀態：歷史需求快照。** 本文保留最初問題與當時尚未完成的項目，不代表目前狀態。
+> 現在請先閱讀[文件導覽](README.md)與[權威整合報告](../reports/completed-activation-integrated-report.md)。
+
+
 > **2026-08-25 Phase 0 決策覆寫**
 >
 > - 未來由使用者交付的不可變 baseline 資料夾決定實際模型；本文 YOLO26m mapping 目前只作
@@ -368,7 +372,7 @@ g(u) vs SiLU(u), u >= 0
 
 流程：
 
-1. 先為每個 region 擬合獨立 oracle PWL，僅用來了解需求。
+1. 先為每個 region 擬合獨立 oracle PWL，僅用來瞭解需求。
 2. 根據 region 的分布特徵、敏感度與 oracle 係數差異，初始化兩群。
 3. 聯合擬合 `hi_profile` 與 `lo_profile`。
 4. 以完整 validation task metric 重新搜尋 region assignment。

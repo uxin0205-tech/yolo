@@ -2,7 +2,7 @@
 
 ## 任務與範圍
 
-依使用者要求，在不干擾既有 GPU 任務的前提下確認 GPU 是否有人使用。本輪只執行一次
+依使用者要求，在不乾擾既有 GPU 任務的前提下確認 GPU 是否有人使用。本輪只執行一次
 `nvidia-smi` 快照及既有 PID 的 `ps`／`pstree` 查詢；沒有建立 CUDA context、啟動 benchmark、
 送出 signal、調整 clock／power、終止程序或啟動本專案訓練。
 

@@ -227,4 +227,4 @@ A'(x)=\begin{cases}
 - GRAU、DAPA 與 xIELU 是 2024–2026 的近年／預印本工作；本報告確認其原始稿內容，但未完成全面引用鏈、同族論文與專利檢索。
 - 新多項式假說的 exact-tail 公式已修正並完成基本符號條件檢查，但尚未驗證可行 \(a,T\) 範圍、逼近誤差、訓練穩定性、量化誤差或 detector AP。
 
-Phase 0 的合理出口不是宣布勝者。純函數 registry 現已實作 SiLU、Hardswish、ReLU diagnostic、`poly_shift` 與 `poly_quality`；收到資料夾後先建立不可變 SiLU baseline，再依第 9 節漏斗於 BBAT5 v1 與 COCO2017 **分開**收斂候選。只有現行短名單被淘汰時才從本文件的研究 frontier 補位，最終仍以指定硬體的端到端實測決定 profile 與架構。
+Phase 0 的合理出口不是宣佈勝者。純函數 registry 現已實作 SiLU、Hardswish、ReLU diagnostic、`poly_shift` 與 `poly_quality`；收到資料夾後先建立不可變 SiLU baseline，再依第 9 節漏斗於 BBAT5 v1 與 COCO2017 **分開**收斂候選。只有現行短名單被淘汰時才從本文件的研究 frontier 補位，最終仍以指定硬體的端到端實測決定 profile 與架構。

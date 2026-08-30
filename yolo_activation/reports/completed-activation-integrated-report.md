@@ -34,170 +34,171 @@ BCSP 的 manifest、region、queue 與 gate propagation，但沒有得到實際 
 > 已完成的 non-SiLU 候選中，只有 `qsilu_pq` 通過完整 COCO2017 + Canonical BBAT5 v1 的
 > 10-epoch 八項 accuracy gate；下一階段應比較 accepted SiLU 與 qSiLU 的量化行為。
 
-## 3. 共用數學骨架
+## 3. 六種 Activation 的可讀公式
 
-本專案的主要候選都可寫成
+完整逐步推導放在[可讀版數學文件](../docs/research/full35-activation-mathematical-derivations.md)。本節只保留
+閱讀實驗結果需要的公式與直觀意義。
 
-\[
-A(x)=\frac{x}{2}+H(|x|).
-\]
+### 3.1 共用骨架
 
-因為 \(H(|x|)\) 是偶函數，所以
+令 `u = |x|`，也就是先取輸入的絕對值。主要候選都採用：
 
-\[
-A(x)-A(-x)=x.
-\]
+```text
+輸出 A(x) = x / 2 + 修正量 H(|x|)
+```
 
-這項 symmetry invariant 精確成立，不是訓練後的近似統計。若 \(H(0)=0\)，則 \(A(0)=0\)；若
-\(u=|x|\ge T\) 時 \(H(u)=u/2\)，則正尾端精確為 \(x\)，負尾端精確為 0。
+對 `x` 與 `-x`，修正量完全相同，所以相減時會抵消：
 
-### 3.1 SiLU
+```text
+A(x) - A(-x)
+= [x/2 + H(|x|)] - [-x/2 + H(|x|)]
+= x
+```
 
-\[
-\operatorname{SiLU}(x)=x\sigma(x)
-=\frac{x}{2}+\frac{|x|}{2}\tanh(|x|/2).
-\]
+如果 `H(0)=0`，輸入 0 時輸出也是 0。如果門檻 `T` 以外令 `H(u)=u/2`，正尾端輸出就是 `x`，
+負尾端輸出就是 0，也就是精確 ReLU 尾端。
 
-- 光滑、含負輸出谷與非單調導數。
-- 原模型實際使用的 activation，也是所有 delta 的 accuracy reference。
-- 硬體可依賴 backend fused SiLU；若自行實作，仍需要 sigmoid／exp 類非線性。
+### 3.2 SiLU
 
-### 3.2 Hardswish
+```text
+SiLU(x) = x × sigmoid(x)
+```
 
-\[
-\operatorname{Hardswish}(x)=
-\begin{cases}
-0,&x\le-3,\\
-x(x+3)/6,&-3<x<3,\\
-x,&x\ge3.
-\end{cases}
-\]
+也可以改寫成共用骨架：
 
-- 中央區間是二次式，兩端是 exact ReLU tails。
-- 只有 C⁰；在 \(-3\) 與 \(3\) 的一階導數不連續。
-- 常見 backend 有 fused operator，但本模型直接 zero-shot 會產生很大的 feature drift。
+```text
+SiLU(x) = x/2 + [|x|/2] × tanh(|x|/2)
+```
 
-### 3.3 ReLU
+SiLU 是正式父模型使用的 activation。它光滑、保留負輸出谷與非單調區域；硬體若沒有 fused SiLU，
+通常需要 sigmoid／exp 類運算。
 
-\[
-\operatorname{ReLU}(x)=\frac{x+|x|}{2}.
-\]
+### 3.3 Hardswish
 
-- 比較／截斷即可實作，是最低 primitive cost。
-- 拿掉 SiLU 的負谷與平滑轉換後，本次 zero-shot 八項 mAP50-95 全為 0。
-- 因診斷已足夠明確，沒有浪費完整 recovery 預算。
+| 輸入範圍 | 輸出 |
+| --- | --- |
+| `x ≤ -3` | `0` |
+| `-3 < x < 3` | `x × (x + 3) / 6` |
+| `x ≥ 3` | `x` |
 
-### 3.4 qSiLU：`qsilu_pq`
+中央區間是二次式，兩端精確等於 ReLU。它只有 C0，門檻上的一階導數不連續。雖然常見 backend 有
+fused operator，本模型直接替換 190 個 sites 後仍產生很大的 feature drift。
 
-令 \(u=|x|\)，定義
+### 3.4 ReLU
 
-\[
-Q(x)=\frac{x}{2}+h(u),
-\]
+| 輸入範圍 | 輸出 |
+| --- | --- |
+| `x < 0` | `0` |
+| `x ≥ 0` | `x` |
 
-\[
-h(u)=
-\begin{cases}
-\frac{57}{256}u^2,&0\le u<1,\\
-\frac{23}{256}u^2+\frac{17}{64}u-\frac{17}{128},&1\le u<2,\\
--\frac{11}{512}u^2+\frac{91}{128}u-\frac{37}{64},&2\le u<4,\\
--\frac{5}{1024}u^2+\frac{37}{64}u-\frac{5}{16},&4\le u<8,\\
-\frac12u,&u\ge8.
-\end{cases}
-\]
+ReLU 是最低成本控制組，但拿掉 SiLU 的負谷與平滑轉換後，本次 zero-shot 八項 mAP50-95 全為 0。
 
-等價的截斷平方表示為
+### 3.5 qSiLU：`qsilu_pq`
 
-\[
-h(u)=\frac{57}{256}u^2-\frac{17}{128}[u-1]_+^2
--\frac{57}{512}[u-2]_+^2+\frac{17}{1024}[u-4]_+^2
-+\frac{5}{1024}[u-8]_+^2.
-\]
+qSiLU 仍使用 `qSiLU(x)=x/2+h(|x|)`。令 `u=|x|`，程式實際使用下列分段：
 
-- knots 為 1、2、4、8，全部是二的冪。
-- 全部係數是 dyadic；融合 datapath 可共用一次 \(u^2\)。
-- 全域 C¹、保留負谷與非單調導數，\(|x|\ge8\) 為 exact ReLU。
-- \([-8,8]\) 對 SiLU：MAE 0.0051297、RMSE 0.0060978、max error 0.0108319。
-- 已通過 float、Q16.10 bit-true 與 ONNX gate。
-- 「硬體友善」目前是結構判斷；尚未有指定 FPGA／ASIC 的 latency、power 或 resource 實測。
+| `u` 的範圍 | 修正量 `h(u)` |
+| --- | --- |
+| `0 ≤ u < 1` | `(57/256)u²` |
+| `1 ≤ u < 2` | `(23/256)u² + (17/64)u - 17/128` |
+| `2 ≤ u < 4` | `-(11/512)u² + (91/128)u - 37/64` |
+| `4 ≤ u < 8` | `-(5/1024)u² + (37/64)u - 5/16` |
+| `u ≥ 8` | `u/2` |
 
-### 3.5 SIPA 一般式
+- 門檻是 1、2、4、8，全部是 2 的冪。
+- 全部係數都是 dyadic，可用 shift／add 表示常數。
+- 四個區段可共用一次 `u²`。
+- 全域 C1，保留負谷與非單調導數；`|x|≥8` 時精確等於 ReLU。
+- `[-8,8]` 對 SiLU：MAE 0.0051297、RMSE 0.0060978、最大誤差 0.0108319。
+- 已通過 float、Q16.10 bit-true、ONNX 介面與 Full35 10-epoch accuracy gate。
+- 「硬體友善」目前是結構判斷，尚未有指定 FPGA／ASIC 的 latency、power 或資源實測。
 
-令 \(z=u/T\in[0,1]\)，先設計偶殘差導數
+### 3.6 SIPA 一般設計
 
-\[
-q_a(z)=az+(9-\frac92a)z^2+(6a-16)z^3
-+(\frac{15}{2}-\frac52a)z^4.
-\]
+SIPA 先把中央區間縮放成 `z=u/T`，再設計修正量的斜率 `q_a(z)`：
 
-四項約束為
+```text
+q_a(z) = a z
+       + (9 - 9a/2) z²
+       + (6a - 16) z³
+       + (15/2 - 5a/2) z⁴
+```
 
-\[
-q_a(0)=0,\quad q_a(1)=\frac12,\quad q_a'(1)=0,\quad
-\int_0^1q_a(t)\,dt=\frac12.
-\]
+四個限制不要連成一行看；它們分別代表：
 
-積分後
+1. `q_a(0)=0`：原點的修正斜率是 0。
+2. `q_a(1)=1/2`：中央區間走到尾端時，斜率接到 `u/2` 直線。
+3. `q_a` 在 `z=1` 的導數等於 0：曲率接到尾端的 0。
+4. `q_a` 從 0 到 1 的曲線下面積等於 1/2：函數值走到尾端時剛好是 `T/2`。
 
-\[
-R_a(z)=\frac a2z^2+(3-\frac32a)z^3
-+(\frac32a-4)z^4+(\frac32-\frac12a)z^5,
-\]
+累積斜率後得到：
 
-\[
-H_{T,a}(u)=T R_a\left(\frac{\min(u,T)}{T}\right)+\frac{[u-T]_+}{2}.
-\]
+```text
+R_a(z) = (a/2) z²
+       + (3 - 3a/2) z³
+       + (3a/2 - 4) z⁴
+       + (3/2 - a/2) z⁵
+```
 
-這組約束同時保證 zero anchor、symmetry invariant、C² 接合與 exact ReLU tails。完整線性解與連續性
-證明在[六種 activation 完整数學推導](../docs/research/full35-activation-mathematical-derivations.md)。
+最後的修正量分成兩段：
+
+| 輸入大小 | `H(u)` |
+| --- | --- |
+| `0 ≤ u ≤ T` | `T × R_a(u/T)` |
+| `u ≥ T` | `u/2` |
+
+這四個限制共同保證 zero anchor、symmetry invariant、C2 接合與精確 ReLU 尾端。
 
 #### `poly_quality`
 
-\[
-a=4,\qquad T=\frac{109}{16},
-\]
+```text
+a = 4
+T = 109/16 = 6.8125
 
-\[
-H(u)=\frac{32}{109}u^2-\frac{768}{11881}u^3
-+\frac{8192}{1295029}u^4-\frac{32768}{141158161}u^5.
-\]
+H(u) = (32/109)u²
+     - (768/11881)u³
+     + (8192/1295029)u⁴
+     - (32768/141158161)u⁵       ，0 ≤ u ≤ 109/16
 
-- 負谷約 \(-0.27904\)，接近原始 SiLU。
-- 係數不是 dyadic，需要一般常數乘法器或再近似。
-- zero-shot 是所有 proposed profiles 中最貼近 baseline 的一個，但 10-epoch recovery 的 BBAT ball
-  box 超出 gate，不能只看函數 MSE 或 COCO 指標選它。
+H(u) = u/2                      ，u ≥ 109/16
+```
+
+負谷約為 -0.27904，接近原始 SiLU。它的 zero-shot 很接近 baseline，但係數不是 dyadic，而且
+10-epoch recovery 的 BBAT ball box 未通過 gate。
 
 #### `poly_shift`
 
-\[
-a=\frac92,\qquad T=8,
-\]
+```text
+a = 9/2
+T = 8
 
-\[
-H(u)=\frac9{32}u^2-\frac{15}{256}u^3
-+\frac{11}{2048}u^4-\frac3{16384}u^5,\qquad 0\le u\le8.
-\]
+H(u) = (9/32)u²
+     - (15/256)u³
+     + (11/2048)u⁴
+     - (3/16384)u⁵       ，0 ≤ u ≤ 8
 
-- 直接係數全部是 dyadic／APoT，可用 shift-add 表示常數。
-- 仍需形成 \(u^2,u^3,u^4,u^5\)，所以不是零乘法器設計。
-- 完成 11-region zero-shot sensitivity，但 uniform 10-epoch gate 失敗，後續 BCSP jobs 依規則封鎖。
+H(u) = u/2               ，u ≥ 8
+```
 
-### 3.6 Fixed-point invariant
+直接係數全部是 dyadic，但仍需形成 `u²` 到 `u⁵`，不是零乘法器設計。它完成 11-region zero-shot
+sensitivity，但 uniform 10-epoch gate 失敗，所以後續 BCSP jobs 依規則封鎖。
 
-若整數輸入 code 為 \(n\)，正負輸入共用同一個 \(\widehat H(|n|)\)，則
+### 3.7 Fixed-point 不變量
 
-\[
-\widehat A(n)=\left\lfloor\frac n2\right\rfloor+\widehat H(|n|)
-\]
+令 `n` 是 fixed-point 的整數輸入 code，正負輸入共用同一個 `H_hat(|n|)`：
 
-可保持
+```text
+A_hat(n) = floor(n/2) + H_hat(|n|)
+```
 
-\[
-\widehat A(n)-\widehat A(-n)=n.
-\]
+因為 `floor(n/2)-floor(-n/2)=n`，而 `H_hat(|n|)` 會相減抵消，所以：
 
-尾端採 \(\widehat H(u)=\lceil u/2\rceil\) 時，奇數 code 的正／負 ReLU tails 也能保持 0 LSB
-誤差。這是量化工作列應繼續驗證的 bit-exact 性質，不等於 PTQ／QAT AP 已經完成。
+```text
+A_hat(n) - A_hat(-n) = n
+```
+
+尾端若使用 `H_hat(u)=ceil(u/2)`，奇數 code 的正、負 ReLU 尾端也能保持 0 LSB 誤差。這是後續量化
+工作要做全輸入碼枚舉的 bit-exact 性質，不代表 PTQ／QAT AP 已完成。
 
 ## 4. 模型、資料與比較契約
 
@@ -228,7 +229,7 @@ H(u)=\frac9{32}u^2-\frac{15}{256}u^3
 | PTQ | 0 | 1 | calibration | — | 尚未在本專案執行 |
 | QAT if needed | 10 | 1 | 0／1 | 原 J3 的 0.5× | 未啟動 |
 
-Recovery 共用 AdamW、weight decay \(2.7\times10^{-4}\)、betas (0.948, 0.999)、AMP、gradient clip
+Recovery 共用 AdamW、weight decay 2.7×10⁻⁴、betas (0.948, 0.999)、AMP、gradient clip
 10 與 cosine final factor 0.5。Short recovery LR：backbone 3.8e-7、neck 1.9e-6、MASF 3.8e-6、
 attention 5e-8、Detect／Pose heads 5e-6。
 

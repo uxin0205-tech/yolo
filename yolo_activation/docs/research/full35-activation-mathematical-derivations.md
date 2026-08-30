@@ -1,433 +1,500 @@
-# Full35 Activation 完整数学推导
+# Full35 六種 Activation 可讀版完整數學推導
 
-## 1. 范围与符号
+這份文件不假設讀者熟悉 LaTeX。所有公式都改用一般分數、Unicode 次方與逐行說明；程式名稱與必要
+英文術語保留原名。本文涵蓋實際評估的六種 activation：SiLU、Hardswish、ReLU、`qsilu_pq`、
+`poly_quality`、`poly_shift`。
 
-本文覆盖程式 registry 中实际评估的六种 activation：`silu`、`hardswish`、`relu`、
-`qsilu_pq`、`poly_quality`、`poly_shift`。其中后三个为本工作中以约束方程推导的候选；
-SiLU、Hardswish、ReLU 是控制组，但也完整列出其公式与性质，避免量化工作列只看到名称而不知道
-不变量、连续性及尾端行为。
+## 1. 先看懂本文符號
 
-记
+| 符號 | 意思 |
+| --- | --- |
+| `x` | activation 的輸入，可以是正數或負數 |
+| `A(x)` | activation 的輸出 |
+| `u = |x|` | 輸入的絕對值，所以 `u` 一定大於或等於 0 |
+| `T` | 進入精確 ReLU 尾端的門檻 |
+| `H(u)` | 只看輸入大小、不看正負號的修正量 |
+| `z = u / T` | 把中央區間縮放到 0 到 1 |
+| `q(z)` | `H` 在中央區間的斜率設計 |
+| `R(z)` | 把 `q(z)` 從 0 累積到 `z` 得到的曲線 |
 
-\[
-u=|x|,\qquad [v]_+=\max(v,0).
-\]
+連續性縮寫：
 
-我们关注的核心分解是
+- C0：函數值連續，曲線沒有跳躍。
+- C1：函數值與一階導數都連續，曲線沒有尖角。
+- C2：函數值、一階導數與二階導數都連續，曲率也沒有跳躍。
 
-\[
-A(x)=\frac{x}{2}+H(|x|).
-\]
+## 2. 共用結構為什麼重要
 
-因为第二项是偶函数，所以不论 \(H\) 的具体形式为何，都有
+本專案把主要候選寫成：
 
-\[
-A(x)-A(-x)
-=\left(\frac{x}{2}+H(|x|)\right)
--\left(-\frac{x}{2}+H(|x|)\right)=x. \tag{1}
-\]
+```text
+A(x) = x / 2 + H(|x|)
+```
 
-这是所有 proposed profiles 的结构性不变量，不是训练后才近似成立的统计性质。若再要求
-\(H(0)=0\)，便有 zero anchor \(A(0)=0\)；若某个 \(T>0\) 之后
-\(H(u)=u/2\)，便得到 exact ReLU tails：\(x\ge T\) 时 \(A(x)=x\)，
-\(x\le -T\) 时 \(A(x)=0\)。
+`H(|x|)` 對 `x` 與 `-x` 完全相同，因此：
 
-## 2. SiLU 控制组
+```text
+A(x)  =  x / 2 + H(|x|)
+A(-x) = -x / 2 + H(|x|)
 
-### 2.1 从 sigmoid 推导偶残差
+A(x) - A(-x)
+= x / 2 + H(|x|) - [-x / 2 + H(|x|)]
+= x
+```
 
-SiLU 定义为
+這個結果叫做 symmetry invariant，意思是正、負輸出的差永遠精確等於原輸入，不需要靠訓練近似。
 
-\[
-\operatorname{SiLU}(x)=x\sigma(x),\qquad
-\sigma(x)=\frac{1}{1+e^{-x}}.
-\]
+再加兩個條件，就能保留 SiLU 想要的行為：
 
-由 \(\sigma(-x)=1-\sigma(x)\)，可直接得到
+1. `H(0) = 0`：輸入為 0 時，輸出也為 0。
+2. 當 `u ≥ T` 時令 `H(u) = u / 2`：
+   - 正輸入 `x ≥ T` 時，`A(x) = x`。
+   - 負輸入 `x ≤ -T` 時，`A(x) = 0`。
 
-\[
-\operatorname{SiLU}(x)-\operatorname{SiLU}(-x)
-=x\sigma(x)+x\sigma(-x)=x. \tag{2}
-\]
+也就是有限門檻外精確等於 ReLU，而不是慢慢趨近 ReLU。
 
-又因为
+## 3. SiLU 控制組
 
-\[
-\sigma(x)=\frac{1+\tanh(x/2)}{2},
-\]
+### 3.1 定義
 
-所以
+```text
+sigmoid(x) = 1 / [1 + exp(-x)]
+SiLU(x)    = x × sigmoid(x)
+```
 
-\[
-\operatorname{SiLU}(x)
-=\frac{x}{2}+\frac{x}{2}\tanh(x/2)
-=\frac{x}{2}+\frac{|x|}{2}\tanh(|x|/2). \tag{3}
-\]
+sigmoid 有一個互補性質：
 
-最后一步成立是因为 \(x\tanh(x/2)\) 为偶函数。式 (3) 正是我们采用
-\(x/2+H(|x|)\) 的来源，其中
+```text
+sigmoid(-x) = 1 - sigmoid(x)
+```
 
-\[
-H_{\mathrm{SiLU}}(u)=\frac{u}{2}\tanh(u/2).
-\]
+所以：
 
-### 2.2 导数与实现成本
+```text
+SiLU(x) - SiLU(-x)
+= x × sigmoid(x) + x × sigmoid(-x)
+= x × [sigmoid(x) + sigmoid(-x)]
+= x
+```
 
-\[
-\operatorname{SiLU}'(x)
-=\sigma(x)+x\sigma(x)(1-\sigma(x)). \tag{4}
-\]
+### 3.2 轉成共用結構
 
-SiLU 是光滑、含负输出谷、非单调的函数，但 sigmoid／exp 对整数 datapath 并不便宜。因此后续
-候选保留式 (1)、zero anchor、负谷与 ReLU tails，同时把非线性改写为低阶多项式或分段二次式。
+利用 `sigmoid(x) = [1 + tanh(x/2)] / 2`：
 
-## 3. Hardswish 控制组
+```text
+SiLU(x)
+= x / 2 + [x / 2] × tanh(x / 2)
+= x / 2 + [|x| / 2] × tanh(|x| / 2)
+```
 
-定义
+因此 SiLU 的修正量是：
 
-\[
-\operatorname{Hardswish}(x)
-=x\frac{\operatorname{ReLU6}(x+3)}{6}
-=\begin{cases}
-0,&x\le -3,\\
-\dfrac{x(x+3)}{6},&-3<x<3,\\
-x,&x\ge 3.
-\end{cases} \tag{5}
-\]
+```text
+H_SiLU(u) = [u / 2] × tanh(u / 2)
+```
 
-在中心区间，
+SiLU 光滑、保留負輸出谷與非單調區域，但若硬體沒有 fused SiLU，通常需要 sigmoid／exp 與資料乘法。
 
-\[
-\frac{x(x+3)}{6}=\frac{x}{2}+\frac{x^2}{6},
-\]
+## 4. Hardswish 控制組
 
-所以 Hardswish 也满足式 (1)，且在 \(|x|\ge3\) 是 exact ReLU tails。其导数为
+Hardswish 依輸入分成三段：
 
-\[
-\operatorname{Hardswish}'(x)=
-\begin{cases}
-0,&x<-3,\\
-\dfrac{2x+3}{6},&-3<x<3,\\
-1,&x>3.
-\end{cases} \tag{6}
-\]
+| 輸入範圍 | 輸出 |
+| --- | --- |
+| `x ≤ -3` | `0` |
+| `-3 < x < 3` | `x × (x + 3) / 6` |
+| `x ≥ 3` | `x` |
 
-在 \(-3\) 的左右导数分别为 \(0\) 与 \(-1/2\)，在 \(3\) 的左右导数分别为
-\(3/2\) 与 \(1\)，因此它只有 \(C^0\)，不是 \(C^1\)。它只有一个中心二次式且门槛固定，硬体简单；
-但 Full35 的 10-epoch recovery 仍有 BBAT bat pose 超过 accuracy gate，不能只凭公式简单就宣称胜出。
+中央段展開後：
 
-## 4. ReLU 诊断控制组
+```text
+x × (x + 3) / 6 = x / 2 + x² / 6
+```
 
-\[
-\operatorname{ReLU}(x)=[x]_+
-=\frac{x+|x|}{2}. \tag{7}
-\]
+因為 `x² = |x|²`，中央段也符合 `x/2 + H(|x|)`；門檻外直接是 ReLU。
 
-因此它是 \(H(u)=u/2\) 的退化情形，也满足式 (1)。其导数为
+中央段的一階導數是：
 
-\[
-\operatorname{ReLU}'(x)=
-\begin{cases}0,&x<0,\\1,&x>0,\end{cases}
-\]
+```text
+(2x + 3) / 6
+```
 
-并在原点不可微。ReLU 仅作为「完全拿掉负谷与平滑过渡」的诊断下界；本实验 zero-shot 八项
-mAP50-95 全为 0，所以没有进入昂贵 recovery。
+在 `x = -3` 與 `x = 3`，左右導數不同，所以 Hardswish 只有 C0，不是 C1。它的運算簡單，但本次
+Full35 10-epoch recovery 的 bat pose 差值為 -0.016884，超過 -0.015 gate。
 
-## 5. SIPA：受约束积分多项式族
+## 5. ReLU 診斷控制組
 
-### 5.1 先设计导数，再积分
+| 輸入範圍 | 輸出 |
+| --- | --- |
+| `x < 0` | `0` |
+| `x ≥ 0` | `x` |
 
-令正规化位置 \(z=u/T\in[0,1]\)。我们不直接拟合函数值，而先设定偶残差的导数
+也可以寫成：
 
-\[
-q_a(z)=az+(9-\tfrac92a)z^2+(6a-16)z^3
-+(\tfrac{15}{2}-\tfrac52a)z^4. \tag{8}
-\]
+```text
+ReLU(x) = [x + |x|] / 2
+```
 
-四个系数来自下列四个线性约束：
+因此 ReLU 是 `H(u) = u/2` 的退化版本。它在 0 有尖角，沒有 SiLU 的負谷與平滑轉換。本次直接替換
+後，八項 zero-shot mAP50-95 全為 0，所以只保留作最低運算成本控制組，不啟動 recovery。
 
-\[
-q_a(0)=0,\quad q_a(1)=\frac12,\quad q_a'(1)=0,
-\quad \int_0^1q_a(t)\,dt=\frac12. \tag{9}
-\]
+## 6. SIPA 受約束積分多項式族
 
-这些约束各有明确作用：
+SIPA 的做法不是直接猜一條五次曲線，而是先設計「修正量的斜率」，再把斜率累積成曲線。這樣能把
+原點、尾端斜率、尾端曲率與尾端函數值分別控制。
 
-- \(q_a(0)=0\)：使原点左右一阶导数同为 \(1/2\)。
-- \(q_a(1)=1/2\)：接上 \(H(u)=u/2\) 的 tail slope。
-- \(q_a'(1)=0\)：接上尾端的零二阶导数。
-- 积分为 \(1/2\)：使 \(H(T)=T/2\)，函数值接上 exact ReLU tail。
+### 6.1 第一步：建立一般斜率多項式
 
-积分得到
+先把 `u` 除以門檻 `T`，得到 `z = u/T`。在中央區間，`z` 介於 0 和 1。
 
-\[
-R_a(z)=\int_0^zq_a(t)\,dt
-=\frac a2z^2+(3-\tfrac32a)z^3
-+(\tfrac32a-4)z^4+(\tfrac32-\tfrac12a)z^5. \tag{10}
-\]
+從沒有常數項的四次式開始：
 
-于是定义
+```text
+q(z) = a z + b₂ z² + b₃ z³ + b₄ z⁴
+```
 
-\[
-H_{T,a}(u)=T R_a\!\left(\frac{\min(u,T)}{T}\right)
-+\frac{[u-T]_+}{2}, \tag{11}
-\]
+`a` 保留為 shape 參數，另外三個係數由三個尾端條件解出。
 
-\[
-A_{T,a}(x)=\frac{x}{2}+H_{T,a}(|x|). \tag{12}
-\]
+### 6.2 第二步：逐條說明四個限制
 
-### 5.2 不变量与连续性的逐项证明
+限制一：原點的修正斜率必須是 0。
 
-由 \(R_a(0)=0\)，式 (12) 有 \(A(0)=0\)。由偶残差结构，式 (1) 精确成立。
-由式 (9) 与 (10)，
+```text
+q(0) = 0
+```
 
-\[
-H(T^-)=TR_a(1)=T/2=H(T^+),
-\]
+這個條件已由「沒有常數項」自動滿足，可讓 activation 在原點左右的一階導數都等於 1/2。
 
-\[
-H'(T^-)=q_a(1)=1/2=H'(T^+),
-\]
+限制二：走到中央區間終點時，修正斜率必須是 1/2。
 
-\[
-H''(T^-)=q_a'(1)/T=0=H''(T^+).
-\]
+```text
+q(1) = 1/2
+```
 
-所以两个门槛及原点都达到 \(C^2\)。在 \(u\ge T\) 时，式 (11) 化为
+因為門檻外要接 `H(u)=u/2`，其斜率就是 1/2。
 
-\[
-H(u)=TR_a(1)+(u-T)/2=u/2,
-\]
+限制三：走到中央區間終點時，斜率不能再繼續改變。
 
-因此 exact ReLU tails 成立。参数 \(a=q_a'(0)\) 控制原点附近曲率；\(T\) 控制负谷宽度与尾端门槛。
+```text
+q 在 z=1 的導數 = 0
+```
 
-把式 (10) 的 \(z=u/T\) 展开，可得到不需 runtime 除法的直接式
+門檻外 `H(u)=u/2` 是直線，二階導數為 0；此條件讓中央曲率平順接到尾端曲率。
 
-\[
-H(u)=c_2u^2+c_3u^3+c_4u^4+c_5u^5,\quad 0\le u\le T, \tag{13}
-\]
+限制四：從 `z=0` 到 `z=1` 累積的面積必須等於 1/2。
 
-其中 \(c_k\) 等于式 (10) 中 \(z^k\) 的系数除以 \(T^{k-1}\)。
+```text
+q(z) 在 0 到 1 下方的面積 = 1/2
+```
 
-### 5.3 `poly_quality` 的完整代入
+這保證走到門檻時 `H(T)=T/2`，函數值能接上 ReLU 尾端。
 
-选择
+把後三個條件展開，得到三條一般線性方程：
 
-\[
-a=4,\qquad T=\frac{109}{16}=6.8125.
-\]
+```text
+b₂ + b₃ + b₄             = 1/2 - a
+2b₂ + 3b₃ + 4b₄          = -a
+b₂/3 + b₃/4 + b₄/5       = 1/2 - a/2
+```
 
-式 (8) 与 (10) 化为
+解出：
 
-\[
-q(z)=4z-9z^2+8z^3-\frac52z^4, \tag{14}
-\]
+```text
+b₂ = 9 - 9a/2
+b₃ = 6a - 16
+b₄ = 15/2 - 5a/2
+```
 
-\[
-R(z)=2z^2-3z^3+2z^4-\frac12z^5. \tag{15}
-\]
+所以完整斜率式為：
 
-其导数可因式分解为
+```text
+q_a(z) = a z
+       + (9 - 9a/2) z²
+       + (6a - 16) z³
+       + (15/2 - 5a/2) z⁴
+```
 
-\[
-q'(z)=2(1-z)^2(2-5z). \tag{16}
-\]
+### 6.3 第三步：把斜率累積成曲線
 
-所以尾端二阶连续一目了然。代入 \(T=109/16\)，直接系数为
+逐項累積後得到：
 
-\[
-H(u)=\frac{32}{109}u^2
--\frac{768}{11881}u^3
-+\frac{8192}{1295029}u^4
--\frac{32768}{141158161}u^5,\quad u\le\frac{109}{16}. \tag{17}
-\]
+```text
+R_a(z) = (a/2) z²
+       + (3 - 3a/2) z³
+       + (3a/2 - 4) z⁴
+       + (3/2 - a/2) z⁵
+```
 
-负半轴写成 \(A(-Tz)=T(R(z)-z/2)\)。极值条件是 \(q(z)=1/2\)，其中一根为
-\(z=1/5\)，因此负谷值为
+最後把修正量 `H(u)` 分成中央與尾端：
 
-\[
-T\left(R(1/5)-1/10\right)=-0.27904. \tag{18}
-\]
+| 輸入大小 | 修正量 |
+| --- | --- |
+| `0 ≤ u ≤ T` | `H(u) = T × R_a(u/T)` |
+| `u ≥ T` | `H(u) = u/2` |
 
-解析导数范围为 \([-27/250,277/250]=[-0.108,1.108]\)。这组门槛优先贴近 SiLU 品质，
-直接系数不是 dyadic，仍需要常数乘法器或近似。
+完整 activation 仍是：
 
-### 5.4 `poly_shift` 的完整代入
+```text
+A(x) = x/2 + H(|x|)
+```
 
-选择
+### 6.4 為什麼是 C2 且尾端精確等於 ReLU
 
-\[
-a=\frac92,\qquad T=8.
-\]
+在 `u=T` 的左右兩側逐項比較：
 
-式 (8) 与 (10) 化为
+| 比較項目 | 中央多項式 | 尾端直線 | 結果 |
+| --- | --- | --- | --- |
+| 函數值 | `T × R_a(1) = T/2` | `T/2` | 相同 |
+| 一階導數 | `q_a(1) = 1/2` | `1/2` | 相同 |
+| 二階導數 | `q_a` 在 1 的導數除以 `T`，等於 0 | `0` | 相同 |
 
-\[
-q(z)=\frac92z-\frac{45}{4}z^2+11z^3-\frac{15}{4}z^4, \tag{19}
-\]
+因此接點達到 C2。門檻外直接使用 `H(u)=u/2`，正尾端輸出 `x`，負尾端輸出 `0`。
 
-\[
-R(z)=\frac94z^2-\frac{15}{4}z^3+\frac{11}{4}z^4-\frac34z^5. \tag{20}
-\]
+## 7. `poly_quality` 的完整代入
 
-由于 \(T=8\)，直接式全部成为 dyadic：
+品質導向版本選擇：
 
-\[
-H(u)=\frac9{32}u^2-\frac{15}{256}u^3
-+\frac{11}{2048}u^4-\frac3{16384}u^5,\quad 0\le u\le8, \tag{21}
-\]
+```text
+a = 4
+T = 109/16 = 6.8125
+```
 
-\[
-H(u)=u/2,\quad u\ge8. \tag{22}
-\]
+把 `a=4` 代入一般係數：
 
-例如 \(9/32=1/4+1/32\)、\(15/256=1/16-1/256\)，可用 shift-add 表示常数；
-但式 (21) 仍需形成 \(u^2,u^3,u^4,u^5\)，所以「dyadic」不等于「零乘法器」。本次 Full35
-结果显示它的 uniform zero-shot 与 10-epoch recovery 都未过 gate，因此 region／mixed search
-依预注册依赖被封锁，没有拿缺失结果补造结论。
+```text
+b₂ = 9 - 9×4/2 = -9
+b₃ = 6×4 - 16  = 8
+b₄ = 15/2 - 5×4/2 = -5/2
+```
 
-## 6. `qsilu_pq`：C1 分段二次 qSiLU
+所以斜率與累積曲線為：
 
-### 6.1 设计目标
+```text
+q(z) = 4z - 9z² + 8z³ - (5/2)z⁴
+R(z) = 2z² - 3z³ + 2z⁴ - (1/2)z⁵
+```
 
-SIPA 的五次式虽可做 dyadic 常数化，但仍有高次数据路径。`qsilu_pq` 改用门槛
-\(0,1,2,4,8\) 的分段二次偶残差：只形成一次 \(u^2\)，保持式 (1)、zero anchor、负谷、
-非单调导数与 \(|x|\ge8\) exact ReLU tails。它是 SiLU 近似，不是把 SiLU 换成 GELU。
+展開 `H(u)=T×R(u/T)` 後：
 
-### 6.2 从截断平方基底推导
+```text
+H(u) = (32/109)u²
+     - (768/11881)u³
+     + (8192/1295029)u⁴
+     - (32768/141158161)u⁵        ，0 ≤ u ≤ 109/16
 
-采用截断平方基底
+H(u) = u/2                       ，u ≥ 109/16
+```
 
-\[
-h(u)=\frac1{1024}\sum_{i=0}^{4}k_i[u-t_i]_+^2, \tag{23}
-\]
+負半軸可寫成 `A(-Tz)=T×[R(z)-z/2]`。令斜率為 0，可得到負谷位置 `z=1/5`；代回後負谷約為
+`-0.27904`，很接近 SiLU。解析導數範圍為 `[-0.108, 1.108]`。
 
-\[
-(t_0,t_1,t_2,t_3,t_4)=(0,1,2,4,8),
-\]
+這個 profile 的 zero-shot 最貼近 baseline，但係數不是 dyadic，而且 10-epoch recovery 的 BBAT ball
+box 差值為 -0.020970，未通過 gate。
 
-\[
-(k_0,k_1,k_2,k_3,k_4)=(228,-136,-114,17,5). \tag{24}
-\]
+## 8. `poly_shift` 的完整代入
 
-每个 \([u-t]_+^2\) 在门槛处的函数值与一阶导数都连续，所以式 (23) 自动是 \(C^1\)。
-前三个 exact-tail 线性条件是
+Shift 導向版本選擇：
 
-\[
-\sum_i k_i=228-136-114+17+5=0, \tag{25}
-\]
+```text
+a = 9/2
+T = 8
+```
 
-\[
-\sum_i k_it_i=-136-228+68+40=-256, \tag{26}
-\]
+代入一般係數後：
 
-\[
-\sum_i k_it_i^2=-136-456+272+320=0. \tag{27}
-\]
+```text
+q(z) = (9/2)z - (45/4)z² + 11z³ - (15/4)z⁴
+R(z) = (9/4)z² - (15/4)z³ + (11/4)z⁴ - (3/4)z⁵
+```
 
-当 \(u\ge8\) 时展开式 (23)：二次项由式 (25) 消失，线性项为
+因為門檻剛好是 8，展開後所有常數都是 2 的冪次分母：
 
-\(-2\sum k_it_i/1024=1/2\)，常数项由式 (27) 消失，因此
+```text
+H(u) = (9/32)u²
+     - (15/256)u³
+     + (11/2048)u⁴
+     - (3/16384)u⁵        ，0 ≤ u ≤ 8
 
-\[
-h(u)=u/2,\qquad u\ge8. \tag{28}
-\]
+H(u) = u/2                ，u ≥ 8
+```
 
-再定义
+例如：
 
-\[
-Q(x)=\frac{x}{2}+h(|x|), \tag{29}
-\]
+```text
+9/32   = 1/4 + 1/32
+15/256 = 1/16 - 1/256
+```
 
-便得到 exact ReLU tails 与 \(Q(x)-Q(-x)=x\)。
+常數乘法可轉成 shift／add，但仍要形成 `u²`、`u³`、`u⁴`、`u⁵`。本次 uniform zero-shot 與
+10-epoch recovery 都未過 gate，所以後續 BCSP region／mixed jobs 依預註冊規則 blocked。
 
-### 6.3 逐区间展开
+## 9. qSiLU：`qsilu_pq` 的完整推導
 
-把式 (23) 依门槛展开，得到程式实际使用的四段：
+SIPA 需要最高到五次方的資料路徑。qSiLU 改成四個分段共用一次 `u²`，門檻固定為 1、2、4、8。
 
-\[
-h(u)=
-\begin{cases}
-\dfrac{57}{256}u^2,&0\le u<1,\\[2mm]
-\dfrac{23}{256}u^2+\dfrac{17}{64}u-\dfrac{17}{128},&1\le u<2,\\[2mm]
--\dfrac{11}{512}u^2+\dfrac{91}{128}u-\dfrac{37}{64},&2\le u<4,\\[2mm]
--\dfrac{5}{1024}u^2+\dfrac{37}{64}u-\dfrac{5}{16},&4\le u<8,\\[2mm]
-\dfrac12u,&u\ge8.
-\end{cases} \tag{30}
-\]
+### 9.1 截斷平方怎麼看
 
-以第二区为例，\((228u^2-136(u-1)^2)/1024\) 展开为
-\(23u^2/256+17u/64-17/128\)；其余区段按相同方式逐个加入新的截断平方项。
+先定義：
 
-所有系数均是 dyadic。看似较重的 \(91/128\) 也可写成
+```text
+positive(v) = max(v, 0)
+```
 
-\[
-\frac{91}{128}=1-\frac14-\frac1{32}-\frac1{128}, \tag{31}
-\]
+例如 `positive(u-2)²` 在 `u≤2` 時是 0，超過 2 才開始產生二次曲線。qSiLU 的修正量是：
 
-即四个 signed shift 项。融合实现可共用一个 \(u^2\)，再依门槛选择系数；目前 PyTorch eager
-reference 会同时形成多个候选张量，所以显存行为不等同未来 fused RTL／kernel。
+```text
+h(u) = [ 228u²
+         - 136 positive(u-1)²
+         - 114 positive(u-2)²
+         +  17 positive(u-4)²
+         +   5 positive(u-8)² ] / 1024
+```
 
-### 6.4 函数与导数误差
+每個截斷平方在自己的門檻上，函數值與一階導數都是 0，所以相加後自動保持 C1。
 
-以 dense grid 对原 SiLU 比较，当前冻结候选的数值为：
+### 9.2 為什麼 8 以後會精確變成 `u/2`
 
-| 区间／项目 | 数值 |
+五個平方項的係數依序是：
+
+```text
+228, -136, -114, 17, 5
+```
+
+門檻依序是：
+
+```text
+0, 1, 2, 4, 8
+```
+
+當 `u≥8`，所有平方都展開。要留下純粹的 `u/2`，必須讓二次項消失、一次項成為 1/2、常數項消失。
+
+二次項檢查：
+
+```text
+228 - 136 - 114 + 17 + 5 = 0
+```
+
+一次項所需的加權和：
+
+```text
+(-136×1) + (-114×2) + (17×4) + (5×8) = -256
+```
+
+展開平方後，一次項係數是 `-2×(-256)/1024 = 1/2`。
+
+常數項檢查：
+
+```text
+(-136×1²) + (-114×2²) + (17×4²) + (5×8²)
+= -136 - 456 + 272 + 320
+= 0
+```
+
+因此 `u≥8` 時，所有二次項與常數項都抵消，只剩：
+
+```text
+h(u) = u/2
+```
+
+最後定義：
+
+```text
+qSiLU(x) = x/2 + h(|x|)
+```
+
+所以 qSiLU 同時保有 `qSiLU(x)-qSiLU(-x)=x` 與 exact ReLU tails。
+
+### 9.3 程式實際使用的四段公式
+
+| `u=|x|` 的範圍 | `h(u)` |
+| --- | --- |
+| `0 ≤ u < 1` | `(57/256)u²` |
+| `1 ≤ u < 2` | `(23/256)u² + (17/64)u - 17/128` |
+| `2 ≤ u < 4` | `-(11/512)u² + (91/128)u - 37/64` |
+| `4 ≤ u < 8` | `-(5/1024)u² + (37/64)u - 5/16` |
+| `u ≥ 8` | `u/2` |
+
+以第二段為例：
+
+```text
+[228u² - 136(u-1)²] / 1024
+= (23/256)u² + (17/64)u - 17/128
+```
+
+其餘分段依序加入門檻 2、4、8 的新平方項。所有係數都是 dyadic。較大的 `91/128` 也能寫成：
+
+```text
+91/128 = 1 - 1/4 - 1/32 - 1/128
+```
+
+也就是四個 signed shift 項。融合硬體可以共用一個 `u²`，再依區段選係數。
+
+### 9.4 函數誤差與實驗結果
+
+| 項目 | 數值 |
 | --- | ---: |
-| \([-8,8]\) function MAE | 0.0051297 |
-| \([-8,8]\) function RMSE | 0.0060978 |
-| \([-8,8]\) function max error | 0.0108319 |
-| \([-12,12]\) function MSE | \(2.51284\times10^{-5}\) |
-| derivative MAE | 0.0072994 |
-| derivative max error | 0.0342158 |
-| derivative range | \([-0.125,1.125]\) |
+| `[-8,8]` 對 SiLU 的 MAE | 0.0051297 |
+| `[-8,8]` 對 SiLU 的 RMSE | 0.0060978 |
+| `[-8,8]` 最大誤差 | 0.0108319 |
+| `[-12,12]` MSE | 0.0000251284 |
+| 導數 MAE | 0.0072994 |
+| 導數最大誤差 | 0.0342158 |
+| 導數範圍 | `[-0.125, 1.125]` |
 
-它通过 float、Q16.10 bit-true 与 ONNX 数值 gate；但尚无特定 FPGA／ASIC synthesis、latency、
-power 或 resource 实测。因此可称「shift-friendly 候选」，不可称已证明的硬体加速。
+qSiLU 已通過 float、Q16.10 bit-true、ONNX 介面與 Full35 10-epoch 八項 accuracy gate。這證明它是
+值得量化的候選，但尚未證明指定 FPGA／ASIC 上的 latency、power 或資源優勢。
 
-## 7. 保持不变量的 fixed-point integerization
+## 10. Fixed-point 不變量
 
-令输入整数 code 为 \(n\)，正负输入共用同一个偶残差查表／多项式 \(\widehat H(|n|)\)，定义
+令 `n` 是 fixed-point 輸入的整數 code。正負輸入共用同一個整數修正函數 `H_hat(|n|)`：
 
-\[
-\widehat A(n)=\left\lfloor\frac n2\right\rfloor+\widehat H(|n|). \tag{32}
-\]
+```text
+A_hat(n) = floor(n/2) + H_hat(|n|)
+```
 
-由于
+整數 floor 有一個精確性質：
 
-\[
-\left\lfloor\frac n2\right\rfloor
--\left\lfloor\frac{-n}{2}\right\rfloor=n,
-\]
+```text
+floor(n/2) - floor(-n/2) = n
+```
 
-偶残差又会精确抵消，所以对所有可表示整数 code 都有
+而兩側的 `H_hat(|n|)` 完全相同，相減後抵消，因此：
 
-\[
-\widehat A(n)-\widehat A(-n)=n. \tag{33}
-\]
+```text
+A_hat(n) - A_hat(-n) = n
+```
 
-尾端若使用互补 rounding
+尾端使用互補 rounding：
 
-\[
-\widehat H(u)=\left\lceil\frac u2\right\rceil,
-\]
+```text
+H_hat(u) = ceil(u/2)
+```
 
-则正输入为 \(\lfloor n/2\rfloor+\lceil n/2\rceil=n\)，负输入为 0，奇数 code 也保持 0 LSB
-的 ReLU tail 误差。后续量化工作必须另外枚举 Q8／Q12／Q16 全输入码，并验证 overflow、
-saturation、rounding、compiler IR、HLS 与 RTL bit-exact；目前不能把公式证明扩大成 PTQ/QAT AP
-或板上成本已经获证。
+對正整數輸入：
 
-## 8. 数学贡献边界与最终定位
+```text
+floor(n/2) + ceil(n/2) = n
+```
 
-本阶段最值得继续验证的是：zero-anchored、SiLU-like non-monotone、式 (1) symmetry-constrained、
-\(C^2\) exact-tail 的低自由度积分多项式族，以及保持式 (33) 的整数化。`qsilu_pq` 是本专案
-冻结的 \(C^1\) 分段二次候选；已存在其他分段二次 SiLU／Swish 硬体近似，因此不能把「分段二次
-近似 SiLU」本身宣称为新颖。SIPA 的各个单独元素也有 prior art，学术主张必须以组合约束、
-bit-exact 证据与 Full35／量化／硬体结果共同支撑。完整 prior-art 来源与名称冲突见
-[qSiLU 硬体近似研究](qsilu-hardware-approximation.md)与
-[SIPA–BCSP 新颖性稽核](sipa-bcsp-novelty-audit.md)。
+對對應的負輸入則得到 0，所以奇數 code 的正、負 ReLU tails 也能保持 0 LSB 誤差。
 
-最后，BCSP 在本轮只是节省实验成本的 bounded placement 计划。由于 `poly_shift` 的 uniform
-prerequisite 未过，14 个 region／mixed jobs 正确封锁；本阶段没有产生足以把 BCSP 升格为新算法
-贡献的跨资料集 normalized-regret 搜寻结果。
+這是數學與 bit-exact 性質，不等於 PTQ／QAT 精度已完成。量化階段仍要枚舉 Q8、Q12、Q16 全輸入碼，
+並檢查 overflow、saturation、rounding、compiler IR、HLS 與 RTL 一致性。
+
+## 11. 六種 Activation 的最終定位
+
+| Activation | 數學／硬體特徵 | Full35 結果 | 下一步 |
+| --- | --- | --- | --- |
+| SiLU | 光滑；可能需要 sigmoid／exp 或 fused op | accepted baseline | 量化控制組 |
+| Hardswish | 三段、中央二次、C0 | recovery 未過 gate | 保留負結果 |
+| ReLU | 最低成本、有尖角、無負谷 | zero-shot 八項皆 0 | 只作 cost floor |
+| `poly_quality` | SIPA C2、最貼近 SiLU、一般常數 | recovery 未過 gate | 暫停 |
+| `poly_shift` | SIPA C2、dyadic 常數、最高五次方 | recovery 未過 gate | BCSP 搜尋停止 |
+| `qsilu_pq` | C1、四段、共用一次平方、dyadic | 唯一 non-SiLU recovery 通過 | 與 SiLU 做 matched PTQ |
+
+學術上不能把「分段二次近似 SiLU」單獨宣稱為新方法；已有相關 SiLU／Swish 硬體近似。SIPA 的
+個別元素也有 prior art。可主張的內容必須建立在本專案的組合限制、bit-exact 證據、Full35 結果與
+後續量化／硬體實測上。
+
+BCSP 不是第七種 activation。本輪完成的是支援架構；因 `poly_shift` prerequisite 未通過，14 個後續
+jobs 被正確封鎖，沒有產生可宣稱為新搜尋演算法成果的 mixed-policy 或 normalized-regret 結果。

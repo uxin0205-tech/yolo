@@ -140,4 +140,14 @@ Q16.10 與 ONNX gate 已通過。它先跑 uniform zero-shot／short recovery，
 搜尋政策在 [policy-search-plan.yaml](policy-search-plan.yaml)，可執行的 serial queue 在
 [experiment-queue.yaml](experiment-queue.yaml)，通過 frozen selector 後的 seed-1 queue 在
 [finalist-seed1-queue.yaml](finalist-seed1-queue.yaml)；verbose GPU 輸出只寫入 `artifacts/runs/full35/queue/`，
-console 與監測只保留單行 JSON。\n\n## 2026-08-29 收尾状态\n\n- 静态 queue：`5 completed / 0 pending / 14 blocked`。qSiLU、Hardswish、`poly_shift`、\n  `poly_quality` 的 10-epoch recovery 均完成；只有 qSiLU 八项 gate 全过。\n- 14 个 blocked jobs 是 `poly_shift` uniform prerequisite 未过后的预注册结果，不是执行故障。\n- Finalist queue：SiLU control 在第 6 个 epoch early-stop 并过 gate；qSiLU 在 epoch 1 完成、epoch 2\n  macro 106 后依使用者要求停止，维持 pending 且不得冒充 completion。\n- qSiLU physical batch 128／64／32 均在第一个 forward OOM；16 可稳定训练，logical batch 仍为 128。\n- Activation-only 最佳化暂时停止，先交由量化工作列比较 accepted SiLU 与已完成 qSiLU 10-epoch 权重。\n\n完整逐项数值、权重与后续 PTQ／QAT 顺序见\n[最终整合分析](../../reports/full35-activation-final-analysis.md)。
+console 與監測只保留單行 JSON。
+
+## 2026-08-30 最終狀態
+
+- 靜態 queue：`5 completed / 0 pending / 14 blocked`。qSiLU、Hardswish、`poly_shift`、`poly_quality` 的 10-epoch recovery 均完成；只有 qSiLU 的八項 gate 全部通過。
+- 14 個 blocked jobs 是 `poly_shift` uniform prerequisite 未通過後的預註冊結果，不是執行故障。
+- Finalist queue：SiLU control 在第 6 個完成 epoch early-stop 並通過 gate；qSiLU 完成 epoch 1，進入 epoch 2 macro 106 後依使用者要求停止，沒有 completion marker。
+- qSiLU physical batch 128、64、32 均在第一個 forward OOM；physical 16 可穩定訓練，logical batch 仍維持 128。
+- Activation-only 最佳化已停止。下一步先用相同量化設定比較 accepted SiLU 與完成 10-epoch recovery 的 qSiLU 權重。
+
+完整數值、權重、數學與後續 PTQ／QAT 順序，以[權威整合報告](../../reports/completed-activation-integrated-report.md)為準。

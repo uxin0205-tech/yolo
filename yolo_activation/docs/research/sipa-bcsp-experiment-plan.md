@@ -205,7 +205,7 @@ s_r=\mathbb E\left[\left|\frac{\partial L}{\partial h_r}
 | --- | --- | --- |
 | symmetry | 同 degree、同 operator count 的 unconstrained asymmetric polynomial | 差分對稱硬限制是否有價值 |
 | tail smoothness | matched-degree C0、C1、C2 variants | exact-ReLU／C2 接合是否影響 recovery、range 或量化 |
-| coefficient | `poly_quality` float → dyadic projection → `poly_shift` | 硬體係數限制造成多少 AP／曲線代價 |
+| coefficient | `poly_quality` float → dyadic projection → `poly_shift` | 硬體係數限製造成多少 AP／曲線代價 |
 | placement | uniform、best-single-region、greedy、random、BCSP、ActNAS-style | 改善來自 activation 或搜尋方法 |
 | profile sharing | per-layer oracle、per-region shared、global shared | 少 profile 的代價與泛化 |
 | search budget | 2/4/8 mixed trials；縮小問題另做 exhaustive oracle | BCSP 的 sample efficiency 與 regret |
