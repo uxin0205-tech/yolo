@@ -16,6 +16,7 @@ zero-shot、11-region sensitivity、10-epoch recovery 与 matched finalist contr
 - [SIPA–BCSP 新穎性 prior-art 稽核](docs/research/sipa-bcsp-novelty-audit.md)
 - [SIPA-BCSP 完整訓練架構](training/README.md)
 - [Full35 全量正式實驗配置](training/full35/README.md)
+- [已完成 Activation 权威整合报告](reports/completed-activation-integrated-report.md)
 - [Full35 Activation 最終整合分析](reports/full35-activation-final-analysis.md)
 - [六種 activation 完整数学推导](docs/research/full35-activation-mathematical-derivations.md)
 - [Machine-readable 结果](reports/full35-activation-results.json)

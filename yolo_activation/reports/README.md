@@ -1,5 +1,6 @@
 # Full35 Activation 交付报告
 
+- [已完成 Activation 权威整合报告](completed-activation-integrated-report.md)：六种 activation 的公式、完成程度、完整结果、SIPA／BCSP 边界与量化决策。
 - [最终整合分析](full35-activation-final-analysis.md)：资料、实验顺序、训练配置、结果、停止点与量化交接建议。
 - [Machine-readable JSON](full35-activation-results.json)：包含 full Float／Bit-True zero-shot、八项 selector、
   11-region sensitivity、queue、OOM probe 与权重 lineage。

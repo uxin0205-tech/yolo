@@ -274,8 +274,8 @@ R(z)=\frac94z^2-\frac{15}{4}z^3+\frac{11}{4}z^4-\frac34z^5. \tag{20}
 由于 \(T=8\)，直接式全部成为 dyadic：
 
 \[
-H(u)=\frac9{32}u^2-rac{15}{256}u^3
-+\frac{11}{2048}u^4-rac3{16384}u^5,quad 0\le u\le8, \tag{21}
+H(u)=\frac9{32}u^2-\frac{15}{256}u^3
++\frac{11}{2048}u^4-\frac3{16384}u^5,\quad 0\le u\le8, \tag{21}
 \]
 
 \[
