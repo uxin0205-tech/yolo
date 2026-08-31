@@ -10,6 +10,7 @@
 - 使用完整 COCO2017 與不可變的 Canonical BBAT5 v1；沒有 30% 資料夾、重新抽樣或重新切分。
 - 實際納入六種 activation：SiLU、Hardswish、ReLU、qSiLU、`poly_quality`、`poly_shift`。
 - 唯一通過 10-epoch 八項 accuracy gate 的非 SiLU 候選是 `qsilu_pq`。
+- 全非 SiLU Q3 已完成 22/22 純 CPU 逐區評估；Hardswish 保留 3 個部署候選，LeakyReLU 1/8 只保留 `masf`。
 - SIPA 已完成數學、實作與 Full35 實驗；BCSP 只完成支援架構，沒有完成 mixed-policy 搜尋。
 - qSiLU 20-epoch finalist 是人工中止狀態，不能當成正式 finalist；量化應使用已完成的 10-epoch 權重。
 - 尚無 FPGA／ASIC 的 latency、power、LUT、DSP 或 BRAM 實測。
@@ -19,6 +20,7 @@
 | 想知道的內容 | 入口 |
 | --- | --- |
 | 完成了什麼、結果如何、接下來做什麼 | [Activation 權威整合報告](reports/completed-activation-integrated-report.md) |
+| qSiLU 哪些 region 可換成更簡單 activation | [Full35 Q3 純 CPU 最終報告](reports/full35-q3-cpu-final-report.md) |
 | 每種 activation 的公式與係數怎麼來 | [可讀版完整數學推導](docs/research/full35-activation-mathematical-derivations.md) |
 | 所有文件如何區分目前與歷史狀態 | [文件導覽](docs/README.md) |
 | 正式訓練配置、epoch、batch、queue 與 gate | [Full35 實驗配置](training/full35/README.md) |

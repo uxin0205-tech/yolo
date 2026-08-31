@@ -2,6 +2,7 @@
 
 ## 權威入口
 
+- [Full35 Q3 全非 SiLU 純 CPU 最終報告](full35-q3-cpu-final-report.md)：22/22 個逐區結果、完整表格、兩張圖、運算 proxy、CPU 安全證據與量化交接。
 - [已完成 Activation 權威整合報告](completed-activation-integrated-report.md)：目前完成範圍、六種 activation、可讀公式、完整八項結果、SIPA／BCSP 邊界、權重與量化決策。
 - [六種 activation 可讀版完整數學推導](../docs/research/full35-activation-mathematical-derivations.md)：每個係數與限制條件的逐步來源。
 - [可重建權重](../release/weights/README.md)：accepted SiLU 與完成 10-epoch recovery 的 qSiLU inference 權重。

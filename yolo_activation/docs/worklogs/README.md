@@ -9,6 +9,7 @@
 
 ## 索引
 
+- [2026-08-31：Full35 全非 SiLU Q3 純 CPU 續跑與 CUDA 防護](2026-08-31-full35-nonsilu-q3-cpu-sensitivity.md)
 - [2026-08-30：Activation 子專案完整整理與重新發布](2026-08-30-folder-consolidation-publication.md)
 - [2026-08-30：已完成 Activation 權威整合報告](2026-08-30-completed-activation-report.md)
 - [2026-08-29：Full35 Activation 收尾、權重發布與量化交接](2026-08-29-full35-activation-final-handoff.md)
