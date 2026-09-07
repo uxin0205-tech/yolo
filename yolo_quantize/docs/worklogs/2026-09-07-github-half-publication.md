@@ -16,4 +16,6 @@ diff whitespace檢查報出CSV的CRLF、Markdown硬換行、Matplotlib SVG路徑
 
 ## 未解事項與風險
 
+上傳後複核發現一個歷史備份 `tests/test_qat_runtime.py.orig` 被帶入，追加同名發行提交從Git快照排除並新增ignore；不改寫已推送歷史。本機該備份原件保留，僅移除此次建立的隔離發行副本。
+
 新四天queue、formal及全整數部署仍未完成，未因上傳而啟動GPU。快取清理仍未獲授權，因此不刪本機檔案；僅排除發行。訓練checkpoint與data不隨此提交公開。此發行保留本機程式研究狀態，不宣稱全部歷史路徑已驗證。
