@@ -1,0 +1,117 @@
+schema_version: 1
+plan_id: v7-qsilu-eight-regions-w6-search-v1
+date: '2026-09-03'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-map50-v1
+
+execution_authorization:
+  authorization_id: user-2026-09-03-autonomous-v6-stage3-isolated-w6-search
+  scope: eight_candidate_only_w6_validations_reusing_verified_reference
+  cells:
+    - qsilu_pq--lsq-plus-a8--backbone_deep--w6-mse_grid_v1
+    - qsilu_pq--lsq-plus-a8--neck--w6-mse_grid_v1
+    - qsilu_pq--lsq-plus-a8--masf--w6-mse_grid_v1
+    - qsilu_pq--lsq-plus-a8--neck_attention_safe--w6-mse_grid_v1
+    - qsilu_pq--lsq-plus-a8--detect_one2one_tower--w6-mse_grid_v1
+    - qsilu_pq--lsq-plus-a8--detect_one2one_predictor--w6-mse_grid_v1
+    - qsilu_pq--lsq-plus-a8--pose_one2one_tower--w6-mse_grid_v1
+    - qsilu_pq--lsq-plus-a8--pose_one2one_predictor--w6-mse_grid_v1
+  validation_roles: [candidate]
+  training: false
+  stop_after: write_map50_gates_and_pareto_selection
+
+upstream:
+  base_search_plan:
+    path: configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml
+    sha256: 3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985
+  reference_search_report:
+    path: artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json
+    sha256: 738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2
+    reuse_roles: [accepted, matched]
+    old_candidate_role: include_as_backbone_early_w8_control_only
+  reference_map50_regate:
+    path: artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json
+    sha256: 67fce27506fac33e7655e791d815c04d7030ba213978a1ab27873369a396573e
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v7.yaml
+    sha256: 562a1446c378e0fb8929d235fabd785719fc9d3769d801104e5e0af271ce3e78
+
+candidates:
+  - cell_id: qsilu_pq--lsq-plus-a8--backbone_deep--w6-mse_grid_v1
+    activation: qsilu_pq
+    region: backbone_deep
+    weight_bits: 6
+    scale_method: mse_grid_v1
+    diagnostic_report: &diagnostic
+      path: artifacts/reports/weight-ptq-qsilu-eight-regions-w6-diagnostic-v7.json
+      sha256: 0b6d6874511de5fdd10d4f834a723913b45644df28eac58f1baad199be947572
+  - cell_id: qsilu_pq--lsq-plus-a8--neck--w6-mse_grid_v1
+    activation: qsilu_pq
+    region: neck
+    weight_bits: 6
+    scale_method: mse_grid_v1
+    diagnostic_report: *diagnostic
+  - cell_id: qsilu_pq--lsq-plus-a8--masf--w6-mse_grid_v1
+    activation: qsilu_pq
+    region: masf
+    weight_bits: 6
+    scale_method: mse_grid_v1
+    diagnostic_report: *diagnostic
+  - cell_id: qsilu_pq--lsq-plus-a8--neck_attention_safe--w6-mse_grid_v1
+    activation: qsilu_pq
+    region: neck_attention_safe
+    weight_bits: 6
+    scale_method: mse_grid_v1
+    diagnostic_report: *diagnostic
+  - cell_id: qsilu_pq--lsq-plus-a8--detect_one2one_tower--w6-mse_grid_v1
+    activation: qsilu_pq
+    region: detect_one2one_tower
+    weight_bits: 6
+    scale_method: mse_grid_v1
+    diagnostic_report: *diagnostic
+  - cell_id: qsilu_pq--lsq-plus-a8--detect_one2one_predictor--w6-mse_grid_v1
+    activation: qsilu_pq
+    region: detect_one2one_predictor
+    weight_bits: 6
+    scale_method: mse_grid_v1
+    diagnostic_report: *diagnostic
+  - cell_id: qsilu_pq--lsq-plus-a8--pose_one2one_tower--w6-mse_grid_v1
+    activation: qsilu_pq
+    region: pose_one2one_tower
+    weight_bits: 6
+    scale_method: mse_grid_v1
+    diagnostic_report: *diagnostic
+  - cell_id: qsilu_pq--lsq-plus-a8--pose_one2one_predictor--w6-mse_grid_v1
+    activation: qsilu_pq
+    region: pose_one2one_predictor
+    weight_bits: 6
+    scale_method: mse_grid_v1
+    diagnostic_report: *diagnostic
+
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch: {detect: 32, pose: 16}
+  workers: {detect: 4, pose: 8}
+  plots: false
+  save_coco_json: false
+  augmentation: false
+
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+
+selection:
+  hard_gate_first: true
+  objectives: [maximize_worst_total_map50_delta, minimize_total_packed_weight_bytes]
+  accuracy_tolerance: 0.002
+  roles: [accuracy, balanced, hardware]
+  mean_metric_can_override_worst_task: false

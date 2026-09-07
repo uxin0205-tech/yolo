@@ -1,0 +1,114 @@
+{
+  "candidates": {
+    "qsilu-all-ten-regions-w8": {
+      "decision": "recover",
+      "dual_gate_passed": false,
+      "failed_map50_95_metrics": [],
+      "failed_map50_metrics": [
+        "coco/box/map50"
+      ],
+      "incremental_deltas": {
+        "bbat/ball/box/map50": -0.001596760436887723,
+        "bbat/ball/box/map50_95": -0.01775522324241119,
+        "bbat/ball/pose/map50": -0.0028475089560057176,
+        "bbat/ball/pose/map50_95": -0.003051986926981498,
+        "bbat/bat/box/map50": -3.795865394295994e-05,
+        "bbat/bat/box/map50_95": -0.0025189955480359183,
+        "bbat/bat/pose/map50": 0.0004822166773670311,
+        "bbat/bat/pose/map50_95": 0.0005401409813963198,
+        "bbat/box/map50": -0.000817359545415286,
+        "bbat/box/map50_95": -0.010137109395223609,
+        "bbat/pose/map50": -0.0011826461393193988,
+        "bbat/pose/map50_95": -0.0012559229727928667,
+        "coco/box/map50": -0.008721779556232434,
+        "coco/box/map50_95": -0.008236214161398248,
+        "coco/person/box/map50": -0.0025916083882138174,
+        "coco/person/box/map50_95": -0.003913791862290794
+      },
+      "metric_summaries": {
+        "accepted": {
+          "joint_priority_map50": 0.8879852486242279,
+          "joint_priority_map50_95": 0.7816826911108012,
+          "mean_required_map50": 0.9211463434448058,
+          "mean_required_map50_95": 0.8197602405423289
+        },
+        "candidate": {
+          "joint_priority_map50": 0.8843169781771429,
+          "joint_priority_map50_95": 0.7733713102733637,
+          "mean_required_map50": 0.9200713832018115,
+          "mean_required_map50_95": 0.8120408980962495
+        },
+        "incremental_deltas": {
+          "joint_priority_map50": -0.0028992079537000226,
+          "joint_priority_map50_95": -0.004959792272899666,
+          "mean_required_map50": -0.0021641756248313992,
+          "mean_required_map50_95": -0.005791137890967191
+        },
+        "matched": {
+          "joint_priority_map50": 0.887216186130843,
+          "joint_priority_map50_95": 0.7783311025462634,
+          "mean_required_map50": 0.9222355588266429,
+          "mean_required_map50_95": 0.8178320359872167
+        },
+        "semantics": {
+          "joint_priority": "fixed_0.2_0.2_0.2_0.4_selection_score_not_official_map",
+          "mean_required": "diagnostic_mean_not_official_map"
+        },
+        "total_deltas": {
+          "joint_priority_map50": -0.0036682704470849536,
+          "joint_priority_map50_95": -0.008311380837437543,
+          "mean_required_map50": -0.0010749602429943605,
+          "mean_required_map50_95": -0.0077193424460794136
+        }
+      },
+      "source_map50_decision": "recover",
+      "source_map50_gate_passed": false,
+      "status": "completed",
+      "total_deltas": {
+        "bbat/ball/box/map50": 0.007979490973513248,
+        "bbat/ball/box/map50_95": -0.018834761683056866,
+        "bbat/ball/pose/map50": 0.007697557726036419,
+        "bbat/ball/pose/map50_95": 0.007493079755060528,
+        "bbat/bat/box/map50": -0.0015644581404772318,
+        "bbat/bat/box/map50_95": -0.004443163004912765,
+        "bbat/bat/pose/map50": -0.0010442828091672407,
+        "bbat/bat/pose/map50_95": -0.001332901142018117,
+        "bbat/box/map50": 0.0032075164165179526,
+        "bbat/box/map50_95": -0.011638962343984871,
+        "bbat/pose/map50": 0.0033266374584346448,
+        "bbat/pose/map50_95": 0.003080089306520817,
+        "coco/box/map50": -0.020297866820987998,
+        "coco/box/map50_95": -0.021367118703869314,
+        "coco/person/box/map50": -0.007904276747824568,
+        "coco/person/box/map50_95": -0.014711001752375052
+      },
+      "worst_incremental_map50_95_delta": -0.01775522324241119,
+      "worst_incremental_map50_95_metric": "bbat/ball/box/map50_95",
+      "worst_incremental_map50_delta": -0.008721779556232434,
+      "worst_incremental_map50_metric": "coco/box/map50",
+      "worst_map50_95_delta": -0.021367118703869314,
+      "worst_map50_95_metric": "coco/box/map50_95",
+      "worst_map50_delta": -0.020297866820987998,
+      "worst_map50_metric": "coco/box/map50"
+    }
+  },
+  "formal_training": false,
+  "formal_validation": false,
+  "gpu_used": false,
+  "kind": "full35_dual_metric_candidate_regate",
+  "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-map50-v1",
+  "schema_version": 1,
+  "source": {
+    "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v30-qsilu-all-ten-regions-w8-search-v1.json",
+    "report_sha256": "50d7449ef7728824ae23cf2b535aa5477860086062fafb6f50f424c99d79617e"
+  },
+  "status": "completed",
+  "thresholds": {
+    "activation_replacement_included": true,
+    "all_eight_metrics_per_family_required": true,
+    "map50_95_recovery_floor": 0.08,
+    "map50_95_total_max_drop": 0.04,
+    "map50_total_max_drop": 0.015
+  },
+  "validation_rerun": false
+}

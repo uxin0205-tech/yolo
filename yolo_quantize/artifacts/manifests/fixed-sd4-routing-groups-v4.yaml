@@ -1,0 +1,61 @@
+schema_version: 4
+manifest_id: full35-fixed-sd4-routing-groups-v4
+status: static_grouped_candidates_only_not_validated_not_authorized
+execution_authorized: false
+gpu_used: false
+formal_training: false
+map_validation_run: false
+source_manifest:
+  path: artifacts/manifests/fixed-sd4-routing-candidates-v3.yaml
+  sha256: afbefae48e3bafd87a2842da205c3f7a5b5d081f5351a9caf480ecacb1ed98f4
+  source_rule: exact_sd4_mse_strictly_better_than_exact_uniform_w4_in_all_three_parents_and_both_views
+grouping_rule: existing_full35_deployment_weight_region
+all_candidates_count: 36
+backbone_early:
+  - graph.model.1.conv
+  - graph.model.2.cv1.conv
+  - graph.model.2.m.0.m.0.cv1.conv
+  - graph.model.2.m.0.m.0.cv2.conv
+backbone_deep:
+  - graph.model.8.m.0.m.0.cv2.conv
+  - graph.model.8.m.0.m.1.cv1.conv
+  - graph.model.8.m.0.m.1.cv2.conv
+  - graph.model.9.cv2.conv
+neck:
+  - graph.model.13.m.0.m.0.cv1.conv
+  - graph.model.16.cv1.conv
+  - graph.model.16.cv2.conv
+  - graph.model.16.m.0.cv3.conv
+  - graph.model.16.m.0.m.0.cv1.conv
+  - graph.model.16.m.0.m.0.cv2.conv
+  - graph.model.16.m.0.m.1.cv1.conv
+  - graph.model.16.m.0.m.1.cv2.conv
+  - graph.model.17.conv
+  - graph.model.19.cv2.conv
+  - graph.model.19.m.0.cv2.conv
+  - graph.model.19.m.0.cv3.conv
+  - graph.model.19.m.0.m.0.cv1.conv
+  - graph.model.19.m.0.m.0.cv2.conv
+  - graph.model.19.m.0.m.1.cv1.conv
+  - graph.model.19.m.0.m.1.cv2.conv
+  - graph.model.20.conv
+  - graph.model.22.cv2.conv
+  - graph.model.22.m.0.0.cv1.conv
+  - graph.model.22.m.0.0.cv2.conv
+neck_attention_safe:
+  - graph.model.22.m.0.1.attn.qkv.v.conv
+detect_one2one_tower:
+  - graph.model.23.detect_head.one2one_cv2.0.0.conv
+  - graph.model.23.detect_head.one2one_cv2.0.1.conv
+  - graph.model.23.detect_head.one2one_cv2.1.0.conv
+  - graph.model.23.detect_head.one2one_cv2.1.1.conv
+  - graph.model.23.detect_head.one2one_cv2.2.0.conv
+  - graph.model.23.detect_head.one2one_cv2.2.1.conv
+detect_one2one_predictor:
+  - graph.model.23.detect_head.one2one_cv3.2.2
+limitations:
+  - grouping_does_not_change_v3_static_selection_rule
+  - no_fixed_probe_output_test
+  - no_eight_metric_map
+  - no_qat
+  - candidate_manifest_does_not_promote_a_policy

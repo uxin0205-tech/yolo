@@ -1,0 +1,228 @@
+schema_version: 1
+queue_id: v29-v19-progressive-ptq-to-short-qat-v1
+date: '2026-09-04'
+status: ready
+execution_authorized: true
+execution_authorization:
+  authorization_id: user-2026-09-04-arrange-and-continue-training-queue
+  scope: search_ptq_and_eligible_short_qat_only
+formal_training: false
+formal_validation: false
+sources:
+  locked_parent:
+    path: artifacts/manifests/v19-epoch5-locked-parent-v1.yaml
+    sha256: 6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7
+  cpu_profile:
+    path: artifacts/reports/v19-epoch5-progressive-weight-formats-cpu-v1.json
+    sha256: cfcfc25269499e4bb309f9c4c5c757d35f1b152906c45b2c0edfd807838eb217
+  accepted_metrics:
+    path: artifacts/runs/v15-poly-shift-backbone-early-w8-search-v1/validation/accepted/epoch-0000/bittrue/metrics.json
+    sha256: 2e97e4a60039741cc1fc45a03d67615bbc5b851bcf60a56cd153251366c4a355
+  locked_parent_metrics:
+    path: artifacts/runs/qat/v19-poly-shift-all-w8-qat-pilot-v1-qat-seed1/validation/epoch-0005/bittrue/metrics.json
+    sha256: c626ec9b5e1c84a04882032a9856d1c9fd2282b52c684b26c75c522756ffe42f
+datasets:
+  coco:
+    path: /home/uxin/yolo/coco2017.yaml
+    sha256: 1ed971749ec00b84db8ffe850b05e34e0acfd63a9654a9224ac8d80f5e068068
+  bbat5_registry:
+    path: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+    sha256: 208e0f9e5bfded11f5739e9c598d98b4e5414699c64b9faf6f9625680988754a
+  bbat5_pose_search:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+    sha256: a9069992cf21bff802466fa8adb46cba9bd55585f5adc8f3c183d33c8ede0b5d
+  runtime_view: artifacts/datasets/bbat5-v1-progressive-search-v1
+  assignment_changed: false
+validation:
+  backend: bittrue
+  image_size: 640
+  batch:
+    detect: 32
+    pose: 16
+  workers:
+    detect: 4
+    pose: 8
+  plots: false
+  save_coco_json: false
+gpu_queue:
+  device: 0
+  poll_seconds: 300
+  mode: low_token_event_only
+  maximum_retries_per_candidate: 1
+  wait_when_foreign_compute_process_exists: true
+gates:
+  all_eight_map50_each_at_least: -0.015
+  all_eight_map50_95_each_at_least: -0.04
+  recover_map50_floor: -0.04
+  recover_map50_95_floor: -0.08
+  activation_replacement_included: true
+  reference: accepted_full35
+  incremental_reference: previous_locked_stage
+selection:
+  map50_accuracy_tolerance: 0.002
+  map50_95_accuracy_tolerance: 0.005
+  prefer_smaller_within_tolerance: true
+  retain_previous_policy_when_no_green_candidate: true
+pruning:
+  run_4bit_controls_first: true
+  skip_ternary_when_both_4bit_controls_reject: true
+  cpu_metrics_are_ranking_only: true
+formats:
+  exact_w4:
+    family: uniform
+    bits: 4
+    scale_method: optimal_scaled_codebook
+  fixed_sd4:
+    family: fixed_sd4
+    scale_method: optimal_scaled_codebook
+  twn_v3_filterwise:
+    family: twn_filterwise
+    threshold_multiplier: 0.75
+  exact_scaled_ternary:
+    family: exact_scaled_ternary
+    scale_method: optimal_scaled_codebook
+  paper_twn_v2:
+    family: paper_twn
+    threshold_multiplier: 0.7
+stages:
+- stage_id: backbone-early-primary
+  region: backbone_early
+  path: graph.model.4.m.0.cv3.conv
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  - paper_twn_v2
+  promotion_min_savings_bytes: 4096
+  role: accuracy_oriented_plus_paper_control
+- stage_id: backbone-deep-primary
+  region: backbone_deep
+  path: graph.model.6.cv2.conv
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  promotion_min_savings_bytes: 65536
+  role: balanced_capacity
+- stage_id: backbone-attention-sentinel
+  region: backbone_attention_safe
+  path: graph.model.10.m.0.attn.proj.conv
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  promotion_min_savings_bytes: 16384
+  role: sentinel_binary_qk_untouched
+- stage_id: neck-primary
+  region: neck
+  path: graph.model.13.cv2.conv
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  promotion_min_savings_bytes: 65536
+  role: balanced_capacity
+- stage_id: masf-weight-primary
+  region: masf
+  path: graph.model.16.p3_masf.context.project.conv
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  promotion_min_savings_bytes: 16384
+  role: weight_only_topology_unchanged
+- stage_id: neck-attention-primary
+  region: neck_attention_safe
+  path: graph.model.22.m.0.1.ffn.1.conv
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  promotion_min_savings_bytes: 32768
+  role: ffn_weight_binary_qk_untouched
+- stage_id: detect-tower-primary
+  region: detect_one2one_tower
+  path: graph.model.23.detect_head.one2one_cv3.1.0.1.conv
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  promotion_min_savings_bytes: 32768
+  role: detect_tower
+- stage_id: detect-predictor-control
+  region: detect_one2one_predictor
+  path: graph.model.23.detect_head.one2one_cv3.2.2
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  promotion_min_savings_bytes: 4096
+  role: known_fixed_sd4_matched_path
+- stage_id: pose-tower-primary
+  region: pose_one2one_tower
+  path: graph.model.23.pose_head.one2one_cv2.1.0.conv
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  promotion_min_savings_bytes: 65536
+  role: pose_tower
+- stage_id: pose-predictor-diagnostic
+  region: pose_one2one_predictor
+  path: graph.model.23.pose_head.one2one_cv3.2.2
+  format_ids:
+  - exact_w4
+  - fixed_sd4
+  - twn_v3_filterwise
+  - exact_scaled_ternary
+  promotion_min_savings_bytes: 0
+  role: diagnostic_only
+  promotion_allowed: false
+short_qat_queue:
+  execution_authorized: true
+  maximum_candidates: 8
+  roles:
+    main: 6
+    sentinel: 2
+  eligibility: ptq_recover_and_material_capacity_saving
+  matched_sham_required: true
+  from_scratch: false
+  optimizer: AdamW
+  epochs: 15
+  patience: 5
+  schedule:
+    fp32_epochs: 3
+    progressive_ramp_epochs: 6
+    full_quant_epochs: 6
+  batch:
+    detect_logical: 128
+    detect_microbatch: 16
+    pose: 16
+  loss_weights:
+    detect: 1.0
+    pose: 0.25
+  augmentation: accepted_full35_exact
+  added_noise: false
+  lanes:
+    uniform: learned_uniform_scale
+    fixed_sd4: ls_sd4_learned_scale
+    paper_twn: learned_alpha_layerwise_extension
+    twn_filterwise: faithful_filterwise_twn
+    exact_scaled_ternary: learned_exact_ternary_scale
+deferred:
+  long_qat_epochs:
+  - 20
+  - 60
+  long_qat_execution_authorized: false
+  formal_validation_authorized: false
+  multi_seed_authorized: false
+  final_hardware_optimization_authorized: false
+run_root: artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1

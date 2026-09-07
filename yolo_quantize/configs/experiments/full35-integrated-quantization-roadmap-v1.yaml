@@ -1,0 +1,265 @@
+schema_version: 1
+roadmap_id: full35-integrated-quantization-roadmap-v1
+date: '2026-09-04'
+language: zh-TW
+status: v29_corrected_short_qat_running_then_complete_qsilu_lane
+
+relationship_to_existing_plans:
+  mode: additive_orchestration_only
+  modifies_historical_results: false
+  frozen_primary_plan:
+    path: configs/experiments/full35-quantization-plan-v5.yaml
+    sha256: ce48d4fad331608892f6ae316dba3920e56cace84f0ef9cc61354e9db51531dd
+  note: 本檔整合執行順序與決策點，不原地改寫v5、V19或既有PTQ結果。
+
+objective:
+  priority: accuracy_first_then_capacity
+  description: 在activation替換已計入的前提下，逐步固定backbone、neck與head的weight policy。
+  total_gate:
+    map50_max_drop_each_metric: 0.015
+    map50_95_max_drop_each_metric: 0.04
+    reference: accepted_full35
+    mean_cannot_override_worst_task: true
+  report_all:
+    - eight_map50
+    - eight_map50_95
+    - candidate_minus_locked_parent
+    - packed_weight_bytes
+    - compression_ratio
+    - code_occupancy
+    - static_nrmse_and_cosine_as_diagnostic_only
+
+immutable_inputs:
+  accepted_checkpoint:
+    path: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt
+    sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+  activation_parent:
+    id: poly_shift--lsq-plus-a8
+    checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+    sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+  datasets:
+    coco: /home/uxin/yolo/coco2017.yaml
+    bbat5_search: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+    bbat5_formal: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+    bbat5_assignment_changed: false
+
+current_execution:
+  state: corrected_short_qat_running
+  v19_locked_parent:
+    path: artifacts/manifests/v19-epoch5-locked-parent-v1.yaml
+    sha256: 6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7
+    selected_epoch: 5
+    gate: green
+    worst_map50_delta: -0.014133354771334816
+    worst_map50_95_delta: -0.012950485942226253
+  cpu_profile:
+    path: artifacts/reports/v19-epoch5-progressive-weight-formats-cpu-v1.json
+    sha256: cfcfc25269499e4bb309f9c4c5c757d35f1b152906c45b2c0edfd807838eb217
+    delivery: artifacts/manifests/v28-progressive-weight-cpu-delivery-v1.yaml
+    coverage: 148_paths_x_5_formats
+    status: completed
+  ptq_queue:
+    plan: configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml
+    plan_sha256: a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c
+    state: artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/queue-state.json
+    state_sha256: 756e2c6fc6432bc9b5f1ce8d2a69a82599cbe9b4f92ea8c42bdf380bf49a1990
+    status: completed
+    locked_assignments: 3
+    final_worst_map50_delta: -0.013841760085
+    final_worst_map50_95_delta: -0.013097940662
+  recovery_regate:
+    reason: negative_delta_floor_was_double_negated_in_plan_parser
+    original_artifacts_modified: false
+    gpu_validation_repeated: false
+    report: artifacts/reports/v29-v19-progressive-recovery-regate-v2.json
+    report_sha256: 2c96c5598741bd220a51aed807c3b64dd714b2679c9c227a79bd4d17292e460f
+    corrected_recover_candidates: 12
+    selected: {main: 6, sentinel: 1}
+  short_qat_supervisor:
+    source: artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json
+    source_sha256: e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06
+    state: artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/execution-state.json
+    event: artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/execution-status.json
+    order: [matched_sham, qat]
+    jobs: 7
+    status: running
+  monitor_interval_seconds: 600
+  monitor_mode: low_token_event_only
+  automatic_retry_per_candidate_or_arm: 1
+  monitor_note: 目前已啟動程序記憶體中的300秒只用於arm間GPU等待；不重啟訓練。外部狀態檢查與所有新queue改為600秒。
+
+queued_next_lane:
+  id: v30-qsilu-complete-quantization-lane-v1
+  plan: configs/experiments/v30-qsilu-complete-quantization-lane-v1.yaml
+  state: registered_waiting_for_current_queue
+  activation_checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+  scope:
+    - all_ten_regions_w8_ptq
+    - paired_all_w8_qat_and_parent_lock
+    - 148_paths_x_5_cpu_profile
+    - backbone_to_neck_to_head_progressive_ptq
+    - fixed_sd4_and_ls_sd4
+    - paper_twn_and_exact_scaled_ternary
+    - corrected_matched_short_qat
+    - fair_poly_shift_vs_qsilu_pareto
+  critical_rule: 不把poly_shift V19 weight winner直接接qSiLU；qSiLU必須形成自己的locked parent。
+
+protected_contract:
+  binary_qk: keep_existing_bittrue_implementation
+  masf: keep_topology_and_semantics
+  attention_pwl: keep_existing_implementation
+  never_general_quantize: [topk, gather, box_decode, keypoint_decode]
+  dfl: absent_because_reg_max_is_1
+  nms: absent_from_end_to_end_one_to_one_deployment
+  training_only_branches_not_counted_as_deployment_savings: [one2many, pose_flow, pose_sigma]
+
+algorithm_contract:
+  twn_v2_0_70_layerwise_static_proxy:
+    levels: [-alpha, '0', +alpha]
+    threshold: 0.7_times_mean_absolute_weight
+    alpha: mean_absolute_selected_weight
+    granularity: per_tensor
+    bits: 2
+    role: frozen_project_static_control
+    paper_faithfulness: simplified_proxy_not_full_reproduction
+    reason: 原論文以FP32 shadow weights訓練且以filter為單位；現有結果是layer-wise PTQ套用。
+  twn_v3_0_75_filterwise_static_initialization:
+    levels: [-alpha, '0', +alpha]
+    threshold: 0.75_times_filter_mean_absolute_weight
+    granularity: per_output_filter
+    bits: 2
+    role: cpu_ablation_and_faithful_qat_initialization
+    implementation_status: completed_cpu_profile
+  exact_scaled_ternary_ptq:
+    levels: [-scale, '0', +scale]
+    scale_method: optimal_scaled_codebook
+    granularity: per_tensor
+    bits: 2
+    role: required_strong_ptq_comparator
+    implementation_status: completed_cpu_profile
+  learned_alpha_layerwise_twn_qat:
+    role: project_recovery_extension_not_faithful_paper_result
+    selection_rule: paper_threshold
+    scale: learned_positive_layer_scale
+    progressive_schedule: [fp32_3_epochs, ramp_6_epochs, full_ternary_6_epochs]
+  faithful_filterwise_twn_qat:
+    role: paper_aligned_full_precision_shadow_weight_training
+    scale_and_threshold_granularity: per_output_filter
+    versions: [twn_v2_0_70, twn_v3_0_75]
+    implementation_status: implemented_conditionally_queued
+  channel_twn:
+    role: separate_qat_upper_bound
+    must_not_be_named_paper_twn: true
+  ttq:
+    role: separate_positive_and_negative_scale_qat
+    must_not_be_named_paper_twn: true
+
+workflow:
+  - stage: 0
+    name: finish_current_w8_qat
+    state: completed_locked_v19_epoch5
+    action: 已以patience=5合法early stop；鎖定V19 epoch-5 full-resume與inference checkpoints。
+  - stage: 1
+    name: cpu_ternary_baselines
+    state: completed
+    gpu: false
+    action: 已對148個deployment paths完成exact W4、Fixed-SD4、TWN-v2、TWN-v3 filter-wise與exact-scaled ternary，共740格；只作排序。
+    winner_selection: false
+  - stage: 2
+    name: lock_backbone
+    state: completed_in_v29_queue
+    plan: configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml
+    rule: 一次只替換一個path；不通過即保留V19 W8並進下一區。
+  - stage: 3
+    name: lock_neck
+    state: completed_in_v29_queue
+    rule: 在固定backbone結果上逐path測neck、MASF weight與neck attention safe；不得相加isolated delta。
+  - stage: 4
+    name: lock_heads
+    state: completed_in_v29_queue
+    rule: 在固定backbone+neck結果上依Detect tower、Detect predictor、Pose tower、Pose predictor逐步替換。
+  - stage: 5
+    name: matched_weight_recovery_lanes
+    state: executing_seven_paired_short_qat_jobs
+    lanes:
+      uniform_mixed:
+        scope: W8與既有mixed-bit recover candidates
+        rule: 保留V19與既有mixed-bit evidence，不因新增ternary重跑已完成PTQ。
+      sd4:
+        scope: Fixed-SD4 Detect predictor/head與matched LS-SD4
+        rule: 固定codebook control與learned-scale recovery分開歸因。
+      ternary:
+        scope: staged backbone→neck→head的Paper/exact ternary recover candidates
+        rule: 只讓search-val為recover且有實質容量收益者進短QAT；green PTQ不強制重訓，reject不直接進長訓練。
+    convergence: 三條lane各保留最多accuracy/balanced/hardware角色，再做跨lane Pareto。
+  - stage: 6
+    name: activation_weight_coupling
+    state: pending_stage5
+    rule: qSiLU先依V30跑完整平行weight流程；完成poly_shift與qSiLU各自Pareto後，再把最多三個locked policies接到uniform Hardswish與Q3 regional Hardswish重驗。weight policy鎖定後才試A7/A6。
+    lower_activation_bits:
+      primary: [a8]
+      later_search: [a7, a6]
+      a_sd4: separate_research_branch_after_weight_map
+  - stage: 7
+    name: formal_and_export
+    state: pending_locked_finalists
+    rule: 最多三個locked finalists進multi-seed、formal validation、packing與target hardware量測。
+
+stage_locking:
+  order: [backbone, neck, head]
+  accepted_action_when_no_ternary_cell_passes: retain_previous_w8_or_fp32_policy
+  rollback: 任一累積cell失敗即回到上一個green checkpoint或PTQ policy。
+  intermediate_reserve:
+    before_head_map50_required_headroom: 0.002
+    before_head_map50_95_required_headroom: 0.005
+  final_hard_gate_overrides_reserve: true
+
+evaluation:
+  screening:
+    coco: full_val_5000
+    bbat5: canonical_search_val_600
+    formal_validation: false
+    augmentation: false
+  metric_keys_map50:
+    - coco/box/map50
+    - coco/person/box/map50
+    - bbat/box/map50
+    - bbat/pose/map50
+    - bbat/ball/box/map50
+    - bbat/bat/box/map50
+    - bbat/ball/pose/map50
+    - bbat/bat/pose/map50
+  matched_controls_per_exact_path_set:
+    - locked_parent_unchanged
+    - exact_uniform_w4
+    - twn_v2_0_70_layerwise_static_proxy
+    - twn_v3_0_75_filterwise_static_initialization
+    - exact_scaled_ternary
+
+training_if_needed:
+  from_scratch: false
+  primary_optimizer: AdamW
+  detect_logical_batch: 128
+  detect_physical_batch: 16
+  pose_physical_batch: 16
+  loss_weights: {detect: 1.0, pose: 0.25}
+  augmentation: accepted_full35_exact
+  added_noise: false
+  short_ternary_candidates_maximum: 8
+  short_ternary_roles: {main: 6, sentinels: 2}
+  short_epochs: 15
+  patience: 5
+  progressive_inq_style_ablation:
+    role: fallback_after_direct_progressive_qat
+    fractions_percent: [20, 40, 60, 70, 80, 85, 90, 95, 97.5, 100]
+    note: 借用INQ的layer內逐步量化概念；backbone到neck到head仍是本專案外層順序，不宣稱為INQ原實驗。
+  extended_epochs: [20, 60]
+  extended_only_after_short_recovery: true
+  musgd: separate_matched_sham_pilot_only
+
+stopping_rules:
+  do_not_launch_gpu_ternary_without_locked_parent: true
+  do_not_use_static_nrmse_to_promote_without_map: true
+  do_not_search_formal_validation: true
+  do_not_claim_native_speed_without_kernel_and_hardware_measurement: true
+  do_not_run_final_optimizations_before_base_finalists: true

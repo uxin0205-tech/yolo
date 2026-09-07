@@ -1,0 +1,156 @@
+schema_version: 1
+plan_id: v27-poly-shift-coupled-special-route-search-v1
+date: '2026-09-03'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-map50-v1
+
+execution_authorization:
+  authorization_id: user-2026-09-03-autonomous-poly-shift-coupled-special-route-search
+  validation_roles: [candidate]
+  candidate_ids:
+    - polyshift-all9-w8-plus-w4-neck-attention
+    - polyshift-all9-w8-plus-sd4-detect-predictor
+    - polyshift-all9-w8-plus-sd4-detect-tower
+    - polyshift-all9-w8-plus-w4-neck-attention-sd4-predictor
+    - polyshift-all9-w8-plus-sd4-detect-head
+    - polyshift-all9-w8-plus-w4-neck-attention-sd4-tower
+    - polyshift-all9-w8-plus-three-special-routes
+  route_ids:
+    - w4-neck-attention
+    - fixed-sd4-detect-tower
+    - fixed-sd4-detect-predictor
+  training: false
+  stop_after: coupled_diagnostic_then_dual_metric_search_val_gate_and_pareto
+
+upstream:
+  base_search_plan:
+    path: configs/experiments/v15-poly-shift-backbone-early-w8-search-v1.yaml
+    sha256: 9d4207d1db4204ee317cfd8d652916cfdd92b569c51a541054428e39e96d0490
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v18.yaml
+    sha256: 2462f26c8639afa2c40a1de09d305aef9998ba7d657d7a222822e6a9a00d9f1c
+  reference_search_report:
+    path: artifacts/reports/v15-poly-shift-backbone-early-w8-search-v1.json
+    sha256: 563bf656c731ce44c790dd75d5bf8f65a28a5f9157408303ee4dbd8f9e1f8c56
+    reuse_roles: [accepted, matched]
+  reference_map50_regate:
+    path: artifacts/reports/v15-poly-shift-backbone-early-w8-map50-regate-v1.json
+    sha256: e8b5d75ad5cde241bf8323727d3544990e9fe9674119759e0483885be956335a
+  comparison_candidates:
+    - path: artifacts/reports/v17-poly-shift-cumulative-w8-policy-search-v1.json
+      sha256: f5bc68744bd7ff783a0a7f6976e0c26646c371601f9db8e3ad60027d39d2fc3c
+      candidate_id: compression-c08-add-predictors-w8
+  isolated_special_evidence:
+    path: artifacts/reports/v24-poly-shift-special-format-route-dual-regate-v1.json
+    sha256: bdd9cd2169e4f1827fdcf71ee317ed5c63cfe5dfd24baba46cb111fa193feade
+    interpretation: only_dual_green_routes_enter_coupled_search
+
+activation:
+  default: poly_shift
+  bits: 8
+  signed_codes: false
+  region_assignments: {}
+  policy_id: poly_shift--lsq-plus-a8
+  checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+    sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+
+routes:
+  w4-neck-attention:
+    manifest: &fixed_groups
+      path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml
+      sha256: 33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665
+    list_key: neck_attention_safe
+  fixed-sd4-detect-tower:
+    manifest: *fixed_groups
+    list_key: detect_one2one_tower
+  fixed-sd4-detect-predictor:
+    manifest: *fixed_groups
+    list_key: detect_one2one_predictor
+
+candidate_templates:
+  all_nine_w8: &all_nine_w8
+    - {region: backbone_early, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: backbone_deep, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: neck, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: masf, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: neck_attention_safe, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: detect_one2one_tower, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: detect_one2one_predictor, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: pose_one2one_tower, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: pose_one2one_predictor, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+
+candidates:
+  - candidate_id: polyshift-all9-w8-plus-w4-neck-attention
+    region_defaults: *all_nine_w8
+    path_routes:
+      - {route_id: w4-neck-attention, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-all9-w8-plus-sd4-detect-predictor
+    region_defaults: *all_nine_w8
+    path_routes:
+      - {route_id: fixed-sd4-detect-predictor, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-all9-w8-plus-sd4-detect-tower
+    region_defaults: *all_nine_w8
+    path_routes:
+      - {route_id: fixed-sd4-detect-tower, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-all9-w8-plus-w4-neck-attention-sd4-predictor
+    region_defaults: *all_nine_w8
+    path_routes:
+      - {route_id: w4-neck-attention, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+      - {route_id: fixed-sd4-detect-predictor, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-all9-w8-plus-sd4-detect-head
+    region_defaults: *all_nine_w8
+    path_routes:
+      - {route_id: fixed-sd4-detect-tower, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+      - {route_id: fixed-sd4-detect-predictor, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-all9-w8-plus-w4-neck-attention-sd4-tower
+    region_defaults: *all_nine_w8
+    path_routes:
+      - {route_id: w4-neck-attention, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+      - {route_id: fixed-sd4-detect-tower, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-all9-w8-plus-three-special-routes
+    region_defaults: *all_nine_w8
+    path_routes:
+      - {route_id: w4-neck-attention, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+      - {route_id: fixed-sd4-detect-tower, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+      - {route_id: fixed-sd4-detect-predictor, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+
+diagnostic:
+  manifest: inherit_weight_plan
+  fixed_probe_per_task: 1
+  all_finite_required: true
+  same_structure_required: true
+  selection_claim: false
+
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch: {detect: 32, pose: 16}
+  workers: {detect: 4, pose: 8}
+  plots: false
+  save_coco_json: false
+  augmentation: false
+
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  map50_95_companion_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+
+selection:
+  hard_gate_first: true
+  objectives:
+    - maximize_worst_total_map50_delta
+    - maximize_worst_total_map50_95_delta
+    - minimize_total_packed_weight_bytes
+  accuracy_tolerance: 0.002
+  roles: [accuracy, balanced, hardware]
+  paired_path_matched_controls_required: true
+  mean_metric_can_override_worst_task: false

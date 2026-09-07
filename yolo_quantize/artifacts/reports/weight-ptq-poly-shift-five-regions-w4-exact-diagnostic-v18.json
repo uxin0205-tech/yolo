@@ -1,0 +1,3887 @@
+{
+  "catalog_contract": {
+    "deployment_regions": {
+      "backbone_attention_safe": {
+        "modules": 7,
+        "weight_elements": 919808
+      },
+      "backbone_deep": {
+        "modules": 22,
+        "weight_elements": 8126464
+      },
+      "backbone_early": {
+        "modules": 21,
+        "weight_elements": 1218240
+      },
+      "detect_one2one_predictor": {
+        "modules": 6,
+        "weight_elements": 62208
+      },
+      "detect_one2one_tower": {
+        "modules": 18,
+        "weight_elements": 1390592
+      },
+      "masf": {
+        "modules": 3,
+        "weight_elements": 74240
+      },
+      "neck": {
+        "modules": 33,
+        "weight_elements": 8142848
+      },
+      "neck_attention_safe": {
+        "modules": 5,
+        "weight_elements": 395520
+      },
+      "pose_one2one_predictor": {
+        "modules": 9,
+        "weight_elements": 3456
+      },
+      "pose_one2one_tower": {
+        "modules": 24,
+        "weight_elements": 2238464
+      }
+    },
+    "totals": {
+      "deployment_modules": 148,
+      "deployment_weight_elements": 22571840,
+      "modules": 152,
+      "protected_modules": 4,
+      "protected_weight_elements": 131072,
+      "training_only_modules": 0,
+      "training_only_weight_elements": 0,
+      "weight_elements": 22702912
+    }
+  },
+  "contract": {
+    "activation_output_format": "lsq_plus_a8",
+    "bbat5_assignment_changed": false,
+    "bbat5_dataset_id": "bbat5-v1",
+    "calibration_images": {
+      "detect": [
+        {
+          "bytes": 84829,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000292440.jpg",
+          "sha256": "8734a4ffee27d13dc79a9e68e8749279bdaffbd1fac1bbaace6b20844fce8721"
+        },
+        {
+          "bytes": 267198,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000484641.jpg",
+          "sha256": "633cc83c8e37ba22c9f1112b9faadf979bb78b098f0bb952eb151f58085d7fd7"
+        },
+        {
+          "bytes": 184619,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000475578.jpg",
+          "sha256": "03c3f4fe74909bbe6ca5bc9bbe7326f0128467bbd42012fe8eb1b92e9df23ed2"
+        },
+        {
+          "bytes": 110049,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000381568.jpg",
+          "sha256": "26b2d6cf32afbf1def0b6b59c38b3507348a73b99a5a2f00c780cff90968a937"
+        },
+        {
+          "bytes": 96028,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000179618.jpg",
+          "sha256": "50ce644c704c888defcad495eb721d1511e4bb711cc59c53e703041fca2bd0a0"
+        },
+        {
+          "bytes": 95413,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000006363.jpg",
+          "sha256": "e7513b57fdde4c11135dc70aa87f90fa708f60925de5c3370cd3cf0966d6e1f1"
+        },
+        {
+          "bytes": 215549,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000131295.jpg",
+          "sha256": "b383d732c5ca0f0e099d16e4911fd215ffdf7c10253bdd8ec2612ae83d063f59"
+        },
+        {
+          "bytes": 121290,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000557102.jpg",
+          "sha256": "487233e2395361328e912257d9a8430bc8fe6a08a84a1425b558c312ad5a46b8"
+        },
+        {
+          "bytes": 267809,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000005282.jpg",
+          "sha256": "2d286da0df7544038e01c2bc2dae4095e8f92ae322b3df388a3a7fbface56659"
+        },
+        {
+          "bytes": 320145,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000573853.jpg",
+          "sha256": "e606c8d24409014461b87e3f2323012f4468a8d3ce4254f6811b3c7580f3d152"
+        },
+        {
+          "bytes": 156733,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000231744.jpg",
+          "sha256": "796489a3db510743b112e28ffd47804a09129d7bdf01bccc537fa9ba6f6d29de"
+        },
+        {
+          "bytes": 118310,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000022559.jpg",
+          "sha256": "91e240c19d6ac8a902c6d67a7f399ae4e614ad57086407b079b378ba00376c33"
+        },
+        {
+          "bytes": 110276,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000074081.jpg",
+          "sha256": "9062f18e953b247330a7e7ac72f4e43edab04d6745993788b64c0d8769f32ee5"
+        },
+        {
+          "bytes": 206085,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000429776.jpg",
+          "sha256": "dc07a1303b4a36540e1730f517239966a1ae7a807b0ab91e5eb57e305565750e"
+        },
+        {
+          "bytes": 276133,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000553640.jpg",
+          "sha256": "c00db78e551fd3d8c061c0472215a87c5218ff5ad29585bdf91acdd04021f84d"
+        },
+        {
+          "bytes": 134376,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000247597.jpg",
+          "sha256": "7a59d6eabf06577af7a3fec98846e7b42f251207a105f720f5cf605577a88f6c"
+        },
+        {
+          "bytes": 178376,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000041186.jpg",
+          "sha256": "f7e88cd9746fec4eb0b68d7b7426d829508fb42afae9dbe53e11d171a17049d5"
+        },
+        {
+          "bytes": 221692,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000446899.jpg",
+          "sha256": "6edf6f7bda5566b20ff88d9af86ed9c538a7b1b69f6f444604ed3446b5ea5d70"
+        },
+        {
+          "bytes": 177975,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000347790.jpg",
+          "sha256": "1752b1af0f7006ef0e6758346ec51b5439717e19a4e621eaa92b714443594cdf"
+        },
+        {
+          "bytes": 101936,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000396193.jpg",
+          "sha256": "eb76d7330fe834410db15b9c67485d6e5de2ec05a1be14b991b43b0968735539"
+        },
+        {
+          "bytes": 262314,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000173279.jpg",
+          "sha256": "daba9b1b32224d3cb3dace56d98db7be255183c09d0ca4c196977bc86da844ff"
+        },
+        {
+          "bytes": 119299,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000331129.jpg",
+          "sha256": "c96552c2afb3514f48992d987ba832f6b1cf829c03c43f679edfc600ef9a77a3"
+        },
+        {
+          "bytes": 172407,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000098501.jpg",
+          "sha256": "af3c69ca61a6ddb3ee9f5fb91c8659f90359472176adcac988392533bc3b3282"
+        },
+        {
+          "bytes": 183071,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000522192.jpg",
+          "sha256": "578ee986e918f41065af2528df5f2cc98fc7d6a1cdfec21b802d218039051a3a"
+        },
+        {
+          "bytes": 189547,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000547774.jpg",
+          "sha256": "83848fc0637ef6810147adf5c4d39fa5b531b804613875c6012e90d036849ecc"
+        },
+        {
+          "bytes": 128973,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000265915.jpg",
+          "sha256": "ca15fec70ad6d125dd885abb226d46847dfb20b6eb4e54117b383459332d9590"
+        },
+        {
+          "bytes": 161124,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000369791.jpg",
+          "sha256": "41cefd843962dbfd669ae8df3af56dce3aaaf48ef2ed30b66a107301308a7067"
+        },
+        {
+          "bytes": 170405,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000266441.jpg",
+          "sha256": "901cb9c684bb6364400a7c8d09a0459741d8f091be7c1465c7c96844704f31b4"
+        },
+        {
+          "bytes": 198934,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000282176.jpg",
+          "sha256": "b1bf6d8484a135034a521891c644978a1426952b8f0480851e2b74ae21f9fc9a"
+        },
+        {
+          "bytes": 144301,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000511333.jpg",
+          "sha256": "7ac70fd8388676d79401408ce1ccc5318f22447244bf90481968f3711a40a575"
+        },
+        {
+          "bytes": 96394,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000371157.jpg",
+          "sha256": "a80edc66df27b13e5c348d06c9468c230503ff50b386e9b7eece85da50f8f6f4"
+        },
+        {
+          "bytes": 187598,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000213642.jpg",
+          "sha256": "8885c58ca533122ecdc48caf4dda0c4a53c1ab3af1bcd3850b818ce6f6725446"
+        }
+      ],
+      "pose": [
+        {
+          "bytes": 46259,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/f15c641e4a78b05c_jpg.rf.e90ead8bcae2c7d6371e1936d80fb038.jpg",
+          "sha256": "3be0746a4289d34081669f82baee81210fff5b6d2d6a1087d0f9ac794fd939fd"
+        },
+        {
+          "bytes": 59747,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_163024_mp4-0036_jpg.rf.0e30597392ba99bbab733344f4f75902.jpg",
+          "sha256": "5d688d5bf1b7c581870b13a9feff4419c810ec8ef469e3790a4995ee7bdd5511"
+        },
+        {
+          "bytes": 53018,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/Untitled_mov-41_jpg.rf.1539695f91b8cba80d9ab9aa626564cc.jpg",
+          "sha256": "8a6d05ac8521ca49d27a128193b6c29e038778f0dabd392f4ef4dd44d5f22d51"
+        },
+        {
+          "bytes": 63800,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_162543_mp4-0000_jpg.rf.ce4a6eb60e5c092e83ce4750eb04d87e.jpg",
+          "sha256": "accc373f4827243010e8764fb61d4e28a795ed5c98abf90f649a6d859b3003de"
+        },
+        {
+          "bytes": 57251,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/0028F_mp4-0011_jpg.rf.4ca4f42c1b844ac6da94606c06c4679a.jpg",
+          "sha256": "bd3e01d009feed657d32c96e2c28879c7c63c51e7745cfb3be1b1ae005b2a07a"
+        },
+        {
+          "bytes": 58983,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_163024_mp4-0001_jpg.rf.f444979cacb26c4231b9dfd9f67c073e.jpg",
+          "sha256": "958afbefb06d7be45c2f4ac9e882b8f581e1d4fe6c66e37839badfa8b195b2b3"
+        },
+        {
+          "bytes": 61305,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000074369_jpg.rf.005285acde3eb3b5dd6db6081d919f4d.jpg",
+          "sha256": "3d53d50e553c32b4d2607eac5a74f4c343f4611e8adacd7f96566c5f006ec4cd"
+        },
+        {
+          "bytes": 49257,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/260_png_jpg.rf.63fb963574ef2342039c409d48ec7050.jpg",
+          "sha256": "efeff79856d5838dd4232123cc6676ed217ce990156591e8df219ca9d24c6d38"
+        },
+        {
+          "bytes": 42950,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/0021O_mp4-0011_jpg.rf.5f3349e46df6691b6ac74da919adeec3.jpg",
+          "sha256": "500ab3758c7955963f097334dc4e04d41ce2a2a15226d0b01257efdc01e3fd2d"
+        },
+        {
+          "bytes": 68714,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/frame1222_jpg.rf.0c837f204b5a8594d3add744b0f79d8f.jpg",
+          "sha256": "7b3f2cb56c5924a3188595a602c4960b9af3ec742568c8644dc16f6d4208bcd8"
+        },
+        {
+          "bytes": 38860,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250315_163624_mp4-0049_jpg.rf.49e463762ee45163cf1657ffb39028c3.jpg",
+          "sha256": "f59d7c6a7f8800a4110f51ce2fe815eabe9ce7711b79d2da1130dfe94bf1176b"
+        },
+        {
+          "bytes": 78742,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250312_143547_mp4-0183_jpg.rf.3e684ea247b9d2293e425fa2af7f6046.jpg",
+          "sha256": "99a8405fc8559c6919fb011e82c40ca47a4384647d467d6f0380a2cf30cf91f4"
+        },
+        {
+          "bytes": 48884,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/youtube-380_jpg.rf.66a8c17c7b2925e13f91ab87fa4a42c5.jpg",
+          "sha256": "915845a193915d4bb561ffe2d9135e797dfbe4bb371ca6c23437352b066086c9"
+        },
+        {
+          "bytes": 61359,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000015843_jpg.rf.04f90f836a0608872ae7649468e48a0f.jpg",
+          "sha256": "b1e6d0ae858d12737abc8b3d03c90cbf79a477d1d7e51d2ef959252829ae8393"
+        },
+        {
+          "bytes": 32949,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/3H2A9735-MPEG-4328_jpg.rf.20265feae97e4c3f34bc0a1ea3e1180a.jpg",
+          "sha256": "c54f60a8bc592fc93478eafc57a50368f375940a46e8faf2b60a0afb0b6316b6"
+        },
+        {
+          "bytes": 57549,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_150219_mp4-0173_jpg.rf.115f80c35a78a9612a41e3b7b2d401a0.jpg",
+          "sha256": "f94cbb7065a6d6389a5ba42a50117457d7a5358a638d921f08afe3a8d3eb4039"
+        },
+        {
+          "bytes": 33100,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/AngleW_1683932996_mp4-0104_jpg.rf.2271a82da6d13b947e193a74deade69d.jpg",
+          "sha256": "7c2021bd7aa51bdc8c2a93661324cefa22aac02f326b1c5af10f346284762df3"
+        },
+        {
+          "bytes": 32673,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/ohtani_mp4-0008_jpg.rf.1791d4f272695d911cc6b43833692614.jpg",
+          "sha256": "eb8d0a87734d2ae2da3f6a379caea62d9368121ac3bfba4499a95eb1e2134ba5"
+        },
+        {
+          "bytes": 68600,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000043657_jpg.rf.7599b0b431a00676dbf55b722f944971.jpg",
+          "sha256": "fad88353566ef7aa3d713355e49ad1a3743420f92b6234f95fc99a213808ac90"
+        },
+        {
+          "bytes": 82199,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250312_143547_mp4-0549_jpg.rf.c36996f5694e5587e96cab29ff333364.jpg",
+          "sha256": "06c6e0ab057bd5b937c314f5d3e534537399586d34501697f4572e0eb3065805"
+        },
+        {
+          "bytes": 52928,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/baseball106_png_jpg.rf.6eaa37a71dd2edf74c6a3213835371b1.jpg",
+          "sha256": "eaf1f1dfd0ed94210cefb1366ed9f64461de5b9c86a167df932881cdac2ea0e4"
+        },
+        {
+          "bytes": 24415,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/0002I_mp4-0007_jpg.rf.402c05689f52658502d511c3f9728354.jpg",
+          "sha256": "b092ec7a9ff1e2887b58fd001218c1a73fd3c30cc00e0e202788ea3d6552133b"
+        },
+        {
+          "bytes": 48085,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/106_png_jpg.rf.10601e1e74c90df565da5abdd5b9d93e.jpg",
+          "sha256": "bde72f771c5e5e6d1323768ac87edf304b66783f136e87b813d0322909d529a0"
+        },
+        {
+          "bytes": 40799,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000492605_jpg.rf.2ec622f29918b5d03a64660529cba7e3.jpg",
+          "sha256": "25d994dca765648bbe608c3213a75f4ac27c93d494f557fe53e8f9a708034fe2"
+        },
+        {
+          "bytes": 31481,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/AngleV_1717202555_mp4-0056_jpg.rf.373309f06fc33424d8893018a73603d3.jpg",
+          "sha256": "24b30e2046eb6a402b071729e9c2d2fed7137a115660554dd2170f584d54930b"
+        },
+        {
+          "bytes": 44097,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/00f7558660597358_jpg.rf.14c3e2f346d9f4689fb648ac343c3175.jpg",
+          "sha256": "911fd6de1762810fde5931ff70111e4786190b20a0cd38243665af1bbf9d19ef"
+        },
+        {
+          "bytes": 59516,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_163024_mp4-0069_jpg.rf.abf5881d02ccb3bd9c05bd521b92b7d2.jpg",
+          "sha256": "795d3f8c5188b6907fa5165a3d74729ca9f5dae509d2a5506979fe8a38abdedb"
+        },
+        {
+          "bytes": 59246,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_163024_mp4-0074_jpg.rf.33eddfb61dab8bdb053289307020fdfc.jpg",
+          "sha256": "5796a9ac0101a2c310405f04392ef1587aeab0011584ba38125fff218c337a2c"
+        },
+        {
+          "bytes": 52551,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000443505_jpg.rf.17147d2b371079a1af83f02b4b099775.jpg",
+          "sha256": "f9699cc18a0a83cf66dc8d0ffec83e74ab9608c4ac83a73185acc25db6c8916e"
+        },
+        {
+          "bytes": 59559,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000342459_jpg.rf.b5942f002c3c5d389eda9c55dcae2368.jpg",
+          "sha256": "827a5f0c754d25b1bf20ee9dd433a87b3339efb22c4f9b1d0df8700b270776fe"
+        },
+        {
+          "bytes": 67380,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250312_143347_mp4-0016_jpg.rf.582c365461198cf6315d83af393cac41.jpg",
+          "sha256": "287d84e3eef626d2d8f8e0cf947c8b8ada10632e0d34515358fbfa6ad39c0436"
+        },
+        {
+          "bytes": 56973,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000036911_jpg.rf.95430e8162ca1a646fd865a73f4fa549.jpg",
+          "sha256": "3186d4a5930518998fd41b4750caf4695b5d6d38645a7664f296d46da6ab728a"
+        }
+      ]
+    },
+    "calibration_per_task": 32,
+    "calibration_split": "canonical_train_exemplars_only",
+    "cells": [
+      {
+        "activation": "poly_shift",
+        "activation_policy_id": "poly_shift--lsq-plus-a8",
+        "activation_role": "map50_accuracy_and_hardware_candidate",
+        "cell_id": "poly_shift--lsq-plus-a8--masf--w4-optimal_scaled_codebook",
+        "formal_training": false,
+        "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+        "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+        "region": "masf",
+        "scale_method": "optimal_scaled_codebook",
+        "weight_bits": 4,
+        "weight_format": "w4"
+      },
+      {
+        "activation": "poly_shift",
+        "activation_policy_id": "poly_shift--lsq-plus-a8",
+        "activation_role": "map50_accuracy_and_hardware_candidate",
+        "cell_id": "poly_shift--lsq-plus-a8--neck_attention_safe--w4-optimal_scaled_codebook",
+        "formal_training": false,
+        "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+        "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+        "region": "neck_attention_safe",
+        "scale_method": "optimal_scaled_codebook",
+        "weight_bits": 4,
+        "weight_format": "w4"
+      },
+      {
+        "activation": "poly_shift",
+        "activation_policy_id": "poly_shift--lsq-plus-a8",
+        "activation_role": "map50_accuracy_and_hardware_candidate",
+        "cell_id": "poly_shift--lsq-plus-a8--detect_one2one_predictor--w4-optimal_scaled_codebook",
+        "formal_training": false,
+        "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+        "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+        "region": "detect_one2one_predictor",
+        "scale_method": "optimal_scaled_codebook",
+        "weight_bits": 4,
+        "weight_format": "w4"
+      },
+      {
+        "activation": "poly_shift",
+        "activation_policy_id": "poly_shift--lsq-plus-a8",
+        "activation_role": "map50_accuracy_and_hardware_candidate",
+        "cell_id": "poly_shift--lsq-plus-a8--pose_one2one_tower--w4-optimal_scaled_codebook",
+        "formal_training": false,
+        "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+        "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+        "region": "pose_one2one_tower",
+        "scale_method": "optimal_scaled_codebook",
+        "weight_bits": 4,
+        "weight_format": "w4"
+      },
+      {
+        "activation": "poly_shift",
+        "activation_policy_id": "poly_shift--lsq-plus-a8",
+        "activation_role": "map50_accuracy_and_hardware_candidate",
+        "cell_id": "poly_shift--lsq-plus-a8--pose_one2one_predictor--w4-optimal_scaled_codebook",
+        "formal_training": false,
+        "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+        "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+        "region": "pose_one2one_predictor",
+        "scale_method": "optimal_scaled_codebook",
+        "weight_bits": 4,
+        "weight_format": "w4"
+      }
+    ],
+    "comparison_reference": "matched_activation_a8_fp32_weights",
+    "diagnostic_manifest": {
+      "all_file_evidence_verified_before_execution": true,
+      "manifest_calibration_per_task": 32,
+      "manifest_probe_per_task": 64,
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+      "probe_subset_policy": "first_ordered_sample_per_task_from_fixed_64_manifest",
+      "runner_probe_per_task": 1,
+      "sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2"
+    },
+    "diagnostic_only": true,
+    "execution_authorization": {
+      "authorization_id": "user-2026-09-03-autonomous-poly-shift-stage6-w4-exact",
+      "authorized_cell_ids": [
+        "poly_shift--lsq-plus-a8--masf--w4-optimal_scaled_codebook",
+        "poly_shift--lsq-plus-a8--neck_attention_safe--w4-optimal_scaled_codebook",
+        "poly_shift--lsq-plus-a8--detect_one2one_predictor--w4-optimal_scaled_codebook",
+        "poly_shift--lsq-plus-a8--pose_one2one_tower--w4-optimal_scaled_codebook",
+        "poly_shift--lsq-plus-a8--pose_one2one_predictor--w4-optimal_scaled_codebook"
+      ]
+    },
+    "formal_training": false,
+    "graph_view": "bn_folded_deployment",
+    "image_size": 640,
+    "kind": "full35_isolated_region_weight_ptq_sensitivity",
+    "plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/weight-region-sensitivity-plan-v18.yaml",
+    "plan_sha256": "2462f26c8639afa2c40a1de09d305aef9998ba7d657d7a222822e6a9a00d9f1c",
+    "probe_images": {
+      "detect": [
+        {
+          "bytes": 209467,
+          "path": "/home/uxin/yolo/coco2017/images/val2017/000000114907.jpg",
+          "sha256": "1ef6feb0a8d8886de8dc4db6e6c379cdd8fad15111a8edc570eeda66bcc17dba"
+        }
+      ],
+      "pose": [
+        {
+          "bytes": 49973,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/0006B1_mp4-0003_jpg.rf.33d289b122f1e958dfd5c3d89172a227.jpg",
+          "sha256": "077bd2bf397664dc51c0b90b1dc68b0b82f9d60548f7d0b07a79b09b36c916e8"
+        }
+      ]
+    },
+    "probe_split": "canonical_val_exemplars_only",
+    "promotion_authorized": false,
+    "qat": false,
+    "schema_version": 2,
+    "selection_claim": false,
+    "weight_quantization": {
+      "accumulator_contract": "int32",
+      "family": "signed_uniform",
+      "granularity": "per_output_channel",
+      "representation": "fake_quant_dequantized_weights",
+      "rounding": "nearest_even"
+    }
+  },
+  "kind": "full35_isolated_region_weight_ptq_sensitivity",
+  "parents": {
+    "poly_shift--lsq-plus-a8": {
+      "activation": "poly_shift",
+      "activation_observer": {
+        "invalid_sites": [],
+        "maximum": 252.97195434570312,
+        "minimum": -0.2898893654346466,
+        "valid_sites": 124
+      },
+      "activation_quantizers": 124,
+      "catalog": {
+        "deployment_regions": {
+          "backbone_attention_safe": {
+            "modules": 7,
+            "weight_elements": 919808
+          },
+          "backbone_deep": {
+            "modules": 22,
+            "weight_elements": 8126464
+          },
+          "backbone_early": {
+            "modules": 21,
+            "weight_elements": 1218240
+          },
+          "detect_one2one_predictor": {
+            "modules": 6,
+            "weight_elements": 62208
+          },
+          "detect_one2one_tower": {
+            "modules": 18,
+            "weight_elements": 1390592
+          },
+          "masf": {
+            "modules": 3,
+            "weight_elements": 74240
+          },
+          "neck": {
+            "modules": 33,
+            "weight_elements": 8142848
+          },
+          "neck_attention_safe": {
+            "modules": 5,
+            "weight_elements": 395520
+          },
+          "pose_one2one_predictor": {
+            "modules": 9,
+            "weight_elements": 3456
+          },
+          "pose_one2one_tower": {
+            "modules": 24,
+            "weight_elements": 2238464
+          }
+        },
+        "totals": {
+          "deployment_modules": 148,
+          "deployment_weight_elements": 22571840,
+          "modules": 152,
+          "protected_modules": 4,
+          "protected_weight_elements": 131072,
+          "training_only_modules": 0,
+          "training_only_weight_elements": 0,
+          "weight_elements": 22702912
+        }
+      },
+      "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+      "checkpoint_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+      "checkpoint_state_source": "ema",
+      "graph_view": "bn_folded_deployment",
+      "peak_gpu_memory_mib": 485.6328125,
+      "role": "map50_accuracy_and_hardware_candidate",
+      "status": "ready",
+      "timing_seconds": {
+        "activation_calibration": 2.497794819995761,
+        "build_and_gpu_transfer": 2.027015940286219,
+        "matched_reference_probe": 0.07023618696257472
+      },
+      "weight_view_parity": {
+        "deployment_batch_norm_modules": 0,
+        "deployment_catalog": {
+          "deployment_regions": {
+            "backbone_attention_safe": {
+              "modules": 7,
+              "weight_elements": 919808
+            },
+            "backbone_deep": {
+              "modules": 22,
+              "weight_elements": 8126464
+            },
+            "backbone_early": {
+              "modules": 21,
+              "weight_elements": 1218240
+            },
+            "detect_one2one_predictor": {
+              "modules": 6,
+              "weight_elements": 62208
+            },
+            "detect_one2one_tower": {
+              "modules": 18,
+              "weight_elements": 1390592
+            },
+            "masf": {
+              "modules": 3,
+              "weight_elements": 74240
+            },
+            "neck": {
+              "modules": 33,
+              "weight_elements": 8142848
+            },
+            "neck_attention_safe": {
+              "modules": 5,
+              "weight_elements": 395520
+            },
+            "pose_one2one_predictor": {
+              "modules": 9,
+              "weight_elements": 3456
+            },
+            "pose_one2one_tower": {
+              "modules": 24,
+              "weight_elements": 2238464
+            }
+          },
+          "totals": {
+            "deployment_modules": 148,
+            "deployment_weight_elements": 22571840,
+            "modules": 152,
+            "protected_modules": 4,
+            "protected_weight_elements": 131072,
+            "training_only_modules": 0,
+            "training_only_weight_elements": 0,
+            "weight_elements": 22702912
+          }
+        },
+        "deployment_path_parity": true,
+        "deployment_state_sha256": "094df3459309b1baa0aa8548258321928531d2107bdcb93eca24f4b9c4961600",
+        "folded_batch_norm_modules": 179,
+        "forward_all_finite": true,
+        "forward_maximum_absolute_error": 0.002288818359375,
+        "forward_maximum_relative_to_reference_peak": 2.23624863626104e-05,
+        "forward_normalized_rmse": 4.893338920355796e-06,
+        "forward_parity_evaluated": true,
+        "forward_parity_passed": true,
+        "forward_removed_training_only_tensor_paths": [
+          "output.detect[1].one2many.boxes",
+          "output.detect[1].one2many.scores",
+          "output.detect[1].one2many.feats[0]",
+          "output.detect[1].one2many.feats[1]",
+          "output.detect[1].one2many.feats[2]",
+          "output.pose[1].one2many.boxes",
+          "output.pose[1].one2many.scores",
+          "output.pose[1].one2many.feats[0]",
+          "output.pose[1].one2many.feats[1]",
+          "output.pose[1].one2many.feats[2]",
+          "output.pose[1].one2many.kpts"
+        ],
+        "forward_same_structure": true,
+        "inference_contract_parity": true,
+        "master_batch_norm_modules": 179,
+        "master_catalog": {
+          "deployment_regions": {
+            "backbone_attention_safe": {
+              "modules": 7,
+              "weight_elements": 919808
+            },
+            "backbone_deep": {
+              "modules": 22,
+              "weight_elements": 8126464
+            },
+            "backbone_early": {
+              "modules": 21,
+              "weight_elements": 1218240
+            },
+            "detect_one2one_predictor": {
+              "modules": 6,
+              "weight_elements": 62208
+            },
+            "detect_one2one_tower": {
+              "modules": 18,
+              "weight_elements": 1390592
+            },
+            "masf": {
+              "modules": 3,
+              "weight_elements": 74240
+            },
+            "neck": {
+              "modules": 33,
+              "weight_elements": 8142848
+            },
+            "neck_attention_safe": {
+              "modules": 5,
+              "weight_elements": 395520
+            },
+            "pose_one2one_predictor": {
+              "modules": 9,
+              "weight_elements": 3456
+            },
+            "pose_one2one_tower": {
+              "modules": 24,
+              "weight_elements": 2238464
+            }
+          },
+          "totals": {
+            "deployment_modules": 148,
+            "deployment_weight_elements": 22571840,
+            "modules": 251,
+            "protected_modules": 4,
+            "protected_weight_elements": 131072,
+            "training_only_modules": 99,
+            "training_only_weight_elements": 3748480,
+            "weight_elements": 26451392
+          }
+        },
+        "master_matches_source": true,
+        "master_state_sha256": "6990d72c91ebcc3169997d2a4968db0f35fde6ed1d0775a4af4bb6bd75d02ce4",
+        "schema_version": 1,
+        "source_batch_norm_modules": 179,
+        "source_state_sha256": "6990d72c91ebcc3169997d2a4968db0f35fde6ed1d0775a4af4bb6bd75d02ce4",
+        "source_unchanged": true
+      }
+    }
+  },
+  "results": {
+    "poly_shift--lsq-plus-a8--detect_one2one_predictor--w4-optimal_scaled_codebook": {
+      "activation": "poly_shift",
+      "activation_policy_id": "poly_shift--lsq-plus-a8",
+      "activation_role": "map50_accuracy_and_hardware_candidate",
+      "all_finite": true,
+      "cell_id": "poly_shift--lsq-plus-a8--detect_one2one_predictor--w4-optimal_scaled_codebook",
+      "coverage": {
+        "protected_modules": 4,
+        "quantized_modules": 6,
+        "training_only_modules": 0,
+        "weight_elements": 62208
+      },
+      "formal_training": false,
+      "incremental_reference": "matched_activation_a8_fp32_weights",
+      "layer_weight_numeric": [
+        {
+          "clipping_rate": 0.0078125,
+          "code_max": 7,
+          "code_min": -6,
+          "cosine": 0.9964673781326246,
+          "elements": 256,
+          "maximum_absolute_error": 0.06203263998031616,
+          "mse": 0.00018543790793046355,
+          "normalized_rmse": 0.0839816736064646,
+          "occupied_codes": 14,
+          "output_channels": 4,
+          "path": "graph.model.23.detect_head.one2one_cv2.0.2",
+          "region": "detect_one2one_predictor",
+          "scale_maximum": 0.07333642989397049,
+          "scale_mean": 0.06939747929573059,
+          "scale_minimum": 0.0648690015077591,
+          "sqnr_db": 21.516309497793422,
+          "zero_ratio": 0.68359375
+        },
+        {
+          "clipping_rate": 0.00390625,
+          "code_max": 7,
+          "code_min": -7,
+          "cosine": 0.9966344493694554,
+          "elements": 256,
+          "maximum_absolute_error": 0.04265680909156799,
+          "mse": 0.0002218554145656526,
+          "normalized_rmse": 0.08197413288729204,
+          "occupied_codes": 14,
+          "output_channels": 4,
+          "path": "graph.model.23.detect_head.one2one_cv2.1.2",
+          "region": "detect_one2one_predictor",
+          "scale_maximum": 0.09462504833936691,
+          "scale_mean": 0.08174937963485718,
+          "scale_minimum": 0.06854857504367828,
+          "sqnr_db": 21.726463371002005,
+          "zero_ratio": 0.71875
+        },
+        {
+          "clipping_rate": 0.00390625,
+          "code_max": 7,
+          "code_min": -5,
+          "cosine": 0.9959095957338115,
+          "elements": 256,
+          "maximum_absolute_error": 0.048217467963695526,
+          "mse": 0.00022110949794296175,
+          "normalized_rmse": 0.09035500031420948,
+          "occupied_codes": 13,
+          "output_channels": 4,
+          "path": "graph.model.23.detect_head.one2one_cv2.2.2",
+          "region": "detect_one2one_predictor",
+          "scale_maximum": 0.10388413816690445,
+          "scale_mean": 0.08979350328445435,
+          "scale_minimum": 0.0777575895190239,
+          "sqnr_db": 20.88095616504303,
+          "zero_ratio": 0.74609375
+        },
+        {
+          "clipping_rate": 0.00732421875,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.991303609894833,
+          "elements": 20480,
+          "maximum_absolute_error": 0.12352168560028076,
+          "mse": 0.00013062359066680075,
+          "normalized_rmse": 0.13159466004676984,
+          "occupied_codes": 16,
+          "output_channels": 80,
+          "path": "graph.model.23.detect_head.one2one_cv3.0.2",
+          "region": "detect_one2one_predictor",
+          "scale_maximum": 0.052539706230163574,
+          "scale_mean": 0.037044450640678406,
+          "scale_minimum": 0.030247703194618225,
+          "sqnr_db": 17.61523467025802,
+          "zero_ratio": 0.24609375
+        },
+        {
+          "clipping_rate": 0.00751953125,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9899184371943285,
+          "elements": 20480,
+          "maximum_absolute_error": 0.13193657994270325,
+          "mse": 0.0001608087681233883,
+          "normalized_rmse": 0.141638868370301,
+          "occupied_codes": 16,
+          "output_channels": 80,
+          "path": "graph.model.23.detect_head.one2one_cv3.1.2",
+          "region": "detect_one2one_predictor",
+          "scale_maximum": 0.066062331199646,
+          "scale_mean": 0.040811873972415924,
+          "scale_minimum": 0.02939540334045887,
+          "sqnr_db": 16.976351034282075,
+          "zero_ratio": 0.325244140625
+        },
+        {
+          "clipping_rate": 0.005859375,
+          "code_max": 6,
+          "code_min": -8,
+          "cosine": 0.9849111685359626,
+          "elements": 20480,
+          "maximum_absolute_error": 0.2091067135334015,
+          "mse": 0.0002815532730892301,
+          "normalized_rmse": 0.17306074739948857,
+          "occupied_codes": 15,
+          "output_channels": 80,
+          "path": "graph.model.23.detect_head.one2one_cv3.2.2",
+          "region": "detect_one2one_predictor",
+          "scale_maximum": 0.0898980051279068,
+          "scale_mean": 0.05167117714881897,
+          "scale_minimum": 0.03623276576399803,
+          "sqnr_db": 15.236028500484815,
+          "zero_ratio": 0.36103515625
+        }
+      ],
+      "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+      "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+      "peak_gpu_memory_mib": 533.44482421875,
+      "promotion_authorized": false,
+      "region": "detect_one2one_predictor",
+      "same_structure": true,
+      "scale_method": "optimal_scaled_codebook",
+      "selection_claim": false,
+      "status": "diagnostic_pass",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 0.936372249886169,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7974255953913688,
+              "elements": 1800,
+              "maximum_absolute_error": 633.7322998046875,
+              "mean_absolute_error": 123.74443576388889,
+              "normalized_rmse": 0.6411871809386034,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7974255953913688,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 633.7322998046875,
+                  "mean_absolute_error": 123.74443576388889,
+                  "normalized_rmse": 0.6411871809386034,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9997580589514368,
+              "elements": 705600,
+              "maximum_absolute_error": 12.983116149902344,
+              "mean_absolute_error": 0.4091611748866213,
+              "normalized_rmse": 0.02526957876685651,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 0.9998630679901606,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.5457220077514648,
+                  "mean_absolute_error": 0.07218563988095238,
+                  "normalized_rmse": 0.027947432145926872,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9997580123122308,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 12.983116149902344,
+                  "mean_absolute_error": 0.42600995163690475,
+                  "normalized_rmse": 0.025267089792044412,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.023333333432674408,
+              "ordered_pair_match": 0.019999999552965164,
+              "selected_anchor_jaccard": 0.7547169811320755,
+              "selected_pair_overlap": 0.85,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 633.7322998046875,
+          "mean_absolute_error": 0.15177283796516114,
+          "normalized_rmse": 0.3559935507194653,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 0.7974255953913688,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 633.7322998046875,
+              "mean_absolute_error": 123.74443576388889,
+              "normalized_rmse": 0.6411871809386034,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 0.9998630679901606,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.5457220077514648,
+              "mean_absolute_error": 0.07218563988095238,
+              "normalized_rmse": 0.027947432145926872,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9997580123122308,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 12.983116149902344,
+              "mean_absolute_error": 0.42600995163690475,
+              "normalized_rmse": 0.025267089792044412,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 3600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 100800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "timing_seconds": {
+        "cell_total": 0.16948611102998257,
+        "probe_forward": 0.0673575815744698,
+        "weight_quantization": 0.09889842011034489
+      },
+      "weight_bits": 4,
+      "weight_format": "w4",
+      "weight_numeric": {
+        "clipping_rate": 0.006880144032921811,
+        "code_histogram": [
+          813,
+          563,
+          907,
+          1511,
+          2153,
+          3450,
+          4775,
+          8746,
+          19645,
+          14368,
+          4001,
+          885,
+          230,
+          89,
+          41,
+          31
+        ],
+        "code_max": 7,
+        "code_min": -8,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9887840249174784,
+        "encoded_bits": 4,
+        "logical_code_count": 16,
+        "maximum_absolute_error": 0.2091067135334015,
+        "mse": 0.00019122326490038109,
+        "normalized_rmse": 0.1493525702619209,
+        "occupied_codes": 16,
+        "scale_bytes": 1008,
+        "scale_count": 252,
+        "scale_maximum": 0.10388413816690445,
+        "scale_mean": 0.04494429155001565,
+        "scale_minimum": 0.02939540334045887,
+        "sqnr_db": 16.515745981322368,
+        "weight_code_bytes": 31104,
+        "zero_ratio": 0.315795396090535
+      }
+    },
+    "poly_shift--lsq-plus-a8--masf--w4-optimal_scaled_codebook": {
+      "activation": "poly_shift",
+      "activation_policy_id": "poly_shift--lsq-plus-a8",
+      "activation_role": "map50_accuracy_and_hardware_candidate",
+      "all_finite": true,
+      "cell_id": "poly_shift--lsq-plus-a8--masf--w4-optimal_scaled_codebook",
+      "coverage": {
+        "protected_modules": 4,
+        "quantized_modules": 3,
+        "training_only_modules": 0,
+        "weight_elements": 74240
+      },
+      "formal_training": false,
+      "incremental_reference": "matched_activation_a8_fp32_weights",
+      "layer_weight_numeric": [
+        {
+          "clipping_rate": 0.004774305555555556,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9985181674080379,
+          "elements": 2304,
+          "maximum_absolute_error": 0.6334152817726135,
+          "mse": 0.012893712355030907,
+          "normalized_rmse": 0.05441945913182062,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.16.p3_masf.context.dw3.conv",
+          "region": "masf",
+          "scale_maximum": 1.3993960618972778,
+          "scale_mean": 0.4157315492630005,
+          "scale_minimum": 0.06807927042245865,
+          "sqnr_db": 25.28491557866401,
+          "zero_ratio": 0.05946180555555555
+        },
+        {
+          "clipping_rate": 0.00796875,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9977522580565664,
+          "elements": 6400,
+          "maximum_absolute_error": 0.3994581699371338,
+          "mse": 0.005688261985778808,
+          "normalized_rmse": 0.06701121596368877,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.16.p3_masf.context.dw5.conv",
+          "region": "masf",
+          "scale_maximum": 0.8086554408073425,
+          "scale_mean": 0.24754071235656738,
+          "scale_minimum": 0.0394720584154129,
+          "sqnr_db": 23.477050028528694,
+          "zero_ratio": 0.07875
+        },
+        {
+          "clipping_rate": 0.007537841796875,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9932723554790043,
+          "elements": 65536,
+          "maximum_absolute_error": 0.14114338159561157,
+          "mse": 3.824480882030912e-05,
+          "normalized_rmse": 0.11580139371130549,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.16.p3_masf.context.project.conv",
+          "region": "masf",
+          "scale_maximum": 0.04675402492284775,
+          "scale_mean": 0.018753688782453537,
+          "scale_minimum": 0.009069638326764107,
+          "sqnr_db": 18.725724273745584,
+          "zero_ratio": 0.136474609375
+        }
+      ],
+      "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+      "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+      "peak_gpu_memory_mib": 511.6201171875,
+      "promotion_authorized": false,
+      "region": "masf",
+      "same_structure": true,
+      "scale_method": "optimal_scaled_codebook",
+      "selection_claim": false,
+      "status": "diagnostic_pass",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 0.9399220213339821,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.8085264134543163,
+              "elements": 1800,
+              "maximum_absolute_error": 680.7617797851562,
+              "mean_absolute_error": 118.39881944444444,
+              "normalized_rmse": 0.6214104543843535,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.8085264134543163,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 680.7617797851562,
+                  "mean_absolute_error": 118.39881944444444,
+                  "normalized_rmse": 0.6214104543843535,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.998657834389549,
+              "elements": 705600,
+              "maximum_absolute_error": 21.407041549682617,
+              "mean_absolute_error": 0.6960553580563085,
+              "normalized_rmse": 0.05183395151670569,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 0.9998053190915442,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 1.6252870559692383,
+                  "mean_absolute_error": 0.03129198346819197,
+                  "normalized_rmse": 0.01975888513122029,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9986568253092628,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 21.407041549682617,
+                  "mean_absolute_error": 0.7292935267857142,
+                  "normalized_rmse": 0.0518534994467157,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.06666667014360428,
+              "ordered_pair_match": 0.06666667014360428,
+              "selected_anchor_jaccard": 0.8244274809160306,
+              "selected_pair_overlap": 0.8933333333333333,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 680.7617797851562,
+          "mean_absolute_error": 0.22162694521350487,
+          "normalized_rmse": 0.3471696433325201,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 0.8085264134543163,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 680.7617797851562,
+              "mean_absolute_error": 118.39881944444444,
+              "normalized_rmse": 0.6214104543843535,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 0.9998053190915442,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 1.6252870559692383,
+              "mean_absolute_error": 0.03129198346819197,
+              "normalized_rmse": 0.01975888513122029,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9986568253092628,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 21.407041549682617,
+              "mean_absolute_error": 0.7292935267857142,
+              "normalized_rmse": 0.0518534994467157,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9998681096625516,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.23630023002624512,
+              "mean_absolute_error": 0.00399760901927948,
+              "normalized_rmse": 0.01624323067706943,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9980273734478338,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 2.234071731567383,
+              "mean_absolute_error": 0.01698131561279297,
+              "normalized_rmse": 0.06280036464288026,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9932236723047276,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 13.904571533203125,
+              "mean_absolute_error": 0.1080232810974121,
+              "normalized_rmse": 0.11628656735132739,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 0.7535901234296477,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7462194475411598,
+              "elements": 3600,
+              "maximum_absolute_error": 641.498046875,
+              "mean_absolute_error": 138.31079861111112,
+              "normalized_rmse": 0.7100386805087339,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7462194475411598,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 641.498046875,
+                  "mean_absolute_error": 138.31079861111112,
+                  "normalized_rmse": 0.7100386805087339,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9997926511555869,
+              "elements": 100800,
+              "maximum_absolute_error": 7.813701629638672,
+              "mean_absolute_error": 0.0635103398277646,
+              "normalized_rmse": 0.0203633790514668,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 0.9999497500926527,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.4077029228210449,
+                  "mean_absolute_error": 0.011183754148937406,
+                  "normalized_rmse": 0.010084395608619016,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9997889715155042,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 7.813701629638672,
+                  "mean_absolute_error": 0.30303699311755955,
+                  "normalized_rmse": 0.020543702830731377,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9997872904697122,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.3417339324951172,
+                  "mean_absolute_error": 0.01855251251705109,
+                  "normalized_rmse": 0.02066251569892861,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.030000001192092896,
+              "ordered_pair_match": 0.030000001192092896,
+              "selected_anchor_jaccard": 0.7986111111111112,
+              "selected_pair_overlap": 0.88,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 641.498046875,
+          "mean_absolute_error": 0.1975168845879992,
+          "normalized_rmse": 0.6997186512305666,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 0.7462194475411598,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 641.498046875,
+              "mean_absolute_error": 138.31079861111112,
+              "normalized_rmse": 0.7100386805087339,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 0.9999497500926527,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.4077029228210449,
+              "mean_absolute_error": 0.011183754148937406,
+              "normalized_rmse": 0.010084395608619016,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9997889715155042,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 7.813701629638672,
+              "mean_absolute_error": 0.30303699311755955,
+              "normalized_rmse": 0.020543702830731377,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.999791969908814,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.30944058299064636,
+              "mean_absolute_error": 0.004515885710716248,
+              "normalized_rmse": 0.02040329517691823,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9981774024958439,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 2.8219852447509766,
+              "mean_absolute_error": 0.01529881477355957,
+              "normalized_rmse": 0.06034996125987215,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9938333119796646,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 8.938653945922852,
+              "mean_absolute_error": 0.10858097076416015,
+              "normalized_rmse": 0.11104129511321596,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9997872904697122,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.3417339324951172,
+              "mean_absolute_error": 0.01855251251705109,
+              "normalized_rmse": 0.02066251569892861,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "timing_seconds": {
+        "cell_total": 0.4120125137269497,
+        "probe_forward": 0.06853719195351005,
+        "weight_quantization": 0.3401527148671448
+      },
+      "weight_bits": 4,
+      "weight_format": "w4",
+      "weight_numeric": {
+        "clipping_rate": 0.007489224137931035,
+        "code_histogram": [
+          801,
+          1157,
+          2080,
+          3526,
+          5278,
+          7203,
+          8866,
+          9663,
+          9585,
+          8275,
+          6393,
+          4529,
+          2869,
+          1810,
+          1054,
+          1151
+        ],
+        "code_max": 7,
+        "code_min": -8,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9981260170416308,
+        "encoded_bits": 4,
+        "logical_code_count": 16,
+        "maximum_absolute_error": 0.6334152817726135,
+        "mse": 0.0009242780410267156,
+        "normalized_rmse": 0.06119223445887792,
+        "occupied_codes": 16,
+        "scale_bytes": 3072,
+        "scale_count": 768,
+        "scale_maximum": 1.3993960618972778,
+        "scale_mean": 0.22734198346734047,
+        "scale_minimum": 0.009069638326764107,
+        "sqnr_db": 24.266073761547332,
+        "weight_code_bytes": 37120,
+        "zero_ratio": 0.1291082974137931
+      }
+    },
+    "poly_shift--lsq-plus-a8--neck_attention_safe--w4-optimal_scaled_codebook": {
+      "activation": "poly_shift",
+      "activation_policy_id": "poly_shift--lsq-plus-a8",
+      "activation_role": "map50_accuracy_and_hardware_candidate",
+      "all_finite": true,
+      "cell_id": "poly_shift--lsq-plus-a8--neck_attention_safe--w4-optimal_scaled_codebook",
+      "coverage": {
+        "protected_modules": 4,
+        "quantized_modules": 5,
+        "training_only_modules": 0,
+        "weight_elements": 395520
+      },
+      "formal_training": false,
+      "incremental_reference": "matched_activation_a8_fp32_weights",
+      "layer_weight_numeric": [
+        {
+          "clipping_rate": 0.0069732666015625,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9821256187832018,
+          "elements": 65536,
+          "maximum_absolute_error": 0.46800684928894043,
+          "mse": 0.0004246114403940737,
+          "normalized_rmse": 0.1882266553927676,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.22.m.0.1.attn.qkv.v.conv",
+          "region": "neck_attention_safe",
+          "scale_maximum": 0.2584783434867859,
+          "scale_mean": 0.058087173849344254,
+          "scale_minimum": 0.018745340406894684,
+          "sqnr_db": 14.506377493810191,
+          "zero_ratio": 0.320404052734375
+        },
+        {
+          "clipping_rate": 0.0013020833333333333,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9968151633963279,
+          "elements": 2304,
+          "maximum_absolute_error": 0.19759447872638702,
+          "mse": 0.0006627448730998569,
+          "normalized_rmse": 0.07974631287592357,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.22.m.0.1.attn.pe.conv",
+          "region": "neck_attention_safe",
+          "scale_maximum": 0.4231078028678894,
+          "scale_mean": 0.08208049833774567,
+          "scale_minimum": 0.002713776659220457,
+          "sqnr_db": 21.965787754044705,
+          "zero_ratio": 0.234375
+        },
+        {
+          "clipping_rate": 0.007354736328125,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9893552842415783,
+          "elements": 65536,
+          "maximum_absolute_error": 0.15637367963790894,
+          "mse": 5.8230805734638125e-05,
+          "normalized_rmse": 0.14552058484036492,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.22.m.0.1.attn.proj.conv",
+          "region": "neck_attention_safe",
+          "scale_maximum": 0.055460572242736816,
+          "scale_mean": 0.02301185205578804,
+          "scale_minimum": 0.012027505785226822,
+          "sqnr_db": 16.741511370640648,
+          "zero_ratio": 0.204742431640625
+        },
+        {
+          "clipping_rate": 0.00666046142578125,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9854757876896993,
+          "elements": 131072,
+          "maximum_absolute_error": 0.2582141160964966,
+          "mse": 9.666947880759835e-05,
+          "normalized_rmse": 0.1698160452999194,
+          "occupied_codes": 16,
+          "output_channels": 512,
+          "path": "graph.model.22.m.0.1.ffn.0.conv",
+          "region": "neck_attention_safe",
+          "scale_maximum": 0.08303238451480865,
+          "scale_mean": 0.02862679585814476,
+          "scale_minimum": 0.010576087981462479,
+          "sqnr_db": 15.40042554497484,
+          "zero_ratio": 0.25386810302734375
+        },
+        {
+          "clipping_rate": 0.00640106201171875,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9892692928090586,
+          "elements": 131072,
+          "maximum_absolute_error": 0.3741966485977173,
+          "mse": 0.00020938317175023258,
+          "normalized_rmse": 0.14610344239939113,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.22.m.0.1.ffn.1.conv",
+          "region": "neck_attention_safe",
+          "scale_maximum": 0.09365212917327881,
+          "scale_mean": 0.042271506041288376,
+          "scale_minimum": 0.014964279718697071,
+          "sqnr_db": 16.706791027317127,
+          "zero_ratio": 0.19532012939453125
+        }
+      ],
+      "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+      "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+      "peak_gpu_memory_mib": 515.310546875,
+      "promotion_authorized": false,
+      "region": "neck_attention_safe",
+      "same_structure": true,
+      "scale_method": "optimal_scaled_codebook",
+      "selection_claim": false,
+      "status": "diagnostic_pass",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 0.93978576575407,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.8075774109248474,
+              "elements": 1800,
+              "maximum_absolute_error": 728.1607666015625,
+              "mean_absolute_error": 115.10381076388889,
+              "normalized_rmse": 0.6227549793882319,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.8075774109248474,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 728.1607666015625,
+                  "mean_absolute_error": 115.10381076388889,
+                  "normalized_rmse": 0.6227549793882319,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9991781059317292,
+              "elements": 705600,
+              "maximum_absolute_error": 43.675750732421875,
+              "mean_absolute_error": 0.1440746923260678,
+              "normalized_rmse": 0.04067449891268015,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 0.9988130624186431,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 3.9067296981811523,
+                  "mean_absolute_error": 0.021753434680757067,
+                  "normalized_rmse": 0.049167823555255744,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9991784330401816,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 43.675750732421875,
+                  "mean_absolute_error": 0.15019075520833333,
+                  "normalized_rmse": 0.04066621871826126,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.08666666597127914,
+              "ordered_pair_match": 0.08666666597127914,
+              "selected_anchor_jaccard": 0.89453125,
+              "selected_pair_overlap": 0.9366666666666666,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 728.1607666015625,
+          "mean_absolute_error": 0.11946250791004613,
+          "normalized_rmse": 0.34774697235712104,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 0.8075774109248474,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 728.1607666015625,
+              "mean_absolute_error": 115.10381076388889,
+              "normalized_rmse": 0.6227549793882319,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 0.9988130624186431,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 3.9067296981811523,
+              "mean_absolute_error": 0.021753434680757067,
+              "normalized_rmse": 0.049167823555255744,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9991784330401816,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 43.675750732421875,
+              "mean_absolute_error": 0.15019075520833333,
+              "normalized_rmse": 0.04066621871826126,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9181041694964387,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 26.81595802307129,
+              "mean_absolute_error": 0.45761131286621093,
+              "normalized_rmse": 0.4018799970632933,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 0.9995022727910983,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 3600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9998297117439258,
+              "elements": 100800,
+              "maximum_absolute_error": 5.590267181396484,
+              "mean_absolute_error": 0.018072823115757534,
+              "normalized_rmse": 0.018509366624609256,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 0.9993984060559857,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 1.9326016902923584,
+                  "mean_absolute_error": 0.011239938281831287,
+                  "normalized_rmse": 0.03471115851566143,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9998476254000234,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 5.590267181396484,
+                  "mean_absolute_error": 0.060587674095517116,
+                  "normalized_rmse": 0.017516155574053952,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9993811379197166,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 1.4038043022155762,
+                  "mean_absolute_error": 0.008456462678455172,
+                  "normalized_rmse": 0.035178941739061935,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 23.836410522460938,
+          "mean_absolute_error": 0.03425717094479845,
+          "normalized_rmse": 0.031547281830787,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 0.9993984060559857,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 1.9326016902923584,
+              "mean_absolute_error": 0.011239938281831287,
+              "normalized_rmse": 0.03471115851566143,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9998476254000234,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 5.590267181396484,
+              "mean_absolute_error": 0.060587674095517116,
+              "normalized_rmse": 0.017516155574053952,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9257134525577699,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 23.836410522460938,
+              "mean_absolute_error": 0.4539111328125,
+              "normalized_rmse": 0.3792131319809743,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9993811379197166,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 1.4038043022155762,
+              "mean_absolute_error": 0.008456462678455172,
+              "normalized_rmse": 0.035178941739061935,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "timing_seconds": {
+        "cell_total": 0.6794257978908718,
+        "probe_forward": 0.06839840905740857,
+        "weight_quantization": 0.6078072851523757
+      },
+      "weight_bits": 4,
+      "weight_format": "w4",
+      "weight_numeric": {
+        "clipping_rate": 0.006710153721682848,
+        "code_histogram": [
+          2116,
+          1593,
+          3231,
+          6021,
+          11186,
+          21690,
+          39216,
+          69229,
+          93832,
+          67766,
+          37473,
+          20128,
+          10512,
+          5451,
+          2796,
+          3280
+        ],
+        "code_max": 7,
+        "code_min": -8,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9874182471016926,
+        "encoded_bits": 4,
+        "logical_code_count": 16,
+        "maximum_absolute_error": 0.46800684928894043,
+        "mse": 0.000185288851749164,
+        "normalized_rmse": 0.15813029387797226,
+        "occupied_codes": 16,
+        "scale_bytes": 6144,
+        "scale_count": 1536,
+        "scale_maximum": 0.4231078028678894,
+        "scale_mean": 0.043784103666742645,
+        "scale_minimum": 0.002713776659220457,
+        "sqnr_db": 16.01969843896104,
+        "weight_code_bytes": 197760,
+        "zero_ratio": 0.23723705501618123
+      }
+    },
+    "poly_shift--lsq-plus-a8--pose_one2one_predictor--w4-optimal_scaled_codebook": {
+      "activation": "poly_shift",
+      "activation_policy_id": "poly_shift--lsq-plus-a8",
+      "activation_role": "map50_accuracy_and_hardware_candidate",
+      "all_finite": true,
+      "cell_id": "poly_shift--lsq-plus-a8--pose_one2one_predictor--w4-optimal_scaled_codebook",
+      "coverage": {
+        "protected_modules": 4,
+        "quantized_modules": 9,
+        "training_only_modules": 0,
+        "weight_elements": 3456
+      },
+      "formal_training": false,
+      "incremental_reference": "matched_activation_a8_fp32_weights",
+      "layer_weight_numeric": [
+        {
+          "clipping_rate": 0.0078125,
+          "code_max": 7,
+          "code_min": -6,
+          "cosine": 0.9961422047079758,
+          "elements": 256,
+          "maximum_absolute_error": 0.016543090343475342,
+          "mse": 3.9463964640162885e-05,
+          "normalized_rmse": 0.08775430897524839,
+          "occupied_codes": 14,
+          "output_channels": 4,
+          "path": "graph.model.23.pose_head.one2one_cv2.0.2",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.025232186540961266,
+          "scale_mean": 0.022782184183597565,
+          "scale_minimum": 0.020438479259610176,
+          "sqnr_db": 21.13463098596579,
+          "zero_ratio": 0.125
+        },
+        {
+          "clipping_rate": 0.0234375,
+          "code_max": 7,
+          "code_min": -6,
+          "cosine": 0.9960841723808784,
+          "elements": 256,
+          "maximum_absolute_error": 0.01898801326751709,
+          "mse": 4.291978621040471e-05,
+          "normalized_rmse": 0.08841070100804664,
+          "occupied_codes": 14,
+          "output_channels": 4,
+          "path": "graph.model.23.pose_head.one2one_cv2.1.2",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.023038098588585854,
+          "scale_mean": 0.0223448034375906,
+          "scale_minimum": 0.021192092448472977,
+          "sqnr_db": 21.069903317955728,
+          "zero_ratio": 0.15625
+        },
+        {
+          "clipping_rate": 0.015625,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9972246566055705,
+          "elements": 256,
+          "maximum_absolute_error": 0.0206126868724823,
+          "mse": 4.499499118537642e-05,
+          "normalized_rmse": 0.07445122367081902,
+          "occupied_codes": 16,
+          "output_channels": 4,
+          "path": "graph.model.23.pose_head.one2one_cv2.2.2",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.025303509086370468,
+          "scale_mean": 0.022451315075159073,
+          "scale_minimum": 0.021103471517562866,
+          "sqnr_db": 22.562563196888338,
+          "zero_ratio": 0.078125
+        },
+        {
+          "clipping_rate": 0.01171875,
+          "code_max": 3,
+          "code_min": -8,
+          "cosine": 0.9975414359655793,
+          "elements": 512,
+          "maximum_absolute_error": 0.07119762897491455,
+          "mse": 0.00011278690362814814,
+          "normalized_rmse": 0.07007912788673096,
+          "occupied_codes": 12,
+          "output_channels": 2,
+          "path": "graph.model.23.pose_head.one2one_cv3.0.2",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.03718124330043793,
+          "scale_mean": 0.03629441186785698,
+          "scale_minimum": 0.03540758043527603,
+          "sqnr_db": 23.088226229361464,
+          "zero_ratio": 0.169921875
+        },
+        {
+          "clipping_rate": 0.01171875,
+          "code_max": 3,
+          "code_min": -8,
+          "cosine": 0.9972037086626927,
+          "elements": 512,
+          "maximum_absolute_error": 0.06469887495040894,
+          "mse": 0.00013448773825075477,
+          "normalized_rmse": 0.07473207935549489,
+          "occupied_codes": 12,
+          "output_channels": 2,
+          "path": "graph.model.23.pose_head.one2one_cv3.1.2",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.042315393686294556,
+          "scale_mean": 0.03723881393671036,
+          "scale_minimum": 0.03216223791241646,
+          "sqnr_db": 22.529858674144947,
+          "zero_ratio": 0.162109375
+        },
+        {
+          "clipping_rate": 0.01171875,
+          "code_max": 3,
+          "code_min": -8,
+          "cosine": 0.9977452886228269,
+          "elements": 512,
+          "maximum_absolute_error": 0.04018467664718628,
+          "mse": 8.222163160098717e-05,
+          "normalized_rmse": 0.06711467862489143,
+          "occupied_codes": 12,
+          "output_channels": 2,
+          "path": "graph.model.23.pose_head.one2one_cv3.2.2",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.03212361037731171,
+          "scale_mean": 0.031894974410533905,
+          "scale_minimum": 0.031666338443756104,
+          "sqnr_db": 23.463649701352963,
+          "zero_ratio": 0.14453125
+        },
+        {
+          "clipping_rate": 0.015625,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9945538451902078,
+          "elements": 384,
+          "maximum_absolute_error": 0.07551759481430054,
+          "mse": 0.00027855735970661044,
+          "normalized_rmse": 0.10422403645031143,
+          "occupied_codes": 16,
+          "output_channels": 6,
+          "path": "graph.model.23.pose_head.one2one_cv4_kpts.0",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.0941648855805397,
+          "scale_mean": 0.04302559420466423,
+          "scale_minimum": 0.019255025312304497,
+          "sqnr_db": 19.64064222458444,
+          "zero_ratio": 0.14583333333333334
+        },
+        {
+          "clipping_rate": 0.0078125,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9940291364438008,
+          "elements": 384,
+          "maximum_absolute_error": 0.09897398948669434,
+          "mse": 0.0002590514486655593,
+          "normalized_rmse": 0.10911438619222456,
+          "occupied_codes": 16,
+          "output_channels": 6,
+          "path": "graph.model.23.pose_head.one2one_cv4_kpts.1",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.08874586224555969,
+          "scale_mean": 0.04559382423758507,
+          "scale_minimum": 0.02231825888156891,
+          "sqnr_db": 19.242359721137476,
+          "zero_ratio": 0.140625
+        },
+        {
+          "clipping_rate": 0.005208333333333333,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9954942451751705,
+          "elements": 384,
+          "maximum_absolute_error": 0.03053492307662964,
+          "mse": 0.00010871500126086175,
+          "normalized_rmse": 0.09482191618013042,
+          "occupied_codes": 16,
+          "output_channels": 6,
+          "path": "graph.model.23.pose_head.one2one_cv4_kpts.2",
+          "region": "pose_one2one_predictor",
+          "scale_maximum": 0.06393010169267654,
+          "scale_mean": 0.03250442445278168,
+          "scale_minimum": 0.016737310215830803,
+          "sqnr_db": 20.46182545238334,
+          "zero_ratio": 0.12239583333333333
+        }
+      ],
+      "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+      "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+      "peak_gpu_memory_mib": 535.5791015625,
+      "promotion_authorized": false,
+      "region": "pose_one2one_predictor",
+      "same_structure": true,
+      "scale_method": "optimal_scaled_codebook",
+      "selection_claim": false,
+      "status": "diagnostic_pass",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 1800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 705600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 0.8041484598077507,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7982895509142003,
+              "elements": 3600,
+              "maximum_absolute_error": 638.931640625,
+              "mean_absolute_error": 117.12453125,
+              "normalized_rmse": 0.634831469267737,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7982895509142003,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 638.931640625,
+                  "mean_absolute_error": 117.12453125,
+                  "normalized_rmse": 0.634831469267737,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9999537891836381,
+              "elements": 100800,
+              "maximum_absolute_error": 1.159158706665039,
+              "mean_absolute_error": 0.047718241858103916,
+              "normalized_rmse": 0.00973968794653281,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 0.9998932140878503,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.4136781692504883,
+                  "mean_absolute_error": 0.021919708251953125,
+                  "normalized_rmse": 0.014632997098157772,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9999793056401188,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 1.159158706665039,
+                  "mean_absolute_error": 0.09605194091796875,
+                  "normalized_rmse": 0.006612288892933604,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9985137865818982,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.7754647731781006,
+                  "mean_absolute_error": 0.048806031242249505,
+                  "normalized_rmse": 0.05471682613081725,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.09000000357627869,
+              "ordered_pair_match": 0.09000000357627869,
+              "selected_anchor_jaccard": 0.9621212121212122,
+              "selected_pair_overlap": 0.9766666666666667,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 638.931640625,
+          "mean_absolute_error": 0.1541341301428715,
+          "normalized_rmse": 0.6255431554652777,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 0.7982895509142003,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 638.931640625,
+              "mean_absolute_error": 117.12453125,
+              "normalized_rmse": 0.634831469267737,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 0.9998932140878503,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.4136781692504883,
+              "mean_absolute_error": 0.021919708251953125,
+              "normalized_rmse": 0.014632997098157772,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9999793056401188,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 1.159158706665039,
+              "mean_absolute_error": 0.09605194091796875,
+              "normalized_rmse": 0.006612288892933604,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9985137865818982,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.7754647731781006,
+              "mean_absolute_error": 0.048806031242249505,
+              "normalized_rmse": 0.05471682613081725,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "timing_seconds": {
+        "cell_total": 0.08927057310938835,
+        "probe_forward": 0.0677595897577703,
+        "weight_quantization": 0.018253186717629433
+      },
+      "weight_bits": 4,
+      "weight_format": "w4",
+      "weight_numeric": {
+        "clipping_rate": 0.011863425925925927,
+        "code_histogram": [
+          97,
+          123,
+          253,
+          270,
+          260,
+          297,
+          332,
+          342,
+          493,
+          313,
+          210,
+          145,
+          75,
+          98,
+          75,
+          73
+        ],
+        "code_max": 7,
+        "code_min": -8,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9963132961618785,
+        "encoded_bits": 4,
+        "logical_code_count": 16,
+        "maximum_absolute_error": 0.09897398948669434,
+        "mse": 0.00013006348173668676,
+        "normalized_rmse": 0.08578947402961895,
+        "occupied_codes": 16,
+        "scale_bytes": 144,
+        "scale_count": 36,
+        "scale_maximum": 0.0941648855805397,
+        "scale_mean": 0.033553129269017115,
+        "scale_minimum": 0.016737310215830803,
+        "sqnr_db": 21.331319896006008,
+        "weight_code_bytes": 1728,
+        "zero_ratio": 0.14265046296296297
+      }
+    },
+    "poly_shift--lsq-plus-a8--pose_one2one_tower--w4-optimal_scaled_codebook": {
+      "activation": "poly_shift",
+      "activation_policy_id": "poly_shift--lsq-plus-a8",
+      "activation_role": "map50_accuracy_and_hardware_candidate",
+      "all_finite": true,
+      "cell_id": "poly_shift--lsq-plus-a8--pose_one2one_tower--w4-optimal_scaled_codebook",
+      "coverage": {
+        "protected_modules": 4,
+        "quantized_modules": 24,
+        "training_only_modules": 0,
+        "weight_elements": 2238464
+      },
+      "formal_training": false,
+      "incremental_reference": "matched_activation_a8_fp32_weights",
+      "layer_weight_numeric": [
+        {
+          "clipping_rate": 0.007188585069444444,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9933610564280339,
+          "elements": 147456,
+          "maximum_absolute_error": 0.05459616333246231,
+          "mse": 5.041150466745927e-06,
+          "normalized_rmse": 0.11503777092389085,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv2.0.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.010041057132184505,
+          "scale_mean": 0.006830488331615925,
+          "scale_minimum": 0.0043531181290745735,
+          "sqnr_db": 18.783190843262975,
+          "zero_ratio": 0.1438530815972222
+        },
+        {
+          "clipping_rate": 0.008517795138888888,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.994739955957688,
+          "elements": 36864,
+          "maximum_absolute_error": 0.029240861535072327,
+          "mse": 4.209592589177191e-06,
+          "normalized_rmse": 0.10243300647832163,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv2.0.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.010183603502810001,
+          "scale_mean": 0.006422217469662428,
+          "scale_minimum": 0.003783352440223098,
+          "sqnr_db": 19.791201605156562,
+          "zero_ratio": 0.11726888020833333
+        },
+        {
+          "clipping_rate": 0.006818983289930556,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9925367508282814,
+          "elements": 294912,
+          "maximum_absolute_error": 0.022423135116696358,
+          "mse": 3.517059970666499e-07,
+          "normalized_rmse": 0.12194517314994567,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv2.1.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.0025281019043177366,
+          "scale_mean": 0.0017787697724997997,
+          "scale_minimum": 0.0012443583691492677,
+          "sqnr_db": 18.27670770623921,
+          "zero_ratio": 0.1549038357204861
+        },
+        {
+          "clipping_rate": 0.007622612847222222,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9937838985041723,
+          "elements": 36864,
+          "maximum_absolute_error": 0.04986775666475296,
+          "mse": 5.373395753041324e-06,
+          "normalized_rmse": 0.11132612141821234,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv2.1.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.013239998370409012,
+          "scale_mean": 0.006984890438616276,
+          "scale_minimum": 0.004766352009028196,
+          "sqnr_db": 19.068058428172193,
+          "zero_ratio": 0.123779296875
+        },
+        {
+          "clipping_rate": 0.006540934244791667,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9922166557921056,
+          "elements": 294912,
+          "maximum_absolute_error": 0.0032207341864705086,
+          "mse": 1.601076841476849e-08,
+          "normalized_rmse": 0.1245236160205331,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv2.2.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.0006342275883071125,
+          "scale_mean": 0.0003779557882808149,
+          "scale_minimum": 0.0002674557617865503,
+          "sqnr_db": 18.09496552802652,
+          "zero_ratio": 0.16048177083333334
+        },
+        {
+          "clipping_rate": 0.008327907986111112,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9944798750853393,
+          "elements": 36864,
+          "maximum_absolute_error": 0.03228108584880829,
+          "mse": 3.617357126333647e-06,
+          "normalized_rmse": 0.10492781788860517,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv2.2.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.011648613028228283,
+          "scale_mean": 0.005788459908217192,
+          "scale_minimum": 0.003782969433814287,
+          "sqnr_db": 19.582187175321792,
+          "zero_ratio": 0.11973741319444445
+        },
+        {
+          "clipping_rate": 0.0013020833333333333,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9985460592415305,
+          "elements": 2304,
+          "maximum_absolute_error": 0.4849860370159149,
+          "mse": 0.00489238484038247,
+          "normalized_rmse": 0.0539059519343995,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.0.0.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 1.2806826829910278,
+          "scale_mean": 0.28094059228897095,
+          "scale_minimum": 0.06150811165571213,
+          "sqnr_db": 25.367265605520195,
+          "zero_ratio": 0.06597222222222222
+        },
+        {
+          "clipping_rate": 0.00872802734375,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9949111527019744,
+          "elements": 65536,
+          "maximum_absolute_error": 0.14982840418815613,
+          "mse": 8.590900688432157e-05,
+          "normalized_rmse": 0.10075727596197966,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.0.0.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.04947489872574806,
+          "scale_mean": 0.029794327914714813,
+          "scale_minimum": 0.021827805787324905,
+          "sqnr_db": 19.934471648939514,
+          "zero_ratio": 0.119720458984375
+        },
+        {
+          "clipping_rate": 0.003472222222222222,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9985887000817704,
+          "elements": 2304,
+          "maximum_absolute_error": 0.11932849884033203,
+          "mse": 0.0010811839666631487,
+          "normalized_rmse": 0.053109610673518166,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.0.1.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.3385172486305237,
+          "scale_mean": 0.14075660705566406,
+          "scale_minimum": 0.06172974780201912,
+          "sqnr_db": 25.49653764435778,
+          "zero_ratio": 0.06684027777777778
+        },
+        {
+          "clipping_rate": 0.0085601806640625,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9952255669253017,
+          "elements": 65536,
+          "maximum_absolute_error": 0.10938192903995514,
+          "mse": 7.065349200274795e-05,
+          "normalized_rmse": 0.09760134163572651,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.0.1.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.06040014699101448,
+          "scale_mean": 0.02707733027637005,
+          "scale_minimum": 0.017075058072805405,
+          "sqnr_db": 20.21088424892271,
+          "zero_ratio": 0.1123199462890625
+        },
+        {
+          "clipping_rate": 0.0028211805555555555,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9985278633350868,
+          "elements": 4608,
+          "maximum_absolute_error": 0.2906043529510498,
+          "mse": 0.0024445588803953594,
+          "normalized_rmse": 0.05424148113413828,
+          "occupied_codes": 16,
+          "output_channels": 512,
+          "path": "graph.model.23.pose_head.one2one_cv3.1.0.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.7825791239738464,
+          "scale_mean": 0.1879614144563675,
+          "scale_minimum": 0.022188454866409302,
+          "sqnr_db": 25.313369200076217,
+          "zero_ratio": 0.06141493055555555
+        },
+        {
+          "clipping_rate": 0.007080078125,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9941303064821417,
+          "elements": 131072,
+          "maximum_absolute_error": 0.20982658863067627,
+          "mse": 4.3647127313306555e-05,
+          "normalized_rmse": 0.10818933759479384,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.1.0.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.03104797936975956,
+          "scale_mean": 0.02055564895272255,
+          "scale_minimum": 0.013705523684620857,
+          "sqnr_db": 19.31631076461094,
+          "zero_ratio": 0.12880706787109375
+        },
+        {
+          "clipping_rate": 0.0008680555555555555,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9986429630274931,
+          "elements": 2304,
+          "maximum_absolute_error": 0.11837780475616455,
+          "mse": 0.0010229735117819575,
+          "normalized_rmse": 0.05207906851813875,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.1.1.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.25388553738594055,
+          "scale_mean": 0.1384461224079132,
+          "scale_minimum": 0.05214042589068413,
+          "sqnr_db": 25.666735842503154,
+          "zero_ratio": 0.07508680555555555
+        },
+        {
+          "clipping_rate": 0.008758544921875,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9950139891035029,
+          "elements": 65536,
+          "maximum_absolute_error": 0.14880651235580444,
+          "mse": 7.958605419844389e-05,
+          "normalized_rmse": 0.09973538458361914,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.05666601285338402,
+          "scale_mean": 0.02816171944141388,
+          "scale_minimum": 0.018506009131669998,
+          "sqnr_db": 20.023014666657257,
+          "zero_ratio": 0.1093597412109375
+        },
+        {
+          "clipping_rate": 0.001953125,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.998858388583538,
+          "elements": 4608,
+          "maximum_absolute_error": 0.5840191841125488,
+          "mse": 0.0026930425730016497,
+          "normalized_rmse": 0.04776919569693076,
+          "occupied_codes": 16,
+          "output_channels": 512,
+          "path": "graph.model.23.pose_head.one2one_cv3.2.0.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 1.9901483058929443,
+          "scale_mean": 0.10271155089139938,
+          "scale_minimum": 0.006630902178585529,
+          "sqnr_db": 26.417041419811426,
+          "zero_ratio": 0.0625
+        },
+        {
+          "clipping_rate": 0.00817108154296875,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9948364752571675,
+          "elements": 131072,
+          "maximum_absolute_error": 0.1371782124042511,
+          "mse": 3.654328975244425e-05,
+          "normalized_rmse": 0.10149090047785542,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.2.0.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.028781067579984665,
+          "scale_mean": 0.019050944596529007,
+          "scale_minimum": 0.012049544602632523,
+          "sqnr_db": 19.871457883963057,
+          "zero_ratio": 0.117950439453125
+        },
+        {
+          "clipping_rate": 0.0013020833333333333,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9986043237212395,
+          "elements": 2304,
+          "maximum_absolute_error": 0.1088167354464531,
+          "mse": 0.001038513042860561,
+          "normalized_rmse": 0.052813841081578855,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.2.1.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.33393940329551697,
+          "scale_mean": 0.14063100516796112,
+          "scale_minimum": 0.05759581923484802,
+          "sqnr_db": 25.545044913865325,
+          "zero_ratio": 0.05946180555555555
+        },
+        {
+          "clipping_rate": 0.0088043212890625,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9960877275574413,
+          "elements": 65536,
+          "maximum_absolute_error": 0.09991461038589478,
+          "mse": 5.495528603205457e-05,
+          "normalized_rmse": 0.08836974082545533,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.23.pose_head.one2one_cv3.2.1.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.036182284355163574,
+          "scale_mean": 0.02433774806559086,
+          "scale_minimum": 0.015353997237980366,
+          "sqnr_db": 21.073928374440708,
+          "zero_ratio": 0.0985107421875
+        },
+        {
+          "clipping_rate": 0.006802029079861111,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9931877021280718,
+          "elements": 147456,
+          "maximum_absolute_error": 0.0694994404911995,
+          "mse": 6.7126295309410325e-06,
+          "normalized_rmse": 0.1165256467666835,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv4.0.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.015668120235204697,
+          "scale_mean": 0.007771695964038372,
+          "scale_minimum": 0.005125305615365505,
+          "sqnr_db": 18.671569557408123,
+          "zero_ratio": 0.1459893120659722
+        },
+        {
+          "clipping_rate": 0.007758246527777778,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9945044694028233,
+          "elements": 36864,
+          "maximum_absolute_error": 0.04159976541996002,
+          "mse": 8.76755398672281e-06,
+          "normalized_rmse": 0.10469369810191657,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv4.0.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.013738693669438362,
+          "scale_mean": 0.009278347715735435,
+          "scale_minimum": 0.005877198185771704,
+          "sqnr_db": 19.601589186276623,
+          "zero_ratio": 0.12388780381944445
+        },
+        {
+          "clipping_rate": 0.006534152560763889,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9922932055405166,
+          "elements": 294912,
+          "maximum_absolute_error": 0.026499565690755844,
+          "mse": 5.46985322418752e-07,
+          "normalized_rmse": 0.12391221706620942,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv4.1.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.004064761567860842,
+          "scale_mean": 0.0021266103722155094,
+          "scale_minimum": 0.0012244269018992782,
+          "sqnr_db": 18.137717449093813,
+          "zero_ratio": 0.153839111328125
+        },
+        {
+          "clipping_rate": 0.007568359375,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9936625907574074,
+          "elements": 36864,
+          "maximum_absolute_error": 0.09824013710021973,
+          "mse": 1.1390113892654577e-05,
+          "normalized_rmse": 0.11240417598965177,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv4.1.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.031792737543582916,
+          "scale_mean": 0.010007353499531746,
+          "scale_minimum": 0.00603691628202796,
+          "sqnr_db": 18.984351075059326,
+          "zero_ratio": 0.1332736545138889
+        },
+        {
+          "clipping_rate": 0.0069580078125,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9930643540683203,
+          "elements": 294912,
+          "maximum_absolute_error": 0.004718203097581863,
+          "mse": 3.3194074452088294e-08,
+          "normalized_rmse": 0.11757231627074181,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv4.2.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.000926489825360477,
+          "scale_mean": 0.0005434867925941944,
+          "scale_minimum": 0.0002973795053549111,
+          "sqnr_db": 18.5938985152328,
+          "zero_ratio": 0.14695909288194445
+        },
+        {
+          "clipping_rate": 0.008490668402777778,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9950342482862625,
+          "elements": 36864,
+          "maximum_absolute_error": 0.04505147784948349,
+          "mse": 5.045914602103747e-06,
+          "normalized_rmse": 0.09953322157497986,
+          "occupied_codes": 16,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv4.2.1.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.013606393709778786,
+          "scale_mean": 0.0069129131734371185,
+          "scale_minimum": 0.0037961858324706554,
+          "sqnr_db": 20.04063877933853,
+          "zero_ratio": 0.11078559027777778
+        }
+      ],
+      "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+      "parent_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+      "peak_gpu_memory_mib": 519.75537109375,
+      "promotion_authorized": false,
+      "region": "pose_one2one_tower",
+      "same_structure": true,
+      "scale_method": "optimal_scaled_codebook",
+      "selection_claim": false,
+      "status": "diagnostic_pass",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 1800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 705600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 0.7579970741215954,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7508592471856921,
+              "elements": 3600,
+              "maximum_absolute_error": 639.690673828125,
+              "mean_absolute_error": 140.9366579861111,
+              "normalized_rmse": 0.7066580485725713,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7508592471856921,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 639.690673828125,
+                  "mean_absolute_error": 140.9366579861111,
+                  "normalized_rmse": 0.7066580485725713,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9991716713751229,
+              "elements": 100800,
+              "maximum_absolute_error": 12.713584899902344,
+              "mean_absolute_error": 0.1376490747360956,
+              "normalized_rmse": 0.042805445675358544,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 0.9998433280861441,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.5534734725952148,
+                  "mean_absolute_error": 0.04144684927804129,
+                  "normalized_rmse": 0.027500108676358735,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9991668192481038,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 12.713584899902344,
+                  "mean_absolute_error": 0.5842415364583333,
+                  "normalized_rmse": 0.04282019507513026,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9985678367447363,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.9322471618652344,
+                  "mean_absolute_error": 0.05291973780071925,
+                  "normalized_rmse": 0.05764067905377654,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.006666666828095913,
+              "ordered_pair_match": 0.006666666828095913,
+              "selected_anchor_jaccard": 0.6591639871382636,
+              "selected_pair_overlap": 0.7933333333333333,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 639.690673828125,
+          "mean_absolute_error": 0.18839344928560012,
+          "normalized_rmse": 0.6963431239282729,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 0.7508592471856921,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 639.690673828125,
+              "mean_absolute_error": 140.9366579861111,
+              "normalized_rmse": 0.7066580485725713,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 0.9998433280861441,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.5534734725952148,
+              "mean_absolute_error": 0.04144684927804129,
+              "normalized_rmse": 0.027500108676358735,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9991668192481038,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 12.713584899902344,
+              "mean_absolute_error": 0.5842415364583333,
+              "normalized_rmse": 0.04282019507513026,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9985678367447363,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.9322471618652344,
+              "mean_absolute_error": 0.05291973780071925,
+              "normalized_rmse": 0.05764067905377654,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "timing_seconds": {
+        "cell_total": 1.9710180973634124,
+        "probe_forward": 0.06859532603994012,
+        "weight_quantization": 1.8991521862335503
+      },
+      "weight_bits": 4,
+      "weight_format": "w4",
+      "weight_numeric": {
+        "clipping_rate": 0.007184837459972553,
+        "code_histogram": [
+          16072,
+          20477,
+          41134,
+          74109,
+          123981,
+          185853,
+          248452,
+          296801,
+          313683,
+          289313,
+          234440,
+          166626,
+          106807,
+          61926,
+          32434,
+          26356
+        ],
+        "code_max": 7,
+        "code_min": -8,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9980198267134129,
+        "encoded_bits": 4,
+        "logical_code_count": 16,
+        "maximum_absolute_error": 0.5840191841125488,
+        "mse": 3.359614822170671e-05,
+        "normalized_rmse": 0.0629002637522415,
+        "occupied_codes": 16,
+        "scale_bytes": 17408,
+        "scale_count": 4352,
+        "scale_maximum": 1.9901483058929443,
+        "scale_mean": 0.08513551612764679,
+        "scale_minimum": 0.0002674557617865503,
+        "sqnr_db": 24.02695066950387,
+        "weight_code_bytes": 1119232,
+        "zero_ratio": 0.14013314487076853
+      }
+    }
+  },
+  "schema_version": 1,
+  "status": "diagnostic_completed",
+  "summary": {
+    "cells": 5,
+    "diagnostic_passed": 5,
+    "failed": 0,
+    "formal_training": false,
+    "promotion_authorized": false,
+    "selection_claim": false
+  }
+}

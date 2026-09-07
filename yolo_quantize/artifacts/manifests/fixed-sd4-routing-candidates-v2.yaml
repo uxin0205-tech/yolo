@@ -1,0 +1,110 @@
+schema_version: 2
+manifest_id: full35-fixed-sd4-routing-candidates-v2
+date: '2026-08-31'
+supersedes: full35-fixed-sd4-routing-candidates-v1
+historical_manifest: artifacts/manifests/fixed-sd4-routing-candidates-v1.yaml
+status: static_candidates_only_not_validated_not_authorized
+execution_authorized: false
+gpu_used: false
+formal_training: false
+map_validation_run: false
+
+comparison:
+  candidate: fixed-sd4-per_output_channel-mse
+  control: uniform-w4-per_output_channel-mse
+  equal_code_bits: 4
+  equal_scale_granularity: per_output_channel
+  equal_code_plus_scale_bytes: 11402016
+  selection_metric: per_layer_weight_reconstruction_mse
+  required_parents: [qsilu_pq, hardswish, poly_shift]
+  excluded_historical_parent: poly_quality
+  required_views: [master, deployment]
+  rule: candidate_mse_strictly_less_than_control_in_every_active_parent_and_view
+
+source_artifacts:
+  - path: artifacts/reports/weight-format-analysis-qsilu-pq-a8-main-v2.json
+    sha256: 159ea7d18aaad6266f05cbc78665581ea336fb562d33e6eed5daa0c4f8e74a12
+  - path: artifacts/reports/weight-format-analysis-hardswish-a8-main-v3.json
+    sha256: 7f78a8f46387ce6d9c6d8bc5e5db89a2ac663aab4358af3ddbca971a525c2d52
+  - path: artifacts/reports/weight-format-analysis-poly-shift-a8-main-v2.json
+    sha256: 306deaa51d29f16c3ed49b1a442f513fb09813a0966ba1960544816cfde48f24
+
+counts:
+  deployment_winners_each_active_parent: 37
+  deployment_intersection_equals_union: true
+  master_winners_each_active_parent: 35
+  master_intersection_equals_union: true
+  both_view_cross_parent_winners: 34
+  same_stable_candidate_set_as_historical_v1: true
+  regions:
+    backbone_early: 4
+    backbone_deep: 4
+    neck: 19
+    neck_attention_safe: 1
+    detect_one2one_tower: 6
+
+stable_candidates:
+  - graph.model.1.conv
+  - graph.model.13.m.0.m.0.cv1.conv
+  - graph.model.16.cv1.conv
+  - graph.model.16.cv2.conv
+  - graph.model.16.m.0.m.0.cv1.conv
+  - graph.model.16.m.0.m.0.cv2.conv
+  - graph.model.16.m.0.m.1.cv1.conv
+  - graph.model.16.m.0.m.1.cv2.conv
+  - graph.model.17.conv
+  - graph.model.19.cv2.conv
+  - graph.model.19.m.0.cv2.conv
+  - graph.model.19.m.0.cv3.conv
+  - graph.model.19.m.0.m.0.cv1.conv
+  - graph.model.19.m.0.m.0.cv2.conv
+  - graph.model.19.m.0.m.1.cv1.conv
+  - graph.model.19.m.0.m.1.cv2.conv
+  - graph.model.2.cv1.conv
+  - graph.model.2.m.0.m.0.cv1.conv
+  - graph.model.2.m.0.m.0.cv2.conv
+  - graph.model.20.conv
+  - graph.model.22.cv2.conv
+  - graph.model.22.m.0.0.cv1.conv
+  - graph.model.22.m.0.0.cv2.conv
+  - graph.model.22.m.0.1.attn.qkv.v.conv
+  - graph.model.23.detect_head.one2one_cv2.0.0.conv
+  - graph.model.23.detect_head.one2one_cv2.0.1.conv
+  - graph.model.23.detect_head.one2one_cv2.1.0.conv
+  - graph.model.23.detect_head.one2one_cv2.1.1.conv
+  - graph.model.23.detect_head.one2one_cv2.2.0.conv
+  - graph.model.23.detect_head.one2one_cv2.2.1.conv
+  - graph.model.8.m.0.m.0.cv2.conv
+  - graph.model.8.m.0.m.1.cv1.conv
+  - graph.model.8.m.0.m.1.cv2.conv
+  - graph.model.9.cv2.conv
+
+view_specific_exceptions:
+  deployment_only:
+    - graph.model.2.m.0.m.1.cv1.conv
+    - graph.model.23.detect_head.one2one_cv3.0.1.0.conv
+    - graph.model.3.conv
+  master_only:
+    - graph.model.10.m.0.attn.pe.conv
+
+static_proxy_effect:
+  conservative_34_layer_hybrid_deployment_nrmse:
+    qsilu_pq: 0.09471580263519203
+    hardswish: 0.09465570943385694
+    poly_shift: 0.0947154143983147
+  all_w4_deployment_nrmse:
+    qsilu_pq: 0.09584015991972746
+    hardswish: 0.09572429352643387
+    poly_shift: 0.09583012587301055
+  relative_nrmse_reduction_range: [0.01116314420520476, 0.011731588151325642]
+  aggregate_method: sum_layer_squared_error_over_sum_layer_reference_energy_derived_from_layer_records
+
+limitations:
+  - static_weight_reconstruction_only
+  - no_layer_output_nrmse
+  - no_topk_overlap
+  - no_eight_metric_map
+  - no_qat
+  - no_bittrue_export_or_hardware_measurement
+  - candidate_manifest_does_not_promote_a_policy
+  - equal_candidate_set_does_not_make_poly_quality_an_active_parent

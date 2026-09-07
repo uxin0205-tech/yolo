@@ -1,0 +1,248 @@
+schema_version: 1
+delivery_id: full35-quantization-v1-v3-cpu-delivery-v1
+date: '2026-08-30'
+status: v0_v3_complete_v4_plus_prepared_not_run
+
+execution_boundary:
+  gpu_used: false
+  cuda_visible_devices: '-1'
+  formal_training: false
+  validation_map_run: false
+  qat_run: false
+  export_run: false
+  v4_or_later_run: false
+
+v0_lineage:
+  manifest: artifacts/manifests/v0-lineage-reconciliation-v1.yaml
+  publication_commit: bf56249b57697bd1985ae68b6572add655c21c6d
+  publication_subject: 5090 Profile 0829
+  publication_report:
+    path: docs/reports/2026-08-29-activation-preselection-report.md
+    sha256: 89c968ecc47f32f59da0d325f617549de3871f07d20038ce0df5f228bddf0709
+    bit_exact_with_publication_commit: true
+  publication_manifest_audit:
+    exact_files: 15
+    evolved_index_files: 6
+    missing_files: 0
+    evolved_paths:
+      - README.md
+      - artifacts/reports/README.md
+      - configs/experiments/README.md
+      - docs/reports/README.md
+      - docs/worklogs/README.md
+      - scripts/README.md
+  local_historical_ptq_preserved: true
+  git_checkout_reset_or_push_performed: false
+  issue_11_available: false
+  issue_11_reason: gh_not_authenticated
+
+v1_graph_and_views:
+  catalog:
+    total_modules: 251
+    total_weight_elements: 26451392
+    deployment_modules: 148
+    deployment_weight_elements: 22571840
+    training_only_modules: 99
+    training_only_weight_elements: 3748480
+    binary_qk_protected_modules: 4
+    binary_qk_protected_weight_elements: 131072
+    corrected_training_only_paths:
+      - graph.model.23.pose_head.one2one_cv4_sigma.0
+      - graph.model.23.pose_head.one2one_cv4_sigma.1
+      - graph.model.23.pose_head.one2one_cv4_sigma.2
+  view_contract:
+    source_batch_norm_modules: 179
+    deployment_batch_norm_modules: 0
+    deployment_path_parity: true
+    inference_contract_parity: true
+    source_unchanged: true
+  parents:
+    qsilu_pq:
+      parent_checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+      artifact: artifacts/manifests/weight-views-qsilu-pq-a8-v2.json
+      bytes: 4773
+      sha256: e5b06fdd97bc77c376dcf50bf371a2a6b6368045e308318b236ace4ba69ae391
+      source_state_sha256: 1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb
+      deployment_state_sha256: ebc32f865e118d7417d8e315cb9983f4ce435ce423f0f29d66a4bbe924eaa143
+      forward_nrmse: 0.0000033907510427995803
+      forward_max_absolute_error: 0.000732421875
+      forward_max_relative_to_reference_peak: 0.000007105692362750036
+      parity_passed: true
+    poly_quality:
+      parent_checkpoint_sha256: eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968
+      artifact: artifacts/manifests/weight-views-poly-quality-a8-v2.json
+      bytes: 4789
+      sha256: 1740ff090b2ccda02fa191669675b39182b5b0737b66c6f4fc8631fabdd31008
+      source_state_sha256: 89e7dae8fcf521ff1eee4cea9b9676a1ec4e32ccd101b93eeb21ff91a3841472
+      deployment_state_sha256: 72ea152e08e8d592bd59cf1a9ca4ad3bb6011ba8309141b6661a358476e00791
+      forward_nrmse: 0.000004142677382657168
+      forward_max_absolute_error: 0.00145721435546875
+      forward_max_relative_to_reference_peak: 0.000014447632588987773
+      parity_passed: true
+    poly_shift:
+      parent_checkpoint_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+      artifact: artifacts/manifests/weight-views-poly-shift-a8-v2.json
+      bytes: 4780
+      sha256: 13c740589e9fde432e3fd32cbfd8551df1a7add84c880ad82e9835b083c1402c
+      source_state_sha256: 6990d72c91ebcc3169997d2a4968db0f35fde6ed1d0775a4af4bb6bd75d02ce4
+      deployment_state_sha256: 094df3459309b1baa0aa8548258321928531d2107bdcb93eca24f4b9c4961600
+      forward_nrmse: 0.000004893338920355796
+      forward_max_absolute_error: 0.002288818359375
+      forward_max_relative_to_reference_peak: 0.0000223624863626104
+      parity_passed: true
+
+v2_static_analysis:
+  profile: main
+  views: [master, deployment]
+  uniform_bits: [8, 7, 6, 5, 4]
+  uniform_granularity: per_output_channel
+  uniform_scale: mse_grid_selected
+  mse_range_fractions: [1.0, 0.98, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.5]
+  fixed_sd4_variants:
+    granularities: [per_tensor, per_output_channel]
+    scale_methods: [max, mse_grid_selected]
+  paper_twn_static: true
+  measurements_per_parent: 2960
+  total_measurements: 8880
+  measurements_per_parent_by_family:
+    uniform: 1480
+    fixed_sd4: 1184
+    paper_twn: 296
+  artifacts:
+    qsilu_pq:
+      path: artifacts/reports/weight-format-analysis-qsilu-pq-a8-main-v2.json
+      bytes: 3360453
+      sha256: 159ea7d18aaad6266f05cbc78665581ea336fb562d33e6eed5daa0c4f8e74a12
+    poly_quality:
+      path: artifacts/reports/weight-format-analysis-poly-quality-a8-main-v2.json
+      bytes: 3360560
+      sha256: 478bafe010b4383662a0ad46fc3eec6a0b757a64e67b5a429c8770ec74f8878d
+    poly_shift:
+      path: artifacts/reports/weight-format-analysis-poly-shift-a8-main-v2.json
+      bytes: 3361003
+      sha256: 306deaa51d29f16c3ed49b1a442f513fb09813a0966ba1960544816cfde48f24
+  deployment_global:
+    fp32_reference_bytes: 90287360
+    formats:
+      w8:
+        code_plus_scale_bytes: 22687936
+        compression_ratio_vs_fp32: 3.97953167709923
+        nrmse_range_across_parents: [0.006267485813121071, 0.006272093024965403]
+        sqnr_db_range_across_parents: [44.05175018016639, 44.058132808472564]
+      w7:
+        code_plus_scale_bytes: 19866456
+        compression_ratio_vs_fp32: 4.5447139640809615
+        nrmse_range_across_parents: [0.01250867385609725, 0.012513969662271729]
+        sqnr_db_range_across_parents: [38.05209804442415, 38.05577461749519]
+      w6:
+        code_plus_scale_bytes: 17044976
+        compression_ratio_vs_fp32: 5.297007165043823
+        nrmse_range_across_parents: [0.024539899867849952, 0.024547261056130105]
+        sqnr_db_range_across_parents: [32.19993917433812, 32.20254427385017]
+      w5:
+        code_plus_scale_bytes: 14223496
+        compression_ratio_vs_fp32: 6.347761478612572
+        nrmse_range_across_parents: [0.04950769374120213, 0.04952104608614649]
+        sqnr_db_range_across_parents: [26.1042037964621, 26.106546086094404]
+      w4:
+        code_plus_scale_bytes: 11402016
+        compression_ratio_vs_fp32: 7.918543527741059
+        nrmse_range_across_parents: [0.09583012885968159, 0.09584016172644375]
+        sqnr_db_range_across_parents: [20.369049241991178, 20.36995855739173]
+      fixed_sd4_per_output_channel_mse:
+        code_plus_scale_bytes: 11402016
+        compression_ratio_vs_fp32: 7.918543527741059
+        nrmse_range_across_parents: [0.16032481187685496, 0.16033610939989743]
+        sqnr_db_range_across_parents: [15.899373177733292, 15.899985220123618]
+      paper_twn_layerwise:
+        code_plus_scale_bytes: 5643552
+        compression_ratio_vs_fp32: 15.998321624395416
+        nrmse_range_across_parents: [0.6775456533528182, 0.677598458333622]
+        sqnr_db_range_across_parents: [3.3805518155883894, 3.381228729920789]
+  master_global_nrmse_ranges:
+    w8: [0.013328236236871141, 0.013334155394458263]
+    w7: [0.026310344633000433, 0.0263206156861434]
+    w6: [0.05088229084391905, 0.05089530859978558]
+    w5: [0.09391314685052989, 0.09393751486192885]
+    w4: [0.16366097994986856, 0.16369839593923566]
+    fixed_sd4_per_output_channel_mse: [0.1770754831574408, 0.17708668447643383]
+    paper_twn_layerwise: [0.5817627689555956, 0.5820504855724195]
+  deployment_region_worst_nrmse_across_parents:
+    backbone_early: {elements: 1218240, w8: 0.005453, w7: 0.010941, w6: 0.021578, w5: 0.044955, w4: 0.089496, fixed_sd4: 0.159676, paper_twn: 0.683018}
+    backbone_deep: {elements: 8126464, w8: 0.013838, w7: 0.027370, w6: 0.053185, w5: 0.099036, w4: 0.173282, fixed_sd4: 0.186566, paper_twn: 0.538948}
+    backbone_attention_safe: {elements: 919808, w8: 0.010492, w7: 0.020849, w6: 0.041490, w5: 0.080317, w4: 0.146323, fixed_sd4: 0.183024, paper_twn: 0.520294}
+    neck: {elements: 8142848, w8: 0.015027, w7: 0.029779, w6: 0.058206, w5: 0.108114, w4: 0.187051, fixed_sd4: 0.184876, paper_twn: 0.584731}
+    masf: {elements: 74240, w8: 0.003932, w7: 0.007717, w6: 0.015594, w5: 0.030576, w4: 0.063573, fixed_sd4: 0.150788, paper_twn: 0.508730}
+    neck_attention_safe: {elements: 395520, w8: 0.011034, w7: 0.022013, w6: 0.043816, w5: 0.085746, w4: 0.158903, fixed_sd4: 0.176587, paper_twn: 0.559232}
+    detect_one2one_tower: {elements: 1390592, w8: 0.012431, w7: 0.023954, w6: 0.044685, w5: 0.079158, w4: 0.138494, fixed_sd4: 0.145264, paper_twn: 0.794496}
+    detect_one2one_predictor: {elements: 62208, w8: 0.010740, w7: 0.021148, w6: 0.042173, w5: 0.081625, w4: 0.150438, fixed_sd4: 0.176774, paper_twn: 0.584154}
+    pose_one2one_tower: {elements: 2238464, w8: 0.004280, w7: 0.008394, w6: 0.016819, w5: 0.032909, w4: 0.065351, fixed_sd4: 0.145298, paper_twn: 0.595308}
+    pose_one2one_predictor: {elements: 3456, w8: 0.005808, w7: 0.011061, w6: 0.021968, w5: 0.044119, w4: 0.086310, fixed_sd4: 0.175055, paper_twn: 0.460421}
+  routing_findings:
+    fixed_sd4_beats_matched_w4_deployment_layers_each_parent: 37
+    fixed_sd4_deployment_intersection_equals_union: true
+    fixed_sd4_beats_matched_w4_master_layers_each_parent: 35
+    fixed_sd4_master_intersection_equals_union: true
+    fixed_sd4_cross_parent_and_both_view_conservative_layers: 34
+    routing_manifest: artifacts/manifests/fixed-sd4-routing-candidates-v1.yaml
+    paper_twn_layers_beating_w4_in_any_parent_or_view: 0
+    conservative_34_layer_hybrid_deployment_nrmse:
+      qsilu_pq: 0.094715804421
+      poly_quality: 0.094705827958
+      poly_shift: 0.094715417350
+    conservative_hybrid_relative_nrmse_reduction_range: [0.011632161, 0.011734729]
+
+v3_diagnostic_and_gate:
+  diagnostic_manifest:
+    path: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+    bytes: 120302
+    file_sha256: 76b4392d2d07232967018b20af82149ba67ee036fad2cb75bb15d2d7565f4356
+    semantic_sha256: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+    seed: 20260830
+    calibration:
+      coco_samples: 32
+      coco_person_images: 16
+      bbat_samples: 32
+      bbat_pose_rows: 44
+      bbat_classes: [0, 1]
+    probe:
+      coco_samples: 64
+      coco_person_images: 42
+      bbat_samples: 64
+      bbat_pose_rows: 85
+      bbat_classes: [0, 1]
+    bbat_train_val_source_group_overlap: 0
+    bbat_assignment_changed: false
+  metric_gate:
+    metric_count: 8
+    coco_person_required: true
+    total_max_drop: 0.04
+    w8_incremental_max_drop: 0.01
+    qat_matched_sham_max_absolute_drift: 0.01
+    recovery_floor: 0.06
+    map_validation_executed: false
+
+validation:
+  pytest:
+    command: env CUDA_VISIBLE_DEVICES=-1 /home/uxin/yolo/.venv/bin/pytest -q
+    result: 53_passed_in_37.47_seconds
+  ruff_check:
+    command: /home/uxin/yolo/.venv/bin/ruff check src tests scripts
+    result: passed
+  ruff_format:
+    command: /home/uxin/yolo/.venv/bin/ruff format --check src tests scripts
+    result: 32_files_already_formatted
+  yaml_json_audit:
+    result: passed
+    yaml_files: 12
+    json_files: 7
+    v2_hashes_verified: 3
+    sd4_candidates_unique: 34
+
+future_boundary:
+  v4_config: configs/experiments/v4-plus-prepared-plan-v2.yaml
+  v4_cells: 15
+  v5_cells: 150
+  execution_authorized: false
+  next_required_authority: explicit_gpu_validation_authorization
+  auto_qat: false

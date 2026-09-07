@@ -1,0 +1,45 @@
+schema_version: 1
+delivery_id: full35-exact-w4-sd4-cpu-delivery-v1
+date: '2026-09-01'
+status: cpu_prerequisites_complete_stopped_before_gpu
+gpu_used: false
+formal_training: false
+map_validation_run: false
+execution_authorized: false
+completed:
+- hybrid_integer_boundary_reference_contract
+- all_148_layer_exact_w4_fixed_sd4_profiles_for_three_active_parents
+- cross_parent_cross_view_fixed_sd4_routing_v3
+artifacts:
+- kind: exact_profile_qsilu_pq
+  path: artifacts/reports/weight-format-analysis-qsilu-pq-a8-exact-w4-sd4-v1.json
+  sha256: 26247cf4bb8b88253e3438d45c2797b5b8eb948a1d3761b75bcf46a2923a86b2
+- kind: exact_profile_hardswish
+  path: artifacts/reports/weight-format-analysis-hardswish-a8-exact-w4-sd4-v1.json
+  sha256: 8a24e5fabd87542ae28a9bfd4c3081ff7156d9673e46a29569a7bea4f6abe18d
+- kind: exact_profile_poly_shift
+  path: artifacts/reports/weight-format-analysis-poly-shift-a8-exact-w4-sd4-v1.json
+  sha256: e013b3cc78ad8e470ec89bf935f84d37f051282696949cd8657425fcdc6c7def
+- kind: integer_boundary_contract
+  path: artifacts/manifests/full35-integer-boundary-contract-qsilu-pq-a8-v1.json
+  sha256: db0ef0ade253e09701907dd1235c9ab56dea44883dc6d52bb189b0c6a8254e3b
+- kind: fixed_sd4_routing_v3
+  path: artifacts/manifests/fixed-sd4-routing-candidates-v3.yaml
+  sha256: afbefae48e3bafd87a2842da205c3f7a5b5d081f5351a9caf480ecacb1ed98f4
+historical_evidence_retained:
+- artifacts/manifests/fixed-sd4-routing-candidates-v2.yaml
+- artifacts/reports/weight-format-analysis-qsilu-pq-a8-main-v2.json
+- artifacts/reports/weight-format-analysis-hardswish-a8-main-v3.json
+- artifacts/reports/weight-format-analysis-poly-shift-a8-main-v2.json
+first_gpu_required_stage:
+  stage: V4_W8_bridge
+  requires_gpu: true
+  execution_authorized: false
+  work:
+  - calibrate_and_freeze_lsq_plus_scales_and_offsets
+  - measure_add_concat_saturation_and_output_scale_alignment
+  - run_layer_output_nrmse_and_top300_overlap
+  - run_eight_metric_COCO_person_and_BBAT5_validation
+still_blocked_after_gpu_bridge:
+  qat: needs_fold_aware_bn_affine_contract_before_any_qat_run
+  hardware_claim: needs_target_profile_integer_reciprocal_kernels_and_board_measurement

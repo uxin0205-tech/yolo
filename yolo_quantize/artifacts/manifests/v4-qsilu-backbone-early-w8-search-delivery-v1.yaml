@@ -1,0 +1,109 @@
+schema_version: 1
+delivery_id: v4-qsilu-backbone-early-w8-search-delivery-v1
+date: '2026-09-03'
+status: completed_green_stopped_before_expansion
+formal_training: false
+formal_validation: false
+selection_claim: false
+promotion_scope: search_eligible_single_cell_only
+
+cell:
+  id: qsilu_pq--lsq-plus-a8--backbone_early--w8-mse_grid_v1
+  activation_parent: qsilu_pq--lsq-plus-a8
+  region: backbone_early
+  weight_format: w8
+  scale_method: mse_grid_v1
+  quantized_modules: 21
+  weight_elements: 1218240
+
+plans:
+  diagnostic:
+    path: configs/experiments/weight-region-sensitivity-plan-v3.yaml
+    sha256: 2f83ba617b5501338ab3578f3cb1026b79f18aee3b6bf2668b167d5616db1f43
+  search:
+    path: configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml
+    sha256: 3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985
+
+inputs:
+  accepted_checkpoint:
+    path: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt
+    sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+  qsilu_parent_checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+    sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+  calibration_manifest:
+    path: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+    canonical_payload_sha256: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+  bbat5_runtime_view:
+    yaml: artifacts/datasets/bbat5-v1-pose-search-v1/data.yaml
+    yaml_sha256: 55699d2a0c7cb06505388348612451afbe90083289e9c4c9f114b914e1c78eaf
+    manifest: artifacts/datasets/bbat5-v1-pose-search-v1/manifest.json
+    manifest_sha256: 2a5a9593d3703d86cfebb315fa5d2e5954fac1860d777cb0222d153416196ac5
+    train_images: 5364
+    val_images: 600
+    source_group_overlap: 0
+    assignment_changed: false
+
+outputs:
+  diagnostic:
+    path: artifacts/reports/weight-ptq-qsilu-backbone-early-w8-diagnostic-v3.json
+    sha256: 0a61dc6eafead2f410fadf1373b4bf14c4e5d948a481ece81884e23821a8ab85
+    status: diagnostic_pass
+    selection_claim: false
+  search:
+    path: artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json
+    sha256: 738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2
+    status: completed
+    decision: green
+  role_metrics:
+    accepted:
+      path: artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/accepted/epoch-0000/bittrue/metrics.json
+      sha256: 2e97e4a60039741cc1fc45a03d67615bbc5b851bcf60a56cd153251366c4a355
+    matched:
+      path: artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/matched/epoch-0000/bittrue/metrics.json
+      sha256: e2b3501a98a25f90519919d11c6e5c77d2327a04f2a58e6ea5291fb9c65cd0a3
+    candidate:
+      path: artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/candidate/epoch-0000/bittrue/metrics.json
+      sha256: a40932555b0b5d6f2e409fcfd49557d5fce30ec55984a09a983d5961e4a7bfd5
+
+gate:
+  total_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  worst_total_metric: coco/box/map50_95
+  worst_total_delta: -0.013504198375223875
+  worst_incremental_metric: bbat/ball/box/map50_95
+  worst_incremental_delta: -0.007147057049401329
+  decision: green
+
+implementation:
+  search_runner:
+    path: src/yolo_quantize/search_validation.py
+    sha256: 4487af0838c87613982fc785ab8f6a5bf51b0e81376d24cd37d5857659f10b8e
+  search_data:
+    path: src/yolo_quantize/search_data.py
+    sha256: 5648ab61073f55cc4490ada22964667ccc7c207a78a6e5db64a05a974160ad36
+  validation_source:
+    path: src/yolo_quantize/validation_source.py
+    sha256: 282207de13aec6f2d50e4d55ab689b8406af0a368bba8f601de1883090f0aede
+  weight_runner:
+    path: src/yolo_quantize/weight_sensitivity.py
+    sha256: ae54cdede0e8186e6e7e7b77fcf7c87613cd5470dcd709193798f0f2a5a9555c
+  package_exports:
+    path: src/yolo_quantize/__init__.py
+    sha256: 0418e731c0359ff3d9d61c8231ce23b08448bc3de1f4598c540cdb6384bf0b08
+
+verification:
+  pytest: passed_110_tests
+  ruff_check: passed
+  ruff_format_check: passed
+  resume_contract_check: passed_without_revalidation
+  gpu_released_after_run: true
+
+limitations:
+  - one_activation_parent_one_region_one_weight_bit_only
+  - bbat5_search_val_not_formal_val
+  - total_parent_delta_is_not_pure_activation_or_a8_causality
+  - fake_quant_not_packed_native_integer_kernel
+  - no_qat_no_matched_qat_sham_no_formal_training
+  - no_hardware_latency_power_or_energy_claim
+  - matrix_expansion_requires_new_reviewed_authorization

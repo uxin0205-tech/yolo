@@ -1,6 +1,8 @@
 # Activation預選可分享成品
 
-本目錄保存同一張Full35 activation預選老師版圖表的三種格式。完整解釋見[預選報告](../docs/reports/2026-08-29-activation-preselection-report.md)。
+另見[2026-09-07全模型量化盤點附件](full-model-audit-2026-09-07/README.md)：V36實測數據、148路格式、四天規劃與圖表。以下activation圖保留歷史版本。
+
+本目錄保存同一張Full35 activation預選老師版圖表的三種格式。完整解釋見[預選報告](../docs/reports/2026-08-29-activation-preselection-report.md)。這是2026-08-29的凍結歷史成品；2026-08-31後active shortlist已改為qSiLU／Hardswish／poly_shift，見[修訂報告](../docs/reports/2026-08-31-hardswish-policy-revision.md)。舊圖不重繪或改hash，以免把新決策偽裝成當時結果。
 
 | 檔案 | 用途 | SHA-256 |
 |---|---|---|

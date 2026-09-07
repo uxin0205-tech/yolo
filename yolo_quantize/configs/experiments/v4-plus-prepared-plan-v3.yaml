@@ -1,0 +1,96 @@
+schema_version: 3
+plan_id: full35-v4-plus-prepared-v3
+date: '2026-08-31'
+supersedes: full35-v4-plus-prepared-v2
+execution_authorized: false
+gpu_required_steps_must_not_run: true
+source_plan: configs/experiments/full35-quantization-plan-v3.yaml
+
+v4_bridge:
+  status: prepared_not_run
+  axes:
+    activation_parents: [qsilu_pq, hardswish, poly_shift]
+    activation_bits: [8]
+    weight_formats: [w8, w7, w6, w5, w4]
+  cells: 15
+  formula: 3_uniform_activation_parents_x_5_weight_bits
+  required_matched_fp32_weight_controls: 3
+  calibration_manifest: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+  execution_order:
+    - all_parent_w8_graph_and_probe
+    - all_parent_w8_full_eight_metric_validation
+    - w7_then_w6
+    - w5_then_w4_with_successive_racing
+  all_eight_metric_gate: true
+  hardswish_note: uniform_parent_checkpoint_is_distinct_from_q3_regional_policies
+
+v4h_q3_regional_bridge:
+  status: prepared_conditional_not_run
+  base_parent: qsilu_pq
+  override_activation: hardswish
+  stage_a_single_regions: [neck_attention, masf, backbone_attention]
+  formats_per_policy: [fp32_weight_matched_control, w8]
+  stage_a_cells: 6
+  stage_b_combination:
+    regions: [neck_attention, masf]
+    prerequisite: both_single_region_w8_cells_pass
+    formats: [fp32_weight_matched_control, w8]
+    conditional_cells: 2
+  do_not_infer_combination_from_single_deltas: true
+  do_not_replace_base_checkpoint: true
+  weight_region_mapping_is_advisory_not_identity: true
+
+v5_isolated_regions:
+  status: prepared_not_run
+  axes:
+    activation_parents: [qsilu_pq, hardswish, poly_shift]
+    regions:
+      - backbone_early
+      - backbone_deep
+      - backbone_attention_safe
+      - neck
+      - masf
+      - neck_attention_safe
+      - detect_one2one_tower
+      - detect_one2one_predictor
+      - pose_one2one_tower
+      - pose_one2one_predictor
+    weight_formats: [w8, w7, w6, w5, w4]
+  cells: 150
+  report_after_all_no_training_cells: true
+  auto_qat: false
+  regional_policy_expansion:
+    preallocated: false
+    prerequisite: v4h_w8_policy_passes_matched_control_and_all_eight_metrics
+    maximum_promotions: 2
+
+racing:
+  method: successive_racing_with_sentinel_audit
+  structural_or_nonfinite: hard_reject
+  pareto_objectives: [eight_metric_margin, code_plus_metadata_bytes, bop_proxy]
+  retain_roles: [accuracy, standard_hardware, dyadic_hardware]
+  maximum_roles: 3
+  dominated_sentinel_per_region_bit: 1
+  expand_if_sentinel_passes_or_wins: true
+
+special_formats_after_uniform_map:
+  fixed_sd4:
+    source_candidates: artifacts/manifests/fixed-sd4-routing-candidates-v2.yaml
+    compare_scale_methods: [max, mse]
+    route_layers_only: true
+    int4_matched_control: true
+  paper_twn:
+    static_first: true
+    exact_pdf_formula: true
+  ls_sd4:
+    starts_after_uniform_qat_baseline: true
+    training_authorized: false
+  channel_twn: {training_authorized: false}
+  ttq: {training_authorized: false}
+
+training_and_formal:
+  qat_authorized: false
+  formal_authorized: false
+  optimizer_state_resume_between_adamw_and_musgd: forbidden
+  matched_sham_required: true
+  final_optimizations_deferred_until_base_finalists: true

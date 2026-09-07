@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yolo-full35-quantize"
+version = "0.1.0"
+description = "Activation-aware quantization research for the Full35 Detect/Pose model"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy==2.5.1",
+    "Pillow==12.3.0",
+    "matplotlib==3.11.1",
+    "PyYAML==6.0.3",
+    "torch==2.11.0",
+]
+
+[project.scripts]
+yolo-quantize-activation-intake = "yolo_quantize.intake:main"
+yolo-quantize-activation-smoke = "yolo_quantize.activation_smoke:main"
+yolo-quantize-weight-sensitivity = "yolo_quantize.weight_sensitivity:main"
+yolo-quantize-search-validation = "yolo_quantize.search_validation:main"
+yolo-quantize-search-race = "yolo_quantize.search_race:main"
+yolo-quantize-mixed-policy-search = "yolo_quantize.mixed_policy_search:main"
+yolo-quantize-activation-policy-search = "yolo_quantize.activation_policy_search:main"
+yolo-quantize-policy-search = "yolo_quantize.policy_search:main"
+yolo-quantize-metric-regate = "yolo_quantize.metric_regate:main"
+yolo-quantize-prepare-v1-v3 = "yolo_quantize.preparation:main"
+yolo-quantize-prepare-exact-weight-cpu = "yolo_quantize.exact_preparation:main"
+yolo-quantize-prepare-progressive-weight-cpu = "yolo_quantize.progressive_preparation:main"
+yolo-quantize-progressive-queue = "yolo_quantize.progressive_queue:main"
+yolo-quantize-progressive-regate = "yolo_quantize.progressive_regate:main"
+yolo-quantize-progressive-short-qat = "yolo_quantize.progressive_qat_queue:main"
+yolo-quantize-qsilu-lane = "yolo_quantize.qsilu_lane_queue:main"
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+pythonpath = ["src"]
+testpaths = ["tests"]

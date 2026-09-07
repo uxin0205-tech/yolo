@@ -1,0 +1,1469 @@
+{
+  "catalog_contract": {
+    "deployment_regions": {
+      "backbone_attention_safe": {
+        "modules": 7,
+        "weight_elements": 919808
+      },
+      "backbone_deep": {
+        "modules": 22,
+        "weight_elements": 8126464
+      },
+      "backbone_early": {
+        "modules": 21,
+        "weight_elements": 1218240
+      },
+      "detect_one2one_predictor": {
+        "modules": 6,
+        "weight_elements": 62208
+      },
+      "detect_one2one_tower": {
+        "modules": 18,
+        "weight_elements": 1390592
+      },
+      "masf": {
+        "modules": 3,
+        "weight_elements": 74240
+      },
+      "neck": {
+        "modules": 33,
+        "weight_elements": 8142848
+      },
+      "neck_attention_safe": {
+        "modules": 5,
+        "weight_elements": 395520
+      },
+      "pose_one2one_predictor": {
+        "modules": 12,
+        "weight_elements": 4224
+      },
+      "pose_one2one_tower": {
+        "modules": 24,
+        "weight_elements": 2238464
+      }
+    },
+    "totals": {
+      "deployment_modules": 151,
+      "deployment_weight_elements": 22572608,
+      "modules": 251,
+      "protected_modules": 4,
+      "protected_weight_elements": 131072,
+      "training_only_modules": 96,
+      "training_only_weight_elements": 3747712,
+      "weight_elements": 26451392
+    }
+  },
+  "contract": {
+    "activation_output_format": "lsq_plus_a8",
+    "bbat5_assignment_changed": false,
+    "bbat5_dataset_id": "bbat5-v1",
+    "calibration_images": {
+      "detect": [
+        {
+          "bytes": 256514,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000109622.jpg",
+          "sha256": "afb9609bbc5f57ce3af8b9016a49f60949d67cd441c2332b9f3f728e40235394"
+        },
+        {
+          "bytes": 150059,
+          "path": "/home/uxin/yolo/coco2017/images/train2017/000000160694.jpg",
+          "sha256": "ee0dc2c3cf817b0653400709657eff46e6872985c16bf721d8369d0e4d42fa01"
+        }
+      ],
+      "pose": [
+        {
+          "bytes": 56578,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000001204_jpg.rf.461babb244541057b895be2c5b296b9a.jpg",
+          "sha256": "20b8f37014e9a732efcb1338bb19bdf7ae8a9c104727f4642851c4a27c1340bd"
+        },
+        {
+          "bytes": 33117,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000004711_jpg.rf.37209f4112e461ffe7a96adc80965193.jpg",
+          "sha256": "5fe6611e7cb665e38dda831f5842ee989f95cdbddb828804af73192d477dbc4c"
+        }
+      ]
+    },
+    "calibration_per_task": 2,
+    "calibration_split": "canonical_train_exemplars_only",
+    "cells": [
+      {
+        "activation": "poly_quality",
+        "activation_policy_id": "poly_quality--lsq-plus-a8",
+        "activation_role": "activation_numeric",
+        "cell_id": "poly_quality--lsq-plus-a8--backbone_early--w8-mse",
+        "formal_training": false,
+        "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_joint.pt",
+        "parent_sha256": "eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968",
+        "region": "backbone_early",
+        "scale_method": "mse",
+        "weight_bits": 8,
+        "weight_format": "w8"
+      }
+    ],
+    "comparison_reference": "matched_activation_a8_fp32_weights",
+    "formal_training": false,
+    "image_size": 640,
+    "kind": "full35_isolated_region_weight_ptq_sensitivity",
+    "plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/weight-region-sensitivity-plan-v1.yaml",
+    "plan_sha256": "070dc5d08729f5d938d7667d560372d10c36ed5d1c6629261344a0fbe8f39253",
+    "probe_images": {
+      "detect": [
+        {
+          "bytes": 139317,
+          "path": "/home/uxin/yolo/coco2017/images/val2017/000000182611.jpg",
+          "sha256": "c819074e44adebad82ebad4f0e86d673d710cee0f4fe7a0522249aff07d94e71"
+        }
+      ],
+      "pose": [
+        {
+          "bytes": 37454,
+          "path": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/00019ee392d03976_jpg.rf.5faf2313d265f270d3951b781a123c66.jpg",
+          "sha256": "81cd582b7653b482f32d157b81f180042bdc2f6a67da108632349df9d9b19b21"
+        }
+      ]
+    },
+    "probe_split": "canonical_val_exemplars_only",
+    "qat": false,
+    "schema_version": 1,
+    "weight_quantization": {
+      "accumulator_contract": "int32",
+      "family": "signed_uniform",
+      "granularity": "per_output_channel",
+      "representation": "fake_quant_dequantized_weights",
+      "rounding": "nearest_even"
+    }
+  },
+  "kind": "full35_isolated_region_weight_ptq_sensitivity",
+  "parents": {
+    "poly_quality--lsq-plus-a8": {
+      "activation": "poly_quality",
+      "activation_observer": {
+        "invalid_sites": [],
+        "maximum": 199.35964965820312,
+        "minimum": -0.2790400981903076,
+        "valid_sites": 124
+      },
+      "activation_quantizers": 124,
+      "catalog": {
+        "deployment_regions": {
+          "backbone_attention_safe": {
+            "modules": 7,
+            "weight_elements": 919808
+          },
+          "backbone_deep": {
+            "modules": 22,
+            "weight_elements": 8126464
+          },
+          "backbone_early": {
+            "modules": 21,
+            "weight_elements": 1218240
+          },
+          "detect_one2one_predictor": {
+            "modules": 6,
+            "weight_elements": 62208
+          },
+          "detect_one2one_tower": {
+            "modules": 18,
+            "weight_elements": 1390592
+          },
+          "masf": {
+            "modules": 3,
+            "weight_elements": 74240
+          },
+          "neck": {
+            "modules": 33,
+            "weight_elements": 8142848
+          },
+          "neck_attention_safe": {
+            "modules": 5,
+            "weight_elements": 395520
+          },
+          "pose_one2one_predictor": {
+            "modules": 12,
+            "weight_elements": 4224
+          },
+          "pose_one2one_tower": {
+            "modules": 24,
+            "weight_elements": 2238464
+          }
+        },
+        "totals": {
+          "deployment_modules": 151,
+          "deployment_weight_elements": 22572608,
+          "modules": 251,
+          "protected_modules": 4,
+          "protected_weight_elements": 131072,
+          "training_only_modules": 96,
+          "training_only_weight_elements": 3747712,
+          "weight_elements": 26451392
+        }
+      },
+      "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_joint.pt",
+      "checkpoint_sha256": "eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968",
+      "checkpoint_state_source": "ema",
+      "peak_gpu_memory_mib": 504.5634765625,
+      "role": "activation_numeric",
+      "status": "ready",
+      "timing_seconds": {
+        "activation_calibration": 0.5018106042407453,
+        "build_and_gpu_transfer": 8.839701537974179,
+        "matched_reference_probe": 0.07829135423526168
+      }
+    }
+  },
+  "results": {
+    "poly_quality--lsq-plus-a8--backbone_early--w8-mse": {
+      "activation": "poly_quality",
+      "activation_policy_id": "poly_quality--lsq-plus-a8",
+      "activation_role": "activation_numeric",
+      "all_finite": true,
+      "cell_id": "poly_quality--lsq-plus-a8--backbone_early--w8-mse",
+      "coverage": {
+        "protected_modules": 4,
+        "quantized_modules": 21,
+        "training_only_modules": 96,
+        "weight_elements": 1218240
+      },
+      "formal_training": false,
+      "incremental_reference": "matched_activation_a8_fp32_weights",
+      "layer_weight_numeric": [
+        {
+          "clipping_rate": 0.0,
+          "code_max": 127,
+          "code_min": -127,
+          "cosine": 0.999984950677627,
+          "elements": 1728,
+          "maximum_absolute_error": 0.0065691471099853516,
+          "mse": 2.9604831339653444e-06,
+          "normalized_rmse": 0.005492664852950117,
+          "occupied_codes": 228,
+          "output_channels": 64,
+          "path": "graph.model.0.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.013572003692388535,
+          "scale_mean": 0.005122889764606953,
+          "scale_minimum": 0.0007121351663954556,
+          "sqnr_db": 45.204337992101145,
+          "zero_ratio": 0.016203703703703703
+        },
+        {
+          "clipping_rate": 0.0004611545138888889,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9998830214404413,
+          "elements": 73728,
+          "maximum_absolute_error": 0.004464685916900635,
+          "mse": 2.6417122474716354e-07,
+          "normalized_rmse": 0.015292080160634314,
+          "occupied_codes": 256,
+          "output_channels": 128,
+          "path": "graph.model.1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.002879566978663206,
+          "scale_mean": 0.0017140319105237722,
+          "scale_minimum": 0.0008781188516877592,
+          "sqnr_db": 36.310668681762905,
+          "zero_ratio": 0.046793619791666664
+        },
+        {
+          "clipping_rate": 0.0,
+          "code_max": 127,
+          "code_min": -127,
+          "cosine": 0.9999202314417912,
+          "elements": 16384,
+          "maximum_absolute_error": 0.00212673656642437,
+          "mse": 4.555006114514981e-07,
+          "normalized_rmse": 0.012640208041884201,
+          "occupied_codes": 242,
+          "output_channels": 128,
+          "path": "graph.model.2.cv1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.004275477956980467,
+          "scale_mean": 0.002277590334415436,
+          "scale_minimum": 0.0012656920589506626,
+          "sqnr_db": 37.96491556110626,
+          "zero_ratio": 0.05108642578125
+        },
+        {
+          "clipping_rate": 0.0003255208333333333,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999418886402887,
+          "elements": 49152,
+          "maximum_absolute_error": 0.003429323434829712,
+          "mse": 1.684885925593941e-07,
+          "normalized_rmse": 0.010777933987723556,
+          "occupied_codes": 256,
+          "output_channels": 256,
+          "path": "graph.model.2.cv2.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0031162735540419817,
+          "scale_mean": 0.0013761096633970737,
+          "scale_minimum": 0.0007369831437245011,
+          "sqnr_db": 39.34928961364045,
+          "zero_ratio": 0.022806803385416668
+        },
+        {
+          "clipping_rate": 0.0,
+          "code_max": 127,
+          "code_min": -127,
+          "cosine": 0.9999581641243831,
+          "elements": 2048,
+          "maximum_absolute_error": 0.0017102248966693878,
+          "mse": 4.3969632201878994e-07,
+          "normalized_rmse": 0.00916494196085653,
+          "occupied_codes": 195,
+          "output_channels": 32,
+          "path": "graph.model.2.m.0.cv1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0034366236068308353,
+          "scale_mean": 0.002269305754452944,
+          "scale_minimum": 0.001662776223383844,
+          "sqnr_db": 40.75740561929345,
+          "zero_ratio": 0.0263671875
+        },
+        {
+          "clipping_rate": 0.0,
+          "code_max": 127,
+          "code_min": -127,
+          "cosine": 0.9999566117426456,
+          "elements": 2048,
+          "maximum_absolute_error": 0.0016626864671707153,
+          "mse": 3.8813743685750524e-07,
+          "normalized_rmse": 0.009318278318293557,
+          "occupied_codes": 204,
+          "output_channels": 32,
+          "path": "graph.model.2.m.0.cv2.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.003335819812491536,
+          "scale_mean": 0.0021015219390392303,
+          "scale_minimum": 0.0013371460372582078,
+          "sqnr_db": 40.613286443770164,
+          "zero_ratio": 0.02294921875
+        },
+        {
+          "clipping_rate": 0.0,
+          "code_max": 127,
+          "code_min": -127,
+          "cosine": 0.9999613142596437,
+          "elements": 4096,
+          "maximum_absolute_error": 0.0015980005264282227,
+          "mse": 3.649492725799064e-07,
+          "normalized_rmse": 0.008794525647905005,
+          "occupied_codes": 230,
+          "output_channels": 64,
+          "path": "graph.model.2.m.0.cv3.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.003210608148947358,
+          "scale_mean": 0.002039042767137289,
+          "scale_minimum": 0.0010707470355555415,
+          "sqnr_db": 41.115751604069,
+          "zero_ratio": 0.019775390625
+        },
+        {
+          "clipping_rate": 0.0,
+          "code_max": 127,
+          "code_min": -127,
+          "cosine": 0.9999123419277238,
+          "elements": 9216,
+          "maximum_absolute_error": 0.0014985296875238419,
+          "mse": 3.154248386433917e-07,
+          "normalized_rmse": 0.013245638571037908,
+          "occupied_codes": 229,
+          "output_channels": 32,
+          "path": "graph.model.2.m.0.m.0.cv1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.003004465950652957,
+          "scale_mean": 0.0019049195107072592,
+          "scale_minimum": 0.0012359468964859843,
+          "sqnr_db": 37.55854199128671,
+          "zero_ratio": 0.034505208333333336
+        },
+        {
+          "clipping_rate": 0.00043402777777777775,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999059022826141,
+          "elements": 9216,
+          "maximum_absolute_error": 0.0034305155277252197,
+          "mse": 2.868793874060632e-07,
+          "normalized_rmse": 0.013721537640028137,
+          "occupied_codes": 234,
+          "output_channels": 32,
+          "path": "graph.model.2.m.0.m.0.cv2.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.00340821105055511,
+          "scale_mean": 0.0017282171174883842,
+          "scale_minimum": 0.000969896384049207,
+          "sqnr_db": 37.25194437439049,
+          "zero_ratio": 0.03233506944444445
+        },
+        {
+          "clipping_rate": 0.0005425347222222222,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999274519006328,
+          "elements": 9216,
+          "maximum_absolute_error": 0.004060566425323486,
+          "mse": 2.397283525270824e-07,
+          "normalized_rmse": 0.01205131508454796,
+          "occupied_codes": 237,
+          "output_channels": 32,
+          "path": "graph.model.2.m.0.m.1.cv1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0033177987206727266,
+          "scale_mean": 0.0016050087288022041,
+          "scale_minimum": 0.0010083905654028058,
+          "sqnr_db": 38.37931117331894,
+          "zero_ratio": 0.023654513888888888
+        },
+        {
+          "clipping_rate": 0.00043402777777777775,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999380131679945,
+          "elements": 9216,
+          "maximum_absolute_error": 0.0033528804779052734,
+          "mse": 2.1281357476254925e-07,
+          "normalized_rmse": 0.011133118651657623,
+          "occupied_codes": 235,
+          "output_channels": 32,
+          "path": "graph.model.2.m.0.m.1.cv2.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0022549419663846493,
+          "scale_mean": 0.0015635567251592875,
+          "scale_minimum": 0.0009959114249795675,
+          "sqnr_db": 39.06766324792134,
+          "zero_ratio": 0.022352430555555556
+        },
+        {
+          "clipping_rate": 0.0003560384114583333,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9998668908222211,
+          "elements": 589824,
+          "maximum_absolute_error": 0.004140764474868774,
+          "mse": 6.875337829923309e-08,
+          "normalized_rmse": 0.01631455765260786,
+          "occupied_codes": 256,
+          "output_channels": 256,
+          "path": "graph.model.3.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0017010680167004466,
+          "scale_mean": 0.0008619065047241747,
+          "scale_minimum": 0.0004627810267265886,
+          "sqnr_db": 35.7484939406001,
+          "zero_ratio": 0.030509101019965276
+        },
+        {
+          "clipping_rate": 0.0003204345703125,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999337045278923,
+          "elements": 65536,
+          "maximum_absolute_error": 0.003799617290496826,
+          "mse": 1.6888284903870954e-07,
+          "normalized_rmse": 0.011509532390210242,
+          "occupied_codes": 256,
+          "output_channels": 256,
+          "path": "graph.model.4.cv1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0033178983721882105,
+          "scale_mean": 0.0013617118820548058,
+          "scale_minimum": 0.0007490397547371686,
+          "sqnr_db": 38.778846410943174,
+          "zero_ratio": 0.0229949951171875
+        },
+        {
+          "clipping_rate": 0.0004984537760416666,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999256801268421,
+          "elements": 196608,
+          "maximum_absolute_error": 0.004153639078140259,
+          "mse": 1.091581983322006e-07,
+          "normalized_rmse": 0.01218945324070354,
+          "occupied_codes": 256,
+          "output_channels": 512,
+          "path": "graph.model.4.cv2.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.002766435733065009,
+          "scale_mean": 0.0010785022750496864,
+          "scale_minimum": 0.0005795121542178094,
+          "sqnr_db": 38.2803154854516,
+          "zero_ratio": 0.020731608072916668
+        },
+        {
+          "clipping_rate": 0.0001220703125,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999660124324546,
+          "elements": 8192,
+          "maximum_absolute_error": 0.0028278976678848267,
+          "mse": 1.730107186403984e-07,
+          "normalized_rmse": 0.008239981011630952,
+          "occupied_codes": 251,
+          "output_channels": 64,
+          "path": "graph.model.4.m.0.cv1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.002335626631975174,
+          "scale_mean": 0.001405802322551608,
+          "scale_minimum": 0.0008662263862788677,
+          "sqnr_db": 41.681475781964,
+          "zero_ratio": 0.0125732421875
+        },
+        {
+          "clipping_rate": 0.0001220703125,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999647604952416,
+          "elements": 8192,
+          "maximum_absolute_error": 0.0017319023609161377,
+          "mse": 1.4708453477396688e-07,
+          "normalized_rmse": 0.008395008893326502,
+          "occupied_codes": 248,
+          "output_channels": 64,
+          "path": "graph.model.4.m.0.cv2.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0023181308060884476,
+          "scale_mean": 0.0012986100045964122,
+          "scale_minimum": 0.0008770099375396967,
+          "sqnr_db": 41.519576789040194,
+          "zero_ratio": 0.011962890625
+        },
+        {
+          "clipping_rate": 0.0001220703125,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.999962355343915,
+          "elements": 16384,
+          "maximum_absolute_error": 0.0030855387449264526,
+          "mse": 1.5778221040818607e-07,
+          "normalized_rmse": 0.008675221940942765,
+          "occupied_codes": 254,
+          "output_channels": 128,
+          "path": "graph.model.4.m.0.cv3.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.002775632543489337,
+          "scale_mean": 0.0013318145647644997,
+          "scale_minimum": 0.0006824475130997598,
+          "sqnr_db": 41.234388114041415,
+          "zero_ratio": 0.01495361328125
+        },
+        {
+          "clipping_rate": 0.0003255208333333333,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.999914668807864,
+          "elements": 36864,
+          "maximum_absolute_error": 0.002229824662208557,
+          "mse": 1.2843821019083003e-07,
+          "normalized_rmse": 0.0130649263218655,
+          "occupied_codes": 250,
+          "output_channels": 64,
+          "path": "graph.model.4.m.0.m.0.cv1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.002287572715431452,
+          "scale_mean": 0.0011871407041326165,
+          "scale_minimum": 0.0007073545712046325,
+          "sqnr_db": 37.67786070166074,
+          "zero_ratio": 0.023247612847222224
+        },
+        {
+          "clipping_rate": 0.00035264756944444444,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.999929575521034,
+          "elements": 36864,
+          "maximum_absolute_error": 0.0035954713821411133,
+          "mse": 9.663556789342289e-08,
+          "normalized_rmse": 0.011873219999772996,
+          "occupied_codes": 252,
+          "output_channels": 64,
+          "path": "graph.model.4.m.0.m.0.cv2.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0022586933337152004,
+          "scale_mean": 0.0010474033188074827,
+          "scale_minimum": 0.0006260143127292395,
+          "sqnr_db": 38.50862970095843,
+          "zero_ratio": 0.020562065972222224
+        },
+        {
+          "clipping_rate": 0.0006239149305555555,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999177959109805,
+          "elements": 36864,
+          "maximum_absolute_error": 0.003244936466217041,
+          "mse": 1.1908049499551352e-07,
+          "normalized_rmse": 0.012823787029729678,
+          "occupied_codes": 251,
+          "output_channels": 64,
+          "path": "graph.model.4.m.0.m.1.cv1.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0021933314856141806,
+          "scale_mean": 0.0011487763840705156,
+          "scale_minimum": 0.0006882652523927391,
+          "sqnr_db": 37.839674062269175,
+          "zero_ratio": 0.023356119791666668
+        },
+        {
+          "clipping_rate": 0.0004611545138888889,
+          "code_max": 127,
+          "code_min": -128,
+          "cosine": 0.9999315407582283,
+          "elements": 36864,
+          "maximum_absolute_error": 0.0026478171348571777,
+          "mse": 1.0032202782086743e-07,
+          "normalized_rmse": 0.011703960246708332,
+          "occupied_codes": 249,
+          "output_channels": 64,
+          "path": "graph.model.4.m.0.m.1.cv2.conv",
+          "region": "backbone_early",
+          "scale_maximum": 0.0019566593691706657,
+          "scale_mean": 0.0010696586687117815,
+          "scale_minimum": 0.0006975767319090664,
+          "sqnr_db": 38.633343239815765,
+          "zero_ratio": 0.019829644097222224
+        }
+      ],
+      "parent_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_joint.pt",
+      "parent_sha256": "eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968",
+      "peak_gpu_memory_mib": 536.33154296875,
+      "region": "backbone_early",
+      "same_structure": true,
+      "scale_method": "mse",
+      "status": "passed",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 0.9711114960014711,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.8789515032697759,
+              "elements": 1800,
+              "maximum_absolute_error": 597.7365112304688,
+              "mean_absolute_error": 105.06286458333334,
+              "normalized_rmse": 0.48873961035526153,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.8789515032697759,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 597.7365112304688,
+                  "mean_absolute_error": 105.06286458333334,
+                  "normalized_rmse": 0.48873961035526153,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9952682466359417,
+              "elements": 705600,
+              "maximum_absolute_error": 53.90632629394531,
+              "mean_absolute_error": 1.2741867494475003,
+              "normalized_rmse": 0.0973036205918899,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 0.9945795899608865,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 8.532693862915039,
+                  "mean_absolute_error": 0.18243810744512648,
+                  "normalized_rmse": 0.10408850936192471,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9952689977881317,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 53.90632629394531,
+                  "mean_absolute_error": 1.328774181547619,
+                  "normalized_rmse": 0.0972964723658517,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.013333333656191826,
+              "ordered_pair_match": 0.013333333656191826,
+              "selected_anchor_jaccard": 0.7049180327868853,
+              "selected_pair_overlap": 0.8066666666666666,
+              "topk": 300
+            }
+          },
+          "elements": 6737800,
+          "maximum_absolute_error": 597.7365112304688,
+          "mean_absolute_error": 0.28897615419547645,
+          "normalized_rmse": 0.23970549252749399,
+          "same_structure": true,
+          "tensor_count": 11,
+          "tensors": [
+            {
+              "cosine": 0.8789515032697759,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 597.7365112304688,
+              "mean_absolute_error": 105.06286458333334,
+              "normalized_rmse": 0.48873961035526153,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 0.9931372460262986,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 7.410100936889648,
+              "mean_absolute_error": 0.19887096586681546,
+              "normalized_rmse": 0.11695653803177801,
+              "path": "output.detect[1].one2many.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9976713799188761,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 40.54574203491211,
+              "mean_absolute_error": 0.7777715773809524,
+              "normalized_rmse": 0.06856907913864523,
+              "path": "output.detect[1].one2many.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9831081717556209,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 3.995666027069092,
+              "mean_absolute_error": 0.04547003746032715,
+              "normalized_rmse": 0.18376807329828024,
+              "path": "output.detect[1].one2many.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9799965221447745,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 7.360915660858154,
+              "mean_absolute_error": 0.06205043792724609,
+              "normalized_rmse": 0.20050739341738755,
+              "path": "output.detect[1].one2many.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9768139637185341,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 26.618492126464844,
+              "mean_absolute_error": 0.19257808685302735,
+              "normalized_rmse": 0.2160055330672415,
+              "path": "output.detect[1].one2many.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9945795899608865,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 8.532693862915039,
+              "mean_absolute_error": 0.18243810744512648,
+              "normalized_rmse": 0.10408850936192471,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9952689977881317,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 53.90632629394531,
+              "mean_absolute_error": 1.328774181547619,
+              "normalized_rmse": 0.0972964723658517,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9831081717556209,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 3.995666027069092,
+              "mean_absolute_error": 0.04547003746032715,
+              "normalized_rmse": 0.18376807329828024,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9799965221447745,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 7.360915660858154,
+              "mean_absolute_error": 0.06205043792724609,
+              "normalized_rmse": 0.20050739341738755,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9768139637185341,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 26.618492126464844,
+              "mean_absolute_error": 0.19257808685302735,
+              "normalized_rmse": 0.2160055330672415,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 0.8154413956791623,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.8083179562390241,
+              "elements": 3600,
+              "maximum_absolute_error": 648.0459594726562,
+              "mean_absolute_error": 143.10730902777777,
+              "normalized_rmse": 0.610065001965883,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.8083179562390241,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 648.0459594726562,
+                  "mean_absolute_error": 143.10730902777777,
+                  "normalized_rmse": 0.610065001965883,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9950362456472666,
+              "elements": 100800,
+              "maximum_absolute_error": 34.07994079589844,
+              "mean_absolute_error": 0.3572274441189236,
+              "normalized_rmse": 0.10026671429189832,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 0.9936011088094802,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 2.6390528678894043,
+                  "mean_absolute_error": 0.17480832054501488,
+                  "normalized_rmse": 0.11326454977896168,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9958609088831522,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 34.07994079589844,
+                  "mean_absolute_error": 1.1291556222098214,
+                  "normalized_rmse": 0.0918842851648589,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9263586339810085,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 8.658262252807617,
+                  "mean_absolute_error": 0.22153080047123017,
+                  "normalized_rmse": 0.37816322150652903,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.006666666828095913,
+              "ordered_pair_match": 0.006666666828095913,
+              "selected_anchor_jaccard": 0.38618925831202044,
+              "selected_pair_overlap": 0.55,
+              "topk": 300
+            }
+          },
+          "elements": 5530000,
+          "maximum_absolute_error": 648.0459594726562,
+          "mean_absolute_error": 0.20788966715641952,
+          "normalized_rmse": 0.5989041045601867,
+          "same_structure": true,
+          "tensor_count": 13,
+          "tensors": [
+            {
+              "cosine": 0.8083179562390241,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 648.0459594726562,
+              "mean_absolute_error": 143.10730902777777,
+              "normalized_rmse": 0.610065001965883,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 0.9928360517252044,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 3.202873706817627,
+              "mean_absolute_error": 0.18508524576822916,
+              "normalized_rmse": 0.11975540988247739,
+              "path": "output.pose[1].one2many.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9958864287351905,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 17.33995819091797,
+              "mean_absolute_error": 1.1813278924851192,
+              "normalized_rmse": 0.09165014417561056,
+              "path": "output.pose[1].one2many.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9501675635454563,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 4.299999237060547,
+              "mean_absolute_error": 0.07752735137939454,
+              "normalized_rmse": 0.31514261642003,
+              "path": "output.pose[1].one2many.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9180993313463611,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 9.507848739624023,
+              "mean_absolute_error": 0.11498659133911132,
+              "normalized_rmse": 0.4020215657134034,
+              "path": "output.pose[1].one2many.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9666065285731189,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 18.78952407836914,
+              "mean_absolute_error": 0.28402946472167967,
+              "normalized_rmse": 0.26243912562367794,
+              "path": "output.pose[1].one2many.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9442400471071893,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 6.3024492263793945,
+              "mean_absolute_error": 0.2697564019097222,
+              "normalized_rmse": 0.3303869708591981,
+              "path": "output.pose[1].one2many.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9936011088094802,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 2.6390528678894043,
+              "mean_absolute_error": 0.17480832054501488,
+              "normalized_rmse": 0.11326454977896168,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9958609088831522,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 34.07994079589844,
+              "mean_absolute_error": 1.1291556222098214,
+              "normalized_rmse": 0.0918842851648589,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9501675635454563,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 4.299999237060547,
+              "mean_absolute_error": 0.07752735137939454,
+              "normalized_rmse": 0.31514261642003,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9180993313463611,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 9.507848739624023,
+              "mean_absolute_error": 0.11498659133911132,
+              "normalized_rmse": 0.4020215657134034,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9666065285731189,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 18.78952407836914,
+              "mean_absolute_error": 0.28402946472167967,
+              "normalized_rmse": 0.26243912562367794,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9263586339810085,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 8.658262252807617,
+              "mean_absolute_error": 0.22153080047123017,
+              "normalized_rmse": 0.37816322150652903,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "timing_seconds": {
+        "cell_total": 0.22653861111029983,
+        "probe_forward": 0.07718424405902624,
+        "weight_quantization": 0.14439528714865446
+      },
+      "weight_bits": 8,
+      "weight_format": "w8",
+      "weight_numeric": {
+        "clipping_rate": 0.00037841476228001053,
+        "code_histogram": [
+          422,
+          1195,
+          70,
+          59,
+          61,
+          80,
+          84,
+          74,
+          78,
+          79,
+          95,
+          77,
+          79,
+          75,
+          87,
+          118,
+          100,
+          100,
+          109,
+          128,
+          133,
+          121,
+          107,
+          153,
+          155,
+          162,
+          163,
+          187,
+          195,
+          198,
+          207,
+          194,
+          227,
+          208,
+          244,
+          264,
+          240,
+          252,
+          244,
+          290,
+          306,
+          317,
+          322,
+          331,
+          363,
+          375,
+          387,
+          406,
+          405,
+          459,
+          473,
+          466,
+          527,
+          533,
+          585,
+          578,
+          610,
+          631,
+          681,
+          735,
+          721,
+          817,
+          798,
+          912,
+          930,
+          926,
+          984,
+          1062,
+          1091,
+          1170,
+          1227,
+          1276,
+          1387,
+          1484,
+          1474,
+          1597,
+          1693,
+          1880,
+          1970,
+          2032,
+          2087,
+          2184,
+          2396,
+          2493,
+          2623,
+          2691,
+          3065,
+          3021,
+          3325,
+          3571,
+          3728,
+          4006,
+          4011,
+          4432,
+          4650,
+          4897,
+          5106,
+          5512,
+          5797,
+          6303,
+          6706,
+          7209,
+          7417,
+          7879,
+          8442,
+          8889,
+          9522,
+          10097,
+          10953,
+          11564,
+          12419,
+          13146,
+          14089,
+          14810,
+          15854,
+          16992,
+          18038,
+          19308,
+          20653,
+          22235,
+          23606,
+          25517,
+          26554,
+          28682,
+          30012,
+          31650,
+          32610,
+          33455,
+          33889,
+          33732,
+          32768,
+          31950,
+          30018,
+          28458,
+          26641,
+          25145,
+          23605,
+          21845,
+          20683,
+          19119,
+          17959,
+          16665,
+          15411,
+          14631,
+          13487,
+          12672,
+          11714,
+          10896,
+          10252,
+          9629,
+          8935,
+          8190,
+          7755,
+          7396,
+          6858,
+          6284,
+          6073,
+          5716,
+          5219,
+          4984,
+          4800,
+          4270,
+          4036,
+          3767,
+          3617,
+          3458,
+          3221,
+          3066,
+          2901,
+          2668,
+          2461,
+          2463,
+          2276,
+          2070,
+          1951,
+          1830,
+          1718,
+          1673,
+          1601,
+          1464,
+          1395,
+          1388,
+          1200,
+          1174,
+          1127,
+          1155,
+          1039,
+          936,
+          899,
+          851,
+          839,
+          785,
+          695,
+          727,
+          639,
+          608,
+          602,
+          542,
+          576,
+          500,
+          472,
+          485,
+          441,
+          441,
+          364,
+          324,
+          354,
+          350,
+          319,
+          298,
+          279,
+          283,
+          271,
+          287,
+          262,
+          249,
+          237,
+          206,
+          198,
+          197,
+          198,
+          192,
+          161,
+          177,
+          159,
+          156,
+          157,
+          153,
+          127,
+          117,
+          121,
+          115,
+          90,
+          92,
+          87,
+          94,
+          69,
+          69,
+          70,
+          70,
+          64,
+          72,
+          54,
+          52,
+          65,
+          50,
+          59,
+          60,
+          60,
+          47,
+          45,
+          42,
+          41,
+          36,
+          52,
+          842
+        ],
+        "code_max": 127,
+        "code_min": -128,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9999282532263183,
+        "maximum_absolute_error": 0.0065691471099853516,
+        "mse": 1.2142342609252268e-07,
+        "normalized_rmse": 0.011977672847245357,
+        "occupied_codes": 256,
+        "scale_bytes": 9472,
+        "scale_count": 2368,
+        "scale_maximum": 0.013572003692388535,
+        "scale_mean": 0.0014480916984580658,
+        "scale_minimum": 0.0004627810267265886,
+        "sqnr_db": 38.432551064268836,
+        "weight_code_bytes": 1218240,
+        "zero_ratio": 0.027817999737325978
+      }
+    }
+  },
+  "schema_version": 1,
+  "status": "completed",
+  "summary": {
+    "cells": 1,
+    "failed": 0,
+    "formal_training": false,
+    "passed": 1
+  }
+}

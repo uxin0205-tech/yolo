@@ -1,0 +1,119 @@
+schema_version: 1
+plan_id: v12-activation-policy-map50-search-v1
+date: '2026-09-03'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-map50-v1
+
+execution_authorization:
+  authorization_id: user-2026-09-03-autonomous-v12-activation-coupling-search
+  validation_roles: [candidate]
+  candidate_ids:
+    - qsilu-hswish-neck-attention
+    - qsilu-hswish-neck-attention-masf
+    - qsilu-hswish-neck-attention-masf-backbone-attention
+    - uniform-hardswish
+    - uniform-poly-shift
+  training: false
+  stop_after: activation_only_map50_gate_and_selection
+
+upstream:
+  base_search_plan:
+    path: configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml
+    sha256: 3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985
+  reference_search_report:
+    path: artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json
+    sha256: 738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2
+    reuse_roles: [accepted, matched]
+  reference_map50_regate:
+    path: artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json
+    sha256: 67fce27506fac33e7655e791d815c04d7030ba213978a1ab27873369a396573e
+  q3_evidence:
+    path: /home/uxin/yolo/yolo_activation/reports/full35-q3-cpu-final-report.md
+    sha256: 8c495d71a7d4e50db7dd29676dfc8919a88cac3e362ab3f7d4737428c9b41d77
+    use: candidate_order_and_rationale_only
+
+candidates:
+  - candidate_id: qsilu-hswish-neck-attention
+    default_activation: qsilu_pq
+    region_assignments: {neck_attention: hardswish}
+    bits: 8
+    signed_codes: false
+    policy_id: qsilu_pq--regional--neck_attention=hardswish--lsq-plus-a8
+    checkpoint: &qsilu_checkpoint
+      path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+      sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    analytic_hardware_rank: 90
+  - candidate_id: qsilu-hswish-neck-attention-masf
+    default_activation: qsilu_pq
+    region_assignments: {neck_attention: hardswish, masf: hardswish}
+    bits: 8
+    signed_codes: false
+    policy_id: qsilu_pq--regional--masf=hardswish__neck_attention=hardswish--lsq-plus-a8
+    checkpoint: *qsilu_checkpoint
+    analytic_hardware_rank: 80
+  - candidate_id: qsilu-hswish-neck-attention-masf-backbone-attention
+    default_activation: qsilu_pq
+    region_assignments:
+      neck_attention: hardswish
+      masf: hardswish
+      backbone_attention: hardswish
+    bits: 8
+    signed_codes: false
+    policy_id: qsilu_pq--regional--backbone_attention=hardswish__masf=hardswish__neck_attention=hardswish--lsq-plus-a8
+    checkpoint: *qsilu_checkpoint
+    analytic_hardware_rank: 70
+  - candidate_id: uniform-hardswish
+    default_activation: hardswish
+    region_assignments: {}
+    bits: 8
+    signed_codes: false
+    policy_id: hardswish--lsq-plus-a8
+    checkpoint:
+      path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt
+      sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+    analytic_hardware_rank: 10
+  - candidate_id: uniform-poly-shift
+    default_activation: poly_shift
+    region_assignments: {}
+    bits: 8
+    signed_codes: false
+    policy_id: poly_shift--lsq-plus-a8
+    checkpoint:
+      path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+      sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+    analytic_hardware_rank: 0
+
+diagnostic:
+  manifest: inherit_base_weight_plan
+  fixed_probe_per_task: 1
+  all_finite_required: true
+  same_structure_required: true
+  selection_claim: false
+
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch: {detect: 32, pose: 16}
+  workers: {detect: 4, pose: 8}
+  plots: false
+  save_coco_json: false
+  augmentation: false
+
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+
+selection:
+  accuracy_tolerance: 0.002
+  accuracy_role: maximize_worst_total_map50_delta
+  balanced_role: within_accuracy_tolerance_then_minimize_analytic_hardware_rank
+  hardware_role: minimize_analytic_hardware_rank_among_gate_passed
+  analytic_hardware_rank_is_not_measured_latency: true

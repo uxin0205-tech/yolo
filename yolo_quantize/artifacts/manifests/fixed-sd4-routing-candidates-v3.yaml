@@ -1,0 +1,365 @@
+schema_version: 3
+manifest_id: full35-fixed-sd4-routing-candidates-v3
+status: exact_static_candidates_only_not_validated_not_authorized
+execution_authorized: false
+gpu_used: false
+formal_training: false
+map_validation_run: false
+comparison:
+  candidate: fixed-sd4-per_output_channel-optimal_scaled_codebook
+  control: uniform-w4-per_output_channel-optimal_scaled_codebook
+  equal_code_bits: 4
+  equal_scale_granularity: per_output_channel
+  selection_metric: per_layer_weight_reconstruction_mse
+  required_parents:
+  - qsilu_pq
+  - hardswish
+  - poly_shift
+  required_views:
+  - master
+  - deployment
+  rule: candidate_mse_strictly_less_than_control_in_every_active_parent_and_view
+source_artifacts:
+- parent: qsilu_pq
+  path: artifacts/reports/weight-format-analysis-qsilu-pq-a8-exact-w4-sd4-v1.json
+  sha256: 26247cf4bb8b88253e3438d45c2797b5b8eb948a1d3761b75bcf46a2923a86b2
+  checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+- parent: hardswish
+  path: artifacts/reports/weight-format-analysis-hardswish-a8-exact-w4-sd4-v1.json
+  sha256: 8a24e5fabd87542ae28a9bfd4c3081ff7156d9673e46a29569a7bea4f6abe18d
+  checkpoint_sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+- parent: poly_shift
+  path: artifacts/reports/weight-format-analysis-poly-shift-a8-exact-w4-sd4-v1.json
+  sha256: e013b3cc78ad8e470ec89bf935f84d37f051282696949cd8657425fcdc6c7def
+  checkpoint_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+counts:
+  paths_per_view_and_parent: 148
+  parent_view_winners:
+    qsilu_pq:
+      master: 37
+      deployment: 40
+    hardswish:
+      master: 37
+      deployment: 40
+    poly_shift:
+      master: 37
+      deployment: 40
+  both_view_cross_parent_winners: 36
+  regions:
+    backbone_deep: 4
+    backbone_early: 4
+    detect_one2one_predictor: 1
+    detect_one2one_tower: 6
+    neck: 20
+    neck_attention_safe: 1
+stable_candidates:
+- graph.model.1.conv
+- graph.model.13.m.0.m.0.cv1.conv
+- graph.model.16.cv1.conv
+- graph.model.16.cv2.conv
+- graph.model.16.m.0.cv3.conv
+- graph.model.16.m.0.m.0.cv1.conv
+- graph.model.16.m.0.m.0.cv2.conv
+- graph.model.16.m.0.m.1.cv1.conv
+- graph.model.16.m.0.m.1.cv2.conv
+- graph.model.17.conv
+- graph.model.19.cv2.conv
+- graph.model.19.m.0.cv2.conv
+- graph.model.19.m.0.cv3.conv
+- graph.model.19.m.0.m.0.cv1.conv
+- graph.model.19.m.0.m.0.cv2.conv
+- graph.model.19.m.0.m.1.cv1.conv
+- graph.model.19.m.0.m.1.cv2.conv
+- graph.model.2.cv1.conv
+- graph.model.2.m.0.m.0.cv1.conv
+- graph.model.2.m.0.m.0.cv2.conv
+- graph.model.20.conv
+- graph.model.22.cv2.conv
+- graph.model.22.m.0.0.cv1.conv
+- graph.model.22.m.0.0.cv2.conv
+- graph.model.22.m.0.1.attn.qkv.v.conv
+- graph.model.23.detect_head.one2one_cv2.0.0.conv
+- graph.model.23.detect_head.one2one_cv2.0.1.conv
+- graph.model.23.detect_head.one2one_cv2.1.0.conv
+- graph.model.23.detect_head.one2one_cv2.1.1.conv
+- graph.model.23.detect_head.one2one_cv2.2.0.conv
+- graph.model.23.detect_head.one2one_cv2.2.1.conv
+- graph.model.23.detect_head.one2one_cv3.2.2
+- graph.model.8.m.0.m.0.cv2.conv
+- graph.model.8.m.0.m.1.cv1.conv
+- graph.model.8.m.0.m.1.cv2.conv
+- graph.model.9.cv2.conv
+parent_view_winners:
+  qsilu_pq:
+    master:
+    - graph.model.1.conv
+    - graph.model.10.m.0.attn.pe.conv
+    - graph.model.13.m.0.m.0.cv1.conv
+    - graph.model.16.cv1.conv
+    - graph.model.16.cv2.conv
+    - graph.model.16.m.0.cv3.conv
+    - graph.model.16.m.0.m.0.cv1.conv
+    - graph.model.16.m.0.m.0.cv2.conv
+    - graph.model.16.m.0.m.1.cv1.conv
+    - graph.model.16.m.0.m.1.cv2.conv
+    - graph.model.17.conv
+    - graph.model.19.cv2.conv
+    - graph.model.19.m.0.cv2.conv
+    - graph.model.19.m.0.cv3.conv
+    - graph.model.19.m.0.m.0.cv1.conv
+    - graph.model.19.m.0.m.0.cv2.conv
+    - graph.model.19.m.0.m.1.cv1.conv
+    - graph.model.19.m.0.m.1.cv2.conv
+    - graph.model.2.cv1.conv
+    - graph.model.2.m.0.m.0.cv1.conv
+    - graph.model.2.m.0.m.0.cv2.conv
+    - graph.model.20.conv
+    - graph.model.22.cv2.conv
+    - graph.model.22.m.0.0.cv1.conv
+    - graph.model.22.m.0.0.cv2.conv
+    - graph.model.22.m.0.1.attn.qkv.v.conv
+    - graph.model.23.detect_head.one2one_cv2.0.0.conv
+    - graph.model.23.detect_head.one2one_cv2.0.1.conv
+    - graph.model.23.detect_head.one2one_cv2.1.0.conv
+    - graph.model.23.detect_head.one2one_cv2.1.1.conv
+    - graph.model.23.detect_head.one2one_cv2.2.0.conv
+    - graph.model.23.detect_head.one2one_cv2.2.1.conv
+    - graph.model.23.detect_head.one2one_cv3.2.2
+    - graph.model.8.m.0.m.0.cv2.conv
+    - graph.model.8.m.0.m.1.cv1.conv
+    - graph.model.8.m.0.m.1.cv2.conv
+    - graph.model.9.cv2.conv
+    deployment:
+    - graph.model.1.conv
+    - graph.model.13.m.0.m.0.cv1.conv
+    - graph.model.16.cv1.conv
+    - graph.model.16.cv2.conv
+    - graph.model.16.m.0.cv3.conv
+    - graph.model.16.m.0.m.0.cv1.conv
+    - graph.model.16.m.0.m.0.cv2.conv
+    - graph.model.16.m.0.m.1.cv1.conv
+    - graph.model.16.m.0.m.1.cv2.conv
+    - graph.model.17.conv
+    - graph.model.19.cv2.conv
+    - graph.model.19.m.0.cv2.conv
+    - graph.model.19.m.0.cv3.conv
+    - graph.model.19.m.0.m.0.cv1.conv
+    - graph.model.19.m.0.m.0.cv2.conv
+    - graph.model.19.m.0.m.1.cv1.conv
+    - graph.model.19.m.0.m.1.cv2.conv
+    - graph.model.2.cv1.conv
+    - graph.model.2.m.0.m.0.cv1.conv
+    - graph.model.2.m.0.m.0.cv2.conv
+    - graph.model.2.m.0.m.1.cv1.conv
+    - graph.model.20.conv
+    - graph.model.22.cv2.conv
+    - graph.model.22.m.0.0.cv1.conv
+    - graph.model.22.m.0.0.cv2.conv
+    - graph.model.22.m.0.1.attn.qkv.v.conv
+    - graph.model.23.detect_head.one2one_cv2.0.0.conv
+    - graph.model.23.detect_head.one2one_cv2.0.1.conv
+    - graph.model.23.detect_head.one2one_cv2.1.0.conv
+    - graph.model.23.detect_head.one2one_cv2.1.1.conv
+    - graph.model.23.detect_head.one2one_cv2.2.0.conv
+    - graph.model.23.detect_head.one2one_cv2.2.1.conv
+    - graph.model.23.detect_head.one2one_cv3.0.1.0.conv
+    - graph.model.23.detect_head.one2one_cv3.2.2
+    - graph.model.3.conv
+    - graph.model.4.cv1.conv
+    - graph.model.8.m.0.m.0.cv2.conv
+    - graph.model.8.m.0.m.1.cv1.conv
+    - graph.model.8.m.0.m.1.cv2.conv
+    - graph.model.9.cv2.conv
+  hardswish:
+    master:
+    - graph.model.1.conv
+    - graph.model.10.m.0.attn.pe.conv
+    - graph.model.13.m.0.m.0.cv1.conv
+    - graph.model.16.cv1.conv
+    - graph.model.16.cv2.conv
+    - graph.model.16.m.0.cv3.conv
+    - graph.model.16.m.0.m.0.cv1.conv
+    - graph.model.16.m.0.m.0.cv2.conv
+    - graph.model.16.m.0.m.1.cv1.conv
+    - graph.model.16.m.0.m.1.cv2.conv
+    - graph.model.17.conv
+    - graph.model.19.cv2.conv
+    - graph.model.19.m.0.cv2.conv
+    - graph.model.19.m.0.cv3.conv
+    - graph.model.19.m.0.m.0.cv1.conv
+    - graph.model.19.m.0.m.0.cv2.conv
+    - graph.model.19.m.0.m.1.cv1.conv
+    - graph.model.19.m.0.m.1.cv2.conv
+    - graph.model.2.cv1.conv
+    - graph.model.2.m.0.m.0.cv1.conv
+    - graph.model.2.m.0.m.0.cv2.conv
+    - graph.model.20.conv
+    - graph.model.22.cv2.conv
+    - graph.model.22.m.0.0.cv1.conv
+    - graph.model.22.m.0.0.cv2.conv
+    - graph.model.22.m.0.1.attn.qkv.v.conv
+    - graph.model.23.detect_head.one2one_cv2.0.0.conv
+    - graph.model.23.detect_head.one2one_cv2.0.1.conv
+    - graph.model.23.detect_head.one2one_cv2.1.0.conv
+    - graph.model.23.detect_head.one2one_cv2.1.1.conv
+    - graph.model.23.detect_head.one2one_cv2.2.0.conv
+    - graph.model.23.detect_head.one2one_cv2.2.1.conv
+    - graph.model.23.detect_head.one2one_cv3.2.2
+    - graph.model.8.m.0.m.0.cv2.conv
+    - graph.model.8.m.0.m.1.cv1.conv
+    - graph.model.8.m.0.m.1.cv2.conv
+    - graph.model.9.cv2.conv
+    deployment:
+    - graph.model.1.conv
+    - graph.model.13.m.0.m.0.cv1.conv
+    - graph.model.16.cv1.conv
+    - graph.model.16.cv2.conv
+    - graph.model.16.m.0.cv3.conv
+    - graph.model.16.m.0.m.0.cv1.conv
+    - graph.model.16.m.0.m.0.cv2.conv
+    - graph.model.16.m.0.m.1.cv1.conv
+    - graph.model.16.m.0.m.1.cv2.conv
+    - graph.model.17.conv
+    - graph.model.19.cv2.conv
+    - graph.model.19.m.0.cv2.conv
+    - graph.model.19.m.0.cv3.conv
+    - graph.model.19.m.0.m.0.cv1.conv
+    - graph.model.19.m.0.m.0.cv2.conv
+    - graph.model.19.m.0.m.1.cv1.conv
+    - graph.model.19.m.0.m.1.cv2.conv
+    - graph.model.2.cv1.conv
+    - graph.model.2.m.0.m.0.cv1.conv
+    - graph.model.2.m.0.m.0.cv2.conv
+    - graph.model.2.m.0.m.1.cv1.conv
+    - graph.model.20.conv
+    - graph.model.22.cv2.conv
+    - graph.model.22.m.0.0.cv1.conv
+    - graph.model.22.m.0.0.cv2.conv
+    - graph.model.22.m.0.1.attn.qkv.v.conv
+    - graph.model.23.detect_head.one2one_cv2.0.0.conv
+    - graph.model.23.detect_head.one2one_cv2.0.1.conv
+    - graph.model.23.detect_head.one2one_cv2.1.0.conv
+    - graph.model.23.detect_head.one2one_cv2.1.1.conv
+    - graph.model.23.detect_head.one2one_cv2.2.0.conv
+    - graph.model.23.detect_head.one2one_cv2.2.1.conv
+    - graph.model.23.detect_head.one2one_cv3.0.1.0.conv
+    - graph.model.23.detect_head.one2one_cv3.2.2
+    - graph.model.3.conv
+    - graph.model.4.cv1.conv
+    - graph.model.8.m.0.m.0.cv2.conv
+    - graph.model.8.m.0.m.1.cv1.conv
+    - graph.model.8.m.0.m.1.cv2.conv
+    - graph.model.9.cv2.conv
+  poly_shift:
+    master:
+    - graph.model.1.conv
+    - graph.model.10.m.0.attn.pe.conv
+    - graph.model.13.m.0.m.0.cv1.conv
+    - graph.model.16.cv1.conv
+    - graph.model.16.cv2.conv
+    - graph.model.16.m.0.cv3.conv
+    - graph.model.16.m.0.m.0.cv1.conv
+    - graph.model.16.m.0.m.0.cv2.conv
+    - graph.model.16.m.0.m.1.cv1.conv
+    - graph.model.16.m.0.m.1.cv2.conv
+    - graph.model.17.conv
+    - graph.model.19.cv2.conv
+    - graph.model.19.m.0.cv2.conv
+    - graph.model.19.m.0.cv3.conv
+    - graph.model.19.m.0.m.0.cv1.conv
+    - graph.model.19.m.0.m.0.cv2.conv
+    - graph.model.19.m.0.m.1.cv1.conv
+    - graph.model.19.m.0.m.1.cv2.conv
+    - graph.model.2.cv1.conv
+    - graph.model.2.m.0.m.0.cv1.conv
+    - graph.model.2.m.0.m.0.cv2.conv
+    - graph.model.20.conv
+    - graph.model.22.cv2.conv
+    - graph.model.22.m.0.0.cv1.conv
+    - graph.model.22.m.0.0.cv2.conv
+    - graph.model.22.m.0.1.attn.qkv.v.conv
+    - graph.model.23.detect_head.one2one_cv2.0.0.conv
+    - graph.model.23.detect_head.one2one_cv2.0.1.conv
+    - graph.model.23.detect_head.one2one_cv2.1.0.conv
+    - graph.model.23.detect_head.one2one_cv2.1.1.conv
+    - graph.model.23.detect_head.one2one_cv2.2.0.conv
+    - graph.model.23.detect_head.one2one_cv2.2.1.conv
+    - graph.model.23.detect_head.one2one_cv3.2.2
+    - graph.model.8.m.0.m.0.cv2.conv
+    - graph.model.8.m.0.m.1.cv1.conv
+    - graph.model.8.m.0.m.1.cv2.conv
+    - graph.model.9.cv2.conv
+    deployment:
+    - graph.model.1.conv
+    - graph.model.13.m.0.m.0.cv1.conv
+    - graph.model.16.cv1.conv
+    - graph.model.16.cv2.conv
+    - graph.model.16.m.0.cv3.conv
+    - graph.model.16.m.0.m.0.cv1.conv
+    - graph.model.16.m.0.m.0.cv2.conv
+    - graph.model.16.m.0.m.1.cv1.conv
+    - graph.model.16.m.0.m.1.cv2.conv
+    - graph.model.17.conv
+    - graph.model.19.cv2.conv
+    - graph.model.19.m.0.cv2.conv
+    - graph.model.19.m.0.cv3.conv
+    - graph.model.19.m.0.m.0.cv1.conv
+    - graph.model.19.m.0.m.0.cv2.conv
+    - graph.model.19.m.0.m.1.cv1.conv
+    - graph.model.19.m.0.m.1.cv2.conv
+    - graph.model.2.cv1.conv
+    - graph.model.2.m.0.m.0.cv1.conv
+    - graph.model.2.m.0.m.0.cv2.conv
+    - graph.model.2.m.0.m.1.cv1.conv
+    - graph.model.20.conv
+    - graph.model.22.cv2.conv
+    - graph.model.22.m.0.0.cv1.conv
+    - graph.model.22.m.0.0.cv2.conv
+    - graph.model.22.m.0.1.attn.qkv.v.conv
+    - graph.model.23.detect_head.one2one_cv2.0.0.conv
+    - graph.model.23.detect_head.one2one_cv2.0.1.conv
+    - graph.model.23.detect_head.one2one_cv2.1.0.conv
+    - graph.model.23.detect_head.one2one_cv2.1.1.conv
+    - graph.model.23.detect_head.one2one_cv2.2.0.conv
+    - graph.model.23.detect_head.one2one_cv2.2.1.conv
+    - graph.model.23.detect_head.one2one_cv3.0.1.0.conv
+    - graph.model.23.detect_head.one2one_cv3.2.2
+    - graph.model.3.conv
+    - graph.model.4.cv1.conv
+    - graph.model.8.m.0.m.0.cv2.conv
+    - graph.model.8.m.0.m.1.cv1.conv
+    - graph.model.8.m.0.m.1.cv2.conv
+    - graph.model.9.cv2.conv
+static_proxy_effect:
+  qsilu_pq:
+    all_w4_nrmse: 0.09507712802124808
+    hybrid_nrmse: 0.09397931381850376
+    relative_nrmse_reduction: 0.011546564621714083
+  hardswish:
+    all_w4_nrmse: 0.0949727016170061
+    hybrid_nrmse: 0.0939253112311473
+    relative_nrmse_reduction: 0.011028330962749652
+  poly_shift:
+    all_w4_nrmse: 0.09506930288985628
+    hybrid_nrmse: 0.09398030536878776
+    relative_nrmse_reduction: 0.011454775494990087
+exact_solver_audit:
+  uniform_exact_never_worse_than_grid: true
+  fixed_sd4_exact_never_worse_than_grid: true
+  uniform_cells: 888
+  fixed_sd4_cells: 888
+  uniform_total_mse_reduction: 0.28385293994305566
+  fixed_sd4_total_mse_reduction: 2.657781375037028
+limitations:
+- static_weight_reconstruction_only
+- no_layer_output_nrmse
+- no_topk_overlap
+- no_eight_metric_map
+- no_qat
+- no_gpu_run
+- no_bittrue_export_or_hardware_measurement
+- candidate_manifest_does_not_promote_a_policy
+date: '2026-09-01'
+supersedes: full35-fixed-sd4-routing-candidates-v2
+historical_manifest: artifacts/manifests/fixed-sd4-routing-candidates-v2.yaml
+next_stage: gpu_w8_bridge_then_output_sensitivity

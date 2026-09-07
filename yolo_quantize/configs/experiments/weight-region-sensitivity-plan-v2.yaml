@@ -1,0 +1,159 @@
+schema_version: 2
+plan_id: full35-weight-region-sensitivity-v2
+date: '2026-09-01'
+supersedes: full35-weight-region-sensitivity-v1
+status: reviewed_cpu_ready_gpu_execution_blocked
+execution_authorized: false
+formal_training_started: false
+implementation_started: true
+graph_view: bn_folded_deployment
+
+revision:
+  frozen_history: configs/experiments/weight-region-sensitivity-plan-v1.yaml
+  fixes:
+    - active parents are qSiLU, Hardswish and poly_shift; poly_quality is historical only
+    - deployment catalog is 148 modules and is separate from the 251-module master
+    - PTQ runs on the BN-folded deployment view
+    - a structural probe is diagnostic-only and cannot promote a policy
+  execution_blockers:
+    - GPU is reserved for another user
+    - no reviewed authorization has been issued for this revision
+
+activation_policies:
+  new_silu_runs: false
+  historical_silu_reference_only: true
+  primary_a8:
+    - policy_id: qsilu_pq--lsq-plus-a8
+      role: accuracy_fallback
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+      parent_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    - policy_id: hardswish--lsq-plus-a8
+      role: standard_hardware_operator
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt
+      parent_sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+      checkpoint_kind: inference_only_best_joint_epoch8
+      comparability_warning: recovery recipe differs from qSiLU in the FP32 CIoU stability patch
+    - policy_id: poly_shift--lsq-plus-a8
+      role: dyadic_hardware_extreme
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+      parent_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+  historical_excluded:
+    poly_quality:
+      future_execution: false
+      preserve_existing_artifacts: true
+  q3_regional_hardswish:
+    base_parent: qsilu_pq--lsq-plus-a8
+    policies: [neck_attention, masf, backbone_attention]
+    status: separate_conditional_branch_not_uniform_parent
+
+graph_inventory:
+  master:
+    total_conv_linear_modules: 251
+    total_weight_elements: 26451392
+    deployment_candidate_modules: 148
+    deployment_candidate_weight_elements: 22571840
+    training_only_excluded_modules: 99
+    training_only_excluded_weight_elements: 3748480
+    binary_qk_protected_modules: 4
+    binary_qk_protected_weight_elements: 131072
+  deployment:
+    total_conv_linear_modules: 152
+    total_weight_elements: 22702912
+    deployment_candidate_modules: 148
+    deployment_candidate_weight_elements: 22571840
+    training_only_excluded_modules: 0
+    training_only_excluded_weight_elements: 0
+    binary_qk_protected_modules: 4
+    binary_qk_protected_weight_elements: 131072
+
+regions:
+  - {order: 1, id: backbone_early, modules: 21, weights: 1218240}
+  - {order: 2, id: backbone_deep, modules: 22, weights: 8126464}
+  - {order: 3, id: backbone_attention_safe, modules: 7, weights: 919808}
+  - {order: 4, id: neck, modules: 33, weights: 8142848}
+  - {order: 5, id: masf, modules: 3, weights: 74240}
+  - {order: 6, id: neck_attention_safe, modules: 5, weights: 395520}
+  - {order: 7, id: detect_one2one_tower, modules: 18, weights: 1390592}
+  - {order: 8, id: detect_one2one_predictor, modules: 6, weights: 62208}
+  - {order: 9, id: pose_one2one_tower, modules: 24, weights: 2238464}
+  - {order: 10, id: pose_one2one_predictor, modules: 9, weights: 3456}
+
+protected:
+  training_only_regions: [detect_one2many, pose_one2many, pose_flow, pose_sigma]
+  semantics: [binary_qk, attention_pwl, topk, gather, box_decode, keypoint_decode]
+  dfl_quantization: false
+  nms_quantization: false
+
+uniform_weight_formats:
+  bits: [8, 7, 6, 5, 4]
+  granularity: per_output_channel
+  zero_point: 0
+  signed_integer_range: full_twos_complement
+  ranges:
+    w8: [-128, 127]
+    w7: [-64, 63]
+    w6: [-32, 31]
+    w5: [-16, 15]
+    w4: [-8, 7]
+  rounding: nearest_even
+  accumulator: int32
+
+diagnostic:
+  manifest: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+  manifest_sha256: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+  manifest_binding_status: implemented_verify_all_evidence_before_execution
+  runner_probe_per_task: 1
+  probe_subset_policy: first_ordered_sample_per_task_from_fixed_64_manifest
+  result_status_on_finite_structural_parity: diagnostic_pass
+  selection_claim: false
+  promotion_authorized: false
+  map_measured: false
+  note: single-image raw-output overlap is not accuracy
+
+data_governance:
+  bbat5_dataset_id: bbat5-v1
+  assignment_changed: false
+  tuning_train: /home/uxin/yolo/original/pose/derived/bbat5-v1/pose/splits/search-train.txt
+  tuning_validation: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+  formal_validation: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  formal_val_role: preregistered_finalist_confirmation_only
+  new_random_split: false
+  physical_detect_pose_merge: false
+
+execution_ladder:
+  - stage: static
+    scope: all regions and formats
+    gpu: false
+    selection_evidence: reconstruction_and_cost_only
+  - stage: diagnostic
+    scope: structural and numerical sentinels
+    gpu: true
+    selection_evidence: false
+  - stage: search
+    scope: survivors only
+    data: canonical search validation
+    selection_evidence: true
+  - stage: formal
+    scope: preregistered finalists only
+    data: full COCO plus formal BBAT5 validation
+    selection_evidence: confirmation_only
+
+gates:
+  metric_contract_id_required: true
+  matched_activation_policy_required: true
+  all_eight_metrics_required: true
+  total_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  matched_sham_max_absolute_drift: 0.01
+  recovery_floor: 0.06
+  reject_nonfinite: true
+
+training:
+  qat_authorized: false
+  optimizer_control: AdamW
+  optimizer_pilot: MuSGD_requires_separate_matched_sham
+  augmentation: accepted_full35_exact_no_added_noise
+  detect_logical_batch: 128
+  pose_physical_probe_order: [16, 8, 4]
+  bn_running_stats: frozen
+  bn_affine_policy: unresolved_fold_aware_p0

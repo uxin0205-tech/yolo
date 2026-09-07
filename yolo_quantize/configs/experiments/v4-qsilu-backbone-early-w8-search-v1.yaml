@@ -1,0 +1,70 @@
+schema_version: 1
+plan_id: v4-qsilu-backbone-early-w8-search-v1
+date: '2026-09-03'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-v1
+
+execution_authorization:
+  authorization_id: user-2026-09-03-qsilu-backbone-early-w8-search
+  roles: [accepted, matched, candidate]
+  stop_after: write_gate_report_and_request_matrix_promotion_decision
+
+upstream:
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v3.yaml
+    sha256: 2f83ba617b5501338ab3578f3cb1026b79f18aee3b6bf2668b167d5616db1f43
+  diagnostic_report:
+    path: artifacts/reports/weight-ptq-qsilu-backbone-early-w8-diagnostic-v3.json
+    sha256: 0a61dc6eafead2f410fadf1373b4bf14c4e5d948a481ece81884e23821a8ab85
+
+accepted:
+  policy_id: accepted-full35-silu-bittrue
+  activation: silu
+  activation_output_quantization: disabled
+  checkpoint:
+    path: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt
+    sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+
+matched:
+  policy_id: qsilu_pq--lsq-plus-a8
+  activation_output_quantization: calibrated_lsq_plus_a8
+
+candidate:
+  cell_id: qsilu_pq--lsq-plus-a8--backbone_early--w8-mse_grid_v1
+  activation: qsilu_pq
+  region: backbone_early
+  weight_bits: 8
+  scale_method: mse_grid_v1
+  granularity: per_output_channel
+  rounding: nearest_even
+
+datasets:
+  coco:
+    path: /home/uxin/yolo/coco2017.yaml
+    sha256: 1ed971749ec00b84db8ffe850b05e34e0acfd63a9654a9224ac8d80f5e068068
+  bbat5_dataset_id: bbat5-v1
+  bbat5_registry:
+    path: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+    sha256: 208e0f9e5bfded11f5739e9c598d98b4e5414699c64b9faf6f9625680988754a
+  bbat5_pose_search:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+    sha256: a9069992cf21bff802466fa8adb46cba9bd55585f5adc8f3c183d33c8ede0b5d
+  runtime_view: artifacts/datasets/bbat5-v1-pose-search-v1
+  assignment_changed: false
+
+validation:
+  backend: bittrue
+  image_size: 640
+  batch: {detect: 32, pose: 16}
+  workers: {detect: 4, pose: 8}
+  plots: false
+  save_coco_json: false
+
+gates:
+  all_eight_metrics_required: true
+  total_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.06

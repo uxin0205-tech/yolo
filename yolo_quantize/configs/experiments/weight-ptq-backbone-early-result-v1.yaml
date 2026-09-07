@@ -1,0 +1,51 @@
+schema_version: 1
+result_id: full35-weight-ptq-backbone-early-v1
+date: 2026-08-29
+status: completed_gpu_paused_after_stage
+formal_training: false
+qat: false
+
+source_plan:
+  path: configs/experiments/weight-region-sensitivity-plan-v1.yaml
+  sha256: 070dc5d08729f5d938d7667d560372d10c36ed5d1c6629261344a0fbe8f39253
+
+matrix:
+  activation_policies:
+    - qsilu_pq--lsq-plus-a8
+    - poly_quality--lsq-plus-a8
+    - poly_shift--lsq-plus-a8
+  region: backbone_early
+  region_modules: 21
+  region_weight_elements: 1218240
+  tested_weight_bits: [8, 4]
+  scale_method: per_output_channel_mse
+  cells: 6
+  passed: 6
+
+decision:
+  w8: promote_to_full_validation_when_gpu_is_allowed
+  w4: reject_ptq_for_backbone_early
+  w6: pending_conditional_rescue_not_run
+  next_region: blocked_until_user_selection_and_gpu_permission
+  rationale:
+    - W8的weight NRMSE約0.012，minimum TopK overlap為0.48至0.60。
+    - W4的weight NRMSE約0.162，minimum TopK overlap僅0.0167至0.03，已出現候選集合collapse。
+    - qSiLU、poly_quality與poly_shift的matched parent不同，不能只依相對proxy刪除qSiLU。
+
+artifacts:
+  report_json:
+    path: artifacts/reports/weight-ptq-backbone-early-v1.json
+    sha256: 27ce8fe399cba8ab4e89e4ced955eeadd2a2206e0c74c2ac0e4a54eb7ea90c5e
+  summary_csv:
+    path: artifacts/reports/weight-ptq-backbone-early-v1-summary.csv
+    sha256: 83a5ae24ee507733ee1a0584886fe22075a1b089bf2c7c780fd4bdd4af8945a2
+  tracer_json:
+    path: artifacts/reports/weight-ptq-smoke-v1.json
+    sha256: 88cdfa9e2ac888593d39445f728817393885bd907cbeaa567f24d99bc8dd2599
+
+paused:
+  reason: 使用者要求若需GPU先停下，讓其他人優先使用。
+  gpu_work_not_started:
+    - backbone_early_w6
+    - backbone_early_full_validation
+    - backbone_deep_ptq

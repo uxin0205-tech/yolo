@@ -1,0 +1,167 @@
+{
+  "formal_training": false,
+  "gpu_used": false,
+  "kind": "full35_weight_dual_view_manifest",
+  "parent": {
+    "activation": "qsilu_pq",
+    "activation_counts": {
+      "hardswish": 3,
+      "qsilu_pq": 187
+    },
+    "activation_policy_id": "qsilu_pq--regional--masf=hardswish",
+    "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+    "checkpoint_root_policy_id": "qsilu_pq--lsq-plus-a8",
+    "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+    "policy_id": "qsilu_pq--regional--masf=hardswish--lsq-plus-a8",
+    "region_assignments": [
+      {
+        "activation": "hardswish",
+        "region": "masf"
+      }
+    ],
+    "role": "accuracy"
+  },
+  "parity": {
+    "deployment_batch_norm_modules": 0,
+    "deployment_catalog": {
+      "deployment_regions": {
+        "backbone_attention_safe": {
+          "modules": 7,
+          "weight_elements": 919808
+        },
+        "backbone_deep": {
+          "modules": 22,
+          "weight_elements": 8126464
+        },
+        "backbone_early": {
+          "modules": 21,
+          "weight_elements": 1218240
+        },
+        "detect_one2one_predictor": {
+          "modules": 6,
+          "weight_elements": 62208
+        },
+        "detect_one2one_tower": {
+          "modules": 18,
+          "weight_elements": 1390592
+        },
+        "masf": {
+          "modules": 3,
+          "weight_elements": 74240
+        },
+        "neck": {
+          "modules": 33,
+          "weight_elements": 8142848
+        },
+        "neck_attention_safe": {
+          "modules": 5,
+          "weight_elements": 395520
+        },
+        "pose_one2one_predictor": {
+          "modules": 9,
+          "weight_elements": 3456
+        },
+        "pose_one2one_tower": {
+          "modules": 24,
+          "weight_elements": 2238464
+        }
+      },
+      "totals": {
+        "deployment_modules": 148,
+        "deployment_weight_elements": 22571840,
+        "modules": 152,
+        "protected_modules": 4,
+        "protected_weight_elements": 131072,
+        "training_only_modules": 0,
+        "training_only_weight_elements": 0,
+        "weight_elements": 22702912
+      }
+    },
+    "deployment_path_parity": true,
+    "deployment_state_sha256": "ebc32f865e118d7417d8e315cb9983f4ce435ce423f0f29d66a4bbe924eaa143",
+    "folded_batch_norm_modules": 179,
+    "forward_all_finite": true,
+    "forward_maximum_absolute_error": 0.00066375732421875,
+    "forward_maximum_relative_to_reference_peak": 6.440058526067506e-06,
+    "forward_normalized_rmse": 3.423227744803728e-06,
+    "forward_parity_evaluated": true,
+    "forward_parity_passed": true,
+    "forward_removed_training_only_tensor_paths": [
+      "output.detect[1].one2many.boxes",
+      "output.detect[1].one2many.scores",
+      "output.detect[1].one2many.feats[0]",
+      "output.detect[1].one2many.feats[1]",
+      "output.detect[1].one2many.feats[2]",
+      "output.pose[1].one2many.boxes",
+      "output.pose[1].one2many.scores",
+      "output.pose[1].one2many.feats[0]",
+      "output.pose[1].one2many.feats[1]",
+      "output.pose[1].one2many.feats[2]",
+      "output.pose[1].one2many.kpts"
+    ],
+    "forward_same_structure": true,
+    "inference_contract_parity": true,
+    "master_batch_norm_modules": 179,
+    "master_catalog": {
+      "deployment_regions": {
+        "backbone_attention_safe": {
+          "modules": 7,
+          "weight_elements": 919808
+        },
+        "backbone_deep": {
+          "modules": 22,
+          "weight_elements": 8126464
+        },
+        "backbone_early": {
+          "modules": 21,
+          "weight_elements": 1218240
+        },
+        "detect_one2one_predictor": {
+          "modules": 6,
+          "weight_elements": 62208
+        },
+        "detect_one2one_tower": {
+          "modules": 18,
+          "weight_elements": 1390592
+        },
+        "masf": {
+          "modules": 3,
+          "weight_elements": 74240
+        },
+        "neck": {
+          "modules": 33,
+          "weight_elements": 8142848
+        },
+        "neck_attention_safe": {
+          "modules": 5,
+          "weight_elements": 395520
+        },
+        "pose_one2one_predictor": {
+          "modules": 9,
+          "weight_elements": 3456
+        },
+        "pose_one2one_tower": {
+          "modules": 24,
+          "weight_elements": 2238464
+        }
+      },
+      "totals": {
+        "deployment_modules": 148,
+        "deployment_weight_elements": 22571840,
+        "modules": 251,
+        "protected_modules": 4,
+        "protected_weight_elements": 131072,
+        "training_only_modules": 99,
+        "training_only_weight_elements": 3748480,
+        "weight_elements": 26451392
+      }
+    },
+    "master_matches_source": true,
+    "master_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+    "schema_version": 1,
+    "source_batch_norm_modules": 179,
+    "source_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+    "source_unchanged": true
+  },
+  "schema_version": 1
+}

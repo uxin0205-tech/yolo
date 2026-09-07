@@ -1,0 +1,320 @@
+schema_version: 4
+plan_id: full35-activation-aware-quantization-v4
+date: '2026-09-03'
+supersedes: full35-activation-aware-quantization-v3
+status: first_gpu_bridge_complete_stopped_before_matrix_expansion
+language: zh-TW
+active_weight_runner: configs/experiments/weight-region-sensitivity-plan-v2.yaml
+active_weight_universe: configs/experiments/weight-region-sensitivity-plan-v2.yaml
+completed_scoped_weight_runner: configs/experiments/weight-region-sensitivity-plan-v3.yaml
+completed_scoped_search_plan: configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml
+
+authorization:
+  cpu_contract_implementation: true
+  gpu_validation: false
+  scoped_gpu_validation_completed:
+    cell_id: qsilu_pq--lsq-plus-a8--backbone_early--w8-mse_grid_v1
+    decision: green
+    expansion_authorized: false
+  qat: false
+  formal_training: false
+  export: false
+
+history:
+  frozen_v3_plan: configs/experiments/full35-quantization-plan-v3.yaml
+  frozen_v3_execution_plan: configs/experiments/v4-plus-prepared-plan-v3.yaml
+  frozen_grid_artifacts:
+    delivery: artifacts/manifests/v1-v3-cpu-delivery-v2.yaml
+    sd4_routes: artifacts/manifests/fixed-sd4-routing-candidates-v2.yaml
+    interpretation: historical_mse_grid_v1_only_not_active_promotion_evidence
+  exact_cpu_artifacts:
+    delivery: artifacts/manifests/exact-w4-sd4-cpu-delivery-v1.yaml
+    integer_boundary: artifacts/manifests/full35-integer-boundary-contract-qsilu-pq-a8-v1.json
+    sd4_routes: artifacts/manifests/fixed-sd4-routing-candidates-v3.yaml
+    interpretation: exact_static_candidates_not_map_validation_not_promotion
+  first_gpu_bridge:
+    delivery: artifacts/manifests/v4-qsilu-backbone-early-w8-search-delivery-v1.yaml
+    diagnostic: artifacts/reports/weight-ptq-qsilu-backbone-early-w8-diagnostic-v3.json
+    search: artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json
+    report: docs/reports/2026-09-03-v4-qsilu-backbone-early-w8-search-validation.md
+    decision: green_search_eligible_not_formal_winner
+  do_not_rewrite_historical_hashes: true
+
+model:
+  target: Full35 shared Detect+Pose accepted J3 experimental baseline
+  accepted_checkpoint: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt
+  accepted_checkpoint_sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+  deployment_semantics: one_to_one_end2end_nms_free
+  reg_max: 1
+  dfl_effective: false
+  training_master: unfused_fp32_with_training_only_supervision
+  ptq_and_export_view: bn_folded_deployment
+
+data:
+  physical_detect_pose_merge: false
+  task_specific_loaders: true
+  coco:
+    yaml: /home/uxin/yolo/coco2017.yaml
+    person_metric_required: true
+    selection_validation: coco_val2017
+    final_independent_option: coco_test_dev_if_available
+    limitation: coco_val_reuse_must_be_reported
+  bbat5:
+    dataset_id: bbat5-v1
+    registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+    detect_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml
+    pose_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+    selection_validation: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+    formal_validation: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+    assignment_changed: false
+    new_split_created: false
+    formal_val_role: locked_finalist_confirmation_only
+  diagnostic_manifest:
+    path: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+    sha256: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+    status: active_diagnostic_only
+    runner_binding: implemented_verify_all_file_evidence
+    runner_probe_per_task: 1
+    selection_claim: false
+    promotion_authorized: false
+  calibration_ablation:
+    sizes_per_task: [32, 128, 512]
+    same_manifest_across_methods: true
+    validation_as_calibration: forbidden
+    status: manifests_not_created
+  qat_30_percent_view:
+    immutable_hash_required: true
+    coco_person_and_size_coverage_required: true
+    bbat_source_group_safe: true
+    formal_validation_excluded: true
+    status: not_created
+
+activation_policies:
+  new_silu_runs: false
+  historical_silu_reference_only: true
+  active_uniform_a8:
+    - policy_id: qsilu_pq--lsq-plus-a8
+      role: accuracy_fallback
+      checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    - policy_id: hardswish--lsq-plus-a8
+      role: standard_operator_hypothesis
+      checkpoint_sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+      checkpoint_selector: best_joint_epoch8
+      cross_parent_causal_claim: forbidden
+    - policy_id: poly_shift--lsq-plus-a8
+      role: dyadic_operator_hypothesis
+      checkpoint_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+  historical_excluded:
+    poly_quality:
+      future_execution: false
+      preserve_artifacts: true
+  q3_regional_hardswish:
+    base_policy_id: qsilu_pq--lsq-plus-a8
+    base_checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    single_regions: [neck_attention, masf, backbone_attention]
+    meaning: placement_priority_only
+    multi_region_inference: forbidden
+    weight_quantization_result: not_measured
+  lower_bits_after_weight_map:
+    main: [a7, a6]
+    a5_and_below: not_promoted
+    a_sd4: deferred_matched_research
+
+protected_graph:
+  semantics:
+    - binary_qk
+    - attention_pwl
+    - topk
+    - gather
+    - box_decode
+    - keypoint_decode
+  training_only:
+    - detect_one2many
+    - pose_one2many
+    - pose_flow
+    - pose_sigma
+  dfl_quantization: false
+  nms_quantization: false
+
+scale_methods:
+  historical: [max, mse_grid_v1]
+  historical_grid_aliases: [mse, mse_grid]
+  exact_aliases: [optimal]
+  strong_baseline: optimal_scaled_codebook
+  exact_solver:
+    status: implemented_cpu_tested
+    scope: [per_tensor, per_output_channel, group32, group64]
+    source: src/yolo_quantize/scaled_codebook.py
+    complexity_note: exact_event_sweep_can_be_expensive_for_high_bit_large_groups
+  full35_recompute:
+    status: not_run
+    required_before_new_sd4_routing: true
+
+uniform_weights:
+  bits: [8, 7, 6, 5, 4]
+  main_granularity: per_output_channel
+  zero_point: 0
+  signed_integer_range: full_twos_complement
+  ranges:
+    w8: [-128, 127]
+    w7: [-64, 63]
+    w6: [-32, 31]
+    w5: [-16, 15]
+    w4: [-8, 7]
+  coarse_order: [w8, w6, w4]
+  boundary_bits: [w7, w5]
+  keep_all_bits: true
+  first_exact_comparator: uniform_w4
+  accumulator: int32
+  non_native_bits:
+    bits: [7, 6, 5]
+    accuracy_capacity_research: allowed
+    speed_claim_without_kernel: forbidden
+
+sd4:
+  normalized_values: [0, 0.015625, -0.015625, 0.03125, -0.03125, 0.0625, -0.0625, 0.125, -0.125, 0.25, -0.25, 0.5, -0.5, 1.0, -1.0]
+  logical_unique_values: 15
+  encoded_codes: 16
+  bittrue_encoding:
+    status: implemented_cpu_tested
+    source: src/yolo_quantize/sd4_encoding.py
+    positive_zero_code: '0111'
+    negative_zero_code: '1111'
+    canonical_export_zero: '0111'
+    nibble_order: high_first
+  fixed_baselines: [max, mse_grid_v1, optimal_scaled_codebook]
+  matched_comparators:
+    - optimal_uniform_w4
+    - apot4
+    - paper_twn
+    - exact_scaled_ternary
+  old_34_layer_route:
+    status: historical_weak_grid_route
+    promotion_authorized: false
+  ls_sd4:
+    starts_after_exact_fixed_baseline: true
+    scale_only_novelty_claim: forbidden
+    candidate_contribution: fold_aware_task_and_worst_task_conditioned_learning
+
+ternary:
+  paper_twn:
+    threshold: 0.7_mean_absolute_weight
+    alpha: mean_absolute_selected_weight
+    status: implemented_static
+  exact_scaled_ternary:
+    status: planned_strong_ptq_baseline
+  channel_twn: {status: planned_qat}
+  ttq: {status: planned_qat}
+  progressive_quantization: {status: planned_matched_qat}
+  signed_safe_a4_for_ternary_branch: [-7, 7]
+
+metric_gate:
+  all_eight_required: true
+  metric_contract_id_required: true
+  matched_policy_id_required: true
+  total_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  matched_sham_max_absolute_drift: 0.01
+  recovery_floor: 0.06
+  unit: absolute_ap_on_0_to_1_scale
+  mean_cannot_override_worst_task: true
+
+evaluation_tiers:
+  static:
+    scope: all_cells
+    winner_selection: false
+  diagnostic:
+    scope: all_or_stratified_cells
+    winner_selection: false
+    allowed_result_label: diagnostic_pass
+  search_validation:
+    scope: preregistered_promoted_plus_sentinels
+    bbat_split: canonical_search_val
+    winner_selection: true
+  formal:
+    scope: locked_finalists_only
+    bbat_split: formal_val
+    winner_selection: confirmation_only
+
+qat_graph_contract:
+  status: p0_unresolved
+  quantized_tensor: bn_folded_effective_weight
+  bn_running_stats: frozen
+  bn_affine: explicit_policy_required
+  options: [fold_aware_shadow_qat, folded_graph_qat]
+  deployment_parity_each_checkpoint: true
+  block_qat_until_resolved: true
+
+integer_boundary_contract:
+  status: cpu_reference_and_first_a8_calibration_complete_boundary_lowering_pending
+  required_before: first_w8_gpu_bridge
+  artifact: artifacts/manifests/full35-integer-boundary-contract-qsilu-pq-a8-v1.json
+  checkpoint_bound: qsilu_pq--lsq-plus-a8
+  graph_counts:
+    deployment_weight_sites: 148
+    activation_output_quantizers: 124
+    reviewed_core_concat_operations: 21
+    reviewed_core_residual_add_operations: 20
+  static_int32_mac_bound:
+    safe_sites: 148
+    total_sites: 148
+    maximum: 150405120
+    maximum_path: graph.model.5.conv
+  activation_affine: learned_scale_plus_arbitrary_offset
+  requirements:
+    - add_scale_alignment
+    - concat_requant
+    - masf_input_output_scale
+    - attention_pwl_and_binary_qk_boundaries
+    - int32_bias_and_accumulator_bound
+    - rounding_and_saturation
+    - protected_fp_island_cost
+    - bittrue_vs_fake_quant_error
+  cpu_completed:
+    - affine_zero_point_and_arbitrary_offset_reference_semantics
+    - add_concat_rne_and_saturation_emulator
+    - graph_signature_and_protected_island_manifest
+    - raw_code_int32_mac_bounds
+  next_requires_gpu:
+    - register_join_output_scales_and_measure_saturation
+    - lower_offset_and_padding_correction_into_int32_bias
+    - compare_reference_codes_to_gpu_fake_quant_boundaries
+  first_bridge_completed:
+    policy_id: qsilu_pq--lsq-plus-a8
+    calibrated_observers: 124
+    calibration_per_task: 32
+    invalid_observers: 0
+    weight_cell: backbone_early_w8_mse_grid_v1
+    search_gate: green
+  native_integer_kernel_claimed: false
+
+training:
+  from_scratch: false
+  matched_sham_required: true
+  optimizer_control: AdamW
+  optimizer_pilot: MuSGD_with_separate_matched_sham
+  optimizer_state_cross_family_resume: forbidden
+  detect_logical_batch: 128
+  pose_physical_probe_order: [16, 8, 4]
+  detect_pose_loss_weights: [1.0, 0.25]
+  augmentation: accepted_full35_exact_no_added_noise
+  noise_pilot: deferred_and_reject_if_clean_drop_exceeds_0.002
+
+hardware:
+  target_status: unresolved
+  bytes_and_metadata_reporting: allowed
+  bop_and_traffic_proxy_reporting: allowed
+  speed_or_energy_winner_claim: forbidden_until_target_and_kernel_are_fixed
+  required_protocol: [device, runtime, compiler, kernel, input_shape, batch, warmup, repetitions, power_mode, clock_policy]
+
+research:
+  novelty_status: hypotheses_require_broader_prior_art_and_experiments
+  candidates:
+    - activation_conditioned_worst_task_mixed_format_routing
+    - shared_detect_pose_task_output_loss_ptq
+    - exact_to_learned_sd4_continuum
+    - q3_seeded_activation_weight_interaction
+
+deferred_final_optimizations:
+  methods: [pq, freq, kd, masf_freq]
+  starts_after_locked_base_finalists: true

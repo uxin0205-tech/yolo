@@ -1,0 +1,126 @@
+{
+  "candidates": {
+    "final-full-coverage-policy": {
+      "decision": "reject",
+      "dual_gate_passed": false,
+      "failed_map50_95_metrics": [
+        "coco/box/map50_95",
+        "coco/person/box/map50_95",
+        "bbat/box/map50_95",
+        "bbat/ball/box/map50_95",
+        "bbat/bat/box/map50_95"
+      ],
+      "failed_map50_metrics": [
+        "coco/box/map50",
+        "coco/person/box/map50",
+        "bbat/box/map50",
+        "bbat/pose/map50",
+        "bbat/bat/box/map50",
+        "bbat/ball/pose/map50",
+        "bbat/bat/pose/map50"
+      ],
+      "incremental_deltas": {
+        "bbat/ball/box/map50": -0.018447643140372838,
+        "bbat/ball/box/map50_95": -0.06795303840819134,
+        "bbat/ball/pose/map50": -0.026340689133547923,
+        "bbat/ball/pose/map50_95": -0.026689609804501968,
+        "bbat/bat/box/map50": -0.022370002885363505,
+        "bbat/bat/box/map50_95": -0.047386191381680765,
+        "bbat/bat/pose/map50": -0.020885905655041115,
+        "bbat/bat/pose/map50_95": -0.020799180464257327,
+        "bbat/box/map50": -0.02040882301286806,
+        "bbat/box/map50_95": -0.05766961489493605,
+        "bbat/pose/map50": -0.02361329739429463,
+        "bbat/pose/map50_95": -0.023744395134380092,
+        "coco/box/map50": -0.030918619072745956,
+        "coco/box/map50_95": -0.0438036302509866,
+        "coco/person/box/map50": -0.017449070845190207,
+        "coco/person/box/map50_95": -0.03633245302483812
+      },
+      "metric_summaries": {
+        "accepted": {
+          "joint_priority_map50": 0.8879852486242279,
+          "joint_priority_map50_95": 0.7816826911108012,
+          "mean_required_map50": 0.9211463434448058,
+          "mean_required_map50_95": 0.8197602405423289
+        },
+        "candidate": {
+          "joint_priority_map50": 0.8640155645869643,
+          "joint_priority_map50_95": 0.7412722048583592,
+          "mean_required_map50": 0.8996813024342147,
+          "mean_required_map50_95": 0.7772847718167452
+        },
+        "incremental_deltas": {
+          "joint_priority_map50": -0.023200621543878697,
+          "joint_priority_map50_95": -0.03705889768790416,
+          "mean_required_map50": -0.02255425639242814,
+          "mean_required_map50_95": -0.0405472641704715
+        },
+        "matched": {
+          "joint_priority_map50": 0.887216186130843,
+          "joint_priority_map50_95": 0.7783311025462634,
+          "mean_required_map50": 0.9222355588266429,
+          "mean_required_map50_95": 0.8178320359872167
+        },
+        "semantics": {
+          "joint_priority": "fixed_0.2_0.2_0.2_0.4_selection_score_not_official_map",
+          "mean_required": "diagnostic_mean_not_official_map"
+        },
+        "total_deltas": {
+          "joint_priority_map50": -0.023969684037263628,
+          "joint_priority_map50_95": -0.040410486252442035,
+          "mean_required_map50": -0.0214650410105911,
+          "mean_required_map50_95": -0.04247546872558372
+        }
+      },
+      "source_map50_decision": "reject",
+      "source_map50_gate_passed": false,
+      "status": "completed",
+      "total_deltas": {
+        "bbat/ball/box/map50": -0.008871391729971867,
+        "bbat/ball/box/map50_95": -0.06903257684883701,
+        "bbat/ball/pose/map50": -0.015795622451505786,
+        "bbat/ball/pose/map50_95": -0.016144543122459942,
+        "bbat/bat/box/map50": -0.023896502371897776,
+        "bbat/bat/box/map50_95": -0.04931035883855761,
+        "bbat/bat/pose/map50": -0.022412405141575387,
+        "bbat/bat/pose/map50_95": -0.022672222587671764,
+        "bbat/box/map50": -0.01638394705093482,
+        "bbat/box/map50_95": -0.05917146784369731,
+        "bbat/pose/map50": -0.019104013796540587,
+        "bbat/pose/map50_95": -0.01940838285506641,
+        "coco/box/map50": -0.04249470633750152,
+        "coco/box/map50_95": -0.05693453479345767,
+        "coco/person/box/map50": -0.022761739204800957,
+        "coco/person/box/map50_95": -0.04712966291492238
+      },
+      "worst_incremental_map50_95_delta": -0.06795303840819134,
+      "worst_incremental_map50_95_metric": "bbat/ball/box/map50_95",
+      "worst_incremental_map50_delta": -0.030918619072745956,
+      "worst_incremental_map50_metric": "coco/box/map50",
+      "worst_map50_95_delta": -0.06903257684883701,
+      "worst_map50_95_metric": "bbat/ball/box/map50_95",
+      "worst_map50_delta": -0.04249470633750152,
+      "worst_map50_metric": "coco/box/map50"
+    }
+  },
+  "formal_training": false,
+  "formal_validation": false,
+  "gpu_used": false,
+  "kind": "full35_dual_metric_candidate_regate",
+  "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-dual-v1",
+  "schema_version": 1,
+  "source": {
+    "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v36-qsilu-full-coverage-final-v1.json",
+    "report_sha256": "8a1ab2b0f822aab2cf391663f3f8fa5b20f1873c1bfac900ab0fe0ccdbe0d37c"
+  },
+  "status": "completed",
+  "thresholds": {
+    "activation_replacement_included": true,
+    "all_eight_metrics_per_family_required": true,
+    "map50_95_recovery_floor": 0.08,
+    "map50_95_total_max_drop": 0.04,
+    "map50_total_max_drop": 0.015
+  },
+  "validation_rerun": false
+}

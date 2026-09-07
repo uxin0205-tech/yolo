@@ -1,0 +1,4180 @@
+{
+  "candidates": [
+    {
+      "candidate_id": "accuracy-a05-add-pose-tower-w8",
+      "compression_ratio": 1.1011530283776738,
+      "format_id": "mixed-w8-mse_grid_v1",
+      "hard_gate_passed": true,
+      "packed_weight_bytes": 81993472,
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "reference_fp32_bytes": 90287360,
+      "worst_total_delta": -0.010876715913442636
+    },
+    {
+      "candidate_id": "compression-c04-add-pose-tower-w8",
+      "compression_ratio": 2.8948529426853016,
+      "format_id": "mixed-w8-mse_grid_v1",
+      "hard_gate_passed": true,
+      "packed_weight_bytes": 31188928,
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "reference_fp32_bytes": 90287360,
+      "worst_total_delta": -0.012283302180263633
+    },
+    {
+      "candidate_id": "accuracy-a09-add-neck-w8",
+      "compression_ratio": 3.5494332691751267,
+      "format_id": "mixed-w8-mse_grid_v1",
+      "hard_gate_passed": true,
+      "packed_weight_bytes": 25437120,
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "reference_fp32_bytes": 90287360,
+      "worst_total_delta": -0.01330265480336612
+    },
+    {
+      "candidate_id": "cumulative-backbone-fixed-sd4",
+      "compression_ratio": 1.146271169501455,
+      "format_id": "mixed-fixed-sd4",
+      "hard_gate_passed": true,
+      "packed_weight_bytes": 78766144,
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "reference_fp32_bytes": 90287360,
+      "worst_total_delta": -0.012350901970825112
+    },
+    {
+      "candidate_id": "cumulative-backbone-w8",
+      "compression_ratio": 1.1293572524742765,
+      "format_id": "mixed-fixed-sd4-w8",
+      "hard_gate_passed": true,
+      "packed_weight_bytes": 79945792,
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "reference_fp32_bytes": 90287360,
+      "worst_total_delta": -0.013938300915200874
+    }
+  ],
+  "contract": {
+    "calibration_manifest": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+      "samples_per_task": 32,
+      "sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+      "split": "canonical_train_exemplars_only"
+    },
+    "diagnostic": {
+      "all_finite_required": true,
+      "fixed_probe_per_task": 1,
+      "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+      "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+      "same_structure_required": true,
+      "selection_claim": false
+    },
+    "formal_training": false,
+    "formal_validation": false,
+    "kind": "full35_mixed_weight_policy_map50_search",
+    "reference_reuse": {
+      "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json",
+      "roles": [
+        "accepted",
+        "matched"
+      ],
+      "sha256": "738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2",
+      "validation_rerun": false
+    },
+    "reviewed_plan": {
+      "accuracy_tolerance": 0.002,
+      "activation_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+      "activation_checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+      "activation_policy_id": "qsilu_pq--lsq-plus-a8",
+      "base_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml",
+      "base_plan_sha256": "3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985",
+      "batch": {
+        "detect": 32,
+        "pose": 16
+      },
+      "candidates": [
+        {
+          "candidate_id": "cumulative-backbone-fixed-sd4",
+          "format_id": "mixed-fixed-sd4",
+          "path_routes": [
+            {
+              "format": {
+                "bits": 4,
+                "family": "fixed_sd4",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 1,
+              "paths": [
+                "graph.model.22.m.0.1.attn.qkv.v.conv"
+              ],
+              "route_id": "fixed-sd4-neck-attention"
+            },
+            {
+              "format": {
+                "bits": 4,
+                "family": "fixed_sd4",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 6,
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+              ],
+              "route_id": "fixed-sd4-detect-tower"
+            },
+            {
+              "format": {
+                "bits": 4,
+                "family": "fixed_sd4",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 1,
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv3.2.2"
+              ],
+              "route_id": "fixed-sd4-detect-predictor"
+            },
+            {
+              "format": {
+                "bits": 4,
+                "family": "fixed_sd4",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 1,
+              "paths": [
+                "graph.model.7.conv"
+              ],
+              "route_id": "layer-backbone-high"
+            }
+          ],
+          "region_defaults": []
+        },
+        {
+          "candidate_id": "cumulative-backbone-w8",
+          "format_id": "mixed-fixed-sd4-w8",
+          "path_routes": [
+            {
+              "format": {
+                "bits": 4,
+                "family": "fixed_sd4",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 1,
+              "paths": [
+                "graph.model.22.m.0.1.attn.qkv.v.conv"
+              ],
+              "route_id": "fixed-sd4-neck-attention"
+            },
+            {
+              "format": {
+                "bits": 4,
+                "family": "fixed_sd4",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 6,
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+              ],
+              "route_id": "fixed-sd4-detect-tower"
+            },
+            {
+              "format": {
+                "bits": 4,
+                "family": "fixed_sd4",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 1,
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv3.2.2"
+              ],
+              "route_id": "fixed-sd4-detect-predictor"
+            },
+            {
+              "format": {
+                "bits": 8,
+                "family": "uniform",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 1,
+              "paths": [
+                "graph.model.7.conv"
+              ],
+              "route_id": "layer-backbone-high"
+            }
+          ],
+          "region_defaults": []
+        }
+      ],
+      "comparison_candidates": [
+        {
+          "candidate_id": "accuracy-a05-add-pose-tower-w8",
+          "compression_ratio": 1.1011530283776738,
+          "format_id": "mixed-w8-mse_grid_v1",
+          "hard_gate_passed": true,
+          "packed_weight_bytes": 81993472,
+          "policy_id": "qsilu_pq--lsq-plus-a8",
+          "reference_fp32_bytes": 90287360,
+          "source_path": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+          "source_sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+          "worst_total_delta": -0.010876715913442636
+        },
+        {
+          "candidate_id": "compression-c04-add-pose-tower-w8",
+          "compression_ratio": 2.8948529426853016,
+          "format_id": "mixed-w8-mse_grid_v1",
+          "hard_gate_passed": true,
+          "packed_weight_bytes": 31188928,
+          "policy_id": "qsilu_pq--lsq-plus-a8",
+          "reference_fp32_bytes": 90287360,
+          "source_path": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+          "source_sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+          "worst_total_delta": -0.012283302180263633
+        },
+        {
+          "candidate_id": "accuracy-a09-add-neck-w8",
+          "compression_ratio": 3.5494332691751267,
+          "format_id": "mixed-w8-mse_grid_v1",
+          "hard_gate_passed": true,
+          "packed_weight_bytes": 25437120,
+          "policy_id": "qsilu_pq--lsq-plus-a8",
+          "reference_fp32_bytes": 90287360,
+          "source_path": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+          "source_sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+          "worst_total_delta": -0.01330265480336612
+        }
+      ],
+      "datasets": {
+        "assignment_changed": false,
+        "bbat5_pose_search": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml",
+        "bbat5_registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml",
+        "coco": "/home/uxin/yolo/coco2017.yaml",
+        "runtime_view": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1"
+      },
+      "execution_authorization_id": "user-2026-09-06-mixed-layer-successor",
+      "formal_training": false,
+      "formal_validation": false,
+      "gates": {
+        "metric_family": "map50",
+        "recovery_floor": 0.04,
+        "sham_absolute_drift": 0.01,
+        "total_drop": 0.015,
+        "w8_incremental_drop": 0.01
+      },
+      "image_size": 640,
+      "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-dual-v1",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v35-qsilu-mixed-layer-successor-v1/generated/v35-cumulative-backbone-v1.yaml",
+      "plan_id": "v35-cumulative-backbone-mixed-format-search-v1",
+      "plan_sha256": "f1efb249ba87a9192c3b4ed8594730e25d25a02f1607a6d0dabb9987aa635481",
+      "routes": {
+        "fixed-sd4-detect-predictor": {
+          "list_key": "detect_one2one_predictor",
+          "path": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/fixed-sd4-routing-groups-v4.yaml",
+          "path_count": 1,
+          "sha256": "33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665",
+          "source_execution_authorized": false,
+          "source_map_validation_run": false
+        },
+        "fixed-sd4-detect-tower": {
+          "list_key": "detect_one2one_tower",
+          "path": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/fixed-sd4-routing-groups-v4.yaml",
+          "path_count": 6,
+          "sha256": "33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665",
+          "source_execution_authorized": false,
+          "source_map_validation_run": false
+        },
+        "fixed-sd4-neck-attention": {
+          "list_key": "neck_attention_safe",
+          "path": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/fixed-sd4-routing-groups-v4.yaml",
+          "path_count": 1,
+          "sha256": "33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665",
+          "source_execution_authorized": false,
+          "source_map_validation_run": false
+        },
+        "layer-backbone-high": {
+          "list_key": "layer-backbone-high",
+          "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml",
+          "path_count": 1,
+          "sha256": "c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594",
+          "source_execution_authorized": false,
+          "source_map_validation_run": false
+        }
+      },
+      "weight_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/weight-region-sensitivity-plan-v9.yaml",
+      "weight_plan_sha256": "9bc7084e9217754153cc2ad69e83e6ae658304944ffa0ab6318ebd57c1d5d394",
+      "workers": {
+        "detect": 4,
+        "pose": 8
+      }
+    },
+    "runtime": {
+      "cuda": "12.8",
+      "device_index": 0,
+      "device_name": "NVIDIA GeForce RTX 5090",
+      "torch": "2.11.0+cu128"
+    },
+    "runtime_view": {
+      "assignment_changed": false,
+      "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1/manifest.json",
+      "manifest_sha256": "2a5a9593d3703d86cfebb315fa5d2e5954fac1860d777cb0222d153416196ac5",
+      "root": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1",
+      "storage": "symlink-only-runtime-view",
+      "train_images": 5364,
+      "val_images": 600,
+      "yaml": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1/data.yaml",
+      "yaml_sha256": "55699d2a0c7cb06505388348612451afbe90083289e9c4c9f114b914e1c78eaf"
+    },
+    "schema_version": 1,
+    "selection_claim": false,
+    "validator": {
+      "augmentation": false,
+      "backend": "bittrue",
+      "rect": true,
+      "source": "/home/uxin/yolo/yolo_combine/final/full35/code/project/src/yolo_combine/validation.py",
+      "source_sha256": "83a9ba7f518d30a97790986171b4d41444a30657e2c0f658be3e9dbfda358779",
+      "split": "val"
+    }
+  },
+  "diagnostics": {
+    "cumulative-backbone-fixed-sd4": {
+      "all_finite": true,
+      "candidate": {
+        "candidate_id": "cumulative-backbone-fixed-sd4",
+        "format_id": "mixed-fixed-sd4",
+        "path_routes": [
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.22.m.0.1.attn.qkv.v.conv"
+            ],
+            "route_id": "fixed-sd4-neck-attention"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 6,
+            "paths": [
+              "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+              "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+              "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+            ],
+            "route_id": "fixed-sd4-detect-tower"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.23.detect_head.one2one_cv3.2.2"
+            ],
+            "route_id": "fixed-sd4-detect-predictor"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.7.conv"
+            ],
+            "route_id": "layer-backbone-high"
+          }
+        ],
+        "region_defaults": []
+      },
+      "same_structure": true,
+      "seconds": 0.6608373080380261,
+      "selection_claim": false,
+      "status": "diagnostic_pass",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 0.9376576829190977,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.8045482931356858,
+              "elements": 1800,
+              "maximum_absolute_error": 652.2587890625,
+              "mean_absolute_error": 118.88135416666667,
+              "normalized_rmse": 0.6304173544447293,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.8045482931356858,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 652.2587890625,
+                  "mean_absolute_error": 118.88135416666667,
+                  "normalized_rmse": 0.6304173544447293,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9969806376838742,
+              "elements": 705600,
+              "maximum_absolute_error": 44.58335494995117,
+              "mean_absolute_error": 1.1594956004862882,
+              "normalized_rmse": 0.0777118087192743,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 0.9929240092501732,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 8.740951538085938,
+                  "mean_absolute_error": 0.24304042271205356,
+                  "normalized_rmse": 0.12239470916815647,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9969845835613108,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 44.58335494995117,
+                  "mean_absolute_error": 1.205318359375,
+                  "normalized_rmse": 0.07766225086660421,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.05000000074505806,
+              "ordered_pair_match": 0.05000000074505806,
+              "selected_anchor_jaccard": 0.7418181818181818,
+              "selected_pair_overlap": 0.84,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 652.2587890625,
+          "mean_absolute_error": 0.3467371446608478,
+          "normalized_rmse": 0.35401870382706646,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 0.8045482931356858,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 652.2587890625,
+              "mean_absolute_error": 118.88135416666667,
+              "normalized_rmse": 0.6304173544447293,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 0.9929240092501732,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 8.740951538085938,
+              "mean_absolute_error": 0.24304042271205356,
+              "normalized_rmse": 0.12239470916815647,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9969845835613108,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 44.58335494995117,
+              "mean_absolute_error": 1.205318359375,
+              "normalized_rmse": 0.07766225086660421,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9903074364155516,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 4.042597770690918,
+              "mean_absolute_error": 0.03414304256439209,
+              "normalized_rmse": 0.1392291778486401,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9864399108981817,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 7.283308029174805,
+              "mean_absolute_error": 0.047856616973876956,
+              "normalized_rmse": 0.1646370635920027,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9807426441276155,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 28.441404342651367,
+              "mean_absolute_error": 0.2009970474243164,
+              "normalized_rmse": 0.19699947032031204,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 0.7761502619912841,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7699135775020587,
+              "elements": 3600,
+              "maximum_absolute_error": 639.962646484375,
+              "mean_absolute_error": 137.0973611111111,
+              "normalized_rmse": 0.6777588256309036,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7699135775020587,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 639.962646484375,
+                  "mean_absolute_error": 137.0973611111111,
+                  "normalized_rmse": 0.6777588256309036,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9984555065024612,
+              "elements": 100800,
+              "maximum_absolute_error": 16.058856964111328,
+              "mean_absolute_error": 0.2086123511904762,
+              "normalized_rmse": 0.05557207552109131,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 0.9981852514633894,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 1.8216891288757324,
+                  "mean_absolute_error": 0.07824545724051339,
+                  "normalized_rmse": 0.06022620130295881,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.998590393067872,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 16.058856964111328,
+                  "mean_absolute_error": 0.7497612072172619,
+                  "normalized_rmse": 0.05309167891768382,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9904917011670787,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 2.9105336666107178,
+                  "mean_absolute_error": 0.11514066181485615,
+                  "normalized_rmse": 0.13783119658004986,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.023333333432674408,
+              "ordered_pair_match": 0.023333333432674408,
+              "selected_anchor_jaccard": 0.5542168674698795,
+              "selected_pair_overlap": 0.69,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 639.962646484375,
+          "mean_absolute_error": 0.2432672333562238,
+          "normalized_rmse": 0.6685377491729598,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 0.7699135775020587,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 639.962646484375,
+              "mean_absolute_error": 137.0973611111111,
+              "normalized_rmse": 0.6777588256309036,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 0.9981852514633894,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 1.8216891288757324,
+              "mean_absolute_error": 0.07824545724051339,
+              "normalized_rmse": 0.06022620130295881,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.998590393067872,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 16.058856964111328,
+              "mean_absolute_error": 0.7497612072172619,
+              "normalized_rmse": 0.05309167891768382,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9836931787818086,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 5.439422607421875,
+              "mean_absolute_error": 0.04151447296142578,
+              "normalized_rmse": 0.18056524141685273,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9755283149272529,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 7.999699592590332,
+              "mean_absolute_error": 0.05922147750854492,
+              "normalized_rmse": 0.2217675843550511,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9820916638458076,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 23.174476623535156,
+              "mean_absolute_error": 0.2048906707763672,
+              "normalized_rmse": 0.1897896518025471,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9904917011670787,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 2.9105336666107178,
+              "mean_absolute_error": 0.11514066181485615,
+              "normalized_rmse": 0.13783119658004986,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "weight_quantization": {
+        "assignments": [
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "neck_attention_safe",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.22.m.0.1.attn.qkv.v.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "detect_one2one_tower",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "detect_one2one_predictor",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv3.2.2"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "backbone_deep",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.7.conv"
+              ]
+            }
+          }
+        ],
+        "formats": [
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.005462646484375,
+              "code_histogram": [
+                583,
+                2662,
+                6062,
+                7772,
+                6582,
+                4320,
+                3269,
+                3245,
+                3193,
+                4297,
+                6538,
+                7730,
+                6088,
+                2589,
+                606
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9849297165080712,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.35077136754989624,
+              "mse": 0.0003585076774470508,
+              "normalized_rmse": 0.17295521686861184,
+              "occupied_codes": 15,
+              "scale_bytes": 1024,
+              "scale_count": 256,
+              "scale_maximum": 2.2858333587646484,
+              "scale_mean": 0.5268023014068604,
+              "scale_minimum": 0.13468092679977417,
+              "sqnr_db": 15.241326675527123,
+              "weight_code_bytes": 32768,
+              "zero_ratio": 0.0495147705078125
+            },
+            "quantized_modules": 1,
+            "region": "neck_attention_safe",
+            "sites": [
+              {
+                "clipping_rate": 0.005462646484375,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9849297165080712,
+                "elements": 65536,
+                "maximum_absolute_error": 0.35077136754989624,
+                "mse": 0.0003585076774470508,
+                "normalized_rmse": 0.17295521686861184,
+                "occupied_codes": 15,
+                "output_channels": 256,
+                "path": "graph.model.22.m.0.1.attn.qkv.v.conv",
+                "region": "neck_attention_safe",
+                "scale_maximum": 2.2858333587646484,
+                "scale_mean": 0.5268023014068604,
+                "scale_minimum": 0.13468092679977417,
+                "sqnr_db": 15.241326675527123,
+                "zero_ratio": 0.0495147705078125
+              }
+            ],
+            "weight_elements": 65536
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.0006522210899758454,
+              "code_histogram": [
+                1242,
+                4683,
+                17469,
+                57554,
+                101216,
+                100486,
+                96183,
+                116427,
+                95194,
+                98516,
+                95214,
+                48097,
+                12466,
+                2629,
+                496
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9836303206657396,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.3752480149269104,
+              "mse": 4.469506282932721e-05,
+              "normalized_rmse": 0.18019828933290072,
+              "occupied_codes": 15,
+              "scale_bytes": 1536,
+              "scale_count": 384,
+              "scale_maximum": 2.7382900714874268,
+              "scale_mean": 0.34007549782594043,
+              "scale_minimum": 0.008437533862888813,
+              "sqnr_db": 14.884986724054542,
+              "weight_code_bytes": 423936,
+              "zero_ratio": 0.13731671761775363
+            },
+            "quantized_modules": 6,
+            "region": "detect_one2one_tower",
+            "sites": [
+              {
+                "clipping_rate": 0.0006239149305555555,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9830804969971892,
+                "elements": 147456,
+                "maximum_absolute_error": 0.3752480149269104,
+                "mse": 0.00019220286048948765,
+                "normalized_rmse": 0.1831741748428189,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 2.7382900714874268,
+                "scale_mean": 0.7751375436782837,
+                "scale_minimum": 0.17664282023906708,
+                "sqnr_db": 14.742715123609642,
+                "zero_ratio": 0.1322360568576389
+              },
+              {
+                "clipping_rate": 0.0013292100694444445,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9877297539539798,
+                "elements": 36864,
+                "maximum_absolute_error": 0.14484095573425293,
+                "mse": 4.386627309334775e-05,
+                "normalized_rmse": 0.15617230721107972,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.109224557876587,
+                "scale_mean": 0.3923737406730652,
+                "scale_minimum": 0.027862347662448883,
+                "sqnr_db": 16.127919472127516,
+                "zero_ratio": 0.2921278211805556
+              },
+              {
+                "clipping_rate": 0.00037977430555555556,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9820589483263,
+                "elements": 294912,
+                "maximum_absolute_error": 0.09761349856853485,
+                "mse": 1.1649530885430673e-05,
+                "normalized_rmse": 0.1885745385007873,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 0.45706042647361755,
+                "scale_mean": 0.17663788795471191,
+                "scale_minimum": 0.05764247104525566,
+                "sqnr_db": 14.490338929226365,
+                "zero_ratio": 0.12276543511284722
+              },
+              {
+                "clipping_rate": 0.001681857638888889,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9858087001986933,
+                "elements": 36864,
+                "maximum_absolute_error": 0.25421327352523804,
+                "mse": 5.065878697981437e-05,
+                "normalized_rmse": 0.16787261188836397,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.2683179378509521,
+                "scale_mean": 0.31279394030570984,
+                "scale_minimum": 0.01897888444364071,
+                "sqnr_db": 15.500403048767792,
+                "zero_ratio": 0.2623426649305556
+              },
+              {
+                "clipping_rate": 0.0006035698784722222,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9818896507498014,
+                "elements": 294912,
+                "maximum_absolute_error": 0.015421323478221893,
+                "mse": 2.5202166398230474e-07,
+                "normalized_rmse": 0.18945383456468598,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 0.05762431398034096,
+                "scale_mean": 0.02389758825302124,
+                "scale_minimum": 0.008437533862888813,
+                "sqnr_db": 14.449932002719821,
+                "zero_ratio": 0.10446845160590278
+              },
+              {
+                "clipping_rate": 0.0016276041666666667,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9858527194670995,
+                "elements": 36864,
+                "maximum_absolute_error": 0.21959877014160156,
+                "mse": 6.943752264810933e-05,
+                "normalized_rmse": 0.1676141067857747,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.2.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.2993465662002563,
+                "scale_mean": 0.35961228609085083,
+                "scale_minimum": 0.024951931089162827,
+                "sqnr_db": 15.513788659054937,
+                "zero_ratio": 0.2569986979166667
+              }
+            ],
+            "weight_elements": 847872
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.003076171875,
+              "code_histogram": [
+                221,
+                1146,
+                2141,
+                2086,
+                1768,
+                1325,
+                1094,
+                1174,
+                1348,
+                2058,
+                3281,
+                2475,
+                354,
+                9,
+                0
+              ],
+              "code_max": 6,
+              "code_min": -7,
+              "code_occupancy_ratio": 0.9333333373069763,
+              "cosine": 0.984990789242353,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.1511608064174652,
+              "mse": 0.0002811174839735031,
+              "normalized_rmse": 0.17260702361035307,
+              "occupied_codes": 14,
+              "scale_bytes": 320,
+              "scale_count": 80,
+              "scale_maximum": 0.8103833198547363,
+              "scale_mean": 0.516663932800293,
+              "scale_minimum": 0.31700533628463745,
+              "sqnr_db": 15.25883072477333,
+              "weight_code_bytes": 10240,
+              "zero_ratio": 0.05732421875
+            },
+            "quantized_modules": 1,
+            "region": "detect_one2one_predictor",
+            "sites": [
+              {
+                "clipping_rate": 0.003076171875,
+                "code_max": 6,
+                "code_min": -7,
+                "cosine": 0.984990789242353,
+                "elements": 20480,
+                "maximum_absolute_error": 0.1511608064174652,
+                "mse": 0.0002811174839735031,
+                "normalized_rmse": 0.17260702361035307,
+                "occupied_codes": 14,
+                "output_channels": 80,
+                "path": "graph.model.23.detect_head.one2one_cv3.2.2",
+                "region": "detect_one2one_predictor",
+                "scale_maximum": 0.8103833198547363,
+                "scale_mean": 0.5166639685630798,
+                "scale_minimum": 0.31700533628463745,
+                "sqnr_db": 15.25883072477333,
+                "zero_ratio": 0.05732421875
+              }
+            ],
+            "weight_elements": 20480
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.0008549160427517361,
+              "code_histogram": [
+                3337,
+                60974,
+                237469,
+                332477,
+                262971,
+                156608,
+                110687,
+                112377,
+                109243,
+                151827,
+                248448,
+                299820,
+                208019,
+                59376,
+                5663
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9816018474027116,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.09545576572418213,
+              "mse": 2.218826719197548e-05,
+              "normalized_rmse": 0.1909393993879334,
+              "occupied_codes": 15,
+              "scale_bytes": 2048,
+              "scale_count": 512,
+              "scale_maximum": 0.4763305187225342,
+              "scale_mean": 0.15465809404850006,
+              "scale_minimum": 0.05088790878653526,
+              "sqnr_db": 14.382088957399542,
+              "weight_code_bytes": 1179648,
+              "zero_ratio": 0.04763158162434896
+            },
+            "quantized_modules": 1,
+            "region": "backbone_deep",
+            "sites": [
+              {
+                "clipping_rate": 0.0008549160427517361,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9816018474027116,
+                "elements": 2359296,
+                "maximum_absolute_error": 0.09545576572418213,
+                "mse": 2.218826719197548e-05,
+                "normalized_rmse": 0.1909393993879334,
+                "occupied_codes": 15,
+                "output_channels": 512,
+                "path": "graph.model.7.conv",
+                "region": "backbone_deep",
+                "scale_maximum": 0.4763305187225342,
+                "scale_mean": 0.15465809404850006,
+                "scale_minimum": 0.05088790878653526,
+                "sqnr_db": 14.382088957399542,
+                "zero_ratio": 0.04763158162434896
+              }
+            ],
+            "weight_elements": 2359296
+          }
+        ],
+        "quantized_modules": 9,
+        "scale_bytes": 4928,
+        "weight_code_bytes": 1646592,
+        "weight_elements": 3293184
+      }
+    },
+    "cumulative-backbone-w8": {
+      "all_finite": true,
+      "candidate": {
+        "candidate_id": "cumulative-backbone-w8",
+        "format_id": "mixed-fixed-sd4-w8",
+        "path_routes": [
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.22.m.0.1.attn.qkv.v.conv"
+            ],
+            "route_id": "fixed-sd4-neck-attention"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 6,
+            "paths": [
+              "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+              "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+              "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+            ],
+            "route_id": "fixed-sd4-detect-tower"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.23.detect_head.one2one_cv3.2.2"
+            ],
+            "route_id": "fixed-sd4-detect-predictor"
+          },
+          {
+            "format": {
+              "bits": 8,
+              "family": "uniform",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.7.conv"
+            ],
+            "route_id": "layer-backbone-high"
+          }
+        ],
+        "region_defaults": []
+      },
+      "same_structure": true,
+      "seconds": 0.7115445691160858,
+      "selection_claim": false,
+      "status": "diagnostic_pass",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 0.9323995993607229,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7870930721041148,
+              "elements": 1800,
+              "maximum_absolute_error": 640.298583984375,
+              "mean_absolute_error": 125.09541666666667,
+              "normalized_rmse": 0.6584205170140695,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7870930721041148,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 640.298583984375,
+                  "mean_absolute_error": 125.09541666666667,
+                  "normalized_rmse": 0.6584205170140695,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9972913784647804,
+              "elements": 705600,
+              "maximum_absolute_error": 25.11919403076172,
+              "mean_absolute_error": 1.0976713537791418,
+              "normalized_rmse": 0.07357007392444859,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 0.9935468341978181,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 8.447759628295898,
+                  "mean_absolute_error": 0.23509210495721727,
+                  "normalized_rmse": 0.1187556017442396,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9972951800436237,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 25.11919403076172,
+                  "mean_absolute_error": 1.140800316220238,
+                  "normalized_rmse": 0.0735191942830632,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.03333333507180214,
+              "ordered_pair_match": 0.03333333507180214,
+              "selected_anchor_jaccard": 0.7518518518518519,
+              "selected_pair_overlap": 0.8533333333333334,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 640.298583984375,
+          "mean_absolute_error": 0.3315982347454782,
+          "normalized_rmse": 0.36856358317063787,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 0.7870930721041148,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 640.298583984375,
+              "mean_absolute_error": 125.09541666666667,
+              "normalized_rmse": 0.6584205170140695,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 0.9935468341978181,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 8.447759628295898,
+              "mean_absolute_error": 0.23509210495721727,
+              "normalized_rmse": 0.1187556017442396,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9972951800436237,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 25.11919403076172,
+              "mean_absolute_error": 1.140800316220238,
+              "normalized_rmse": 0.0735191942830632,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9929809152048306,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 3.690683364868164,
+              "mean_absolute_error": 0.029627952575683594,
+              "normalized_rmse": 0.11849595814293892,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9901980370609343,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 7.760901927947998,
+              "mean_absolute_error": 0.040448570251464845,
+              "normalized_rmse": 0.13990516852079002,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.984896306182747,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 12.640625,
+              "mean_absolute_error": 0.1760408592224121,
+              "normalized_rmse": 0.1738117735896316,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 0.7842062729902047,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7781267093676606,
+              "elements": 3600,
+              "maximum_absolute_error": 638.6397705078125,
+              "mean_absolute_error": 135.5388715277778,
+              "normalized_rmse": 0.6651245020344992,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7781267093676606,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 638.6397705078125,
+                  "mean_absolute_error": 135.5388715277778,
+                  "normalized_rmse": 0.6651245020344992,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9989045780182355,
+              "elements": 100800,
+              "maximum_absolute_error": 11.746282577514648,
+              "mean_absolute_error": 0.1720568605453249,
+              "normalized_rmse": 0.04683150452503315,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 0.9990480065103275,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 1.0284185409545898,
+                  "mean_absolute_error": 0.05997618175688244,
+                  "normalized_rmse": 0.04378999992654952,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9989635641243557,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 11.746282577514648,
+                  "mean_absolute_error": 0.6567287481398809,
+                  "normalized_rmse": 0.04555329051966289,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9950266620694919,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 3.417762279510498,
+                  "mean_absolute_error": 0.08522001720610119,
+                  "normalized_rmse": 0.09965686124464136,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.02666666731238365,
+              "ordered_pair_match": 0.023333333432674408,
+              "selected_anchor_jaccard": 0.645367412140575,
+              "selected_pair_overlap": 0.7766666666666666,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 638.6397705078125,
+          "mean_absolute_error": 0.22918771639817434,
+          "normalized_rmse": 0.6560021662377801,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 0.7781267093676606,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 638.6397705078125,
+              "mean_absolute_error": 135.5388715277778,
+              "normalized_rmse": 0.6651245020344992,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 0.9990480065103275,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 1.0284185409545898,
+              "mean_absolute_error": 0.05997618175688244,
+              "normalized_rmse": 0.04378999992654952,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9989635641243557,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 11.746282577514648,
+              "mean_absolute_error": 0.6567287481398809,
+              "normalized_rmse": 0.04555329051966289,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9894672334608547,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 4.7523417472839355,
+              "mean_absolute_error": 0.034092741012573244,
+              "normalized_rmse": 0.14535987367090214,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9869596362379323,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 8.596692085266113,
+              "mean_absolute_error": 0.044950647354125975,
+              "normalized_rmse": 0.16201995557448168,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9862343222238827,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 16.854164123535156,
+              "mean_absolute_error": 0.17652435302734376,
+              "normalized_rmse": 0.16682838878100917,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9950266620694919,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 3.417762279510498,
+              "mean_absolute_error": 0.08522001720610119,
+              "normalized_rmse": 0.09965686124464136,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "weight_quantization": {
+        "assignments": [
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "neck_attention_safe",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.22.m.0.1.attn.qkv.v.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "detect_one2one_tower",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "detect_one2one_predictor",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv3.2.2"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 8,
+              "format_id": "w8",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "backbone_deep",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.7.conv"
+              ]
+            }
+          }
+        ],
+        "formats": [
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.005462646484375,
+              "code_histogram": [
+                583,
+                2662,
+                6062,
+                7772,
+                6582,
+                4320,
+                3269,
+                3245,
+                3193,
+                4297,
+                6538,
+                7730,
+                6088,
+                2589,
+                606
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9849297165080712,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.35077136754989624,
+              "mse": 0.0003585076774470508,
+              "normalized_rmse": 0.17295521686861184,
+              "occupied_codes": 15,
+              "scale_bytes": 1024,
+              "scale_count": 256,
+              "scale_maximum": 2.2858333587646484,
+              "scale_mean": 0.5268023014068604,
+              "scale_minimum": 0.13468092679977417,
+              "sqnr_db": 15.241326675527123,
+              "weight_code_bytes": 32768,
+              "zero_ratio": 0.0495147705078125
+            },
+            "quantized_modules": 1,
+            "region": "neck_attention_safe",
+            "sites": [
+              {
+                "clipping_rate": 0.005462646484375,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9849297165080712,
+                "elements": 65536,
+                "maximum_absolute_error": 0.35077136754989624,
+                "mse": 0.0003585076774470508,
+                "normalized_rmse": 0.17295521686861184,
+                "occupied_codes": 15,
+                "output_channels": 256,
+                "path": "graph.model.22.m.0.1.attn.qkv.v.conv",
+                "region": "neck_attention_safe",
+                "scale_maximum": 2.2858333587646484,
+                "scale_mean": 0.5268023014068604,
+                "scale_minimum": 0.13468092679977417,
+                "sqnr_db": 15.241326675527123,
+                "zero_ratio": 0.0495147705078125
+              }
+            ],
+            "weight_elements": 65536
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.0006522210899758454,
+              "code_histogram": [
+                1242,
+                4683,
+                17469,
+                57554,
+                101216,
+                100486,
+                96183,
+                116427,
+                95194,
+                98516,
+                95214,
+                48097,
+                12466,
+                2629,
+                496
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9836303206657396,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.3752480149269104,
+              "mse": 4.469506282932721e-05,
+              "normalized_rmse": 0.18019828933290072,
+              "occupied_codes": 15,
+              "scale_bytes": 1536,
+              "scale_count": 384,
+              "scale_maximum": 2.7382900714874268,
+              "scale_mean": 0.34007549782594043,
+              "scale_minimum": 0.008437533862888813,
+              "sqnr_db": 14.884986724054542,
+              "weight_code_bytes": 423936,
+              "zero_ratio": 0.13731671761775363
+            },
+            "quantized_modules": 6,
+            "region": "detect_one2one_tower",
+            "sites": [
+              {
+                "clipping_rate": 0.0006239149305555555,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9830804969971892,
+                "elements": 147456,
+                "maximum_absolute_error": 0.3752480149269104,
+                "mse": 0.00019220286048948765,
+                "normalized_rmse": 0.1831741748428189,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 2.7382900714874268,
+                "scale_mean": 0.7751375436782837,
+                "scale_minimum": 0.17664282023906708,
+                "sqnr_db": 14.742715123609642,
+                "zero_ratio": 0.1322360568576389
+              },
+              {
+                "clipping_rate": 0.0013292100694444445,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9877297539539798,
+                "elements": 36864,
+                "maximum_absolute_error": 0.14484095573425293,
+                "mse": 4.386627309334775e-05,
+                "normalized_rmse": 0.15617230721107972,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.109224557876587,
+                "scale_mean": 0.3923737406730652,
+                "scale_minimum": 0.027862347662448883,
+                "sqnr_db": 16.127919472127516,
+                "zero_ratio": 0.2921278211805556
+              },
+              {
+                "clipping_rate": 0.00037977430555555556,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9820589483263,
+                "elements": 294912,
+                "maximum_absolute_error": 0.09761349856853485,
+                "mse": 1.1649530885430673e-05,
+                "normalized_rmse": 0.1885745385007873,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 0.45706042647361755,
+                "scale_mean": 0.17663788795471191,
+                "scale_minimum": 0.05764247104525566,
+                "sqnr_db": 14.490338929226365,
+                "zero_ratio": 0.12276543511284722
+              },
+              {
+                "clipping_rate": 0.001681857638888889,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9858087001986933,
+                "elements": 36864,
+                "maximum_absolute_error": 0.25421327352523804,
+                "mse": 5.065878697981437e-05,
+                "normalized_rmse": 0.16787261188836397,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.2683179378509521,
+                "scale_mean": 0.31279394030570984,
+                "scale_minimum": 0.01897888444364071,
+                "sqnr_db": 15.500403048767792,
+                "zero_ratio": 0.2623426649305556
+              },
+              {
+                "clipping_rate": 0.0006035698784722222,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9818896507498014,
+                "elements": 294912,
+                "maximum_absolute_error": 0.015421323478221893,
+                "mse": 2.5202166398230474e-07,
+                "normalized_rmse": 0.18945383456468598,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 0.05762431398034096,
+                "scale_mean": 0.02389758825302124,
+                "scale_minimum": 0.008437533862888813,
+                "sqnr_db": 14.449932002719821,
+                "zero_ratio": 0.10446845160590278
+              },
+              {
+                "clipping_rate": 0.0016276041666666667,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9858527194670995,
+                "elements": 36864,
+                "maximum_absolute_error": 0.21959877014160156,
+                "mse": 6.943752264810933e-05,
+                "normalized_rmse": 0.1676141067857747,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.2.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.2993465662002563,
+                "scale_mean": 0.35961228609085083,
+                "scale_minimum": 0.024951931089162827,
+                "sqnr_db": 15.513788659054937,
+                "zero_ratio": 0.2569986979166667
+              }
+            ],
+            "weight_elements": 847872
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.003076171875,
+              "code_histogram": [
+                221,
+                1146,
+                2141,
+                2086,
+                1768,
+                1325,
+                1094,
+                1174,
+                1348,
+                2058,
+                3281,
+                2475,
+                354,
+                9,
+                0
+              ],
+              "code_max": 6,
+              "code_min": -7,
+              "code_occupancy_ratio": 0.9333333373069763,
+              "cosine": 0.984990789242353,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.1511608064174652,
+              "mse": 0.0002811174839735031,
+              "normalized_rmse": 0.17260702361035307,
+              "occupied_codes": 14,
+              "scale_bytes": 320,
+              "scale_count": 80,
+              "scale_maximum": 0.8103833198547363,
+              "scale_mean": 0.516663932800293,
+              "scale_minimum": 0.31700533628463745,
+              "sqnr_db": 15.25883072477333,
+              "weight_code_bytes": 10240,
+              "zero_ratio": 0.05732421875
+            },
+            "quantized_modules": 1,
+            "region": "detect_one2one_predictor",
+            "sites": [
+              {
+                "clipping_rate": 0.003076171875,
+                "code_max": 6,
+                "code_min": -7,
+                "cosine": 0.984990789242353,
+                "elements": 20480,
+                "maximum_absolute_error": 0.1511608064174652,
+                "mse": 0.0002811174839735031,
+                "normalized_rmse": 0.17260702361035307,
+                "occupied_codes": 14,
+                "output_channels": 80,
+                "path": "graph.model.23.detect_head.one2one_cv3.2.2",
+                "region": "detect_one2one_predictor",
+                "scale_maximum": 0.8103833198547363,
+                "scale_mean": 0.5166639685630798,
+                "scale_minimum": 0.31700533628463745,
+                "sqnr_db": 15.25883072477333,
+                "zero_ratio": 0.05732421875
+              }
+            ],
+            "weight_elements": 20480
+          },
+          {
+            "format_id": "w8",
+            "numeric": {
+              "clipping_rate": 0.00023396809895833334,
+              "code_histogram": [
+                151,
+                18,
+                15,
+                15,
+                11,
+                13,
+                19,
+                12,
+                16,
+                20,
+                23,
+                22,
+                26,
+                21,
+                30,
+                27,
+                22,
+                27,
+                29,
+                28,
+                44,
+                35,
+                43,
+                50,
+                46,
+                50,
+                53,
+                61,
+                72,
+                67,
+                61,
+                91,
+                73,
+                67,
+                97,
+                114,
+                98,
+                107,
+                119,
+                148,
+                166,
+                167,
+                159,
+                170,
+                169,
+                210,
+                221,
+                245,
+                274,
+                281,
+                324,
+                314,
+                341,
+                402,
+                428,
+                477,
+                537,
+                527,
+                566,
+                589,
+                679,
+                729,
+                748,
+                873,
+                929,
+                968,
+                1080,
+                1111,
+                1284,
+                1332,
+                1526,
+                1642,
+                1807,
+                1796,
+                2030,
+                2215,
+                2361,
+                2611,
+                2719,
+                3016,
+                3092,
+                3446,
+                3889,
+                3943,
+                4375,
+                4671,
+                5106,
+                5545,
+                5996,
+                6408,
+                6913,
+                7366,
+                7920,
+                8569,
+                9358,
+                9980,
+                10791,
+                11418,
+                12525,
+                13278,
+                14329,
+                15414,
+                16372,
+                17744,
+                18856,
+                19823,
+                21790,
+                22934,
+                24669,
+                26214,
+                27848,
+                29402,
+                31015,
+                33152,
+                35071,
+                37144,
+                39316,
+                41406,
+                44174,
+                46030,
+                48216,
+                50467,
+                53198,
+                54446,
+                56555,
+                57708,
+                58735,
+                59576,
+                69232,
+                58760,
+                57685,
+                56463,
+                55173,
+                52621,
+                50596,
+                48226,
+                45687,
+                43228,
+                40983,
+                38341,
+                36351,
+                34055,
+                32128,
+                30227,
+                28025,
+                26135,
+                25088,
+                22960,
+                21910,
+                20135,
+                19139,
+                17451,
+                16471,
+                15454,
+                14363,
+                13174,
+                12506,
+                11596,
+                10949,
+                10102,
+                9438,
+                8590,
+                8042,
+                7490,
+                6980,
+                6377,
+                5986,
+                5464,
+                5364,
+                4819,
+                4491,
+                4183,
+                3847,
+                3605,
+                3387,
+                3121,
+                2949,
+                2764,
+                2672,
+                2420,
+                2170,
+                1990,
+                1973,
+                1812,
+                1747,
+                1566,
+                1453,
+                1312,
+                1253,
+                1191,
+                1143,
+                1114,
+                957,
+                936,
+                879,
+                814,
+                797,
+                763,
+                619,
+                627,
+                610,
+                532,
+                507,
+                511,
+                451,
+                433,
+                414,
+                371,
+                384,
+                346,
+                305,
+                300,
+                284,
+                244,
+                258,
+                232,
+                225,
+                208,
+                199,
+                206,
+                182,
+                184,
+                171,
+                169,
+                147,
+                129,
+                125,
+                111,
+                114,
+                104,
+                94,
+                110,
+                92,
+                99,
+                103,
+                108,
+                83,
+                71,
+                90,
+                75,
+                69,
+                70,
+                69,
+                63,
+                63,
+                49,
+                56,
+                59,
+                47,
+                56,
+                51,
+                61,
+                38,
+                45,
+                52,
+                491
+              ],
+              "code_max": 127,
+              "code_min": -128,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9982250801687417,
+              "encoded_bits": 8,
+              "logical_code_count": 256,
+              "maximum_absolute_error": 0.40366390347480774,
+              "mse": 2.1585314647786113e-06,
+              "normalized_rmse": 0.05955428987366736,
+              "occupied_codes": 256,
+              "scale_bytes": 2048,
+              "scale_count": 512,
+              "scale_maximum": 0.8073278069496155,
+              "scale_mean": 0.0040152668952941895,
+              "scale_minimum": 0.000522525398992002,
+              "sqnr_db": 24.50173899047244,
+              "weight_code_bytes": 2359296,
+              "zero_ratio": 0.029344346788194444
+            },
+            "quantized_modules": 1,
+            "region": "backbone_deep",
+            "sites": [
+              {
+                "clipping_rate": 0.00023396809895833334,
+                "code_max": 127,
+                "code_min": -128,
+                "cosine": 0.9982250801687417,
+                "elements": 2359296,
+                "maximum_absolute_error": 0.40366390347480774,
+                "mse": 2.1585314647786113e-06,
+                "normalized_rmse": 0.05955428987366736,
+                "occupied_codes": 256,
+                "output_channels": 512,
+                "path": "graph.model.7.conv",
+                "region": "backbone_deep",
+                "scale_maximum": 0.8073278069496155,
+                "scale_mean": 0.0040152668952941895,
+                "scale_minimum": 0.000522525398992002,
+                "sqnr_db": 24.50173899047244,
+                "zero_ratio": 0.029344346788194444
+              }
+            ],
+            "weight_elements": 2359296
+          }
+        ],
+        "quantized_modules": 9,
+        "scale_bytes": 4928,
+        "weight_code_bytes": 2826240,
+        "weight_elements": 3293184
+      }
+    }
+  },
+  "formal_training": false,
+  "formal_validation": false,
+  "kind": "full35_mixed_weight_policy_map50_search",
+  "reference": {
+    "formal_training": false,
+    "formal_validation": false,
+    "gate": {
+      "accepted_run_id": "legacy-search:accepted:regate-map50",
+      "candidate_run_id": "legacy-search:candidate:regate-map50",
+      "decision": "green",
+      "incremental_deltas": {
+        "bbat/ball/box/map50": 0.0009800300818973984,
+        "bbat/ball/pose/map50": -0.0005203629393314424,
+        "bbat/bat/box/map50": -0.0005990640244449841,
+        "bbat/bat/pose/map50": 0.00029859961957767744,
+        "bbat/box/map50": 0.00019048302872626266,
+        "bbat/pose/map50": -0.00011088165987693799,
+        "coco/box/map50": 0.00016828185060069334,
+        "coco/person/box/map50": -0.0007814821457564625
+      },
+      "matched_run_id": "legacy-search:matched:regate-map50",
+      "maximum_sham_drift": 0.0,
+      "passed": true,
+      "sham_deltas": {},
+      "sham_gate_applicable": false,
+      "sham_gate_passed": true,
+      "thresholds": {
+        "metric_family": "map50",
+        "recovery_floor": 0.04,
+        "sham_absolute_drift": 0.01,
+        "total_drop": 0.015,
+        "w8_incremental_drop": 0.01
+      },
+      "total_deltas": {
+        "bbat/ball/box/map50": 0.01055628149229837,
+        "bbat/ball/pose/map50": 0.010024703742710694,
+        "bbat/bat/box/map50": -0.002125563510979256,
+        "bbat/bat/pose/map50": -0.0012278998669565944,
+        "bbat/box/map50": 0.004215358990659501,
+        "bbat/pose/map50": 0.0043984019378771055,
+        "coco/box/map50": -0.01140780541415487,
+        "coco/person/box/map50": -0.006094150505367213
+      },
+      "total_gate_passed": true,
+      "w8_incremental_gate_applicable": true,
+      "w8_incremental_gate_passed": true,
+      "worst_incremental_delta": -0.0007814821457564625,
+      "worst_incremental_metric": "coco/person/box/map50",
+      "worst_total_delta": -0.01140780541415487,
+      "worst_total_metric": "coco/box/map50"
+    },
+    "gpu_used": false,
+    "kind": "full35_search_metric_regate",
+    "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-dual-v1",
+    "roles": {
+      "accepted": {
+        "metrics": {
+          "bbat/ball/box/map50": 0.9583825665067429,
+          "bbat/ball/pose/map50": 0.9594888546060787,
+          "bbat/bat/box/map50": 0.9940783404183501,
+          "bbat/bat/pose/map50": 0.9940783404183501,
+          "bbat/box/map50": 0.9762304534625466,
+          "bbat/pose/map50": 0.9767835975122143,
+          "coco/box/map50": 0.6707190071574208,
+          "coco/person/box/map50": 0.8394095874767435
+        },
+        "policy_id": "accepted-full35-silu-bittrue",
+        "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/accepted/epoch-0000/bittrue/metrics.json",
+        "source_metrics_report_sha256": "2e97e4a60039741cc1fc45a03d67615bbc5b851bcf60a56cd153251366c4a355"
+      },
+      "candidate": {
+        "metrics": {
+          "bbat/ball/box/map50": 0.9689388479990413,
+          "bbat/ball/pose/map50": 0.9695135583487894,
+          "bbat/bat/box/map50": 0.9919527769073708,
+          "bbat/bat/pose/map50": 0.9928504405513935,
+          "bbat/box/map50": 0.9804458124532061,
+          "bbat/pose/map50": 0.9811819994500914,
+          "coco/box/map50": 0.659311201743266,
+          "coco/person/box/map50": 0.8333154369713763
+        },
+        "policy_id": "qsilu_pq--lsq-plus-a8",
+        "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/candidate/epoch-0000/bittrue/metrics.json",
+        "source_metrics_report_sha256": "a40932555b0b5d6f2e409fcfd49557d5fce30ec55984a09a983d5961e4a7bfd5"
+      },
+      "matched": {
+        "metrics": {
+          "bbat/ball/box/map50": 0.9679588179171439,
+          "bbat/ball/pose/map50": 0.9700339212881208,
+          "bbat/bat/box/map50": 0.9925518409318158,
+          "bbat/bat/pose/map50": 0.9925518409318158,
+          "bbat/box/map50": 0.9802553294244798,
+          "bbat/pose/map50": 0.9812928811099684,
+          "coco/box/map50": 0.6591429198926653,
+          "coco/person/box/map50": 0.8340969191171328
+        },
+        "policy_id": "qsilu_pq--lsq-plus-a8",
+        "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/matched/epoch-0000/bittrue/metrics.json",
+        "source_metrics_report_sha256": "e2b3501a98a25f90519919d11c6e5c77d2327a04f2a58e6ea5291fb9c65cd0a3"
+      }
+    },
+    "schema_version": 1,
+    "selection_claim": "single_cell_gate_only",
+    "source": {
+      "plan_id": "legacy-search",
+      "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json",
+      "report_sha256": "738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2"
+    },
+    "status": "completed",
+    "validation_rerun": false
+  },
+  "results": {
+    "cumulative-backbone-fixed-sd4": {
+      "activation_output_quantization": "calibrated_lsq_plus_a8",
+      "all_metric_count": 40,
+      "build": {
+        "activation": "qsilu_pq",
+        "activation_policy_id": "qsilu_pq--lsq-plus-a8",
+        "activation_quantizers": 124,
+        "activation_region_assignments": [],
+        "build_seconds": 1.789554225280881,
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+        "checkpoint_state_source": "ema",
+        "protected_modules": {
+          "achitechure_1.masf.P3MASFFull35": 1,
+          "ultralytics.nn.modules.block.RealNVP": 1,
+          "ultralytics.nn.modules.head.Detect": 1,
+          "ultralytics.nn.modules.head.Pose26": 1,
+          "yolo_attention.attention.HardwareFriendlyAttention": 2,
+          "yolo_attention.binary_basis.BinaryScore": 2,
+          "yolo_attention.normalization.PiecewiseLinearSoftmax": 2,
+          "yolo_attention.projection.ModularQKVProjection": 2,
+          "yolo_attention.relative_bias.RelativePositionBias": 2
+        },
+        "training_only_unquantized_sites": 66,
+        "weight_view_parity": {
+          "deployment_batch_norm_modules": 0,
+          "deployment_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 152,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 0,
+              "training_only_weight_elements": 0,
+              "weight_elements": 22702912
+            }
+          },
+          "deployment_path_parity": true,
+          "deployment_state_sha256": "ebc32f865e118d7417d8e315cb9983f4ce435ce423f0f29d66a4bbe924eaa143",
+          "folded_batch_norm_modules": 179,
+          "forward_all_finite": true,
+          "forward_maximum_absolute_error": 0.000732421875,
+          "forward_maximum_relative_to_reference_peak": 7.105692362750036e-06,
+          "forward_normalized_rmse": 3.3907510427995803e-06,
+          "forward_parity_evaluated": true,
+          "forward_parity_passed": true,
+          "forward_removed_training_only_tensor_paths": [
+            "output.detect[1].one2many.boxes",
+            "output.detect[1].one2many.scores",
+            "output.detect[1].one2many.feats[0]",
+            "output.detect[1].one2many.feats[1]",
+            "output.detect[1].one2many.feats[2]",
+            "output.pose[1].one2many.boxes",
+            "output.pose[1].one2many.scores",
+            "output.pose[1].one2many.feats[0]",
+            "output.pose[1].one2many.feats[1]",
+            "output.pose[1].one2many.feats[2]",
+            "output.pose[1].one2many.kpts"
+          ],
+          "forward_same_structure": true,
+          "inference_contract_parity": true,
+          "master_batch_norm_modules": 179,
+          "master_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 251,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 99,
+              "training_only_weight_elements": 3748480,
+              "weight_elements": 26451392
+            }
+          },
+          "master_matches_source": true,
+          "master_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "schema_version": 1,
+          "source_batch_norm_modules": 179,
+          "source_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "source_unchanged": true
+        }
+      },
+      "calibration": {
+        "invalid_observers": [],
+        "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+        "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+        "observed_maximum": 268.3276062011719,
+        "observed_minimum": -0.2856657803058624,
+        "peak_gpu_memory_mib": 475.1259765625,
+        "quantizers": 124,
+        "samples": {
+          "detect": 32,
+          "pose": 32
+        },
+        "seconds": 3.5390758612193167,
+        "valid_observers": 124
+      },
+      "candidate": {
+        "candidate_id": "cumulative-backbone-fixed-sd4",
+        "format_id": "mixed-fixed-sd4",
+        "path_routes": [
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.22.m.0.1.attn.qkv.v.conv"
+            ],
+            "route_id": "fixed-sd4-neck-attention"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 6,
+            "paths": [
+              "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+              "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+              "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+            ],
+            "route_id": "fixed-sd4-detect-tower"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.23.detect_head.one2one_cv3.2.2"
+            ],
+            "route_id": "fixed-sd4-detect-predictor"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.7.conv"
+            ],
+            "route_id": "layer-backbone-high"
+          }
+        ],
+        "region_defaults": []
+      },
+      "gate": {
+        "accepted_run_id": "v35-cumulative-backbone-mixed-format-search-v1:accepted-reused",
+        "candidate_run_id": "v35-cumulative-backbone-mixed-format-search-v1:cumulative-backbone-fixed-sd4",
+        "decision": "green",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": -0.002430234197909109,
+          "bbat/ball/pose/map50": -0.0034955268176960486,
+          "bbat/bat/box/map50": 0.0011765861857429005,
+          "bbat/bat/pose/map50": 0.0011765861857429005,
+          "bbat/box/map50": -0.0006268240060830488,
+          "bbat/pose/map50": -0.0011594703159766295,
+          "coco/box/map50": -0.0007748147060695487,
+          "coco/person/box/map50": -0.003257794151456106
+        },
+        "matched_run_id": "v35-cumulative-backbone-mixed-format-search-v1:matched-reused",
+        "maximum_sham_drift": 0.0,
+        "passed": true,
+        "sham_deltas": {},
+        "sham_gate_applicable": false,
+        "sham_gate_passed": true,
+        "thresholds": {
+          "metric_family": "map50",
+          "recovery_floor": 0.04,
+          "sham_absolute_drift": 0.01,
+          "total_drop": 0.015,
+          "w8_incremental_drop": 0.01
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.007146017212491862,
+          "bbat/ball/pose/map50": 0.007049539864346088,
+          "bbat/bat/box/map50": -0.0003499133007913713,
+          "bbat/bat/pose/map50": -0.0003499133007913713,
+          "bbat/box/map50": 0.00339805195585019,
+          "bbat/pose/map50": 0.003349813281777414,
+          "coco/box/map50": -0.012350901970825112,
+          "coco/person/box/map50": -0.008570462511066856
+        },
+        "total_gate_passed": true,
+        "w8_incremental_gate_applicable": false,
+        "w8_incremental_gate_passed": true,
+        "worst_incremental_delta": -0.0034955268176960486,
+        "worst_incremental_metric": "bbat/ball/pose/map50",
+        "worst_total_delta": -0.012350901970825112,
+        "worst_total_metric": "coco/box/map50"
+      },
+      "materialization": {
+        "detect_compatible_tensors": 753,
+        "detect_complete": true,
+        "pose_compatible_tensors": 801,
+        "pose_complete": true
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9655285837192348,
+        "bbat/ball/pose/map50": 0.9665383944704248,
+        "bbat/bat/box/map50": 0.9937284271175587,
+        "bbat/bat/pose/map50": 0.9937284271175587,
+        "bbat/box/map50": 0.9796285054183967,
+        "bbat/pose/map50": 0.9801334107939917,
+        "coco/box/map50": 0.6583681051865957,
+        "coco/person/box/map50": 0.8308391249656767
+      },
+      "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v35-cumulative-backbone-mixed-format-search-v1/validation/cumulative-backbone-fixed-sd4/epoch-0000/bittrue/metrics.json",
+      "metrics_report_sha256": "ac178a73535ff1cc439871c1aa0915eea46bb4e1a5d0265d9a87444d16e5033f",
+      "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v35-cumulative-backbone-mixed-format-search-v1/validation/cumulative-backbone-fixed-sd4/epoch-0000/bittrue",
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "role": "cumulative-backbone-fixed-sd4",
+      "seconds": 87.66932259500027,
+      "status": "completed",
+      "weight_quantization": {
+        "assignments": [
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "neck_attention_safe",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.22.m.0.1.attn.qkv.v.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "detect_one2one_tower",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "detect_one2one_predictor",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv3.2.2"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "backbone_deep",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.7.conv"
+              ]
+            }
+          }
+        ],
+        "formats": [
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.005462646484375,
+              "code_histogram": [
+                583,
+                2662,
+                6062,
+                7772,
+                6582,
+                4320,
+                3269,
+                3245,
+                3193,
+                4297,
+                6538,
+                7730,
+                6088,
+                2589,
+                606
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9849297165080712,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.35077136754989624,
+              "mse": 0.0003585076774470508,
+              "normalized_rmse": 0.17295521686861184,
+              "occupied_codes": 15,
+              "scale_bytes": 1024,
+              "scale_count": 256,
+              "scale_maximum": 2.2858333587646484,
+              "scale_mean": 0.5268023014068604,
+              "scale_minimum": 0.13468092679977417,
+              "sqnr_db": 15.241326675527123,
+              "weight_code_bytes": 32768,
+              "zero_ratio": 0.0495147705078125
+            },
+            "quantized_modules": 1,
+            "region": "neck_attention_safe",
+            "sites": [
+              {
+                "clipping_rate": 0.005462646484375,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9849297165080712,
+                "elements": 65536,
+                "maximum_absolute_error": 0.35077136754989624,
+                "mse": 0.0003585076774470508,
+                "normalized_rmse": 0.17295521686861184,
+                "occupied_codes": 15,
+                "output_channels": 256,
+                "path": "graph.model.22.m.0.1.attn.qkv.v.conv",
+                "region": "neck_attention_safe",
+                "scale_maximum": 2.2858333587646484,
+                "scale_mean": 0.5268023014068604,
+                "scale_minimum": 0.13468092679977417,
+                "sqnr_db": 15.241326675527123,
+                "zero_ratio": 0.0495147705078125
+              }
+            ],
+            "weight_elements": 65536
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.0006522210899758454,
+              "code_histogram": [
+                1242,
+                4683,
+                17469,
+                57554,
+                101216,
+                100486,
+                96183,
+                116427,
+                95194,
+                98516,
+                95214,
+                48097,
+                12466,
+                2629,
+                496
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9836303206657396,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.3752480149269104,
+              "mse": 4.469506282932721e-05,
+              "normalized_rmse": 0.18019828933290072,
+              "occupied_codes": 15,
+              "scale_bytes": 1536,
+              "scale_count": 384,
+              "scale_maximum": 2.7382900714874268,
+              "scale_mean": 0.34007549782594043,
+              "scale_minimum": 0.008437533862888813,
+              "sqnr_db": 14.884986724054542,
+              "weight_code_bytes": 423936,
+              "zero_ratio": 0.13731671761775363
+            },
+            "quantized_modules": 6,
+            "region": "detect_one2one_tower",
+            "sites": [
+              {
+                "clipping_rate": 0.0006239149305555555,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9830804969971892,
+                "elements": 147456,
+                "maximum_absolute_error": 0.3752480149269104,
+                "mse": 0.00019220286048948765,
+                "normalized_rmse": 0.1831741748428189,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 2.7382900714874268,
+                "scale_mean": 0.7751375436782837,
+                "scale_minimum": 0.17664282023906708,
+                "sqnr_db": 14.742715123609642,
+                "zero_ratio": 0.1322360568576389
+              },
+              {
+                "clipping_rate": 0.0013292100694444445,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9877297539539798,
+                "elements": 36864,
+                "maximum_absolute_error": 0.14484095573425293,
+                "mse": 4.386627309334775e-05,
+                "normalized_rmse": 0.15617230721107972,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.109224557876587,
+                "scale_mean": 0.3923737406730652,
+                "scale_minimum": 0.027862347662448883,
+                "sqnr_db": 16.127919472127516,
+                "zero_ratio": 0.2921278211805556
+              },
+              {
+                "clipping_rate": 0.00037977430555555556,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9820589483263,
+                "elements": 294912,
+                "maximum_absolute_error": 0.09761349856853485,
+                "mse": 1.1649530885430673e-05,
+                "normalized_rmse": 0.1885745385007873,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 0.45706042647361755,
+                "scale_mean": 0.17663788795471191,
+                "scale_minimum": 0.05764247104525566,
+                "sqnr_db": 14.490338929226365,
+                "zero_ratio": 0.12276543511284722
+              },
+              {
+                "clipping_rate": 0.001681857638888889,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9858087001986933,
+                "elements": 36864,
+                "maximum_absolute_error": 0.25421327352523804,
+                "mse": 5.065878697981437e-05,
+                "normalized_rmse": 0.16787261188836397,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.2683179378509521,
+                "scale_mean": 0.31279394030570984,
+                "scale_minimum": 0.01897888444364071,
+                "sqnr_db": 15.500403048767792,
+                "zero_ratio": 0.2623426649305556
+              },
+              {
+                "clipping_rate": 0.0006035698784722222,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9818896507498014,
+                "elements": 294912,
+                "maximum_absolute_error": 0.015421323478221893,
+                "mse": 2.5202166398230474e-07,
+                "normalized_rmse": 0.18945383456468598,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 0.05762431398034096,
+                "scale_mean": 0.02389758825302124,
+                "scale_minimum": 0.008437533862888813,
+                "sqnr_db": 14.449932002719821,
+                "zero_ratio": 0.10446845160590278
+              },
+              {
+                "clipping_rate": 0.0016276041666666667,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9858527194670995,
+                "elements": 36864,
+                "maximum_absolute_error": 0.21959877014160156,
+                "mse": 6.943752264810933e-05,
+                "normalized_rmse": 0.1676141067857747,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.2.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.2993465662002563,
+                "scale_mean": 0.35961228609085083,
+                "scale_minimum": 0.024951931089162827,
+                "sqnr_db": 15.513788659054937,
+                "zero_ratio": 0.2569986979166667
+              }
+            ],
+            "weight_elements": 847872
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.003076171875,
+              "code_histogram": [
+                221,
+                1146,
+                2141,
+                2086,
+                1768,
+                1325,
+                1094,
+                1174,
+                1348,
+                2058,
+                3281,
+                2475,
+                354,
+                9,
+                0
+              ],
+              "code_max": 6,
+              "code_min": -7,
+              "code_occupancy_ratio": 0.9333333373069763,
+              "cosine": 0.984990789242353,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.1511608064174652,
+              "mse": 0.0002811174839735031,
+              "normalized_rmse": 0.17260702361035307,
+              "occupied_codes": 14,
+              "scale_bytes": 320,
+              "scale_count": 80,
+              "scale_maximum": 0.8103833198547363,
+              "scale_mean": 0.516663932800293,
+              "scale_minimum": 0.31700533628463745,
+              "sqnr_db": 15.25883072477333,
+              "weight_code_bytes": 10240,
+              "zero_ratio": 0.05732421875
+            },
+            "quantized_modules": 1,
+            "region": "detect_one2one_predictor",
+            "sites": [
+              {
+                "clipping_rate": 0.003076171875,
+                "code_max": 6,
+                "code_min": -7,
+                "cosine": 0.984990789242353,
+                "elements": 20480,
+                "maximum_absolute_error": 0.1511608064174652,
+                "mse": 0.0002811174839735031,
+                "normalized_rmse": 0.17260702361035307,
+                "occupied_codes": 14,
+                "output_channels": 80,
+                "path": "graph.model.23.detect_head.one2one_cv3.2.2",
+                "region": "detect_one2one_predictor",
+                "scale_maximum": 0.8103833198547363,
+                "scale_mean": 0.5166639685630798,
+                "scale_minimum": 0.31700533628463745,
+                "sqnr_db": 15.25883072477333,
+                "zero_ratio": 0.05732421875
+              }
+            ],
+            "weight_elements": 20480
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.0008549160427517361,
+              "code_histogram": [
+                3337,
+                60974,
+                237469,
+                332477,
+                262971,
+                156608,
+                110687,
+                112377,
+                109243,
+                151827,
+                248448,
+                299820,
+                208019,
+                59376,
+                5663
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9816018474027116,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.09545576572418213,
+              "mse": 2.218826719197548e-05,
+              "normalized_rmse": 0.1909393993879334,
+              "occupied_codes": 15,
+              "scale_bytes": 2048,
+              "scale_count": 512,
+              "scale_maximum": 0.4763305187225342,
+              "scale_mean": 0.15465809404850006,
+              "scale_minimum": 0.05088790878653526,
+              "sqnr_db": 14.382088957399542,
+              "weight_code_bytes": 1179648,
+              "zero_ratio": 0.04763158162434896
+            },
+            "quantized_modules": 1,
+            "region": "backbone_deep",
+            "sites": [
+              {
+                "clipping_rate": 0.0008549160427517361,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9816018474027116,
+                "elements": 2359296,
+                "maximum_absolute_error": 0.09545576572418213,
+                "mse": 2.218826719197548e-05,
+                "normalized_rmse": 0.1909393993879334,
+                "occupied_codes": 15,
+                "output_channels": 512,
+                "path": "graph.model.7.conv",
+                "region": "backbone_deep",
+                "scale_maximum": 0.4763305187225342,
+                "scale_mean": 0.15465809404850006,
+                "scale_minimum": 0.05088790878653526,
+                "sqnr_db": 14.382088957399542,
+                "zero_ratio": 0.04763158162434896
+              }
+            ],
+            "weight_elements": 2359296
+          }
+        ],
+        "quantized_modules": 9,
+        "scale_bytes": 4928,
+        "weight_code_bytes": 1646592,
+        "weight_elements": 3293184
+      }
+    },
+    "cumulative-backbone-w8": {
+      "activation_output_quantization": "calibrated_lsq_plus_a8",
+      "all_metric_count": 40,
+      "build": {
+        "activation": "qsilu_pq",
+        "activation_policy_id": "qsilu_pq--lsq-plus-a8",
+        "activation_quantizers": 124,
+        "activation_region_assignments": [],
+        "build_seconds": 1.789554225280881,
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+        "checkpoint_state_source": "ema",
+        "protected_modules": {
+          "achitechure_1.masf.P3MASFFull35": 1,
+          "ultralytics.nn.modules.block.RealNVP": 1,
+          "ultralytics.nn.modules.head.Detect": 1,
+          "ultralytics.nn.modules.head.Pose26": 1,
+          "yolo_attention.attention.HardwareFriendlyAttention": 2,
+          "yolo_attention.binary_basis.BinaryScore": 2,
+          "yolo_attention.normalization.PiecewiseLinearSoftmax": 2,
+          "yolo_attention.projection.ModularQKVProjection": 2,
+          "yolo_attention.relative_bias.RelativePositionBias": 2
+        },
+        "training_only_unquantized_sites": 66,
+        "weight_view_parity": {
+          "deployment_batch_norm_modules": 0,
+          "deployment_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 152,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 0,
+              "training_only_weight_elements": 0,
+              "weight_elements": 22702912
+            }
+          },
+          "deployment_path_parity": true,
+          "deployment_state_sha256": "ebc32f865e118d7417d8e315cb9983f4ce435ce423f0f29d66a4bbe924eaa143",
+          "folded_batch_norm_modules": 179,
+          "forward_all_finite": true,
+          "forward_maximum_absolute_error": 0.000732421875,
+          "forward_maximum_relative_to_reference_peak": 7.105692362750036e-06,
+          "forward_normalized_rmse": 3.3907510427995803e-06,
+          "forward_parity_evaluated": true,
+          "forward_parity_passed": true,
+          "forward_removed_training_only_tensor_paths": [
+            "output.detect[1].one2many.boxes",
+            "output.detect[1].one2many.scores",
+            "output.detect[1].one2many.feats[0]",
+            "output.detect[1].one2many.feats[1]",
+            "output.detect[1].one2many.feats[2]",
+            "output.pose[1].one2many.boxes",
+            "output.pose[1].one2many.scores",
+            "output.pose[1].one2many.feats[0]",
+            "output.pose[1].one2many.feats[1]",
+            "output.pose[1].one2many.feats[2]",
+            "output.pose[1].one2many.kpts"
+          ],
+          "forward_same_structure": true,
+          "inference_contract_parity": true,
+          "master_batch_norm_modules": 179,
+          "master_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 251,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 99,
+              "training_only_weight_elements": 3748480,
+              "weight_elements": 26451392
+            }
+          },
+          "master_matches_source": true,
+          "master_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "schema_version": 1,
+          "source_batch_norm_modules": 179,
+          "source_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "source_unchanged": true
+        }
+      },
+      "calibration": {
+        "invalid_observers": [],
+        "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+        "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+        "observed_maximum": 268.3276062011719,
+        "observed_minimum": -0.2856657803058624,
+        "peak_gpu_memory_mib": 475.1259765625,
+        "quantizers": 124,
+        "samples": {
+          "detect": 32,
+          "pose": 32
+        },
+        "seconds": 3.5390758612193167,
+        "valid_observers": 124
+      },
+      "candidate": {
+        "candidate_id": "cumulative-backbone-w8",
+        "format_id": "mixed-fixed-sd4-w8",
+        "path_routes": [
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.22.m.0.1.attn.qkv.v.conv"
+            ],
+            "route_id": "fixed-sd4-neck-attention"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 6,
+            "paths": [
+              "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+              "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+              "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+              "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+            ],
+            "route_id": "fixed-sd4-detect-tower"
+          },
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.23.detect_head.one2one_cv3.2.2"
+            ],
+            "route_id": "fixed-sd4-detect-predictor"
+          },
+          {
+            "format": {
+              "bits": 8,
+              "family": "uniform",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 1,
+            "paths": [
+              "graph.model.7.conv"
+            ],
+            "route_id": "layer-backbone-high"
+          }
+        ],
+        "region_defaults": []
+      },
+      "gate": {
+        "accepted_run_id": "v35-cumulative-backbone-mixed-format-search-v1:accepted-reused",
+        "candidate_run_id": "v35-cumulative-backbone-mixed-format-search-v1:cumulative-backbone-w8",
+        "decision": "green",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.000603632806199017,
+          "bbat/ball/pose/map50": -0.00023996217327071356,
+          "bbat/bat/box/map50": 0.0005003650838716345,
+          "bbat/bat/pose/map50": 0.0005005557752709722,
+          "bbat/box/map50": 0.0005519989450353258,
+          "bbat/pose/map50": 0.0001302968010000738,
+          "coco/box/map50": -0.0023622136504453106,
+          "coco/person/box/map50": -0.0013912862132987591
+        },
+        "matched_run_id": "v35-cumulative-backbone-mixed-format-search-v1:matched-reused",
+        "maximum_sham_drift": 0.0,
+        "passed": true,
+        "sham_deltas": {},
+        "sham_gate_applicable": false,
+        "sham_gate_passed": true,
+        "thresholds": {
+          "metric_family": "map50",
+          "recovery_floor": 0.04,
+          "sham_absolute_drift": 0.01,
+          "total_drop": 0.015,
+          "w8_incremental_drop": 0.01
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.010179884216599988,
+          "bbat/ball/pose/map50": 0.010305104508771423,
+          "bbat/bat/box/map50": -0.0010261344026626373,
+          "bbat/bat/pose/map50": -0.0010259437112632996,
+          "bbat/box/map50": 0.004576874906968564,
+          "bbat/pose/map50": 0.004639580398754117,
+          "coco/box/map50": -0.013938300915200874,
+          "coco/person/box/map50": -0.00670395457290951
+        },
+        "total_gate_passed": true,
+        "w8_incremental_gate_applicable": true,
+        "w8_incremental_gate_passed": true,
+        "worst_incremental_delta": -0.0023622136504453106,
+        "worst_incremental_metric": "coco/box/map50",
+        "worst_total_delta": -0.013938300915200874,
+        "worst_total_metric": "coco/box/map50"
+      },
+      "materialization": {
+        "detect_compatible_tensors": 753,
+        "detect_complete": true,
+        "pose_compatible_tensors": 801,
+        "pose_complete": true
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9685624507233429,
+        "bbat/ball/pose/map50": 0.9697939591148501,
+        "bbat/bat/box/map50": 0.9930522060156874,
+        "bbat/bat/pose/map50": 0.9930523967070868,
+        "bbat/box/map50": 0.9808073283695151,
+        "bbat/pose/map50": 0.9814231779109684,
+        "coco/box/map50": 0.65678070624222,
+        "coco/person/box/map50": 0.832705632903834
+      },
+      "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v35-cumulative-backbone-mixed-format-search-v1/validation/cumulative-backbone-w8/epoch-0000/bittrue/metrics.json",
+      "metrics_report_sha256": "aa0fd65656b57f200bd03ce48e15546a099f24455cc66e0be7f07f1737917bb9",
+      "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v35-cumulative-backbone-mixed-format-search-v1/validation/cumulative-backbone-w8/epoch-0000/bittrue",
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "role": "cumulative-backbone-w8",
+      "seconds": 87.58615454798564,
+      "status": "completed",
+      "weight_quantization": {
+        "assignments": [
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "neck_attention_safe",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.22.m.0.1.attn.qkv.v.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "detect_one2one_tower",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "graph.model.23.detect_head.one2one_cv2.2.1.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "detect_one2one_predictor",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.23.detect_head.one2one_cv3.2.2"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 8,
+              "format_id": "w8",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "backbone_deep",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.7.conv"
+              ]
+            }
+          }
+        ],
+        "formats": [
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.005462646484375,
+              "code_histogram": [
+                583,
+                2662,
+                6062,
+                7772,
+                6582,
+                4320,
+                3269,
+                3245,
+                3193,
+                4297,
+                6538,
+                7730,
+                6088,
+                2589,
+                606
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9849297165080712,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.35077136754989624,
+              "mse": 0.0003585076774470508,
+              "normalized_rmse": 0.17295521686861184,
+              "occupied_codes": 15,
+              "scale_bytes": 1024,
+              "scale_count": 256,
+              "scale_maximum": 2.2858333587646484,
+              "scale_mean": 0.5268023014068604,
+              "scale_minimum": 0.13468092679977417,
+              "sqnr_db": 15.241326675527123,
+              "weight_code_bytes": 32768,
+              "zero_ratio": 0.0495147705078125
+            },
+            "quantized_modules": 1,
+            "region": "neck_attention_safe",
+            "sites": [
+              {
+                "clipping_rate": 0.005462646484375,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9849297165080712,
+                "elements": 65536,
+                "maximum_absolute_error": 0.35077136754989624,
+                "mse": 0.0003585076774470508,
+                "normalized_rmse": 0.17295521686861184,
+                "occupied_codes": 15,
+                "output_channels": 256,
+                "path": "graph.model.22.m.0.1.attn.qkv.v.conv",
+                "region": "neck_attention_safe",
+                "scale_maximum": 2.2858333587646484,
+                "scale_mean": 0.5268023014068604,
+                "scale_minimum": 0.13468092679977417,
+                "sqnr_db": 15.241326675527123,
+                "zero_ratio": 0.0495147705078125
+              }
+            ],
+            "weight_elements": 65536
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.0006522210899758454,
+              "code_histogram": [
+                1242,
+                4683,
+                17469,
+                57554,
+                101216,
+                100486,
+                96183,
+                116427,
+                95194,
+                98516,
+                95214,
+                48097,
+                12466,
+                2629,
+                496
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9836303206657396,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.3752480149269104,
+              "mse": 4.469506282932721e-05,
+              "normalized_rmse": 0.18019828933290072,
+              "occupied_codes": 15,
+              "scale_bytes": 1536,
+              "scale_count": 384,
+              "scale_maximum": 2.7382900714874268,
+              "scale_mean": 0.34007549782594043,
+              "scale_minimum": 0.008437533862888813,
+              "sqnr_db": 14.884986724054542,
+              "weight_code_bytes": 423936,
+              "zero_ratio": 0.13731671761775363
+            },
+            "quantized_modules": 6,
+            "region": "detect_one2one_tower",
+            "sites": [
+              {
+                "clipping_rate": 0.0006239149305555555,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9830804969971892,
+                "elements": 147456,
+                "maximum_absolute_error": 0.3752480149269104,
+                "mse": 0.00019220286048948765,
+                "normalized_rmse": 0.1831741748428189,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 2.7382900714874268,
+                "scale_mean": 0.7751375436782837,
+                "scale_minimum": 0.17664282023906708,
+                "sqnr_db": 14.742715123609642,
+                "zero_ratio": 0.1322360568576389
+              },
+              {
+                "clipping_rate": 0.0013292100694444445,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9877297539539798,
+                "elements": 36864,
+                "maximum_absolute_error": 0.14484095573425293,
+                "mse": 4.386627309334775e-05,
+                "normalized_rmse": 0.15617230721107972,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.109224557876587,
+                "scale_mean": 0.3923737406730652,
+                "scale_minimum": 0.027862347662448883,
+                "sqnr_db": 16.127919472127516,
+                "zero_ratio": 0.2921278211805556
+              },
+              {
+                "clipping_rate": 0.00037977430555555556,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9820589483263,
+                "elements": 294912,
+                "maximum_absolute_error": 0.09761349856853485,
+                "mse": 1.1649530885430673e-05,
+                "normalized_rmse": 0.1885745385007873,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 0.45706042647361755,
+                "scale_mean": 0.17663788795471191,
+                "scale_minimum": 0.05764247104525566,
+                "sqnr_db": 14.490338929226365,
+                "zero_ratio": 0.12276543511284722
+              },
+              {
+                "clipping_rate": 0.001681857638888889,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9858087001986933,
+                "elements": 36864,
+                "maximum_absolute_error": 0.25421327352523804,
+                "mse": 5.065878697981437e-05,
+                "normalized_rmse": 0.16787261188836397,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.2683179378509521,
+                "scale_mean": 0.31279394030570984,
+                "scale_minimum": 0.01897888444364071,
+                "sqnr_db": 15.500403048767792,
+                "zero_ratio": 0.2623426649305556
+              },
+              {
+                "clipping_rate": 0.0006035698784722222,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9818896507498014,
+                "elements": 294912,
+                "maximum_absolute_error": 0.015421323478221893,
+                "mse": 2.5202166398230474e-07,
+                "normalized_rmse": 0.18945383456468598,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 0.05762431398034096,
+                "scale_mean": 0.02389758825302124,
+                "scale_minimum": 0.008437533862888813,
+                "sqnr_db": 14.449932002719821,
+                "zero_ratio": 0.10446845160590278
+              },
+              {
+                "clipping_rate": 0.0016276041666666667,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9858527194670995,
+                "elements": 36864,
+                "maximum_absolute_error": 0.21959877014160156,
+                "mse": 6.943752264810933e-05,
+                "normalized_rmse": 0.1676141067857747,
+                "occupied_codes": 15,
+                "output_channels": 64,
+                "path": "graph.model.23.detect_head.one2one_cv2.2.1.conv",
+                "region": "detect_one2one_tower",
+                "scale_maximum": 1.2993465662002563,
+                "scale_mean": 0.35961228609085083,
+                "scale_minimum": 0.024951931089162827,
+                "sqnr_db": 15.513788659054937,
+                "zero_ratio": 0.2569986979166667
+              }
+            ],
+            "weight_elements": 847872
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.003076171875,
+              "code_histogram": [
+                221,
+                1146,
+                2141,
+                2086,
+                1768,
+                1325,
+                1094,
+                1174,
+                1348,
+                2058,
+                3281,
+                2475,
+                354,
+                9,
+                0
+              ],
+              "code_max": 6,
+              "code_min": -7,
+              "code_occupancy_ratio": 0.9333333373069763,
+              "cosine": 0.984990789242353,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.1511608064174652,
+              "mse": 0.0002811174839735031,
+              "normalized_rmse": 0.17260702361035307,
+              "occupied_codes": 14,
+              "scale_bytes": 320,
+              "scale_count": 80,
+              "scale_maximum": 0.8103833198547363,
+              "scale_mean": 0.516663932800293,
+              "scale_minimum": 0.31700533628463745,
+              "sqnr_db": 15.25883072477333,
+              "weight_code_bytes": 10240,
+              "zero_ratio": 0.05732421875
+            },
+            "quantized_modules": 1,
+            "region": "detect_one2one_predictor",
+            "sites": [
+              {
+                "clipping_rate": 0.003076171875,
+                "code_max": 6,
+                "code_min": -7,
+                "cosine": 0.984990789242353,
+                "elements": 20480,
+                "maximum_absolute_error": 0.1511608064174652,
+                "mse": 0.0002811174839735031,
+                "normalized_rmse": 0.17260702361035307,
+                "occupied_codes": 14,
+                "output_channels": 80,
+                "path": "graph.model.23.detect_head.one2one_cv3.2.2",
+                "region": "detect_one2one_predictor",
+                "scale_maximum": 0.8103833198547363,
+                "scale_mean": 0.5166639685630798,
+                "scale_minimum": 0.31700533628463745,
+                "sqnr_db": 15.25883072477333,
+                "zero_ratio": 0.05732421875
+              }
+            ],
+            "weight_elements": 20480
+          },
+          {
+            "format_id": "w8",
+            "numeric": {
+              "clipping_rate": 0.00023439195421006944,
+              "code_histogram": [
+                150,
+                23,
+                15,
+                14,
+                11,
+                15,
+                14,
+                14,
+                17,
+                20,
+                24,
+                27,
+                26,
+                22,
+                21,
+                26,
+                24,
+                27,
+                30,
+                25,
+                45,
+                34,
+                47,
+                44,
+                51,
+                50,
+                48,
+                68,
+                67,
+                64,
+                70,
+                88,
+                79,
+                71,
+                95,
+                114,
+                106,
+                105,
+                121,
+                144,
+                160,
+                161,
+                172,
+                171,
+                170,
+                209,
+                218,
+                246,
+                266,
+                297,
+                313,
+                306,
+                360,
+                409,
+                418,
+                479,
+                530,
+                535,
+                583,
+                606,
+                652,
+                719,
+                759,
+                878,
+                942,
+                973,
+                1076,
+                1114,
+                1290,
+                1332,
+                1532,
+                1648,
+                1789,
+                1802,
+                2037,
+                2200,
+                2367,
+                2647,
+                2656,
+                3038,
+                3140,
+                3469,
+                3874,
+                3962,
+                4367,
+                4683,
+                5075,
+                5509,
+                6006,
+                6420,
+                6893,
+                7375,
+                7966,
+                8527,
+                9289,
+                10109,
+                10692,
+                11488,
+                12444,
+                13301,
+                14274,
+                15426,
+                16383,
+                17744,
+                18791,
+                19827,
+                21654,
+                22903,
+                24654,
+                26064,
+                27845,
+                29382,
+                30922,
+                33151,
+                34890,
+                37052,
+                39123,
+                41308,
+                43913,
+                45944,
+                48046,
+                50263,
+                53014,
+                54248,
+                56397,
+                57630,
+                58591,
+                59558,
+                73771,
+                58707,
+                57673,
+                56335,
+                55038,
+                52535,
+                50544,
+                48067,
+                45595,
+                43023,
+                40914,
+                38209,
+                36200,
+                33941,
+                32092,
+                30092,
+                28094,
+                26051,
+                24955,
+                22923,
+                21845,
+                20162,
+                19091,
+                17458,
+                16385,
+                15423,
+                14281,
+                13237,
+                12511,
+                11585,
+                10963,
+                10074,
+                9424,
+                8538,
+                8080,
+                7497,
+                6927,
+                6458,
+                5951,
+                5489,
+                5307,
+                4838,
+                4501,
+                4139,
+                3819,
+                3617,
+                3405,
+                3159,
+                2950,
+                2746,
+                2679,
+                2407,
+                2152,
+                2067,
+                1943,
+                1813,
+                1719,
+                1571,
+                1458,
+                1330,
+                1273,
+                1173,
+                1120,
+                1130,
+                957,
+                929,
+                858,
+                839,
+                771,
+                786,
+                632,
+                645,
+                605,
+                521,
+                511,
+                507,
+                448,
+                436,
+                417,
+                374,
+                370,
+                360,
+                312,
+                297,
+                284,
+                250,
+                252,
+                228,
+                219,
+                205,
+                204,
+                208,
+                183,
+                192,
+                175,
+                160,
+                137,
+                132,
+                135,
+                119,
+                112,
+                111,
+                92,
+                111,
+                91,
+                94,
+                103,
+                105,
+                87,
+                63,
+                99,
+                76,
+                72,
+                65,
+                61,
+                71,
+                61,
+                51,
+                49,
+                59,
+                51,
+                58,
+                46,
+                65,
+                34,
+                54,
+                56,
+                485
+              ],
+              "code_max": 127,
+              "code_min": -128,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.995732537668397,
+              "encoded_bits": 8,
+              "logical_code_count": 256,
+              "maximum_absolute_error": 0.4799596965312958,
+              "mse": 5.183342081080708e-06,
+              "normalized_rmse": 0.09228663151277822,
+              "occupied_codes": 256,
+              "scale_bytes": 2048,
+              "scale_count": 512,
+              "scale_maximum": 0.9599193930625916,
+              "scale_mean": 0.005497056990861893,
+              "scale_minimum": 0.000522525398992002,
+              "sqnr_db": 20.697224111816563,
+              "weight_code_bytes": 2359296,
+              "zero_ratio": 0.03126822577582465
+            },
+            "quantized_modules": 1,
+            "region": "backbone_deep",
+            "sites": [
+              {
+                "clipping_rate": 0.00023439195421006944,
+                "code_max": 127,
+                "code_min": -128,
+                "cosine": 0.995732537668397,
+                "elements": 2359296,
+                "maximum_absolute_error": 0.4799596965312958,
+                "mse": 5.183342081080708e-06,
+                "normalized_rmse": 0.09228663151277822,
+                "occupied_codes": 256,
+                "output_channels": 512,
+                "path": "graph.model.7.conv",
+                "region": "backbone_deep",
+                "scale_maximum": 0.9599193930625916,
+                "scale_mean": 0.005497056990861893,
+                "scale_minimum": 0.000522525398992002,
+                "sqnr_db": 20.697224111816563,
+                "zero_ratio": 0.03126822577582465
+              }
+            ],
+            "weight_elements": 2359296
+          }
+        ],
+        "quantized_modules": 9,
+        "scale_bytes": 4928,
+        "weight_code_bytes": 2826240,
+        "weight_elements": 3293184
+      }
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "accuracy_tolerance": 0.002,
+    "eligible_ids": [
+      "accuracy-a05-add-pose-tower-w8",
+      "compression-c04-add-pose-tower-w8",
+      "accuracy-a09-add-neck-w8",
+      "cumulative-backbone-fixed-sd4",
+      "cumulative-backbone-w8"
+    ],
+    "pareto_ids": [
+      "accuracy-a05-add-pose-tower-w8",
+      "compression-c04-add-pose-tower-w8",
+      "accuracy-a09-add-neck-w8"
+    ],
+    "rejected_ids": [],
+    "roles": {
+      "accuracy": "accuracy-a05-add-pose-tower-w8",
+      "balanced": "compression-c04-add-pose-tower-w8",
+      "hardware": "accuracy-a09-add-neck-w8"
+    },
+    "total_max_drop": 0.015
+  },
+  "status": "completed"
+}

@@ -1,0 +1,2550 @@
+{
+  "counts": {
+    "calibration_per_task": 32,
+    "probe_per_task": 64
+  },
+  "diagnostic_only": true,
+  "formal_training": false,
+  "gpu_used": false,
+  "kind": "full35_quantization_diagnostic_manifest",
+  "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+  "schema_version": 1,
+  "seed": 20260830,
+  "selections": {
+    "calibration": {
+      "bbat_pose": {
+        "coverage": {
+          "class_ids": [
+            0,
+            1
+          ],
+          "labeled_images": 32,
+          "pose_rows": 44
+        },
+        "samples": [
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/f15c641e4a78b05c_jpg.rf.e90ead8bcae2c7d6371e1936d80fb038.jpg",
+            "image_sha256": "3be0746a4289d34081669f82baee81210fff5b6d2d6a1087d0f9ac794fd939fd",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/f15c641e4a78b05c_jpg.rf.e90ead8bcae2c7d6371e1936d80fb038.txt",
+            "label_sha256": "1f829a834811d70c59e81247ce7c71070b85615a7be7ae369598d60a44119d62",
+            "pose_rows": 2,
+            "source_group": "f15c641e4a78b05c_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_163024_mp4-0036_jpg.rf.0e30597392ba99bbab733344f4f75902.jpg",
+            "image_sha256": "5d688d5bf1b7c581870b13a9feff4419c810ec8ef469e3790a4995ee7bdd5511",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250314_163024_mp4-0036_jpg.rf.0e30597392ba99bbab733344f4f75902.txt",
+            "label_sha256": "adebb2e63382e564301aaafdd37775dc6c8e93f1d3c7cb6f1103772887a71cdf",
+            "pose_rows": 1,
+            "source_group": "20250314_163024_mp4-0036_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/Untitled_mov-41_jpg.rf.1539695f91b8cba80d9ab9aa626564cc.jpg",
+            "image_sha256": "8a6d05ac8521ca49d27a128193b6c29e038778f0dabd392f4ef4dd44d5f22d51",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/Untitled_mov-41_jpg.rf.1539695f91b8cba80d9ab9aa626564cc.txt",
+            "label_sha256": "f8cad3d3bdc4ea88e161d9b07fe819996960f85f03589885c06009f60ac53ae3",
+            "pose_rows": 1,
+            "source_group": "Untitled_mov-41_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_162543_mp4-0000_jpg.rf.ce4a6eb60e5c092e83ce4750eb04d87e.jpg",
+            "image_sha256": "accc373f4827243010e8764fb61d4e28a795ed5c98abf90f649a6d859b3003de",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250314_162543_mp4-0000_jpg.rf.ce4a6eb60e5c092e83ce4750eb04d87e.txt",
+            "label_sha256": "c98efffb303d5dc8c6858c812cc70dd7e666a6ee8099307e11708d38c7e3799d",
+            "pose_rows": 1,
+            "source_group": "20250314_162543_mp4-0000_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/0028F_mp4-0011_jpg.rf.4ca4f42c1b844ac6da94606c06c4679a.jpg",
+            "image_sha256": "bd3e01d009feed657d32c96e2c28879c7c63c51e7745cfb3be1b1ae005b2a07a",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/0028F_mp4-0011_jpg.rf.4ca4f42c1b844ac6da94606c06c4679a.txt",
+            "label_sha256": "074c18839a324eb152a48f3c8ace34e39eed7f25f27e4a0f63e836ab9c07ae50",
+            "pose_rows": 2,
+            "source_group": "0028F_mp4-0011_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_163024_mp4-0001_jpg.rf.f444979cacb26c4231b9dfd9f67c073e.jpg",
+            "image_sha256": "958afbefb06d7be45c2f4ac9e882b8f581e1d4fe6c66e37839badfa8b195b2b3",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250314_163024_mp4-0001_jpg.rf.f444979cacb26c4231b9dfd9f67c073e.txt",
+            "label_sha256": "6436c9047bb471bf6d174be4a3a2bd15a46f541c9ab00415e5d1003da8a7d74d",
+            "pose_rows": 1,
+            "source_group": "20250314_163024_mp4-0001_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000074369_jpg.rf.005285acde3eb3b5dd6db6081d919f4d.jpg",
+            "image_sha256": "3d53d50e553c32b4d2607eac5a74f4c343f4611e8adacd7f96566c5f006ec4cd",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/000000074369_jpg.rf.005285acde3eb3b5dd6db6081d919f4d.txt",
+            "label_sha256": "ab26150f8e87bc72ce5c5e6db39b5b33dc25097191174fd3cb0a573e20c751b3",
+            "pose_rows": 1,
+            "source_group": "000000074369_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/260_png_jpg.rf.63fb963574ef2342039c409d48ec7050.jpg",
+            "image_sha256": "efeff79856d5838dd4232123cc6676ed217ce990156591e8df219ca9d24c6d38",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/260_png_jpg.rf.63fb963574ef2342039c409d48ec7050.txt",
+            "label_sha256": "73f2df4e935a2f4fc1e892c636560f902e03d9a29207d1cb58d39c561d610eba",
+            "pose_rows": 1,
+            "source_group": "260_png_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/0021O_mp4-0011_jpg.rf.5f3349e46df6691b6ac74da919adeec3.jpg",
+            "image_sha256": "500ab3758c7955963f097334dc4e04d41ce2a2a15226d0b01257efdc01e3fd2d",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/0021O_mp4-0011_jpg.rf.5f3349e46df6691b6ac74da919adeec3.txt",
+            "label_sha256": "c6c93a27d4248efafcbad3cc9f42d2cfd832a669da4b868289a635ef6d384795",
+            "pose_rows": 2,
+            "source_group": "0021O_mp4-0011_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/frame1222_jpg.rf.0c837f204b5a8594d3add744b0f79d8f.jpg",
+            "image_sha256": "7b3f2cb56c5924a3188595a602c4960b9af3ec742568c8644dc16f6d4208bcd8",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/frame1222_jpg.rf.0c837f204b5a8594d3add744b0f79d8f.txt",
+            "label_sha256": "70558c9bd3b2c63ded71ecb99e34b5ceed2677ed57295b8f5050616fb4a1c17e",
+            "pose_rows": 2,
+            "source_group": "frame1222_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250315_163624_mp4-0049_jpg.rf.49e463762ee45163cf1657ffb39028c3.jpg",
+            "image_sha256": "f59d7c6a7f8800a4110f51ce2fe815eabe9ce7711b79d2da1130dfe94bf1176b",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250315_163624_mp4-0049_jpg.rf.49e463762ee45163cf1657ffb39028c3.txt",
+            "label_sha256": "9996bd94b467ea85a4376cd6eed87e9af69f775b5a0044a19f87e0202ea91c60",
+            "pose_rows": 1,
+            "source_group": "20250315_163624_mp4-0049_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250312_143547_mp4-0183_jpg.rf.3e684ea247b9d2293e425fa2af7f6046.jpg",
+            "image_sha256": "99a8405fc8559c6919fb011e82c40ca47a4384647d467d6f0380a2cf30cf91f4",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250312_143547_mp4-0183_jpg.rf.3e684ea247b9d2293e425fa2af7f6046.txt",
+            "label_sha256": "066b84fa85a1531bc76b1304a4cf76184d88cb5b2c2cddb883e8851bfc0f4886",
+            "pose_rows": 1,
+            "source_group": "20250312_143547_mp4-0183_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/youtube-380_jpg.rf.66a8c17c7b2925e13f91ab87fa4a42c5.jpg",
+            "image_sha256": "915845a193915d4bb561ffe2d9135e797dfbe4bb371ca6c23437352b066086c9",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/youtube-380_jpg.rf.66a8c17c7b2925e13f91ab87fa4a42c5.txt",
+            "label_sha256": "c65843b7fd45d7e7f8d11f81b1f48ec13f15ebc98c687060136d0377759d7172",
+            "pose_rows": 1,
+            "source_group": "youtube-380_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000015843_jpg.rf.04f90f836a0608872ae7649468e48a0f.jpg",
+            "image_sha256": "b1e6d0ae858d12737abc8b3d03c90cbf79a477d1d7e51d2ef959252829ae8393",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/000000015843_jpg.rf.04f90f836a0608872ae7649468e48a0f.txt",
+            "label_sha256": "7a1c8ce5fb3f6c7bd74ed84ed81f6c15c0ce78d6f6bc019526fd11e8d8923f24",
+            "pose_rows": 1,
+            "source_group": "000000015843_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/3H2A9735-MPEG-4328_jpg.rf.20265feae97e4c3f34bc0a1ea3e1180a.jpg",
+            "image_sha256": "c54f60a8bc592fc93478eafc57a50368f375940a46e8faf2b60a0afb0b6316b6",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/3H2A9735-MPEG-4328_jpg.rf.20265feae97e4c3f34bc0a1ea3e1180a.txt",
+            "label_sha256": "a50b12151d01f9d954e1f4db6f417a84f1f291ceb0ee3fea94349b54a45ef130",
+            "pose_rows": 2,
+            "source_group": "3H2A9735-MPEG-4328_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_150219_mp4-0173_jpg.rf.115f80c35a78a9612a41e3b7b2d401a0.jpg",
+            "image_sha256": "f94cbb7065a6d6389a5ba42a50117457d7a5358a638d921f08afe3a8d3eb4039",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250314_150219_mp4-0173_jpg.rf.115f80c35a78a9612a41e3b7b2d401a0.txt",
+            "label_sha256": "390523f0b97184e469560dc02b8c5ec5b703271325ba5f84dbe2d87a47c579be",
+            "pose_rows": 1,
+            "source_group": "20250314_150219_mp4-0173_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/AngleW_1683932996_mp4-0104_jpg.rf.2271a82da6d13b947e193a74deade69d.jpg",
+            "image_sha256": "7c2021bd7aa51bdc8c2a93661324cefa22aac02f326b1c5af10f346284762df3",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/AngleW_1683932996_mp4-0104_jpg.rf.2271a82da6d13b947e193a74deade69d.txt",
+            "label_sha256": "f186977c1c1c339f6e19bc11ed678946eed9c1cc4e9f84dae989a5e5f7838fe0",
+            "pose_rows": 2,
+            "source_group": "AngleW_1683932996_mp4-0104_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/ohtani_mp4-0008_jpg.rf.1791d4f272695d911cc6b43833692614.jpg",
+            "image_sha256": "eb8d0a87734d2ae2da3f6a379caea62d9368121ac3bfba4499a95eb1e2134ba5",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/ohtani_mp4-0008_jpg.rf.1791d4f272695d911cc6b43833692614.txt",
+            "label_sha256": "0b0982d9e81808ccb5ab3223a5f6d0a3eae002a315dd721e1583cafc6a5a5226",
+            "pose_rows": 1,
+            "source_group": "ohtani_mp4-0008_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000043657_jpg.rf.7599b0b431a00676dbf55b722f944971.jpg",
+            "image_sha256": "fad88353566ef7aa3d713355e49ad1a3743420f92b6234f95fc99a213808ac90",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/000000043657_jpg.rf.7599b0b431a00676dbf55b722f944971.txt",
+            "label_sha256": "7d312bdf3672e09bf150f973b5c57707085029c114c6f9ce23224b96bae6255e",
+            "pose_rows": 2,
+            "source_group": "000000043657_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250312_143547_mp4-0549_jpg.rf.c36996f5694e5587e96cab29ff333364.jpg",
+            "image_sha256": "06c6e0ab057bd5b937c314f5d3e534537399586d34501697f4572e0eb3065805",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250312_143547_mp4-0549_jpg.rf.c36996f5694e5587e96cab29ff333364.txt",
+            "label_sha256": "7599f42e641f19d59b3bbd7566ba241d93923fbf95e789b8d154ad150a8deded",
+            "pose_rows": 1,
+            "source_group": "20250312_143547_mp4-0549_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/baseball106_png_jpg.rf.6eaa37a71dd2edf74c6a3213835371b1.jpg",
+            "image_sha256": "eaf1f1dfd0ed94210cefb1366ed9f64461de5b9c86a167df932881cdac2ea0e4",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/baseball106_png_jpg.rf.6eaa37a71dd2edf74c6a3213835371b1.txt",
+            "label_sha256": "d1743120edd18ed972a58a2abfa6f173150721b13f427433823d8dcb72865d22",
+            "pose_rows": 2,
+            "source_group": "baseball106_png_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/0002I_mp4-0007_jpg.rf.402c05689f52658502d511c3f9728354.jpg",
+            "image_sha256": "b092ec7a9ff1e2887b58fd001218c1a73fd3c30cc00e0e202788ea3d6552133b",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/0002I_mp4-0007_jpg.rf.402c05689f52658502d511c3f9728354.txt",
+            "label_sha256": "465f1b00e3b64b8552533f4c5fb23f227035cccfd3c5ceec0b706f7202f4c177",
+            "pose_rows": 2,
+            "source_group": "0002I_mp4-0007_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/106_png_jpg.rf.10601e1e74c90df565da5abdd5b9d93e.jpg",
+            "image_sha256": "bde72f771c5e5e6d1323768ac87edf304b66783f136e87b813d0322909d529a0",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/106_png_jpg.rf.10601e1e74c90df565da5abdd5b9d93e.txt",
+            "label_sha256": "043d02a015fa15a3907897f2ad0c61a426e12afb4e1e17053c6e57a1f23d7cc9",
+            "pose_rows": 1,
+            "source_group": "106_png_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000492605_jpg.rf.2ec622f29918b5d03a64660529cba7e3.jpg",
+            "image_sha256": "25d994dca765648bbe608c3213a75f4ac27c93d494f557fe53e8f9a708034fe2",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/000000492605_jpg.rf.2ec622f29918b5d03a64660529cba7e3.txt",
+            "label_sha256": "d15099153de6255a6b83c8b6e2acac2031d7a500de4772b54b9a7c128ea5e573",
+            "pose_rows": 1,
+            "source_group": "000000492605_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/AngleV_1717202555_mp4-0056_jpg.rf.373309f06fc33424d8893018a73603d3.jpg",
+            "image_sha256": "24b30e2046eb6a402b071729e9c2d2fed7137a115660554dd2170f584d54930b",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/AngleV_1717202555_mp4-0056_jpg.rf.373309f06fc33424d8893018a73603d3.txt",
+            "label_sha256": "5dc9bed4a4a5c1d55417fd6933ebff600465e58a900d28f7887e15ec4c69d943",
+            "pose_rows": 2,
+            "source_group": "AngleV_1717202555_mp4-0056_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/00f7558660597358_jpg.rf.14c3e2f346d9f4689fb648ac343c3175.jpg",
+            "image_sha256": "911fd6de1762810fde5931ff70111e4786190b20a0cd38243665af1bbf9d19ef",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/00f7558660597358_jpg.rf.14c3e2f346d9f4689fb648ac343c3175.txt",
+            "label_sha256": "511d4a86e73bde2c315b26e1551930bc1a197ef4c3d7b14575e55feed84d4c7f",
+            "pose_rows": 1,
+            "source_group": "00f7558660597358_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_163024_mp4-0069_jpg.rf.abf5881d02ccb3bd9c05bd521b92b7d2.jpg",
+            "image_sha256": "795d3f8c5188b6907fa5165a3d74729ca9f5dae509d2a5506979fe8a38abdedb",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250314_163024_mp4-0069_jpg.rf.abf5881d02ccb3bd9c05bd521b92b7d2.txt",
+            "label_sha256": "7c61cb20366738772ef9a9271fd1cce809bef3a328bbd651b0c6aff193aa43ae",
+            "pose_rows": 1,
+            "source_group": "20250314_163024_mp4-0069_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250314_163024_mp4-0074_jpg.rf.33eddfb61dab8bdb053289307020fdfc.jpg",
+            "image_sha256": "5796a9ac0101a2c310405f04392ef1587aeab0011584ba38125fff218c337a2c",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250314_163024_mp4-0074_jpg.rf.33eddfb61dab8bdb053289307020fdfc.txt",
+            "label_sha256": "ddc10156e7c639f0f475240993daa485e3dd364c0365ed132abe6645877cf564",
+            "pose_rows": 1,
+            "source_group": "20250314_163024_mp4-0074_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000443505_jpg.rf.17147d2b371079a1af83f02b4b099775.jpg",
+            "image_sha256": "f9699cc18a0a83cf66dc8d0ffec83e74ab9608c4ac83a73185acc25db6c8916e",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/000000443505_jpg.rf.17147d2b371079a1af83f02b4b099775.txt",
+            "label_sha256": "ea5e1676b528a7b97519b5914f1d715ce5ead7ee22d32b87b9a237c37a980de1",
+            "pose_rows": 2,
+            "source_group": "000000443505_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000342459_jpg.rf.b5942f002c3c5d389eda9c55dcae2368.jpg",
+            "image_sha256": "827a5f0c754d25b1bf20ee9dd433a87b3339efb22c4f9b1d0df8700b270776fe",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/000000342459_jpg.rf.b5942f002c3c5d389eda9c55dcae2368.txt",
+            "label_sha256": "2d90b9c1d5c482ef7074f79bf4ea7ce4db94748c3aff74c140069f7a95adee2e",
+            "pose_rows": 1,
+            "source_group": "000000342459_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/20250312_143347_mp4-0016_jpg.rf.582c365461198cf6315d83af393cac41.jpg",
+            "image_sha256": "287d84e3eef626d2d8f8e0cf947c8b8ada10632e0d34515358fbfa6ad39c0436",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/20250312_143347_mp4-0016_jpg.rf.582c365461198cf6315d83af393cac41.txt",
+            "label_sha256": "7a2a4297a823fe2717181d1d776188187ead01714fb014c517968aff26eb4ab6",
+            "pose_rows": 2,
+            "source_group": "20250312_143347_mp4-0016_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/train/000000036911_jpg.rf.95430e8162ca1a646fd865a73f4fa549.jpg",
+            "image_sha256": "3186d4a5930518998fd41b4750caf4695b5d6d38645a7664f296d46da6ab728a",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/train/000000036911_jpg.rf.95430e8162ca1a646fd865a73f4fa549.txt",
+            "label_sha256": "cefad2c377bcdd6e854d767cd6a546d2a052de10be4ae7b4e153c4e7404610a6",
+            "pose_rows": 1,
+            "source_group": "000000036911_jpg"
+          }
+        ],
+        "selection_sha256": "ae8d1873e0a95aa95e1f412fdc15298a3ad66cc4815284aadd05485a9fa574f8",
+        "source_group_policy": "one_canonical_exemplar_per_rf_group",
+        "source_list": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/splits/formal-train.txt",
+        "source_list_sha256": "8249c5f45a7b1f4a103ff1f2612dee8739230a738e63b59a4b8c2f3d00dca65b",
+        "split": "formal-train"
+      },
+      "coco_detect": {
+        "coverage": {
+          "class_ids": [
+            0,
+            2,
+            3,
+            6,
+            7,
+            8,
+            9,
+            13,
+            16,
+            20,
+            24,
+            26,
+            28,
+            29,
+            30,
+            31,
+            32,
+            36,
+            37,
+            39,
+            41,
+            42,
+            45,
+            46,
+            49,
+            53,
+            54,
+            56,
+            57,
+            58,
+            59,
+            60,
+            62,
+            63,
+            65,
+            66,
+            67,
+            69,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77
+          ],
+          "labeled_images": 31,
+          "person_images": 16,
+          "pose_rows": 185
+        },
+        "samples": [
+          {
+            "class_ids": [
+              0,
+              57,
+              77
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000292440.jpg",
+            "image_sha256": "8734a4ffee27d13dc79a9e68e8749279bdaffbd1fac1bbaace6b20844fce8721",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000292440.txt",
+            "label_sha256": "2b624ff8a7a2e2a2343fe4fbcb7556c6892baa5d528794a26b6b6308d9326db8",
+            "pose_rows": 4,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              41,
+              45,
+              54,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000484641.jpg",
+            "image_sha256": "633cc83c8e37ba22c9f1112b9faadf979bb78b098f0bb952eb151f58085d7fd7",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000484641.txt",
+            "label_sha256": "c4df61c9bd7c4c883a7b92fb856526b4d27af857002433d84835755d579213c6",
+            "pose_rows": 6,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              41,
+              42,
+              53,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000475578.jpg",
+            "image_sha256": "03c3f4fe74909bbe6ca5bc9bbe7326f0128467bbd42012fe8eb1b92e9df23ed2",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000475578.txt",
+            "label_sha256": "f6d436bd30048d89feb0eacfacf81e7064d257072ed9c250cd994b8dff2d2089",
+            "pose_rows": 11,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              37
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000381568.jpg",
+            "image_sha256": "26b2d6cf32afbf1def0b6b59c38b3507348a73b99a5a2f00c780cff90968a937",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000381568.txt",
+            "label_sha256": "a933a5bf53910dfb36a568dd6bc0e4d83561a84011b42b18cfc9ad26b9be7179",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              39,
+              46
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000179618.jpg",
+            "image_sha256": "50ce644c704c888defcad495eb721d1511e4bb711cc59c53e703041fca2bd0a0",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000179618.txt",
+            "label_sha256": "b7adf4a06bd4f030aab032f915771f8fcdbd2f27a594629da8a6eb97ca66e8cd",
+            "pose_rows": 5,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              53,
+              69
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000006363.jpg",
+            "image_sha256": "e7513b57fdde4c11135dc70aa87f90fa708f60925de5c3370cd3cf0966d6e1f1",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000006363.txt",
+            "label_sha256": "bf571dda68481a95457b9facbbc09621db80454d9459c04794612e107c026206",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              6
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000131295.jpg",
+            "image_sha256": "b383d732c5ca0f0e099d16e4911fd215ffdf7c10253bdd8ec2612ae83d063f59",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000131295.txt",
+            "label_sha256": "e910ab87dfbd7d16086c07e80f3ac4c7035fd6a34a3414f2ca4ccc6142221376",
+            "pose_rows": 1,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              56,
+              57,
+              62,
+              65
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000557102.jpg",
+            "image_sha256": "487233e2395361328e912257d9a8430bc8fe6a08a84a1425b558c312ad5a46b8",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000557102.txt",
+            "label_sha256": "ce0a4b8a878cb287608b70b99759813d65249844e1f510a5cacd9cd4fd2c9237",
+            "pose_rows": 6,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              2,
+              8
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000005282.jpg",
+            "image_sha256": "2d286da0df7544038e01c2bc2dae4095e8f92ae322b3df388a3a7fbface56659",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000005282.txt",
+            "label_sha256": "cd19be37085ba63019facdc8b735de3b20750fa0d651c39ea21c68deea40fd2a",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              53,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000573853.jpg",
+            "image_sha256": "e606c8d24409014461b87e3f2323012f4468a8d3ce4254f6811b3c7580f3d152",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000573853.txt",
+            "label_sha256": "abf42b391ac763bc5d5388685a40af3e0ae66205d5ee18445a55567a9c7aaffc",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              56,
+              60,
+              75
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000231744.jpg",
+            "image_sha256": "796489a3db510743b112e28ffd47804a09129d7bdf01bccc537fa9ba6f6d29de",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000231744.txt",
+            "label_sha256": "a0838145de634fc1be14650890abf10ebfce414809e9a84e08bb1b83f7b9f3c6",
+            "pose_rows": 4,
+            "source_group": null
+          },
+          {
+            "class_ids": [],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000022559.jpg",
+            "image_sha256": "91e240c19d6ac8a902c6d67a7f399ae4e614ad57086407b079b378ba00376c33",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000022559.txt",
+            "label_sha256": null,
+            "pose_rows": 0,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              39,
+              56,
+              59,
+              63,
+              72,
+              73
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000074081.jpg",
+            "image_sha256": "9062f18e953b247330a7e7ac72f4e43edab04d6745993788b64c0d8769f32ee5",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000074081.txt",
+            "label_sha256": "f1b161c998ede4be1170f50c956770b9fe15aa1a444c88e5b021e0654743b6a6",
+            "pose_rows": 7,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              56,
+              57,
+              58,
+              60,
+              74,
+              75
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000429776.jpg",
+            "image_sha256": "dc07a1303b4a36540e1730f517239966a1ae7a807b0ab91e5eb57e305565750e",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000429776.txt",
+            "label_sha256": "c72ceadc558aeccebea5119d1406bc9349fa6573b94cc185e4996287127f6685",
+            "pose_rows": 14,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              74
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000553640.jpg",
+            "image_sha256": "c00db78e551fd3d8c061c0472215a87c5218ff5ad29585bdf91acdd04021f84d",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000553640.txt",
+            "label_sha256": "98c11a0bee9185fa3e6cd9190bffed7a14b0b39828fbf001208f3be6493a833e",
+            "pose_rows": 5,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              13,
+              24,
+              26,
+              28
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000247597.jpg",
+            "image_sha256": "7a59d6eabf06577af7a3fec98846e7b42f251207a105f720f5cf605577a88f6c",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000247597.txt",
+            "label_sha256": "5355851d08397d1df0c8b7a353ffff361e68f7d12643a744172d4eebdda0cc2b",
+            "pose_rows": 11,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              56,
+              57,
+              58,
+              75
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000041186.jpg",
+            "image_sha256": "f7e88cd9746fec4eb0b68d7b7426d829508fb42afae9dbe53e11d171a17049d5",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000041186.txt",
+            "label_sha256": "bd0dad734158901289f36757d86ad9dca3a504f1ec3bd7c1bc170843dbde3f3c",
+            "pose_rows": 5,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              7,
+              16,
+              24,
+              26,
+              56,
+              67
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000446899.jpg",
+            "image_sha256": "6edf6f7bda5566b20ff88d9af86ed9c538a7b1b69f6f444604ed3446b5ea5d70",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000446899.txt",
+            "label_sha256": "e4d11f8150b31316e77d6bc81cd8602c9f645157821cd98e5221df57289da484",
+            "pose_rows": 24,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              59,
+              73
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000347790.jpg",
+            "image_sha256": "1752b1af0f7006ef0e6758346ec51b5439717e19a4e621eaa92b714443594cdf",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000347790.txt",
+            "label_sha256": "ba4c7c25f3683113bb45cb38aa71bc93626614c00f16e3ed166f637a850ce1fa",
+            "pose_rows": 14,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              49
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000396193.jpg",
+            "image_sha256": "eb76d7330fe834410db15b9c67485d6e5de2ec05a1be14b991b43b0968735539",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000396193.txt",
+            "label_sha256": "c0ada598cb86868b995301e9f05e3611500f45faabecaff65c9606980a177a9e",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              20
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000173279.jpg",
+            "image_sha256": "daba9b1b32224d3cb3dace56d98db7be255183c09d0ca4c196977bc86da844ff",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000173279.txt",
+            "label_sha256": "21154b84361bab367955c4f7f39ef1875a9c328d113d8c07c02a5f8ddd6916e0",
+            "pose_rows": 8,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              74
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000331129.jpg",
+            "image_sha256": "c96552c2afb3514f48992d987ba832f6b1cf829c03c43f679edfc600ef9a77a3",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000331129.txt",
+            "label_sha256": "764c20a0f74e0b656a31daeb63b0d526a5827d92b6325808abb2553797e7e6a2",
+            "pose_rows": 0,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              9
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000098501.jpg",
+            "image_sha256": "af3c69ca61a6ddb3ee9f5fb91c8659f90359472176adcac988392533bc3b3282",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000098501.txt",
+            "label_sha256": "194fd346d9b7ca32cb90902ca13c28721bfc8d5d61f8a793a4d590e9039ccbec",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              36
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000522192.jpg",
+            "image_sha256": "578ee986e918f41065af2528df5f2cc98fc7d6a1cdfec21b802d218039051a3a",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000522192.txt",
+            "label_sha256": "fc3107612a0e1c81aacb63725bcc2d89132f095e1ea4dd9da0f15ee43abc876d",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              6
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000547774.jpg",
+            "image_sha256": "83848fc0637ef6810147adf5c4d39fa5b531b804613875c6012e90d036849ecc",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000547774.txt",
+            "label_sha256": "05b4b2df7aaf68c0794a677f3e785e6e61cabf29755a50a3fc675855189a3aea",
+            "pose_rows": 11,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              53,
+              69
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000265915.jpg",
+            "image_sha256": "ca15fec70ad6d125dd885abb226d46847dfb20b6eb4e54117b383459332d9590",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000265915.txt",
+            "label_sha256": "4f48e30b7c42a21305d477a495ccff4dfcb26cb59a2a58c1f1c924c96396a813",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              3
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000369791.jpg",
+            "image_sha256": "41cefd843962dbfd669ae8df3af56dce3aaaf48ef2ed30b66a107301308a7067",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000369791.txt",
+            "label_sha256": "d7e99424506997598bdcc8d50803c3125ec942901a85702cfdc34683bef62d12",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              29,
+              56
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000266441.jpg",
+            "image_sha256": "901cb9c684bb6364400a7c8d09a0459741d8f091be7c1465c7c96844704f31b4",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000266441.txt",
+            "label_sha256": "3bad3b8e9c83feb9a48cac48d4e8a808d28bc599dfd839041945f4e5edf19819",
+            "pose_rows": 7,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              13
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000282176.jpg",
+            "image_sha256": "b1bf6d8484a135034a521891c644978a1426952b8f0480851e2b74ae21f9fc9a",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000282176.txt",
+            "label_sha256": "aa6e1056f814fa86e44fcc26d1d59ada5902b371a6e921b089ef9b96815d07db",
+            "pose_rows": 1,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              59,
+              71
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000511333.jpg",
+            "image_sha256": "7ac70fd8388676d79401408ce1ccc5318f22447244bf90481968f3711a40a575",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000511333.txt",
+            "label_sha256": "785104fc86ef9f5b61fdd73ab680f6bfc08441cf8f0ca2c2ca242f7d61172ada",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              32,
+              60,
+              63,
+              65,
+              66,
+              73,
+              76
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000371157.jpg",
+            "image_sha256": "a80edc66df27b13e5c348d06c9468c230503ff50b386e9b7eece85da50f8f6f4",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000371157.txt",
+            "label_sha256": "41067f5f27a2dfbabf8f9cf91296c957077a46847aa5288cf265160a28d9313c",
+            "pose_rows": 7,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              24,
+              30,
+              31
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/train2017/000000213642.jpg",
+            "image_sha256": "8885c58ca533122ecdc48caf4dda0c4a53c1ab3af1bcd3850b818ce6f6725446",
+            "label": "/home/uxin/yolo/coco2017/labels/train2017/000000213642.txt",
+            "label_sha256": "b5442d1a6883a4efcd74db99564411f1a6e44821cc91ac191519eb4c4d10e9e2",
+            "pose_rows": 8,
+            "source_group": null
+          }
+        ],
+        "selection_sha256": "9672d2ea14ca11654cb231dd2b196c9ba3ae9013d187e98c021334f47293522f",
+        "source_list": "/home/uxin/yolo/coco2017/train2017.txt",
+        "source_list_sha256": "521d40ccd3df3ac9ba48c1be569828ed7e03b7b2d698186e830ae236364a985b",
+        "split": "train2017"
+      }
+    },
+    "probe": {
+      "bbat_pose": {
+        "coverage": {
+          "class_ids": [
+            0,
+            1
+          ],
+          "labeled_images": 64,
+          "pose_rows": 85
+        },
+        "samples": [
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/0006B1_mp4-0003_jpg.rf.33d289b122f1e958dfd5c3d89172a227.jpg",
+            "image_sha256": "077bd2bf397664dc51c0b90b1dc68b0b82f9d60548f7d0b07a79b09b36c916e8",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/0006B1_mp4-0003_jpg.rf.33d289b122f1e958dfd5c3d89172a227.txt",
+            "label_sha256": "2f6a5d0a4af074a506160041e8667d89bfc0f9fe1c88b5c4f4aaa9b495c7c870",
+            "pose_rows": 1,
+            "source_group": "0006B1_mp4-0003_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3H2A9587-MPEG-4030_jpg.rf.272f5daecd75ac4aa0cac63d7cff1552.jpg",
+            "image_sha256": "681fea286683498168f9670d4c1083e318fe48996e7608f86d0dc7dbabb4c2ac",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3H2A9587-MPEG-4030_jpg.rf.272f5daecd75ac4aa0cac63d7cff1552.txt",
+            "label_sha256": "2a53de2aa543178694bd82366aba58bf92fa52789aec5977c7a0fc7072517e95",
+            "pose_rows": 1,
+            "source_group": "3H2A9587-MPEG-4030_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/0131I_mp4-0000_jpg.rf.26b34dc0edc6cbdafc19fce89e7275d3.jpg",
+            "image_sha256": "2dfcd3a1cd0bc1e4e9efcbb7940762a1779085bf1e508c6db664c230d7de1879",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/0131I_mp4-0000_jpg.rf.26b34dc0edc6cbdafc19fce89e7275d3.txt",
+            "label_sha256": "6b74a097b26be8be53434cc0fa0c25304a4f409c1a13b02e8939aa3515769f26",
+            "pose_rows": 1,
+            "source_group": "0131I_mp4-0000_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/image140_jpg.rf.27e0be3c570115fa21704bfc562aacf1.jpg",
+            "image_sha256": "31b4026dee4a9bf0a68c21b5011cfdbc8746f9dcb1a040d0d77515ffb558ca90",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/image140_jpg.rf.27e0be3c570115fa21704bfc562aacf1.txt",
+            "label_sha256": "ee0e14c7bbb33eb220ba7899287a93bb45c56b94359979b7af2e4e904161d0d0",
+            "pose_rows": 1,
+            "source_group": "image140_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250314_150219_mp4-0127_jpg.rf.cd3d461c5dcccb56cd7bfa54b5685862.jpg",
+            "image_sha256": "a373ab0658b933b162a385c1e505e949f9d60f6daa5f6ffdccdec58fdbae2a0a",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250314_150219_mp4-0127_jpg.rf.cd3d461c5dcccb56cd7bfa54b5685862.txt",
+            "label_sha256": "e5f8347de52e5118150bbee79ab77552f4a28ff7fc3b701703e16f23bf3e888f",
+            "pose_rows": 2,
+            "source_group": "20250314_150219_mp4-0127_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0009_jpg.rf.c2dccf6e5d3c0bbc06662770ed79725d.jpg",
+            "image_sha256": "a2fdc2eb6ce1fae097eacc2659c8c45631e229d2a35aced04f7f1a90f247f491",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0009_jpg.rf.c2dccf6e5d3c0bbc06662770ed79725d.txt",
+            "label_sha256": "e7c90fe7685cd4170abd4250c15ad1cb536e8ec09037b961a540487c9196d07e",
+            "pose_rows": 2,
+            "source_group": "20250312_143347_mp4-0009_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/611_png_jpg.rf.3466634ae32a2706d4edda25e93cf88c.jpg",
+            "image_sha256": "79004381cd0f1ff4351714c5faa357bfbd537c05668a664abb198e35bb136df1",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/611_png_jpg.rf.3466634ae32a2706d4edda25e93cf88c.txt",
+            "label_sha256": "360c3a69b498b2f85a6036b8f113a60cf43067c684c68e4512de2f43e3c2bcc7",
+            "pose_rows": 1,
+            "source_group": "611_png_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/0227E_mp4-0012_jpg.rf.14847d1493866e3252a4f5c3a6407b96.jpg",
+            "image_sha256": "ef4e7aab8aecf86a802a9a0a7b9c7cb15ed3ed0db0c423a0dc8e1e0afc9e612c",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/0227E_mp4-0012_jpg.rf.14847d1493866e3252a4f5c3a6407b96.txt",
+            "label_sha256": "fde7aa627da8ad350d95d54a9c9d30c9a87ec1467c3cb68edc50d6c5de330ff8",
+            "pose_rows": 2,
+            "source_group": "0227E_mp4-0012_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3H2A9587-MPEG-4056_jpg.rf.36518b1ef18c9279e7f7e4519cb20f42.jpg",
+            "image_sha256": "4c778ef357bc5aa490c415e381f2238531de4486c756911cc93c5845b86efd04",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3H2A9587-MPEG-4056_jpg.rf.36518b1ef18c9279e7f7e4519cb20f42.txt",
+            "label_sha256": "20486fbc67c6cb29eb89f8407cc7afbf42cbb0ad3f10a19b63906236406473f7",
+            "pose_rows": 2,
+            "source_group": "3H2A9587-MPEG-4056_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0034_jpg.rf.0ea9e8ae8773dad8583d6acd5bab7348.jpg",
+            "image_sha256": "f03c02ffd701f509977fb0c4590c06d73acf6f46a2edde16b7ea6e6734d0171a",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0034_jpg.rf.0ea9e8ae8773dad8583d6acd5bab7348.txt",
+            "label_sha256": "ecc2099d2175ea8310c20a3005cfd77f4ddaa0123b7144e55ab1085dee890901",
+            "pose_rows": 2,
+            "source_group": "20250312_143347_mp4-0034_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250315_163624_mp4-0083_jpg.rf.26d8c6b83fbcacf70cfdb9ad09479e39.jpg",
+            "image_sha256": "8dfe7d93bf03cb7ecd276544c757d0516162cd5fde8ddee08e2647ca536b8473",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250315_163624_mp4-0083_jpg.rf.26d8c6b83fbcacf70cfdb9ad09479e39.txt",
+            "label_sha256": "18ff4014894a6b243ff7341598f1e0a520f9b0ad83adbfbce41c699a699f02c6",
+            "pose_rows": 1,
+            "source_group": "20250315_163624_mp4-0083_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/AngleV_1715122533_mp4-0068_jpg.rf.1d3d3dbf0f8d3bf277f517f1379a3b45.jpg",
+            "image_sha256": "3ca8a6653e9a72757ffb84dc05b29ab78812806132953554f73dc32af5e9882f",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/AngleV_1715122533_mp4-0068_jpg.rf.1d3d3dbf0f8d3bf277f517f1379a3b45.txt",
+            "label_sha256": "1a4bc2ca47c1b526a08ed4e292b2724e06eee53881b18877c259d4ef0bc9bbcd",
+            "pose_rows": 2,
+            "source_group": "AngleV_1715122533_mp4-0068_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/185_png_jpg.rf.53c2084051562638fd9ffe205c32e4ad.jpg",
+            "image_sha256": "fe3a5a01bd31cb0001b7f8eebfc1744222082c1bb0f213b5f9b704494ef693c4",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/185_png_jpg.rf.53c2084051562638fd9ffe205c32e4ad.txt",
+            "label_sha256": "668b053d8ef5a12435b055d4301c1bcee16fabbd726fc684af6041d10ef99129",
+            "pose_rows": 1,
+            "source_group": "185_png_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250315_163624_mp4-0093_jpg.rf.b6dfc37b0d1a0b11c7897dedb859474f.jpg",
+            "image_sha256": "9b9e080bc91a9919c337fd281d00b5bb45a6c5a1147e0dbefe3db01e9bef0384",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250315_163624_mp4-0093_jpg.rf.b6dfc37b0d1a0b11c7897dedb859474f.txt",
+            "label_sha256": "7f0de23f1ce2ec961793bbba1dd052b4c7509e118bab9dc34cdf5d66e5411f6f",
+            "pose_rows": 1,
+            "source_group": "20250315_163624_mp4-0093_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0087_jpg.rf.221b82cfab7935fa3e71b7f345f75ed2.jpg",
+            "image_sha256": "40bb7ad75021c140048225a2c85556fdaa0b3aa26a435e8fd08645f50822f849",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0087_jpg.rf.221b82cfab7935fa3e71b7f345f75ed2.txt",
+            "label_sha256": "abf7b95c448ce4038281d484cb88e10943da149f1f337f9be334bd70d540790c",
+            "pose_rows": 1,
+            "source_group": "20250312_143347_mp4-0087_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250315_163431_frame_401_20250327_195817_jpg.rf.3d9c40737da57409cd19030d1de773be.jpg",
+            "image_sha256": "b8a851011887ec3105dc9352da6ab0afdb0a233f9ef1ef00bea7af872e785b23",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250315_163431_frame_401_20250327_195817_jpg.rf.3d9c40737da57409cd19030d1de773be.txt",
+            "label_sha256": "bc4f384bea076c3fd52dc5d5f6355ff4791fe547e1eda1bd05dcc6263593f018",
+            "pose_rows": 2,
+            "source_group": "20250315_163431_frame_401_20250327_195817_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0072_jpg.rf.f00b52f172f0f4baec5c502d34a94fa5.jpg",
+            "image_sha256": "d2d07fcbe9a48c372977f59c514143d6c8eba45f2815b2cb198de3301b9cde24",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0072_jpg.rf.f00b52f172f0f4baec5c502d34a94fa5.txt",
+            "label_sha256": "4e9b5e51b0e203ac4640aa71f5e1b9cba81d74f31e3b6e69fdd2c98065e9787d",
+            "pose_rows": 1,
+            "source_group": "20250312_143347_mp4-0072_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/AngleW_1683932996_mp4-0052_jpg.rf.c7ee4f85c6c4519076900f83c50c8875.jpg",
+            "image_sha256": "18156088f4c0df571792628210a5edf0e66079edeebaf08acefb1e84f178b214",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/AngleW_1683932996_mp4-0052_jpg.rf.c7ee4f85c6c4519076900f83c50c8875.txt",
+            "label_sha256": "e63d30b5f460cb9387fa659448703cc6afd6dc8dad13f351456bc831b33ca1b5",
+            "pose_rows": 2,
+            "source_group": "AngleW_1683932996_mp4-0052_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0112_jpg.rf.8fed645602be99f77ac841ae33c10549.jpg",
+            "image_sha256": "ca11343836f8f50b67904b4aba0477624dd467821352922f1070cfda3e607f4b",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0112_jpg.rf.8fed645602be99f77ac841ae33c10549.txt",
+            "label_sha256": "84eae1379bfa1c8a478730d1e5babc6e08ab759e28b372fe6d314e2ca304931c",
+            "pose_rows": 1,
+            "source_group": "20250312_143347_mp4-0112_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/100_png_jpg.rf.380d6fadeab6671102103f77224ced4b.jpg",
+            "image_sha256": "84808e192d4112e5065dcd783a66e6e1d090b29b3314a114535f13a93aaf7b75",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/100_png_jpg.rf.380d6fadeab6671102103f77224ced4b.txt",
+            "label_sha256": "a8ba7ffd0396870e8fb3769fa939df9e984fcf8808bff88c5440461f4b9e4ae6",
+            "pose_rows": 1,
+            "source_group": "100_png_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/youtube-474_jpg.rf.2f8315285353af3a8932d209b5f61cb0.jpg",
+            "image_sha256": "0e3e3b6743e839e2e87e9b176ccac67cb74754945730d368e71db4f203ab818b",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/youtube-474_jpg.rf.2f8315285353af3a8932d209b5f61cb0.txt",
+            "label_sha256": "93d6c04b2778676b4b16456630f7f2c0e69a0be81b6ed3a68d201ec3da0b0622",
+            "pose_rows": 1,
+            "source_group": "youtube-474_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/193_png_jpg.rf.309665b15ce26117821eec556f52ad09.jpg",
+            "image_sha256": "ee040bcb832c011e40ec97593aa7a969cd9f18de0d5ba2ce6aa8b185d28af214",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/193_png_jpg.rf.309665b15ce26117821eec556f52ad09.txt",
+            "label_sha256": "9c0e6ecaea49d1c6497e9b29512ea1e93d29aa869284a16d35af007631516f17",
+            "pose_rows": 1,
+            "source_group": "193_png_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/403_png_jpg.rf.f397aee12fc5d4fbb61d5fbc720c71f6.jpg",
+            "image_sha256": "b6e416757caf6728a7599919be6af6d7adfa3f81ad2ee4e8e3167121b313aa27",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/403_png_jpg.rf.f397aee12fc5d4fbb61d5fbc720c71f6.txt",
+            "label_sha256": "8a8cffc0332b097b6add85b5e527c917aba1c0bc28fed2872d9361aa63907fe4",
+            "pose_rows": 1,
+            "source_group": "403_png_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/178_png_jpg.rf.8c85ba914a3f58fd46d6cc01f7b46b2c.jpg",
+            "image_sha256": "82a6b9c3e821765074880e99cfbe495b15ad150199a4ea4fc4b70d66a38bfb70",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/178_png_jpg.rf.8c85ba914a3f58fd46d6cc01f7b46b2c.txt",
+            "label_sha256": "f192fba4fe90576e18d11af4652eba207a8389f7877113509ff78c7b81e1edfc",
+            "pose_rows": 1,
+            "source_group": "178_png_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/Freeman_mp4-0005_jpg.rf.2f09ae7af29ee4b927101485271a7a80.jpg",
+            "image_sha256": "8c73bbcbea9dd968ea52d5e79841bf96b51b8355882bd7e284de8a4d17cf0c68",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/Freeman_mp4-0005_jpg.rf.2f09ae7af29ee4b927101485271a7a80.txt",
+            "label_sha256": "510f3c6d8c38b16ff694e535da963565a2a2e9ae981675b35664243a5f5d9614",
+            "pose_rows": 1,
+            "source_group": "Freeman_mp4-0005_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/V1-0001_3H2A0131-MPEG-404_jpg.rf.b35cda48c8fc45f1091e817bfd66a434.jpg",
+            "image_sha256": "a31df91c32a9a2b8861bc09159f8486ee14b7b0aa9b1f22c0bfb7f674ef73e6b",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/V1-0001_3H2A0131-MPEG-404_jpg.rf.b35cda48c8fc45f1091e817bfd66a434.txt",
+            "label_sha256": "64e5bc0a93a4b9c8c95895c13c418696315a9dfaee733368913f9901e8146039",
+            "pose_rows": 2,
+            "source_group": "V1-0001_3H2A0131-MPEG-404_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3H2A9587-MPEG-4087_jpg.rf.13b9cbf1e74e028742c169ad0d4e0ccd.jpg",
+            "image_sha256": "e24635ef3e9a1139a2a0a9a21f73c2353ebe6e105f066519131c38a62174e05f",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3H2A9587-MPEG-4087_jpg.rf.13b9cbf1e74e028742c169ad0d4e0ccd.txt",
+            "label_sha256": "f8bdb238fbe127034e271000a695efacde57a761e2075b516d18e5f08b87d026",
+            "pose_rows": 1,
+            "source_group": "3H2A9587-MPEG-4087_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/0837ea8b7142debe_jpg.rf.79ea5936d11d8faa48163663a18f4835.jpg",
+            "image_sha256": "a97c09ee5c6daab0f1fd49c2431c95dc7a5d18b797a668c12114b68a08244772",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/0837ea8b7142debe_jpg.rf.79ea5936d11d8faa48163663a18f4835.txt",
+            "label_sha256": "d04c14a51c29747842e091caac22ddb54a9396532c02242a19ea643717345566",
+            "pose_rows": 2,
+            "source_group": "0837ea8b7142debe_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250314_162543_mp4-0004_jpg.rf.0ab95212158c64ce081a3521203d7cc2.jpg",
+            "image_sha256": "042ab13f6f14b5682e0bcc6fb970ba088bf05986a4047ab475d26cc46c4effa8",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250314_162543_mp4-0004_jpg.rf.0ab95212158c64ce081a3521203d7cc2.txt",
+            "label_sha256": "99ba276c6d20b85585af12200ba3f56d781868e7ec70090a968d2e311e758e79",
+            "pose_rows": 1,
+            "source_group": "20250314_162543_mp4-0004_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3H2A9516-MPEG-4102_jpg.rf.3c39a6a4ceb60d76aafa757c1ab9ce9b.jpg",
+            "image_sha256": "29959e3522af5bf02055f8728050cbb980b1fa9d139937bd79901aa5eb65589a",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3H2A9516-MPEG-4102_jpg.rf.3c39a6a4ceb60d76aafa757c1ab9ce9b.txt",
+            "label_sha256": "9d0bb626bb221cffcbcbfdf3c0b808194e87cc44453559bfbe27a5a50bad3994",
+            "pose_rows": 1,
+            "source_group": "3H2A9516-MPEG-4102_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250315_163624_mp4-0085_jpg.rf.0922219dcc98b935cf656bbe1cea8827.jpg",
+            "image_sha256": "979f7a55fdbe77bb1c03386064d15d757592e2375815e20f16242bf4f1403e8d",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250315_163624_mp4-0085_jpg.rf.0922219dcc98b935cf656bbe1cea8827.txt",
+            "label_sha256": "c549c831f620dcfd27b2b17531072420d8d7da19d77dadc3bc00a421ae428a8d",
+            "pose_rows": 1,
+            "source_group": "20250315_163624_mp4-0085_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/Tauchman_mp4-0004_jpg.rf.206ef45460949f5027554b3e9a20ca0c.jpg",
+            "image_sha256": "a3725c9b6991f6552ea661462b6afd5ee03b1ca5feb769353379073b53144c2c",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/Tauchman_mp4-0004_jpg.rf.206ef45460949f5027554b3e9a20ca0c.txt",
+            "label_sha256": "b1afdedec315bd116a15cab5350b3335c54a567200b6b40dd4f8a594fc4625e7",
+            "pose_rows": 1,
+            "source_group": "Tauchman_mp4-0004_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_140135_mp4-0015_jpg.rf.135e53392e86dd713be6b523283110c4.jpg",
+            "image_sha256": "77548f0ca9360ab81b2f2b053c310c9d2e0fd78043e2173de38dd2c088fb9ae4",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_140135_mp4-0015_jpg.rf.135e53392e86dd713be6b523283110c4.txt",
+            "label_sha256": "05dd630811f5a7de23c0625008c03c2959d18e468574a1858d07eebcdd4cc87c",
+            "pose_rows": 1,
+            "source_group": "20250312_140135_mp4-0015_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/5448699cbe7e9200_jpg.rf.130823ce97668115a9288216827c1e85.jpg",
+            "image_sha256": "49f7c9d81e4f4c357b94eec7dc50dc482366ca7e50882a42f4afa15cf1b6697d",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/5448699cbe7e9200_jpg.rf.130823ce97668115a9288216827c1e85.txt",
+            "label_sha256": "98866c2c96d48c51f43310b100db0a06bf65c4a8e2f4d2a76171c16770b60eed",
+            "pose_rows": 2,
+            "source_group": "5448699cbe7e9200_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3H2A7726080_jpg.rf.39aceb2bce1e61e380e49daed3f714fe.jpg",
+            "image_sha256": "64b6d0ed36850caaaf03c90e564237ecfe93f3339d4bae0de09f286540cda73f",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3H2A7726080_jpg.rf.39aceb2bce1e61e380e49daed3f714fe.txt",
+            "label_sha256": "dc6f64c2b9295b59340b98a0e147cfe4b9fedabd6ce410c52211f5e71b194582",
+            "pose_rows": 1,
+            "source_group": "3H2A7726080_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/bbd108c8d86b4877_jpg.rf.10eef8adba92c54b3fab63195879a7a4.jpg",
+            "image_sha256": "b78b60c362ef42def10a1dda6aa0671b5b4297551fa4330a5e78f8ed7a50a144",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/bbd108c8d86b4877_jpg.rf.10eef8adba92c54b3fab63195879a7a4.txt",
+            "label_sha256": "76ed6508f9027f5353f8d754163138e3dc0b02d49eb66d8a41a0529dfef93357",
+            "pose_rows": 1,
+            "source_group": "bbd108c8d86b4877_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/19588f6aeee00923_jpg.rf.779eace6bad4006673efeb45b8a36d20.jpg",
+            "image_sha256": "02271fe7cc29f220205f5e86052b331066087b076cb87d2c74044c430848eb09",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/19588f6aeee00923_jpg.rf.779eace6bad4006673efeb45b8a36d20.txt",
+            "label_sha256": "da1d23a61d2ab37922c6b72a5d5aade14f1f0da8322e0eedd2063c1795b2c58b",
+            "pose_rows": 2,
+            "source_group": "19588f6aeee00923_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/Untitled_mov-34_jpg.rf.34378a08ee0bed3e85a47c9eaba3da8f.jpg",
+            "image_sha256": "fee5c74e59ec5b78aeec16af3df2775a98f58730945a9ef7d9d11faa9b0f6c6f",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/Untitled_mov-34_jpg.rf.34378a08ee0bed3e85a47c9eaba3da8f.txt",
+            "label_sha256": "f746ca53b7256f0fd33708f5307732f3d628516d81d2018ab2da61479664a4bd",
+            "pose_rows": 1,
+            "source_group": "Untitled_mov-34_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143216_mp4-0006_jpg.rf.3f3908f767d2a48bc573ca1f62dae8be.jpg",
+            "image_sha256": "3f037fcadd326135f0cd4252e3f6a09d546e6586974af37df4371ea6c3a4f7e0",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143216_mp4-0006_jpg.rf.3f3908f767d2a48bc573ca1f62dae8be.txt",
+            "label_sha256": "c9c351c9d95e1cd7c438f2ae6435e3d21b5a30c48a3d2a7b9d4103f3d9bf3935",
+            "pose_rows": 2,
+            "source_group": "20250312_143216_mp4-0006_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3H2A9735-MPEG-4327_jpg.rf.4e494e79b1ad674d201bfa977d8d2ce7.jpg",
+            "image_sha256": "f7936f3b034db60ada9eb29325682a74b9c1f5a3fbf742b1cd2fec60f644cf93",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3H2A9735-MPEG-4327_jpg.rf.4e494e79b1ad674d201bfa977d8d2ce7.txt",
+            "label_sha256": "b5564c405faf2b34094962c408a2eec9210a7cb19d11458631a89225b6f301cd",
+            "pose_rows": 1,
+            "source_group": "3H2A9735-MPEG-4327_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3960E_mp4-0014_jpg.rf.712fdbda8caa7182afaee22b2836f208.jpg",
+            "image_sha256": "cd0a052ac08993b68977f84d31f011ecc5d763df2d54fd7748cfba4f3c62444a",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3960E_mp4-0014_jpg.rf.712fdbda8caa7182afaee22b2836f208.txt",
+            "label_sha256": "eb15395612d3f7b04c159500799a72a76187cccc2f8c346825eac90596f9a3bf",
+            "pose_rows": 2,
+            "source_group": "3960E_mp4-0014_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250314_163024_mp4-0013_jpg.rf.4de6055fd52c1bb5aaf074069b5819f5.jpg",
+            "image_sha256": "8f71bf5f70003b78747baad8bffb8370a3c30d7e438ee28d9c6d278f7031bd2a",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250314_163024_mp4-0013_jpg.rf.4de6055fd52c1bb5aaf074069b5819f5.txt",
+            "label_sha256": "e830af181d146d877f71af50ddd3929e477d113358dc8ad3ad94a101dfdfacc0",
+            "pose_rows": 1,
+            "source_group": "20250314_163024_mp4-0013_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/d48791c0f69d41af_jpg.rf.172559904559cc2a5534bdca4b1abaaf.jpg",
+            "image_sha256": "08624c364d2aca66b3225e3a6257e798ad7bd3d51bbeacf907660825c787d802",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/d48791c0f69d41af_jpg.rf.172559904559cc2a5534bdca4b1abaaf.txt",
+            "label_sha256": "0dfa7654bdbff8e4ebc43db01d2f5cd70745d9268738a267beff766aff10bc2c",
+            "pose_rows": 2,
+            "source_group": "d48791c0f69d41af_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250314_162543_mp4-0019_jpg.rf.7ed92290b21a2e42f15a8fbbdc5c8b9d.jpg",
+            "image_sha256": "26b2d6e5578bb7d9cce0f62481b2aab4bce506cf5b3d9d7c1ee7dcefe384bbb8",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250314_162543_mp4-0019_jpg.rf.7ed92290b21a2e42f15a8fbbdc5c8b9d.txt",
+            "label_sha256": "b64899aaa47a63cab30b27199396bc05c18606bce263acac6c7eb02c9c92a041",
+            "pose_rows": 1,
+            "source_group": "20250314_162543_mp4-0019_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0108_jpg.rf.343d88c862e20c9c26c7128b4cae01ac.jpg",
+            "image_sha256": "273c22e80453563468296f1ed9534cf0b815ff774fb8aeeb8c8196d3c2ece88e",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0108_jpg.rf.343d88c862e20c9c26c7128b4cae01ac.txt",
+            "label_sha256": "387f101c2108627eb0e64ef26331b8ba6ad42e52e09ba6199130c50890a4cc57",
+            "pose_rows": 1,
+            "source_group": "20250312_143347_mp4-0108_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3760B_mp4-0012_jpg.rf.25baf54fcc06cf54539ad993e160826b.jpg",
+            "image_sha256": "40102db7318ebd8d67bca88239d5661dc7059f98eebb10ca613ded54fca00e25",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3760B_mp4-0012_jpg.rf.25baf54fcc06cf54539ad993e160826b.txt",
+            "label_sha256": "429a5d89965deba99b7cb4c4ae03b111efe42c254da2c21ae3574ecadd59b65a",
+            "pose_rows": 1,
+            "source_group": "3760B_mp4-0012_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/AngleV_1715122533_mp4-0020_jpg.rf.1d6bb0de50d7abd91acd8d224d98c9e5.jpg",
+            "image_sha256": "0e183816516996cd3509cd412cdb1f77cd058c4378a4b3222dcd67f26cc497e1",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/AngleV_1715122533_mp4-0020_jpg.rf.1d6bb0de50d7abd91acd8d224d98c9e5.txt",
+            "label_sha256": "2688fd490a1fe803fd21082fef2e2d91c38f47a87853d962a9c5962304b1d729",
+            "pose_rows": 2,
+            "source_group": "AngleV_1715122533_mp4-0020_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250314_162543_mp4-0003_jpg.rf.4d90d33cc4597d34460f5a163d12207c.jpg",
+            "image_sha256": "872c103faf198673c6b5f8ee269523ae1f607a9da420c419c146be54de41b797",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250314_162543_mp4-0003_jpg.rf.4d90d33cc4597d34460f5a163d12207c.txt",
+            "label_sha256": "dd1bcecc4b59ae6fbbe7eeebb0ce119830dc12669a95a26b96dfe11638e31c4b",
+            "pose_rows": 1,
+            "source_group": "20250314_162543_mp4-0003_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250315_163624_mp4-0070_jpg.rf.06bf048c493b0e8e997c95c91ef8f8c6.jpg",
+            "image_sha256": "2e2e3ebe874745ed96323734f65a5d42fb0abebd13a6812d01772ff77abba801",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250315_163624_mp4-0070_jpg.rf.06bf048c493b0e8e997c95c91ef8f8c6.txt",
+            "label_sha256": "0d1f0045e8bb5b298a27e1a4333aadf32dbc65c4d002d8f862d59cb01cd291e6",
+            "pose_rows": 1,
+            "source_group": "20250315_163624_mp4-0070_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/3H2A9735-MPEG-4329_jpg.rf.9780c546a3f1dead84ffb2cfed639768.jpg",
+            "image_sha256": "a5cfee48d3fad708c197d6290e261313f626401b80807489e4d246644e46de61",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/3H2A9735-MPEG-4329_jpg.rf.9780c546a3f1dead84ffb2cfed639768.txt",
+            "label_sha256": "6f6b5e0143a7e157fb7dd7fa15870c23b15140d97e9dd460a608d6975cd381b0",
+            "pose_rows": 1,
+            "source_group": "3H2A9735-MPEG-4329_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143547_mp4-0147_jpg.rf.9675452fe89be106c383729d1f8c38ee.jpg",
+            "image_sha256": "24979afbf57b5e350b442e9f0200f17ea19f08bf91114c98fdbf67672956070a",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143547_mp4-0147_jpg.rf.9675452fe89be106c383729d1f8c38ee.txt",
+            "label_sha256": "97f1a7e61323d59675bdb844005bfcf62af497c7b64578af91cb513370a7cba4",
+            "pose_rows": 1,
+            "source_group": "20250312_143547_mp4-0147_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143547_mp4-0161_jpg.rf.35bd5bb3fd0ab5cddaa13a79b330d01b.jpg",
+            "image_sha256": "4d3a13995601b3a64498ca0f75d601cc63b300c06471c5e30151fe8e5ad9bbd7",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143547_mp4-0161_jpg.rf.35bd5bb3fd0ab5cddaa13a79b330d01b.txt",
+            "label_sha256": "2a0a6b6598c21266fb7b3b370594374f135d5b6a4c8e4c9f996efce66cc97574",
+            "pose_rows": 1,
+            "source_group": "20250312_143547_mp4-0161_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250315_163624_mp4-0039_jpg.rf.658838ce9de5b19a7c880101752f35ae.jpg",
+            "image_sha256": "d8cc39aad078f031bf737f75d6660e5c972758f918463f98538b9d462e34dcc1",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250315_163624_mp4-0039_jpg.rf.658838ce9de5b19a7c880101752f35ae.txt",
+            "label_sha256": "c9aec1f25b30c4d5215a70c985eeba6b6a629145bf71867c5b17eb104f313d26",
+            "pose_rows": 1,
+            "source_group": "20250315_163624_mp4-0039_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250315_163903_mp4-0074_jpg.rf.0491d91c216b496a98ddd37fb55dd671.jpg",
+            "image_sha256": "a15854f4e50836be2592a922a0ac8def847c8fbac3a84ef1d79472d1f24c62e6",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250315_163903_mp4-0074_jpg.rf.0491d91c216b496a98ddd37fb55dd671.txt",
+            "label_sha256": "c9b6feb90ceb279987c70a5e75d458a62b79c290b47ba3ece933836729a07bf8",
+            "pose_rows": 1,
+            "source_group": "20250315_163903_mp4-0074_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/AngleV_1715122533_mp4-0062_jpg.rf.0ca96e72f535eb1bf58165cc94990c42.jpg",
+            "image_sha256": "2f988b4684e493d8b8be6032c9bd35804f073461e56974a1de48bcb3ba252e01",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/AngleV_1715122533_mp4-0062_jpg.rf.0ca96e72f535eb1bf58165cc94990c42.txt",
+            "label_sha256": "d232543bc9beaa5c869b9fd8e62a9c9f308f43ef0d14f82360a2d86ca0e0fac9",
+            "pose_rows": 2,
+            "source_group": "AngleV_1715122533_mp4-0062_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0010_jpg.rf.5d57a5879aace5c0af5db817437a4fca.jpg",
+            "image_sha256": "75a161f74bf48eb6df5967faca3d7ab9dd8f8b8a333407c856e352efdb0d7d50",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0010_jpg.rf.5d57a5879aace5c0af5db817437a4fca.txt",
+            "label_sha256": "1be203d9a34142e9932eb48ec49cf3c25ab7fc5411b529ff960750501c33bc9c",
+            "pose_rows": 2,
+            "source_group": "20250312_143347_mp4-0010_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/image48_jpeg_jpg.rf.0bdac8dbd60f00291e391922e14216b8.jpg",
+            "image_sha256": "d398a473f4c19f48002e53503a24879847d2700959ed946ca678cfd3c9eea381",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/image48_jpeg_jpg.rf.0bdac8dbd60f00291e391922e14216b8.txt",
+            "label_sha256": "5af2cbb58e03b2cc39894f0d08b0fe2027c3fd9ef016ec70974bc5ad455bfb57",
+            "pose_rows": 1,
+            "source_group": "image48_jpeg_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0110_jpg.rf.c8f9d7c6473705c9e3ae13c625bd48fe.jpg",
+            "image_sha256": "0d709e55405d5111782ce1afe0d0233d60bb29471aa8a6b2dd4507be01e318a2",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0110_jpg.rf.c8f9d7c6473705c9e3ae13c625bd48fe.txt",
+            "label_sha256": "b4def5e9e3c8b77142abc7a1018cf6c0ad329b667e0fc5821f7cbd7a4b015217",
+            "pose_rows": 1,
+            "source_group": "20250312_143347_mp4-0110_jpg"
+          },
+          {
+            "class_ids": [
+              0
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/513_png_jpg.rf.6006bae9f8dff2ff9a49de7c048c54a2.jpg",
+            "image_sha256": "76df31ab6fd183f668d83b32f4b18811337a16152ec6ef145723065529d813da",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/513_png_jpg.rf.6006bae9f8dff2ff9a49de7c048c54a2.txt",
+            "label_sha256": "7aa43e4c0e4ee3253a3a7d46a540994c17e88b75e7cc12912936141c5d8f355e",
+            "pose_rows": 1,
+            "source_group": "513_png_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250314_162543_mp4-0052_jpg.rf.4af8d124b3a103b1fc59af3176029700.jpg",
+            "image_sha256": "5e6d9f8dca92b8b7fbcbfa88d445331f88f8319e9aab0ab11c109671cf9e1ce6",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250314_162543_mp4-0052_jpg.rf.4af8d124b3a103b1fc59af3176029700.txt",
+            "label_sha256": "50799df05fd7eed348406316f7e46209837ae9cf3c9788771ee68d67f498ee3a",
+            "pose_rows": 1,
+            "source_group": "20250314_162543_mp4-0052_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/0002G-1-_mp4-0014_jpg.rf.6614f5caf284c40081274427a7a383b8.jpg",
+            "image_sha256": "a62b1c2dd496940b0c8a7be8f9bcd73f2907843ff2b4924033a0b48f402d9456",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/0002G-1-_mp4-0014_jpg.rf.6614f5caf284c40081274427a7a383b8.txt",
+            "label_sha256": "3f614975b7a6017b955e72b5e1b7fa0d1cd17784bcba8d38b0c887214a3942e1",
+            "pose_rows": 2,
+            "source_group": "0002G-1-_mp4-0014_jpg"
+          },
+          {
+            "class_ids": [
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250314_163024_mp4-0050_jpg.rf.6b2d520f1b61d18011660bb76bde5649.jpg",
+            "image_sha256": "7c62c0827e5d1146f00dd275aa6b1c639f6c25744ba43cc73682013744c49db1",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250314_163024_mp4-0050_jpg.rf.6b2d520f1b61d18011660bb76bde5649.txt",
+            "label_sha256": "492a48540de656d147b15e805a9e57e9b4faea143d5248f4b7f73a0b34e5c3f3",
+            "pose_rows": 1,
+            "source_group": "20250314_163024_mp4-0050_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/20250312_143347_mp4-0012_jpg.rf.78840587b66ec34296e1e51028b08e33.jpg",
+            "image_sha256": "560e6e09bd21013a2d2336fe3f922b342f3fe3abae5c8b4c2f9a7cb4b6e185d8",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/20250312_143347_mp4-0012_jpg.rf.78840587b66ec34296e1e51028b08e33.txt",
+            "label_sha256": "663fc743a79b837c6f1080858b165353068bfcc3ae22cefe00f778d4fed9939a",
+            "pose_rows": 2,
+            "source_group": "20250312_143347_mp4-0012_jpg"
+          },
+          {
+            "class_ids": [
+              0,
+              1
+            ],
+            "image": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/00dc6a5abc773fe7_jpg.rf.615c22fee4319f379096c93723746f4e.jpg",
+            "image_sha256": "45d0281a16872a1e6ce1aa7ae0bff6dfa1de5108954e7e5296cf567ec885bc5b",
+            "label": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/labels/val/00dc6a5abc773fe7_jpg.rf.615c22fee4319f379096c93723746f4e.txt",
+            "label_sha256": "6fb6b5f17067a2111c01190d14754e9ac75e27eb64367eae849323fc456c1c77",
+            "pose_rows": 2,
+            "source_group": "00dc6a5abc773fe7_jpg"
+          }
+        ],
+        "selection_sha256": "a6c83274801a85c5920edaac95f9c66462061510917c53cab6085db170b4ca7d",
+        "source_group_policy": "one_canonical_exemplar_per_rf_group",
+        "source_list": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/splits/formal-val.txt",
+        "source_list_sha256": "c936fcd169fbbafbd1958573b8d9a2f8cff923d397314ea044501100d3fc03d2",
+        "split": "formal-val"
+      },
+      "coco_detect": {
+        "coverage": {
+          "class_ids": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            7,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            24,
+            25,
+            26,
+            27,
+            28,
+            30,
+            31,
+            32,
+            37,
+            38,
+            39,
+            40,
+            41,
+            45,
+            46,
+            47,
+            48,
+            49,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            71,
+            72,
+            73,
+            74,
+            75,
+            77
+          ],
+          "labeled_images": 64,
+          "person_images": 42,
+          "pose_rows": 460
+        },
+        "samples": [
+          {
+            "class_ids": [
+              0,
+              7,
+              19
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000114907.jpg",
+            "image_sha256": "1ef6feb0a8d8886de8dc4db6e6c379cdd8fad15111a8edc570eeda66bcc17dba",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000114907.txt",
+            "label_sha256": "338f8a74f889bf53496b8a317b108c016f46e8f70bb3eb5961b738f1532852d2",
+            "pose_rows": 15,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              19
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000014888.jpg",
+            "image_sha256": "aba25018b65a2a52ce7d77e68c6501e532084cd327e6cb230225e302fca95f4c",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000014888.txt",
+            "label_sha256": "0e3801f592e94103c7d4858e6e802cff67cd3e169420ace7ecdcf374e714cdbc",
+            "pose_rows": 1,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              32,
+              38,
+              56
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000079969.jpg",
+            "image_sha256": "eb7d3520f8ecbf2a6d27a70ce037402445ca68550184c88770a1c26d48521c87",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000079969.txt",
+            "label_sha256": "9f9c648409f733a368ec56ec969884d27bdfd86c338f3080384de311d70df208",
+            "pose_rows": 18,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              37
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000341196.jpg",
+            "image_sha256": "e52e592ba38fec51c3df751bbc7ec2cbbf4b43726da1a4e1bc9a556e7cf8e748",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000341196.txt",
+            "label_sha256": "d526b704f4e35d313061050cbc5b004e14ad452512d2a4a7e52fe6d8dd2c01f4",
+            "pose_rows": 4,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              21
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000110972.jpg",
+            "image_sha256": "ec73a8372fe4579490693690ff4b56510af5ce4ce830642eb05c01f2baa58f91",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000110972.txt",
+            "label_sha256": "ef1a75aa52e0da8c7bde702299a8af8bd4049d53783dc2b2dfb99134f310f2e6",
+            "pose_rows": 1,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              49
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000347370.jpg",
+            "image_sha256": "84a3f48206f3cfb058c55c4385b48e1d39fdb63e0c51e0b4018750896d38f7ba",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000347370.txt",
+            "label_sha256": "908cb2a3af64f369fa561a11c98c39bae5d71bf2690b270968c4d43bf9421691",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              39,
+              58,
+              71
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000354072.jpg",
+            "image_sha256": "09187f078c7f5f80071932db41d194628766fe325ec18deb69760d81ab9d51d3",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000354072.txt",
+            "label_sha256": "9d2ff3b477ee525d92294f19524f01b8359e0229f864e3a0c5cec0c6db80708f",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              40,
+              41,
+              45,
+              48,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000070048.jpg",
+            "image_sha256": "5232a912f3438d7d915b7509b4602d1c768f76b72a43589d2624810e42b41988",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000070048.txt",
+            "label_sha256": "fecab21bfe9ca60f2a3e0a970359baad646c0563f0a74267dfe83289fa82d43f",
+            "pose_rows": 6,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              57,
+              77
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000253433.jpg",
+            "image_sha256": "e76c6f262920b8c8ba89654061dd83d50a8937291e3f8cda6e3215c9235c686b",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000253433.txt",
+            "label_sha256": "a8c24ec7e86b74a22d08ecc6cd371bbc9af2130e11f5f6092d71f7c7fc3fc71e",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              47
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000188592.jpg",
+            "image_sha256": "d91e1e7121a0f877856108f6244212ef0b34cfcbea0b6563f22a0f618eeafc27",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000188592.txt",
+            "label_sha256": "decebac661a87a64fd5a80d441e3ac6c158b4d15885b93586b5b94bd6a33f181",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              31
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000350405.jpg",
+            "image_sha256": "ea113f2a601d32d5032df428be396854d97bc3f0b35520280ba860a9d29d9c05",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000350405.txt",
+            "label_sha256": "f153a2a985636d13963512d63b5e8c8e6ef9dfcfb9240dc5ecce2cbcfa8bf3ab",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              32,
+              38
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000451435.jpg",
+            "image_sha256": "2bde34357a8934f67db9e1c42a033718169233d2155acb8859a0d8d79028f40a",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000451435.txt",
+            "label_sha256": "d3cff19789b5a173e6cf6b2f0f095979387a4012baef0251078f866123b9468f",
+            "pose_rows": 4,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              5,
+              9,
+              27
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000002006.jpg",
+            "image_sha256": "eda4af13818b566f8fa4f479e76286ad90cd5da2e8dfd530be0ab3637e1482ed",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000002006.txt",
+            "label_sha256": "73546188db315df357a603bc5e4008994c793379b8479caa1a4dec67367fbc90",
+            "pose_rows": 5,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              2,
+              5,
+              27
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000344029.jpg",
+            "image_sha256": "2f0cd75fa54770e7af99879d114ca0e40980c041f1f9f36d09ebf6ea1e7317a2",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000344029.txt",
+            "label_sha256": "89d46620bc3911520fc9caa49f6932f5ef9223f6d30ca53a54bf85305506c7a6",
+            "pose_rows": 12,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              15,
+              59
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000291490.jpg",
+            "image_sha256": "64ef671112dacfaec5345bb1ed3625909496c06776936528e197b91170cb90af",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000291490.txt",
+            "label_sha256": "83bbfdd8e02ef5c0d4c808553c62237d626912f2a2b871e9a5eea12681efce3c",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              2,
+              5
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000084170.jpg",
+            "image_sha256": "74de1d85ded730e719dbf35407dc4160976d9da86f2b310f8df6bb388586afa3",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000084170.txt",
+            "label_sha256": "8b767b5105d630f782da42423a9b305d25a754d834f4e88579a3be857e5cafbd",
+            "pose_rows": 7,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              28,
+              56,
+              58,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000422836.jpg",
+            "image_sha256": "5e15339c64fdb9957d689d26a73d2de652535b294c1627d874f76ff591494599",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000422836.txt",
+            "label_sha256": "ce38ad18585de030be8e0f2ffd1b829341d5db361a4dcb2abbf757ae25500e33",
+            "pose_rows": 20,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              37
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000170613.jpg",
+            "image_sha256": "6bd1a11dd96e356d2c7c206a2eef5542e9fc27ff91731fde9fc6cae1f9fcf01e",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000170613.txt",
+            "label_sha256": "8180237f9ad91bac9d11853998f88913d59ed225b6fab7c6308482e4b4c79502",
+            "pose_rows": 4,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              24,
+              26,
+              39,
+              56,
+              62,
+              63,
+              64,
+              66,
+              67,
+              73
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000172595.jpg",
+            "image_sha256": "faa06206531e26d29bed2d1ecca535d5496a017e1e88a7329f19bf4a5574a83b",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000172595.txt",
+            "label_sha256": "55102c5f1b427f3b0fc2bb63cf6b48ac51f3a8792165a349b67656969b488f12",
+            "pose_rows": 14,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              1,
+              2,
+              7,
+              28
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000350003.jpg",
+            "image_sha256": "4278c4c673a2e75b1f63780d026b3c05dd9955eeae50cd017a8e1844b736ce58",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000350003.txt",
+            "label_sha256": "4525ac9b71c0efd9149ecc0452ae045f45296e80ffc9171ef4c43a46300dec23",
+            "pose_rows": 6,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              15,
+              41,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000078426.jpg",
+            "image_sha256": "475db6e34f57f03cf611cc4c359d8707df49628491adc27d6b5209607284778b",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000078426.txt",
+            "label_sha256": "c33780ab2f45228d70b9b13f2e28f4c3b00e009e83dbdc00256e75f1b8df04ae",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              3,
+              25,
+              56
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000255536.jpg",
+            "image_sha256": "8d34300522af3e1c5da698671662bd4656d6bd3439815dbcbb2f0b7827bee052",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000255536.txt",
+            "label_sha256": "9b5807ce5fe8cdc095e555f3c6e549eccae467dc05617305074faa01fe2e2db0",
+            "pose_rows": 8,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              2,
+              5,
+              7,
+              28
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000436883.jpg",
+            "image_sha256": "65cb98085b86ed663a6812a9368364178d845b3458694f1d8d23783f3b848477",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000436883.txt",
+            "label_sha256": "edf9e50b195a7db8c3729f96e47c8c64c0849e2dd4322b932f7eee8c0056acca",
+            "pose_rows": 12,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              30
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000002473.jpg",
+            "image_sha256": "2f1bfa7634a64f7999ba5488ec904ad1f85bbc63d0fe4b9fe35f52abbf8c5f4f",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000002473.txt",
+            "label_sha256": "0d922a2daad064bfb47356ee4d72751c7e6b6e6bd1d41cc0d9afe961d0b71241",
+            "pose_rows": 5,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              68
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000207538.jpg",
+            "image_sha256": "ebbcaafc1d5541995fa3e04abbdee73c2f4f7c1259107622864363306035ff9c",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000207538.txt",
+            "label_sha256": "253b2d388fa70785e52addb8d90fd902830d53272196950d848521e3847e74f0",
+            "pose_rows": 0,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              2,
+              7,
+              11
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000222094.jpg",
+            "image_sha256": "1d9bcba769c81d9703d4d5cf3502e8997916347c91648104f888866634b2de8b",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000222094.txt",
+            "label_sha256": "5fc1af867eb570636d33d28d5c0f8aed5a06fb31381b162aa944ab302e5b7b52",
+            "pose_rows": 11,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              37
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000232692.jpg",
+            "image_sha256": "b22868f61d01d16d4b6820d2b8b592e27e66ab2c988fd053fea5e71042681d62",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000232692.txt",
+            "label_sha256": "d8c8ca093efe90e57cc55d9c0d9632a8bb3fd7f4847ed0cf28948ff1f8882452",
+            "pose_rows": 9,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              56,
+              65,
+              73
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000489764.jpg",
+            "image_sha256": "4a5c2b0c4d9fda2bd78378aa054e9876dfe36ac1db551ed3ba1e408c44248ce5",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000489764.txt",
+            "label_sha256": "beab4041edf5be3bc337c5e49a4a41d203b8c30703a760d5a7c8a14f095ffa2d",
+            "pose_rows": 8,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              74
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000468233.jpg",
+            "image_sha256": "368593e0f440236c8d44cf6730e6aabedc61c5a6296d52610bd6afa8e2343794",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000468233.txt",
+            "label_sha256": "bbc69b787d3da23ffd0234806cc0e2c6be0e2b7d5361179f5e3540793fc9e192",
+            "pose_rows": 1,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              20
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000103723.jpg",
+            "image_sha256": "c2b8c919404b382f029b6abcd068dfb22b0f051745ce146471d5ec38917941d6",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000103723.txt",
+            "label_sha256": "08de794dc50bce30385366781d33fd10848404fc59f9907358fa475e2db722c8",
+            "pose_rows": 8,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              4
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000214205.jpg",
+            "image_sha256": "20470118cd1429a1b81bb88fdf9289e21f936e1ce5d717ea1b353dc12072978d",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000214205.txt",
+            "label_sha256": "b610dda4681221500a0a79dcbb1d594fcf73e4182c0fd80b36bbf82b9aa3307a",
+            "pose_rows": 1,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              13
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000029397.jpg",
+            "image_sha256": "4185e741b14c3e6e2b9da920217a988d08cb89dfc41d377c3aeb4f1e41d8c2f3",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000029397.txt",
+            "label_sha256": "2e17b963bdc3f41eba074a31200816cecb991624547a6d381eeccf6d18ac17dc",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              2,
+              26,
+              27
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000297578.jpg",
+            "image_sha256": "75910e3bad10ece753c3872a043a2a91d6b0d8c3f0fb7cbf9ec5623ae14c3e6e",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000297578.txt",
+            "label_sha256": "4f5a2d95e2f55e2fa5e6557b1a0fbce5ce4832ed081a117726f9a95e498f081c",
+            "pose_rows": 8,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              30
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000173830.jpg",
+            "image_sha256": "46580410572c0e00f7810b350f1a6c7e75fe70203af2a4deef352b2ab3f441aa",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000173830.txt",
+            "label_sha256": "c7c0efd89cdb72a2ac47c6e398ef3d719ff58bd5d85af40f3f6ba1cba4a12f5b",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              2,
+              37
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000107554.jpg",
+            "image_sha256": "ff73401833c0ede37a6e08cc49bfbfc9583c1223a0bbe13a58f21840f5ca152c",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000107554.txt",
+            "label_sha256": "3ea022c9c57291d12afde0b3419da6ce90ea016176686c4a3242bfe744331eeb",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              18
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000535578.jpg",
+            "image_sha256": "24d70ca8f5760938bb45611d54d2d9fbdfc3f9d291b54b81fa3b732284cabb2f",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000535578.txt",
+            "label_sha256": "89f22902cc05ac9f9aa1cafaff91708a80df72770d8b8e1bfcd7c1e242aa33d1",
+            "pose_rows": 11,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              16,
+              37
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000193674.jpg",
+            "image_sha256": "fe94d775b39e9a7ad325404842bdc5ce2758e5cb3edaeb66d9be772ac5448020",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000193674.txt",
+            "label_sha256": "b7e95e5acb1139b842cba65d4a245fe6c3385cdd3355b79de6caaa05c093b863",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              45,
+              56,
+              57,
+              62,
+              65,
+              74
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000195842.jpg",
+            "image_sha256": "dc2c6c102dd3a340414a135603e43c0a0c5d55bec57671847b679e1d9abf2a48",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000195842.txt",
+            "label_sha256": "077dc1e0a2f61584ac5321cac67e1cab9c359f733f745d4396b7099f59f72c42",
+            "pose_rows": 8,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              17
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000476215.jpg",
+            "image_sha256": "0f292f55b4658641a083ee1e443a1494f3406979426a722f4c860c1299d75b27",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000476215.txt",
+            "label_sha256": "256f98925d4e792e5c45f46101af3b516e9319efbaa1c7548f3159051368d111",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              30
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000252507.jpg",
+            "image_sha256": "1b1546862442847703c58c444f31824c780bc998a719649eb5cba550c9f04569",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000252507.txt",
+            "label_sha256": "758a2d59831535d05732921ebb8765b5507952811cf42cb3238d7883e09af830",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              39,
+              41,
+              45,
+              46,
+              47,
+              60,
+              69,
+              71,
+              72,
+              75
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000530836.jpg",
+            "image_sha256": "31430f4f31af2e65ec72a42361de6e64b0706e9445ddb38f280044c6f4063e7a",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000530836.txt",
+            "label_sha256": "a5b86f0be50a36be64bd40dc5f26b28b4dfdbdc5ae179b4e8ed523d86550298d",
+            "pose_rows": 22,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              39,
+              61,
+              71
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000557172.jpg",
+            "image_sha256": "71201f7f2e82854eaa174837e88217c4b3c6a3b01c54e23671ea31b4dbdad508",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000557172.txt",
+            "label_sha256": "75f56c07c975a1c65417573f3fcd8ab773b0c57d33567b52ae7fa26fe313d2f3",
+            "pose_rows": 4,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              19,
+              56,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000231580.jpg",
+            "image_sha256": "f4c3efedc90249f7671736c8a1eb3446ff13446a7160ab8e3965ff16c760dd7c",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000231580.txt",
+            "label_sha256": "6601198fbb3744b508c17fb449223df26d4ca8b0d0ab0eb4c4c6f839d54d1014",
+            "pose_rows": 10,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              2,
+              10
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000283318.jpg",
+            "image_sha256": "4b94d49605715fe88957ac8838ba58746a9082d5beee2928429f4bda101477ee",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000283318.txt",
+            "label_sha256": "8bbd73f9cc0e700df2fabb9337e27bf87ca7dac3a29ca68d43ae9631e7e699c8",
+            "pose_rows": 9,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              20
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000564133.jpg",
+            "image_sha256": "e12af9d5e9ab35d17cf432951532ca019cdec750c85c902f891e05a0b7a50d06",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000564133.txt",
+            "label_sha256": "a2e12f572396ef95bd7a9df889fe4db4d23427a4a293e706445ec2a38b396270",
+            "pose_rows": 8,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              77
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000080413.jpg",
+            "image_sha256": "ccfbf08efc80416f38a5b732d916b9f2a4b6436ae4a0398ccbc0d9dcc7db0aae",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000080413.txt",
+            "label_sha256": "1525aadc192792acc4d40cb0d07a59661c66b1aabf331c7a6c1aadcf4bbf4816",
+            "pose_rows": 1,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              56,
+              62,
+              66,
+              73
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000386912.jpg",
+            "image_sha256": "e4d58abb24655f12e70e056631e96915a142e1e60fb0b1f75372269bad764828",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000386912.txt",
+            "label_sha256": "0e492ef1a345870f52bd5ad6ec5a0c4dab34271871d7cfb8db650c861cd3fc14",
+            "pose_rows": 12,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              22
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000129054.jpg",
+            "image_sha256": "b499404f1b12c09135740acf268306f73ecc23c4f0259c5b03ae5c06e45a2d3d",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000129054.txt",
+            "label_sha256": "76ceddd394e00a634c7da0f888b61143375faa756c563183dd6681329fe3234f",
+            "pose_rows": 13,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              32,
+              38
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000463174.jpg",
+            "image_sha256": "237708f292cbd2271a0030d62ca42f2236c1e3ec8823f9a9d123fbe5bf75d714",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000463174.txt",
+            "label_sha256": "a15c43351170f1d5b872e5421ff6eb01e77503c956b5fd23d150c1014063ac78",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              39,
+              41,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000150638.jpg",
+            "image_sha256": "c7847b6a940733f7ae4ee04c5d6a524c76fd9659826dd6269c4564b07f5bc8cb",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000150638.txt",
+            "label_sha256": "db925e37ddfe88c351154016c43d86e8efb4500f8d42192bdde5798b1ce05fce",
+            "pose_rows": 18,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              32,
+              38
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000273493.jpg",
+            "image_sha256": "09b6bcf5fec8857c972e7f7377404274de0c1b96c0da4e0113b06a3d06b90c2b",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000273493.txt",
+            "label_sha256": "95110ebd652d02a216f513138bee17ac22755b269d23886e871635783f75a525",
+            "pose_rows": 5,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              13,
+              32
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000438862.jpg",
+            "image_sha256": "3689831ed23f734ebab9405f48ffbfbbefb778e9de3101a9d56e421ea45288cf",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000438862.txt",
+            "label_sha256": "671f643591f29dcb38f3883c64317f5dd553ec1e8510e1d57e08268d6ff14c5d",
+            "pose_rows": 10,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              26,
+              39,
+              41,
+              45,
+              46,
+              47,
+              49,
+              55,
+              58,
+              77
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000349480.jpg",
+            "image_sha256": "aa94fa47d66e175a2c5dce5547cad5563f0e074deb70e2c39aa7618258ff453d",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000349480.txt",
+            "label_sha256": "892952ed1743afd7f5214c56b49fb540c4c186a5dbf87562350c4af87bacd835",
+            "pose_rows": 17,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              14
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000098261.jpg",
+            "image_sha256": "6d73f5967db3ef19680f17791dd7252e1acf189ddb0cf6590ed211f8da123475",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000098261.txt",
+            "label_sha256": "b154b1972dbf06ff2e0fc91abc80520879facffeb976e56ed8e72f48ddb10ae8",
+            "pose_rows": 2,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              1,
+              26
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000072852.jpg",
+            "image_sha256": "5425359ed9786a3829a80b26e37e2568149df4502aa02cb77f8572412d5303f4",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000072852.txt",
+            "label_sha256": "5a39ef192d9086a426535e9827c3c4bf8c43a9cdaa516cc226f5a77f9d6237aa",
+            "pose_rows": 4,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              24,
+              26,
+              28,
+              56
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000115245.jpg",
+            "image_sha256": "31967b55cb57fdf83991b7aeb4076d91e4e5be51cda0a9400313014b97ab7eb8",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000115245.txt",
+            "label_sha256": "b1b74f9a15201bda00b075fb2f9dafd02b3de81e0a281b1972540cc9006d0bc4",
+            "pose_rows": 16,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              2,
+              3,
+              26,
+              46
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000147740.jpg",
+            "image_sha256": "0384b4bff79f53a0f2bcc54c99c0f7dc24660dd33f37c9b6dfa6adaa1e4a88ce",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000147740.txt",
+            "label_sha256": "23d4d9c23e6f301829c8064fe0632d54681cf7129431128b6c29f7ffe5f116fe",
+            "pose_rows": 12,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              27,
+              56,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000568814.jpg",
+            "image_sha256": "018b450a9f537a3aabeff85e2b1f966c6b0ce512323a0fbfdd6e1264f6c4b7f9",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000568814.txt",
+            "label_sha256": "fc354fa650dc86a04b3a51f08621da861e983a750a005ed8bfc0bf3b40efe879",
+            "pose_rows": 6,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              13
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000537153.jpg",
+            "image_sha256": "1b02d5b6a0128df984dda7c4fc6b6768e88c2379ca34616c58e2c584c058e711",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000537153.txt",
+            "label_sha256": "ac415880b8d4abc8623985eb4565cb7b7b665b194444575a72886df44e1b0b7a",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              12
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000051961.jpg",
+            "image_sha256": "4b2300cc85b7d63ac7e7744c51f0413cff08530890c6525946e7004bf20e02ad",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000051961.txt",
+            "label_sha256": "bb72b356dad30374f306bd3a9bad7aa599c5345febd840093560073caf696ab2",
+            "pose_rows": 1,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              7
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000148719.jpg",
+            "image_sha256": "dc5224344a70a6bb7bda0d21dddeac70f599aeaa35b2ce1fa3620821c6de4bf0",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000148719.txt",
+            "label_sha256": "23fefd69d2e8f539f7ffe293421a5611d0c5e907af712b65752072fbcaaae1ec",
+            "pose_rows": 6,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              15,
+              59,
+              73
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000458255.jpg",
+            "image_sha256": "a736cbd407d124923301403a399ec841193221775b4cd9671776b8bafe9b29c1",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000458255.txt",
+            "label_sha256": "e0905b50d768dc45bd0ee34e1810b49aef9100f6a127bbfb6e61060f6a2c9320",
+            "pose_rows": 5,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              38
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000292225.jpg",
+            "image_sha256": "0f1b0b32e7259b5c34b3236301d8792e6ac5e0afc67bf4dfc30df77fb5841ba1",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000292225.txt",
+            "label_sha256": "12132d97f71444a4230bb64885b17f8c07f42d6277c4d57e4905f2020e32f9d8",
+            "pose_rows": 3,
+            "source_group": null
+          },
+          {
+            "class_ids": [
+              0,
+              2,
+              4,
+              9,
+              56,
+              60
+            ],
+            "image": "/home/uxin/yolo/coco2017/images/val2017/000000039484.jpg",
+            "image_sha256": "dd5ee58026d819fb399dff4339efd842c936746c404abda74ad42cc2a499bc5b",
+            "label": "/home/uxin/yolo/coco2017/labels/val2017/000000039484.txt",
+            "label_sha256": "80324f7219250ad475f791735a5d6c02aa5b9ec2081e89639a977e19bfc385ed",
+            "pose_rows": 32,
+            "source_group": null
+          }
+        ],
+        "selection_sha256": "e9873c110772f34f3dde14ffbe308bbb75657b619111d8a2acfd7db6d1dfaff3",
+        "source_list": "/home/uxin/yolo/coco2017/val2017.txt",
+        "source_list_sha256": "4d010d0d7200a7b9176acd164d36c9769350a2e41661152f2cf8ba16c9e2aa73",
+        "split": "val2017"
+      }
+    }
+  },
+  "sources": {
+    "bbat5": {
+      "assignment_changed": false,
+      "dataset_id": "bbat5-v1",
+      "pose_yaml": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml",
+      "pose_yaml_sha256": "dece3f4665fad86c2b0b3e3941b1cde9668cbfc6db1208c0e3d10638b3f5b888",
+      "registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml",
+      "registry_sha256": "208e0f9e5bfded11f5739e9c598d98b4e5414699c64b9faf6f9625680988754a"
+    },
+    "coco2017": {
+      "person_class_id": 0,
+      "yaml": "/home/uxin/yolo/coco2017.yaml",
+      "yaml_sha256": "1ed971749ec00b84db8ffe850b05e34e0acfd63a9654a9224ac8d80f5e068068"
+    }
+  }
+}

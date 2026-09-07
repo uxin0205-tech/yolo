@@ -1,0 +1,21 @@
+schema_version: 1
+publication_id: full-model-half-0907
+date: '2026-09-07'
+commit_subject: 5090 Half 0907
+target: uxin0205-tech/yolo
+branch: main
+scope: yolo_quantize
+included:
+  - 中文詳細報告、工作紀錄與四天待執行計畫
+  - 老師版圖表、CSV、來源hash及既有CPU/PTQ報告
+  - 量化程式、測試、設定、manifests與報告生成器
+excluded:
+  - checkpoint、weights與GPU訓練runs
+  - live queue狀態目錄、資料集副本、快取及其他子專案
+gpu_started_during_publication: false
+new_four_day_queue_started: false
+validation_scope: CPU focused regression and report integrity; not full suite or GPU
+reproduction:
+  weight_evidence: 可由已發布CPU profile與CSV重建
+  full_audit: 完整重建需本機runs及checkpoint供hash驗證；GitHub僅提供輸出快照
+historical_manifest: PUBLICATION_MANIFEST.yaml僅描述0829歷史發行，不代表本次排除SD4與QAT摘要

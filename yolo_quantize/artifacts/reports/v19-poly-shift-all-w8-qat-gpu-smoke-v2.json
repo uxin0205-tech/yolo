@@ -1,0 +1,84 @@
+{
+  "calibration": {
+    "invalid_observers": [],
+    "observed_maximum": 252.97195434570312,
+    "observed_minimum": -0.2898893654346466,
+    "peak_gpu_memory_mib": 490.21728515625,
+    "quantizers": 124,
+    "samples": {
+      "detect": 32,
+      "pose": 32
+    },
+    "seconds": 4.316787141840905,
+    "valid_observers": 124
+  },
+  "candidate_id": "accuracy-a10-add-backbone-attention-w8",
+  "deployment_materialized": true,
+  "device": {
+    "index": 0,
+    "name": "NVIDIA GeForce RTX 5090"
+  },
+  "formal_training": false,
+  "formal_validation": false,
+  "gpu_used": true,
+  "gradient_norm_before_clip": 1.2900813817977905,
+  "kind": "full35_qat_gpu_smoke",
+  "optimizer_split": {
+    "model_groups": [
+      "backbone.decay",
+      "backbone.no_decay",
+      "neck.decay",
+      "neck.no_decay",
+      "masf.decay",
+      "masf.no_decay",
+      "attention.decay",
+      "attention.no_decay",
+      "detect_head.decay",
+      "detect_head.no_decay",
+      "pose_head.decay",
+      "pose_head.no_decay"
+    ],
+    "model_parameters": 499,
+    "qparam_lr_ratio": 1.0,
+    "quantizer_groups": [
+      "backbone.no_decay.qparam",
+      "neck.no_decay.qparam",
+      "masf.no_decay.qparam",
+      "attention.no_decay.qparam",
+      "detect_head.no_decay.qparam",
+      "pose_head.no_decay.qparam"
+    ],
+    "quantizer_parameters": 396
+  },
+  "peak_gpu_memory_mib": 26541.26904296875,
+  "plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v19-poly-shift-all-w8-qat-pilot-v1.yaml",
+  "plan_sha256": "2745da54f419b529233da5d149c617981d9ad9ffe55b6b5291d84676e47e10a8",
+  "quantization": {
+    "blend_ratio": 1.0,
+    "epoch": 5,
+    "sham": false
+  },
+  "quantizer_gradients": 396,
+  "quantizer_parameters": 396,
+  "schema_version": 1,
+  "seconds": 10.860942559782416,
+  "status": "passed",
+  "tasks": {
+    "detect": {
+      "batch": 16,
+      "objective": 1202.531494140625,
+      "output_tensors": 7
+    },
+    "pose": {
+      "batch": 16,
+      "objective": 806.7960205078125,
+      "output_tensors": 11
+    }
+  },
+  "trainability": {
+    "epoch": 0,
+    "model_trainable_parameters": 0,
+    "quantizer_trainable_parameters": 396,
+    "scale_only": true
+  }
+}

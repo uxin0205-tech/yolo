@@ -1,0 +1,5 @@
+# 保留原始CSV位元內容及Markdown硬換行，避免改動證據hash。
+*.csv whitespace=cr-at-eol
+*.md whitespace=-blank-at-eol,-blank-at-eof
+*.yaml whitespace=-blank-at-eof
+*.svg whitespace=-blank-at-eol

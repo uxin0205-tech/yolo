@@ -1,0 +1,158 @@
+schema_version: 1
+plan_id: full35-weight-region-sensitivity-v1
+date: 2026-08-29
+status: planned_user_review
+formal_training_started: false
+implementation_started: false
+
+activation_policies:
+  new_silu_runs: false
+  historical_silu_reference_only: true
+  primary_a8:
+    - policy_id: qsilu_pq--lsq-plus-a8
+      role: accuracy_headroom
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+      parent_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    - policy_id: poly_quality--lsq-plus-a8
+      role: activation_numeric
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_joint.pt
+      parent_sha256: eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968
+    - policy_id: poly_shift--lsq-plus-a8
+      role: hardware
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+      parent_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+  lower_bit_after_weight_selection:
+    - qsilu_pq--lsq-plus-a6
+    - poly_quality--lsq-plus-a7
+    - poly_shift--lsq-plus-a7
+  excluded_from_new_runs:
+    silu: user_requested_no_new_tests
+    hardswish: pareto_dominated_in_a3_through_a8_smoke
+    relu: upstream_negative_control_failed
+
+activation_bit_verdict:
+  a3: reject_mainline
+  a4: reject_mainline
+  a5: no_promotion
+  a6: research_only_after_weight_policy
+  a7: secondary_exploration
+  a8: primary_weight_sensitivity_anchor
+
+graph_inventory:
+  total_conv_linear_modules: 251
+  total_weight_elements: 26451392
+  deployment_candidate_modules: 151
+  deployment_candidate_weight_elements: 22572608
+  training_only_excluded_modules: 96
+  training_only_excluded_weight_elements: 3747712
+  binary_qk_protected_modules: 4
+  binary_qk_protected_weight_elements: 131072
+  candidate_storage_bytes:
+    fp32: 90290432
+    int8_codes_only: 22572608
+    int4_codes_only: 11286304
+
+regions:
+  - {order: 1, id: backbone_early, modules: 21, weights: 1218240, first_formats: [int8, int4]}
+  - {order: 2, id: backbone_deep, modules: 22, weights: 8126464, first_formats: [int8, int4], priority: highest}
+  - {order: 3, id: backbone_attention_safe, modules: 7, weights: 919808, first_formats: [int8, int4], protected: [q_projection, k_projection, binary_score, pwl]}
+  - {order: 4, id: neck, modules: 33, weights: 8142848, first_formats: [int8, int4], priority: highest}
+  - {order: 5, id: masf, modules: 3, weights: 74240, first_formats: [int8, int4], preserve_topology: true}
+  - {order: 6, id: neck_attention_safe, modules: 5, weights: 395520, first_formats: [int8, int4], protected: [q_projection, k_projection, binary_score, pwl]}
+  - {order: 7, id: detect_one2one_tower, modules: 18, weights: 1390592, first_formats: [int8, int4]}
+  - {order: 8, id: detect_one2one_predictor, modules: 6, weights: 62208, first_formats: [int8, int4], default: int8}
+  - {order: 9, id: pose_one2one_tower, modules: 24, weights: 2238464, first_formats: [int8, int4]}
+  - {order: 10, id: pose_one2one_predictor, modules: 12, weights: 4224, first_formats: [int8, int4], default: int8}
+
+exclusions:
+  training_only_regions: [detect_one2many, pose_one2many, pose_flow]
+  protected_semantics: [binary_qk, attention_pwl, topk, gather, box_decode, keypoint_decode]
+  dfl_quantization: false
+  nms_quantization: false
+
+uniform_weight_formats:
+  int8:
+    qmin: -128
+    qmax: 127
+    granularity: per_output_channel
+    symmetric: true
+    rounding: nearest_even
+    accumulator: int32
+  int4:
+    qmin: -8
+    qmax: 7
+    granularity: per_output_channel
+    symmetric: true
+    rounding: nearest_even
+    accumulator: int32
+  int6:
+    status: conditional_rescue_only
+
+phases:
+  w0:
+    mode: distribution_and_reconstruction
+    training: false
+    scope: all_151_deployment_modules
+    formats: [int8, int4, fixed_sd4, ls_sd4_proxy, paper_twn, channel_twn_proxy]
+    stop_for_user_selection: true
+  w1:
+    mode: isolated_region_probe
+    training: false
+    cells: 60
+    formula: 3_activation_policies_x_10_regions_x_2_uniform_formats
+    stop_for_user_selection: true
+  w2:
+    mode: cumulative_full_validation_beam
+    training: false
+    region_order: [backbone_early, backbone_deep, backbone_attention_safe, neck, masf, neck_attention_safe, detect_one2one_tower, detect_one2one_predictor, pose_one2one_tower, pose_one2one_predictor]
+    maximum_parents_per_role: 1
+    roles: [accuracy, hardware, balanced]
+    stop_after_each_region: true
+  w3:
+    mode: qat_recovery
+    training: true
+    authorized: false
+    maximum_policies: 3
+    diagnostic_epochs: 20
+    continuation_epochs: 60
+    matched_sham_required: true
+  w4:
+    mode: distribution_routed_sd4_and_ternary
+    starts_after: w3_uniform_baseline
+  w5:
+    mode: lower_activation_bit_coupling
+    starts_after: selected_weight_policy
+
+scorecard:
+  identity: [policy_id, parent_sha256, recipe_sha256, dataset_manifest_sha256, region_manifest_sha256, seed, status]
+  coverage: [quantized_modules, weight_elements, region_bits, protected_exclusions, training_only_exclusions]
+  weight_numeric: [mse, nrmse, sqnr_db, cosine, clipping_rate, code_occupancy, zero_ratio, scale_statistics]
+  forward: [layer_nrmse, region_nrmse, cosine, maximum_error, one2one_raw_nrmse, topk_pair_overlap, anchor_jaccard]
+  task: [coco_box_map50_95, bbat_box_map50_95, bbat_pose_map50_95, matched_parent_deltas, accepted_full35_deltas, worst_task_drop]
+  training: [detect_loss, pose_loss, gradient_norm, scale_trajectory, saturation, best_epoch, last5_slope, nonfinite]
+  cost: [weight_code_bytes, scale_bytes, bias_bytes, requant_metadata_bytes, compression_ratio, mac_bop_proxy, zero_skip_potential, peak_gpu_memory, diagnostic_latency]
+  decision: [gate, pareto_status, recommended_role, rationale]
+
+gates:
+  structural: exact
+  int8_incremental_max_task_drop: 0.01
+  final_total_max_task_drop: 0.04
+  recovery_band_max_task_drop: 0.06
+  reject_on_nonfinite: true
+  reject_on_topk_collapse: true
+
+future_qat_recipe:
+  dataset: fixed_30_percent_diagnostic_train_with_full_validation
+  detect_logical_batch: 128
+  pose_logical_batch: 16
+  fp32_master_weights: true
+  bn_running_stats_frozen: true
+  weight_scale_init: per_output_channel_mse
+  activation_a8_observer: calibrated_then_frozen
+  optimizer: AdamW
+  learning_rate_scale: 0.1
+  warmup_epochs: 1
+  scheduler: cosine
+  gradient_clip_norm: 10.0
+  fresh_optimizer_scheduler_ema_rng: true
+  formal_training_authorized: false
