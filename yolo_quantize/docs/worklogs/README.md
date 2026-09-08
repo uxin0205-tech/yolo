@@ -4,6 +4,28 @@
 
 ## 索引
 
+- [2026-09-08：報告精簡執行、恢復交接與 GitHub Stop 發布](2026-09-08-report-cleanup-and-publication.md)
+
+- [2026-09-08：報告精簡盤點與待核准清單](2026-09-08-report-retention-proposal.md)
+
+- [2026-09-08：相同 benchmark 與公平比較契約](2026-09-08-matched-benchmark-contract.md)
+
+- [2026-09-08：量化延後、完成本批 PTQ 與階段收尾](2026-09-08-quantization-phase-handoff.md)
+
+- [2026-09-08：六組完成後的有限累積 PTQ 接續](2026-09-08-cumulative-ptq-continuation.md)
+
+- [2026-09-08：600 秒 blocking monitor 與短 QAT 完成事件](2026-09-08-blocking-monitor-events.md)
+
+- [2026-09-08：專案入口整理、歷史區與待核准清除](2026-09-08-project-organization.md)
+
+- [2026-09-07：歷史與本輪比較條件釐清、CPU 血緣稽核](2026-09-07-evidence-consistency-clarification.md)
+
+- [2026-09-07：六組短 QAT、三元比較與恢復候選](2026-09-07-six-short-qat-continuation.md)
+
+- [2026-09-07：P0實作、共同parent與EMA投影診斷](2026-09-07-continuous-p0-implementation.md)
+
+- [2026-09-07：持續5epoch規劃修訂](2026-09-07-continuous-five-epoch-plan.md)
+
 - [2026-09-07：GitHub階段成果發行5090 Half 0907](2026-09-07-github-half-publication.md)
 
 - [2026-09-07：SD4／三元分布與既有實驗詳細分析](2026-09-07-weight-evidence-supplement.md)

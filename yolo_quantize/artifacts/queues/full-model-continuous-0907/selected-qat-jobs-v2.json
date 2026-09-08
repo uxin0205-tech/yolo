@@ -1,0 +1,85 @@
+{
+  "status": "prepared_not_started",
+  "parent": "v36-qsilu-a8-full-coverage-epoch1",
+  "prerequisite": "per_job_cpu_graph_preflight",
+  "jobs": [
+    {
+      "job_id": "pose-sd4-fixed",
+      "candidate_id": "isolated-pose_one2one_tower-fixed-sd4",
+      "plan": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/generated/pose-sd4-fixed-qat-plan.json",
+        "sha256": "6668a54e3107f741c8c9f50d86d46317b69db8dd7356798a1c27458511b58f17"
+      },
+      "epochs": 5,
+      "reset_weight_scales": 24,
+      "frozen_weight_scales": 24,
+      "status": "pending_preflight"
+    },
+    {
+      "job_id": "pose-ls-sd4",
+      "candidate_id": "isolated-pose_one2one_tower-fixed-sd4",
+      "plan": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/generated/pose-ls-sd4-qat-plan.json",
+        "sha256": "7fe2bc65c306287147fecaab68fdccc2ce613fd146a294fd8068a53a7102cdf3"
+      },
+      "epochs": 5,
+      "reset_weight_scales": 24,
+      "frozen_weight_scales": 0,
+      "status": "pending_preflight"
+    },
+    {
+      "job_id": "masf-exact-ternary",
+      "candidate_id": "isolated-masf-exact-ternary",
+      "plan": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/generated/masf-exact-ternary-qat-plan.json",
+        "sha256": "d29431e2a43ba0ad1f1f0f1d4833cbc43cd8ffca3878177414103b09b4e833f0"
+      },
+      "epochs": 5,
+      "reset_weight_scales": 3,
+      "frozen_weight_scales": 0,
+      "status": "pending_preflight"
+    },
+    {
+      "job_id": "masf-paper-twn",
+      "candidate_id": "isolated-masf-paper-twn-v2",
+      "plan": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/generated/masf-paper-twn-qat-plan.json",
+        "sha256": "798d4d86a839a65a35cfda1692b6d72cc5eefbba6396ea4383cf2ecaa3ff3f4a"
+      },
+      "epochs": 5,
+      "reset_weight_scales": 3,
+      "frozen_weight_scales": 0,
+      "status": "pending_preflight"
+    },
+    {
+      "job_id": "masf-twn",
+      "candidate_id": "isolated-masf-twn-v3",
+      "plan": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/generated/masf-twn-qat-plan.json",
+        "sha256": "60524f7ccd849cf83aee8065d436380dda8aa334f0e653f5c1da0f22e72de7e1"
+      },
+      "epochs": 5,
+      "reset_weight_scales": 3,
+      "frozen_weight_scales": 0,
+      "status": "pending_preflight"
+    },
+    {
+      "job_id": "detect-predictor-ls-sd4-recovery",
+      "candidate_id": "isolated-detect_one2one_predictor-fixed-sd4",
+      "plan": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/generated/detect-predictor-ls-sd4-recovery-qat-plan.json",
+        "sha256": "b8b0e95fc6392442725b17d658703197b9dfae7f4d01990b9acd90c6bf13e943"
+      },
+      "epochs": 5,
+      "reset_weight_scales": 6,
+      "frozen_weight_scales": 0,
+      "status": "pending_preflight"
+    }
+  ],
+  "new_sham_training": false,
+  "single_layer_probe": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/single-layer-probe.json",
+    "sha256": "396a1d25c61fc8755e02aabd0d362b3b324c210895124ca3c0112a2a3f5c1982"
+  },
+  "maximum_jobs": 6
+}

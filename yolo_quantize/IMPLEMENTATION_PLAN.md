@@ -1,6 +1,8 @@
 # Full35 Activation-aware Quantization 實作計畫 v5
 
-> 2026-09-07狀態補充：最新盤點與後續96小時執行順序以[四天整合計畫](docs/reports/2026-09-07-full-model-audit-four-day-plan.md)為準。V36 QAT已完成，epoch1/2搜尋通過；舊v5正文保留歷史契約，不代表其所有待辦仍未執行。parent統一、十大區域sensitivity與整數部署邊界仍未完成。
+> 此檔是歷史 v5 規劃，保留原文供追溯，不再作現行執行入口。請改讀 [CURRENT_PLAN](docs/CURRENT_PLAN.md)；下方旧「最新」與待辦描述只代表當時狀態。
+
+> 2026-09-07狀態補充：最新盤點與後續96小時執行順序以[四天整合計畫](docs/archive/reports/2026-09-07-full-model-audit-four-day-plan.md)為準。V36 QAT已完成，epoch1/2搜尋通過；舊v5正文保留歷史契約，不代表其所有待辦仍未執行。parent統一、十大區域sensitivity與整數部署邊界仍未完成。
 
 更新日期：2026-09-04。
 
@@ -20,7 +22,7 @@
 | V5-S3–S5 | 累積W8、mixed precision、SD4／ternary、Hardswish／poly_shift | poly_shift W8–W4、mixed、Fixed-SD4、Paper-TWN與耦合PTQ已完成 | 已使用並釋放 |
 | V5-S6–S7 | paired QAT、formal、多seed、export | V19 sham已完成；fused-head contract與0.2 FP32比例誤判均已修正，QAT由epoch 0 last.pt精確續跑；formal只給鎖定finalists | 進行中 |
 
-目前沒有formal winner。poly_shift PTQ accuracy候選為九區W8＋單一SD4 Detect predictor，最差total mAP50／mAP50–95 `-0.011415／-0.017322`；balanced SD4 Detect head約`3.611×`但mAP50–95接近門檻。詳見[`poly_shift PTQ、特殊格式與QAT入口報告`](docs/reports/2026-09-03-poly-shift-ptq-special-format-and-qat-entry.md)。所有total都包含activation替換，不能只看weight incremental或跨task平均。
+目前沒有formal winner。poly_shift PTQ accuracy候選為九區W8＋單一SD4 Detect predictor，最差total mAP50／mAP50–95 `-0.011415／-0.017322`；balanced SD4 Detect head約`3.611×`但mAP50–95接近門檻。詳見[`poly_shift PTQ、特殊格式與QAT入口報告`](docs/archive/reports/2026-09-03-poly-shift-ptq-special-format-and-qat-entry.md)。所有total都包含activation替換，不能只看weight incremental或跨task平均。
 
 ## 二、不可變來源與硬邊界
 
@@ -316,3 +318,6 @@ IN PROGRESS: matched sham → W8／mixed／LS-SD4 paired QAT → qSiLU／regiona
     ↓
 鎖定finalists → formal／多seed／export
 ```
+# 2026-09-07最新修訂入口
+
+依[持續5epoch計畫](docs/CURRENT_PLAN.md)執行下一輪；取消四天硬截止，AdamW先行，依證據滾動追加。下方舊epoch與時程設定只適用其歷史版本。

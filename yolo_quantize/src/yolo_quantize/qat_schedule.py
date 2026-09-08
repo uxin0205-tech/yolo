@@ -76,16 +76,24 @@ class QATTrainabilityState:
 class QATTrainabilityController:
     """Freeze FP model tensors during scale-only epochs, then restore stage policy."""
 
-    def __init__(self, *, scale_only_epochs: int) -> None:
+    def __init__(
+        self, *, scale_only_epochs: int, frozen_weight_scale_paths: tuple[str, ...] = ()
+    ) -> None:
         if scale_only_epochs < 0:
             raise ValueError("scale_only_epochs cannot be negative")
         self.scale_only_epochs = int(scale_only_epochs)
+        self.frozen_weight_scale_names = {
+            f"{p}.weight_quantizer._scale_unconstrained"
+            for p in frozen_weight_scale_paths
+        }
         self._stage_trainability: dict[str, bool] | None = None
 
     def apply(self, model: nn.Module, *, epoch: int) -> QATTrainabilityState:
         if epoch < 0:
             raise ValueError("epoch cannot be negative")
         parameters = dict(model.named_parameters())
+        if not self.frozen_weight_scale_names.issubset(parameters):
+            raise ValueError("fixed weight scale path is absent from model")
         if self._stage_trainability is None:
             self._stage_trainability = {
                 name: parameter.requires_grad for name, parameter in parameters.items()
@@ -96,7 +104,9 @@ class QATTrainabilityController:
         for name, parameter in parameters.items():
             stage_trainable = self._stage_trainability[name]
             parameter.requires_grad_(
-                stage_trainable and (not scale_only or is_quantizer_parameter(name))
+                stage_trainable
+                and name not in self.frozen_weight_scale_names
+                and (not scale_only or is_quantizer_parameter(name))
             )
         model_count = sum(
             parameter.requires_grad and not is_quantizer_parameter(name)

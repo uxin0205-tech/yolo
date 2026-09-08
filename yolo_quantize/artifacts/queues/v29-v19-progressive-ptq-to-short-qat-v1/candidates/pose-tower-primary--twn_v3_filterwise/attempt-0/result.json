@@ -1,0 +1,236 @@
+{
+  "assignments": [
+    {
+      "cpu_format_id": "exact-scaled-ternary-per_tensor",
+      "format_id": "exact_scaled_ternary",
+      "path": "graph.model.16.p3_masf.context.project.conv",
+      "region": "masf",
+      "stage_id": "masf-weight-primary",
+      "weight_format_id": "exact-scaled-ternary"
+    },
+    {
+      "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "fixed_sd4",
+      "path": "graph.model.22.m.0.1.ffn.1.conv",
+      "region": "neck_attention_safe",
+      "stage_id": "neck-attention-primary",
+      "weight_format_id": "fixed-sd4"
+    },
+    {
+      "cpu_format_id": "twn-v3-0.75-filterwise",
+      "format_id": "twn_v3_filterwise",
+      "path": "graph.model.23.pose_head.one2one_cv2.1.0.conv",
+      "region": "pose_one2one_tower",
+      "stage_id": "pose-tower-primary",
+      "weight_format_id": "twn-v3-0.75-filterwise"
+    }
+  ],
+  "candidate_id": "pose-tower-primary--twn_v3_filterwise",
+  "formal_training": false,
+  "formal_validation": false,
+  "materialization": {
+    "detect_complete": true,
+    "pose_complete": true
+  },
+  "metrics": {
+    "bbat/ball/box/map50": 0.966548515052158,
+    "bbat/ball/box/map50_95": 0.7407334695196697,
+    "bbat/ball/pose/map50": 0.9720379423448947,
+    "bbat/ball/pose/map50_95": 0.9719706377256813,
+    "bbat/bat/box/map50": 0.9931582813061605,
+    "bbat/bat/box/map50_95": 0.7941688663521483,
+    "bbat/bat/pose/map50": 0.9936092621694583,
+    "bbat/bat/pose/map50_95": 0.9930512748943169,
+    "bbat/box/map50": 0.9798533981791593,
+    "bbat/box/map50_95": 0.767451167935909,
+    "bbat/pose/map50": 0.9828236022571766,
+    "bbat/pose/map50_95": 0.9825109563099991,
+    "coco/box/map50": 0.6568772470727758,
+    "coco/box/map50_95": 0.48492439580913044,
+    "coco/person/box/map50": 0.830338250527126,
+    "coco/person/box/map50_95": 0.6103740185770332
+  },
+  "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+  "metrics_sha256": "3296d036dd81669edbd5b51072419f0f604c739e4846fc8b461a4c792ac75f17",
+  "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue",
+  "parent_id": "v19-poly-shift-a8-all-w8-qat-epoch5",
+  "parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "schema_version": 1,
+  "seconds": 73.35703508602455,
+  "status": "completed",
+  "weight_quantization": [
+    {
+      "format_id": "exact-scaled-ternary",
+      "numeric": {
+        "clipping_rate": 0.0,
+        "code_histogram": [
+          23064,
+          29811,
+          12661
+        ],
+        "code_max": 1,
+        "code_min": -1,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.8920976557131215,
+        "encoded_bits": 2,
+        "logical_code_count": 3,
+        "maximum_absolute_error": 0.4024066925048828,
+        "mse": 0.0005818167701363564,
+        "normalized_rmse": 0.45184255345113683,
+        "occupied_codes": 3,
+        "scale_bytes": 4,
+        "scale_count": 1,
+        "scale_maximum": 0.06449851393699646,
+        "scale_mean": 0.06449851393699646,
+        "scale_minimum": 0.06449851393699646,
+        "sqnr_db": 6.9002574134768215,
+        "weight_code_bytes": 16384,
+        "zero_ratio": 0.4548797607421875
+      },
+      "quantized_modules": 1,
+      "region": "masf",
+      "sites": [
+        {
+          "clipping_rate": 0.0,
+          "code_max": 1,
+          "code_min": -1,
+          "cosine": 0.8920976557131215,
+          "elements": 65536,
+          "maximum_absolute_error": 0.4024066925048828,
+          "mse": 0.0005818167701363564,
+          "normalized_rmse": 0.45184255345113683,
+          "occupied_codes": 3,
+          "output_channels": 1,
+          "path": "graph.model.16.p3_masf.context.project.conv",
+          "region": "masf",
+          "scale_maximum": 0.06449851393699646,
+          "scale_mean": 0.06449851393699646,
+          "scale_minimum": 0.06449851393699646,
+          "sqnr_db": 6.9002574134768215,
+          "zero_ratio": 0.4548797607421875
+        }
+      ],
+      "weight_elements": 65536
+    },
+    {
+      "format_id": "fixed-sd4",
+      "numeric": {
+        "clipping_rate": 0.00502777099609375,
+        "code_histogram": [
+          1264,
+          8084,
+          17007,
+          16748,
+          11186,
+          5834,
+          4137,
+          3709,
+          4355,
+          5761,
+          10822,
+          16572,
+          16396,
+          7971,
+          1226
+        ],
+        "code_max": 7,
+        "code_min": -7,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9829142943584728,
+        "encoded_bits": 4,
+        "logical_code_count": 15,
+        "maximum_absolute_error": 0.2038925588130951,
+        "mse": 0.00033232755959033966,
+        "normalized_rmse": 0.1840638203063971,
+        "occupied_codes": 15,
+        "scale_bytes": 1024,
+        "scale_count": 256,
+        "scale_maximum": 0.9683982133865356,
+        "scale_mean": 0.41828295588493347,
+        "scale_minimum": 0.12155882269144058,
+        "sqnr_db": 14.700631365762245,
+        "weight_code_bytes": 65536,
+        "zero_ratio": 0.02829742431640625
+      },
+      "quantized_modules": 1,
+      "region": "neck_attention_safe",
+      "sites": [
+        {
+          "clipping_rate": 0.00502777099609375,
+          "code_max": 7,
+          "code_min": -7,
+          "cosine": 0.9829142943584728,
+          "elements": 131072,
+          "maximum_absolute_error": 0.2038925588130951,
+          "mse": 0.00033232755959033966,
+          "normalized_rmse": 0.1840638203063971,
+          "occupied_codes": 15,
+          "output_channels": 256,
+          "path": "graph.model.22.m.0.1.ffn.1.conv",
+          "region": "neck_attention_safe",
+          "scale_maximum": 0.9683982133865356,
+          "scale_mean": 0.41828295588493347,
+          "scale_minimum": 0.12155882269144058,
+          "sqnr_db": 14.700631365762245,
+          "zero_ratio": 0.02829742431640625
+        }
+      ],
+      "weight_elements": 131072
+    },
+    {
+      "format_id": "twn-v3-0.75-filterwise",
+      "numeric": {
+        "clipping_rate": 0.0,
+        "code_histogram": [
+          80203,
+          136089,
+          78620
+        ],
+        "code_max": 1,
+        "code_min": -1,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.889893875285054,
+        "encoded_bits": 2,
+        "logical_code_count": 3,
+        "maximum_absolute_error": 0.03134904429316521,
+        "mse": 4.9215442332853045e-06,
+        "normalized_rmse": 0.45616750014084306,
+        "occupied_codes": 3,
+        "scale_bytes": 256,
+        "scale_count": 64,
+        "scale_maximum": 0.008178097195923328,
+        "scale_mean": 0.005828713066875935,
+        "scale_minimum": 0.00450271088629961,
+        "sqnr_db": 6.81751318926631,
+        "weight_code_bytes": 73728,
+        "zero_ratio": 0.461456298828125
+      },
+      "quantized_modules": 1,
+      "region": "pose_one2one_tower",
+      "sites": [
+        {
+          "clipping_rate": 0.0,
+          "code_max": 1,
+          "code_min": -1,
+          "cosine": 0.889893875285054,
+          "elements": 294912,
+          "maximum_absolute_error": 0.03134904429316521,
+          "mse": 4.9215442332853045e-06,
+          "normalized_rmse": 0.45616750014084306,
+          "occupied_codes": 3,
+          "output_channels": 64,
+          "path": "graph.model.23.pose_head.one2one_cv2.1.0.conv",
+          "region": "pose_one2one_tower",
+          "scale_maximum": 0.008178097195923328,
+          "scale_mean": 0.005828713066875935,
+          "scale_minimum": 0.00450271088629961,
+          "sqnr_db": 6.81751318926631,
+          "zero_ratio": 0.461456298828125
+        }
+      ],
+      "weight_elements": 294912
+    }
+  ]
+}

@@ -474,4 +474,4 @@ hardware_target:
 - active PTQ runner已改用BN-folded deployment View、由plan獨立釘住SHA的固定diagnostic manifest與fail-closed執行授權。
 - 完整Full35 exact W4／SD4 profile已在qSiLU、Hardswish、poly_shift三parent完成，共3,552筆；routing v3有36層cross-parent、cross-view static候選。舊十點grid產物未覆寫。
 - integer boundary CPU reference已補Add／Concat、RNE、saturation、protected islands與148層INT32 MAC bound；下一步仍需GPU凍結LSQ+ scale／offset並驗證bias／padding lowering與實際boundary error。fold-aware contract只阻擋QAT；未固定target hardware前不作速度或能耗winner宣稱。
-- 完整結果見[`../reports/2026-09-01-cpu-p0-integer-exact-routing.md`](../reports/2026-09-01-cpu-p0-integer-exact-routing.md)。
+- 完整結果見[`../reports/2026-09-01-cpu-p0-integer-exact-routing.md`](../archive/reports/2026-09-01-cpu-p0-integer-exact-routing.md)。

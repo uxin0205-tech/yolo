@@ -1,0 +1,115 @@
+{
+  "assignments": [
+    {
+      "cpu_format_id": "uniform-w4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "exact_w4",
+      "path": "graph.model.16.p3_masf.context.project.conv",
+      "region": "masf",
+      "stage_id": "masf-weight-primary",
+      "weight_format_id": "w4"
+    }
+  ],
+  "candidate_id": "masf-weight-primary--exact_w4",
+  "formal_training": false,
+  "formal_validation": false,
+  "materialization": {
+    "detect_complete": true,
+    "pose_complete": true
+  },
+  "metrics": {
+    "bbat/ball/box/map50": 0.9662057788142729,
+    "bbat/ball/box/map50_95": 0.7750482402363875,
+    "bbat/ball/pose/map50": 0.9697346858711867,
+    "bbat/ball/pose/map50_95": 0.9697082538486139,
+    "bbat/bat/box/map50": 0.9932199022369318,
+    "bbat/bat/box/map50_95": 0.8904983168291519,
+    "bbat/bat/pose/map50": 0.9935696230022816,
+    "bbat/bat/pose/map50_95": 0.9930808365255986,
+    "bbat/box/map50": 0.9797128405256024,
+    "bbat/box/map50_95": 0.83277327853277,
+    "bbat/pose/map50": 0.9816521544367341,
+    "bbat/pose/map50_95": 0.9813945451871062,
+    "coco/box/map50": 0.6567342543241776,
+    "coco/box/map50_95": 0.4854738117107522,
+    "coco/person/box/map50": 0.829539874043241,
+    "coco/person/box/map50_95": 0.6101208329339781
+  },
+  "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+  "metrics_sha256": "375015817cd576fc1993dae00c1ccc8b50900e78c3fb97939976f48b39d98fb7",
+  "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue",
+  "parent_id": "v19-poly-shift-a8-all-w8-qat-epoch5",
+  "parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "schema_version": 1,
+  "seconds": 74.05898177390918,
+  "status": "completed",
+  "weight_quantization": [
+    {
+      "format_id": "w4",
+      "numeric": {
+        "clipping_rate": 0.0075531005859375,
+        "code_histogram": [
+          525,
+          785,
+          1599,
+          2972,
+          4734,
+          6541,
+          8285,
+          9002,
+          9002,
+          7634,
+          5669,
+          3932,
+          2294,
+          1261,
+          624,
+          677
+        ],
+        "code_max": 7,
+        "code_min": -8,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9932876185147486,
+        "encoded_bits": 4,
+        "logical_code_count": 16,
+        "maximum_absolute_error": 0.13257792592048645,
+        "mse": 3.812914656009525e-05,
+        "normalized_rmse": 0.11567048434411985,
+        "occupied_codes": 16,
+        "scale_bytes": 1024,
+        "scale_count": 256,
+        "scale_maximum": 0.047761041671037674,
+        "scale_mean": 0.01875205524265766,
+        "scale_minimum": 0.00914342887699604,
+        "sqnr_db": 18.73554891807599,
+        "weight_code_bytes": 32768,
+        "zero_ratio": 0.137359619140625
+      },
+      "quantized_modules": 1,
+      "region": "masf",
+      "sites": [
+        {
+          "clipping_rate": 0.0075531005859375,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9932876185147486,
+          "elements": 65536,
+          "maximum_absolute_error": 0.13257792592048645,
+          "mse": 3.812914656009525e-05,
+          "normalized_rmse": 0.11567048434411985,
+          "occupied_codes": 16,
+          "output_channels": 256,
+          "path": "graph.model.16.p3_masf.context.project.conv",
+          "region": "masf",
+          "scale_maximum": 0.047761041671037674,
+          "scale_mean": 0.01875205524265766,
+          "scale_minimum": 0.00914342887699604,
+          "sqnr_db": 18.73554891807599,
+          "zero_ratio": 0.137359619140625
+        }
+      ],
+      "weight_elements": 65536
+    }
+  ]
+}

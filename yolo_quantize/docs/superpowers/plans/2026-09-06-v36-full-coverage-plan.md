@@ -8,7 +8,7 @@
 - [x] 真實148路權重覆蓋與plan/source/checkpoint hashes已核對，最新相關pytest 32 passed。
 - [ ] PTQ loader仍是較早qSiLU parent；未完成設計要求的CPU/PTQ/QAT同parent比較。
 - [ ] 十大區域獨立accuracy sensitivity、逐區累積新比較、export reload與整數部署尚待執行。
-- [ ] 後續四天計畫尚未接為live queue，詳見[整合報告](../../reports/2026-09-07-full-model-audit-four-day-plan.md)。
+- [ ] 後續四天計畫尚未接為live queue，詳見[整合報告](../../archive/reports/2026-09-07-full-model-audit-four-day-plan.md)。
 
 下方為原始建立時checklist，保留作歷史；最新完成度以上表為準。
 

@@ -1,0 +1,102 @@
+{
+  "assignments": [
+    {
+      "cpu_format_id": "exact-scaled-ternary-per_tensor",
+      "format_id": "exact_scaled_ternary",
+      "path": "graph.model.16.p3_masf.context.project.conv",
+      "region": "masf",
+      "stage_id": "masf-weight-primary",
+      "weight_format_id": "exact-scaled-ternary"
+    }
+  ],
+  "candidate_id": "masf-weight-primary--exact_scaled_ternary",
+  "formal_training": false,
+  "formal_validation": false,
+  "materialization": {
+    "detect_complete": true,
+    "pose_complete": true
+  },
+  "metrics": {
+    "bbat/ball/box/map50": 0.9669616567026529,
+    "bbat/ball/box/map50_95": 0.7752768646765721,
+    "bbat/ball/pose/map50": 0.9704077039780582,
+    "bbat/ball/pose/map50_95": 0.9703400652037182,
+    "bbat/bat/box/map50": 0.9931590797093541,
+    "bbat/bat/box/map50_95": 0.8876691159635067,
+    "bbat/bat/pose/map50": 0.9936107634192969,
+    "bbat/bat/pose/map50_95": 0.9930339443633331,
+    "bbat/box/map50": 0.9800603682060035,
+    "bbat/box/map50_95": 0.8314729903200394,
+    "bbat/pose/map50": 0.9820092336986775,
+    "bbat/pose/map50_95": 0.9816870047835258,
+    "coco/box/map50": 0.6564756010778454,
+    "coco/box/map50_95": 0.4850783133558285,
+    "coco/person/box/map50": 0.8299736679965517,
+    "coco/person/box/map50_95": 0.6106344518015903
+  },
+  "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--exact_scaled_ternary/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+  "metrics_sha256": "adf59072f82773d5f2564f130b440b3518418e98d2f56d99347a58f62b47648f",
+  "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--exact_scaled_ternary/attempt-0/validation/epoch-0000/bittrue",
+  "parent_id": "v19-poly-shift-a8-all-w8-qat-epoch5",
+  "parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "schema_version": 1,
+  "seconds": 73.46454217610881,
+  "status": "completed",
+  "weight_quantization": [
+    {
+      "format_id": "exact-scaled-ternary",
+      "numeric": {
+        "clipping_rate": 0.0,
+        "code_histogram": [
+          23064,
+          29811,
+          12661
+        ],
+        "code_max": 1,
+        "code_min": -1,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.8920976557131215,
+        "encoded_bits": 2,
+        "logical_code_count": 3,
+        "maximum_absolute_error": 0.4024066925048828,
+        "mse": 0.0005818167701363564,
+        "normalized_rmse": 0.45184255345113683,
+        "occupied_codes": 3,
+        "scale_bytes": 4,
+        "scale_count": 1,
+        "scale_maximum": 0.06449851393699646,
+        "scale_mean": 0.06449851393699646,
+        "scale_minimum": 0.06449851393699646,
+        "sqnr_db": 6.9002574134768215,
+        "weight_code_bytes": 16384,
+        "zero_ratio": 0.4548797607421875
+      },
+      "quantized_modules": 1,
+      "region": "masf",
+      "sites": [
+        {
+          "clipping_rate": 0.0,
+          "code_max": 1,
+          "code_min": -1,
+          "cosine": 0.8920976557131215,
+          "elements": 65536,
+          "maximum_absolute_error": 0.4024066925048828,
+          "mse": 0.0005818167701363564,
+          "normalized_rmse": 0.45184255345113683,
+          "occupied_codes": 3,
+          "output_channels": 1,
+          "path": "graph.model.16.p3_masf.context.project.conv",
+          "region": "masf",
+          "scale_maximum": 0.06449851393699646,
+          "scale_mean": 0.06449851393699646,
+          "scale_minimum": 0.06449851393699646,
+          "sqnr_db": 6.9002574134768215,
+          "zero_ratio": 0.4548797607421875
+        }
+      ],
+      "weight_elements": 65536
+    }
+  ]
+}

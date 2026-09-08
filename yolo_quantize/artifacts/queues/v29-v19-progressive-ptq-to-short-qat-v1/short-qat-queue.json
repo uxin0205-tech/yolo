@@ -1,0 +1,31 @@
+{
+  "execution_authorized": true,
+  "formal_validation": false,
+  "jobs": [],
+  "long_qat_authorized": false,
+  "matched_sham_required": true,
+  "queue_id": "v29-v19-progressive-ptq-to-short-qat-v1--short-qat",
+  "recipe": {
+    "added_noise": false,
+    "augmentation": "accepted_full35_exact",
+    "batch": {
+      "detect_logical": 128,
+      "detect_microbatch": 16,
+      "pose": 16
+    },
+    "epochs": 15,
+    "optimizer": "AdamW",
+    "patience": 5,
+    "schedule": {
+      "fp32_epochs": 3,
+      "full_quant_epochs": 6,
+      "progressive_ramp_epochs": 6
+    }
+  },
+  "schema_version": 1,
+  "source_parent_manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/v19-epoch5-locked-parent-v1.yaml",
+  "source_parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "source_queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "source_queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "status": "no_eligible_recovery_candidates"
+}

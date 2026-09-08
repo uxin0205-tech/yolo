@@ -1,0 +1,123 @@
+schema_version: 1
+manifest_id: v34-qsilu-layer-sensitivity-routes-v1
+date: '2026-09-06'
+execution_authorized: false
+map_validation_run: false
+source_profile:
+  path: artifacts/reports/v34-qsilu-structured-148-layer-cpu-v1.json
+  sha256: 28280630afb4d11ef75cdbd71032da40fa9a8d7cf6a29d78e8e1017ff13dbb77
+  view: deployment
+  format_id: fixed-sd4-per_output_channel-optimal_scaled_codebook
+selection_method:
+  scope: all_148_deployment_weight_layers
+  segments:
+    backbone:
+    - backbone_attention_safe
+    - backbone_deep
+    - backbone_early
+    neck:
+    - masf
+    - neck
+    - neck_attention_safe
+    head:
+    - detect_one2one_predictor
+    - detect_one2one_tower
+    - pose_one2one_predictor
+    - pose_one2one_tower
+  ranks:
+  - minimum_nrmse
+  - upper_median_nrmse
+  - maximum_nrmse
+  gpu_candidates: 9
+  selection_claim: false
+selection_records:
+- path: graph.model.10.m.0.attn.pe.conv
+  region: backbone_attention_safe
+  normalized_rmse: 0.0916770389807525
+  segment: backbone
+  sensitivity_level: low
+  rank_index_zero_based: 0
+  segment_layer_count: 50
+  route_id: layer-backbone-low
+- path: graph.model.10.m.0.attn.proj.conv
+  region: backbone_attention_safe
+  normalized_rmse: 0.18102207550287405
+  segment: backbone
+  sensitivity_level: median
+  rank_index_zero_based: 25
+  segment_layer_count: 50
+  route_id: layer-backbone-median
+- path: graph.model.7.conv
+  region: backbone_deep
+  normalized_rmse: 0.19093640091249098
+  segment: backbone
+  sensitivity_level: high
+  rank_index_zero_based: 49
+  segment_layer_count: 50
+  route_id: layer-backbone-high
+- path: graph.model.22.m.0.1.attn.pe.conv
+  region: neck_attention_safe
+  normalized_rmse: 0.10899308700865665
+  segment: neck
+  sensitivity_level: low
+  rank_index_zero_based: 0
+  segment_layer_count: 41
+  route_id: layer-neck-low
+- path: graph.model.16.m.0.m.0.cv1.conv
+  region: neck
+  normalized_rmse: 0.18069772410471194
+  segment: neck
+  sensitivity_level: median
+  rank_index_zero_based: 20
+  segment_layer_count: 41
+  route_id: layer-neck-median
+- path: graph.model.20.conv
+  region: neck
+  normalized_rmse: 0.1904146283775364
+  segment: neck
+  sensitivity_level: high
+  rank_index_zero_based: 40
+  segment_layer_count: 41
+  route_id: layer-neck-high
+- path: graph.model.23.detect_head.one2one_cv3.0.1.0.conv
+  region: detect_one2one_tower
+  normalized_rmse: 0.07411149015481866
+  segment: head
+  sensitivity_level: low
+  rank_index_zero_based: 0
+  segment_layer_count: 57
+  route_id: layer-head-low
+- path: graph.model.23.detect_head.one2one_cv3.1.2
+  region: detect_one2one_predictor
+  normalized_rmse: 0.17528408542286694
+  segment: head
+  sensitivity_level: median
+  rank_index_zero_based: 28
+  segment_layer_count: 57
+  route_id: layer-head-median
+- path: graph.model.23.pose_head.one2one_cv2.1.0.conv
+  region: pose_one2one_tower
+  normalized_rmse: 0.1918779185712225
+  segment: head
+  sensitivity_level: high
+  rank_index_zero_based: 56
+  segment_layer_count: 57
+  route_id: layer-head-high
+layer-backbone-low:
+- graph.model.10.m.0.attn.pe.conv
+layer-backbone-median:
+- graph.model.10.m.0.attn.proj.conv
+layer-backbone-high:
+- graph.model.7.conv
+layer-neck-low:
+- graph.model.22.m.0.1.attn.pe.conv
+layer-neck-median:
+- graph.model.16.m.0.m.0.cv1.conv
+layer-neck-high:
+- graph.model.20.conv
+layer-head-low:
+- graph.model.23.detect_head.one2one_cv3.0.1.0.conv
+layer-head-median:
+- graph.model.23.detect_head.one2one_cv3.1.2
+layer-head-high:
+- graph.model.23.pose_head.one2one_cv2.1.0.conv

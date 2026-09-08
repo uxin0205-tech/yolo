@@ -1,0 +1,102 @@
+{
+  "assignments": [
+    {
+      "cpu_format_id": "twn-v3-0.75-filterwise",
+      "format_id": "twn_v3_filterwise",
+      "path": "graph.model.16.p3_masf.context.project.conv",
+      "region": "masf",
+      "stage_id": "masf-weight-primary",
+      "weight_format_id": "twn-v3-0.75-filterwise"
+    }
+  ],
+  "candidate_id": "masf-weight-primary--twn_v3_filterwise",
+  "formal_training": false,
+  "formal_validation": false,
+  "materialization": {
+    "detect_complete": true,
+    "pose_complete": true
+  },
+  "metrics": {
+    "bbat/ball/box/map50": 0.965809607140858,
+    "bbat/ball/box/map50_95": 0.774915579677866,
+    "bbat/ball/pose/map50": 0.96949439094272,
+    "bbat/ball/pose/map50_95": 0.9694301640718436,
+    "bbat/bat/box/map50": 0.993315571104429,
+    "bbat/bat/box/map50_95": 0.887627279704256,
+    "bbat/bat/pose/map50": 0.9936959206747169,
+    "bbat/bat/pose/map50_95": 0.993193228655851,
+    "bbat/box/map50": 0.9795625891226435,
+    "bbat/box/map50_95": 0.8312714296910612,
+    "bbat/pose/map50": 0.9815951558087185,
+    "bbat/pose/map50_95": 0.9813116963638473,
+    "coco/box/map50": 0.65721078347901,
+    "coco/box/map50_95": 0.48546226673826803,
+    "coco/person/box/map50": 0.829884991563489,
+    "coco/person/box/map50_95": 0.6110217137657398
+  },
+  "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+  "metrics_sha256": "6af0f98eaca239949d7510eb89536d9287313f3caf88668edda3c81f20e98ad9",
+  "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue",
+  "parent_id": "v19-poly-shift-a8-all-w8-qat-epoch5",
+  "parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "schema_version": 1,
+  "seconds": 73.26667007198557,
+  "status": "completed",
+  "weight_quantization": [
+    {
+      "format_id": "twn-v3-0.75-filterwise",
+      "numeric": {
+        "clipping_rate": 0.0,
+        "code_histogram": [
+          23631,
+          28899,
+          13006
+        ],
+        "code_max": 1,
+        "code_min": -1,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.8992014572891235,
+        "encoded_bits": 2,
+        "logical_code_count": 3,
+        "maximum_absolute_error": 0.3478285074234009,
+        "mse": 0.0005455531645566225,
+        "normalized_rmse": 0.4375347500576016,
+        "occupied_codes": 3,
+        "scale_bytes": 1024,
+        "scale_count": 256,
+        "scale_maximum": 0.1190766841173172,
+        "scale_mean": 0.06352586299180984,
+        "scale_minimum": 0.031293194741010666,
+        "sqnr_db": 7.179748971282066,
+        "weight_code_bytes": 16384,
+        "zero_ratio": 0.4409637451171875
+      },
+      "quantized_modules": 1,
+      "region": "masf",
+      "sites": [
+        {
+          "clipping_rate": 0.0,
+          "code_max": 1,
+          "code_min": -1,
+          "cosine": 0.8992014572891235,
+          "elements": 65536,
+          "maximum_absolute_error": 0.3478285074234009,
+          "mse": 0.0005455531645566225,
+          "normalized_rmse": 0.4375347500576016,
+          "occupied_codes": 3,
+          "output_channels": 256,
+          "path": "graph.model.16.p3_masf.context.project.conv",
+          "region": "masf",
+          "scale_maximum": 0.1190766841173172,
+          "scale_mean": 0.06352586299180984,
+          "scale_minimum": 0.031293194741010666,
+          "sqnr_db": 7.179748971282066,
+          "zero_ratio": 0.4409637451171875
+        }
+      ],
+      "weight_elements": 65536
+    }
+  ]
+}

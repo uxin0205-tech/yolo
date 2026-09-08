@@ -1,6 +1,8 @@
 # SD4／三元權重選擇依據與既有實驗詳細分析
 
-日期：2026-09-07。這是[全模型盤點與四天計畫](2026-09-07-full-model-audit-four-day-plan.md)的詳細補充，兩份合讀。此次只整理既有證據、查核定義並生成圖表，沒有新增 GPU 實驗、訓練或 live queue。
+> 歷史證據快照：下列 V35 CPU 與較早 recovery PTQ 不構成同 parent 隔離比較，亦未證明排序可遷移。本輪已建立 V36 同源 probe／區域 PTQ／QAT，詳見[證據層級與血緣稽核](2026-09-07-evidence-consistency-boundaries.md)。原數字不回寫；文末未執行及 3epoch 描述僅屬舊規劃。
+
+日期：2026-09-07。這是[全模型盤點與四天計畫](../archive/reports/2026-09-07-full-model-audit-four-day-plan.md)的詳細補充，兩份合讀。此次只整理既有證據、查核定義並生成圖表，沒有新增 GPU 實驗、訓練或 live queue。
 
 ## 1. 先回答：為什麼比較 SD4 與三元？
 

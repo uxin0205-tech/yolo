@@ -1,0 +1,92 @@
+{
+  "blockers": [],
+  "ready": true,
+  "resolved": {
+    "formal_validation": false,
+    "gates": {
+      "map50_95_max_drop": 0.04,
+      "map50_max_drop": 0.015
+    },
+    "graph": {
+      "activation_quantizers": 124,
+      "binary_qk_protected_modules": 4,
+      "catalog": {
+        "deployment_regions": {
+          "backbone_attention_safe": {
+            "modules": 7,
+            "weight_elements": 919808
+          },
+          "backbone_deep": {
+            "modules": 22,
+            "weight_elements": 8126464
+          },
+          "backbone_early": {
+            "modules": 21,
+            "weight_elements": 1218240
+          },
+          "detect_one2one_predictor": {
+            "modules": 6,
+            "weight_elements": 62208
+          },
+          "detect_one2one_tower": {
+            "modules": 18,
+            "weight_elements": 1390592
+          },
+          "masf": {
+            "modules": 3,
+            "weight_elements": 74240
+          },
+          "neck": {
+            "modules": 33,
+            "weight_elements": 8142848
+          },
+          "neck_attention_safe": {
+            "modules": 5,
+            "weight_elements": 395520
+          },
+          "pose_one2one_predictor": {
+            "modules": 9,
+            "weight_elements": 3456
+          },
+          "pose_one2one_tower": {
+            "modules": 24,
+            "weight_elements": 2238464
+          }
+        },
+        "totals": {
+          "deployment_modules": 148,
+          "deployment_weight_elements": 22571840,
+          "modules": 251,
+          "protected_modules": 4,
+          "protected_weight_elements": 131072,
+          "training_only_modules": 99,
+          "training_only_weight_elements": 3748480,
+          "weight_elements": 26451392
+        }
+      },
+      "final_batch_norm_modules": 0,
+      "fold": {
+        "final_batch_norm_modules": 0,
+        "folded_conv_batch_norm_modules": 179,
+        "folded_deconv_batch_norm_modules": 0,
+        "folded_modules": 179,
+        "initial_batch_norm_modules": 179,
+        "reparameterized_repconv_modules": 0,
+        "reparameterized_repvggdw_modules": 0
+      },
+      "quantizer_optimizer_groups": 6,
+      "quantizer_optimizer_parameters": 259,
+      "warm_start": null,
+      "weight_quantizers": 11
+    },
+    "graph_verified": true,
+    "plan_id": "v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1",
+    "plan_sha256": "28d5887dd9cc61b1cecbebc1249b9c7aef5c65cd8782dfd9931e34726f0c9a84",
+    "pose_data": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml",
+    "required_metric_count": 16
+  },
+  "warnings": [
+    "TensorBoard 未安裝；auto 模式仍會保留 JSONL、CSV、PNG",
+    "logical Detect batch=128、physical microbatch=16；正式 run 前仍須在空閒 RTX 5090 執行 VRAM gate"
+  ]
+}

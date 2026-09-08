@@ -1,8 +1,10 @@
-# Activation預選可分享成品
+# 可分享成品（歷史圖表與本輪報告分開）
+
+目前訓練結果請分享[本輪 QAT 恢復報告](../docs/reports/2026-09-07-continuous-qat-recovery-results.md)與[比較限制](../docs/reports/2026-09-07-evidence-consistency-boundaries.md)。本目錄圖表有各自日期，不能用舊圖冒充本輪最終結果。
 
 另見[2026-09-07全模型量化盤點附件](full-model-audit-2026-09-07/README.md)：V36實測數據、148路格式、四天規劃與圖表。以下activation圖保留歷史版本。
 
-本目錄保存同一張Full35 activation預選老師版圖表的三種格式。完整解釋見[預選報告](../docs/reports/2026-08-29-activation-preselection-report.md)。這是2026-08-29的凍結歷史成品；2026-08-31後active shortlist已改為qSiLU／Hardswish／poly_shift，見[修訂報告](../docs/reports/2026-08-31-hardswish-policy-revision.md)。舊圖不重繪或改hash，以免把新決策偽裝成當時結果。
+本目錄保存同一張Full35 activation預選老師版圖表的三種格式。完整解釋見[預選報告](../docs/reports/2026-08-29-activation-preselection-report.md)。這是2026-08-29的凍結歷史成品；2026-08-31後active shortlist已改為qSiLU／Hardswish／poly_shift，見[修訂報告](../docs/archive/reports/2026-08-31-hardswish-policy-revision.md)。舊圖不重繪或改hash，以免把新決策偽裝成當時結果。
 
 | 檔案 | 用途 | SHA-256 |
 |---|---|---|

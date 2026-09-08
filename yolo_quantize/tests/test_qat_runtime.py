@@ -257,10 +257,19 @@ def test_qat_arm_requires_completed_hash_pinned_matched_sham(tmp_path: Path) -> 
 def test_qat_runtime_reports_external_control_without_local_sham(
     tmp_path: Path,
 ) -> None:
-    source = PROJECT_ROOT / "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/short-qat-mixed-final-v1/generated/qat-plan.yaml"
+    source = (
+        PROJECT_ROOT
+        / "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/short-qat-mixed-final-v1/generated/qat-plan.yaml"
+    )
     payload = yaml.safe_load(source.read_text(encoding="utf-8"))
-    completion = PROJECT_ROOT / "artifacts/runs/qat/v35-qsilu-mixed-final-short-v1/v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1-sham-seed1/qat-experiment.json"
-    metrics = PROJECT_ROOT / "artifacts/runs/qat/v35-qsilu-mixed-final-short-v1/v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1-sham-seed1/validation/epoch-0003/bittrue/metrics.json"
+    completion = (
+        PROJECT_ROOT
+        / "artifacts/runs/qat/v35-qsilu-mixed-final-short-v1/v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1-sham-seed1/qat-experiment.json"
+    )
+    metrics = (
+        PROJECT_ROOT
+        / "artifacts/runs/qat/v35-qsilu-mixed-final-short-v1/v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1-sham-seed1/validation/epoch-0003/bittrue/metrics.json"
+    )
 
     def digest(path: Path) -> str:
         return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -421,6 +430,55 @@ def _warm_start_policy(model: torch.nn.Module, *, exact_first: bool):
         model,
         catalog=Full35WeightRegionCatalog.inspect(model),
         assignments=tuple(assignments),
+    )
+
+
+def test_explicit_reset_preserves_inherited_override_scale(tmp_path):
+    source = _WarmStartGraph()
+    _warm_start_policy(source, exact_first=False)
+    source.graph.model[1].conv.weight_quantizer.scale_parameter.data.fill_(0.37)
+    checkpoint = tmp_path / "parent.pt"
+    torch.save(
+        {
+            "checkpoint_kind": "full_resume",
+            "progress": {"next_epoch": 2},
+            "ema_state": source.state_dict(),
+        },
+        checkpoint,
+    )
+    target = _WarmStartGraph()
+    assignments = (
+        WeightRegionAssignment("backbone_early", UniformWeightSpec(8, "mse_grid_v1")),
+        WeightRegionAssignment(
+            "backbone_early", ExactTernaryWeightSpec(), paths=("graph.model.0.conv",)
+        ),
+        WeightRegionAssignment(
+            "backbone_early",
+            UniformWeightSpec(8, "mse_grid_v1"),
+            paths=("graph.model.1.conv",),
+        ),
+    )
+    policy = FoldedQATWeightAdapter().apply(
+        target,
+        catalog=Full35WeightRegionCatalog.inspect(target),
+        assignments=assignments,
+    )
+    warm = QATWarmStartSpec(
+        parent_id="fixture",
+        selected_epoch=1,
+        parent_manifest=tmp_path / "manifest",
+        parent_manifest_sha256="a" * 64,
+        checkpoint=checkpoint,
+        checkpoint_sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
+        state_key="ema_state",
+        reset_path_override_quantizers=True,
+        reset_paths=("graph.model.0.conv",),
+    )
+    report = _apply_qat_full_resume_warm_start(target, policy, warm)
+    assert report["reset_paths"] == ["graph.model.0.conv"]
+    assert torch.equal(
+        target.graph.model[1].conv.weight_quantizer.scale_parameter,
+        source.graph.model[1].conv.weight_quantizer.scale_parameter,
     )
 
 

@@ -1,0 +1,401 @@
+schema_version: 1
+plan_id: v34-qsilu-layer-and-structured-ptq-v1
+date: '2026-09-06'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-dual-v1
+execution_authorization:
+  authorization_id: user-2026-09-06-tuesday-quick-structured-ptq
+  validation_roles:
+  - candidate
+  candidate_ids:
+  - layer-sensitivity-backbone-low-fixed-sd4
+  - layer-sensitivity-backbone-median-fixed-sd4
+  - layer-sensitivity-backbone-high-fixed-sd4
+  - layer-sensitivity-neck-low-fixed-sd4
+  - layer-sensitivity-neck-median-fixed-sd4
+  - layer-sensitivity-neck-high-fixed-sd4
+  - layer-sensitivity-head-low-fixed-sd4
+  - layer-sensitivity-head-median-fixed-sd4
+  - layer-sensitivity-head-high-fixed-sd4
+  - fixed-sd4-head-three
+  - exact-ternary-head-three
+  - twn-v3-head-three
+  - paper-twn-v2-head-three
+  - exact-ternary-pose-safe
+  - twn-v3-pose-safe
+  route_ids:
+  - layer-backbone-low
+  - layer-backbone-median
+  - layer-backbone-high
+  - layer-neck-low
+  - layer-neck-median
+  - layer-neck-high
+  - layer-head-low
+  - layer-head-median
+  - layer-head-high
+  - fixed-sd4-neck-attention
+  - fixed-sd4-detect-tower
+  - fixed-sd4-detect-predictor
+  - paper-twn-safe
+  training: false
+  stop_after: nine_single_layer_then_six_structured_ptq_then_dual_regate
+upstream:
+  base_search_plan:
+    path: configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml
+    sha256: 3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v9.yaml
+    sha256: 9bc7084e9217754153cc2ad69e83e6ae658304944ffa0ab6318ebd57c1d5d394
+  reference_search_report:
+    path: artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json
+    sha256: 738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2
+    reuse_roles:
+    - accepted
+    - matched
+  reference_map50_regate:
+    path: artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json
+    sha256: 67fce27506fac33e7655e791d815c04d7030ba213978a1ab27873369a396573e
+  comparison_candidates:
+  - path: artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json
+    sha256: 2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b
+    candidate_id: accuracy-a05-add-pose-tower-w8
+  - path: artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json
+    sha256: 2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b
+    candidate_id: compression-c04-add-pose-tower-w8
+  - path: artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json
+    sha256: 2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b
+    candidate_id: accuracy-a09-add-neck-w8
+activation:
+  default: qsilu_pq
+  bits: 8
+  signed_codes: false
+  region_assignments: {}
+  policy_id: qsilu_pq--lsq-plus-a8
+  checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+    sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+routes:
+  layer-backbone-low:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-backbone-low
+  layer-backbone-median:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-backbone-median
+  layer-backbone-high:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-backbone-high
+  layer-neck-low:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-neck-low
+  layer-neck-median:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-neck-median
+  layer-neck-high:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-neck-high
+  layer-head-low:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-head-low
+  layer-head-median:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-head-median
+  layer-head-high:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-head-high
+  fixed-sd4-neck-attention:
+    manifest: &id001
+      path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml
+      sha256: 33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665
+    list_key: neck_attention_safe
+  fixed-sd4-detect-tower:
+    manifest: *id001
+    list_key: detect_one2one_tower
+  fixed-sd4-detect-predictor:
+    manifest: *id001
+    list_key: detect_one2one_predictor
+  paper-twn-safe:
+    manifest:
+      path: artifacts/manifests/paper-twn-routing-candidates-v1.yaml
+      sha256: 05540a7fcc1f5c5adbc87b65a6c49d90446162d526cda5ac634746fe9885f145
+    list_key: safe_candidates
+candidates:
+- candidate_id: layer-sensitivity-backbone-low-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-backbone-low
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: layer-sensitivity-backbone-median-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-backbone-median
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: layer-sensitivity-backbone-high-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: layer-sensitivity-neck-low-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-neck-low
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: layer-sensitivity-neck-median-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-neck-median
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: layer-sensitivity-neck-high-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-neck-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: layer-sensitivity-head-low-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-head-low
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: layer-sensitivity-head-median-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-head-median
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: layer-sensitivity-head-high-fixed-sd4
+  region_defaults: []
+  path_routes:
+  - route_id: layer-head-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: fixed-sd4-head-three
+  region_defaults: []
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: exact-ternary-head-three
+  region_defaults: []
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+- candidate_id: twn-v3-head-three
+  region_defaults: []
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: twn_filterwise
+      threshold_multiplier: 0.75
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: twn_filterwise
+      threshold_multiplier: 0.75
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: twn_filterwise
+      threshold_multiplier: 0.75
+- candidate_id: paper-twn-v2-head-three
+  region_defaults: []
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: paper_twn
+      threshold_multiplier: 0.7
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: paper_twn
+      threshold_multiplier: 0.7
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: paper_twn
+      threshold_multiplier: 0.7
+- candidate_id: exact-ternary-pose-safe
+  region_defaults: []
+  path_routes:
+  - route_id: paper-twn-safe
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+- candidate_id: twn-v3-pose-safe
+  region_defaults: []
+  path_routes:
+  - route_id: paper-twn-safe
+    format:
+      family: twn_filterwise
+      threshold_multiplier: 0.75
+diagnostic:
+  manifest: inherit_weight_plan
+  fixed_probe_per_task: 1
+  all_finite_required: true
+  same_structure_required: true
+  selection_claim: false
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch:
+    detect: 32
+    pose: 16
+  workers:
+    detect: 4
+    pose: 8
+  plots: false
+  save_coco_json: false
+  augmentation: false
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+selection:
+  hard_gate_first: true
+  objectives:
+  - maximize_worst_total_map50_delta
+  - minimize_total_packed_weight_bytes
+  accuracy_tolerance: 0.002
+  roles:
+  - accuracy
+  - balanced
+  - hardware
+  mean_metric_can_override_worst_task: false
+quick_queue_provenance:
+  base_plan: /home/uxin/yolo/yolo_quantize/configs/experiments/v11-qsilu-special-format-route-sensitivity-v1.yaml
+  base_plan_sha256: d6dbac10f1fb62f96eef53654e1ae81bd50dda61a1430dcd4fd3a2e2e7af127b
+  cpu_profile: /home/uxin/yolo/yolo_quantize/artifacts/reports/v34-qsilu-structured-148-layer-cpu-v1.json
+  cpu_profile_sha256: 28280630afb4d11ef75cdbd71032da40fa9a8d7cf6a29d78e8e1017ff13dbb77
+  candidate_count: 15
+  single_layer_candidate_count: 9
+  structured_route_candidate_count: 6
+  layer_route_manifest: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+  layer_route_manifest_sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+  layer_selection:
+  - path: graph.model.10.m.0.attn.pe.conv
+    region: backbone_attention_safe
+    normalized_rmse: 0.0916770389807525
+    segment: backbone
+    sensitivity_level: low
+    rank_index_zero_based: 0
+    segment_layer_count: 50
+    route_id: layer-backbone-low
+  - path: graph.model.10.m.0.attn.proj.conv
+    region: backbone_attention_safe
+    normalized_rmse: 0.18102207550287405
+    segment: backbone
+    sensitivity_level: median
+    rank_index_zero_based: 25
+    segment_layer_count: 50
+    route_id: layer-backbone-median
+  - path: graph.model.7.conv
+    region: backbone_deep
+    normalized_rmse: 0.19093640091249098
+    segment: backbone
+    sensitivity_level: high
+    rank_index_zero_based: 49
+    segment_layer_count: 50
+    route_id: layer-backbone-high
+  - path: graph.model.22.m.0.1.attn.pe.conv
+    region: neck_attention_safe
+    normalized_rmse: 0.10899308700865665
+    segment: neck
+    sensitivity_level: low
+    rank_index_zero_based: 0
+    segment_layer_count: 41
+    route_id: layer-neck-low
+  - path: graph.model.16.m.0.m.0.cv1.conv
+    region: neck
+    normalized_rmse: 0.18069772410471194
+    segment: neck
+    sensitivity_level: median
+    rank_index_zero_based: 20
+    segment_layer_count: 41
+    route_id: layer-neck-median
+  - path: graph.model.20.conv
+    region: neck
+    normalized_rmse: 0.1904146283775364
+    segment: neck
+    sensitivity_level: high
+    rank_index_zero_based: 40
+    segment_layer_count: 41
+    route_id: layer-neck-high
+  - path: graph.model.23.detect_head.one2one_cv3.0.1.0.conv
+    region: detect_one2one_tower
+    normalized_rmse: 0.07411149015481866
+    segment: head
+    sensitivity_level: low
+    rank_index_zero_based: 0
+    segment_layer_count: 57
+    route_id: layer-head-low
+  - path: graph.model.23.detect_head.one2one_cv3.1.2
+    region: detect_one2one_predictor
+    normalized_rmse: 0.17528408542286694
+    segment: head
+    sensitivity_level: median
+    rank_index_zero_based: 28
+    segment_layer_count: 57
+    route_id: layer-head-median
+  - path: graph.model.23.pose_head.one2one_cv2.1.0.conv
+    region: pose_one2one_tower
+    normalized_rmse: 0.1918779185712225
+    segment: head
+    sensitivity_level: high
+    rank_index_zero_based: 56
+    segment_layer_count: 57
+    route_id: layer-head-high
+  formal_training: false
+  formal_validation: false

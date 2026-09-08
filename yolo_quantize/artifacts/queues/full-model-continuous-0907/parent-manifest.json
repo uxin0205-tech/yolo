@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "parent_id": "v36-qsilu-a8-full-coverage-epoch1",
+  "status": "locked_search_parent",
+  "formal_validation": false,
+  "selected_epoch": 1,
+  "activation": {
+    "name": "qsilu_pq",
+    "bits": 8,
+    "quantizer": "lsq_plus_a8"
+  },
+  "weight_policy": {
+    "format_id": "mixed-w8-ls-sd4-w6-w4-148-paths",
+    "deployment_modules": 148,
+    "deployment_weight_elements": 22571840
+  },
+  "plan": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v36-qsilu-full-coverage-progressive-v1/short-qat-full-coverage-v3/generated/qat-plan.yaml",
+    "sha256": "61f00bf33146c44dda14aba57efaee327c2f47d96102a88abffd8f3e20a17562"
+  },
+  "completion": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/qat-experiment.json",
+    "sha256": "9ff391faa092edc8d91a32fc29790d1d44939c4545c32d7ee3e0a6dc0cfd7c52"
+  },
+  "metrics": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/validation/epoch-0001/bittrue/metrics.json",
+    "sha256": "9ee666d9b25fdb7ada93fddbf57af9d4c4e50c3c32893875d4c7b4ebd238a53b"
+  },
+  "checkpoints": {
+    "full_resume": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/checkpoints/best_joint.pt",
+      "sha256": "f83e1ba22adc737ed05abf68152f621a67915a2104ace3bfd5a3b630d66dcb78"
+    },
+    "inference": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/inference/best_joint.pt",
+      "sha256": "8c1f3652fd21c0e38221cfc3acba7ee013c5e88df641b9331c33796f6f11b66c"
+    }
+  },
+  "gate": {
+    "decision": "green",
+    "map50_max_drop": 0.015,
+    "map50_95_max_drop": 0.04,
+    "worst_map50_delta": -0.008347308097677475,
+    "worst_map50_95_delta": -0.011567125974855264
+  }
+}

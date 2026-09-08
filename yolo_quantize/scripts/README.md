@@ -1,15 +1,51 @@
-# 報告與CPU準備腳本
+# 操作入口
 
-`report_weight_evidence.py`承接盤點表與V36 CPU profile，生成1332筆逐層CSV、十區誤差圖、詳細數據附錄及來源hash。執行：`/home/uxin/yolo/.venv/bin/python scripts/report_weight_evidence.py`；先執行下述盤點腳本更新來源表，不載入模型或使用GPU。
+從專案根目錄執行。先看[目前計畫](../docs/CURRENT_PLAN.md)，不要重複啟動正在執行的 GPU queue。
 
-`report_full_model_audit.py`讀取既有V36完成/QAT metrics、plan、CPU profile與PTQ re-gate，驗證來源hash，輸出`deliverables/full-model-audit-2026-09-07/`的CSV/JSON/PNG/PDF/SVG。執行：`/home/uxin/yolo/.venv/bin/python scripts/report_full_model_audit.py`。不執行GPU或訓練；script與圖表可提交Git，checkpoint不隨報告發布。
+2026-09-08 已在十二個累積 PTQ 完成點收尾，量化延後；目前沒有要接的新 QAT，monitor 已退出。下列 GPU／monitor 命令僅保留作日後明確恢復時的操作說明，不應現在執行。
 
-`render_activation_preselection.py`只讀取既有`activation-smoke-v2.json`並輸出PNG、SVG、PDF，不使用GPU、不載入模型，也不執行validation或訓練。
+## 日常 CPU 操作
 
-`prepare_v1_v3.py`建立固定32/64 diagnostic manifest；指定active activation parent時，另建立unfused／BN-folded dual-view manifest與CPU靜態格式分析。`--activation-region REGION=ACTIVATION --view-only`可只重建regional policy parity，不重複相同checkpoint的weight-only分析。`poly_quality`只可透過`--historical-parent`重建凍結證據。腳本不呼叫CUDA、validation、QAT或訓練。
+| 腳本 | 輸入／輸出 | GPU |
+| --- | --- | --- |
+| `summarize_continuous_qat.py` | 本輪已完成 QAT → 逐回合／逐指標報告 | 不用 |
+| `audit_continuous_evidence.py` | PTQ/probe/QAT metadata → 同源稽核 | 不用 |
+| `inventory_project.py` | 目錄與 JSON/YAML 引用 → 分類／待刪清單；不刪檔 | 不用 |
+| `profile_continuous_distribution.py` | parent checkpoint → 兩種 view 分布 | 不用 |
+| `trace_continuous_precision.py` | parent → CPU 算子精度清單 | 不用 |
 
-完整main profile每個parent約需10–12分鐘CPU；日常回歸使用tiny tensor pytest。`--profile full`只準備granularity／scale ablation介面，本輪沒有執行全模型full profile。
+```bash
+/home/uxin/yolo/.venv/bin/python scripts/summarize_continuous_qat.py
+/home/uxin/yolo/.venv/bin/python scripts/audit_continuous_evidence.py
+/home/uxin/yolo/.venv/bin/python scripts/inventory_project.py
+```
 
-`yolo-quantize-search-validation`／`python -m yolo_quantize.search_validation`只執行reviewed search plan明列的accepted／matched／candidate；必須提供`--execute-reviewed-plan`，支援`--resume`與原子JSON。2026-09-03的v1 plan只授權qSiLU＋A8／`backbone_early`／W8，不會自動展開其他bit、region、QAT或formal validation。
+報告與 metadata 可供 Git 發行；checkpoint、cache、runs 不因生成報告而自動上傳。上述腳本需要本機來源，不能宣稱乾淨 clone 能重建所有實驗。
 
-圖表需求為Python 3.12、`matplotlib==3.11.1`與Noto Sans CJK字型。完整命令、字型路徑與限制見[子專案README](../README.md)。
+## 執行及監測
+
+| 腳本 | 角色 |
+| --- | --- |
+| `run_cumulative_ptq_queue.py` | 已完成的十二個累積 PTQ 入口；無參數只做 CPU 準備，目前不重啟 GPU |
+| `prepare_continuous_qat.py`、`extend_continuous_qat.py` | 生成不可覆寫的本批計畫，不自行訓練 |
+| `run_continuous_qat_queue.py` | 六組 CPU 預檢→GPU 串行訓練；本批已完成，不重啟 |
+| `run_continuous_special_queue.py` | 已完成的 parent 重驗＋40 組 PTQ，不是目前啟動入口 |
+| `run_continuous_layer_probe.py` | 已完成的 592 組 GPU 輸出探測，不是逐層 mAP |
+| `validate_continuous_parent.py` | GPU 搜尋精度重驗，需授權及空閒 GPU |
+| `preflight_continuous_parent.py` | parent reload；GPU export 的 EMA 投影需明確 `--projection-device cuda:0`，不可用 CPU 差異誤判血緣 |
+
+```bash
+PYTHONPATH=src /home/uxin/yolo/.venv/bin/python -m yolo_quantize.blocking_monitor artifacts/queues/full-model-cumulative-0908/execution-status.json
+```
+
+monitor 每 600 秒比較固定欄位，未變則靜默等待，有事件輸出後退出。它不是自動修復模型；supervisor 異常時保留 run，需診斷後明確 resume。
+
+## CPU 回歸
+
+```bash
+CUDA_VISIBLE_DEVICES=-1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 /home/uxin/yolo/.venv/bin/python -m pytest -q
+/home/uxin/yolo/.venv/bin/ruff check src tests scripts
+/home/uxin/yolo/.venv/bin/ruff format --check src tests scripts
+```
+
+歷史 activation、CPU profile 與舊 PTQ 命令見[整理前首頁快照](../docs/archive/project-readme-before-2026-09-08.md)及[歷史腳本說明](../docs/archive/scripts-before-2026-09-08.md)，不要把舊 `--execute-reviewed-plan` 命令當作本輪待辦。歷史图表使用 `matplotlib==3.11.1` 與 Noto Sans CJK；不需重繪來配合目前結論。

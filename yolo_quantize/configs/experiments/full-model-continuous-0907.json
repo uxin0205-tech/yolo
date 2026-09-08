@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "plan_id": "full-model-continuous-0907",
+  "status": "six_qat_queue_started",
+  "supersedes": "full-model-four-day-2026-09-07",
+  "scope": "全模型precision coverage與逐層混合權重量化",
+  "hard_deadline_hours": null,
+  "soft_target_hours": 96,
+  "soft_target_starts_at": "implementation_start_including_preflight",
+  "soft_target_policy": "優先四天內完成全模型量化候選與驗證報告；GPU等待仍記入elapsed並單列。接近期限停止低價值擴展，必要延長記錄原因、剩餘工作與ETA，不自動無限追加。",
+  "report_reserve_hours": 8,
+  "user_authorizes_adaptive_experiments": true,
+  "execution_requires_validated_queue": true,
+  "preflight": ["unified_cpu_ptq_qat_parent_hash", "export_reload_parity", "full_operator_precision_inventory", "immutable_dataset_contract", "queue_dry_run", "gpu_available_without_interrupting_others"],
+  "training": {
+    "epochs": 5,
+    "patience": 5,
+    "initial_optimizer": "AdamW",
+    "optimizer_reason": "沿用已有V36通過搜尋門檻的設定，非宣稱跨optimizer最優",
+    "optimizer_change_requires": ["recorded_failure_or_plateau_evidence", "same_parent_routes_data_control", "bounded_pilot_before_expansion"],
+    "detect_logical_batch": 128,
+    "detect_microbatch": 16,
+    "pose_batch": 16,
+    "new_sham_training": false,
+    "added_noise": false,
+    "schedule_recomputed_for_epochs": 5
+  },
+  "selection": {
+    "total_map50_max_drop": 0.015,
+    "total_map50_95_max_drop": 0.04,
+    "required_metrics": 16,
+    "includes_activation_change": true,
+    "activation_mainline": "qsilu_pq_lsq_plus_a8",
+    "weight_coverage_paths": 148,
+    "all_ops_must_have_explicit_precision": true,
+    "no_silent_float_fallback": true,
+    "objective": "在全部指標通過門檻的候選間保留精度與含metadata儲存成本的Pareto集合；延遲只採實測",
+    "formal_not_for_iterative_selection": true
+  },
+  "stages": [
+    {"id": "P0", "tasks": ["preflight", "original_distribution_profile"], "depends_on": []},
+    {"id": "P1", "tasks": ["148_path_special_probe", "ten_region_same_parent_special_ptq", "fixed_sd4_vs_ls_sd4_control"], "depends_on": ["P0"]},
+    {"id": "P2", "tasks": ["recoverable_ternary_short_qat", "lock_backbone_then_neck_then_head", "w6_w5_then_optional_w7_w4"], "depends_on": ["P1"]},
+    {"id": "P3", "tasks": ["verify_max_two_finalists", "formal_evaluation", "export_and_deployment_boundaries", "teacher_report"], "depends_on": ["P2"]}
+  ],
+  "rolling_queue": {
+    "initial_max_new_qat_jobs": 6,
+    "total_qat_job_cap": null,
+    "max_qat_jobs_per_followup_batch": 2,
+    "automatic_batch_extension_requires": ["previous_batch_artifacts_verified", "new_testable_hypothesis", "plausible_accuracy_or_compression_gain", "no_duplicate_parent_route_hyperparameter_job", "search_only_selection"],
+    "do_not_repeat_exhausted_search": true,
+    "stop_when": ["user_stop", "full_target_met_and_no_supported_pareto_gain", "no_safe_in_scope_progress_without_new_authority"],
+    "pause_when": ["gpu_in_use_by_others", "invalid_parent_or_data", "nonfinite_metrics", "repeated_unresolved_failure"]
+  },
+  "monitor": {
+    "implementation": "shell_blocking_monitor",
+    "poll_seconds": 600,
+    "normal_reads": ["status", "current_index", "current_candidate", "current_arm", "completed_jobs", "error"],
+    "unchanged_action": "silent_shell_sleep_no_model_turn",
+    "initial_terminal_returns_immediately": true,
+    "events": ["job_complete", "batch_complete", "error", "decision_required"],
+    "diagnostics_on_event_only": true,
+    "live_status_path": "artifacts/queues/full-model-continuous-0907/execution-status.json"
+  }
+}

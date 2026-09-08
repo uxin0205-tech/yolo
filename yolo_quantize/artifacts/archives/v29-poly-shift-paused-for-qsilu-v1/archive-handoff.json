@@ -1,0 +1,95 @@
+{
+  "archive_id": "v29-poly-shift-paused-for-qsilu-v1",
+  "completed_first_pair": {
+    "best_joint_checkpoint": null,
+    "interpretation": "arm completed by patience but no checkpoint satisfied the total deployment joint gate",
+    "qat_best_detect_checkpoint": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v29-progressive-short/v29-short-qat-00-pose-tower-primary--exact_scaled_ternary-qat-seed1/checkpoints/best_detect.pt",
+      "sha256": "e5aa611155c2b62e0c32d2324d51d5b9d395c409e5f207d6b1f191cf159bd4ec",
+      "size_bytes": 213765564
+    },
+    "qat_best_pose_checkpoint": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v29-progressive-short/v29-short-qat-00-pose-tower-primary--exact_scaled_ternary-qat-seed1/checkpoints/best_pose.pt",
+      "sha256": "b157920c29806ffe2329ede93e607a3c32ebdbca997c0a77668c9b9b31ba90a7",
+      "size_bytes": 213758378
+    },
+    "qat_last_checkpoint": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v29-progressive-short/v29-short-qat-00-pose-tower-primary--exact_scaled_ternary-qat-seed1/checkpoints/last.pt",
+      "sha256": "7b5507257c04167e0e0e2c328a6f56edd05a4c204199b619ce49977a115a4eb0",
+      "size_bytes": 213738973
+    },
+    "qat_manifest": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v29-progressive-short/v29-short-qat-00-pose-tower-primary--exact_scaled_ternary-qat-seed1/qat-experiment.json",
+      "sha256": "8bad920f7ecb1da04bb6f3a26761e152b51ad46ab2cac1271af626bf96a100aa",
+      "size_bytes": 2873
+    }
+  },
+  "created_time_unix": 1788600724.86067,
+  "formal_training": false,
+  "formal_validation": false,
+  "mutation_policy": "references_only_original_artifacts_not_moved_or_rewritten",
+  "partial_second_sham": {
+    "epoch_controls": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v29-progressive-short/v29-short-qat-01-detect-predictor-control--fixed_sd4-sham-seed1/qat-epoch-controls.json",
+      "sha256": "8f41ecb9bad02824e861f6ff7fa169cdc0a87c3a002c0bf7ee45fc61a7555052",
+      "size_bytes": 922
+    },
+    "inference_checkpoint": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v29-progressive-short/v29-short-qat-01-detect-predictor-control--fixed_sd4-sham-seed1/inference/last.pt",
+      "sha256": "dcf77a5d951841dc5c0c947d95236a920be4fe2868301cd80211daa58c57cc72",
+      "size_bytes": 91234776
+    },
+    "resume_checkpoint": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v29-progressive-short/v29-short-qat-01-detect-predictor-control--fixed_sd4-sham-seed1/checkpoints/last.pt",
+      "sha256": "e39319b372068e8acfa55a19b7c94cd3f70ef41cd5517cb8154f146320108e72",
+      "size_bytes": 213740253
+    }
+  },
+  "progress": {
+    "completed_pairs": [
+      "pose-tower-primary--exact_scaled_ternary"
+    ],
+    "partial_arm": "sham",
+    "partial_candidate": "detect-predictor-control--fixed_sd4",
+    "remaining_diagnostic_pairs_after_partial": 1,
+    "remaining_main_pairs_after_partial": 5
+  },
+  "queue_evidence": {
+    "execution_state_at_stop": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/execution-state.json",
+      "sha256": "6f406518c0e917fc282307da7c8f69678fcef43bf8ab6353b87f7cb681d27880",
+      "size_bytes": 3811
+    },
+    "execution_status_at_stop": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/execution-status.json",
+      "sha256": "44335630c5fa113fd7a0095ce9a370a7651e2ed2f9d18a234ba7b558ebc63693",
+      "size_bytes": 220
+    },
+    "note": "execution-state keeps the pre-existing stale failed/running fields; archive manifest is the authoritative pause handoff and does not falsify completion",
+    "source_queue": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json",
+      "sha256": "e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06",
+      "size_bytes": 32691
+    }
+  },
+  "reason": "user_prioritized_qsilu_before_remaining_poly_shift_short_qat",
+  "resume": {
+    "behavior": "same reviewed queue command detects completed first pair and resumes second sham from checkpoints/last.pt",
+    "command": "PYTHONPATH=src /home/uxin/yolo/.venv/bin/python -m yolo_quantize.progressive_qat_queue --source-queue artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json --output-root artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2 --execute-reviewed-queue --wait-seconds 300",
+    "supported": true
+  },
+  "safe_stop": {
+    "checkpoint_boundary": {
+      "arm": "sham",
+      "candidate_id": "detect-predictor-control--fixed_sd4",
+      "completed_epoch": 1,
+      "next_epoch_control_observed": 2
+    },
+    "gpu_confirmed_released": true,
+    "process_confirmed_stopped": true,
+    "process_group": 1433755,
+    "signal": "SIGINT"
+  },
+  "schema_version": 1,
+  "status": "archived_for_qsilu_handoff"
+}

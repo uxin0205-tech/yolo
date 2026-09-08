@@ -1,0 +1,194 @@
+schema_version: 1
+plan_id: v34-qsilu-head-three-lsq-sd4-short-qat-v1
+date: '2026-09-06'
+execution_authorized: true
+formal_validation: false
+execution_authorization:
+  authorization_id: user-2026-09-06-tuesday-quick-lsq-sd4-paired-qat
+  arms:
+  - sham
+  - qat
+  scope: paired_qsilu_head_three_lsq_sd4_short_qat_search_only
+sources:
+  parent_checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+    sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+  accepted_metrics:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/accepted/epoch-0000/bittrue/metrics.json
+    sha256: 2e97e4a60039741cc1fc45a03d67615bbc5b851bcf60a56cd153251366c4a355
+  matched_metrics:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/matched/epoch-0000/bittrue/metrics.json
+    sha256: e2b3501a98a25f90519919d11c6e5c77d2327a04f2a58e6ea5291fb9c65cd0a3
+  joint_config:
+    path: /home/uxin/yolo/yolo_combine/final/full35/configs/joint.yaml
+    sha256: 0244cd5c36c4ca7bef9bf2e89a8f8cb2d27d8e9db67adb86ede1d5c78d4138ef
+  activation_recipe:
+    path: /home/uxin/yolo/yolo_activation/training/full35/activation-recipe.yaml
+    sha256: ff067b31dd1627930cf21509bcc231310f87aab2761adc325e438b4f305c057a
+  weight_plan:
+    path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-and-structured-ptq-v1.yaml
+    sha256: 3b29ad7a36998534615ce6e6d070d842a1f1c6f4668b88fc9562001c556fe469
+  candidate_evidence:
+    path: artifacts/reports/v34-qsilu-layer-and-structured-ptq-v1.json
+    sha256: dfa12f851d0d659a45a80c658c7884f96a63b08dc234caf1cf9d706d05358b83
+  candidate_dual_regate:
+    path: artifacts/reports/v34-qsilu-layer-and-structured-ptq-dual-v1.json
+    sha256: 552633cd3c76affde781d5134411f3975ba4ce374459f615fe3b4ebe4319ce83
+activation:
+  name: qsilu_pq
+  bits: 8
+  signed_codes: false
+  region_assignments: []
+data:
+  coco:
+    path: /home/uxin/yolo/coco2017.yaml
+    sha256: 1ed971749ec00b84db8ffe850b05e34e0acfd63a9654a9224ac8d80f5e068068
+  registry:
+    path: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+    sha256: 208e0f9e5bfded11f5739e9c598d98b4e5414699c64b9faf6f9625680988754a
+  pose_search:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+    sha256: a9069992cf21bff802466fa8adb46cba9bd55585f5adc8f3c183d33c8ede0b5d
+  diagnostic_manifest:
+    path: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+    sha256: 76b4392d2d07232967018b20af82149ba67ee036fad2cb75bb15d2d7565f4356
+  diagnostic_manifest_identity: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+graph_inventory:
+  master:
+    totals:
+      modules: 251
+      weight_elements: 26451392
+      deployment_modules: 148
+      deployment_weight_elements: 22571840
+      training_only_modules: 99
+      training_only_weight_elements: 3748480
+      protected_modules: 4
+      protected_weight_elements: 131072
+    deployment_regions: &id001
+      backbone_early:
+        modules: 21
+        weight_elements: 1218240
+      backbone_deep:
+        modules: 22
+        weight_elements: 8126464
+      backbone_attention_safe:
+        modules: 7
+        weight_elements: 919808
+      neck:
+        modules: 33
+        weight_elements: 8142848
+      masf:
+        modules: 3
+        weight_elements: 74240
+      neck_attention_safe:
+        modules: 5
+        weight_elements: 395520
+      detect_one2one_tower:
+        modules: 18
+        weight_elements: 1390592
+      detect_one2one_predictor:
+        modules: 6
+        weight_elements: 62208
+      pose_one2one_tower:
+        modules: 24
+        weight_elements: 2238464
+      pose_one2one_predictor:
+        modules: 9
+        weight_elements: 3456
+  deployment:
+    totals:
+      modules: 152
+      weight_elements: 22702912
+      deployment_modules: 148
+      deployment_weight_elements: 22571840
+      training_only_modules: 0
+      training_only_weight_elements: 0
+      protected_modules: 4
+      protected_weight_elements: 131072
+    deployment_regions: *id001
+weight_policy:
+  candidate_id: fixed-sd4-head-three
+  float_regions:
+  - backbone_early
+  - backbone_deep
+  - backbone_attention_safe
+  - neck
+  - masf
+  - neck_attention_safe
+  - detect_one2one_tower
+  - detect_one2one_predictor
+  - pose_one2one_tower
+  - pose_one2one_predictor
+  assignments:
+  - region: neck_attention_safe
+    paths:
+    - graph.model.22.m.0.1.attn.qkv.v.conv
+    format:
+      family: ls_sd4
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    paths:
+    - graph.model.23.detect_head.one2one_cv2.0.0.conv
+    - graph.model.23.detect_head.one2one_cv2.0.1.conv
+    - graph.model.23.detect_head.one2one_cv2.1.0.conv
+    - graph.model.23.detect_head.one2one_cv2.1.1.conv
+    - graph.model.23.detect_head.one2one_cv2.2.0.conv
+    - graph.model.23.detect_head.one2one_cv2.2.1.conv
+    format:
+      family: ls_sd4
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    paths:
+    - graph.model.23.detect_head.one2one_cv3.2.2
+    format:
+      family: ls_sd4
+      scale_method: optimal_scaled_codebook
+optimizer:
+  name: AdamW
+  weight_decay: 0.00027
+  beta1: 0.948
+  beta2: 0.999
+  qparam_lr_ratio: 1.0
+  learning_rates:
+    backbone: 3.8e-07
+    neck: 1.9e-06
+    masf: 3.8e-06
+    attention: 5.0e-08
+    detect_head: 5.0e-06
+    pose_head: 5.0e-06
+training:
+  epochs: 4
+  seed: 1
+  patience: 5
+  warmup_epochs: 1
+  scale_only_epochs: 1
+  progressive_start_epoch: 0
+  progressive_full_epoch: 1
+  detect_logical_batch: 128
+  detect_microbatch: 16
+  pose_batch: 16
+  gradient_clip_norm: 10.0
+  added_noise: false
+gates:
+  map50_max_drop: 0.015
+  map50_95_max_drop: 0.04
+  matched_sham_max_absolute_drift: 0.01
+monitoring:
+  mode: low_token
+  events:
+  - epoch_end
+  - checkpoint
+  - gate
+  - anomaly
+  full_artifact_logging: true
+run_root: artifacts/runs/qat/v34-qsilu-head-three-lsq-sd4-short-v1
+quick_recovery_provenance:
+  selection: largest_material_fixed_sd4_candidate_inside_dual_gate
+  quantized_layers: 8
+  quantized_weight_elements: 933888
+  ptq_worst_total_map50_delta: -0.014363755695247282
+  ptq_worst_total_map50_95_delta: -0.03912952846040274
+  other_weight_layers: float
+  optimizer: accepted_full35_adamw_lr01
+  augmentation: accepted_full35_exact_no_added_noise
+  formal_validation: false

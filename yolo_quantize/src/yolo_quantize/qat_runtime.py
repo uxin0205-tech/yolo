@@ -111,6 +111,12 @@ def _apply_qat_full_resume_warm_start(
     )
     if not override_paths or len(set(override_paths)) != len(override_paths):
         raise ValueError("QAT warm start requires unique path-format overrides")
+    if warm_start.reset_paths is not None:
+        if len(set(warm_start.reset_paths)) != len(warm_start.reset_paths) or not set(
+            warm_start.reset_paths
+        ).issubset(override_paths):
+            raise ValueError("explicit reset paths must be unique path overrides")
+        override_paths = warm_start.reset_paths
     target_state = model.state_dict()
     skipped = {
         name
@@ -935,6 +941,10 @@ class Full35QATRuntime:
                 self.plan.warm_start,
             )
         activation = built.applied.rebind(prepared.model)
+        for path in self.plan.frozen_weight_scale_paths:
+            prepared.model.get_submodule(
+                path
+            ).weight_quantizer.scale_parameter.requires_grad_(False)
         calibration = None
         if calibrate and self.plan.warm_start is not None:
             if activation.mode != "fake_quant":
@@ -1293,7 +1303,8 @@ class Full35QATRuntime:
                     sham=arm == "sham",
                 )
                 state["trainability"] = QATTrainabilityController(
-                    scale_only_epochs=plan.training.scale_only_epochs
+                    scale_only_epochs=plan.training.scale_only_epochs,
+                    frozen_weight_scale_paths=plan.frozen_weight_scale_paths,
                 )
                 _atomic_json(
                     run_dir / "qat-graph.json",
@@ -1321,6 +1332,10 @@ class Full35QATRuntime:
 
         def qat_apply_stage(model: nn.Module, stage: Any) -> Any:
             report = original_apply_stage(model, stage)
+            for path in plan.frozen_weight_scale_paths:
+                model.get_submodule(
+                    path
+                ).weight_quantizer.scale_parameter.requires_grad_(False)
             epoch = state["epoch"]
             if epoch is None:
                 return report
@@ -1706,7 +1721,8 @@ class Full35QATRuntime:
                 self.plan.training.progressive_schedule,
             ).begin_epoch(self.plan.training.progressive_full_epoch)
             trainability = QATTrainabilityController(
-                scale_only_epochs=self.plan.training.scale_only_epochs
+                scale_only_epochs=self.plan.training.scale_only_epochs,
+                frozen_weight_scale_paths=self.plan.frozen_weight_scale_paths,
             ).apply(handles.model, epoch=0)
             manifest = DiagnosticManifest.from_json(
                 self.plan.data.diagnostic_manifest,

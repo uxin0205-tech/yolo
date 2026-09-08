@@ -1,10 +1,12 @@
 # 全模型量化盤點交付
 
+> 本目錄是歷史發行快照，不是 live queue 的最新結果。1,332 筆 CPU 權重誤差與跨 parent PTQ 不得合併稱為逐層 mAP；現行比較條件見[血緣與證據層級釐清](../../docs/reports/2026-09-07-evidence-consistency-boundaries.md)，新 QAT 見[恢復結果](../../docs/reports/2026-09-07-continuous-qat-recovery-results.md)。
+
 GitHub 0907發行包含本目錄輸出及CPU profile。`report_weight_evidence.py`可使用公開輸入重建；`report_full_model_audit.py`仍須本機未上傳的runs/checkpoint完成hash檢查，不能宣稱乾淨clone可直接重跑完整稽核。
 
 新增：[SD4／三元詳細分析](../../docs/reports/2026-09-07-weight-distribution-detailed-analysis.md)／[數據附錄](weight-evidence-tables.md)。`weight-format-evidence.csv`為1332筆原權重摘要與量化誤差；`weight-format-nrmse.png/pdf/svg`是十區重建誤差圖，不是原權重histogram；`weight-evidence-provenance.json`記錄來源hash。重建：`/home/uxin/yolo/.venv/bin/python scripts/report_weight_evidence.py`，僅CPU。圖表、文檔、CSV可納入Git，checkpoint留本機。
 
-主報告：[全模型盤點與四天計畫](../../docs/reports/2026-09-07-full-model-audit-four-day-plan.md)。本目錄是本機證據快照，可直接複製分享。
+主報告：[全模型盤點與四天計畫](../../docs/archive/reports/2026-09-07-full-model-audit-four-day-plan.md)。本目錄是本機證據快照，可直接複製分享。
 
 - `qat-total-deltas.png/pdf/svg`：三個epoch相對accepted的最差總下降，圖中pp是百分點。
 - `qat-epochs.csv`：每epoch兩族最差delta與deployment gate。

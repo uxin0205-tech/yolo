@@ -1,6 +1,6 @@
 # Full35 Activation預先選擇報告
 
-> 歷史狀態：本文與老師版圖表保存2026-08-29的原始proxy判讀。依2026-08-31使用者決策與Q3完整CPU證據，現行shortlist已納入Hardswish並排除future `poly_quality`；請先讀[修訂報告](2026-08-31-hardswish-policy-revision.md)。本文不改寫舊數值。
+> 歷史狀態：本文與老師版圖表保存2026-08-29的原始proxy判讀。依2026-08-31使用者決策與Q3完整CPU證據，現行shortlist已納入Hardswish並排除future `poly_quality`；請先讀[修訂報告](../archive/reports/2026-08-31-hardswish-policy-revision.md)。本文不改寫舊數值。
 
 日期：2026-08-29
 

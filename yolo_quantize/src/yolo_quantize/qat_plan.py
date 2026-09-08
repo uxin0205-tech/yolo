@@ -144,6 +144,7 @@ class QATWarmStartSpec:
     state_key: Literal["ema_state"]
     reset_path_override_quantizers: bool
     load_optimizer_state: bool = False
+    reset_paths: tuple[str, ...] | None = None
 
 
 @dataclass(frozen=True)
@@ -175,6 +176,7 @@ class Full35QATPlan:
     monitoring: QATMonitoringSpec
     run_root: Path
     external_control: Mapping[str, object] | None = None
+    frozen_weight_scale_paths: tuple[str, ...] = ()
 
     @classmethod
     def from_yaml(cls, path: str | Path) -> Full35QATPlan:
@@ -273,7 +275,7 @@ class Full35QATPlan:
         warm_start: QATWarmStartSpec | None = None
         if raw_warm_start is not None:
             warm = _mapping(raw_warm_start, "QAT warm start")
-            if set(warm) != {
+            if set(warm) - {"reset_paths"} != {
                 "locked_parent",
                 "checkpoint_role",
                 "state_key",
@@ -296,6 +298,12 @@ class Full35QATPlan:
                 or warm.get("optimizer_state") != "fresh"
             ):
                 raise ValueError("QAT warm-start policy is unsafe")
+            if "reset_paths" in warm and (
+                not isinstance(warm["reset_paths"], list)
+                or any(not isinstance(p, str) or not p for p in warm["reset_paths"])
+                or len(set(warm["reset_paths"])) != len(warm["reset_paths"])
+            ):
+                raise ValueError("reset_paths must be a unique string list")
             warm_start = QATWarmStartSpec(
                 parent_id=parent.parent_id,
                 selected_epoch=parent.selected_epoch,
@@ -310,6 +318,9 @@ class Full35QATPlan:
                 state_key="ema_state",
                 reset_path_override_quantizers=True,
                 load_optimizer_state=False,
+                reset_paths=tuple(str(p) for p in warm["reset_paths"])
+                if "reset_paths" in warm
+                else None,
             )
 
         raw_activation = _mapping(payload.get("activation"), "activation")
@@ -611,6 +622,15 @@ class Full35QATPlan:
         plan_id = str(payload.get("plan_id", "")).strip()
         if not plan_id:
             raise ValueError("QAT plan_id is empty")
+        frozen_paths = payload.get("frozen_weight_scale_paths", [])
+        if (
+            not isinstance(frozen_paths, list)
+            or any(not isinstance(p, str) or not p for p in frozen_paths)
+            or len(set(frozen_paths)) != len(frozen_paths)
+        ):
+            raise ValueError(
+                "frozen weight scale paths must be unique nonempty strings"
+            )
         return cls(
             config_path=config_path,
             config_sha256=_sha256(config_path),
@@ -641,6 +661,7 @@ class Full35QATPlan:
             monitoring=monitoring,
             run_root=run_root,
             external_control=external_control,
+            frozen_weight_scale_paths=tuple(frozen_paths),
         )
 
 

@@ -81,6 +81,40 @@ def test_quantization_epoch_controller_keeps_matched_sham_at_fp() -> None:
     assert policy.blend_ratio == 0.0
 
 
+def test_five_epoch_continuation_has_four_full_quantization_epochs():
+    model = _ToyGraph()
+    policy = _policy(model)
+    quantization = QuantizationEpochController(
+        policy=policy,
+        schedule=ProgressiveQuantizationSchedule(start_epoch=0, full_epoch=1),
+    )
+    trainability = QATTrainabilityController(scale_only_epochs=1)
+    ratios, frozen = [], []
+    for epoch in range(5):
+        ratios.append(quantization.begin_epoch(epoch).blend_ratio)
+        frozen.append(trainability.apply(model, epoch=epoch).scale_only)
+    assert ratios == [0, 1, 1, 1, 1]
+    assert frozen == [True, False, False, False, False]
+
+
+def test_fixed_weight_scale_stays_frozen_after_stage_reenable():
+    model = _ToyGraph()
+    model.graph.model[0].add_module("second", nn.Conv2d(4, 4, 1))
+    _policy(model)
+    controller = QATTrainabilityController(
+        scale_only_epochs=1, frozen_weight_scale_paths=("graph.model.0.0",)
+    )
+    for epoch in range(5):
+        model.requires_grad_(True)
+        controller.apply(model, epoch=epoch)
+        assert not model.graph.model[0][
+            0
+        ].weight_quantizer.scale_parameter.requires_grad
+        assert model.graph.model[
+            0
+        ].second.weight_quantizer.scale_parameter.requires_grad
+
+
 def test_scale_only_epochs_freeze_model_but_keep_quantizers_trainable() -> None:
     model = _ToyGraph()
     policy = _policy(model)

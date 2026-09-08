@@ -1,0 +1,118 @@
+{
+  "formal_validation": false,
+  "results": {
+    "pose-predictor-diagnostic--twn_v3_filterwise": {
+      "assignments": [
+        {
+          "cpu_format_id": "exact-scaled-ternary-per_tensor",
+          "format_id": "exact_scaled_ternary",
+          "path": "graph.model.16.p3_masf.context.project.conv",
+          "region": "masf",
+          "stage_id": "masf-weight-primary",
+          "weight_format_id": "exact-scaled-ternary"
+        },
+        {
+          "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+          "format_id": "fixed_sd4",
+          "path": "graph.model.22.m.0.1.ffn.1.conv",
+          "region": "neck_attention_safe",
+          "stage_id": "neck-attention-primary",
+          "weight_format_id": "fixed-sd4"
+        },
+        {
+          "cpu_format_id": "uniform-w4-per_output_channel-optimal_scaled_codebook",
+          "format_id": "exact_w4",
+          "path": "graph.model.23.pose_head.one2one_cv2.1.0.conv",
+          "region": "pose_one2one_tower",
+          "stage_id": "pose-tower-primary",
+          "weight_format_id": "w4"
+        },
+        {
+          "cpu_format_id": "twn-v3-0.75-filterwise",
+          "format_id": "twn_v3_filterwise",
+          "path": "graph.model.23.pose_head.one2one_cv3.2.2",
+          "region": "pose_one2one_predictor",
+          "stage_id": "pose-predictor-diagnostic",
+          "weight_format_id": "twn-v3-0.75-filterwise"
+        }
+      ],
+      "candidate_id": "pose-predictor-diagnostic--twn_v3_filterwise",
+      "cpu_format_id": "twn-v3-0.75-filterwise",
+      "format_id": "twn_v3_filterwise",
+      "gate": {
+        "decision": "recover",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": -0.038586331794838835,
+          "bbat/ball/box/map50_95": -0.03996457902145534,
+          "bbat/ball/pose/map50": -0.033194876109125415,
+          "bbat/ball/pose/map50_95": -0.03320564437875129,
+          "bbat/bat/box/map50": -0.0017610353348463947,
+          "bbat/bat/box/map50_95": -0.0018337817222490171,
+          "bbat/bat/pose/map50": -0.0016813302563392085,
+          "bbat/bat/pose/map50_95": -0.0013403612923603703,
+          "bbat/box/map50": -0.020173683564842726,
+          "bbat/box/map50_95": -0.020899180371852233,
+          "bbat/pose/map50": -0.017438103182732423,
+          "bbat/pose/map50_95": -0.017273002835556106,
+          "coco/box/map50": 0.0,
+          "coco/box/map50_95": 0.0,
+          "coco/person/box/map50": 0.0,
+          "coco/person/box/map50_95": 0.0
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": -0.02836832551954427,
+          "bbat/ball/box/map50_95": -0.0457245809322947,
+          "bbat/ball/pose/map50": -0.020645788370309393,
+          "bbat/ball/pose/map50_95": -0.020723861259148713,
+          "bbat/bat/box/map50": -0.0026810944470360143,
+          "bbat/bat/box/map50_95": -0.00997184236638149,
+          "bbat/bat/pose/map50": -0.0021504085052309607,
+          "bbat/bat/pose/map50_95": -0.0023674268163935697,
+          "bbat/box/map50": -0.015524709983290252,
+          "bbat/box/map50_95": -0.02784821164933826,
+          "bbat/pose/map50": -0.011398098437770177,
+          "bbat/pose/map50_95": -0.011545644037771696,
+          "coco/box/map50": -0.013841760084644994,
+          "coco/box/map50_95": -0.013097940661791707,
+          "coco/person/box/map50": -0.009071336949617592,
+          "coco/person/box/map50_95": -0.010007469845415673
+        },
+        "worst_incremental_map50_95_delta": -0.039964579021,
+        "worst_incremental_map50_delta": -0.038586331795,
+        "worst_total_map50_95_delta": -0.045724580932,
+        "worst_total_map50_delta": -0.02836832552
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9300142409871986,
+        "bbat/ball/box/map50_95": 0.7333156012702431,
+        "bbat/ball/pose/map50": 0.9388430662357693,
+        "bbat/ball/pose/map50_95": 0.93876499334693,
+        "bbat/bat/box/map50": 0.9913972459713141,
+        "bbat/bat/box/map50_95": 0.8838728467034919,
+        "bbat/bat/pose/map50": 0.9919279319131191,
+        "bbat/bat/pose/map50_95": 0.9917109136019565,
+        "bbat/box/map50": 0.9607057434792563,
+        "bbat/box/map50_95": 0.8085942239868673,
+        "bbat/pose/map50": 0.9653854990744442,
+        "bbat/pose/map50_95": 0.965237953474443,
+        "coco/box/map50": 0.6568772470727758,
+        "coco/box/map50_95": 0.48492439580913044,
+        "coco/person/box/map50": 0.830338250527126,
+        "coco/person/box/map50_95": 0.6103740185770332
+      },
+      "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "metrics_sha256": "8182bfea978b2f040a09178ebc6a179b0d93ef711c55c4dde016e93389cc1db5",
+      "packed_bytes": 22424388,
+      "queue_role": "sentinel",
+      "regated_from_gate_decision": "reject",
+      "savings_from_locked_parent_bytes": 263548,
+      "seconds": 104.47044366318733,
+      "status": "completed",
+      "weight_format_id": "twn-v3-0.75-filterwise"
+    }
+  },
+  "schema_version": 1,
+  "source_queue": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json",
+  "source_queue_sha256": "e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06",
+  "status": "completed"
+}

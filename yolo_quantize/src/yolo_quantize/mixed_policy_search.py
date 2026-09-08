@@ -33,6 +33,7 @@ from .metric_gate import (
     Full35MetricSnapshot,
 )
 from .metric_regate import regate_search_report
+from .search_evidence import read_dual_search_metrics
 from .search_validation import (
     Full35SearchValidationPlan,
     _build_deployment_policy,
@@ -443,6 +444,8 @@ class Full35MixedPolicySearchPlan:
     accuracy_tolerance: float
     formal_training: bool = False
     formal_validation: bool = False
+    locked_qat_parent: Path | None = None
+    locked_qat_parent_sha256: str | None = None
 
     @property
     def comparison_candidates(self) -> tuple[BalanceCandidate, ...]:
@@ -650,6 +653,26 @@ class Full35MixedPolicySearchPlan:
         if not plan_id or not metric_contract_id:
             raise ValueError("mixed-policy plan and metric contract IDs are required")
         selection = _mapping(payload.get("selection"), "mixed-policy selection")
+        locked_parent = None
+        locked_parent_sha = None
+        if payload.get("locked_qat_parent") is not None:
+            from .progressive_preparation import LockedQATParentSpec
+
+            locked_parent = _verified_file(
+                payload["locked_qat_parent"], "locked QAT parent"
+            )
+            parent = LockedQATParentSpec.from_yaml(locked_parent)
+            locked_parent_sha = parent.config_sha256
+            if (
+                parent.inference_checkpoint != activation_checkpoint
+                or parent.inference_sha256 != activation_checkpoint_sha256
+                or parent.activation_name != activation_policy.activation
+                or parent.activation_bits != activation_policy.bits
+                or activation_policy.region_assignments
+            ):
+                raise ValueError(
+                    "mixed-policy activation differs from locked QAT parent"
+                )
         return cls(
             config_path=config_path,
             config_sha256=_sha256(config_path),
@@ -669,6 +692,8 @@ class Full35MixedPolicySearchPlan:
             reference_regate=reference_regate,
             gate_spec=gate_spec,
             accuracy_tolerance=float(selection["accuracy_tolerance"]),
+            locked_qat_parent=locked_parent,
+            locked_qat_parent_sha256=locked_parent_sha,
         )
 
     @property
@@ -733,6 +758,16 @@ class Full35MixedPolicySearchPlan:
             "activation_policy_id": self.activation_policy.policy_id,
             "activation_checkpoint": str(self.activation_checkpoint),
             "activation_checkpoint_sha256": self.activation_checkpoint_sha256,
+            **(
+                {
+                    "locked_qat_parent": {
+                        "path": str(self.locked_qat_parent),
+                        "sha256": self.locked_qat_parent_sha256,
+                    }
+                }
+                if self.locked_qat_parent is not None
+                else {}
+            ),
             "routes": {
                 route_id: {
                     "path": str(route.source_path),
@@ -817,11 +852,101 @@ def _packed_cost(
 ) -> tuple[int, int]:
     reference = deployment_weight_elements * 4
     packed = (
-        (deployment_weight_elements - int(policy_record["weight_elements"])) * 4
+        int(
+            policy_record.get(
+                "inherited_unmodified_bytes",
+                (deployment_weight_elements - int(policy_record["weight_elements"]))
+                * 4,
+            )
+        )
         + int(policy_record["weight_code_bytes"])
         + int(policy_record["scale_bytes"])
     )
     return packed, reference
+
+
+def inherited_parent_costs(manifest_path):
+    """Estimate unchanged paths using parent codes/scales, never silently FP32."""
+    from .progressive_preparation import LockedQATParentSpec
+
+    parent = LockedQATParentSpec.from_yaml(manifest_path)
+    graph_path = parent.completion_path.parent / "qat-graph.json"
+    graph = json.loads(graph_path.read_text())
+    if graph["plan_sha256"] != parent.plan_sha256:
+        raise ValueError("parent cost graph plan differs")
+    checkpoint = torch.load(
+        parent.full_resume_checkpoint, map_location="cpu", weights_only=True
+    )
+    state = checkpoint["ema_state"]
+    result = {}
+    for site in graph["weight_sites"]:
+        path = site["path"]
+        weight = state[f"{path}.weight"]
+        scale = state[f"{path}.weight_quantizer._scale_unconstrained"]
+        if weight.numel() != site["elements"] or path in result:
+            raise ValueError("parent cost path/elements drift")
+        result[path] = (
+            weight.numel() * site["encoded_bits"] + 7
+        ) // 8 + scale.numel() * 4
+    if len(result) != parent.deployment_modules:
+        raise ValueError("parent cost coverage differs")
+    return result
+
+
+def add_inherited_cost(record, costs):
+    changed = {site["path"] for group in record["formats"] for site in group["sites"]}
+    if not changed.issubset(costs):
+        raise ValueError("replacement references a path outside locked parent")
+    return {
+        **record,
+        "inherited_unmodified_bytes": sum(
+            cost for path, cost in costs.items() if path not in changed
+        ),
+        "effective_quantized_modules": len(costs),
+        "cost_scope": "deployment_weight_codes_and_fp32_scales_estimate_excludes_bias_protected_alignment",
+    }
+
+
+def build_locked_parent(plan):
+    """Strict CPU loader shared with CPU profiling; never recalibrate learned A8."""
+    from .progressive_preparation import LockedQATParentSpec
+    from .qat_runtime import Full35QATRuntime
+
+    if plan.locked_qat_parent is None:
+        raise ValueError("locked parent is required")
+    if _sha256(plan.locked_qat_parent) != plan.locked_qat_parent_sha256:
+        raise ValueError("locked parent manifest changed after plan validation")
+    parent = LockedQATParentSpec.from_yaml(plan.locked_qat_parent)
+    if (
+        parent.inference_checkpoint != plan.activation_checkpoint
+        or parent.inference_sha256 != plan.activation_checkpoint_sha256
+    ):
+        raise ValueError(
+            "locked parent checkpoint differs from PTQ activation checkpoint"
+        )
+    loaded = Full35QATRuntime.from_yaml(parent.plan_path).load_deployment_parent(
+        parent.inference_checkpoint,
+        checkpoint_sha256=parent.inference_sha256,
+        full_resume_sha256=parent.full_resume_sha256,
+        epoch=parent.selected_epoch,
+    )
+    if loaded.catalog.summary() != plan.weight_study.expected_catalog:
+        raise ValueError("locked parent deployment catalog differs from PTQ plan")
+    return (
+        loaded.model.eval(),
+        loaded.source,
+        loaded.activation,
+        {
+            "locked_qat_parent": {
+                "path": str(parent.config_path),
+                "sha256": parent.config_sha256,
+            },
+            "checkpoint": str(parent.inference_checkpoint),
+            "checkpoint_sha256": parent.inference_sha256,
+            "activation_quantizers": loaded.activation.quantizer_count,
+            "activation_recalibrated": False,
+        },
+    )
 
 
 def run_mixed_policy_search(
@@ -920,22 +1045,33 @@ def run_mixed_policy_search(
     torch.manual_seed(0)
     torch.cuda.manual_seed_all(0)
     torch.cuda.set_device(device_index)
-    model, source, activation_applied, build = _build_deployment_policy(
-        activation=plan.activation_policy.activation,
-        checkpoint=plan.activation_checkpoint,
-        checkpoint_sha256=plan.activation_checkpoint_sha256,
-        expected_catalog=plan.weight_study.expected_catalog,
-    )
-    calibration = _calibrate_activation_a8(
-        plan=plan,  # type: ignore[arg-type]
-        model=model,
-        applied=activation_applied,
-        device_index=device_index,
-    )
-    if _calibration_identity(calibration) != _calibration_identity(
-        expected_calibration
-    ):
-        raise RuntimeError("mixed-policy activation calibration differs from reference")
+    if plan.locked_qat_parent is not None:
+        model, source, activation_applied, build = build_locked_parent(plan)
+        model.to(torch.device("cuda", device_index)).eval()
+        calibration = {
+            "kind": "reused_locked_qat_activation",
+            "parent": build["locked_qat_parent"],
+            "recalibrated": False,
+        }
+    else:
+        model, source, activation_applied, build = _build_deployment_policy(
+            activation=plan.activation_policy.activation,
+            checkpoint=plan.activation_checkpoint,
+            checkpoint_sha256=plan.activation_checkpoint_sha256,
+            expected_catalog=plan.weight_study.expected_catalog,
+        )
+        calibration = _calibrate_activation_a8(
+            plan=plan,
+            model=model,
+            applied=activation_applied,
+            device_index=device_index,
+        )
+        if _calibration_identity(calibration) != _calibration_identity(
+            expected_calibration
+        ):
+            raise RuntimeError(
+                "mixed-policy activation calibration differs from reference"
+            )
     catalog = Full35WeightRegionCatalog.inspect(model)
     if catalog.summary() != plan.weight_study.expected_catalog:
         raise RuntimeError("mixed-policy catalog differs from reviewed contract")
@@ -955,6 +1091,11 @@ def run_mixed_policy_search(
         }
 
     adapter = WeightQuantizationAdapter()
+    parent_costs = (
+        inherited_parent_costs(plan.locked_qat_parent)
+        if plan.locked_qat_parent is not None
+        else None
+    )
     try:
         for index, candidate in enumerate(plan.candidates, start=1):
             if diagnostics.get(candidate.candidate_id, {}).get("status") in {
@@ -998,6 +1139,8 @@ def run_mixed_policy_search(
                     item["same_structure"] for item in comparisons.values()
                 )
                 policy_record = _applied_policy_record(applied)
+                if parent_costs is not None:
+                    policy_record = add_inherited_cost(policy_record, parent_costs)
             diagnostics[candidate.candidate_id] = {
                 "status": (
                     "diagnostic_pass"
@@ -1023,6 +1166,19 @@ def run_mixed_policy_search(
             _mapping(regated["roles"], "re-gated roles")["matched"],
             "re-gated matched role",
         )["metrics"]
+        if plan.locked_qat_parent is not None:
+            from .progressive_preparation import LockedQATParentSpec
+
+            locked = LockedQATParentSpec.from_yaml(plan.locked_qat_parent)
+            raw_parent_metrics = json.loads(locked.metrics_path.read_text())["metrics"]
+            matched_metrics = {
+                k: raw_parent_metrics[k] for k in plan.gate_spec.metric_keys
+            }
+            payload["incremental_reference"] = {
+                "kind": "locked_qat_parent",
+                "metrics": str(locked.metrics_path),
+                "sha256": locked.metrics_sha256,
+            }
         accepted = Full35MetricSnapshot(
             run_id=f"{plan.plan_id}:accepted-reused",
             policy_id=str(regated["roles"]["accepted"]["policy_id"]),
@@ -1074,6 +1230,10 @@ def run_mixed_policy_search(
                     device_index=device_index,
                 )
                 policy_record = _applied_policy_record(applied)
+                if parent_costs is not None:
+                    policy_record = add_inherited_cost(policy_record, parent_costs)
+            if plan.locked_qat_parent is not None:
+                record["all_search_metrics"] = read_dual_search_metrics(record)
             metric_candidate = Full35MetricCandidate(
                 run_id=f"{plan.plan_id}:{candidate.candidate_id}",
                 format_id=candidate.format_id,
@@ -1090,7 +1250,9 @@ def run_mixed_policy_search(
                     "status": "completed",
                     "policy_id": plan.matched_policy_id,
                     "candidate": candidate.to_dict(),
-                    "activation_output_quantization": "calibrated_lsq_plus_a8",
+                    "activation_output_quantization": "locked_learned_lsq_plus_a8"
+                    if plan.locked_qat_parent is not None
+                    else "calibrated_lsq_plus_a8",
                     "weight_quantization": policy_record,
                     "gate": gate.to_dict(),
                     "build": build,
@@ -1106,7 +1268,11 @@ def run_mixed_policy_search(
                 "deployment_weight_elements"
             ]
         )
-        all_candidates = list(plan.comparison_candidates)
+        all_candidates = (
+            []
+            if plan.locked_qat_parent is not None
+            else list(plan.comparison_candidates)
+        )
         for candidate in plan.candidates:
             record = _mapping(results[candidate.candidate_id], "mixed-policy result")
             if record.get("status") != "completed":

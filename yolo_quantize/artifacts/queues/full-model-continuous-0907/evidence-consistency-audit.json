@@ -1,0 +1,70 @@
+{
+  "status": "passed_identity_audit_not_new_accuracy_validation",
+  "parent": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/parent-manifest.json",
+    "sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a"
+  },
+  "parent_id": "v36-qsilu-a8-full-coverage-epoch1",
+  "inference": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/inference/best_joint.pt",
+    "sha256": "8c1f3652fd21c0e38221cfc3acba7ee013c5e88df641b9331c33796f6f11b66c"
+  },
+  "ptq_source": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/isolated-special-report.json",
+    "sha256": "7102011a0183a968fc372683cb7056f37f1ce862a3d41f37870102a6f2f85ef2"
+  },
+  "ptq_same_parent_results": 40,
+  "probe_source": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/single-layer-probe.json",
+    "sha256": "396a1d25c61fc8755e02aabd0d362b3b324c210895124ca3c0112a2a3f5c1982"
+  },
+  "single_layer_output_probe_paths": 148,
+  "single_layer_output_probe_rows": 592,
+  "single_layer_map_matrix_completed": false,
+  "qat_jobs": [
+    {
+      "job_id": "pose-sd4-fixed",
+      "plan_verified": true,
+      "executed_graph_verified": true,
+      "legacy_calibration_label": "reused_locked_v19_learned_state"
+    },
+    {
+      "job_id": "pose-ls-sd4",
+      "plan_verified": true,
+      "executed_graph_verified": true,
+      "legacy_calibration_label": "reused_locked_v19_learned_state"
+    },
+    {
+      "job_id": "masf-exact-ternary",
+      "plan_verified": true,
+      "executed_graph_verified": true,
+      "legacy_calibration_label": "reused_locked_v19_learned_state"
+    },
+    {
+      "job_id": "masf-paper-twn",
+      "plan_verified": true,
+      "executed_graph_verified": true,
+      "legacy_calibration_label": "reused_locked_v19_learned_state"
+    },
+    {
+      "job_id": "masf-twn",
+      "plan_verified": true,
+      "executed_graph_verified": true,
+      "legacy_calibration_label": "reused_locked_v19_learned_state"
+    },
+    {
+      "job_id": "detect-predictor-ls-sd4-recovery",
+      "plan_verified": true,
+      "executed_graph_verified": true,
+      "legacy_calibration_label": "reused_locked_v19_learned_state"
+    }
+  ],
+  "warnings": [
+    "歷史 1332 筆屬 V35 CPU 權重投影，不是本輪 V36 的逐層 mAP。",
+    "PTQ reference 保留歷史參照；本輪 incremental_reference 與各 result.build 才記錄實際鎖定 parent。",
+    "舊 selection 僅 mAP50；本輪晉級必須讀 special-dual-summary 的 16 項雙門檻。",
+    "warm_start.activation_calibration 的 v19 字樣是沿用標籤；實際 parent/checkpoint 雜湊已核對為 V36。",
+    "同 parent 不代表 QAT 只更新該層，QAT 允許模型及量化參數適應；不得視為 PTQ 單層隔離實驗。"
+  ],
+  "gpu_used": false
+}
