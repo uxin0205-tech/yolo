@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "variant": "fork",
+  "parent": "/home/uxin/yolo/yolo_optimize/studies/pre-fusion-full35-b100/artifacts/a0-scope-late-v1/epoch-08-resume.pt",
+  "parent_sha256": "27c09c6685a003e9ff106898fd898199e184ee195cce643dd668079abadb9342",
+  "parent_state": "late E8 EMA exploratory parent; not promoted winner",
+  "masf_context_initialization": "B100 trained context only; alpha reset to zero",
+  "masf_source_sha256": "a8780ae988e61905fa78134b16bf362d2392d2a71f43941f770769bd42265cae",
+  "scope": "P3 head branches only, plus MASF when present; all other parameters and all BN statistics fixed",
+  "learning_rates": {
+    "p3_head": 2e-06,
+    "context": 1e-05,
+    "alpha": 0.0001
+  },
+  "optimizer": "AdamW",
+  "fresh_optimizer": true,
+  "warmup_epochs": 1,
+  "criterion_horizon": 10,
+  "epochs_budget": 5,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "ema_initial_updates": 7400,
+  "ema_policy": "native decay on active parameters only; fixed state exact",
+  "alpha_initial": 0.0,
+  "alpha_training_bound": [
+    -0.25,
+    0.25
+  ],
+  "native_one2one_detach_preserved": true,
+  "trainable_parameters_by_role": {
+    "p3_head": 686248,
+    "context": 75776,
+    "alpha": 1
+  },
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "epochs": [],
+  "script_sha256": "e1beedbd73a6fb739d3d8e24d32cc4cf29d81e0092d4abd17edda659cb46d29d",
+  "topology_sha256": "9e785f7252a6657cbd195e9f4450ff973d7b0d92f45985d5a3ea2fe60431cba8",
+  "first_macro_trace_sha256": "251651aca5ce60c5cd20e34794613cf9983e2298410558d419088a297d4db5bb",
+  "first_macro_native_loss_sum": 212.19842529296875,
+  "first_gradient_norm_by_role": {
+    "p3_head": 203.88270052644194,
+    "context": 0.0,
+    "alpha": 0.4169921875
+  },
+  "first_update_ratio": 8.222544441317069e-07,
+  "smoke_images": 128,
+  "optimizer_steps": 1,
+  "ema_updates": 7401,
+  "alpha_after_update": -1.0097292033606209e-05
+}

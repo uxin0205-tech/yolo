@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "variant": "control",
+  "continued_from": "/home/uxin/yolo/yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p3-control-v1/epoch-05-resume.pt",
+  "continued_from_sha256": "432832f3c4d410e97ebd96f3d12a9fdc6a7b421b6a0747ae1f70065462fc2b67",
+  "parent_sha256": "27c09c6685a003e9ff106898fd898199e184ee195cce643dd668079abadb9342",
+  "start_epoch": 5,
+  "target_epoch": 10,
+  "optimizer_initial_steps": 4625,
+  "ema_initial_updates": 12025,
+  "criterion_initial_updates": 5,
+  "initial_live_and_ema_state_exact": true,
+  "optimizer_and_scaler_restored": true,
+  "warmup_restarted": false,
+  "learning_rates": {
+    "p3_head": 1e-05,
+    "context": 1e-05,
+    "alpha": 0.0001
+  },
+  "change": "P3 head base LR 2e-6 -> 1e-5; scope, context/alpha LR and topology unchanged",
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "paired_new_stream_seed": 20260927,
+  "exact_uninterrupted_dataloader_replay": false,
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "epochs": [],
+  "script_sha256": "419cb0ac84f4e88ba344149776812fbe991f75ee494aa984d3f2b6c8145d6743",
+  "first_macro_trace_sha256": "e2adc77c5e398c4213900fcfca1eb868981e081dfeaac27dc8e8260e3f530299",
+  "first_macro_native_loss_sum": 238.0139045715332,
+  "first_gradient_norm_by_role": {
+    "p3_head": 264.70851237795796,
+    "context": 0.0,
+    "alpha": 0.0
+  },
+  "first_update_ratio_by_role": {
+    "p3_head": 4.733851058673555e-06
+  },
+  "smoke_images": 128,
+  "optimizer_steps": 4626,
+  "ema_updates": 12026,
+  "criterion_updates": 5
+}

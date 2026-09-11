@@ -1,0 +1,287 @@
+{
+  "status": "passed",
+  "selected_pose_weight": 0.045,
+  "target_ratio": 1.0,
+  "confirmation_band": [
+    0.5,
+    2.0
+  ],
+  "calibration_median_ratio": 5.855808400535596,
+  "confirmation_median_ratio": 1.2762651038587416,
+  "source": {
+    "detect_checkpoint": "/home/uxin/yolo/yolo_optimize/studies/pre-fusion-full35-b100/artifacts/direction1-candidate-verification-v1/masf-e8-bittrue.pt",
+    "detect_sha256": "73705178305e55e497ead1e1d8948114b67e1d17bf528861c9606e66cd372721",
+    "pose_checkpoint": "/home/uxin/yolo/yolo_combine/variants/full35/artifacts/pose/p0-full35-p3-b32a4-e100max-seed0/weights/best.pt",
+    "pose_sha256": "7b46c6af29723cff8ffdad96cf1220fd75975c31f99def58cfec84e80c322f99",
+    "detect_expected_metrics": {
+      "coco/box/map50_95": 0.5073982397545642,
+      "coco/person/box/map50_95": 0.6259691456767732
+    },
+    "source_kind": "10percent_pose_trunk_merge_initialization",
+    "normalization": "float",
+    "masf_location": "Detect head P3 only",
+    "loader": "weights_only=True; explicit allowlist and SHA256",
+    "plan": "/home/uxin/yolo/yolo_optimize/combine/bridge_v1/plan.json",
+    "pose_head_adaptation": "/home/uxin/yolo/yolo_optimize/combine/artifacts/fusion/j0-no-masf-v1/inference/best_pose.pt",
+    "pose_head_adaptation_sha256": "f483423c6618c69854ffb24779823c0a7084ffbbd3bff1446171d668967fd685",
+    "shared_trunk_exact_reuse": true,
+    "fresh_joint_optimizer_not_exact_resume": true,
+    "pose_extension": "/home/uxin/yolo/yolo_optimize/combine/bridge_v1/artifacts/fusion/j0-pose-extend-v1/inference/best_pose.pt",
+    "pose_extension_sha256": "1b9803b6cfaacc0dad59ecd3fcffaea976bc50c45d828be5981323c941047b05",
+    "independent_pose_training_not_fused_acceptance": true,
+    "full_pose_best": "/home/uxin/yolo/yolo_optimize/combine/bridge_v1/artifacts/fusion/full-pose-gentle-v1/inference/best_pose.pt",
+    "full_pose_sha256": "68d6be769751aaf7ce15d552f6b8d7f1e6f4bb5e463a530bbc976e655959f117",
+    "pose_trunk_ratio": 0.1,
+    "source_export_is_original_anchor_not_merged_file": true,
+    "merged_pose_adaptation": "/home/uxin/yolo/yolo_optimize/combine/bridge_v1/artifacts/fusion/merge-j0-v1/inference/best_pose.pt",
+    "merged_pose_adaptation_sha256": "42c48372c451e87112e63399acc064608088322711d1f311af9c2cb51c3a2c19",
+    "phase": "joint_J1_after_full_pose_and_merge_J0"
+  },
+  "detect_images": 6144,
+  "pose_images": 384,
+  "validation_used": false,
+  "checkpoint_state_restored_each_macro": true,
+  "optimizer_lr_zero": true,
+  "results": [
+    {
+      "index": 0,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 303.51626974422754,
+      "pose_norm": 2353.3150084101776,
+      "cosine_similarity": 0.03342716429402206,
+      "ratio": 7.753505307617647,
+      "amp_retries": 2
+    },
+    {
+      "index": 1,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 356.8000606440591,
+      "pose_norm": 1724.3959744036094,
+      "cosine_similarity": -0.011980859151051607,
+      "ratio": 4.832947537315172,
+      "amp_retries": 0
+    },
+    {
+      "index": 2,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 371.09251771421117,
+      "pose_norm": 1756.3173664897515,
+      "cosine_similarity": -0.0566280221981541,
+      "ratio": 4.732828830147261,
+      "amp_retries": 0
+    },
+    {
+      "index": 3,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 345.5153437559689,
+      "pose_norm": 2037.827825623943,
+      "cosine_similarity": -0.010951667354470198,
+      "ratio": 5.897937276739938,
+      "amp_retries": 0
+    },
+    {
+      "index": 4,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 415.19404343423565,
+      "pose_norm": 2157.986903761615,
+      "cosine_similarity": 0.07708955999860466,
+      "ratio": 5.197538206261448,
+      "amp_retries": 0
+    },
+    {
+      "index": 5,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 403.4692741416048,
+      "pose_norm": 2336.5704018165734,
+      "cosine_similarity": -0.01254950668801865,
+      "ratio": 5.791197871976026,
+      "amp_retries": 0
+    },
+    {
+      "index": 6,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 343.7486352567458,
+      "pose_norm": 1892.5891985615153,
+      "cosine_similarity": -0.049393078066120234,
+      "ratio": 5.505735890843438,
+      "amp_retries": 0
+    },
+    {
+      "index": 7,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 415.52804225094604,
+      "pose_norm": 2487.8258449036002,
+      "cosine_similarity": 0.04579454505305634,
+      "ratio": 5.987143085282197,
+      "amp_retries": 0
+    },
+    {
+      "index": 8,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 348.3010824725525,
+      "pose_norm": 1611.503989115011,
+      "cosine_similarity": -0.06170652304391919,
+      "ratio": 4.626755615214042,
+      "amp_retries": 0
+    },
+    {
+      "index": 9,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 351.5548445536937,
+      "pose_norm": 2626.9874369738723,
+      "cosine_similarity": -0.09380665240039514,
+      "ratio": 7.472482537707276,
+      "amp_retries": 0
+    },
+    {
+      "index": 10,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 415.45256288692633,
+      "pose_norm": 2082.633627222143,
+      "cosine_similarity": 0.16240807508957836,
+      "ratio": 5.012927619823043,
+      "amp_retries": 0
+    },
+    {
+      "index": 11,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 307.37788270930355,
+      "pose_norm": 1891.1852997558688,
+      "cosine_similarity": 0.02424631556218836,
+      "ratio": 6.152639490800381,
+      "amp_retries": 0
+    },
+    {
+      "index": 12,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 330.30038166823874,
+      "pose_norm": 1920.260565783438,
+      "cosine_similarity": 0.04571316682312357,
+      "ratio": 5.8136795243312545,
+      "amp_retries": 0
+    },
+    {
+      "index": 13,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 378.86243142374656,
+      "pose_norm": 2504.4539555273213,
+      "cosine_similarity": 0.008253673309612455,
+      "ratio": 6.610457379254273,
+      "amp_retries": 0
+    },
+    {
+      "index": 14,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 258.8914003449797,
+      "pose_norm": 2717.1927370654676,
+      "cosine_similarity": 0.05048196483046665,
+      "ratio": 10.49549244758511,
+      "amp_retries": 0
+    },
+    {
+      "index": 15,
+      "phase": "calibration",
+      "pose_weight": 0.25,
+      "detect_norm": 322.58052394175405,
+      "pose_norm": 1977.439993891941,
+      "cosine_similarity": 0.09670590253031619,
+      "ratio": 6.130066284624773,
+      "amp_retries": 0
+    },
+    {
+      "index": 16,
+      "phase": "confirmation",
+      "pose_weight": 0.045,
+      "detect_norm": 427.8371077187643,
+      "pose_norm": 768.2261129551772,
+      "cosine_similarity": 0.0025147640680897865,
+      "ratio": 1.7956042126672314,
+      "amp_retries": 0
+    },
+    {
+      "index": 17,
+      "phase": "confirmation",
+      "pose_weight": 0.045,
+      "detect_norm": 512.0396559871847,
+      "pose_norm": 441.15622757290765,
+      "cosine_similarity": -0.002203929546970721,
+      "ratio": 0.8615665259800677,
+      "amp_retries": 0
+    },
+    {
+      "index": 18,
+      "phase": "confirmation",
+      "pose_weight": 0.045,
+      "detect_norm": 392.9768041263891,
+      "pose_norm": 665.8508062453823,
+      "cosine_similarity": -0.03191882316478939,
+      "ratio": 1.6943768671680468,
+      "amp_retries": 0
+    },
+    {
+      "index": 19,
+      "phase": "confirmation",
+      "pose_weight": 0.045,
+      "detect_norm": 432.1210978152218,
+      "pose_norm": 533.0219333172391,
+      "cosine_similarity": -0.0792355718667013,
+      "ratio": 1.2335012939941277,
+      "amp_retries": 0
+    },
+    {
+      "index": 20,
+      "phase": "confirmation",
+      "pose_weight": 0.045,
+      "detect_norm": 404.5929154823296,
+      "pose_norm": 460.7068732480503,
+      "cosine_similarity": 0.10135158855793759,
+      "ratio": 1.13869238836974,
+      "amp_retries": 0
+    },
+    {
+      "index": 21,
+      "phase": "confirmation",
+      "pose_weight": 0.045,
+      "detect_norm": 357.8281366814587,
+      "pose_norm": 490.56181492873014,
+      "cosine_similarity": 0.027048032529949938,
+      "ratio": 1.3709425409590748,
+      "amp_retries": 0
+    },
+    {
+      "index": 22,
+      "phase": "confirmation",
+      "pose_weight": 0.045,
+      "detect_norm": 377.573639825173,
+      "pose_norm": 498.0305479891714,
+      "cosine_similarity": -0.005186335136469031,
+      "ratio": 1.3190289137233553,
+      "amp_retries": 0
+    },
+    {
+      "index": 23,
+      "phase": "confirmation",
+      "pose_weight": 0.045,
+      "detect_norm": 390.9449131763624,
+      "pose_norm": 383.81070504438924,
+      "cosine_similarity": -0.017743496994455144,
+      "ratio": 0.9817513724017819,
+      "amp_retries": 0
+    }
+  ]
+}

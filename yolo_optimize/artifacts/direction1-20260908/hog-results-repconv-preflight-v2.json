@@ -1,0 +1,142 @@
+{
+  "hog_status": "paused_for_analysis",
+  "completed_epochs": 4,
+  "paired_metadata_equal": {
+    "base_state_sha256": true,
+    "seed": true,
+    "physical_batch": true,
+    "detect_logical": true,
+    "detect_per_macro": true,
+    "pose_per_macro": true,
+    "scope": true,
+    "optimizer_hyperparameters": false,
+    "scheduler": true,
+    "ema": true,
+    "base_optimizer_excluding_hog_aux": true
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "hog_joint": 0.7112260043801761,
+      "control_joint": 0.7112260043801761,
+      "joint_delta_control": 0.0,
+      "delta_control": {
+        "coco/box/map50_95": 0.0,
+        "coco/person/box/map50_95": 0.0,
+        "bbat/box/map50_95": 0.0,
+        "bbat/pose/map50_95": 0.0,
+        "bbat/ball/box/map50_95": 0.0,
+        "bbat/bat/box/map50_95": 0.0,
+        "bbat/ball/pose/map50_95": 0.0,
+        "bbat/bat/pose/map50_95": 0.0
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -3.988887488581838e-05,
+        "coco/person/box/map50_95": 7.470232862061277e-05,
+        "bbat/box/map50_95": -0.000381818400498668,
+        "bbat/pose/map50_95": 0.0003016659856591719,
+        "bbat/ball/box/map50_95": -0.0005105163865625206,
+        "bbat/bat/box/map50_95": -0.00025312041443514843,
+        "bbat/ball/pose/map50_95": 0.0005541013475960366,
+        "bbat/bat/pose/map50_95": 4.923062372175213e-05
+      }
+    },
+    {
+      "epoch": 2,
+      "hog_joint": 0.711277968460211,
+      "control_joint": 0.7110669309905167,
+      "joint_delta_control": 0.00021103746969430848,
+      "delta_control": {
+        "coco/box/map50_95": 6.6292740110718285e-06,
+        "coco/person/box/map50_95": 0.00021326331387550024,
+        "bbat/box/map50_95": 0.00032758498142870796,
+        "bbat/pose/map50_95": 0.0002538548895781867,
+        "bbat/ball/box/map50_95": 0.000643284874675909,
+        "bbat/bat/box/map50_95": 1.1885088181950998e-05,
+        "bbat/ball/pose/map50_95": 0.0003863199118870897,
+        "bbat/bat/pose/map50_95": 0.00012138986726950574
+      },
+      "delta_parent": {
+        "coco/box/map50_95": 0.00021665012964255936,
+        "coco/person/box/map50_95": 0.00014031329660557645,
+        "bbat/box/map50_95": -0.0005763905050126805,
+        "bbat/pose/map50_95": 0.0003677872517464653,
+        "bbat/ball/box/map50_95": -0.0003766553349400237,
+        "bbat/bat/box/map50_95": -0.0007761256750853374,
+        "bbat/ball/pose/map50_95": 0.0006690404790716808,
+        "bbat/bat/pose/map50_95": 6.653402442124978e-05
+      }
+    },
+    {
+      "epoch": 3,
+      "hog_joint": 0.710426739827027,
+      "control_joint": 0.7110187195653099,
+      "joint_delta_control": -0.000591979738282955,
+      "delta_control": {
+        "coco/box/map50_95": -2.1596321355121795e-06,
+        "coco/person/box/map50_95": -0.0003012082069293598,
+        "bbat/box/map50_95": -0.0007369836923619699,
+        "bbat/pose/map50_95": -0.0009597735799936613,
+        "bbat/ball/box/map50_95": -0.0014876844769479147,
+        "bbat/bat/box/map50_95": 1.3717092223752836e-05,
+        "bbat/ball/pose/map50_95": -0.0021278583231649773,
+        "bbat/bat/pose/map50_95": 0.0002083111631774326
+      },
+      "delta_parent": {
+        "coco/box/map50_95": 0.0005736846079368862,
+        "coco/person/box/map50_95": 0.00013185886384337042,
+        "bbat/box/map50_95": -0.001748968962783648,
+        "bbat/pose/map50_95": -0.0013482851250939953,
+        "bbat/ball/box/map50_95": -0.003000372747581248,
+        "bbat/bat/box/map50_95": -0.000497565177986492,
+        "bbat/ball/pose/map50_95": -0.0026010278891422933,
+        "bbat/bat/pose/map50_95": -9.554236104569735e-05
+      }
+    },
+    {
+      "epoch": 4,
+      "hog_joint": 0.7095609055344998,
+      "control_joint": 0.7100520603451678,
+      "joint_delta_control": -0.0004911548106679708,
+      "delta_control": {
+        "coco/box/map50_95": 0.00017493248593103417,
+        "coco/person/box/map50_95": 9.1380380349948e-05,
+        "bbat/box/map50_95": -0.0007256035890540469,
+        "bbat/pose/map50_95": -0.0009982416652833948,
+        "bbat/ball/box/map50_95": -0.0014921250914838868,
+        "bbat/bat/box/map50_95": 4.0917913376015136e-05,
+        "bbat/ball/pose/map50_95": -0.0014215465366520519,
+        "bbat/bat/pose/map50_95": -0.0005749367939147376
+      },
+      "delta_parent": {
+        "coco/box/map50_95": 0.0007470696094554752,
+        "coco/person/box/map50_95": 0.00029033623511587336,
+        "bbat/box/map50_95": -0.0029025165569656064,
+        "bbat/pose/map50_95": -0.0031020282457167037,
+        "bbat/ball/box/map50_95": -0.005221414576595085,
+        "bbat/bat/box/map50_95": -0.000583618537336128,
+        "bbat/ball/pose/map50_95": -0.0054412480195082935,
+        "bbat/bat/pose/map50_95": -0.0007628084719252248
+      }
+    }
+  ],
+  "repconv": {
+    "scope": "actual Full35 layer17 CPU-only",
+    "in_channels": 256,
+    "out_channels": 256,
+    "zero_branch_exact": true,
+    "fused_max_abs": 1.430511474609375e-05,
+    "materialization": {
+      "passed": false,
+      "error_type": "RuntimeError",
+      "error": "incomplete graph materialization: detect=GraphMaterializationReport(task=<Task.DETECT: 'detect'>, compatible_tensors=819, missing_tensors=('model.17.conv.weight', 'model.17.bn.weight', 'model.17.bn.bias', 'model.17.bn.running_mean', 'model.17.bn.running_var', 'model.17.bn.num_batches_tracked'), unexpected_tensors=('graph.model.17.conv1.bn.bias', 'graph.model.17.conv1.bn.num_batches_tracked', 'graph.model.17.conv1.bn.running_mean', 'graph.model.17.conv1.bn.running_var', 'graph.model.17.conv1.bn.weight', 'graph.model.17.conv1.conv.weight', 'graph.model.17.conv2.bn.bias', 'graph.model.17.conv2.bn.num_batches_tracked', 'graph.model.17.conv2.bn.running_mean', 'graph.model.17.conv2.bn.running_var', 'graph.model.17.conv2.bn.weight', 'graph.model.17.conv2.conv.weight'), shape_mismatches=()), pose=GraphMaterializationReport(task=<Task.POSE: 'pose'>, compatible_tensors=990, missing_tensors=('model.17.conv.weight', 'model.17.bn.weight', 'model.17.bn.bias', 'model.17.bn.running_mean', 'model.17.bn.running_var', 'model.17.bn.num_batches_tracked'), unexpected_tensors=('graph.model.17.conv1.bn.bias', 'graph.model.17.conv1.bn.num_batches_tracked', 'graph.model.17.conv1.bn.running_mean', 'graph.model.17.conv1.bn.running_var', 'graph.model.17.conv1.bn.weight', 'graph.model.17.conv1.conv.weight', 'graph.model.17.conv2.bn.bias', 'graph.model.17.conv2.bn.num_batches_tracked', 'graph.model.17.conv2.bn.running_mean', 'graph.model.17.conv2.bn.running_var', 'graph.model.17.conv2.bn.weight', 'graph.model.17.conv2.conv.weight'), shape_mismatches=())"
+    },
+    "eval_conv_materialization_passed": true,
+    "eval_conv_max_abs": 1.621246337890625e-05,
+    "full_graph_forward_validated": false
+  },
+  "notes": [
+    "不重新評分，不讀或修改資料集。",
+    "單層等價不等於完整部署契約通過，更不表示 AP 提升。"
+  ]
+}

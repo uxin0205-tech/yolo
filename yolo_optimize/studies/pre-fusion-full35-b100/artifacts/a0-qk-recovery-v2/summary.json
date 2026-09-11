@@ -1,0 +1,122 @@
+{
+  "status": "complete",
+  "arm": "qk",
+  "parent": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/a0.pt",
+  "parent_sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+  "fresh_optimizer": false,
+  "initial_ema_updates": 925,
+  "criterion_horizon": 10,
+  "warmup_epochs": 1,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "train_images": 118287,
+  "epochs": [
+    {
+      "epoch": 1,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 577.010890007019,
+      "ema": {
+        "coco/box/map50_95": 0.5062400410979159,
+        "coco/person/box/map50_95": 0.6259960085842178,
+        "coco/ball/box/map50_95": 0.5147890101748726,
+        "coco/bat/box/map50_95": 0.4879465953715094
+      },
+      "live": {
+        "coco/box/map50_95": 0.506205798160138,
+        "coco/person/box/map50_95": 0.626026355490389,
+        "coco/ball/box/map50_95": 0.5141929390129307,
+        "coco/bat/box/map50_95": 0.48767154499912024
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0004985329362473534,
+        "coco/person/box/map50_95": -0.0008092653932801896,
+        "coco/ball/box/map50_95": 0.0016787515926133256,
+        "coco/bat/box/map50_95": -0.007779139072607522
+      },
+      "source_run": "a0-qk-recovery-v1"
+    },
+    {
+      "epoch": 2,
+      "source_run": "a0-qk-recovery-v2",
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 578.5320618152618,
+      "ema": {
+        "coco/box/map50_95": 0.506345468382229,
+        "coco/person/box/map50_95": 0.6258386227735264,
+        "coco/ball/box/map50_95": 0.5164797079138131,
+        "coco/bat/box/map50_95": 0.49539970255458937
+      },
+      "live": {
+        "coco/box/map50_95": 0.5063943475416443,
+        "coco/person/box/map50_95": 0.6258360146777904,
+        "coco/ball/box/map50_95": 0.5162145243403643,
+        "coco/bat/box/map50_95": 0.4933076838940371
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.000393105651934178,
+        "coco/person/box/map50_95": -0.0009666512039715469,
+        "coco/ball/box/map50_95": 0.00336944933155392,
+        "coco/bat/box/map50_95": -0.0003260318895275671
+      }
+    },
+    {
+      "epoch": 3,
+      "source_run": "a0-qk-recovery-v2",
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 576.7302114963531,
+      "ema": {
+        "coco/box/map50_95": 0.5059815190679441,
+        "coco/person/box/map50_95": 0.6260925753632676,
+        "coco/ball/box/map50_95": 0.5134735991684749,
+        "coco/bat/box/map50_95": 0.4995646199487833
+      },
+      "live": {
+        "coco/box/map50_95": 0.5060159881393048,
+        "coco/person/box/map50_95": 0.6260820847607853,
+        "coco/ball/box/map50_95": 0.5145352749101595,
+        "coco/bat/box/map50_95": 0.5006603139269664
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0007570549662191395,
+        "coco/person/box/map50_95": -0.0007126986142304004,
+        "coco/ball/box/map50_95": 0.0003633405862156769,
+        "coco/bat/box/map50_95": 0.0038388855046663783
+      }
+    }
+  ],
+  "qk_lr": 5e-07,
+  "head_lr": 2.5e-05,
+  "fixed_tensors": 556,
+  "training_scope": "Q/K projection + Detect head; all non-head BN statistics fixed",
+  "loss_reduction": "native batch-sum accumulated over four microbatches; partial final macro retained",
+  "challenger_contract": "exact XNOR forward; clipped signed-dot surrogate backward only in qk arm",
+  "continued_from": "/home/uxin/yolo/yolo_optimize/studies/pre-fusion-full35-b100/artifacts/a0-qk-recovery-v1/epoch-01-resume.pt",
+  "continued_from_sha256": "96f5eb4212cb9604100a87ff8368130d031f150320fd1eb984ece85f5974c9bd",
+  "script_sha256": "9ce01b7e68e36222a2cfd37c0e76c377db48a02fdf550627ef25f79c1c6cbe71",
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "max_epochs": 3,
+  "patience": 6,
+  "data_stream_seed": 20260910,
+  "data_stream_note": "epoch boundary continuation with a new paired deterministic data stream; not exact uninterrupted dataloader replay",
+  "qk_projection_gradient_norms": {
+    "model.10.m.0.attn.qkv.q.conv.weight": 62.850101470947266,
+    "model.10.m.0.attn.qkv.q.bn.weight": 0.37971246242523193,
+    "model.10.m.0.attn.qkv.q.bn.bias": 0.43419912457466125,
+    "model.10.m.0.attn.qkv.k.conv.weight": 47.57209014892578,
+    "model.10.m.0.attn.qkv.k.bn.weight": 0.46582770347595215,
+    "model.10.m.0.attn.qkv.k.bn.bias": 0.30003607273101807,
+    "model.22.m.0.1.attn.qkv.q.conv.weight": 12.38992691040039,
+    "model.22.m.0.1.attn.qkv.q.bn.weight": 0.19083485007286072,
+    "model.22.m.0.1.attn.qkv.q.bn.bias": 0.20272691547870636,
+    "model.22.m.0.1.attn.qkv.k.conv.weight": 15.353497505187988,
+    "model.22.m.0.1.attn.qkv.k.bn.weight": 0.28384265303611755,
+    "model.22.m.0.1.attn.qkv.k.bn.bias": 0.14783711731433868
+  },
+  "first_macro_trace_sha256": "709302ef5eb7ed9c03ca2487d2ed4042101be068aed5acd55ff17fdc74407c4d"
+}

@@ -1,0 +1,62 @@
+{
+  "case": "trained",
+  "weights_source": "/home/uxin/yolo/yolo_optimize/artifacts/direction1-20260908/native-control/inference/epoch-0001.pt",
+  "bn_source": "/home/uxin/yolo/yolo_optimize/artifacts/direction1-20260908/native-control/inference/epoch-0001.pt",
+  "replaced_buffers": [],
+  "loaded": {
+    "path": "/home/uxin/yolo/yolo_optimize/artifacts/direction1-20260908/native-control/inference/epoch-0001.pt",
+    "checkpoint_kind": "inference_only",
+    "state_source": "ema",
+    "tensors": 1238
+  },
+  "metrics": {
+    "bbat/box/precision": 0.8885551897609245,
+    "bbat/box/recall": 0.8818941872376986,
+    "bbat/box/map50": 0.8919781315705987,
+    "bbat/box/map75": 0.6862075797640121,
+    "bbat/box/map50_95": 0.6231795990934389,
+    "bbat/pose/precision": 0.8955215091246778,
+    "bbat/pose/recall": 0.888838533331445,
+    "bbat/pose/map50": 0.9034738403204198,
+    "bbat/pose/map75": 0.9005571948335694,
+    "bbat/pose/map50_95": 0.8989632125022247,
+    "bbat/ball/box/precision": 0.8662064940020807,
+    "bbat/ball/box/recall": 0.8676844783715013,
+    "bbat/ball/box/map50": 0.8487652378568606,
+    "bbat/ball/box/map75": 0.4970649078744039,
+    "bbat/ball/box/map50_95": 0.4987811528282614,
+    "bbat/ball/pose/precision": 0.876367273990375,
+    "bbat/ball/pose/recall": 0.8778625954198473,
+    "bbat/ball/pose/map50": 0.8598438328606022,
+    "bbat/ball/pose/map75": 0.8540105418869015,
+    "bbat/ball/pose/map50_95": 0.8545764024797895,
+    "bbat/bat/box/precision": 0.9109038855197683,
+    "bbat/bat/box/recall": 0.8961038961038961,
+    "bbat/bat/box/map50": 0.9351910252843367,
+    "bbat/bat/box/map75": 0.8753502516536205,
+    "bbat/bat/box/map50_95": 0.7475780453586162,
+    "bbat/bat/pose/precision": 0.9146757442589806,
+    "bbat/bat/pose/recall": 0.8998144712430427,
+    "bbat/bat/pose/map50": 0.9471038477802374,
+    "bbat/bat/pose/map75": 0.9471038477802374,
+    "bbat/bat/pose/map50_95": 0.9433500225246598
+  },
+  "ap_deltas_to_parent": {
+    "bbat/box/map50_95": -0.006855922663626668,
+    "bbat/pose/map50_95": -0.00475396161072017,
+    "bbat/ball/box/map50_95": -0.008655883359067307,
+    "bbat/ball/pose/map50_95": -0.005332312711986975,
+    "bbat/bat/box/map50_95": -0.005055961968186473,
+    "bbat/bat/pose/map50_95": -0.004175610509453587
+  },
+  "criterion": "每個 BBAT AP 必須 >= parent - 0.005",
+  "passed": false,
+  "failed_metrics": {
+    "bbat/box/map50_95": -0.006855922663626668,
+    "bbat/ball/box/map50_95": -0.008655883359067307,
+    "bbat/ball/pose/map50_95": -0.005332312711986975,
+    "bbat/bat/box/map50_95": -0.005055961968186473
+  },
+  "validation_seconds": 3.1277687549591064,
+  "scope": "完整 canonical BBAT5 val，無訓練、無資料或原權重修改"
+}

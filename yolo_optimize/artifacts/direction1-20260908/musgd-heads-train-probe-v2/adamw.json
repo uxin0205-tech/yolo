@@ -1,0 +1,70 @@
+{
+  "label": "adamw",
+  "updates": 16,
+  "trace_sha256": "910d69af0a00cc5924be7ae16135586db7590a4d8b4b9a0c8f02cdfb80c09003",
+  "parent_state_sha256": "8f2081413525c08973daf91d4fa155cddeabe3a84780bf7d3f9df150ece3eaec",
+  "optimizer": "AdamW",
+  "role_lrs": {
+    "detect_head": 2.5e-05,
+    "pose_head": 2.5e-05
+  },
+  "statistics": {
+    "detect_head.decay": {
+      "median": 2.0798206605832092e-05,
+      "count": 768,
+      "zero_fraction": 0.0
+    },
+    "detect_head": {
+      "median": 1.399801590196148e-06,
+      "count": 2112,
+      "zero_fraction": 0.0
+    },
+    "detect_head.no_decay": {
+      "median": 9.755726182447688e-07,
+      "count": 1344,
+      "zero_fraction": 0.0
+    },
+    "pose_head.decay": {
+      "median": 2.3189199964690488e-05,
+      "count": 960,
+      "zero_fraction": 0.0
+    },
+    "pose_head": {
+      "median": 8.462284768029349e-06,
+      "count": 2624,
+      "zero_fraction": 0.0
+    },
+    "pose_head.no_decay": {
+      "median": 1.8464393178874161e-06,
+      "count": 1664,
+      "zero_fraction": 0.0
+    }
+  },
+  "zero_initial_absolute_updates": {},
+  "losses": [
+    1.5695715546607971,
+    1.6045536398887634,
+    1.6190505981445313,
+    1.5921082019805908,
+    1.626588261127472,
+    1.557177734375,
+    1.682693564891815,
+    1.5608147501945495,
+    1.7073152303695678,
+    1.62495276927948,
+    1.5838413000106812,
+    1.599166476726532,
+    1.6285201787948609,
+    1.5686645030975341,
+    1.685163187980652,
+    1.6869922161102295
+  ],
+  "excluded_no_nonzero_finite_gradient": {
+    "pose_head.decay": 768,
+    "pose_head.no_decay": 832
+  },
+  "gradient_eligibility": "actual_unscaled_clipped_gradient_before_successful_optimizer_step",
+  "fixed_states_exact": true,
+  "updates_discarded": true,
+  "validation_used": false
+}

@@ -1,0 +1,143 @@
+{
+  "activation_recovery": {
+    "activation": "qsilu_pq",
+    "activation_gate": 0.015,
+    "best_joint_is_activation_relative_only": true,
+    "epochs": 10,
+    "fp32_bbox_iou": true,
+    "original_fusion_gate_still_reported_separately": true,
+    "paired_seed": 1,
+    "pose_weight": 0.25,
+    "sha256": "d5b2083b2b736ded790578a2779d223d82413ce0c6cbac1468601105c094f9a6",
+    "shared_bn_affine_trainable": true,
+    "shared_bn_running_fixed": true,
+    "start": "/home/uxin/yolo/yolo_optimize/combine/bridge_v1/artifacts/fusion/j3-pose-head-recovery-v1/inference/best_pose.pt",
+    "warmup": 1
+  },
+  "amp": {
+    "enabled": true,
+    "max_overflow_retries": 16
+  },
+  "architecture": "full35",
+  "augmentation": {
+    "detect_fliplr": 0.5,
+    "detect_mosaic": 0.0,
+    "pose_fliplr": 0.0,
+    "pose_mosaic": 0.0
+  },
+  "baseline_metrics": "/home/uxin/yolo/yolo_optimize/activation/bridge_v1/artifacts/activation-baseline-v1.json",
+  "batches": {
+    "detect_train_logical": 128,
+    "detect_train_physical_microbatch": 16,
+    "detect_validation": 32,
+    "loss_reference": 64,
+    "pose_train_physical": 16,
+    "pose_validation": 16
+  },
+  "config": "/home/uxin/yolo/yolo_optimize/combine/bridge_v1/full35/configs/j1.yaml",
+  "detect_data": "/home/uxin/yolo/coco2017.yaml",
+  "enable_j3": false,
+  "imgsz": 640,
+  "j2_plateau": {
+    "adjust_momentum": false,
+    "lr_factor": 0.5,
+    "max_reductions": 1,
+    "min_delta": 0.0001,
+    "monitor": "bittrue_joint_score",
+    "patience": 17,
+    "recovery_after": 8
+  },
+  "macro": {
+    "detect_logical_batches": 2,
+    "detect_physical_microbatches": 16,
+    "detect_weight": 1.0,
+    "pose_batches": 1,
+    "pose_weight": 0.25
+  },
+  "maximum_map_drop": 0.015,
+  "optimizer": "AdamW",
+  "pose_checkpoint": "/home/uxin/yolo/yolo_combine/variants/full35/artifacts/pose/p0-full35-p3-b32a4-e100max-seed0/weights/best.pt",
+  "pose_data": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml",
+  "registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml",
+  "run_root": "/home/uxin/yolo/yolo_optimize/activation/bridge_v1/artifacts/runs",
+  "schema_version": 1,
+  "shared_bn": {
+    "affine_trainable": true,
+    "running_statistics_frozen": true
+  },
+  "source_bundle": "/home/uxin/yolo/yolo_optimize/combine/bridge_v1",
+  "stage_policies": {
+    "j0": {
+      "backbone_start_layer": 11,
+      "epochs": 8,
+      "learning_rates": {
+        "attention": 0.0,
+        "backbone": 0.0,
+        "detect_head": 0.0,
+        "masf": 0.0,
+        "neck": 0.0,
+        "pose_head": 0.0002
+      },
+      "patience": 0,
+      "task_mode": "pose",
+      "tune_attention": false,
+      "warmup_epochs": 1
+    },
+    "j1": {
+      "backbone_start_layer": 11,
+      "epochs": 20,
+      "learning_rates": {
+        "attention": 0.0,
+        "backbone": 0.0,
+        "detect_head": 0.0002,
+        "masf": 0.0,
+        "neck": 7.5e-05,
+        "pose_head": 0.0002
+      },
+      "patience": 8,
+      "task_mode": "joint",
+      "tune_attention": false,
+      "warmup_epochs": 1
+    },
+    "j2": {
+      "backbone_start_layer": 9,
+      "epochs": 80,
+      "learning_rates": {
+        "attention": 0.0,
+        "backbone": 1.5e-05,
+        "detect_head": 0.0002,
+        "masf": 0.00015,
+        "neck": 7.5e-05,
+        "pose_head": 0.0002
+      },
+      "patience": 17,
+      "task_mode": "joint",
+      "tune_attention": false,
+      "warmup_epochs": 1
+    },
+    "j3": {
+      "backbone_start_layer": 0,
+      "epochs": 10,
+      "learning_rates": {
+        "attention": 5e-08,
+        "backbone": 3.8e-07,
+        "detect_head": 5e-06,
+        "masf": 3.8e-06,
+        "neck": 1.9e-06,
+        "pose_head": 5e-06
+      },
+      "patience": 0,
+      "task_mode": "joint",
+      "tune_attention": true,
+      "warmup_epochs": 1
+    }
+  },
+  "stages": [
+    "j3"
+  ],
+  "xnor": {
+    "backend": "tiled_exact",
+    "qk_ste": false,
+    "token_tile": 32
+  }
+}

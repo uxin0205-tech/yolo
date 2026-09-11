@@ -1,5 +1,7 @@
 # 工作紀錄索引
 
+最新發布：[2026-09-12：BinaryQK 至推論完整報告](../../yolo_optimize/docs/worklogs/2026-09-12-github-report-publication.md)。本次限定報告／研究證據，不改資料集或大型權重。
+
 本目錄保存 `/home/uxin/yolo` 及其子專案的中文工作紀錄，讓程式修改、實驗、驗證、困難與解法可被追溯。
 
 ## 紀錄規則

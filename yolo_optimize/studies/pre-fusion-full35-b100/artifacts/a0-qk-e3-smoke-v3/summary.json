@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "arm": "qk",
+  "parent": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/a0.pt",
+  "parent_sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+  "fresh_optimizer": false,
+  "initial_ema_updates": 2775,
+  "criterion_horizon": 10,
+  "warmup_epochs": 1,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "train_images": 118287,
+  "epochs": [
+    {
+      "source_run": "a0-qk-recovery-v1",
+      "epoch": 1,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 577.010890007019,
+      "ema": {
+        "coco/box/map50_95": 0.5062400410979159,
+        "coco/person/box/map50_95": 0.6259960085842178,
+        "coco/ball/box/map50_95": 0.5147890101748726,
+        "coco/bat/box/map50_95": 0.4879465953715094
+      },
+      "live": {
+        "coco/box/map50_95": 0.506205798160138,
+        "coco/person/box/map50_95": 0.626026355490389,
+        "coco/ball/box/map50_95": 0.5141929390129307,
+        "coco/bat/box/map50_95": 0.48767154499912024
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0004985329362473534,
+        "coco/person/box/map50_95": -0.0008092653932801896,
+        "coco/ball/box/map50_95": 0.0016787515926133256,
+        "coco/bat/box/map50_95": -0.007779139072607522
+      }
+    },
+    {
+      "source_run": "a0-qk-recovery-v2",
+      "epoch": 2,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 578.5320618152618,
+      "ema": {
+        "coco/box/map50_95": 0.506345468382229,
+        "coco/person/box/map50_95": 0.6258386227735264,
+        "coco/ball/box/map50_95": 0.5164797079138131,
+        "coco/bat/box/map50_95": 0.49539970255458937
+      },
+      "live": {
+        "coco/box/map50_95": 0.5063943475416443,
+        "coco/person/box/map50_95": 0.6258360146777904,
+        "coco/ball/box/map50_95": 0.5162145243403643,
+        "coco/bat/box/map50_95": 0.4933076838940371
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.000393105651934178,
+        "coco/person/box/map50_95": -0.0009666512039715469,
+        "coco/ball/box/map50_95": 0.00336944933155392,
+        "coco/bat/box/map50_95": -0.0003260318895275671
+      }
+    },
+    {
+      "source_run": "a0-qk-recovery-v2",
+      "epoch": 3,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 576.7302114963531,
+      "ema": {
+        "coco/box/map50_95": 0.5059815190679441,
+        "coco/person/box/map50_95": 0.6260925753632676,
+        "coco/ball/box/map50_95": 0.5134735991684749,
+        "coco/bat/box/map50_95": 0.4995646199487833
+      },
+      "live": {
+        "coco/box/map50_95": 0.5060159881393048,
+        "coco/person/box/map50_95": 0.6260820847607853,
+        "coco/ball/box/map50_95": 0.5145352749101595,
+        "coco/bat/box/map50_95": 0.5006603139269664
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0007570549662191395,
+        "coco/person/box/map50_95": -0.0007126986142304004,
+        "coco/ball/box/map50_95": 0.0003633405862156769,
+        "coco/bat/box/map50_95": 0.0038388855046663783
+      }
+    }
+  ],
+  "qk_lr": 5e-07,
+  "head_lr": 2.5e-05,
+  "fixed_tensors": 556,
+  "training_scope": "Q/K projection + Detect head; all non-head BN statistics fixed",
+  "loss_reduction": "native batch-sum accumulated over four microbatches; partial final macro retained",
+  "challenger_contract": "exact XNOR forward; clipped signed-dot surrogate backward only in qk arm",
+  "continued_from": "/home/uxin/yolo/yolo_optimize/studies/pre-fusion-full35-b100/artifacts/a0-qk-recovery-v2/epoch-03-resume.pt",
+  "continued_from_sha256": "3226d1b0b1d536231bf7f760560b737ed4c86d90ce3d0db5a205aa3274ae75c7",
+  "script_sha256": "9a1202a6dabdc1f23e7120e684805c264f1b1e4228c00fff372535ca223bd92a",
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "max_epochs": 5,
+  "patience": 6,
+  "data_stream_seed": 20260912,
+  "data_stream_note": "epoch boundary continuation with a new paired deterministic data stream; not exact uninterrupted dataloader replay",
+  "initial_stale_epochs": 1,
+  "qk_projection_gradient_norms": {
+    "model.10.m.0.attn.qkv.q.conv.weight": 42.78179931640625,
+    "model.10.m.0.attn.qkv.q.bn.weight": 0.2640226483345032,
+    "model.10.m.0.attn.qkv.q.bn.bias": 0.2975282073020935,
+    "model.10.m.0.attn.qkv.k.conv.weight": 33.862510681152344,
+    "model.10.m.0.attn.qkv.k.bn.weight": 0.31525537371635437,
+    "model.10.m.0.attn.qkv.k.bn.bias": 0.21814212203025818,
+    "model.22.m.0.1.attn.qkv.q.conv.weight": 7.648179054260254,
+    "model.22.m.0.1.attn.qkv.q.bn.weight": 0.15834932029247284,
+    "model.22.m.0.1.attn.qkv.q.bn.bias": 0.1223188191652298,
+    "model.22.m.0.1.attn.qkv.k.conv.weight": 9.918742179870605,
+    "model.22.m.0.1.attn.qkv.k.bn.weight": 0.18998125195503235,
+    "model.22.m.0.1.attn.qkv.k.bn.bias": 0.09971549361944199
+  },
+  "first_macro_trace_sha256": "0dd6f16d96bbcbf19f4e7d954999a840743055558578d5355acb86debde9305d",
+  "qk_optimizer_state_count": 12,
+  "smoke_images": 128,
+  "optimizer_steps": 2776,
+  "qk_grad_norm": 55.98409827116989
+}

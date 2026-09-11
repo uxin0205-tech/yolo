@@ -1,0 +1,71 @@
+{
+  "kind": "actual_materialization_cpu_validation_boundary_repro",
+  "checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+  "backend": "float",
+  "materialization_source": "ema",
+  "seconds": 1.1201533298008144,
+  "cuda_initialized": false,
+  "error": {
+    "type": "RuntimeError",
+    "message": "驗證修改了訓練／EMA 來源 state 或 training mode；拒絕保存並續訓"
+  },
+  "red": true,
+  "changes": {
+    "live": {
+      "state_digest_before": "fdaeedbf1c490116927d9ed20d25d37b75e42dd0cdece3b4fbd8c00a7e6de1ca",
+      "state_digest_after": "fdaeedbf1c490116927d9ed20d25d37b75e42dd0cdece3b4fbd8c00a7e6de1ca",
+      "counts": {
+        "tensors": 0,
+        "training": 1,
+        "requires_grad": 0
+      },
+      "tensors": {},
+      "training": {
+        "graph.model.23.pose_head.cv2.0.0.act": {
+          "before": true,
+          "after": false,
+          "module_type": "torch.nn.modules.activation.SiLU",
+          "all_alias_paths": [
+            "graph.model.23.pose_head.cv2.0.0.act",
+            "graph.model.23.pose_head.cv2.0.1.act",
+            "graph.model.23.pose_head.cv2.1.0.act",
+            "graph.model.23.pose_head.cv2.1.1.act",
+            "graph.model.23.pose_head.cv2.2.0.act",
+            "graph.model.23.pose_head.cv2.2.1.act",
+            "graph.model.23.pose_head.cv3.0.0.0.act",
+            "graph.model.23.pose_head.cv3.0.0.1.act",
+            "graph.model.23.pose_head.cv3.0.1.0.act",
+            "graph.model.23.pose_head.cv3.0.1.1.act",
+            "graph.model.23.pose_head.cv3.1.0.0.act",
+            "graph.model.23.pose_head.cv3.1.0.1.act",
+            "graph.model.23.pose_head.cv3.1.1.0.act",
+            "graph.model.23.pose_head.cv3.1.1.1.act",
+            "graph.model.23.pose_head.cv3.2.0.0.act",
+            "graph.model.23.pose_head.cv3.2.0.1.act",
+            "graph.model.23.pose_head.cv3.2.1.0.act",
+            "graph.model.23.pose_head.cv3.2.1.1.act",
+            "graph.model.23.pose_head.cv4.0.0.act",
+            "graph.model.23.pose_head.cv4.0.1.act",
+            "graph.model.23.pose_head.cv4.1.0.act",
+            "graph.model.23.pose_head.cv4.1.1.act",
+            "graph.model.23.pose_head.cv4.2.0.act",
+            "graph.model.23.pose_head.cv4.2.1.act"
+          ]
+        }
+      },
+      "requires_grad": {}
+    },
+    "ema": {
+      "state_digest_before": "fdaeedbf1c490116927d9ed20d25d37b75e42dd0cdece3b4fbd8c00a7e6de1ca",
+      "state_digest_after": "fdaeedbf1c490116927d9ed20d25d37b75e42dd0cdece3b4fbd8c00a7e6de1ca",
+      "counts": {
+        "tensors": 0,
+        "training": 0,
+        "requires_grad": 0
+      },
+      "tensors": {},
+      "training": {},
+      "requires_grad": {}
+    }
+  }
+}

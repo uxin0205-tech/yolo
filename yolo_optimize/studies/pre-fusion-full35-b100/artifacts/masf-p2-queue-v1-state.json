@@ -1,0 +1,109 @@
+{
+  "status": "awaiting_analysis",
+  "jobs": [
+    {
+      "name": "masf-p2-preflight-v1",
+      "status": "passed"
+    },
+    {
+      "name": "masf-p2-control-smoke-v1",
+      "status": "passed"
+    },
+    {
+      "name": "masf-p2-p2-smoke-v1",
+      "status": "passed"
+    },
+    {
+      "name": "masf-p2-control-v1",
+      "status": "complete"
+    },
+    {
+      "name": "masf-p2-p2-v1",
+      "status": "complete"
+    }
+  ],
+  "monitor_wait_seconds": 600,
+  "last_masf_direction": true,
+  "failure_next_phase": "combine_without_masf",
+  "acceptance": "same-epoch overall/person nonnegative; at least one +0.001; no parent regression",
+  "new_detect_head": false,
+  "pwl_range": [
+    -10,
+    0
+  ],
+  "smoke_proof": {
+    "control": {
+      "trace": "7c69a595eaf9da5e4c994e2bf3322466894783bdd4299fed9ed7f250fe129aff",
+      "loss": 215.72183990478516,
+      "norms": {
+        "head": 274.50619429811275,
+        "context": 0.0,
+        "alpha": 0.0
+      }
+    },
+    "p2": {
+      "trace": "7c69a595eaf9da5e4c994e2bf3322466894783bdd4299fed9ed7f250fe129aff",
+      "loss": 215.72183990478516,
+      "norms": {
+        "head": 274.50619429811275,
+        "context": 0.0,
+        "alpha": 0.00677490234375
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "epoch": 1,
+      "delta": {
+        "coco/box/map50_95": 2.420813317294268e-05,
+        "coco/person/box/map50_95": -2.4505435607169446e-05,
+        "coco/ball/box/map50_95": -0.0003797187275320635,
+        "coco/bat/box/map50_95": 0.0007257942513900217
+      },
+      "eligible": false
+    },
+    {
+      "epoch": 2,
+      "delta": {
+        "coco/box/map50_95": -9.149180498246867e-05,
+        "coco/person/box/map50_95": 5.476077872268448e-05,
+        "coco/ball/box/map50_95": 0.0002108034568334416,
+        "coco/bat/box/map50_95": 0.0007340726033532308
+      },
+      "eligible": false
+    },
+    {
+      "epoch": 3,
+      "delta": {
+        "coco/box/map50_95": -6.291750938336449e-05,
+        "coco/person/box/map50_95": 7.999976323269653e-05,
+        "coco/ball/box/map50_95": 0.0013857413138722574,
+        "coco/bat/box/map50_95": -0.0012223067377041819
+      },
+      "eligible": false
+    },
+    {
+      "epoch": 4,
+      "delta": {
+        "coco/box/map50_95": -0.00016890538545011324,
+        "coco/person/box/map50_95": 0.00029512474257309407,
+        "coco/ball/box/map50_95": -0.0012784431661462259,
+        "coco/bat/box/map50_95": 7.049526493319025e-05
+      },
+      "eligible": false
+    },
+    {
+      "epoch": 5,
+      "delta": {
+        "coco/box/map50_95": -0.00014887395308227358,
+        "coco/person/box/map50_95": 9.925595102067142e-05,
+        "coco/ball/box/map50_95": -0.0012512188730331442,
+        "coco/bat/box/map50_95": 0.00017722774324679946
+      },
+      "eligible": false
+    }
+  ],
+  "threshold_passed": false,
+  "next_phase_if_failed": "combine_without_masf",
+  "automatic_training_started": false
+}

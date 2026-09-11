@@ -1,0 +1,58 @@
+{
+  "status": "complete",
+  "scope": "B100 Float score isolated CPU, train mode, seed0, N16",
+  "sites": {
+    "model.10.m.0.attn": {
+      "use_ste": true,
+      "scale_mode": "power_of_two",
+      "score_requires_grad": false,
+      "q_gradient_nonzero": false,
+      "k_gradient_nonzero": false,
+      "fixed_coefficients": [
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ]
+      ]
+    },
+    "model.22.m.0.1.attn": {
+      "use_ste": true,
+      "scale_mode": "power_of_two",
+      "score_requires_grad": false,
+      "q_gradient_nonzero": false,
+      "k_gradient_nonzero": false,
+      "fixed_coefficients": [
+        [
+          0.125,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ]
+      ]
+    }
+  },
+  "training_performed": false,
+  "limitation": "確認 score 的梯度路徑；尚未證明修復梯度可提升 AP，亦非整模型所有路徑梯度稽核。"
+}

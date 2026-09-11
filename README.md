@@ -1,5 +1,9 @@
 # YOLO 研究工作區
 
+## 5090 Done 0912：BinaryQK 至推論優化報告
+
+[完整研究閱讀入口](yolo_optimize/reports/5090-done-0912/README.md)整合 BinaryQK／固定 scale、HOG、RepConv、MASF P3／P2、重新 combine、activation、KD 與推論。詳細結果、超參數、架構圖與 checkpoint 索引見[全階段總報告](yolo_optimize/reports/consolidated-20260911/README.md)。本次不發布大型權重、封存副本或新增資料集，保留所有失敗與未達門檻結論。
+
 本目錄是 YOLO 與棒球視覺研究的共用工作區。所有子專案均遵守根層代理規則、固定資料集政策與中文工作紀錄要求。
 
 ## 全域文件入口

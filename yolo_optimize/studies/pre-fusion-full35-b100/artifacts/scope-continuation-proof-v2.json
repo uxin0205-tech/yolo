@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "arms": {
+    "narrow": {
+      "trace": "eb9559916d0333cba40e5450d51376fe9411d6016477da699f18874cf00b7d99",
+      "ema_updates": 7401,
+      "criterion_updates": 8,
+      "optimizer_steps": {
+        "qk": [
+          7401
+        ],
+        "head": [
+          7401
+        ]
+      },
+      "adaptive_start_epoch": null,
+      "new_group_moments_restored": false
+    },
+    "late": {
+      "trace": "eb9559916d0333cba40e5450d51376fe9411d6016477da699f18874cf00b7d99",
+      "ema_updates": 7401,
+      "criterion_updates": 8,
+      "optimizer_steps": {
+        "qk": [
+          7401
+        ],
+        "head": [
+          7401
+        ],
+        "adapt": [
+          2776
+        ]
+      },
+      "adaptive_start_epoch": 5,
+      "new_group_moments_restored": true
+    }
+  },
+  "paired_new_stream": true,
+  "exact_uninterrupted_dataloader_replay": false
+}

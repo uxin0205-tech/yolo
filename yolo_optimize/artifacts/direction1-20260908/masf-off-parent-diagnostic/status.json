@@ -1,0 +1,16 @@
+{
+  "candidate": "masf_off",
+  "checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+  "checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+  "phase": "complete",
+  "intervention": {
+    "kind": "shared_masf_residual_zero",
+    "layer": 16,
+    "state_key": "graph.model.16.p3_masf.alpha",
+    "original_alpha": 0.11065910756587982,
+    "effective_alpha": 0.0,
+    "context_preserved": true,
+    "relocation_performed": false
+  },
+  "elapsed_seconds": 69.1251654624939
+}

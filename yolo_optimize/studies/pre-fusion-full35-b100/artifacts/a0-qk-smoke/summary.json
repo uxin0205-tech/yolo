@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "arm": "qk",
+  "parent": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/a0.pt",
+  "parent_sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+  "fresh_optimizer": true,
+  "fresh_ema_updates": 0,
+  "criterion_horizon": 10,
+  "warmup_epochs": 1,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "train_images": 118287,
+  "epochs": [],
+  "qk_lr": 5e-07,
+  "head_lr": 2.5e-05,
+  "fixed_tensors": 556,
+  "training_scope": "Q/K projection + Detect head; all non-head BN statistics fixed",
+  "loss_reduction": "native batch-sum accumulated over four microbatches; partial final macro retained",
+  "challenger_contract": "exact XNOR forward; clipped signed-dot surrogate backward only in qk arm",
+  "smoke_images": 128,
+  "optimizer_steps": 1,
+  "qk_grad_norm": 151.82350912657515
+}

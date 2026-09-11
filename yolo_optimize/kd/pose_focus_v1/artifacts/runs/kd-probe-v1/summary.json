@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "arm": "kd",
+  "detect_output_exact": true,
+  "fixed_non_pose_state": true,
+  "teacher_unchanged": "2028d71caf9407f0354d285d67e184c0ade3d0ab956eaa110fc5aa4f4d8380d0",
+  "records": [
+    {
+      "detect_mean_loss": 0.0,
+      "pose_mean_loss": 6.825655937194824,
+      "joint_mean_loss": 6.825655937194824,
+      "loss_for_backward": 436.84197998046875,
+      "detect_components": [],
+      "pose_components": [
+        0.7567509412765503,
+        0.030887961387634277,
+        0.008663014508783817,
+        0.342658668756485,
+        0.0022486962843686342,
+        0.0
+      ],
+      "detect_batch_sizes": [],
+      "pose_batch_sizes": [
+        16
+      ],
+      "detect_images": 0,
+      "pose_images": 16,
+      "gradient_presence": {},
+      "gradient_statistics": null,
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 315.9140319824219
+    },
+    {
+      "detect_mean_loss": 0.0,
+      "pose_mean_loss": 7.0878825187683105,
+      "joint_mean_loss": 7.0878825187683105,
+      "loss_for_backward": 453.6244812011719,
+      "detect_components": [],
+      "pose_components": [
+        0.915248692035675,
+        0.021597910672426224,
+        0.007157965563237667,
+        0.3744376003742218,
+        0.002880708547309041,
+        0.0
+      ],
+      "detect_batch_sizes": [],
+      "pose_batch_sizes": [
+        16
+      ],
+      "detect_images": 0,
+      "pose_images": 16,
+      "gradient_presence": {},
+      "gradient_statistics": null,
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 333.7100524902344
+    }
+  ],
+  "peak_cuda_allocated_bytes": 5527556096
+}

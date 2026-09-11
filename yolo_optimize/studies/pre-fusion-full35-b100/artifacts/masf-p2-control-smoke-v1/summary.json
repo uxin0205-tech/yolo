@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "variant": "control",
+  "parent": "/home/uxin/yolo/yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-head-control-v1/epoch-08-resume.pt",
+  "parent_sha256": "3aeeaec2b379d465ceb5aee6051e5c11772e856497676ec9c87f2cb511a0c06c",
+  "parent_state": "verified no-MASF control E8 EMA",
+  "scope": "all original Detect heads plus P2 MASF; other parameters/all BN statistics fixed",
+  "head_inputs": [
+    16,
+    19,
+    22
+  ],
+  "head_strides": [
+    8,
+    16,
+    32
+  ],
+  "new_detect_head": false,
+  "learning_rates": {
+    "head": 1e-05,
+    "context": 1e-05,
+    "alpha": 0.0001
+  },
+  "optimizer": "AdamW",
+  "fresh_optimizer": true,
+  "warmup_epochs": 1,
+  "criterion_horizon": 10,
+  "epochs_budget": 5,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "ema_initial_updates": 14800,
+  "context_initialization": "fresh seed20260930; no P3 context transfer",
+  "alpha_initial": 0.0,
+  "alpha_bound": [
+    -0.25,
+    0.25
+  ],
+  "epochs": [],
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "reference": {
+    "coco/box/map50_95": 0.5082670923538396,
+    "coco/person/box/map50_95": 0.6276994545665454,
+    "coco/ball/box/map50_95": 0.5140056521435179,
+    "coco/bat/box/map50_95": 0.48012754958362985
+  },
+  "script_sha256": "36327f135474584acca049c6f25ea587faf6a7cac53ccbff22609905f5504bbc",
+  "module_sha256": "2211002f078bc62c61b663974544b231582c62bdf34cf41fd2d7479c66206448",
+  "first_macro_trace_sha256": "7c69a595eaf9da5e4c994e2bf3322466894783bdd4299fed9ed7f250fe129aff",
+  "first_macro_loss": 215.72183990478516,
+  "first_gradient_norms": {
+    "head": 274.50619429811275,
+    "context": 0.0,
+    "alpha": 0.0
+  },
+  "first_update_ratio": 5.210665739113405e-06,
+  "smoke_images": 128,
+  "optimizer_steps": 1,
+  "ema_updates": 14801
+}

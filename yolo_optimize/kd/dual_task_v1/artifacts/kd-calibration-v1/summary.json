@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "mu": {
+    "detect": 0.8214335621355655,
+    "pose": 1.788698266142668
+  },
+  "student_sha256": "1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a",
+  "records": {
+    "detect": [
+      {
+        "native_feature_gradient": 0.8133912682533264,
+        "kd_feature_gradient": 0.11145217716693878,
+        "ratio": 7.298119147865432,
+        "images": 16,
+        "kd_per_image": 0.2819143831729889
+      },
+      {
+        "native_feature_gradient": 0.907305121421814,
+        "kd_feature_gradient": 0.15393072366714478,
+        "ratio": 5.894243201141207,
+        "images": 16,
+        "kd_per_image": 0.34956154227256775
+      },
+      {
+        "native_feature_gradient": 0.9963477849960327,
+        "kd_feature_gradient": 0.10912240296602249,
+        "ratio": 9.130552094845878,
+        "images": 16,
+        "kd_per_image": 0.28584831953048706
+      },
+      {
+        "native_feature_gradient": 1.2438145875930786,
+        "kd_feature_gradient": 0.11884336173534393,
+        "ratio": 10.465999694311652,
+        "images": 16,
+        "kd_per_image": 0.263367235660553
+      }
+    ],
+    "pose": [
+      {
+        "native_feature_gradient": 2.455984354019165,
+        "kd_feature_gradient": 0.1304253190755844,
+        "ratio": 18.830579610051533,
+        "images": 16,
+        "kd_per_image": 0.31400856375694275
+      },
+      {
+        "native_feature_gradient": 2.3407058715820312,
+        "kd_feature_gradient": 0.13814865052700043,
+        "ratio": 16.943385712801824,
+        "images": 16,
+        "kd_per_image": 0.3064025640487671
+      },
+      {
+        "native_feature_gradient": 2.479381799697876,
+        "kd_feature_gradient": 0.14764796197414398,
+        "ratio": 16.79252301587518,
+        "images": 16,
+        "kd_per_image": 0.2677760422229767
+      },
+      {
+        "native_feature_gradient": 2.8076114654541016,
+        "kd_feature_gradient": 0.13084416091442108,
+        "ratio": 21.45767488463185,
+        "images": 16,
+        "kd_per_image": 0.3025778830051422
+      }
+    ]
+  },
+  "teacher_state_unchanged": {
+    "detect": "75e72ceaf7e0d716bfa09864624269e889457e39f4f456d05658f93d26eddc90",
+    "pose": "2028d71caf9407f0354d285d67e184c0ade3d0ab956eaa110fc5aa4f4d8380d0"
+  },
+  "kd_only_shared_update": true,
+  "updates_discarded": true,
+  "calibration_target": "0.1 times native gradient at shared Neck features; not full parameter gradient ratio",
+  "peak_cuda_allocated_bytes": 19219090944,
+  "validation_used": false,
+  "remaining": "actual mixed macro AMP/snapshot/export checks before training"
+}

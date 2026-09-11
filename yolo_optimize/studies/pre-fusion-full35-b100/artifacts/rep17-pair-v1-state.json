@@ -1,0 +1,38 @@
+{
+  "status": "awaiting_analysis",
+  "jobs": [
+    {
+      "name": "rep17-control-smoke-v1",
+      "variant": "control",
+      "status": "passed",
+      "smoke": true
+    },
+    {
+      "name": "rep17-rep-smoke-v1",
+      "variant": "rep",
+      "status": "passed",
+      "smoke": true
+    },
+    {
+      "name": "rep17-control-v1",
+      "variant": "control",
+      "status": "complete",
+      "smoke": false,
+      "last_epoch": 5
+    },
+    {
+      "name": "rep17-rep-v1",
+      "variant": "rep",
+      "status": "complete",
+      "smoke": false,
+      "last_epoch": 5
+    }
+  ],
+  "monitor_wait_seconds": 600,
+  "epochs_per_arm": 5,
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "accuracy_winner": null
+}

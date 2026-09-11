@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "device": "cpu",
+  "imgsz": 160,
+  "checks": [
+    {
+      "backend": "float",
+      "task": "detect",
+      "output_exact": true,
+      "state_exact": true
+    },
+    {
+      "backend": "float",
+      "task": "pose",
+      "output_exact": true,
+      "state_exact": true
+    },
+    {
+      "backend": "bittrue",
+      "task": "detect",
+      "output_exact": true,
+      "state_exact": true
+    },
+    {
+      "backend": "bittrue",
+      "task": "pose",
+      "output_exact": true,
+      "state_exact": true
+    }
+  ],
+  "checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+  "full_dataset_ap_validated": false,
+  "hardware_latency_measured": false
+}
