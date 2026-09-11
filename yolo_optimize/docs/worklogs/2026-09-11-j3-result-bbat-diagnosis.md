@@ -56,4 +56,4 @@ Pose head 恢復實際完成 9 epoch、patience 4 平台停止，最佳 E5：box
 
 接續 `calibrate_pose_bn.py` 只用完整 canonical train 5,964 張、關閉隨機增強，以 physical128 前向重估 48 層 Pose head BN buffers，沒有 optimizer／參數更新。JOB_DONE 後全量驗證：box +0.000196／pose +0.000516、bat box -0.000052，非主要改善，候選不採用。峰值 allocated memory 8,872,495,104 bytes；不等於 physical128 完整反向訓練可行。所有參數與其他 buffers 精確不變，COCO 不變。困難：無；未修改 canonical 來源或 split。
 
-已整理 [完整結果與下一步](<../../combine/bridge_v1/BBAT_RECOVERY_RESULTS.md>)，同步根層／combine／bridge 入口與 plan。當前沒有執行中的 GPU job；沒有 activation／方向 2 queue。下一個尚未執行方向是共享 affine／Neck 的受控適應，而非繼續延長相同 head-only 訓練。主要未解風險：剩餘 BBAT 差距、單 seed、共享特徵因素尚未經單變因確認。
+已整理 [完整結果與下一步](<../../experiments/combine/bridge_v1/BBAT_RECOVERY_RESULTS.md>)，同步根層／combine／bridge 入口與 plan。當前沒有執行中的 GPU job；沒有 activation／方向 2 queue。下一個尚未執行方向是共享 affine／Neck 的受控適應，而非繼續延長相同 head-only 訓練。主要未解風險：剩餘 BBAT 差距、單 seed、共享特徵因素尚未經單變因確認。

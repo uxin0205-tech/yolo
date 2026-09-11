@@ -2,7 +2,7 @@
 
 ## 完成結果
 
-`native-parent-ema-control-adopted` 完成 E1–E5；E1 明示採用診斷完整快照，E2–E5 在新程序訓練。E5 EMA Ball Box AP=0.5023759176，比原 BEST 下降 0.0050611186，觸發預設 safety gate，保存後暫停。E5 EMA／live joint 分別 0.7101160556／0.7053870730；原 BEST 0.7111747390。原始權重不替換，詳細表格、架構與推導見[native5 報告](<../../optimizations/integrated-roadmap/native5-results.md>)。
+`native-parent-ema-control-adopted` 完成 E1–E5；E1 明示採用診斷完整快照，E2–E5 在新程序訓練。E5 EMA Ball Box AP=0.5023759176，比原 BEST 下降 0.0050611186，觸發預設 safety gate，保存後暫停。E5 EMA／live joint 分別 0.7101160556／0.7053870730；原 BEST 0.7111747390。原始權重不替換，詳細表格、架構與推導見[native5 報告](<../../proposals/integrated-roadmap/native5-results.md>)。
 
 21:42:48 的退出事件確認 GPU 回到 443 MiB／0% 使用率。原 supervisor 因對話中斷退出，後續 observer 不是訓練的 parent，退出代碼不可觀察；只依完整 summary、checkpoint、progress 與 `/proc` 退出作判斷，不假造 exit code。
 

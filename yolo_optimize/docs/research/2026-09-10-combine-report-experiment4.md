@@ -1,6 +1,6 @@
 # 先前 combine 報告：實驗 4 核對與目前訓練修正
 
-來源為使用者提供的《碩一_陳宥炘_0831.pdf》（本機／歷史參照：`../../combine/碩一_陳宥炘_0831.pdf`；未隨本次報告發布），實驗 4 位於 PDF 第 9–11 頁。文字完整讀取並視覺核對第 10、11 頁；本次由主代理直接執行 research 技能，不使用子代理。
+來源為使用者提供的《碩一_陳宥炘_0831.pdf》（本機／歷史參照：`../references/user-reports/combine-experiment4-0831.pdf`；未隨本次報告發布），實驗 4 位於 PDF 第 9–11 頁。文字完整讀取並視覺核對第 10、11 頁；本次由主代理直接執行 research 技能，不使用子代理。
 
 ## 報告實際方法
 
@@ -50,7 +50,7 @@ person AP50–95 曲線在 J0 約 0.626，J1 初期降至約 0.600，再逐步�
 | 1 | 303.5163 | 2353.3150 | 7.7535 | 0.03343 |
 | 2 | 327.1384 | 1706.5215 | 5.2165 | 0.01146 |
 
-來源：[smoke summary](<../../combine/bridge_v1/artifacts/fusion/merge-j1-smoke-v1/summary.json>)；[joint_loss.py](<../../../yolo_combine/src/yolo_combine/joint_loss.py>) 確認統計在 task backward weighting 與 AMP unscale 之後、global clip 之前，因此**已含 0.25 Pose 權重，不能再乘一次 0.25 解讀**。
+來源：[smoke summary](<../../experiments/combine/bridge_v1/artifacts/fusion/merge-j1-smoke-v1/summary.json>)；[joint_loss.py](<../../../yolo_combine/src/yolo_combine/joint_loss.py>) 確認統計在 task backward weighting 與 AMP unscale 之後、global clip 之前，因此**已含 0.25 Pose 權重，不能再乘一次 0.25 解讀**。
 
 由 g = 64/(1+w)·(g_detect + w·g_pose) 可知，共同因子不影響比例；固定 checkpoint 下加權 norm ratio 約正比 w。僅兩個 macro 不能代表全資料，先擴充 train-only 梯度校準，不用 validation 搜權重。若要調整固定 Pose weight，可由 w_new = w_old × target_ratio / measured_median_ratio 提出候選，再用不同後續 training batches 確認；此為待驗證推導，不是報告已驗證參數。
 

@@ -9,9 +9,9 @@
   並以原論文、官方MSFA程式、PCGrad、GradNorm、distillation等第一手來源核對可轉用邊界。
 - 稽核Full35 J1/J2/J3 durable gradient logs。負cosine率為32.258%／32.759%／41.176%；J2/J3
   Pose／Detect norm ratio median已低於1，故首輪優先處理方向衝突，而不是再掃LR或只調loss weight。
-- 建立[`OPT-TRAIN-CONFLICT-SAFE`](<../../optimizations/training-conflict-safe/README.md>)資料夾，包含方向說明、
-  [最小計畫](<../../optimizations/training-conflict-safe/plan.md>)與
-  [終端架構圖](<../../optimizations/training-conflict-safe/architecture-report.md>)。
+- 建立[`OPT-TRAIN-CONFLICT-SAFE`](<../../proposals/training-conflict-safe/README.md>)資料夾，包含方向說明、
+  [最小計畫](<../../proposals/training-conflict-safe/plan.md>)與
+  [終端架構圖](<../../proposals/training-conflict-safe/architecture-report.md>)。
 - 首輪固定為`G0-MATCH`／`G1-APC-DETECT`兩臂；只有`g_detect·g_pose<0`時投影Pose shared gradient，
   Detect與兩個task heads保持原樣。
 - 將此方向排在person-only head決選後：舊logs是COCO80 `g_detect`，不得冒稱person gradient；新head需重新screen。

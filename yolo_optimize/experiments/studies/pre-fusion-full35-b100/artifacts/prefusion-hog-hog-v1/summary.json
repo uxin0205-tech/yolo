@@ -1,0 +1,121 @@
+{
+  "status": "patience_stop",
+  "arm": "hog",
+  "parent": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/a0-scope-late-v1/epoch-08-resume.pt",
+  "parent_sha256": "27c09c6685a003e9ff106898fd898199e184ee195cce643dd668079abadb9342",
+  "parent_state": "EMA E8, exploratory parent; not promoted winner",
+  "epochs": [
+    {
+      "epoch": 1,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5054155188422287,
+        "coco/person/box/map50_95": 0.6268134338120498,
+        "coco/ball/box/map50_95": 0.5145428844233061,
+        "coco/bat/box/map50_95": 0.4727866707194842
+      },
+      "live": {
+        "coco/box/map50_95": 0.5051693326625284,
+        "coco/person/box/map50_95": 0.6248112687846781,
+        "coco/ball/box/map50_95": 0.5154975894570231,
+        "coco/bat/box/map50_95": 0.47898456026541486
+      },
+      "elapsed_seconds": 601.5261685848236,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0027381165542958996,
+        "coco/person/box/map50_95": -0.0007070827930539814
+      }
+    },
+    {
+      "epoch": 2,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5053030517307733,
+        "coco/person/box/map50_95": 0.6255219219875342,
+        "coco/ball/box/map50_95": 0.5118781632357502,
+        "coco/bat/box/map50_95": 0.4800556771755651
+      },
+      "live": {
+        "coco/box/map50_95": 0.5034984663998702,
+        "coco/person/box/map50_95": 0.6219503185780599,
+        "coco/ball/box/map50_95": 0.5114528631677989,
+        "coco/bat/box/map50_95": 0.46746101104289595
+      },
+      "elapsed_seconds": 630.3031606674194,
+      "delta_parent": {
+        "coco/box/map50_95": -0.002850583665751305,
+        "coco/person/box/map50_95": -0.0019985946175695712
+      }
+    },
+    {
+      "epoch": 3,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5057326596397079,
+        "coco/person/box/map50_95": 0.6262592243194224,
+        "coco/ball/box/map50_95": 0.5136223187051817,
+        "coco/bat/box/map50_95": 0.4868514268903195
+      },
+      "live": {
+        "coco/box/map50_95": 0.5028256383230756,
+        "coco/person/box/map50_95": 0.6243594963991101,
+        "coco/ball/box/map50_95": 0.5156560965850793,
+        "coco/bat/box/map50_95": 0.4716373047661075
+      },
+      "elapsed_seconds": 631.5471668243408,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0024209757568166568,
+        "coco/person/box/map50_95": -0.0012612922856813924
+      }
+    },
+    {
+      "epoch": 4,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5050581306563785,
+        "coco/person/box/map50_95": 0.6261561705433933,
+        "coco/ball/box/map50_95": 0.5105232019801107,
+        "coco/bat/box/map50_95": 0.47621596368268315
+      },
+      "live": {
+        "coco/box/map50_95": 0.502977224072556,
+        "coco/person/box/map50_95": 0.6253134431950302,
+        "coco/ball/box/map50_95": 0.5062396105060373,
+        "coco/bat/box/map50_95": 0.48305914007421197
+      },
+      "elapsed_seconds": 631.496440410614,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0030955047401460822,
+        "coco/person/box/map50_95": -0.0013643460617104308
+      }
+    }
+  ],
+  "fresh_optimizer": true,
+  "ema_initial_updates": 7400,
+  "warmup_epochs": 1,
+  "criterion_horizon": 10,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "mu": 0.8750700409454109,
+  "patience": 4,
+  "training_scope": "Neck except attention parameters + Detect head + separate training-only HOG head",
+  "non_head_bn_statistics": "fixed",
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "script_sha256": "08d09adf711de3d7caf141520ac7747066cc411b54f1dc6f8cc8f40c14a4b12b",
+  "native_head_lr": 2.5e-05,
+  "neck_lr": 1e-05,
+  "hog_lr": 0.0003,
+  "loss_reduction": "batch_sum",
+  "hog_mask": "all80 GT cell-center hard union; nonzero gradient energy validity; uniform valid-cell mean",
+  "smoke_forces_hog_when_requested": false,
+  "first_macro_trace_sha256": "d14c28c1d1c2470d9c0e169227345f03ac64b2d11ac3264dbe55708a06ae5be1",
+  "p3_producer_grad_norm": 100.42382049560547,
+  "hog_grad_norm": null
+}

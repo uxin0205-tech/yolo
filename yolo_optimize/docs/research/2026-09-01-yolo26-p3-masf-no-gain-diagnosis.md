@@ -1,8 +1,8 @@
 # 2026-09-01：YOLO26 P3 MASF 無實質增益專項診斷
 
 本報告的可執行方向已整理到
-[P3 MASF Detect-entry 優化資料夾](<../../optimizations/p3-masf-detect-entry/README.md>)，實作、實驗矩陣、
-gate 與停止條件見同目錄的[執行計畫](<../../optimizations/p3-masf-detect-entry/plan.md>)。
+[P3 MASF Detect-entry 優化資料夾](<../../proposals/p3-masf-detect-entry/README.md>)，實作、實驗矩陣、
+gate 與停止條件見同目錄的[執行計畫](<../../proposals/p3-masf-detect-entry/plan.md>)。
 
 ## 結論
 

@@ -28,4 +28,4 @@
 - person-only暫緩、BBAT5不改；無commit／push／刪除。只產生必要Markdown，沒有本次cache或模型可清理。
 - 沿使用者額度限制不擴展新題目；本端無法讀帳戶週剩餘比例，未宣稱自動到73%停止。
 
-返回[工作紀錄索引](<README.md>)或[完整規格](<../../optimizations/round2-innovation/region-ranking-full-spec.md>)。
+返回[工作紀錄索引](<README.md>)或[完整規格](<../../proposals/round2-innovation/region-ranking-full-spec.md>)。

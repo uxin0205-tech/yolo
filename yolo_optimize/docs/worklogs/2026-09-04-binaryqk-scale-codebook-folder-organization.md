@@ -8,7 +8,7 @@
 ## 變更內容與原因
 
 1. 建立
-   [`optimizations/binaryqk-scale-codebook/`](<../../optimizations/binaryqk-scale-codebook/README.md>)：
+   [`optimizations/binaryqk-scale-codebook/`](<../../proposals/binaryqk-scale-codebook/README.md>)：
    - `README.md`：定義 P2條件式定位、C0／B4／A8決策與範圍。
    - `plan.md`：定義 cached replay、target-kernel、完整 validation與 matched QAT gate。
    - `architecture-report.md`：以 terminal圖呈現目前 C0、預計 B4與條件式 A8資料流。
@@ -17,11 +17,11 @@
    [2026-09-03 完整研究報告](<../research/2026-09-03-binaryqk-scale-codebook-hardware.md>)
    在 `docs/research/`，由新資料夾連結；沒有複製第二份研究全文，避免來源漂移。
 3. 將一般
-   [BinaryQK精度恢復 README](<../../optimizations/binaryqk-accuracy-recovery/README.md>)、
-   [計畫](<../../optimizations/binaryqk-accuracy-recovery/plan.md>)與
-   [架構圖](<../../optimizations/binaryqk-accuracy-recovery/architecture-report.md>)中的 B4／A8重複細節
+   [BinaryQK精度恢復 README](<../../proposals/binaryqk-accuracy-recovery/README.md>)、
+   [計畫](<../../proposals/binaryqk-accuracy-recovery/plan.md>)與
+   [架構圖](<../../proposals/binaryqk-accuracy-recovery/architecture-report.md>)中的 B4／A8重複細節
    改為短摘要與新方向連結，使 P1主線維持 site isolation → QAT → ranking KD／STE-window。
-4. 更新[優化方向索引](<../../optimizations/README.md>)、[子專案 README](<../../README.md>)與本工作紀錄
+4. 更新[優化方向索引](<../../proposals/README.md>)、[子專案 README](<../../README.md>)與本工作紀錄
    索引。P1與 P2現在分列，啟動條件不再混在同一列。
 5. 未移動、刪除或改寫原始 metrics、checkpoint、trace與資料集；未修改 production code，也未執行
    GPU訓練、完整 validation或 target-kernel benchmark。

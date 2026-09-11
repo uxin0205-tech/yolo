@@ -8,7 +8,7 @@
 
 確認來源 hash，所有非 Pose state 相同；只置換 96 個關鍵點分支 state。Float／BitTrue CPU 接線精確通過，候選 weights_only 匯出 roundtrip 通過。兩後端完整 COCO 5,000 張與 canonical BBAT Pose 683 張驗證完成；imgsz 640、batch 32／16，沒有訓練或資料修改。
 
-BitTrue COCO／person／ball／bat 框 AP 與原模型精確不變；整體 Pose 從 0.891328882 到 0.890906327，bat Pose 從 0.923008323 到 0.922163213。未保留完整 KD E2 的 Pose 增益，因此不升版、不替換原 best。完整數據與下一步順序見[研究報告](<../../inference/pose_branch_v1/README.md>)。
+BitTrue COCO／person／ball／bat 框 AP 與原模型精確不變；整體 Pose 從 0.891328882 到 0.890906327，bat Pose 從 0.923008323 到 0.922163213。未保留完整 KD E2 的 Pose 增益，因此不升版、不替換原 best。完整數據與下一步順序見[研究報告](<../../experiments/inference/pose_branch_v1/README.md>)。
 
 ## 困難與解法
 

@@ -1,7 +1,7 @@
 # 2026-09-03：BinaryQK 少量 scale／codebook 決策整理
 
 > 2026-09-04 後續整理：本紀錄保留當日決策歷史；最新入口、計畫、架構圖與證據索引已集中到
-> [OPT-BINARYQK-SCALE-CODEBOOK](<../../optimizations/binaryqk-scale-codebook/README.md>)。
+> [OPT-BINARYQK-SCALE-CODEBOOK](<../../proposals/binaryqk-scale-codebook/README.md>)。
 
 ## 工作目的
 
@@ -14,11 +14,11 @@ runtime assignment，並在既有 fixed-PoT site isolation／QAT／KD主線下�
    - 比較 per-token K=4/8、fixed channel-group G=4/8與 per-image global K-codebook。
    - 依正式 `D=32,H=4,N=400`、兩 sites、兩 Hadamard bases推導 storage與 operation上界。
    - 明記 PoT只把乘法改成 shift的條件，不能直接宣稱整條 attention或 target latency變快。
-2. 更新[方向 README](<../../optimizations/binaryqk-accuracy-recovery/README.md>)：
+2. 更新[方向 README](<../../proposals/binaryqk-accuracy-recovery/README.md>)：
    - 說明目前已有16個 fixed coefficient slots；單純改成8-entry固定 LUT只有壓縮效果。
    - 新增 `A8` per-token 3-bit PoT與 `B4` fixed 4-group PoT公式、成本與使用邊界。
-3. 更新[最小計畫](<../../optimizations/binaryqk-accuracy-recovery/plan.md>)與
-   [架構圖](<../../optimizations/binaryqk-accuracy-recovery/architecture-report.md>)：
+3. 更新[最小計畫](<../../proposals/binaryqk-accuracy-recovery/plan.md>)與
+   [架構圖](<../../proposals/binaryqk-accuracy-recovery/architecture-report.md>)：
    - 整體主線不變，仍先做2個 fixed-PoT site-isolation validations，再做 matched QAT／ranking KD。
    - 只有 magnitude殘差仍明顯才以 cached Q/K replay比較 C0、B4、A8；最多帶一個 winner進完整驗證。
 4. 更新優化、研究與工作紀錄索引。本次未修改 production code、checkpoint或資料集，也未執行訓練。

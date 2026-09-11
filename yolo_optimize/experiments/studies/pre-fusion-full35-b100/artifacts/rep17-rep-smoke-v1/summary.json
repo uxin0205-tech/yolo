@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "variant": "rep",
+  "parent": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/a0-scope-late-v1/epoch-08-resume.pt",
+  "parent_sha256": "27c09c6685a003e9ff106898fd898199e184ee195cce643dd668079abadb9342",
+  "parent_state": "EMA E8 exploratory parent, not promoted winner",
+  "epochs": [],
+  "scope": "only layer17 parameters; all other parameters and all BN statistics fixed",
+  "lr": 2e-06,
+  "optimizer": "AdamW",
+  "fresh_optimizer": true,
+  "warmup_epochs": 1,
+  "criterion_horizon": 10,
+  "epochs_budget": 5,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "ema_initial_updates": 7400,
+  "ema_policy": "native decay and arithmetic on trainable parameters only; fixed state exact",
+  "trainable_parameters": 656384,
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "script_sha256": "7b12ccdada848c7b00dc3ec15f6ae333eb7d4cdb7ad4f4264c94ede1df382f08",
+  "deployment_validation": "folded Conv format",
+  "first_macro_trace_sha256": "a0dba80a7ab1f1b4c63cc04ae4d229fbb792a2f7d7f8f17f828fe8ec621057bc",
+  "first_macro_native_loss_sum": 226.00542831420898,
+  "gradient_norms": {
+    "model.17.conv1.conv.weight": 83.71712493896484,
+    "model.17.conv1.bn.weight": 2.7026052474975586,
+    "model.17.conv1.bn.bias": 1.706224799156189,
+    "model.17.conv2.conv.weight": 0.0,
+    "model.17.conv2.bn.weight": 0.5072312951087952,
+    "model.17.conv2.bn.bias": 1.706224799156189
+  },
+  "first_update_ratio": 7.032674618123971e-06,
+  "smoke_images": 128,
+  "optimizer_steps": 1,
+  "ema_updates": 7401
+}

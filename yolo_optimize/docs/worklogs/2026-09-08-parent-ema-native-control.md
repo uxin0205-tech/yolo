@@ -2,7 +2,7 @@
 
 ## 完成結果
 
-E1–E5 全部完成訓練、Float／BitTrue 驗證與 checkpoint 保存。E5 EMA joint=0.7101160556，Ball Box AP=0.5023759176，較 parent 下降 0.0050611186，依既定門檻保存後暫停；沒有升格新 BEST。21:42:48 監測器確認程序退出與 GPU 釋放。原 supervisor 隨對話中斷失效，不能宣稱取得退出代碼；正式 summary 為 `paused_for_analysis`。完整數字、CPU 追加分析與下一個 LR 單變因候選見[新工作紀錄](<2026-09-08-native5-and-quarter-lr.md>)與[native5 報告](<../../optimizations/integrated-roadmap/native5-results.md>)。下文保留啟動與修補歷史，不是目前活躍狀態。
+E1–E5 全部完成訓練、Float／BitTrue 驗證與 checkpoint 保存。E5 EMA joint=0.7101160556，Ball Box AP=0.5023759176，較 parent 下降 0.0050611186，依既定門檻保存後暫停；沒有升格新 BEST。21:42:48 監測器確認程序退出與 GPU 釋放。原 supervisor 隨對話中斷失效，不能宣稱取得退出代碼；正式 summary 為 `paused_for_analysis`。完整數字、CPU 追加分析與下一個 LR 單變因候選見[新工作紀錄](<2026-09-08-native5-and-quarter-lr.md>)與[native5 報告](<../../proposals/integrated-roadmap/native5-results.md>)。下文保留啟動與修補歷史，不是目前活躍狀態。
 
 ## 最新狀態：明示前綴採用已啟動
 

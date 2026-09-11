@@ -14,7 +14,7 @@
 
 ## 結論先行
 
-論文第 3.1 節真正值得借用的不是「COCO → DOTA → SARDet」或「把 HOG 永久接到輸入」本身，而是三個設計原則：先固定部署預算、用短程診斷縮小訓練搜尋、再用一個中間橋接過程降低突然轉移造成的 feature shock。指定論文的完整依據見使用者提供論文，第 3.1.1–3.1.4 節（本機／歷史參照：`../../Design%20and%20Implementation%20of%20a%20Multi-Precision%20Deep%20Learning%20Accelerator%20for%20YOLOX-Based%20Object%20Detection%20in%20Synthetic%20Aperture%20Radar%20Images.pdf`；未隨本次報告發布）。
+論文第 3.1 節真正值得借用的不是「COCO → DOTA → SARDet」或「把 HOG 永久接到輸入」本身，而是三個設計原則：先固定部署預算、用短程診斷縮小訓練搜尋、再用一個中間橋接過程降低突然轉移造成的 feature shock。指定論文的完整依據見使用者提供論文，第 3.1.1–3.1.4 節（本機／歷史參照：`../references/papers/sar-yolox-multiprecision.pdf`；未隨本次報告發布）。
 
 本專案不應直接照抄，原因是：
 
@@ -46,7 +46,7 @@ classification，不應縮寫成單純的person classification gradient。
 | 6 | DOTA／SAR 類外部 domain bridge、永久 filter input | 不建議 | 任務域不匹配、資料血緣與推論成本變複雜 |
 
 **可獨立歸檔的首輪邊界。** 已建立
-[`optimizations/training-conflict-safe/`](<../../optimizations/training-conflict-safe/README.md>)，其中只收
+[`optimizations/training-conflict-safe/`](<../../proposals/training-conflict-safe/README.md>)，其中只收
 `G0-MATCH`、`G1-APC-DETECT`的frozen spec、shared-parameter manifest、數值probes、run manifests與報告；
 dual-teacher anchor、Sobel/HOG companion與person head不得放進首輪處理arm。如此資料夾只有一個可推翻的
 假說：「移除Pose對Detect的當次反向shared-gradient分量，是否能補回protected AP？」本輪只建立研究與計畫，
@@ -183,7 +183,7 @@ BBAT5 detect search      7b9fbeff82eed0c72f1db2aea003909c8e517c7252574c12ddebfef
 ```
 
 上述統計來自COCO80歷史training，只能作開案證據。正式執行先由獨立的
-[person-only head方向](<../../optimizations/coco-person-specialized-head/README.md>)固定H1或H2，再讓G0/G1共同使用
+[person-only head方向](<../../proposals/coco-person-specialized-head/README.md>)固定H1或H2，再讓G0/G1共同使用
 同一head與同一person Runtime Dataset View。person specialization不是G1 treatment；只要兩臂的上游winner完全
 相同，仍可把G1−G0歸因為projection。若使用者保留COCO80，也可以同法執行，但報告語意是保護完整Detect。
 
@@ -560,7 +560,7 @@ HOG/Sobel companion 永遠另案，不能堆進 G1 或 A1 首輪。
 
 ## 一手來源
 
-- 使用者提供論文，第 3.1.1–3.1.4 節（本機／歷史參照：`../../Design%20and%20Implementation%20of%20a%20Multi-Precision%20Deep%20Learning%20Accelerator%20for%20YOLOX-Based%20Object%20Detection%20in%20Synthetic%20Aperture%20Radar%20Images.pdf`；未隨本次報告發布）
+- 使用者提供論文，第 3.1.1–3.1.4 節（本機／歷史參照：`../references/papers/sar-yolox-multiprecision.pdf`；未隨本次報告發布）
 - [SARDet-100K／MSFA，NeurIPS 2024](https://papers.neurips.cc/paper_files/paper/2024/hash/e7eb8128eb26eafbe901348df1dbacdc-Abstract-Conference.html)
 - [SARDet-100K 官方 repository](https://github.com/zcablii/SARDet_100K)
 - [MSFA 官方 filter／input 實作](https://github.com/zcablii/SARDet_100K/blob/main/MSFA/msfa/models/backbones/MSFA.py)

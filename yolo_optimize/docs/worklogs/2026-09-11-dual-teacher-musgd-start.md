@@ -4,7 +4,7 @@
 
 MuSGD：AdamW／初探各16 macro 完成且 trace 相同；attention 更新中位數為0，原確認腳本 assert 中止。已將此數值邊界改成明確 recipe_rejected，只重啟失敗確認步驟做 CPU 判讀，confirmation_updates0；不重跑正常兩臂，不私調 LR。
 
-KD：CPU 空間 loss 契約及真實 train-only 校準通過，μD0.8214335621／μP1.7886982661；KD-only 確實更新共享 Neck、教師 hash 不變。K0／KD 各2個完整 macro 通過，fixed live／EMA 及 MASF BN 不變；KD safe state roundtrip、教師無梯度與暫存 hooks 清除通過。峰值 allocated 分別19,154,190,336／19,757,864,448 bytes。以新 [PLAN](<../../kd/dual_task_v1/PLAN.md>) 為核准後規格，接續 AdamW 五輪配對；正式結果尚未產生。
+KD：CPU 空間 loss 契約及真實 train-only 校準通過，μD0.8214335621／μP1.7886982661；KD-only 確實更新共享 Neck、教師 hash 不變。K0／KD 各2個完整 macro 通過，fixed live／EMA 及 MASF BN 不變；KD safe state roundtrip、教師無梯度與暫存 hooks 清除通過。峰值 allocated 分別19,154,190,336／19,757,864,448 bytes。以新 [PLAN](<../../experiments/kd/dual_task_v1/PLAN.md>) 為核准後規格，接續 AdamW 五輪配對；正式結果尚未產生。
 
 ## 變更與原因
 

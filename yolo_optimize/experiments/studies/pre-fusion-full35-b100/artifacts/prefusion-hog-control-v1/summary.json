@@ -1,0 +1,143 @@
+{
+  "status": "complete",
+  "arm": "control",
+  "parent": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/a0-scope-late-v1/epoch-08-resume.pt",
+  "parent_sha256": "27c09c6685a003e9ff106898fd898199e184ee195cce643dd668079abadb9342",
+  "parent_state": "EMA E8, exploratory parent; not promoted winner",
+  "epochs": [
+    {
+      "epoch": 1,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5054155188422287,
+        "coco/person/box/map50_95": 0.6268134338120498,
+        "coco/ball/box/map50_95": 0.5145428844233061,
+        "coco/bat/box/map50_95": 0.4727866707194842
+      },
+      "live": {
+        "coco/box/map50_95": 0.5051693326625284,
+        "coco/person/box/map50_95": 0.6248112687846781,
+        "coco/ball/box/map50_95": 0.5154975894570231,
+        "coco/bat/box/map50_95": 0.47898456026541486
+      },
+      "elapsed_seconds": 600.7882130146027,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0027381165542958996,
+        "coco/person/box/map50_95": -0.0007070827930539814
+      }
+    },
+    {
+      "epoch": 2,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.506495235330155,
+        "coco/person/box/map50_95": 0.6261657267453191,
+        "coco/ball/box/map50_95": 0.5184232938120983,
+        "coco/bat/box/map50_95": 0.47027229234761103
+      },
+      "live": {
+        "coco/box/map50_95": 0.5043275889195564,
+        "coco/person/box/map50_95": 0.6230882852038387,
+        "coco/ball/box/map50_95": 0.5160180589398411,
+        "coco/bat/box/map50_95": 0.4677486633280745
+      },
+      "elapsed_seconds": 599.399112701416,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0016584000663696363,
+        "coco/person/box/map50_95": -0.0013547898597846553
+      }
+    },
+    {
+      "epoch": 3,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5060519343610373,
+        "coco/person/box/map50_95": 0.6268950223817449,
+        "coco/ball/box/map50_95": 0.5180506936134497,
+        "coco/bat/box/map50_95": 0.4843647066509004
+      },
+      "live": {
+        "coco/box/map50_95": 0.503196093747916,
+        "coco/person/box/map50_95": 0.6252317792909575,
+        "coco/ball/box/map50_95": 0.5188476933569764,
+        "coco/bat/box/map50_95": 0.48259427596199833
+      },
+      "elapsed_seconds": 599.26527094841,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0021017010354872356,
+        "coco/person/box/map50_95": -0.0006254942233588912
+      }
+    },
+    {
+      "epoch": 4,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5058866580543091,
+        "coco/person/box/map50_95": 0.6267297116347359,
+        "coco/ball/box/map50_95": 0.5132482298293968,
+        "coco/bat/box/map50_95": 0.48297107641931303
+      },
+      "live": {
+        "coco/box/map50_95": 0.5042703995993358,
+        "coco/person/box/map50_95": 0.6256708289183504,
+        "coco/ball/box/map50_95": 0.512533698065823,
+        "coco/bat/box/map50_95": 0.48436897687504227
+      },
+      "elapsed_seconds": 600.5290789604187,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0022669773422154815,
+        "coco/person/box/map50_95": -0.0007908049703678754
+      }
+    },
+    {
+      "epoch": 5,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5066436589486277,
+        "coco/person/box/map50_95": 0.6280152064133999,
+        "coco/ball/box/map50_95": 0.512091951715584,
+        "coco/bat/box/map50_95": 0.474966429789628
+      },
+      "live": {
+        "coco/box/map50_95": 0.5035765307321782,
+        "coco/person/box/map50_95": 0.6256726132255697,
+        "coco/ball/box/map50_95": 0.5168153724824589,
+        "coco/bat/box/map50_95": 0.4642902769145679
+      },
+      "elapsed_seconds": 598.4539654254913,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0015099764478968547,
+        "coco/person/box/map50_95": 0.0004946898082961448
+      }
+    }
+  ],
+  "fresh_optimizer": true,
+  "ema_initial_updates": 7400,
+  "warmup_epochs": 1,
+  "criterion_horizon": 10,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "mu": 0.8750700409454109,
+  "patience": 4,
+  "training_scope": "Neck except attention parameters + Detect head + separate training-only HOG head",
+  "non_head_bn_statistics": "fixed",
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "script_sha256": "08d09adf711de3d7caf141520ac7747066cc411b54f1dc6f8cc8f40c14a4b12b",
+  "native_head_lr": 2.5e-05,
+  "neck_lr": 1e-05,
+  "hog_lr": 0.0003,
+  "loss_reduction": "batch_sum",
+  "hog_mask": "all80 GT cell-center hard union; nonzero gradient energy validity; uniform valid-cell mean",
+  "smoke_forces_hog_when_requested": false,
+  "first_macro_trace_sha256": "d14c28c1d1c2470d9c0e169227345f03ac64b2d11ac3264dbe55708a06ae5be1",
+  "p3_producer_grad_norm": 100.42382049560547,
+  "hog_grad_norm": null
+}

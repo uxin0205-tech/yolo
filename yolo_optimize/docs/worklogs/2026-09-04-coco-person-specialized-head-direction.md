@@ -6,9 +6,9 @@
 - 建立研究報告
   [`2026-09-04-coco-person-only-structural-specialization.md`](<../research/2026-09-04-coco-person-only-structural-specialization.md>)，
   整理person尺度、密度、crowd、head成本與第一手行人偵測研究。
-- 建立[`OPT-COCO-PERSON-SPECIALIZED-HEAD`](<../../optimizations/coco-person-specialized-head/README.md>)資料夾，
-  包含[最小計畫](<../../optimizations/coco-person-specialized-head/plan.md>)與
-  [H0/H1/H2終端架構圖](<../../optimizations/coco-person-specialized-head/architecture-report.md>)。
+- 建立[`OPT-COCO-PERSON-SPECIALIZED-HEAD`](<../../proposals/coco-person-specialized-head/README.md>)資料夾，
+  包含[最小計畫](<../../proposals/coco-person-specialized-head/plan.md>)與
+  [H0/H1/H2終端架構圖](<../../proposals/coco-person-specialized-head/architecture-report.md>)。
 - 主線固定為`H0 Detect80(c3=256) → H1 Detect1(c3=256) → H2 Detect1-Lite64(c3=64)`。
 - 修正研究草稿中殘留的舊P2-HCS首輪敘述；P2-HCS、centerness、keypoint/KD與crowd loss全部降為
   有對應誤差證據後的獨立方向。

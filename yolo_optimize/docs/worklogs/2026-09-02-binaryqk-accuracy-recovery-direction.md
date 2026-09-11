@@ -8,19 +8,19 @@ RepConv、PTQ 或資料變更混在同一輪。
 
 ## 變更內容與原因
 
-1. 新增 [BinaryQK 方向 README](<../../optimizations/binaryqk-accuracy-recovery/README.md>)：
+1. 新增 [BinaryQK 方向 README](<../../proposals/binaryqk-accuracy-recovery/README.md>)：
    - 整理 B26-FP、W-DIR、V1-BR、A-FINAL 與舊 YOLO11 recovery 數據。
    - 以 residual decomposition 說明 global Q/K magnitude 為何會丟 token-pair ranking。
    - 將 hardware-first 候選排序為 fixed-PoT site isolation/hybrid、matched direct QAT、單一
      FP-teacher KD；per-token/head dynamic 降為條件式 accuracy ceiling。
    - 明記 W-DIR 已是 full-model direct recovery，且最佳 checkpoint 已清除，避免提出不可執行的
      resume 計畫。
-2. 新增 [最小實驗計畫](<../../optimizations/binaryqk-accuracy-recovery/plan.md>)：
+2. 新增 [最小實驗計畫](<../../proposals/binaryqk-accuracy-recovery/plan.md>)：
    - 重用既有 V1-DYN／V1-SHEAD／V1-P2 scale screen，只新增 `ISO-10-BIN`、`ISO-22-BIN`
      兩個 validation-only jobs。
    - 只讓唯一 winner 與 matched `FP-CTRL` 做 direct QAT；首 seed 失敗立即停止。
    - ranking/KL 仍有明確問題時才增加一個 KD arm，不做大矩陣 sweep。
-3. 新增 [終端架構圖](<../../optimizations/binaryqk-accuracy-recovery/architecture-report.md>)：
+3. 新增 [終端架構圖](<../../proposals/binaryqk-accuracy-recovery/architecture-report.md>)：
    - 以 ASCII 圖表示目前 two-site/fixed-PoT、預計 single-site hybrid、teacher KD，以及條件式
      per-token／clipped-STE 修正。
    - 列出 per-token scale 共用一套 scale時的 `6,400` 個 token scales／`1,280,000` 個 pair-scale

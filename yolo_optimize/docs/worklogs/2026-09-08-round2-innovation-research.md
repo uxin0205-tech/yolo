@@ -41,4 +41,4 @@
 - 文獻依據：[Hinton等人的蒸餾原論文](https://arxiv.org/abs/1503.02531)；只支持teacher知識轉移的一般概念，不提供本地多任務收益證明。
 - 驗證結果：程式文字路由查核完成；GPU、模型載入、AP／梯度測量均0。困難：无。未解風險：尚無合法FP joint teacher的配對優勢證據，因此方向1仍是條件式候選。
 
-返回[工作紀錄索引](<README.md>)或[第二輪入口](<../../optimizations/round2-innovation/README.md>)。
+返回[工作紀錄索引](<README.md>)或[第二輪入口](<../../proposals/round2-innovation/README.md>)。

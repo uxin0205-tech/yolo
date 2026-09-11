@@ -4,7 +4,7 @@
 - 狀態：研究完成／尚未執行實驗
 - 範圍：逐項核對指定論文第 3.1.1–3.1.4、原始 MSFA 一手來源，以及本地 YOLO26M／Full35 的 graph、trainer、設定、checkpoint、結果與資料血緣
 - 執行邊界：未啟動訓練或驗證；未修改 production code、dataset、label、split 或 checkpoint
-- 指定材料：使用者提供論文，第 3.1.1–3.1.4 節（本機／歷史參照：`../../Design and Implementation of a Multi-Precision Deep Learning Accelerator for YOLOX-Based Object Detection in Synthetic Aperture Radar Images.pdf`；未隨本次報告發布）
+- 指定材料：使用者提供論文，第 3.1.1–3.1.4 節（本機／歷史參照：`../references/papers/sar-yolox-multiprecision.pdf`；未隨本次報告發布）
 
 ## 決策摘要
 
@@ -23,8 +23,8 @@
 
 它和現有兩個方向必須分開：
 
-- BinaryQK 的 FP-teacher／ranking model-gap bridge 已在 [Q0 BinaryQK 精度恢復](<../../optimizations/binaryqk-accuracy-recovery/README.md>) 定義，本篇不重複建立 teacher/KD arm。
-- Detect/Pose shared-gradient conflict 已在 [training-conflict-safe](<../../optimizations/training-conflict-safe/README.md>) 定義，本篇只記錄 HOG auxiliary gradient，不在同一首輪加入 projection。
+- BinaryQK 的 FP-teacher／ranking model-gap bridge 已在 [Q0 BinaryQK 精度恢復](<../../proposals/binaryqk-accuracy-recovery/README.md>) 定義，本篇不重複建立 teacher/KD arm。
+- Detect/Pose shared-gradient conflict 已在 [training-conflict-safe](<../../proposals/training-conflict-safe/README.md>) 定義，本篇只記錄 HOG auxiliary gradient，不在同一首輪加入 projection。
 - COCO person-only 是另一個 head／資料視圖決策；目前正式 Full35 仍是 COCO80 Detect，不能先假定 person-only 已成為 baseline。
 
 ---
@@ -680,7 +680,7 @@ LR diagnostic只在工程異常時觸發且不產生候選 checkpoint；semantic
 
 本地主要證據：
 
-- 指定論文 PDF（本機／歷史參照：`../../Design and Implementation of a Multi-Precision Deep Learning Accelerator for YOLOX-Based Object Detection in Synthetic Aperture Radar Images.pdf`；未隨本次報告發布）
+- 指定論文 PDF（本機／歷史參照：`../references/papers/sar-yolox-multiprecision.pdf`；未隨本次報告發布）
 - [Full35 factory report](<../../../yolo_combine/final/full35/outputs/training/factory-report.json>)
 - [Full35 resolved config](<../../../yolo_combine/final/full35/outputs/training/resolved-config.json>)
 - [Full35 最終分析](<../../../yolo_combine/final/full35/analysis/FINAL_ANALYSIS.md>)
@@ -693,7 +693,7 @@ LR diagnostic只在工程異常時觸發且不產生候選 checkpoint；semantic
 - [BBAT5 registry](<../../../configs/datasets/bbat5-v1.yaml>)
 - [BBAT5 immutable data contract](<../../../docs/agents/bbat5-datasets.md>)
 - [既有 Attention LR 消融](<../../../yolo_attention_final/final/TRAINING.md>)
-- [Q0 BinaryQK 計畫](<../../optimizations/binaryqk-accuracy-recovery/README.md>)
+- [Q0 BinaryQK 計畫](<../../proposals/binaryqk-accuracy-recovery/README.md>)
 
 ## 12. 限制、困難與未解風險
 

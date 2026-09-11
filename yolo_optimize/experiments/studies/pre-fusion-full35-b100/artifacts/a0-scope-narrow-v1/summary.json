@@ -1,0 +1,255 @@
+{
+  "status": "complete",
+  "arm": "qk",
+  "parent": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/a0.pt",
+  "parent_sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+  "fresh_optimizer": false,
+  "initial_ema_updates": 4625,
+  "criterion_horizon": 10,
+  "warmup_epochs": 1,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "train_images": 118287,
+  "epochs": [
+    {
+      "source_run": "a0-qk-recovery-v1",
+      "epoch": 1,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 577.010890007019,
+      "ema": {
+        "coco/box/map50_95": 0.5062400410979159,
+        "coco/person/box/map50_95": 0.6259960085842178,
+        "coco/ball/box/map50_95": 0.5147890101748726,
+        "coco/bat/box/map50_95": 0.4879465953715094
+      },
+      "live": {
+        "coco/box/map50_95": 0.506205798160138,
+        "coco/person/box/map50_95": 0.626026355490389,
+        "coco/ball/box/map50_95": 0.5141929390129307,
+        "coco/bat/box/map50_95": 0.48767154499912024
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0004985329362473534,
+        "coco/person/box/map50_95": -0.0008092653932801896,
+        "coco/ball/box/map50_95": 0.0016787515926133256,
+        "coco/bat/box/map50_95": -0.007779139072607522
+      }
+    },
+    {
+      "source_run": "a0-qk-recovery-v2",
+      "epoch": 2,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 578.5320618152618,
+      "ema": {
+        "coco/box/map50_95": 0.506345468382229,
+        "coco/person/box/map50_95": 0.6258386227735264,
+        "coco/ball/box/map50_95": 0.5164797079138131,
+        "coco/bat/box/map50_95": 0.49539970255458937
+      },
+      "live": {
+        "coco/box/map50_95": 0.5063943475416443,
+        "coco/person/box/map50_95": 0.6258360146777904,
+        "coco/ball/box/map50_95": 0.5162145243403643,
+        "coco/bat/box/map50_95": 0.4933076838940371
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.000393105651934178,
+        "coco/person/box/map50_95": -0.0009666512039715469,
+        "coco/ball/box/map50_95": 0.00336944933155392,
+        "coco/bat/box/map50_95": -0.0003260318895275671
+      }
+    },
+    {
+      "source_run": "a0-qk-recovery-v2",
+      "epoch": 3,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 576.7302114963531,
+      "ema": {
+        "coco/box/map50_95": 0.5059815190679441,
+        "coco/person/box/map50_95": 0.6260925753632676,
+        "coco/ball/box/map50_95": 0.5134735991684749,
+        "coco/bat/box/map50_95": 0.4995646199487833
+      },
+      "live": {
+        "coco/box/map50_95": 0.5060159881393048,
+        "coco/person/box/map50_95": 0.6260820847607853,
+        "coco/ball/box/map50_95": 0.5145352749101595,
+        "coco/bat/box/map50_95": 0.5006603139269664
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0007570549662191395,
+        "coco/person/box/map50_95": -0.0007126986142304004,
+        "coco/ball/box/map50_95": 0.0003633405862156769,
+        "coco/bat/box/map50_95": 0.0038388855046663783
+      }
+    },
+    {
+      "source_run": "a0-qk-recovery-v3",
+      "epoch": 4,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 579.3133137226105,
+      "ema": {
+        "coco/box/map50_95": 0.5065688925899309,
+        "coco/person/box/map50_95": 0.6264573611212877,
+        "coco/ball/box/map50_95": 0.5158910348779996,
+        "coco/bat/box/map50_95": 0.49288652161581903
+      },
+      "live": {
+        "coco/box/map50_95": 0.5065285765873733,
+        "coco/person/box/map50_95": 0.6266707576988406,
+        "coco/ball/box/map50_95": 0.5157323992404255,
+        "coco/bat/box/map50_95": 0.4935437852541379
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0001696814442323502,
+        "coco/person/box/map50_95": -0.0003479128562102751,
+        "coco/ball/box/map50_95": 0.0027807762957403614,
+        "coco/bat/box/map50_95": -0.00283921282829791
+      }
+    },
+    {
+      "source_run": "a0-qk-recovery-v3",
+      "epoch": 5,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 577.0514712333679,
+      "ema": {
+        "coco/box/map50_95": 0.5066236910315233,
+        "coco/person/box/map50_95": 0.6268004012013251,
+        "coco/ball/box/map50_95": 0.5135288603902238,
+        "coco/bat/box/map50_95": 0.4851909854995185
+      },
+      "live": {
+        "coco/box/map50_95": 0.5065728901992442,
+        "coco/person/box/map50_95": 0.6264644412696765,
+        "coco/ball/box/map50_95": 0.5142768361009856,
+        "coco/bat/box/map50_95": 0.4851110566258239
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.00011488300263995388,
+        "coco/person/box/map50_95": -4.872776172892834e-06,
+        "coco/ball/box/map50_95": 0.00041860180796460256,
+        "coco/bat/box/map50_95": -0.010534748944598438
+      }
+    },
+    {
+      "epoch": 6,
+      "source_run": "a0-scope-narrow-v1",
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 580.6768324375153,
+      "ema": {
+        "coco/box/map50_95": 0.5070080409521093,
+        "coco/person/box/map50_95": 0.6268424394119407,
+        "coco/ball/box/map50_95": 0.5163944359048125,
+        "coco/bat/box/map50_95": 0.49625254738885155
+      },
+      "live": {
+        "coco/box/map50_95": 0.5067032093946718,
+        "coco/person/box/map50_95": 0.6268652005778822,
+        "coco/ball/box/map50_95": 0.5154737669862691,
+        "coco/bat/box/map50_95": 0.49510901397831597
+      },
+      "delta_parent": {
+        "coco/box/map50_95": 0.0002694669179460485,
+        "coco/person/box/map50_95": 3.716543444276521e-05,
+        "coco/ball/box/map50_95": 0.003284177322553261,
+        "coco/bat/box/map50_95": 0.0005268129447346115
+      }
+    },
+    {
+      "epoch": 7,
+      "source_run": "a0-scope-narrow-v1",
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 578.8497686386108,
+      "ema": {
+        "coco/box/map50_95": 0.507161213069495,
+        "coco/person/box/map50_95": 0.6268403730974555,
+        "coco/ball/box/map50_95": 0.51260571757556,
+        "coco/bat/box/map50_95": 0.4853557885271897
+      },
+      "live": {
+        "coco/box/map50_95": 0.5066020034863249,
+        "coco/person/box/map50_95": 0.6268113104345006,
+        "coco/ball/box/map50_95": 0.5135686247747534,
+        "coco/bat/box/map50_95": 0.4869353792932337
+      },
+      "delta_parent": {
+        "coco/box/map50_95": 0.0004226390353317955,
+        "coco/person/box/map50_95": 3.50991199575823e-05,
+        "coco/ball/box/map50_95": -0.0005045410066992773,
+        "coco/bat/box/map50_95": -0.010369945916927248
+      }
+    },
+    {
+      "epoch": 8,
+      "source_run": "a0-scope-narrow-v1",
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 577.9849774837494,
+      "ema": {
+        "coco/box/map50_95": 0.5074327010027218,
+        "coco/person/box/map50_95": 0.626632483902316,
+        "coco/ball/box/map50_95": 0.5147237654362564,
+        "coco/bat/box/map50_95": 0.4891799964167201
+      },
+      "live": {
+        "coco/box/map50_95": 0.5072080346776522,
+        "coco/person/box/map50_95": 0.6264417440192795,
+        "coco/ball/box/map50_95": 0.5120392454688704,
+        "coco/bat/box/map50_95": 0.49136339808200785
+      },
+      "delta_parent": {
+        "coco/box/map50_95": 0.0006941269685585283,
+        "coco/person/box/map50_95": -0.0001727900751820055,
+        "coco/ball/box/map50_95": 0.001613506853997193,
+        "coco/bat/box/map50_95": -0.00654573802739683
+      }
+    }
+  ],
+  "qk_lr": 5e-07,
+  "head_lr": 2.5e-05,
+  "fixed_tensors": 556,
+  "training_scope": "Q/K projection + Detect head; all non-head BN statistics fixed",
+  "loss_reduction": "native batch-sum accumulated over four microbatches; partial final macro retained",
+  "challenger_contract": "exact XNOR forward; clipped signed-dot surrogate backward only in qk arm",
+  "continued_from": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/a0-qk-recovery-v3/epoch-05-resume.pt",
+  "continued_from_sha256": "2f9c85f05c5c83f285b9900171979a05f42ef7bc8938f27bd8d0b32bc77cc734",
+  "script_sha256": "0dd4c1427bcc2d6095b7b2252c8718325d4ad0c637d9cbb57bbe20e60bf84f20",
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "max_epochs": 8,
+  "patience": 6,
+  "data_stream_seed": 20260914,
+  "data_stream_note": "epoch boundary continuation with a new paired deterministic data stream; not exact uninterrupted dataloader replay",
+  "scope": "narrow",
+  "adapt_lr": null,
+  "adaptive_parameter_names": [],
+  "adaptive_parameters": 0,
+  "new_group_warmup_epochs": 0,
+  "old_optimizer_state_preserved": true,
+  "initial_stale_epochs": 0,
+  "qk_projection_gradient_norms": {
+    "model.10.m.0.attn.qkv.q.conv.weight": 31.125629425048828,
+    "model.10.m.0.attn.qkv.q.bn.weight": 0.1741820126771927,
+    "model.10.m.0.attn.qkv.q.bn.bias": 0.21737819910049438,
+    "model.10.m.0.attn.qkv.k.conv.weight": 25.78755760192871,
+    "model.10.m.0.attn.qkv.k.bn.weight": 0.2160569131374359,
+    "model.10.m.0.attn.qkv.k.bn.bias": 0.16334837675094604,
+    "model.22.m.0.1.attn.qkv.q.conv.weight": 6.613546848297119,
+    "model.22.m.0.1.attn.qkv.q.bn.weight": 0.12294929474592209,
+    "model.22.m.0.1.attn.qkv.q.bn.bias": 0.09449758380651474,
+    "model.22.m.0.1.attn.qkv.k.conv.weight": 7.389501571655273,
+    "model.22.m.0.1.attn.qkv.k.bn.weight": 0.10932252556085587,
+    "model.22.m.0.1.attn.qkv.k.bn.bias": 0.08660656213760376
+  },
+  "first_macro_trace_sha256": "af4bf5e634c046e5980b977ee4bdfb895021cbe2a212a8998c92699eac921096",
+  "adaptive_gradient_norms": {}
+}

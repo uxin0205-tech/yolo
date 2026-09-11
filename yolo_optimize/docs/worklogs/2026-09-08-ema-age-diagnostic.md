@@ -55,7 +55,7 @@ EMA age 在同一 live trajectory 上確實改變評分結果，卻不改 live �
 
 600 秒 GPU 監測於 20:09:26 記錄，elapsed=600.629520 秒、GPU 50°C、17337/32607 MiB、65.87 W，當時處於 validation 切換，瞬時利用率 0%。程序後續正常完成，不以單點利用率判斷掛起。
 
-結果已由 `scripts/report_ema_diagnostic.py` 生成並在 terminal 顯示，完整八項 AP、公式與來源見 [EMA age 結果報告](<../../optimizations/integrated-roadmap/ema-age-diagnostic-results.md>)。
+結果已由 `scripts/report_ema_diagnostic.py` 生成並在 terminal 顯示，完整八項 AP、公式與來源見 [EMA age 結果報告](<../../proposals/integrated-roadmap/ema-age-diagnostic-results.md>)。
 
 後續原定 native5/HOG10 採共同 parent EMA age，兩者從原 BEST 重新建 fresh optimizer，不從本次候選偷偷續訓；另逐 epoch 記錄 live BitTrue AP，selector 與安全暫停仍使用 EMA 八項 AP。先執行原生對照，HOG 不並行、μ 尚未校準。本次結果不足以取代原 BEST。
 

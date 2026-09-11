@@ -2,7 +2,7 @@
 
 日期：2026-09-08。範圍：COCO80 Detect＋BBAT5 Pose；person-only依使用者最新指示暫緩。本次只讀本地文字與一手來源，未執行GPU／模型forward／訓練／新AP評估。
 
-主結論：先查影響訓練與評估的具體問題，再決定額外模組。最有直接本地依據的是 **Q/K凍結規則、fixed-scale多餘reduction、crowd ignore語意**；它們分別影響可學習範圍、執行成本與監督品質。Q/K可訓練範圍已收進[總計畫](<../../optimizations/integrated-roadmap/plan.md>)的S7；fixed-scale冗餘是部署前的獨立parity／效能候選，不另開精度訓練大實驗。
+主結論：先查影響訓練與評估的具體問題，再決定額外模組。最有直接本地依據的是 **Q/K凍結規則、fixed-scale多餘reduction、crowd ignore語意**；它們分別影響可學習範圍、執行成本與監督品質。Q/K可訓練範圍已收進[總計畫](<../../proposals/integrated-roadmap/plan.md>)的S7；fixed-scale冗餘是部署前的獨立parity／效能候選，不另開精度訓練大實驗。
 
 ## 1. 優先清單
 
@@ -116,4 +116,4 @@ Frozen stats仍可能與新representation不匹配，但這是不同假說，需
 
 困難：部分CVF HTML首次開啟失敗，改用原論文arXiv／作者官方頁核對；未以二手摘要替代證據。其餘尚未解的實作／測量問題已在上文逐一列出。
 
-返回[研究索引](<README.md>)或[三類優化總計畫](<../../optimizations/integrated-roadmap/README.md>)。
+返回[研究索引](<README.md>)或[三類優化總計畫](<../../proposals/integrated-roadmap/README.md>)。

@@ -57,4 +57,4 @@
 - 根README保留資料集規範、研究與中文工作紀錄入口，兩個索引已同步。工作樹原本的未追蹤文件狀態保留；無commit／push／刪除。
 - 驗證限制：只證明文件引用與規格整合，沒有模型数值parity、精度、梯度或硬體收益驗證。本次GPU工作數仍為0。
 
-返回[工作紀錄索引](<README.md>)或[總計畫](<../../optimizations/integrated-roadmap/README.md>)。
+返回[工作紀錄索引](<README.md>)或[總計畫](<../../proposals/integrated-roadmap/README.md>)。

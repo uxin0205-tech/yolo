@@ -1,0 +1,33 @@
+{
+  "name": "p2-control-e5",
+  "checkpoint": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/masf-p2-control-v1/epoch-05-resume.pt",
+  "sha256": "82dd6fa04b78739ca0bd0e3d7a310f634b228e800daa1e7c2238d7f68b1ba2e9",
+  "epoch": 5,
+  "coco": {
+    "coco/box/map50_95": 0.5084195943869192,
+    "coco/person/box/map50_95": 0.6276981679935132,
+    "coco/ball/box/map50_95": 0.5155511499790828,
+    "coco/bat/box/map50_95": 0.4806653399633515
+  },
+  "coco_source": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/masf-p2-control-v1/summary.json",
+  "bbat": {
+    "bbat/box/precision": 0.7263751744299429,
+    "bbat/box/recall": 0.634048399169815,
+    "bbat/box/map50": 0.6571175315244114,
+    "bbat/box/map75": 0.45779648365918185,
+    "bbat/box/map50_95": 0.42998873182738223,
+    "bbat/ball/box/precision": 0.5976359303493656,
+    "bbat/ball/box/recall": 0.5782522575792237,
+    "bbat/ball/box/map50": 0.5377666914385897,
+    "bbat/ball/box/map75": 0.26900680882043015,
+    "bbat/ball/box/map50_95": 0.2987045299812073,
+    "bbat/bat/box/precision": 0.8551144185105203,
+    "bbat/bat/box/recall": 0.6898445407604064,
+    "bbat/bat/box/map50": 0.7764683716102332,
+    "bbat/bat/box/map75": 0.6465861584979335,
+    "bbat/bat/box/map50_95": 0.5612729336735574
+  },
+  "keypoint_ap": null,
+  "reason": "Detect 權重沒有 Pose head",
+  "masf": {}
+}

@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "arm": "control",
+  "parent": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/a0.pt",
+  "parent_sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+  "fresh_optimizer": false,
+  "initial_ema_updates": 2775,
+  "criterion_horizon": 10,
+  "warmup_epochs": 1,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "train_images": 118287,
+  "epochs": [
+    {
+      "source_run": "a0-control-recovery-v1",
+      "epoch": 1,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 495.7048144340515,
+      "ema": {
+        "coco/box/map50_95": 0.5062814221393284,
+        "coco/person/box/map50_95": 0.6256401266590622,
+        "coco/ball/box/map50_95": 0.5140586094631321,
+        "coco/bat/box/map50_95": 0.48539939991749115
+      },
+      "live": {
+        "coco/box/map50_95": 0.5062646681493617,
+        "coco/person/box/map50_95": 0.625823997193186,
+        "coco/ball/box/map50_95": 0.5142113002150253,
+        "coco/bat/box/map50_95": 0.48690892357108817
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.00045715189483486185,
+        "coco/person/box/map50_95": -0.0011651473184357553,
+        "coco/ball/box/map50_95": 0.0009483508808728613,
+        "coco/bat/box/map50_95": -0.010326334526625791
+      }
+    },
+    {
+      "source_run": "a0-control-recovery-v2",
+      "epoch": 2,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 496.03617763519287,
+      "ema": {
+        "coco/box/map50_95": 0.5064251689349344,
+        "coco/person/box/map50_95": 0.6261918073495585,
+        "coco/ball/box/map50_95": 0.5175603092109371,
+        "coco/bat/box/map50_95": 0.4913383823284504
+      },
+      "live": {
+        "coco/box/map50_95": 0.5065974976882238,
+        "coco/person/box/map50_95": 0.6261059627255796,
+        "coco/ball/box/map50_95": 0.5169402367922417,
+        "coco/bat/box/map50_95": 0.4912578217919865
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0003134050992288362,
+        "coco/person/box/map50_95": -0.0006134666279394851,
+        "coco/ball/box/map50_95": 0.004450050628677871,
+        "coco/bat/box/map50_95": -0.004387352115666543
+      }
+    },
+    {
+      "source_run": "a0-control-recovery-v2",
+      "epoch": 3,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 493.47452998161316,
+      "ema": {
+        "coco/box/map50_95": 0.5066350725169372,
+        "coco/person/box/map50_95": 0.6261017529437167,
+        "coco/ball/box/map50_95": 0.5173698871973935,
+        "coco/bat/box/map50_95": 0.4938207328770564
+      },
+      "live": {
+        "coco/box/map50_95": 0.5066932388328287,
+        "coco/person/box/map50_95": 0.6260876286660186,
+        "coco/ball/box/map50_95": 0.5177199080839594,
+        "coco/bat/box/map50_95": 0.4936464594245088
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.00010350151722604561,
+        "coco/person/box/map50_95": -0.0007035210337812403,
+        "coco/ball/box/map50_95": 0.004259628615134292,
+        "coco/bat/box/map50_95": -0.001905001567060527
+      }
+    }
+  ],
+  "qk_lr": 5e-07,
+  "head_lr": 2.5e-05,
+  "fixed_tensors": 556,
+  "training_scope": "Q/K projection + Detect head; all non-head BN statistics fixed",
+  "loss_reduction": "native batch-sum accumulated over four microbatches; partial final macro retained",
+  "challenger_contract": "exact XNOR forward; clipped signed-dot surrogate backward only in qk arm",
+  "continued_from": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/a0-control-recovery-v2/epoch-03-resume.pt",
+  "continued_from_sha256": "5eb86cf02d67ccc39ce7dd8b1a56308861806c018b70fd019827f7fdf347b14e",
+  "script_sha256": "9a1202a6dabdc1f23e7120e684805c264f1b1e4228c00fff372535ca223bd92a",
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "max_epochs": 5,
+  "patience": 6,
+  "data_stream_seed": 20260912,
+  "data_stream_note": "epoch boundary continuation with a new paired deterministic data stream; not exact uninterrupted dataloader replay",
+  "initial_stale_epochs": 0,
+  "qk_projection_gradient_norms": {
+    "model.10.m.0.attn.qkv.q.conv.weight": null,
+    "model.10.m.0.attn.qkv.q.bn.weight": null,
+    "model.10.m.0.attn.qkv.q.bn.bias": null,
+    "model.10.m.0.attn.qkv.k.conv.weight": null,
+    "model.10.m.0.attn.qkv.k.bn.weight": null,
+    "model.10.m.0.attn.qkv.k.bn.bias": null,
+    "model.22.m.0.1.attn.qkv.q.conv.weight": null,
+    "model.22.m.0.1.attn.qkv.q.bn.weight": null,
+    "model.22.m.0.1.attn.qkv.q.bn.bias": null,
+    "model.22.m.0.1.attn.qkv.k.conv.weight": null,
+    "model.22.m.0.1.attn.qkv.k.bn.weight": null,
+    "model.22.m.0.1.attn.qkv.k.bn.bias": null
+  },
+  "first_macro_trace_sha256": "0dd6f16d96bbcbf19f4e7d954999a840743055558578d5355acb86debde9305d",
+  "qk_optimizer_state_count": 0,
+  "smoke_images": 128,
+  "optimizer_steps": 2776,
+  "qk_grad_norm": 0.0
+}

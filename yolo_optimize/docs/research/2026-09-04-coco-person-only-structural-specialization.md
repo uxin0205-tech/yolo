@@ -311,7 +311,7 @@ teacher/KD若要區分容量與優化困難，必須另作 matched control，不
 
 H1/H2 fused class-score elements都是8,400，H0則為672,000；H1已取得輸出與top-k bandwidth縮減，H2再取得
 hidden tower縮減。完整圖、公式與最小實驗見
-[方向架構報告](<../../optimizations/coco-person-specialized-head/architecture-report.md>)。
+[方向架構報告](<../../proposals/coco-person-specialized-head/architecture-report.md>)。
 
 ## 六、其他指定候選的判定
 

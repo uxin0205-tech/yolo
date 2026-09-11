@@ -4,6 +4,10 @@
 
 ## 索引
 
+- [2026-09-12：實體資料夾重整、詳細報告與發布](<2026-09-12-physical-layout-and-publication.md>)
+
+- [2026-09-12：全工作區目錄整理與產物保護驗證](<2026-09-12-workspace-organization.md>)
+
 - [2026-09-12：從 BinaryQK 到推論的 GitHub 報告發布](<2026-09-12-github-report-publication.md>)
 
 - [2026-09-11：全階段報告、checkpoint 封存與推論接續](<2026-09-11-comprehensive-archive-and-routing.md>)

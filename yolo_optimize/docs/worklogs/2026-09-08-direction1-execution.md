@@ -4,7 +4,7 @@
 
 使用者已授權開始實作與 GPU 驗證。第一輪目前為 `paused_for_analysis`，不是完成優化：原生對照完成 1/5 epochs，HOG 正式訓練為 0/10，沒有已驗收的精度改善。所有 GPU 工作已結束；新 E1 權重只供診斷，不替代原 BEST。
 
-完整數字、架構 ASCII 圖、五組診斷及推導見[第一輪執行報告](<../../optimizations/integrated-roadmap/first-round-execution.md>)。報告由 `scripts/report_recovery.py` 讀取既有 JSON 產生，已在 terminal 顯示。README、主計畫、optimizer policy 與工作紀錄索引已同步；machine-readable 計畫通過 JSON 格式檢查，最後修正測試總數與單變因對照命名。
+完整數字、架構 ASCII 圖、五組診斷及推導見[第一輪執行報告](<../../proposals/integrated-roadmap/first-round-execution.md>)。報告由 `scripts/report_recovery.py` 讀取既有 JSON 產生，已在 terminal 顯示。README、主計畫、optimizer policy 與工作紀錄索引已同步；machine-readable 計畫通過 JSON 格式檢查，最後修正測試總數與單變因對照命名。
 
 ## 變更內容與原因
 

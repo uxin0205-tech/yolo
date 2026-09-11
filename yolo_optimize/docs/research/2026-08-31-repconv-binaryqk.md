@@ -10,8 +10,8 @@
 > per-token probe 與 hardware-first 約束也改變了候選順序。既有 V1-DYN／V1-SHEAD／V1-P2
 > 已完成 scale 消融，因此不重跑 global dynamic；首輪只新增兩個 fixed-PoT site-isolation validation。
 > 可執行的最新結論以
-> [BinaryQK 精度恢復方向](<../../optimizations/binaryqk-accuracy-recovery/README.md>)與
-> [最小實驗計畫](<../../optimizations/binaryqk-accuracy-recovery/plan.md>)為準。
+> [BinaryQK 精度恢復方向](<../../proposals/binaryqk-accuracy-recovery/README.md>)與
+> [最小實驗計畫](<../../proposals/binaryqk-accuracy-recovery/plan.md>)為準。
 
 ## 結論先行
 
@@ -418,7 +418,7 @@ Phase B 只把唯一 winner 帶到 final same-lineage FP parent：
 | B7 | B6 + 單一 attention-map 或 ranking KD | 只有診斷仍差才做 |
 
 per-head STE window、threshold與 full residual dual-basis 都降為 B7 仍失敗後的條件式研究，不列入
-首輪矩陣。完整 gate 以[新版計畫](<../../optimizations/binaryqk-accuracy-recovery/plan.md>)為準。
+首輪矩陣。完整 gate 以[新版計畫](<../../proposals/binaryqk-accuracy-recovery/plan.md>)為準。
 
 Phase C：獨立 winner 決定後才做 interaction。
 
