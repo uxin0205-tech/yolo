@@ -15,3 +15,5 @@
 輸入是外部唯讀來源與本階段選定 parent；輸出放所屬階段的 artifacts，不再寫到 optimize 根層。完整報告在 [reports/final](<../reports/final/README.md>)，提案在 [proposals](<../proposals/README.md>)。
 
 使用方式及依賴見[操作指南](<../docs/OPERATIONS.md>)。歷史 runner／queue 已完成或停止，不因搬移而重啟。Git 只發布文字指標、必要設定與程式，不發布 checkpoint、cache 或 runtime 影像／labels；本機全部保留。
+
+[benchmark：跨階段推論成本實驗](<benchmark/README.md>)，不重新訓練。

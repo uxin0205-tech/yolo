@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "case": "p3_control_e5",
+  "checkpoint_sha256": "432832f3c4d410e97ebd96f3d12a9fdc6a7b421b6a0747ae1f70065462fc2b67",
+  "cost": {
+    "conv_mac": 37382758400,
+    "binary_qk_bit_products": 40960000,
+    "float_matrix_mac": 81920000,
+    "integer_matrix_mac": 0,
+    "dense_mac_subtotal": 37464678400,
+    "float_flops_subtotal": 74929356800,
+    "integer_ops_subtotal": 0,
+    "binary_sites": [
+      {
+        "q": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "k": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "bit_products": 20480000
+      },
+      {
+        "q": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "k": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "bit_products": 20480000
+      }
+    ],
+    "excludes": "BN/activation/PWL/reciprocal/pooling/decode/sort/NMS/reductions/memory traffic",
+    "accounting_mode": "eval, no_grad, inference_mode=False to preserve dispatcher visibility"
+  },
+  "no_gpu": true,
+  "note": "補正 inference_mode dispatcher 漏算矩陣乘法；不重跑 latency／energy。"
+}

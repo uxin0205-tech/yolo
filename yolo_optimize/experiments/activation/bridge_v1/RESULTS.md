@@ -40,3 +40,9 @@ SHA256：`1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a`。
 
 直接把選定學生的 score 切成真正 FP qᵀk/√d（保留已學相對bias／PWL，非官方P0）只是teacher候選，不是假称已完成FP訓練。CPU確認實際FP算式；全量驗證結果比學生差：COCO -0.011906、person -0.007406、BBAT box -0.016675、pose -0.016762、ball box -0.024243、ball pose -0.031314、bat box -0.009107、bat pose -0.002211。不能拿這個候選直接啟動蒸餾。
 下一步需要先補齊合格teacher，或明確改成任務分流教師方案。見 [KD 接續說明](<../../kd/dual_task_v1/README.md>)。
+
+## AP 與部署成本補充（2026-09-12）
+
+- [Activation：九項指標與比較](<../../../reports/performance/stage-6.md>)
+
+包含 AP50–95、Params、Model size、MAC／FLOPs、Peak memory、CPU／GPU latency、target latency 及 energy/frame。target 未量測明記缺值；不將 core-only 時間當完整 pipeline。

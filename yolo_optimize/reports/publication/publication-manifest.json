@@ -1,7 +1,7 @@
 {
   "scope": "reports, numerical evidence, configs and research source; no weights/dataset/archive",
-  "file_count": 1373,
-  "bytes": 17819630,
+  "file_count": 1455,
+  "bytes": 18271832,
   "excluded_large_text": [
     "experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/logs/macro.csv",
     "experiments/activation/bridge_v1/artifacts/runs/silu-short-e10-seed1-v1/logs/macro.csv",
@@ -185,6 +185,21 @@
     {
       "file": "yolo_optimize/README.md",
       "target": "docs/history/layout-v2-20260912/manifest.json",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/README.md",
+      "target": "reports/publication/PUBLISHED.md",
+      "action": "local_only_reference"
+    },
+    {
+      "file": "yolo_optimize/README.md",
+      "target": "reports/performance/README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/README.md",
+      "target": "reports/performance/comparison.csv",
       "action": "relative_link"
     },
     {
@@ -728,6 +743,16 @@
       "action": "relative_link"
     },
     {
+      "file": "yolo_optimize/docs/worklogs/2026-09-12-physical-layout-and-publication.md",
+      "target": "../../reports/publication/PUBLISHED.md",
+      "action": "local_only_reference"
+    },
+    {
+      "file": "yolo_optimize/docs/worklogs/README.md",
+      "target": "2026-09-12-stage-performance-comparison.md",
+      "action": "relative_link"
+    },
+    {
       "file": "yolo_optimize/docs/worklogs/README.md",
       "target": "2026-09-12-physical-layout-and-publication.md",
       "action": "relative_link"
@@ -793,9 +818,49 @@
       "action": "relative_link"
     },
     {
+      "file": "yolo_optimize/experiments/README.md",
+      "target": "benchmark/README.md",
+      "action": "relative_link"
+    },
+    {
       "file": "yolo_optimize/experiments/activation/bridge_v1/README.md",
       "target": "artifacts",
       "action": "local_only_reference"
+    },
+    {
+      "file": "yolo_optimize/experiments/activation/bridge_v1/RESULTS.md",
+      "target": "../../../reports/performance/stage-6.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/benchmark/README.md",
+      "target": "../../reports/performance/README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/benchmark/README.md",
+      "target": "artifacts/comparison-v1/summary.json",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/benchmark/README.md",
+      "target": "artifacts/isolated-recheck-v1/summary.json",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/combine/bridge_v1/BBAT_RECOVERY_RESULTS.md",
+      "target": "../../../reports/performance/stage-5.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/combine/pose-masf/RESULTS.md",
+      "target": "../../../reports/performance/stage-4.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/inference/README.md",
+      "target": "../../reports/performance/stage-8.md",
+      "action": "relative_link"
     },
     {
       "file": "yolo_optimize/experiments/inference/pose_branch_v1/README.md",
@@ -806,6 +871,31 @@
       "file": "yolo_optimize/experiments/inference/pose_branch_v1/README.md",
       "target": "../../../../yolo_combine/.venv/lib/python3.12/site-packages/ultralytics/utils/nms.py:68",
       "action": "local_only_reference"
+    },
+    {
+      "file": "yolo_optimize/experiments/kd/README.md",
+      "target": "../../reports/performance/stage-7.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/studies/pre-fusion-full35-b100/README.md",
+      "target": "../../../reports/performance/stage-1.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/studies/pre-fusion-full35-b100/README.md",
+      "target": "../../../reports/performance/stage-2.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/studies/pre-fusion-full35-b100/README.md",
+      "target": "../../../reports/performance/stage-3.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/experiments/studies/pre-fusion-full35-b100/README.md",
+      "target": "../../../reports/performance/stage-4.md",
+      "action": "relative_link"
     },
     {
       "file": "yolo_optimize/proposals/coco-person-specialized-head/README.md",
@@ -866,6 +956,11 @@
       "file": "yolo_optimize/reports/README.md",
       "target": "../archives/README.md",
       "action": "local_only_reference"
+    },
+    {
+      "file": "yolo_optimize/reports/README.md",
+      "target": "performance/README.md",
+      "action": "relative_link"
     },
     {
       "file": "yolo_optimize/reports/checkpoints/README.md",
@@ -948,6 +1043,156 @@
       "action": "relative_link"
     },
     {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/stage-1.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/stage-2.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/stage-3.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/stage-4.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/stage-5.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/stage-6.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/stage-7.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/final/README.md",
+      "target": "../performance/stage-8.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/README.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/README.md",
+      "target": "comparison.json",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/README.md",
+      "target": "../../experiments/benchmark/README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/README.md",
+      "target": "paired-deltas.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-1.md",
+      "target": "README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-1.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-2.md",
+      "target": "README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-2.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-3.md",
+      "target": "README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-3.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-4.md",
+      "target": "README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-4.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-5.md",
+      "target": "README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-5.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-6.md",
+      "target": "README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-6.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-7.md",
+      "target": "README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-7.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-8.md",
+      "target": "README.md",
+      "action": "relative_link"
+    },
+    {
+      "file": "yolo_optimize/reports/performance/stage-8.md",
+      "target": "comparison.csv",
+      "action": "relative_link"
+    },
+    {
       "file": "yolo_optimize/tools/README.md",
       "target": "../experiments/scripts/README.md",
       "action": "relative_link"
@@ -957,7 +1202,7 @@
     {
       "source": "yolo_optimize/README.md",
       "published": "yolo_optimize/README.md",
-      "sha256": "a89cf1f34bd51b92ac65d48bacdb2dec3244217d3437bcad5b972b980e1ab436"
+      "sha256": "96b277c9190def9a728c3d5fa5cfb843a42050e8f999a96e2173ff5c1c601236"
     },
     {
       "source": "yolo_optimize/docs/OPERATIONS.md",
@@ -972,7 +1217,7 @@
     {
       "source": "yolo_optimize/docs/WORKSPACE.md",
       "published": "yolo_optimize/docs/WORKSPACE.md",
-      "sha256": "d3a22c0f63db254bcf8d8992a22d8686051dc9d7a4c949ac0e0b0d27eca7c56c"
+      "sha256": "8059ac15e267ff3c3d6131ef8db9371dfe6f179588c4acbd071a6e6a794410e8"
     },
     {
       "source": "yolo_optimize/docs/history/README.md",
@@ -1542,7 +1787,12 @@
     {
       "source": "yolo_optimize/docs/worklogs/2026-09-12-physical-layout-and-publication.md",
       "published": "yolo_optimize/docs/worklogs/2026-09-12-physical-layout-and-publication.md",
-      "sha256": "0fefba539a884962ff373f9ba8111be99f93e350c8e54eb3659b991dbab3a66f"
+      "sha256": "c86695b871e2955b2982dd6071c56ae000e13ca57313f4747313200130e67d07"
+    },
+    {
+      "source": "yolo_optimize/docs/worklogs/2026-09-12-stage-performance-comparison.md",
+      "published": "yolo_optimize/docs/worklogs/2026-09-12-stage-performance-comparison.md",
+      "sha256": "ad9c8e5feab640b99ba7b23822cb581c5d33514de0a294932f4e9012f77514ba"
     },
     {
       "source": "yolo_optimize/docs/worklogs/2026-09-12-workspace-organization.md",
@@ -1552,12 +1802,12 @@
     {
       "source": "yolo_optimize/docs/worklogs/README.md",
       "published": "yolo_optimize/docs/worklogs/README.md",
-      "sha256": "a5010050b5c0e0287292228549ff5d69edbb7c0d1e03ae6b2f0c3b738f994803"
+      "sha256": "ee01b155a2e574576b54236978d9a2c3eab8b3e415fb998fc1dbffcde1e3736c"
     },
     {
       "source": "yolo_optimize/experiments/README.md",
       "published": "yolo_optimize/experiments/README.md",
-      "sha256": "abc92f726975258a881960b338a6b9751d47dffb0be219625afdd821542ced24"
+      "sha256": "a79a347192a5dc4dda0dd5a04f0c36641a6a164718a3a78e1a9b7098e1216f17"
     },
     {
       "source": "yolo_optimize/experiments/activation/README.md",
@@ -1572,7 +1822,7 @@
     {
       "source": "yolo_optimize/experiments/activation/bridge_v1/RESULTS.md",
       "published": "yolo_optimize/experiments/activation/bridge_v1/RESULTS.md",
-      "sha256": "f1c0d41de733f2b0e626d1b538dcd33e067fbbf52ed8e78b975296671a3cf1a9"
+      "sha256": "e4d863b8a8cfcd589965d95a79cd96f2bcb39e272f94b4d48c601833014002d1"
     },
     {
       "source": "yolo_optimize/experiments/activation/bridge_v1/artifacts/activation-baseline-v1.json",
@@ -3035,6 +3285,341 @@
       "sha256": "107c4b4a01ac81f3b16a5e69021e973c3b51fc9a68665720c5ed34f28b9695a0"
     },
     {
+      "source": "yolo_optimize/experiments/benchmark/README.md",
+      "published": "yolo_optimize/experiments/benchmark/README.md",
+      "sha256": "844d6b833b1c69b1d842b445fa11891b40386bc266a7f303c03f7a2c194ffbec"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/accounting.py",
+      "published": "yolo_optimize/experiments/benchmark/accounting.py",
+      "sha256": "26a649e4d1e9102a649a54766967fa8ad6a465b587979031c2b0d7168cbacfff"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/a0.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/a0.json",
+      "sha256": "9518064a60cb5a598ff80c3a0336fd2d39aeab6997a7277cff5881c373167c6b"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/b100.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/b100.json",
+      "sha256": "341baa6583fa6897bdb7b24f6fd3465331075a5bd4efbb427522c9df456f6e7d"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/dual_kd_e4.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/dual_kd_e4.json",
+      "sha256": "c6a8454a12007b7a38469d7702be5e93796a0e16a0cdb069c315de3587299baa"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/fp.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/fp.json",
+      "sha256": "7588be244ef5436f21ce4c6ff416310e62425d0efb9ea5302776da7adda33953"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/hardswish_zero.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/hardswish_zero.json",
+      "sha256": "5d183c4bff75396590815d40c6afc3c3d6d638b7a754b4e23c126ca3576195bf"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/head_kd_e2.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/head_kd_e2.json",
+      "sha256": "8458389dd91032c6fd2130d2e2ac35ea985e4130715a610585213de263c8240b"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/hog_control_e3.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/hog_control_e3.json",
+      "sha256": "f12804bd2b13caa1270a2a6010b0471bc1b7bc60e976277cbe8d984d72be229f"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/hog_e3.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/hog_e3.json",
+      "sha256": "f71d1b86ea794ed569115b37ad0d4faac6e1760d3005234b653770f030bfd83e"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/j3_joint.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/j3_joint.json",
+      "sha256": "70d865f2ee97868a93791ad17e295011f0f6010b0613985f34d4345fb142bffe"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/mixed_keypoint.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/mixed_keypoint.json",
+      "sha256": "225e41ad443f6cabad66dce389f6ed15e2ee27ecefad4c12a9d000210d75c3c3"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/old_joint.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/old_joint.json",
+      "sha256": "0e8e887f6dcbc93f5c0de7995bb0681e3800a438020ab35728c918626b38b09c"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p2_control_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p2_control_e5.json",
+      "sha256": "9d2d60ba4ab04c4d35702649729c5575458b5a607c3a730334b0ad648941152e"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p2_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p2_e5.json",
+      "sha256": "9942791152ebae709691410f3622b5ee4403172d87d5334cda4d7f996eae6135"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_bridge_e8.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_bridge_e8.json",
+      "sha256": "5907ed84ff4d25d237edc11591ad5905fa2e1c296cc02c6687c7e73dd4ab5021"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_control_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_control_e5.json",
+      "sha256": "2983a1cd7656cd89ae50c1bf6cf582149f006567714e9d5798335606c1ed03e8"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_control_e8.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_control_e8.json",
+      "sha256": "9c78b6b5d01a8a73aed93838a6153677c909b32a700f13cbf3f3585de54ae7ed"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_fork_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_fork_e5.json",
+      "sha256": "312c7fa189e2767ea37f7466d7fc090cc10f95d5a2e33a3223ec05cc9f9e080c"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_shared_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/p3_shared_e5.json",
+      "sha256": "f06a14f42b804882e54831a403609544220e634c3dad32c020ea8d5d5ee7c648"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/poly_shift_zero.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/poly_shift_zero.json",
+      "sha256": "7c30af20298c1cd76d06c3b65bd63df85338f2c99e715eb13d5edea2c844a244"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/pose_recovery.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/pose_recovery.json",
+      "sha256": "69ed0f75ce0a964998f5b620dda8dc54495dbe20e0a6771f3900b39dee9007b1"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/qsilu_e2.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/qsilu_e2.json",
+      "sha256": "067311cd9c49ccde924e8fd3d07ac1175b3c3c6dcbf88d7e0322d4426bd8229c"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/qsilu_pose_one2many.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/qsilu_pose_one2many.json",
+      "sha256": "313da74ced4cd78ab4e29a8ea6f32f884ea77c28ebe57758b0ef2edde7fad20d"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/qsilu_pose_one2one.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/qsilu_pose_one2one.json",
+      "sha256": "34ec3d17fc63bba7318563c581bab1cab68b801c1c9f59fec2cfb861745644cd"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/rep_control_e4.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/rep_control_e4.json",
+      "sha256": "682b3dccb32aed75ec1fe57ddc3ac9c0f995efe2487a977e046685246a849972"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/rep_folded_e4.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/rep_folded_e4.json",
+      "sha256": "7957ba0b02c680fb1fd35dd9d8390fed786ae7962ff7d8f3caff4fe1d8ce2bfc"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/silu_e9.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/accounting-v2/silu_e9.json",
+      "sha256": "30ca965187fffe1356173c3e5fb6353acd5782a893ccb8e292421e8b8e1dd21a"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/a0.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/a0.json",
+      "sha256": "c11f70ed0d733ecfd636c29b4b7e4c83cf7f971e9d543a2f957e95879e714f07"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/b100.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/b100.json",
+      "sha256": "57ed03a43976442b98ee60a50a0aeea15d49af74778f8f59570974b7efe58aac"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/dual_kd_e4.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/dual_kd_e4.json",
+      "sha256": "10e1344ebc0bb00ee5ae4cc28c06714f6c30ef9873f0038718c90c8c93ea5023"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/fp.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/fp.json",
+      "sha256": "2ca9e63d87f3d524b87b4e4bc8ec57088cf88c3b11f4f9aa371e6dc7313ab6d1"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/hardswish_zero.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/hardswish_zero.json",
+      "sha256": "3cc1ad83ebd055e80917326354c8c7171ecff0a8743b3d812fa67be1661462e8"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/head_kd_e2.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/head_kd_e2.json",
+      "sha256": "5c4765223b42a8d6aebeba6276a8e8cee1737dded9287087865219e37959a6b5"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/hog_control_e3.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/hog_control_e3.json",
+      "sha256": "d8f0f0e138918e4faa0de550bd9e2d9c5a10447a7efb3abc54acc83d31ec91f1"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/hog_e3.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/hog_e3.json",
+      "sha256": "d8801881ae3fe21bf93848ff0410451696e0c1a23a61293e3830fbc9d2ede7e2"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/j3_joint.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/j3_joint.json",
+      "sha256": "af0ccc6212d215606497e958ac0a5aa512304a24313c44f6eefdd7971f013dd4"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/mixed_keypoint.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/mixed_keypoint.json",
+      "sha256": "a4769c118377a205e5f8a451f942f2eac93a793aabf1e4374a9249516f022b44"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/old_joint.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/old_joint.json",
+      "sha256": "4c84d387ec34f106b1292260bf3b47fd52bf87cc873deac86ccaf856fc012c1c"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p2_control_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p2_control_e5.json",
+      "sha256": "8bd48ab3e9292255ff8bca39356b28d2ca917b4f84e6ea8d013b7a431b0c4c2e"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p2_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p2_e5.json",
+      "sha256": "2558aa7489822728579f2e9edb6ec13cf3456a05b69c466504a3a73c4e20947a"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_bridge_e8.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_bridge_e8.json",
+      "sha256": "6d98efd620c6eb22948c77a1668f54da93ca2bd7ce36884e76c4869419127412"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_control_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_control_e5.json",
+      "sha256": "de614761986aae645772c572ca8085f1e40f467ea400a20f548679504eb09fab"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_control_e8.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_control_e8.json",
+      "sha256": "8c37094625da65b35fb48b71d9eaab2330b260c408fe588cdaf4c833e258a5af"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_fork_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_fork_e5.json",
+      "sha256": "f58cde55466951b7df51d91bbce34019423273ed1e49a6378dae8a6600a56dfc"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_shared_e5.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/p3_shared_e5.json",
+      "sha256": "0ffceb3ef2d40f1a76fd634221836b34d03183060712b0dc5385c7ea52a953b5"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/poly_shift_zero.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/poly_shift_zero.json",
+      "sha256": "078323500a992eaea519611c1adeb41476736cac602e60f070591af754787baa"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/pose_recovery.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/pose_recovery.json",
+      "sha256": "3e20b78f707667d3c438db8f2c3dc739d5a9f6b5d929ba51b985aaee603774fd"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/qsilu_e2.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/qsilu_e2.json",
+      "sha256": "3c0447637452867ddf285f4fd1592e7a9a5c4c0f4dad28268a8016dd7a1a10b7"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/qsilu_pose_one2many.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/qsilu_pose_one2many.json",
+      "sha256": "39968e4380d302005c75e6a40f6a5d407a14c3f02089e87476dc8545ee04b3b8"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/qsilu_pose_one2one.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/qsilu_pose_one2one.json",
+      "sha256": "f8898b112dfbb8a48a189f8c704f4e40ead5367ff32a2f17c8f6b1d054e7fa22"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/rep_control_e4.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/rep_control_e4.json",
+      "sha256": "a1c91aa51fb8654a769eb46dbb758d8ce4a24b0ea7de0a7dd87500f5ef64c1d3"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/rep_folded_e4.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/rep_folded_e4.json",
+      "sha256": "3b3c7b368878c728a8f80fb62664ff44b57d00e1dc39e4152944bedc698f394f"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/silu_e9.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/silu_e9.json",
+      "sha256": "3828a660960fdd537ec755abbac7e01057996eeb42c23d0833c4ec529fe812a8"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/summary.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/comparison-v1/summary.json",
+      "sha256": "aa372a9b82d2b07992c06b57a94b57bdfeac9593908fee0e0aebd07caec40109"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/j3_joint.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/j3_joint.json",
+      "sha256": "9f6f15ceabf1a993a7e040bdb412fcc658700b18ee0009b91bfe38bb3397055a"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/pose_recovery.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/pose_recovery.json",
+      "sha256": "9c4a91f2acc96bd6b93e6d49928c5c83f8efbbdce3e97fba28bad5070572a976"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/qsilu_e2.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/qsilu_e2.json",
+      "sha256": "26fd1fb0c8585f5ccea3a47ccf62c584329a3f81ac6d27d4b98f3c867da2e114"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/silu_e9.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/silu_e9.json",
+      "sha256": "d2d43b13e8cb702c2d424771c6100c7e14e319520eda5cdef2efb23a28663b26"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/summary.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/isolated-recheck-v1/summary.json",
+      "sha256": "867e975ad942fb20909d8317686a7402b64333f9334458af703a9cc33be65a87"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/artifacts/smoke-v2/qsilu_e2.json",
+      "published": "yolo_optimize/experiments/benchmark/artifacts/smoke-v2/qsilu_e2.json",
+      "sha256": "fe32d4915b851a96fc55daf81a9631a0b94ee6465caaeee2980cf4e4bdc55428"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/build_manifest.py",
+      "published": "yolo_optimize/experiments/benchmark/build_manifest.py",
+      "sha256": "be283381d9cf1c056a3805c71cbbac1d2d5263d4a35bf1d556c0f42192f96f2d"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/manifest.json",
+      "published": "yolo_optimize/experiments/benchmark/manifest.json",
+      "sha256": "21bea2fe7e5efcf2b42d4b62ec3afb0c527f530a619d355d9814821ea557968d"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/measure.py",
+      "published": "yolo_optimize/experiments/benchmark/measure.py",
+      "sha256": "be5bb20ef2d32dbebdd1e6898a3107023d4b5b103dcfa68e1fd0a9b2a12ca380"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/report.py",
+      "published": "yolo_optimize/experiments/benchmark/report.py",
+      "sha256": "cd15227adc41d5fe7b2f86635ecf9f87cc4650c1436fbbaa93ce4988b1f1715d"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/run_queue.py",
+      "published": "yolo_optimize/experiments/benchmark/run_queue.py",
+      "sha256": "eaff011a8d3e5ad337d8bfc964982d672fd161e95f42bf23a1be8c257d4ba594"
+    },
+    {
+      "source": "yolo_optimize/experiments/benchmark/test_accounting.py",
+      "published": "yolo_optimize/experiments/benchmark/test_accounting.py",
+      "sha256": "ae8217b08b2e5e9f030c3d6d66644d7e58cc49cf8e393836adbfb2bd2ebacf5c"
+    },
+    {
       "source": "yolo_optimize/experiments/combine/README.md",
       "published": "yolo_optimize/experiments/combine/README.md",
       "sha256": "c7d998bdea96c05784d0005966e5c452adb5103dce5be4c9c22f3870bb8a0c8a"
@@ -3247,7 +3832,7 @@
     {
       "source": "yolo_optimize/experiments/combine/bridge_v1/BBAT_RECOVERY_RESULTS.md",
       "published": "yolo_optimize/experiments/combine/bridge_v1/BBAT_RECOVERY_RESULTS.md",
-      "sha256": "c4a1373b8e3ddec9cb5a08abc3e253bd907034681f264b0345239d09263a3fe6"
+      "sha256": "2e57665a2fca4308cb5af87c7f0ac839c71d412f481c0ce1e7458dccb3162d14"
     },
     {
       "source": "yolo_optimize/experiments/combine/bridge_v1/README.md",
@@ -5622,7 +6207,7 @@
     {
       "source": "yolo_optimize/experiments/combine/pose-masf/RESULTS.md",
       "published": "yolo_optimize/experiments/combine/pose-masf/RESULTS.md",
-      "sha256": "c6f7dcf2b571b57e66b01fcbb0ac9bedce4a8a64c63beec50c3d474cfbbe5d77"
+      "sha256": "ee29fbbc70c9f0bd3eefdcf7588af29960ad78c1b78617f3b1f01a0cd00d5c95"
     },
     {
       "source": "yolo_optimize/experiments/combine/pose_masf.py",
@@ -5687,7 +6272,7 @@
     {
       "source": "yolo_optimize/experiments/inference/README.md",
       "published": "yolo_optimize/experiments/inference/README.md",
-      "sha256": "1caabbcd0405aa3f4226263e8437485f6eab8b961e8164e9ce459d62cd6bd056"
+      "sha256": "07abee888944416b716056f73ad0a397b73985293cea36214c23fb7b7a6d0f96"
     },
     {
       "source": "yolo_optimize/experiments/inference/pose_branch_v1/README.md",
@@ -5747,7 +6332,7 @@
     {
       "source": "yolo_optimize/experiments/kd/README.md",
       "published": "yolo_optimize/experiments/kd/README.md",
-      "sha256": "8bf560a043be9db19109fb4b3a95551f514a05859611cf68fc8f7b425b259032"
+      "sha256": "37046502073446529570a76cb280b3f994e8747116258e3fade8fed4d13c170d"
     },
     {
       "source": "yolo_optimize/experiments/kd/dual_task_v1/PLAN.md",
@@ -6467,7 +7052,7 @@
     {
       "source": "yolo_optimize/experiments/studies/pre-fusion-full35-b100/README.md",
       "published": "yolo_optimize/experiments/studies/pre-fusion-full35-b100/README.md",
-      "sha256": "5ef6bb9479c7ac788e42db535fb4b85140da99b35a24338cbef2e6aa2a07b37e"
+      "sha256": "05ead98bb32a49c387ce6220c31e004b1872ea4d6c0a52a0f0804868db2c7e16"
     },
     {
       "source": "yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/a0-control-continue-smoke/setup/args.yaml",
@@ -7727,7 +8312,7 @@
     {
       "source": "yolo_optimize/reports/README.md",
       "published": "yolo_optimize/reports/README.md",
-      "sha256": "721084c4c63e14f45684a9c94a8105a6deff98ccc19936e1cb43717e92357579"
+      "sha256": "73898febc805fd43ca54fb9c04c26c904c45731adda2d6f3fc3ce386e059cfe9"
     },
     {
       "source": "yolo_optimize/reports/checkpoints/README.md",
@@ -7752,7 +8337,7 @@
     {
       "source": "yolo_optimize/reports/final/README.md",
       "published": "yolo_optimize/reports/final/README.md",
-      "sha256": "e4de401768d8d92a4ef6087e0c920bd0eb5bd6d0996f9f2cb773f2d4da0ec383"
+      "sha256": "2a6aa96d6fdf9bed8dc5113c54d4735a629f134410830a503c8f0275533ce4eb"
     },
     {
       "source": "yolo_optimize/reports/final/build_indexes.py",
@@ -7773,6 +8358,76 @@
       "source": "yolo_optimize/reports/final/runs.csv",
       "published": "yolo_optimize/reports/final/runs.csv",
       "sha256": "081fad4bebbde891738b6656cf7310b885cd2a564b3fec5e94201299564a9606"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/README.md",
+      "published": "yolo_optimize/reports/performance/README.md",
+      "sha256": "c211dee109862c9f7b3442f01cfabe649de63e1ed37844199f838e2ca568ef3a"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/comparison.csv",
+      "published": "yolo_optimize/reports/performance/comparison.csv",
+      "sha256": "09b027d5949261601d5f463888fb6e2a942494b3aaa7042d5b5d82123bc4d57a"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/comparison.json",
+      "published": "yolo_optimize/reports/performance/comparison.json",
+      "sha256": "59bed1c72f0fbbccecb8a08c13ace9318e5afd973b74cc00f31219276c336cab"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/paired-deltas.csv",
+      "published": "yolo_optimize/reports/performance/paired-deltas.csv",
+      "sha256": "5c35d46a86ab7f747eb6e0ea17024ae97884b8f5930c7b09ca355496093b922e"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/stage-1.md",
+      "published": "yolo_optimize/reports/performance/stage-1.md",
+      "sha256": "f5257c065d31bca5c4017a330d9664fbfb74a49e4394a812f99611b30155ac45"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/stage-2.md",
+      "published": "yolo_optimize/reports/performance/stage-2.md",
+      "sha256": "c946727c7643cf3708315465c5614cbc6b4d2bf5dd354bd6381872ef22eb7ed2"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/stage-3.md",
+      "published": "yolo_optimize/reports/performance/stage-3.md",
+      "sha256": "5d7e92ca3ac85de4387621308b0c651a6c64d231ec1dbed73dd93dc123f975d2"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/stage-4.md",
+      "published": "yolo_optimize/reports/performance/stage-4.md",
+      "sha256": "3cf9c686722d3ce7e2b0a373adec960c498874c5373998a5fa2870b6188678f2"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/stage-5.md",
+      "published": "yolo_optimize/reports/performance/stage-5.md",
+      "sha256": "f2108ff17e8e11acf3a736d8e22f6b49b063d352ced13fc2f84d2eeb8d1dd058"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/stage-6.md",
+      "published": "yolo_optimize/reports/performance/stage-6.md",
+      "sha256": "faae826411a50328fffb4cc03a04b58b6e61079896060467dc6c2a28f0de0f18"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/stage-7.md",
+      "published": "yolo_optimize/reports/performance/stage-7.md",
+      "sha256": "7bd54f1c28fba79605e74ed34f3c605cdbd763b988d8a0a97d07e65ec36d9b67"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/stage-8.md",
+      "published": "yolo_optimize/reports/performance/stage-8.md",
+      "sha256": "41e23bad673cb41d451a9194a929603d34b1d6d98b1b80cac84110eac874c555"
+    },
+    {
+      "source": "yolo_optimize/reports/performance/verification.json",
+      "published": "yolo_optimize/reports/performance/verification.json",
+      "sha256": "6389ad341f49f2614a38700caaac5dde90a6a5d9c394c38bcf36890292258db8"
+    },
+    {
+      "source": "yolo_optimize/reports/publication/PUBLISH_STATUS.json",
+      "published": "yolo_optimize/reports/publication/PUBLISH_STATUS.json",
+      "sha256": "880fbc22532520b957f744b6450d0e567f304c221d592d0da6c5db61980b89f4"
     },
     {
       "source": "yolo_optimize/reports/publication/README.md",

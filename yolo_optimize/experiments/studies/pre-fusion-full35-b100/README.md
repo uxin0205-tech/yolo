@@ -16,3 +16,12 @@
 P3 bridge COCO AP 0.508212／person 0.627664；仍低於 FP，額外模組收益未過方法 gate。PWL 保持 [-10,0]／20 段。資料是完整 COCO80；BBAT 觀察使用 canonical v1。沒有新增 P2 Detect head，也沒有本研究 P2 Pose 訓練成果。
 
 原始分段計畫、當時的 queue 狀態與全部文字保留於[歷史入口](<../../../docs/history/README.md>)。新工作應另開 run，不直接重啟舊 queue。
+
+## AP 與部署成本補充（2026-09-12）
+
+- [BinaryQK：九項指標與比較](<../../../reports/performance/stage-1.md>)
+- [HOG：九項指標與比較](<../../../reports/performance/stage-2.md>)
+- [RepConv：九項指標與比較](<../../../reports/performance/stage-3.md>)
+- [MASF：九項指標與比較](<../../../reports/performance/stage-4.md>)
+
+包含 AP50–95、Params、Model size、MAC／FLOPs、Peak memory、CPU／GPU latency、target latency 及 energy/frame。target 未量測明記缺值；不將 core-only 時間當完整 pipeline。

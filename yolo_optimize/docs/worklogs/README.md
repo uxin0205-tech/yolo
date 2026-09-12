@@ -4,6 +4,8 @@
 
 ## 索引
 
+- [2026-09-12：全階段精度與部署成本比較](<2026-09-12-stage-performance-comparison.md>)
+
 - [2026-09-12：實體資料夾重整、詳細報告與發布](<2026-09-12-physical-layout-and-publication.md>)
 
 - [2026-09-12：全工作區目錄整理與產物保護驗證](<2026-09-12-workspace-organization.md>)

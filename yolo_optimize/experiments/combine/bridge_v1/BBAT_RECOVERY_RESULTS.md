@@ -92,3 +92,9 @@ J3 完成 17 epoch／7,871 macro，patience 5。恢復試驗另開 run：AdamW�
 
 新建舊 Detect 診斷骨架一度漏設非 state-dict 的 BN eps，修正為 YOLO 的 1e-3 後舊八項 AP 完全重現；只重跑失敗的舊案例，保留所有輸出。原訓練模型未受此新建診斷工具問題影響。
 其他執行困難：無。尚未驗證第二 seed、測試集泛化、實際硬體 latency 或進一步共享層補訓。所有 AP 增益都是目前固定 validation 上的觀察。
+
+## AP 與部署成本補充（2026-09-12）
+
+- [融合：九項指標與比較](<../../../reports/performance/stage-5.md>)
+
+包含 AP50–95、Params、Model size、MAC／FLOPs、Peak memory、CPU／GPU latency、target latency 及 energy/frame。target 未量測明記缺值；不將 core-only 時間當完整 pipeline。

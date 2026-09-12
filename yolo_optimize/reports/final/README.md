@@ -353,3 +353,20 @@ inference 檔與訓練 snapshot 分開保管。同 run 的`checkpoints/`通常�
 驗證順序為：來源 SHA → canonical 資料版本與 split → source 重建及 PWL／activation 契約 → CPU 基本行為 → 完整相同 evaluator 的 COCO／BBAT 評估 → 每類與小物件分析 → 真實影像／影片目視 → 部署等價與效能。已完成的量測重用原始結果；本次目錄整理只新增必要 CPU 驗證，不捏造新 AP。
 
 目前最合理的後續仍是低成本推論 class routing 的配對驗證，其次才是框／分數／關鍵點一致的區域 KD。共享特徵若再解凍，需同時量 COCO，不可只看 Pose。這些是下一步建議，不在本次整理／發布中自動排入 GPU queue。
+
+## 19. 全階段精度與部署成本
+
+本次另完成 26 組已訓模型的 CPU／GPU 受控比較，未重新訓練；AP 沿用完整驗證，權重 SHA 不變。
+
+[詳細九項比較、算式與所有限制](<../performance/README.md>)／[精確 CSV](<../performance/comparison.csv>)。
+
+- [BinaryQK：精度、大小、算量、峰值記憶體、延遲與能耗](<../performance/stage-1.md>)
+- [HOG：精度、大小、算量、峰值記憶體、延遲與能耗](<../performance/stage-2.md>)
+- [RepConv：精度、大小、算量、峰值記憶體、延遲與能耗](<../performance/stage-3.md>)
+- [MASF：精度、大小、算量、峰值記憶體、延遲與能耗](<../performance/stage-4.md>)
+- [融合：精度、大小、算量、峰值記憶體、延遲與能耗](<../performance/stage-5.md>)
+- [Activation：精度、大小、算量、峰值記憶體、延遲與能耗](<../performance/stage-6.md>)
+- [KD：精度、大小、算量、峰值記憶體、延遲與能耗](<../performance/stage-7.md>)
+- [推論：精度、大小、算量、峰值記憶體、延遲與能耗](<../performance/stage-8.md>)
+
+目標硬體未指定／連接，因此 target latency 與 target energy/frame 仍未量測。GPU 能量為 NVML 整卡遙測，不是整機或 FPGA 能耗。MAC／FLOPs 為明確算子範圍的 subtotal；請勿刪去這些限制再引用數字。

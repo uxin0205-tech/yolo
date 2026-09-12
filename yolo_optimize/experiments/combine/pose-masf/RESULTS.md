@@ -76,3 +76,9 @@ P2 不增加 Detect head；它會影響共享下游特徵。P3 shared、P3 Detec
 P2 Pose 訓練入口只是未完成驗證的準備稿，沒有 GPU 執行，也沒有產生 P2 Pose 訓練成果。使用者改為優先現有權重後，不再修復／重啟新訓練 queue。
 
 本次全部權重、failed smoke 與來源紀錄保留；不清理、不刪除、不 commit 或 push。下一步只由使用者決定是否採用 MASF，以及是否需要進一步 Pose 成對訓練。
+
+## AP 與部署成本補充（2026-09-12）
+
+- [MASF：九項指標與比較](<../../../reports/performance/stage-4.md>)
+
+包含 AP50–95、Params、Model size、MAC／FLOPs、Peak memory、CPU／GPU latency、target latency 及 energy/frame。target 未量測明記缺值；不將 core-only 時間當完整 pipeline。

@@ -29,3 +29,9 @@ MASF 保留 P3 bridge 是使用者選定的研究路線，配對消融沒有證�
 COCO80 使用 `/home/uxin/yolo/coco2017.yaml`；BBAT5 固定使用 `/home/uxin/yolo/original/pose/derived/bbat5-v1/` 的正式 Task View，不重新切分或更動影像／labels。見[資料集規範](<../docs/agents/bbat5-datasets.md>)。
 
 全部權重已隨實驗資料夾搬到新位置，內容不變；舊路徑不留根層捷徑。[工作紀錄](<docs/worklogs/README.md>)與[遷移清單](<docs/history/layout-v2-20260912/manifest.json>)保存過程。GitHub 更新使用 commit 名稱 `5090 Done 0912`，發布報告、數值證據、設定及程式，不把本機大型權重、封存包、runtime 資料或 PDF 混進一般 Git。
+
+最新整理版已建立本機提交 `8786b58f`，但 push 被安全審查攔下，尚待明確發布確認；見交付狀態（本機／歷史參照：`reports/publication/PUBLISHED.md`；未隨本次報告發布）。
+
+## 各階段精度與效能
+
+已完成 26 組代表／配對的 CPU／GPU 成本比較，詳見[九項指標報告](<reports/performance/README.md>)與[精確 CSV](<reports/performance/comparison.csv>)。包含 Params、模型大小、MAC／FLOPs subtotal、峰值記憶體、CPU／GPU 延遲及 GPU 能量；目標板卡尚未指定，target latency／energy 明記未量測。
