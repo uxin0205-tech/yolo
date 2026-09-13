@@ -145,3 +145,9 @@
 - [2026-09-04：COCO person-only 專用 head 方向整理](<2026-09-04-coco-person-specialized-head-direction.md>)
 
 返回[子專案 README](<../../README.md>)。
+
+- [2026-09-12：確認後發布效能報告](<2026-09-12-performance-publish-confirmed.md>)
+
+- [2026-09-13：白話模型說明、開關診斷與 Attention 重訓分流](<2026-09-13-current-model-attention-recovery.md>)
+
+- [2026-09-13：白話報告、BinaryQK 稽核與 GitHub 交付](<2026-09-13-report-update-0913.md>)

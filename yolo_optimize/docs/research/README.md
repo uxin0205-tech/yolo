@@ -1,5 +1,7 @@
 # 研究報告索引
 
+[2026-09-13：BinaryQK scale／bias 稽核與硬體友善替代路線](<2026-09-13-attention-scale-bias-alternatives.md>)
+
 - [2026-09-10：使用者 combine 報告實驗 4、完整 Pose 階段與梯度失衡](<2026-09-10-combine-report-experiment4.md>)
 
 - [2026-09-10：MASF 論文適用條件、BBAT5 ball／bat 尺寸與實際收益](<2026-09-10-masf-paper-small-objects.md>)

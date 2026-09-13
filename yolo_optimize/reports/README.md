@@ -1,5 +1,7 @@
 # 正式報告與模型索引
 
+[先讀：目前實際使用的模型、架構圖與白話說明](<current-model/README.md>)
+
 | 入口 | 用途 |
 | --- | --- |
 | [final](<final/README.md>) | 唯一全階段詳細總報告，含數值 CSV、run／checkpoint 清單 |
@@ -7,7 +9,7 @@
 | [checkpoints](<checkpoints/README.md>) | 現行預設、父模型、對照與未升版候選的新路徑和 SHA |
 | [publication](<publication/README.md>) | 從 BinaryQK 起的閱讀順序與 GitHub 發布稽核 |
 
-原日期型資料夾已實際改名為以上分類，日期保留在報告內容與工作紀錄，不再增加同一總報告的另一份「最終版」。原始量測留在 [experiments](<../experiments/README.md>)；本機大封存留在 archives（本機／歷史參照：`../archives/README.md`；未隨本次報告發布）。
+原日期型資料夾已實際改名為以上分類，日期保留在報告內容與工作紀錄，不再增加同一總報告的另一份「最終版」。原始量測留在 [experiments](<../experiments/README.md>)；本機大封存留在 archives（本機檔案：`../archives/README.md`；本次未上傳）。
 
 此處不放模型 bytes。報告、CSV／JSON 與必要研究程式可以發布；checkpoint 透過清單追溯。更新結論須引用相同 parent、資料版本、backend 與 evaluator，不改寫失敗成成功。
 

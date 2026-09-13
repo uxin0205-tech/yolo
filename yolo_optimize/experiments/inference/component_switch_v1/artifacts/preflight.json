@@ -1,0 +1,404 @@
+{
+  "status": "passed",
+  "checkpoint": "/home/uxin/yolo/yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/inference/best_joint.pt",
+  "sha256": "1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a",
+  "checks": {
+    "binary": {
+      "only_changed_state": [
+        "graph.model.23.detect_head.p3_masf.alpha"
+      ],
+      "pose_outputs_exact_equal": true,
+      "alpha_zero_equals_identity": true,
+      "detect_bypass_exact_equal": true,
+      "materialized_alpha_zero": true,
+      "alpha_on": 0.017398657277226448,
+      "bridge_training_gradient_coefficient": 0.012076444778011642,
+      "attention": [
+        {
+          "path": "graph.model.10.m.0.attn",
+          "basis": "hadamard",
+          "scale_mode": "power_of_two",
+          "fixed_scales": [
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ]
+          ]
+        },
+        {
+          "path": "graph.model.22.m.0.1.attn",
+          "basis": "hadamard",
+          "scale_mode": "power_of_two",
+          "fixed_scales": [
+            [
+              0.125,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ]
+          ]
+        }
+      ],
+      "layers": [
+        {
+          "index": 0,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 1,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 2,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 3,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 4,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 5,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 6,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 7,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 8,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 9,
+          "class": "SPPF",
+          "from": -1
+        },
+        {
+          "index": 10,
+          "class": "C2PSA",
+          "from": -1
+        },
+        {
+          "index": 11,
+          "class": "Upsample",
+          "from": -1
+        },
+        {
+          "index": 12,
+          "class": "Concat",
+          "from": [
+            -1,
+            6
+          ]
+        },
+        {
+          "index": 13,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 14,
+          "class": "Upsample",
+          "from": -1
+        },
+        {
+          "index": 15,
+          "class": "Concat",
+          "from": [
+            -1,
+            4
+          ]
+        },
+        {
+          "index": 16,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 17,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 18,
+          "class": "Concat",
+          "from": [
+            -1,
+            13
+          ]
+        },
+        {
+          "index": 19,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 20,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 21,
+          "class": "Concat",
+          "from": [
+            -1,
+            10
+          ]
+        },
+        {
+          "index": 22,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 23,
+          "class": "DualHeadPredictionModule",
+          "from": [
+            16,
+            19,
+            22
+          ]
+        }
+      ],
+      "activation_types": [
+        "ShiftPiecewiseQuadraticSiLU"
+      ],
+      "hog_sites": [],
+      "repconv_sites": []
+    },
+    "fp": {
+      "only_changed_state": [
+        "graph.model.23.detect_head.p3_masf.alpha"
+      ],
+      "pose_outputs_exact_equal": true,
+      "alpha_zero_equals_identity": true,
+      "detect_bypass_exact_equal": true,
+      "materialized_alpha_zero": true,
+      "alpha_on": 0.017398657277226448,
+      "bridge_training_gradient_coefficient": 0.012076444778011642,
+      "attention": [
+        {
+          "path": "graph.model.10.m.0.attn",
+          "basis": "fp",
+          "scale_mode": "power_of_two",
+          "fixed_scales": [
+            [
+              1.0
+            ],
+            [
+              1.0
+            ],
+            [
+              1.0
+            ],
+            [
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "graph.model.22.m.0.1.attn",
+          "basis": "fp",
+          "scale_mode": "power_of_two",
+          "fixed_scales": [
+            [
+              1.0
+            ],
+            [
+              1.0
+            ],
+            [
+              1.0
+            ],
+            [
+              1.0
+            ]
+          ]
+        }
+      ],
+      "layers": [
+        {
+          "index": 0,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 1,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 2,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 3,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 4,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 5,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 6,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 7,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 8,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 9,
+          "class": "SPPF",
+          "from": -1
+        },
+        {
+          "index": 10,
+          "class": "C2PSA",
+          "from": -1
+        },
+        {
+          "index": 11,
+          "class": "Upsample",
+          "from": -1
+        },
+        {
+          "index": 12,
+          "class": "Concat",
+          "from": [
+            -1,
+            6
+          ]
+        },
+        {
+          "index": 13,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 14,
+          "class": "Upsample",
+          "from": -1
+        },
+        {
+          "index": 15,
+          "class": "Concat",
+          "from": [
+            -1,
+            4
+          ]
+        },
+        {
+          "index": 16,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 17,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 18,
+          "class": "Concat",
+          "from": [
+            -1,
+            13
+          ]
+        },
+        {
+          "index": 19,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 20,
+          "class": "Conv",
+          "from": -1
+        },
+        {
+          "index": 21,
+          "class": "Concat",
+          "from": [
+            -1,
+            10
+          ]
+        },
+        {
+          "index": 22,
+          "class": "C3k2",
+          "from": -1
+        },
+        {
+          "index": 23,
+          "class": "DualHeadPredictionModule",
+          "from": [
+            16,
+            19,
+            22
+          ]
+        }
+      ],
+      "activation_types": [
+        "ShiftPiecewiseQuadraticSiLU"
+      ],
+      "hog_sites": [],
+      "repconv_sites": []
+    }
+  },
+  "not_accuracy_evaluation": true
+}

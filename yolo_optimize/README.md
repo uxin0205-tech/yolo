@@ -1,5 +1,7 @@
 # YOLO Optimize：完整研究與交付
 
+[先讀這份：目前到底用哪些技術？架構圖與移除 BinaryQK 重訓說明](<reports/current-model/README.md>)
+
 從 BinaryQK 精度恢復開始，依序研究 HOG、RepConv、MASF、Detect＋Pose 融合、activation、KD 與推論。**正式結論以詳細報告為準；候選檔名的 best 不等於全指標最佳。**
 
 - [全階段詳細報告：架構、數據、推導、超參數與限制](<reports/final/README.md>)
@@ -16,7 +18,7 @@
 | [proposals](<proposals/README.md>) | 原始假說與尚未完成的優化方向，不冒充實測成果 |
 | [docs](<docs/README.md>) | 研究推導、參考 PDF、工作紀錄與歷史原文 |
 | [tools](<tools/README.md>) | 封存、整理、文件發布工具；不自動訓練 |
-| archives（本機／歷史參照：`archives/README.md`；未隨本次報告發布） | 已驗證的固定保存副本，不作日常工作目錄 |
+| archives（本機檔案：`archives/README.md`；本次未上傳） | 已驗證的固定保存副本，不作日常工作目錄 |
 
 ## 目前結論
 
@@ -30,8 +32,10 @@ COCO80 使用 `/home/uxin/yolo/coco2017.yaml`；BBAT5 固定使用 `/home/uxin/y
 
 全部權重已隨實驗資料夾搬到新位置，內容不變；舊路徑不留根層捷徑。[工作紀錄](<docs/worklogs/README.md>)與[遷移清單](<docs/history/layout-v2-20260912/manifest.json>)保存過程。GitHub 更新使用 commit 名稱 `5090 Done 0912`，發布報告、數值證據、設定及程式，不把本機大型權重、封存包、runtime 資料或 PDF 混進一般 Git。
 
-最新整理版已建立本機提交 `8786b58f`，但 push 被安全審查攔下，尚待明確發布確認；見交付狀態（本機／歷史參照：`reports/publication/PUBLISHED.md`；未隨本次報告發布）。
+歷史發布紀錄：整理版 `8786b58f` 曾因發布確認不足受阻；其後使用者明確確認，已於 `4f4131e` 一併發布成功。先前受阻證據保留於歷史交付狀態（本機檔案：`reports/publication/PUBLISHED.md`；本次未上傳），成功收據見[2026-09-12 發布紀錄](<reports/performance/PUBLISHED-4f4131e.md>)。
 
 ## 各階段精度與效能
 
 已完成 26 組代表／配對的 CPU／GPU 成本比較，詳見[九項指標報告](<reports/performance/README.md>)與[精確 CSV](<reports/performance/comparison.csv>)。包含 Params、模型大小、MAC／FLOPs subtotal、峰值記憶體、CPU／GPU 延遲及 GPU 能量；目標板卡尚未指定，target latency／energy 明記未量測。
+
+2026-09-13：先完成白話報告與發布；新增 scale／bias CPU 稽核，現行權重不變。PWL [-10,0]／20 段已確認，新的尺度調整與原生 QK 重訓尚未啟動。

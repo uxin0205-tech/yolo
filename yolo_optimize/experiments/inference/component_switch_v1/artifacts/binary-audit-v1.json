@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "device": "cpu",
+  "synthetic_only": true,
+  "accuracy_or_scale_optimality_test": false,
+  "checkpoint": "/home/uxin/yolo/yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/inference/best_joint.pt",
+  "sha256": "1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a",
+  "script_sha256": "b64f2c025180aa0da8cab4e7d4c69f07c97acac8b1981cec11212b3e92874b5c",
+  "sites": [
+    {
+      "site": "graph.model.10.m.0.attn",
+      "heads": 4,
+      "key_dim": 32,
+      "head_dim": 64,
+      "native_scale": 0.1767766952966369,
+      "native_scale_exact_power_of_two": "0x1.6a09e667f3bcdp-3",
+      "fixed_coefficients": [
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ]
+      ],
+      "fixed_is_buffer": true,
+      "fixed_requires_grad": false,
+      "gamma_change_leaves_output_exact_equal": true,
+      "gamma_grad_is_none_fixed_mode": true,
+      "xnor_matches_signed_dot_exact": true,
+      "surrogate_qk_gradient_finite": true,
+      "q_gradient_nonzero": 3199,
+      "k_gradient_nonzero": 3200,
+      "bias_kind": "decomposed_2d",
+      "bias_parameters": {
+        "table_y": {
+          "shape": [
+            4,
+            63
+          ],
+          "count": 252,
+          "rms": 2.253188371658325,
+          "max_abs": 6.5078125
+        },
+        "table_x": {
+          "shape": [
+            4,
+            63
+          ],
+          "count": 252,
+          "rms": 2.445380449295044,
+          "max_abs": 5.988280773162842
+        }
+      },
+      "row_constant_bias_cancels": true
+    },
+    {
+      "site": "graph.model.22.m.0.1.attn",
+      "heads": 4,
+      "key_dim": 32,
+      "head_dim": 64,
+      "native_scale": 0.1767766952966369,
+      "native_scale_exact_power_of_two": "0x1.6a09e667f3bcdp-3",
+      "fixed_coefficients": [
+        [
+          0.125,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ],
+        [
+          0.25,
+          0.25
+        ]
+      ],
+      "fixed_is_buffer": true,
+      "fixed_requires_grad": false,
+      "gamma_change_leaves_output_exact_equal": true,
+      "gamma_grad_is_none_fixed_mode": true,
+      "xnor_matches_signed_dot_exact": true,
+      "surrogate_qk_gradient_finite": true,
+      "q_gradient_nonzero": 3197,
+      "k_gradient_nonzero": 3198,
+      "bias_kind": "decomposed_2d",
+      "bias_parameters": {
+        "table_y": {
+          "shape": [
+            4,
+            63
+          ],
+          "count": 252,
+          "rms": 2.414133310317993,
+          "max_abs": 5.429687976837158
+        },
+        "table_x": {
+          "shape": [
+            4,
+            63
+          ],
+          "count": 252,
+          "rms": 2.6047418117523193,
+          "max_abs": 8.265625953674316
+        }
+      },
+      "row_constant_bias_cancels": true
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # 實驗工作區
 
+[Attention 恢復研究計畫](<attention_recovery_v1/README.md>)：PWL 已確認，先報告後實驗；尚未訓練。
+
 此處是實際程式、原始結果與 checkpoint 所在位置，不是連到舊根目錄的捷徑。各階段保留內部目錄關係，避免把不同 parent 的 run 混合。
 
 | 閱讀順序 | 目錄 | 內容與結果入口 |

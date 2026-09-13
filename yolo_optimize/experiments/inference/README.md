@@ -1,5 +1,7 @@
 # 階段 5：推論處理
 
+[目前權重 BinaryQK／MASF 開關診斷](<component_switch_v1/README.md>)：兩組新全量評估完成，兩組舊評估重用；不是移除後重訓。
+
 > 本目錄已實際移入 `experiments/`。內部 run 名與模型內容保留；操作請見[整理後指南](<../../docs/OPERATIONS.md>)。
 
 | 實驗 | 結論 |

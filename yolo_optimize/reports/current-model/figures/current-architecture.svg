@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="810" viewBox="0 0 1120 810" role="img" aria-labelledby="title desc">
+<title id="title">目前選用模型：共用特徵、Detect P3 MASF、獨立 Pose head</title>
+<desc id="desc">圖中藍色是 Detect 支線，綠色是 Pose 支線。MASF 只在 Detect 的 P3 輸入前，不影響共用 P4、P5 或 Pose。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker></defs>
+<rect width="1120" height="810" fill="#f8fafc"/>
+<g font-family="Noto Sans CJK TC,Microsoft JhengHei,sans-serif" text-anchor="middle" fill="#172033">
+<text x="560" y="46" font-size="29" font-weight="bold">目前實際選用：qSiLU E2 融合模型</text>
+<text x="560" y="80" font-size="19">不是所有歷史模型都算「最後版本」；HOG／RepConv／KD 權重未採用</text>
+<rect x="435" y="110" width="250" height="58" rx="12" fill="#e2e8f0"/><text x="560" y="147" font-size="23">輸入影像</text>
+<path d="M560 168 V203" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="185" y="205" width="750" height="115" rx="12" fill="#e2e8f0" stroke="#94a3b8"/>
+<text x="560" y="240" font-size="24" font-weight="bold">共用 Backbone＋Neck</text>
+<text x="560" y="273" font-size="20">layer10、layer22 內含 BinaryQK Attention＋PWL [-10,0]</text>
+<text x="560" y="301" font-size="19">輸出原始 P3／P4／P5；原 SiLU 位置使用 qSiLU</text>
+<path d="M350 320 V364" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M770 320 V364" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="80" y="367" width="480" height="122" rx="12" fill="#dbeafe" stroke="#2563eb"/>
+<text x="320" y="403" font-size="24" font-weight="bold">Detect 專用輸入處理</text>
+<text x="320" y="437" font-size="21">P3 → MASF → 增強後 P3</text>
+<text x="320" y="469" font-size="20">P4、P5 直接通過，不經 MASF</text>
+<rect x="615" y="367" width="425" height="122" rx="12" fill="#dcfce7" stroke="#16a34a"/>
+<text x="827" y="405" font-size="24" font-weight="bold">Pose 專用輸入</text>
+<text x="827" y="443" font-size="21">直接使用原始 P3／P4／P5</text>
+<text x="827" y="473" font-size="20">這條路徑沒有 MASF</text>
+<path d="M320 489 V532" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M827 489 V532" stroke="#475569" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="80" y="535" width="480" height="103" rx="12" fill="#dbeafe" stroke="#2563eb"/>
+<text x="320" y="573" font-size="24" font-weight="bold">Detect head</text><text x="320" y="611" font-size="21">COCO 80 類框／分類，包括 person</text>
+<rect x="615" y="535" width="425" height="103" rx="12" fill="#dcfce7" stroke="#16a34a"/>
+<text x="827" y="573" font-size="24" font-weight="bold">Pose head</text><text x="827" y="611" font-size="21">BBAT ball／bat 框＋關鍵點</text>
+<text x="560" y="690" font-size="22" font-weight="bold">MASF 關閉：α = 0 → Detect 的 P3 回到原始 P3</text>
+<text x="560" y="727" font-size="20">所以只切 MASF，Pose 輸出不變；這不是「MASF 對任何 Pose 都沒有用」。</text>
+<text x="560" y="765" font-size="18">依實際選用 checkpoint 重建核對；精確 layer 跳接見正文 ASCII 圖與 preflight.json。</text>
+</g></svg>
