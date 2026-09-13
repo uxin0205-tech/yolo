@@ -151,3 +151,15 @@
 - [2026-09-13：白話模型說明、開關診斷與 Attention 重訓分流](<2026-09-13-current-model-attention-recovery.md>)
 
 - [2026-09-13：白話報告、BinaryQK 稽核與 GitHub 交付](<2026-09-13-report-update-0913.md>)
+
+- 2026-09-13：scale／bias 與原生 QK＋PWL 三臂恢復（本機保存：`2026-09-13-attention-recovery-training.md`；本次未上傳）
+
+- 2026-09-13：取消額外 BinaryQK 對照，不中斷目前訓練（本機保存：`2026-09-13-cancel-binary-control.md`；本次未上傳）
+
+- [2026-09-13：目前回合結束後暫停 Attention 恢復](<2026-09-13-attention-epoch-pause.md>)
+
+- [2026-09-13：Pose 端 MASF 比較排入 GPU 第一順位](<2026-09-13-pose-masf-priority.md>)
+
+- [2026-09-13：Pose MASF 專項重訓推導與完整架構圖](<2026-09-13-pose-masf-training-derivation.md>)
+
+- [2026-09-13：Pose MASF 圖、分析與 B-only CPU 實作發布](<2026-09-13-pose-masf-b-publication.md>)

@@ -1,0 +1,104 @@
+{
+  "status": "superseded_design_only",
+  "gpu_training_enabled": false,
+  "changes_to_existing_model": false,
+  "parent_inference_sha256": "4257ca9c471736aa97d0077097526b7863a9268b773913119b9969991d00b0f3",
+  "arms": [
+    "pose_head_control",
+    "pose_head_plus_masf"
+  ],
+  "epochs": 5,
+  "warmup_epochs": 1,
+  "patience": null,
+  "primary_comparison": "epoch_5_vs_epoch_5",
+  "seed": 1,
+  "optimizer": "AdamW",
+  "betas": [
+    0.948,
+    0.999
+  ],
+  "weight_decay": 0.00027,
+  "peak_lr": {
+    "pose_head": 5e-06,
+    "pose_masf_context": 1e-05,
+    "pose_masf_alpha": 0.0001
+  },
+  "no_weight_decay": [
+    "alpha",
+    "bias",
+    "BN affine"
+  ],
+  "cosine_final_lr_factor": 0.5,
+  "warmup_start_factor": 0.1,
+  "imgsz": 640,
+  "physical_batch": 16,
+  "accumulate": 8,
+  "effective_batch_max": 128,
+  "train_images_per_epoch": 5964,
+  "optimizer_updates_per_epoch": 47,
+  "last_macro_images": 76,
+  "reference_batch_size": 64,
+  "drop_last": false,
+  "amp": true,
+  "clip_grad_norm": 10,
+  "shared_parameters_and_all_bn_running_frozen": true,
+  "detect_and_its_masf_frozen": true,
+  "train_pose_bn_affine": true,
+  "train_pose_flow_and_sigma_if_active": true,
+  "masf_context_init": "copy donor context",
+  "masf_alpha_init": 0.0,
+  "proposed_pose_bridge_beta": 1.0,
+  "current_candidate_bridge_beta": 0.012076444778011642,
+  "implementation_prerequisite": "new training class must permit beta=1; current archived candidate asserts beta<=0.25",
+  "pose_loss_gains": {
+    "box": 7.5,
+    "cls": 0.5,
+    "regression_slot_dfl": 1.5,
+    "pose": 12.0,
+    "kobj": 1.0,
+    "rle": 1.0
+  },
+  "native_e2e_weights_by_epoch": [
+    [
+      0.8,
+      0.2
+    ],
+    [
+      0.625,
+      0.375
+    ],
+    [
+      0.45,
+      0.55
+    ],
+    [
+      0.275,
+      0.725
+    ],
+    [
+      0.1,
+      0.9
+    ]
+  ],
+  "selection_backend": "bittrue",
+  "coco_max_abs_metric_difference": 1e-08,
+  "provisional_acceptance": {
+    "overall_pose_ap_delta_min": 0.002,
+    "bbat_other_ap_delta_min": -0.001,
+    "note": "事前工程門檻，非統計顯著性；若通過才考慮第二個 seed"
+  },
+  "dataset_registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml",
+  "pose_yaml": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml",
+  "dataset_split_unchanged": true,
+  "no_additional_binaryqk_control": true,
+  "existing_attention_and_scale_bias_remain_paused": true,
+  "accumulation_runner_implemented": false,
+  "critical_implementation_changes": [
+    "新 Pose 訓練類別允許 beta=1，封存候選不修改",
+    "新 runner 明確分組 8 個 microbatch，尾端 76 張，47 steps/epoch",
+    "固定 shared/Detect 參數與所有 BN running／EMA buffer",
+    "重新建立兩組一致的 optimizer、5 epoch criterion 與 scheduler，不當成 native_qk E3 resume"
+  ],
+  "superseded_by": "execution-config.json",
+  "note": "原 A/B 配對提案；A 已取消，不是目前 queue 設定"
+}

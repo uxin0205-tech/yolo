@@ -1,0 +1,28 @@
+digraph Gradient {
+ graph [rankdir=LR, bgcolor="white", fontname="Noto Sans CJK TC", labelloc=t, label="Pose MASF 的訓練梯度（B 組 β=1 已實作、CPU 通過；GPU 未訓練）", fontsize=20];
+ node [shape=box,style="rounded,filled",fillcolor="#fff0d9",fontname="Noto Sans CJK TC",fontsize=13,color="#c27b29"];
+ edge [fontname="Noto Sans CJK TC",fontsize=11];
+ x [label="固定共享特徵 x=P3
+P4／P5 同樣固定",fillcolor="#e8f1fb",color="#527aa3"];
+ fm [label="x + α Fθ(x)
+one2many 路徑"];
+ sg [label="stop-gradient(x)",fillcolor="#e8f1fb",color="#527aa3"];
+ fo [label="sg(x) + α Fθ(sg(x))
+與上方使用同一組 θ、α"];
+ gs [label="GSβ：前向是 identity
+反向才乘 β
+舊 β≈0.0121；新 B 組 β=1"];
+ hm [label="Pose one2many head φm
+框／類別／關鍵點"];
+ ho [label="Pose one2one head φo
+框／類別／關鍵點"];
+ lm [label="λm Lm"];
+ lo [label="λo Lo"];
+ x -> fm -> hm -> lm; x -> sg -> fo -> gs -> ho -> lo;
+ fm -> fo [style=dashed,dir=none,label="共享 MASF 參數，不是兩套獨立模組"];
+ note [shape=note,label="β 只改回到 MASF 的梯度
+不縮放 one2one head 自身梯度
+λm: 0.8 → 0.1；λo: 0.2 → 0.9
+推論不用 GSβ，MASF 只執行一次"];
+ lo -> note [style=invis];
+}

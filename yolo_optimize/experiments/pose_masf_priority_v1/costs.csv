@@ -1,0 +1,10 @@
+指標,原Pose,Pose_MASF,單位,口徑
+Params,26528689,26604466,個,完整共享雙 head、未 fuse 的 state
+Model size,106802973,107151942,bytes,實際 inference-only 檔，含 metadata／序列化差異
+MAC,47923712000,48398848000,MAC,估算：Conv／Linear／QK／AV，其他運算排除
+FLOPs,95847424000,96797696000,FLOP,估算：2 FLOPs/MAC
+Peak memory,496952832,497772032,bytes,GPU peak allocated；不是訓練顯存
+CPU latency,668.6488355044276,681.4079410396516,ms,"batch 1, 640, FP32, 4 threads；中位數"
+GPU latency,21.63856029510498,22.03646469116211,ms,"RTX 5090；batch 1, 640, FP32；中位數"
+target hardware latency,,,ms,專用目標板未量測
+energy/frame,,,J/frame,未量測，不以 TDP 代替

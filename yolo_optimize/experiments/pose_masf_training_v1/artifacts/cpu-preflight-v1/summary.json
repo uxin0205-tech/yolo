@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "gpu_used": false,
+  "accuracy_evaluated": false,
+  "parent_sha256": "4257ca9c471736aa97d0077097526b7863a9268b773913119b9969991d00b0f3",
+  "initial_detect_and_pose_exact_parent": true,
+  "materialization_float_bittrue": true,
+  "beta": 1,
+  "one2one_trunk_detached": true,
+  "optimizer_trainable_names_exact": true,
+  "frozen_live_and_ema_exact_after_2_steps": true,
+  "gradients": [
+    {
+      "step": 1,
+      "alpha": 0.0,
+      "alpha_gradient": -96.969970703125,
+      "context_gradient_max": 0.0
+    },
+    {
+      "step": 2,
+      "alpha": 1.1914890819753055e-05,
+      "alpha_gradient": -287.5276184082031,
+      "context_gradient_max": 0.006664535962045193
+    }
+  ],
+  "accumulation": {
+    "microbatches": 373,
+    "updates": 47,
+    "images": 5964,
+    "tail_images": 76
+  },
+  "full_resume_roundtrip": true,
+  "cpu_snapshot_sha256": "cb06d52fcab5af375d80281b51887f42879f05be93dd235912270eb393154188",
+  "trainable_parameters": 4632441,
+  "total_parameters": 26604466,
+  "limitation": "真實 YOLO head 的合成 one2one 目標；完整 BBAT loss／AMP／GPU 記憶體須由排隊 smoke 驗證"
+}

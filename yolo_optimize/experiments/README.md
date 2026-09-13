@@ -1,6 +1,6 @@
 # 實驗工作區
 
-[Attention 恢復研究計畫](<attention_recovery_v1/README.md>)：PWL 已確認，先報告後實驗；尚未訓練。
+[Attention 恢復研究計畫](<attention_recovery_v1/README.md>)：native QK E2 已完成並暫停；scale_bias 尚未正式訓練。
 
 此處是實際程式、原始結果與 checkpoint 所在位置，不是連到舊根目錄的捷徑。各階段保留內部目錄關係，避免把不同 parent 的 run 混合。
 
@@ -19,3 +19,5 @@
 使用方式及依賴見[操作指南](<../docs/OPERATIONS.md>)。歷史 runner／queue 已完成或停止，不因搬移而重啟。Git 只發布文字指標、必要設定與程式，不發布 checkpoint、cache 或 runtime 影像／labels；本機全部保留。
 
 [benchmark：跨階段推論成本實驗](<benchmark/README.md>)，不重新訓練。
+
+[Pose MASF 已完成移接分析](<pose_masf_priority_v1/RESULTS.md>)與 [B 組專項架構／CPU 檢查](<pose_masf_training_v1/README.md>)：A 已取消，B 的 GPU 訓練與等待佇列尚未啟動。

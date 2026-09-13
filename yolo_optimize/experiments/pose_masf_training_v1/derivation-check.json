@@ -1,0 +1,55 @@
+{
+  "status": "passed",
+  "gpu_used": false,
+  "actual_yolo_training": false,
+  "tests": [
+    "context chain rule",
+    "alpha chain rule",
+    "head gradient not scaled by beta",
+    "alpha zero context task-gradient zero",
+    "alpha can unlock subsequent context task-gradient"
+  ],
+  "cases": [
+    {
+      "beta": 0.012076444778011642,
+      "alpha": 0.02,
+      "alpha_grad": 0.18082757512650038,
+      "context_grad_norm": 0.00811295287062035,
+      "pose_one2one_head_grad": [
+        -0.36247500000000005,
+        0.7329244500000001
+      ]
+    },
+    {
+      "beta": 1.0,
+      "alpha": 0.02,
+      "alpha_grad": 0.37778125000000007,
+      "context_grad_norm": 0.019855538624336033,
+      "pose_one2one_head_grad": [
+        -0.36247500000000005,
+        0.7329244500000001
+      ]
+    },
+    {
+      "beta": 1.0,
+      "alpha": 0.0,
+      "alpha_grad": 0.3740000000000001,
+      "context_grad_norm": 0.0,
+      "pose_one2one_head_grad": [
+        -0.36000000000000004,
+        0.7200000000000001
+      ]
+    },
+    {
+      "beta": 1.0,
+      "alpha": -0.0003740000000000001,
+      "alpha_grad": 0.37392929062500013,
+      "context_grad_norm": 0.00036829211531830486,
+      "pose_one2one_head_grad": [
+        -0.35995371750000005,
+        0.7197593500406206
+      ]
+    }
+  ],
+  "limitation": "解析 toy loss，不是 BBAT 真實 loss／AMP／optimizer 更新驗證"
+}

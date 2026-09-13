@@ -18,7 +18,7 @@
 | [proposals](<proposals/README.md>) | 原始假說與尚未完成的優化方向，不冒充實測成果 |
 | [docs](<docs/README.md>) | 研究推導、參考 PDF、工作紀錄與歷史原文 |
 | [tools](<tools/README.md>) | 封存、整理、文件發布工具；不自動訓練 |
-| archives（本機檔案：`archives/README.md`；本次未上傳） | 已驗證的固定保存副本，不作日常工作目錄 |
+| archives（本機保存：`archives/README.md`；本次未上傳） | 已驗證的固定保存副本，不作日常工作目錄 |
 
 ## 目前結論
 
@@ -32,10 +32,18 @@ COCO80 使用 `/home/uxin/yolo/coco2017.yaml`；BBAT5 固定使用 `/home/uxin/y
 
 全部權重已隨實驗資料夾搬到新位置，內容不變；舊路徑不留根層捷徑。[工作紀錄](<docs/worklogs/README.md>)與[遷移清單](<docs/history/layout-v2-20260912/manifest.json>)保存過程。GitHub 更新使用 commit 名稱 `5090 Done 0912`，發布報告、數值證據、設定及程式，不把本機大型權重、封存包、runtime 資料或 PDF 混進一般 Git。
 
-歷史發布紀錄：整理版 `8786b58f` 曾因發布確認不足受阻；其後使用者明確確認，已於 `4f4131e` 一併發布成功。先前受阻證據保留於歷史交付狀態（本機檔案：`reports/publication/PUBLISHED.md`；本次未上傳），成功收據見[2026-09-12 發布紀錄](<reports/performance/PUBLISHED-4f4131e.md>)。
+歷史發布紀錄：整理版 `8786b58f` 曾因發布確認不足受阻；其後使用者明確確認，已於 `4f4131e` 一併發布成功。先前受阻證據保留於歷史交付狀態（本機保存：`reports/publication/PUBLISHED.md`；本次未上傳），成功收據見[2026-09-12 發布紀錄](<reports/performance/PUBLISHED-4f4131e.md>)。
 
 ## 各階段精度與效能
 
 已完成 26 組代表／配對的 CPU／GPU 成本比較，詳見[九項指標報告](<reports/performance/README.md>)與[精確 CSV](<reports/performance/comparison.csv>)。包含 Params、模型大小、MAC／FLOPs subtotal、峰值記憶體、CPU／GPU 延遲及 GPU 能量；目標板卡尚未指定，target latency／energy 明記未量測。
 
 2026-09-13：先完成白話報告與發布；新增 scale／bias CPU 稽核，現行權重不變。PWL [-10,0]／20 段已確認，新的尺度調整與原生 QK 重訓尚未啟動。
+
+2026-09-13 後續已授權 Attention 恢復（最新只保留原生 QK＋PWL、scale／bias 兩組，取消額外 BinaryQK 對照）：[實驗與即時狀態入口](<experiments/attention_recovery_v1/README.md>)。CPU／E0／GPU smoke 已完成，正式訓練已啟動，後續 queue 狀態以事件與各組 summary 為準；舊報告的「未開始」是該次發布時點。
+
+2026-09-13 16:33：依使用者要求，已安排目前 Attention 恢復 E2 完成驗證、存檔後暫停，後續 queue 不再接續。見[回合結束暫停紀錄](<docs/worklogs/2026-09-13-attention-epoch-pause.md>)。
+
+2026-09-13 最新：[Pose 端 MASF 完整比較與分析](<experiments/pose_masf_priority_v1/RESULTS.md>)已完成：直接移接未帶來整體 Pose AP 收益，COCO 不變；權重、全量驗證、成本量測與來源稽核均保存。原 Attention E2 與 scale_bias 仍保持暫停。
+
+2026-09-13：[Pose MASF 專項重訓推導與完整架構圖](<experiments/pose_masf_training_v1/README.md>)已整理，包含完整架構與 α／β 梯度；最新已取消 A 加訓，只保留 B 組 5 epoch。B 程式與 CPU 檢查完成，GPU 與等待佇列均尚未啟動，依指示先發布現有圖與分析。
