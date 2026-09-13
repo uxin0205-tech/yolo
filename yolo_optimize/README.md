@@ -2,6 +2,8 @@
 
 [先讀這份：目前到底用哪些技術？架構圖與移除 BinaryQK 重訓說明](<reports/current-model/README.md>)
 
+[教授版完整研究報告：從 BinaryQK、MASF、融合、Activation、KD 到推論與失敗實驗](<reports/professor-overview/README.md>)
+
 從 BinaryQK 精度恢復開始，依序研究 HOG、RepConv、MASF、Detect＋Pose 融合、activation、KD 與推論。**正式結論以詳細報告為準；候選檔名的 best 不等於全指標最佳。**
 
 - [全階段詳細報告：架構、數據、推導、超參數與限制](<reports/final/README.md>)
@@ -38,12 +40,10 @@ COCO80 使用 `/home/uxin/yolo/coco2017.yaml`；BBAT5 固定使用 `/home/uxin/y
 
 已完成 26 組代表／配對的 CPU／GPU 成本比較，詳見[九項指標報告](<reports/performance/README.md>)與[精確 CSV](<reports/performance/comparison.csv>)。包含 Params、模型大小、MAC／FLOPs subtotal、峰值記憶體、CPU／GPU 延遲及 GPU 能量；目標板卡尚未指定，target latency／energy 明記未量測。
 
-2026-09-13：先完成白話報告與發布；新增 scale／bias CPU 稽核，現行權重不變。PWL [-10,0]／20 段已確認，新的尺度調整與原生 QK 重訓尚未啟動。
+2026-09-13：先完成白話報告與發布；新增 scale／bias CPU 稽核，現行權重不變。PWL [-10,0]／20 段已確認。
 
-2026-09-13 後續已授權 Attention 恢復（最新只保留原生 QK＋PWL、scale／bias 兩組，取消額外 BinaryQK 對照）：[實驗與即時狀態入口](<experiments/attention_recovery_v1/README.md>)。CPU／E0／GPU smoke 已完成，正式訓練已啟動，後續 queue 狀態以事件與各組 summary 為準；舊報告的「未開始」是該次發布時點。
+2026-09-13 後續已執行原生 QK＋PWL Attention 恢復；E2 已完成完整驗證與 checkpoint 保存後依指示暫停，scale_bias 未接續。見[實驗與狀態入口](<experiments/attention_recovery_v1/README.md>)。
 
-2026-09-13 16:33：依使用者要求，已安排目前 Attention 恢復 E2 完成驗證、存檔後暫停，後續 queue 不再接續。見[回合結束暫停紀錄](<docs/worklogs/2026-09-13-attention-epoch-pause.md>)。
+2026-09-13 最新：[Pose 端 MASF 完整比較與分析](<experiments/pose_masf_priority_v1/RESULTS.md>)已完成：直接移接未帶來整體 Pose AP 收益，COCO 不變；權重、全量驗證、成本量測與來源稽核均保存。
 
-2026-09-13 最新：[Pose 端 MASF 完整比較與分析](<experiments/pose_masf_priority_v1/RESULTS.md>)已完成：直接移接未帶來整體 Pose AP 收益，COCO 不變；權重、全量驗證、成本量測與來源稽核均保存。原 Attention E2 與 scale_bias 仍保持暫停。
-
-2026-09-13：[Pose MASF 專項重訓推導與完整架構圖](<experiments/pose_masf_training_v1/README.md>)已整理，包含完整架構與 α／β 梯度；最新已取消 A 加訓，只保留 B 組 5 epoch。B 程式與 CPU 檢查完成，GPU 與等待佇列均尚未啟動，依指示先發布現有圖與分析。
+2026-09-13：[Pose MASF 專項重訓推導與完整架構圖](<experiments/pose_masf_training_v1/README.md>)已整理；A 組取消，只保留 B 組 5 epoch。B 程式與 CPU 檢查完成，GPU 與等待佇列尚未啟動。
