@@ -1,6 +1,6 @@
 # Pose MASF 專項重訓：完整架構、梯度推導與最小實驗
 
-狀態：**B 組程式與 CPU 檢查完成；尚未啟動 GPU，也尚未啟動等待佇列。A 組已依使用者指示取消。** 本次先發布圖與分析，不冒充新訓練成果。實際執行設定以 [execution-config.json](<execution-config.json>) 為準；[proposed-training.json](<proposed-training.json>) 保留原 A/B 設計供追溯，已被 B-only 決定取代。
+狀態：**B 組 5 epoch、獨立驗證、alpha-off 與 CPU 稽核均已完成；A 組取消。** 最新結論見 [RESULTS.md](<RESULTS.md>)，本輪後續見 [0914 更新](<../../reports/update-0914/README.md>)。提案參數與已執行設定分開保留。
 
 ## 1. 結論與範圍
 
@@ -11,7 +11,7 @@
 | 組別 | 可訓練部分 | 想回答的問題 |
 | --- | --- | --- |
 | A：已取消，不執行 | 原 Pose head 加訓 | 缺少此對照，無法分離單純加訓收益 |
-| B：已授權、尚未 GPU 訓練 | Pose head＋獨立 Pose P3 MASF | 相較固定 E2，實際框／關鍵點 AP 是否改善？ |
+| B：5 epoch 與完整驗證已完成 | Pose head＋獨立 Pose P3 MASF | 相較固定 E2，實際框／關鍵點 AP 是否改善？ |
 
 A 不是已取消的 BinaryQK 對照，也不是重跑整個 COCO 訓練。原提案的兩組起點均是同一份 **native QK E2 融合模型**：原生 QK＋PWL [-10,0] 20 段、qSiLU、既有 Detect P3 bridge MASF。固定來源 SHA：`4257ca9c471736aa97d0077097526b7863a9268b773913119b9969991d00b0f3`。
 
@@ -125,7 +125,7 @@ B 組複製已有 Detect MASF 的 context，但把新 Pose α 設為 0；Pose he
 
 但有一個必要注意事項：α=0 時，context 的**任務梯度**為零，α 的梯度則不一定為零。先確認真實 loss 能更新 α，再確認後續 context 梯度出現。若使用 AdamW，weight decay 仍可能影響零梯度參數，不能把「任務梯度為零」說成「參數必然完全不動」。α 本身不做 weight decay。
 
-為避免 gate 在 AMP 下完全不啟動，正式 smoke 必須核對 α 的 FP32 master 參數、unscaled 梯度與實際更新；不能只看整體 loss 下降。此檢查尚未執行。
+為避免 gate 在 AMP 下完全不啟動，正式 smoke 必須核對 α 的 FP32 master 參數、unscaled 梯度與實際更新；不能只看整體 loss 下降。此檢查已在 B 組真實 GPU smoke 完成。
 
 ## 5. one2many／one2one：為什麼 bridge 需要重新考慮？
 
@@ -180,7 +180,7 @@ geff = λm gm + β λo go
 
 這是**有理由的初始設定，不是已證明最佳的超參數**。若真實 unscaled 梯度或更新不穩定，先降低新分支 LR；需要重新校準 β 時，只根據 train 梯度，不在 val 上挑 β。β=1 是舊 one2one 梯度係數的約 82.8 倍，但不代表總梯度、AdamW 更新或精度增加 82.8 倍。
 
-**實作邊界：目前封存的 `PoseP3BridgeMASF` 仍 assert β≤0.25。** β=1 尚未套用；未來須在新的訓練實作允許它並驗證，不可只改 JSON 就宣稱生效，也不能悄悄修改已完成移接實驗的原程式。舊 β 不影響已完成的推論結果。
+**實作邊界：目前封存的 `PoseP3BridgeMASF` 仍 assert β≤0.25。** B 組已在獨立 training_b.py 實作 β=1 並完成 CPU／GPU 驗證；原移接類別限制不变，不可只改 JSON 就宣稱生效，也不能悄悄修改已完成移接實驗的原程式。舊 β 不影響已完成的推論結果。
 
 ## 6. Pose 專項 loss 不只是關鍵點 loss
 
@@ -208,11 +208,11 @@ Lbackward = (64/B) × Σi raw_total_i
 
 尾端要用 B=76，不能仍除以 128。這是現有 loss 正規化尺度的延續，不是把梯度又平均兩次。Pose-only 時 task weight 會與 weight_sum 抵消，不能以為保留舊 pose_weight=0.25 就仍有 0.25 倍監督。
 
-**新 [training_b.py](<training_b.py>) 已實作 `batches_of(loader, 8)`，明確把 8 個 microbatch 送給 MacroStepEngine。** CPU 已核對 373 個 microbatch → 47 次更新、尾端 76 張；尚未以真實 BBAT GPU epoch 驗證吞吐量。沒有修改舊 PoseEpochRunner。
+**新 [training_b.py](<training_b.py>) 已實作 `batches_of(loader, 8)`，明確把 8 個 microbatch 送給 MacroStepEngine。** CPU 已核對 373 個 microbatch → 47 次更新、尾端 76 張；已以真實 BBAT GPU epoch 完成 5 回合，每回合 47 次更新。沒有修改舊 PoseEpochRunner。
 
 「有效 batch 128」不等於一次將 128 張送進 GPU，也不保證與原生 physical batch 128 逐位等價；原生 target-score 的 batch 內正規化、實際 augmentation 等仍有差異。本次不跑 A 組，不能宣稱已有配對公平性證據。此專項每回合只訓 5,964 張而非 COCO 的 118,287 張，若回合變快是範圍不同，不是省略標註。
 
-## 7. B 組已寫入程式的設定：GPU 尚未執行
+## 7. B 組已執行設定：GPU 5 epoch 完成
 
 | 項目 | 第一輪提案 |
 | --- | --- |
@@ -237,14 +237,14 @@ Lbackward = (64/B) × Σi raw_total_i
 ## 8. 驗證流程與決策
 
 1. **CPU 已通過**：固定 E2／B α=0 的 Detect 與 Pose 輸出精確相同；Float／BitTrue 重建、β=1、真實 Pose head 的合成 one2one 梯度、optimizer 分組、BN／EMA 固定及完整續訓快照 roundtrip 通過。
-2. **等待 GPU 後先 smoke**：使用 canonical train loader 的正常批次做兩次有效 batch 128 更新。檢查真實 loss／AMP、α→context 啟動與固定 state；smoke 不混入正式 epoch。此步尚未執行。
+2. **等待 GPU 後先 smoke**：使用 canonical train loader 的正常批次做兩次有效 batch 128 更新。檢查真實 loss／AMP、α→context 啟動與固定 state；smoke 不混入正式 epoch。此步已完成。
 3. **只跑 B 組**：完整 5 epoch、每回合 47 macro；每回合核對固定參數、全部 BN 與 EMA。共享網路及 Detect 不訓練，A 不執行。
 4. **每回合 BitTrue 驗證**：完整 COCO val 5,000 與 BBAT5 v1 val 683；分列 COCO overall／person、BBAT overall／ball／bat 的框與關鍵點 AP。
 5. **B5 對固定 E2**：回答新方案是否改善。沒有 A5，不能把差值全部歸因於 MASF；best Pose 回合另列，不取代事前固定 E5 比較。
 6. **B5 再關 α、另測 Float**：α=0 只測已訓模型的分支依賴，不等於無 MASF 重訓。Float 與 BitTrue 數值分開保存。
 7. **保存**：每回合保存不可覆寫的完整 optimizer／scheduler／scaler／criterion／RNG／EMA 續訓檔及推論 state。驗證失敗可從已保存邊界補驗，不覆寫原 E2 或移接候選。推論成本本次不另排新 benchmark，先前同結構量測僅作參考。
 
-事前工程參考門檻改以固定 E2 為基準：COCO 指標差異 ≤1e-8；B5 overall Pose AP 增加至少 0.002，其餘 BBAT AP 不下降超過 0.001。它不是統計顯著性，也不是已通過的門檻；目前不自動升版、不安排 A 加訓或延長 B 回合。
+事前工程參考門檻改以固定 E2 為基準：COCO 指標差異 ≤1e-8；B5 overall Pose AP 增加至少 0.002，其餘 BBAT AP 不下降超過 0.001。它不是統計顯著性，B5 已通過該工程門檻，但不是統計顯著性證明；不自動升版、不安排 A 加訓或延長 B 回合。
 
 ## 9. 推導已驗證到哪裡？
 
@@ -264,7 +264,7 @@ dot -Tsvg figures/full-architecture.dot -o figures/full-architecture.svg
 dot -Tsvg figures/training-gradient.dot -o figures/training-gradient.svg
 ```
 
-本目錄明確區分既有實測、CPU 合成梯度驗證及未執行的 GPU 訓練。使用者已明確要求以 `5090 Done 0913` 發布現有圖與分析；發布不代表 GPU 已啟動。
+0913 發布時先有圖、分析與 CPU 檢查；後續 GPU 訓練與驗證已完成，本次 0914 發布補齊結果。
 
 
 ## 11. 程式與佇列入口
@@ -273,4 +273,15 @@ dot -Tsvg figures/training-gradient.dot -o figures/training-gradient.svg
 - [preflight_b.py](<preflight_b.py>)：已完成的 CPU 契約檢查；測試快照只留本機，不作訓練起點。
 - [queue_b.py](<queue_b.py>)：GPU 0 沒有其他 compute 程序且取得共享 lock 後，依序 smoke → B5 → 分析。背景程式每 600 秒檢查，正常時不讀 log／不输出進度；不終止外部工作。ERROR／STALLED 會記錄事件，需要主代理介入，不宣稱背景程式本身具有模型診斷能力。
 
-佇列目前**尚未啟動**，依最新指示先完成 Git 發布。日後啟動入口：`/home/uxin/yolo/.venv/bin/python -B queue_b.py --execute`。原 Attention pause-request 保留，沒有自動解除。Git 只發布程式、圖、設定與數值證據；權重、CPU 測試快照、cache、資料集及日誌保留本機。
+佇列已完成，不因讀取本文而重啟。歷史操作入口：`/home/uxin/yolo/.venv/bin/python -B queue_b.py --execute`。原 Attention pause-request 保留，沒有自動解除。Git 只發布程式、圖、設定與數值證據；權重、CPU 測試快照、cache、資料集及日誌保留本機。
+
+
+## 最新完整 B 組排程
+
+[queue-plan.json](<queue-plan.json>) 定義四階段：`smoke → train B5 → analyze → finalize CPU`，不恢復 Attention 佇列。已補強驗證失敗的恢復與 RNG 隔離，CPU 測試見 [queue-preflight-v1.json](<artifacts/queue-preflight-v1.json>)。GPU 完成後自動產出 RESULTS.md、comparison.csv、training-curves.csv／圖與五回合 final-audit.json；不自動採用新模型。
+
+前述「尚未啟動佇列」是 Git 發布當下狀態，現由這次明確排程授權更新；即時 JOB_STARTED／JOB_DONE／ERROR／ALL_DONE 以本機 events.jsonl 為準。工作紀錄見[完整流程與驗收限制](<../../docs/worklogs/2026-09-13-pose-masf-b-queue.md>)。
+
+## B 組佇列完成
+
+5 epoch／獨立重驗／alpha-off／CPU 稽核已完成，現況以 [最終分析](<RESULTS.md>)為準；原發布狀態詳見工作紀錄。A 未跑，沒有自動升版。

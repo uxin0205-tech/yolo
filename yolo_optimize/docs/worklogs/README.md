@@ -4,6 +4,18 @@
 
 ## 索引
 
+- [2026-09-14：整理與 GitHub 發布](<2026-09-14-organize-publish.md>)
+
+- [2026-09-14：BinaryQK E5 後接 RepConv 進度](<2026-09-14-repconv-progress.md>)
+
+- [2026-09-13：scale／bias 硬體設計確認](<2026-09-13-scale-bias-hardware-audit.md>)
+
+- [2026-09-13：RepConv 改接 BinaryQK 重訓 E5](<2026-09-13-repconv-after-binaryqk.md>)
+
+- [2026-09-13：硬體友善候選佇列狀態](<2026-09-13-hardware-queue-status.md>)
+
+- [2026-09-13：追加 Rep17＋20 雙層組與 MASF 完成確認](<2026-09-13-rep17-20-combined.md>)
+
 - [2026-09-12：全階段精度與部署成本比較](<2026-09-12-stage-performance-comparison.md>)
 
 - [2026-09-12：實體資料夾重整、詳細報告與發布](<2026-09-12-physical-layout-and-publication.md>)
@@ -152,9 +164,9 @@
 
 - [2026-09-13：白話報告、BinaryQK 稽核與 GitHub 交付](<2026-09-13-report-update-0913.md>)
 
-- 2026-09-13：scale／bias 與原生 QK＋PWL 三臂恢復（本機保存：`2026-09-13-attention-recovery-training.md`；本次未上傳）
+- [2026-09-13：scale／bias 與原生 QK＋PWL 三臂恢復](<2026-09-13-attention-recovery-training.md>)
 
-- 2026-09-13：取消額外 BinaryQK 對照，不中斷目前訓練（本機保存：`2026-09-13-cancel-binary-control.md`；本次未上傳）
+- [2026-09-13：取消額外 BinaryQK 對照，不中斷目前訓練](<2026-09-13-cancel-binary-control.md>)
 
 - [2026-09-13：目前回合結束後暫停 Attention 恢復](<2026-09-13-attention-epoch-pause.md>)
 
@@ -163,3 +175,7 @@
 - [2026-09-13：Pose MASF 專項重訓推導與完整架構圖](<2026-09-13-pose-masf-training-derivation.md>)
 
 - [2026-09-13：Pose MASF 圖、分析與 B-only CPU 實作發布](<2026-09-13-pose-masf-b-publication.md>)
+
+- [2026-09-13：B 組完整訓練、驗證與分析佇列](<2026-09-13-pose-masf-b-queue.md>)
+
+- [2026-09-13：MASF 完成後的定點 Attention 與 Rep17／20](<2026-09-13-post-masf-hardware.md>)

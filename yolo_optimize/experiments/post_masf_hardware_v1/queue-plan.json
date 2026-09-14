@@ -1,0 +1,27 @@
+{
+  "status": "ready",
+  "arms": [
+    "scale_bias",
+    "rep17",
+    "rep20"
+  ],
+  "epochs_each": 5,
+  "warmup_epochs": 1,
+  "parent_sha256": "1b46fca17f4ae414f622e39afb6d4bae8686ac3a760e23b65fd971500a39e2c7",
+  "requires": [
+    "MASF_B5_final_audit_completed",
+    "MASF_RESULTS_exists",
+    "CPU_preflight_passed",
+    "GPU_idle"
+  ],
+  "native_qk_reference": "already trained native_qk E2 then Pose B5; reuse independent validation, no additional native epochs",
+  "no_unchanged_control_training": true,
+  "no_extra_epochs": true,
+  "original_attention_queue_remains_paused": true,
+  "source_sha256": {
+    "models.py": "070afac23331119ffb337504e7ecaec2beae98c620f25fb5768c0a211fceb634",
+    "run_arm.py": "dcd1e8e1b1ac91f465a844337075f1d4229ff35da812c86e6f83e66de81b53dc",
+    "run_queue.py": "cc9a4d59eb4a9076ef6730d8b5d7a84377ddf595696630c12addb9016ae63b90",
+    "config.json": "e114198ad9b8d325fc8258af696b73899c9fe1d8251567034f638bf3b9270179"
+  }
+}

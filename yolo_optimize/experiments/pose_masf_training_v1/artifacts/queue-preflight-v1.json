@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "gpu_used": false,
+  "tests": [
+    "驗證失敗只補驗，不重匯出／不改權重",
+    "完成回合不重驗",
+    "驗證 RNG 在例外也還原",
+    "BBAT 大幅退化阻擋續訓，alpha-off 可保留退化結果",
+    "恢復分支先补驗後訓練"
+  ],
+  "source_sha256": {
+    "training_b.py": "f122fa9310cfc27b510448d4b720de801dfe7a72f0528b4dcee9afbf84956788",
+    "queue_b.py": "aaf52a85131ff8baef0892a258f18512fd88ee4b8260fefbc3116997267a87c3",
+    "finalize_b.py": "177e7b1de5b539163fd7f3096dee8f5581601e4f38600b399257cf6570ab0378",
+    "execution-config.json": "b0c41aa139cba3ddbae6224098bb55068208d3f6c4d942989b93b2a5e43a5b64"
+  }
+}

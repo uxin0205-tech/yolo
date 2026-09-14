@@ -1,12 +1,14 @@
 # 先讀這份：目前到底用哪個模型？
 
+> 0914：下列原選用權重未被新候選取代。[最新完成的 MASF → BinaryQK → Rep 三組報告](<../update-0914/README.md>)請由此進入；新候選與本頁舊正式模型不同。
+
 這份是使用者閱讀入口，不是歷史實驗目錄。以下「目前使用」指研究選定版本，不代表已在目標硬體部署，也不代表每個指標都最好。
 
 ## 1. 唯一的目前選用版本
 
 **YOLO26M，共用特徵的 Detect＋Pose，保留 BinaryQK＋PWL＋P3 MASF，activation 使用 qSiLU。**
 
-實際推論權重（本機檔案：`../../experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/inference/best_joint.pt`；本次未上傳）。SHA-256：`1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a`。
+實際推論權重（本機保存：`../../experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/inference/best_joint.pt`；本次未上傳）。SHA-256：`1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a`。
 
 `qSiLU E2` 意思是 qSiLU 訓練實驗中，第 2 回合被選中；這個實驗實際跑了 10 回合，不是模型從零只訓練兩回合。`best_joint` 只是該次實驗依多任務評分選出的檔案，不是歷史上所有模型、所有指標的冠軍。
 

@@ -1,0 +1,21 @@
+{
+  "arms": [
+    "rep17",
+    "rep20",
+    "rep17_20"
+  ],
+  "epochs": 5,
+  "warmup_epochs": 1,
+  "parent": "/home/uxin/yolo/yolo_optimize/experiments/post_masf_hardware_v1/artifacts/scale_bias/train/epochs/e5/inference.pt",
+  "parent_sha256": "c8dcaf439b68c77d45a4f213972e57d51912028b558418511badee55fafbf681",
+  "independent_branches": true,
+  "source_sha256": {
+    "models.py": "5edfc0a25cb7c26b2e02edf29ea7a071c02db23ebf4a8db63b766704088ac6c1",
+    "run_arm.py": "843d570ee5e420873a08fb934cbe9da677d704f50c3ce6cd31d7bfddfcd4f48c",
+    "run_queue.py": "6cb9793fb2051a8e655be92ae52f76a3dfdb0d2877d55316f90c135558e57f22",
+    "config.json": "bb81066e92886c50246fb5734c505ed3a247807fe769270955eb9f1dbeefe3ab",
+    "preflight.py": "0e824f9f2264b0e26c6749f2f507c99f84bcf78c7a7651fd938c9297db3a4de4"
+  },
+  "no_auto_promote": true,
+  "monitor_seconds": 600
+}

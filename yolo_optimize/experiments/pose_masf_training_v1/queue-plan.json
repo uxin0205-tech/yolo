@@ -1,0 +1,51 @@
+{
+  "status": "ready_after_cpu_check",
+  "arm": "B_only",
+  "canceled": [
+    "A_pose_head_additional_training"
+  ],
+  "parent_inference_sha256": "4257ca9c471736aa97d0077097526b7863a9268b773913119b9969991d00b0f3",
+  "order": [
+    {
+      "id": "smoke",
+      "device": "gpu",
+      "requires": [
+        "CPU_pass",
+        "GPU_idle"
+      ],
+      "purpose": "真實 BBAT loss 兩次有效 batch128、α 啟動與固定 state"
+    },
+    {
+      "id": "train",
+      "device": "gpu",
+      "requires": [
+        "smoke_completed"
+      ],
+      "purpose": "B 組 5 epoch，warmup1；每 epoch BitTrue 全量驗證，先存檔再驗證，失敗先補驗"
+    },
+    {
+      "id": "analyze",
+      "device": "gpu",
+      "requires": [
+        "train_completed"
+      ],
+      "purpose": "E5 重新載入 BitTrue／Float／alpha-off；best不同時補重驗與alpha-off"
+    },
+    {
+      "id": "finalize",
+      "device": "cpu",
+      "requires": [
+        "analyze_completed"
+      ],
+      "purpose": "五回合完整續訓與EMA／export SHA、指標與門檻、CSV／曲線／中文報告"
+    }
+  ],
+  "monitor_seconds": 600,
+  "no_external_job_termination": true,
+  "completed_jobs_skip": true,
+  "automatic_extra_training": false,
+  "error_policy": "保留所有已完成結果；ERROR 停止相依工作，供主代理最小範圍診斷後續跑，禁止盲目無限重試",
+  "original_attention_remains_paused": true,
+  "auto_promote": false,
+  "auto_git_publish": false
+}

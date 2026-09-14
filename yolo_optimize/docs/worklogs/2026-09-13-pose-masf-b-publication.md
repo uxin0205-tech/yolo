@@ -35,3 +35,7 @@ sandbox 的 bwrap 網路初始化失敗：必要 shell 操作使用核准的 esc
 未完成：真實 GPU smoke、B 5 epoch、alpha-off 新結果與後續監測。CPU 通過不代表 AMP、GPU 記憶體或精度一定通過；等待佇列只負責事件，不具有自主模型診斷能力。缺少 A5，未來 B5−E2 不能拆分 MASF 與額外訓練收益。
 
 發布成功收據在本次 push 後另存，避免在未成功時先聲稱已上傳。
+
+## 發布完成
+
+GitHub main 已確認為 `31e6b16a5b08c1a661203f70ee25fcaa471a4c53`，subject 為 `5090 Done 0913`。55 個檔案已發布；14 Python AST／17 JSON／2 SVG／2 PNG／184 文件連結與 staged SHA、diff --check 通過。本機成功收據（本機保存：`../../reports/current-model/PUBLISHED-pose-0913.md`；本次未上傳）於 push 後補存。發布當下的紀錄保留在 commit；此補記未再次提交。其他困難：無。GPU／佇列未啟動。

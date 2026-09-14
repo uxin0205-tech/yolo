@@ -1,0 +1,80 @@
+{
+  "status": "completed",
+  "gpu_used": false,
+  "records": [
+    {
+      "epoch": 1,
+      "resume": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/checkpoints/epoch-01.pt",
+      "resume_sha256": "5bd2992f27f94a35b9a9b260df5e89c26e4d78190a7d365405d2a5e30b23c923",
+      "inference": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/epochs/e1/ema.pt",
+      "inference_sha256": "dbd0de843990fdbeaf129019fd15feb98c7aeeddf3e7ecfe7339e87345cdad0c",
+      "inference_bytes": 107118610,
+      "alpha_live": 0.0006979288882575929,
+      "alpha_ema": 0.000697618757840246,
+      "pose_loss": 1.25177583352261
+    },
+    {
+      "epoch": 2,
+      "resume": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/checkpoints/epoch-02.pt",
+      "resume_sha256": "1428eeb844f0b6eaab9995bb6f7735c0a2e65bfaa26e5c629889940f30a07b35",
+      "inference": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/epochs/e2/ema.pt",
+      "inference_sha256": "fdfa4c11d6e1c7576577378f65a8321f299cd3e91fa2af87a33c355df1c38cbc",
+      "inference_bytes": 107118610,
+      "alpha_live": 0.0010075750760734081,
+      "alpha_ema": 0.0010061371140182018,
+      "pose_loss": 1.2089482714552595
+    },
+    {
+      "epoch": 3,
+      "resume": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/checkpoints/epoch-03.pt",
+      "resume_sha256": "e501bd354998d20d6ebd67cee8ccddae1b57fda73a31289e2d67e22726a474f4",
+      "inference": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/epochs/e3/ema.pt",
+      "inference_sha256": "d0bb0fb8cc735c7a6e496d466fb3588e8c52bf04406c26b09d27c42d21655785",
+      "inference_bytes": 107118610,
+      "alpha_live": 0.0018120952881872654,
+      "alpha_ema": 0.0018112306715920568,
+      "pose_loss": 1.278159550737807
+    },
+    {
+      "epoch": 4,
+      "resume": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/checkpoints/epoch-04.pt",
+      "resume_sha256": "cadd59f2c35f5ccc2f5e91dea60cba5f94e8c84e688cebfdbdb6bf4e6ffbbda2",
+      "inference": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/epochs/e4/ema.pt",
+      "inference_sha256": "86ad6c731aa69e503bb67d9d2e9e82b1637bf8645f9307cc3a4b67371173fce3",
+      "inference_bytes": 107118610,
+      "alpha_live": 0.0021691597066819668,
+      "alpha_ema": 0.002168170176446438,
+      "pose_loss": 1.298433341250813
+    },
+    {
+      "epoch": 5,
+      "resume": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/checkpoints/epoch-05.pt",
+      "resume_sha256": "f1d01bd837ff0985b484716e0f61904571edfbab49c255d5a81ea5f5009cc0da",
+      "inference": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/artifacts/b-e5-seed1-v1/epochs/e5/ema.pt",
+      "inference_sha256": "1b46fca17f4ae414f622e39afb6d4bae8686ac3a760e23b65fd971500a39e2c7",
+      "inference_bytes": 107118610,
+      "alpha_live": 0.0022558579221367836,
+      "alpha_ema": 0.002256841864436865,
+      "pose_loss": 1.3107325567006265
+    }
+  ],
+  "gate": {
+    "coco_exact": true,
+    "overall_pose_gain_at_least_0_2pp": true,
+    "other_bbat_ap_drop_at_most_0_1pp": true,
+    "passed": true
+  },
+  "best_pose_epoch": 4,
+  "default_model_replaced": false,
+  "A_canceled": true,
+  "parent_sha256": "4257ca9c471736aa97d0077097526b7863a9268b773913119b9969991d00b0f3",
+  "frozen_all_epochs_exact": true,
+  "exports_equal_ema": true,
+  "total_optimizer_steps": 235,
+  "report": "/home/uxin/yolo/yolo_optimize/experiments/pose_masf_training_v1/RESULTS.md",
+  "limitations": [
+    "無 A 加訓對照",
+    "無新硬體延遲／能耗量測",
+    "無多 seed 或 test"
+  ]
+}

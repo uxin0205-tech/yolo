@@ -8,6 +8,9 @@ import math
 from pathlib import Path
 import sys
 import time
+import random
+import functools
+import numpy as np
 import torch
 from torch import nn
 HERE = Path(__file__).resolve().parent
@@ -138,10 +141,35 @@ def state_bundle(model, cfg, device):
     losses = _AutocastTaskLossRouter(NativeTaskLossRouter(model, epochs=cfg['epochs'], imgsz=640),
                                     device=device, enabled=device.type == 'cuda')
     scaler = torch.amp.GradScaler('cuda', enabled=device.type == 'cuda', init_scale=1024)
-    scheduler = StageWarmupCosineScheduler(optimizer, stage='pose_b', epochs=5, steps_per_epoch=47,
-        warmup_epochs=1, warmup_start_factor=.1, final_lr_factor=.5)
+    scheduler = StageWarmupCosineScheduler(optimizer, stage='pose_b', epochs=cfg['epochs'], steps_per_epoch=cfg['optimizer_updates_per_epoch'],
+        warmup_epochs=cfg['warmup_epochs'], warmup_start_factor=cfg['warmup_start_factor'], final_lr_factor=cfg['cosine_final_lr_factor'])
     return dict(optimizer=optimizer, ema=ema, criteria=losses, scaler=scaler, scheduler=scheduler)
 
+def preserve_rng(function):
+    @functools.wraps(function)
+    def wrapped(*args, **kwargs):
+        python_state = random.getstate(); numpy_state = np.random.get_state()
+        devices = list(range(torch.cuda.device_count())) if torch.cuda.is_initialized() else []
+        try:
+            with torch.random.fork_rng(devices=devices):
+                return function(*args, **kwargs)
+        finally:
+            random.setstate(python_state); np.random.set_state(numpy_state)
+    return wrapped
+
+
+def metric_guard(metrics, training_safety=False):
+    expected = parent.payload()['metadata']['metrics']
+    assert set(metrics) == set(expected)
+    assert all(math.isfinite(v) for v in metrics.values())
+    assert all(abs(metrics[k]-v) <= 1e-8 for k,v in expected.items() if k.startswith('coco/'))
+    # 只擋嚴重退化，不把細微 AP 起伏當作錯誤；不擅自增加回合。
+    if training_safety:
+        assert all(metrics[k] >= v-.05 for k,v in expected.items()
+                   if k.startswith('bbat/') and k.endswith('/map50_95')), 'BBAT AP 較 E2 下降超過 5pp，先停查因'
+
+
+@preserve_rng
 def validate(model, source, output, epoch, kind):
     from common import prepare_coco
     from validate import InternalValidator
@@ -163,14 +191,44 @@ def validate(model, source, output, epoch, kind):
         assert len(CountPose.last_instance.dataloader.dataset) == 683
         metrics = dict(result.metrics)
         assert all(math.isfinite(v) for v in metrics.values())
-        if kind == 'bittrue':
-            expected = parent.payload()['metadata']['metrics']
-            assert all(abs(metrics[k]-v) <= 1e-8 for k, v in expected.items() if k.startswith('coco/'))
+        if kind == 'bittrue': metric_guard(metrics)
         return metrics
     finally:
         validation.PoseValidator = original_pose
         InternalValidator.last_instance = None
         CountPose.last_instance = None
+
+def finish_epoch(out, epoch, template, source, guard, cfg):
+    """先補齊已保存回合的 export／驗證；不動 live trainer 與其 RNG。"""
+    ep = out/f'epochs/e{epoch+1}'; ep.mkdir(parents=True, exist_ok=True)
+    snapshot = out/f'checkpoints/epoch-{epoch+1:02d}.pt'
+    if (ep/'metrics.json').exists():
+        metric_guard(json.loads((ep/'metrics.json').read_text()), training_safety=True)
+        assert (ep/'ema.pt').exists() and (ep/'training.json').exists()
+        return
+    data = torch.load(snapshot, map_location='cpu', weights_only=True)
+    assert data['resolved_config'] == cfg and data['progress']['next_epoch'] == epoch+1
+    candidate = copy.deepcopy(template).cpu().eval()
+    candidate.load_state_dict(data['ema_state'], strict=True); guard.check(candidate)
+    if not (ep/'ema.pt').exists():
+        save_inference_weights(ep/'ema.pt', model=candidate, use_ema=False, metadata={
+            'epoch':epoch, 'parent_sha256':cfg['parent_inference_sha256'], 'trained_pose_masf':True,
+            'config':cfg, 'full_resume_sha256':sha256(snapshot), 'source_module':'training_b.TrainingSource',
+            'selected_state':'EMA'})
+    else:
+        exported = torch.load(ep/'ema.pt', map_location='cpu', weights_only=True)
+        assert all(torch.equal(v,exported['state_dict'][n]) for n,v in data['ema_state'].items())
+    if not (ep/'training.json').exists():
+        state = data['loader_state']
+        save(ep/'training.json', {'epoch':epoch+1,'reports':state['reports'],
+            'train_seconds':state.get('train_seconds'), 'alpha_live':float(data['model_state'][PREFIX+'p3_masf.alpha']),
+            'alpha_ema':float(data['ema_state'][PREFIX+'p3_masf.alpha']), 'frozen_live_ema_exact':True})
+    attempt = 1
+    while (ep/f'validation-attempt-{attempt}').exists(): attempt += 1
+    metrics = validate(candidate, source, ep/f'validation-attempt-{attempt}', epoch, 'bittrue')
+    save(ep/'metrics.json', metrics)
+    metric_guard(metrics, training_safety=True)
+
 
 def run(mode):
     cfg = json.loads(CONFIG.read_text())
@@ -195,13 +253,17 @@ def run(mode):
         reference_batch_size=64, task_weights={Task.POSE:1, Task.DETECT:0}, scaler=bundle['scaler'],
         ema=bundle['ema'], max_grad_norm=10, max_amp_retries=16, preprocess=lambda task, b: loader.preprocess(b))
     scheduler = bundle['scheduler']; start = 0
+    if not (out/'resolved-config.json').exists(): save(out/'resolved-config.json', cfg)
     # 每個 epoch 一個不可覆寫的續訓點；只從最高已保存邊界恢復。
     snapshots = sorted((out/'checkpoints').glob('epoch-*.pt'))
     if snapshots:
+        assert [p.name for p in snapshots] == [f'epoch-{i:02d}.pt' for i in range(1,len(snapshots)+1)]
         restored = load_training_snapshot(snapshots[-1], model=model, **bundle)
         assert restored.resolved_config == cfg
         start = restored.progress.next_epoch
         guard.check(model); guard.check(bundle['ema'].ema)
+        # 已存檔但未驗證成功的回合必須先完成；失敗不可往下一回合訓練。
+        for previous in range(start): finish_epoch(out, previous, model, source, guard, cfg)
     observed = []
     if mode == 'smoke':
         def observe(opt, args, kwargs):
@@ -211,12 +273,15 @@ def run(mode):
                 'context_gradient_max':max(float(g.abs().max()) for g in grads)})
         hook = bundle['optimizer'].register_step_pre_hook(observe)
     torch.cuda.reset_peak_memory_stats()
-    for epoch in range(start, 1 if mode == 'smoke' else 5):
+    for epoch in range(start, 1 if mode == 'smoke' else cfg['epochs']):
         set_training(model)
         loader_seed = reseed_loader_for_epoch(loader.loader, seed=cfg['seed'], epoch=epoch, offset=1)
         reports = []; begin = time.monotonic()
-        groups = batches_of(loader.loader, 8)
+        groups = batches_of(loader.loader, cfg['accumulate'])
         if mode == 'smoke': groups = itertools.islice(groups, 2)
+        criterion = bundle['criteria'].router.criteria[Task.POSE]
+        weights = cfg['native_e2e_weights_by_epoch'][epoch]
+        assert abs(criterion.o2m-weights[0]) < 1e-8 and abs(criterion.o2o-weights[1]) < 1e-8
         for group in groups:
             scheduler.prepare_step()
             reports.append(asdict(engine.run(detect_batches=(), pose_batches=group)))
@@ -236,35 +301,13 @@ def run(mode):
         assert len(reports) == 47 and sum(r['pose_images'] for r in reports) == 5964
         assert reports[-1]['pose_images'] == 76
         engine.advance_epoch((Task.POSE,))
-        ep = out/f'epochs/e{epoch+1}'
-        ep.mkdir(parents=True, exist_ok=True)
-        # 在耗時驗證前先保存完整邊界；若驗證失敗，重試只補驗證，不重訓。
         checkpoint = out/f'checkpoints/epoch-{epoch+1:02d}.pt'
         assert not checkpoint.exists()
-        saved = save_training_snapshot(checkpoint, model=model, **bundle,
+        save_training_snapshot(checkpoint, model=model, **bundle,
             progress=TrainingProgress('pose_b', epoch+1, scheduler.current_step, epoch+1), resolved_config=cfg,
-            provenance=source.provenance(), loader_state={'epoch_end':True,'loader_seed':loader_seed,'reports':reports}, best_state={})
-        save_inference_weights(ep/'ema.pt', model=model, ema=bundle['ema'], metadata={
-            'epoch':epoch,'parent_sha256':cfg['parent_inference_sha256'],'trained_pose_masf':True,'config':cfg,
-            'full_resume_sha256':saved.sha256,'source_module':'training_b.TrainingSource'})
-        save(ep/'training.json', {'epoch':epoch+1,'reports':reports,'train_seconds':time.monotonic()-begin,
-            'alpha_live':float(model.pose_head.p3_masf.alpha.detach()),
-            'alpha_ema':float(bundle['ema'].ema.pose_head.p3_masf.alpha),'frozen_live_ema_exact':True})
-        metrics = validate(bundle['ema'].ema, source, ep/'validation', epoch, 'bittrue')
-        save(ep/'metrics.json', metrics)
-    # 恢復時：补齊已訓回合的 export／驗證（不重跑正常 epoch）。
-    for epoch in range(5):
-        ep = out/f'epochs/e{epoch+1}'; ep.mkdir(parents=True, exist_ok=True)
-        snapshot = out/f'checkpoints/epoch-{epoch+1:02d}.pt'
-        if not (ep/'ema.pt').exists():
-            data = torch.load(snapshot, map_location='cpu', weights_only=True)
-            model.load_state_dict(data['ema_state'], strict=True)
-            save_inference_weights(ep/'ema.pt', model=model, use_ema=False, metadata={'epoch':epoch,
-                'parent_sha256':cfg['parent_inference_sha256'], 'trained_pose_masf':True,'full_resume_sha256':sha256(snapshot)})
-        if not (ep/'metrics.json').exists():
-            data = torch.load(ep/'ema.pt', map_location='cpu', weights_only=True)
-            model.load_state_dict(data['state_dict'], strict=True)
-            save(ep/'metrics.json', validate(model, source, ep/'validation-recovery', epoch, 'bittrue'))
+            provenance=source.provenance(), loader_state={'epoch_end':True, 'loader_seed':loader_seed,
+                'reports':reports, 'train_seconds':time.monotonic()-begin, 'criterion_weights_used':weights}, best_state={})
+        finish_epoch(out, epoch, model, source, guard, cfg)
     metrics_by_epoch = {str(i):json.loads((out/f'epochs/e{i}/metrics.json').read_text()) for i in range(1,6)}
     best = max(range(1,6), key=lambda i:metrics_by_epoch[str(i)]['bbat/pose/map50_95'])
     save(out/'summary.json', {'status':'completed','epochs':5,'metrics_by_epoch':metrics_by_epoch,
@@ -277,17 +320,29 @@ def analyze():
     summary = json.loads((RUN/'summary.json').read_text()); assert summary['status'] == 'completed'
     output = RUN/'analysis'
     output.mkdir(parents=True, exist_ok=True)
-    model, source = build()
-    artifact = RUN/'epochs/e5/ema.pt'
-    model.load_state_dict(torch.load(artifact,map_location='cpu',weights_only=True)['state_dict'],strict=True)
     results = {}
-    for case, kind in (('e5_float','float'), ('e5_alpha_off','bittrue')):
+    cases = [('e5_bittrue_recheck',5,'bittrue',False), ('e5_float',5,'float',False), ('e5_alpha_off',5,'bittrue',True)]
+    best = summary['best_pose_epoch']
+    if best != 5:
+        cases += [('best_bittrue_recheck',best,'bittrue',False), ('best_alpha_off',best,'bittrue',True)]
+    artifact = RUN/'epochs/e5/ema.pt'
+    for case, epoch, kind, off in cases:
         result_path = output/(case+'.json')
         if result_path.exists(): results[case] = json.loads(result_path.read_text()); continue
-        if case == 'e5_alpha_off':
+        model, source = build()
+        guard = FrozenGuard(model)
+        model.load_state_dict(torch.load(RUN/f'epochs/e{epoch}/ema.pt',map_location='cpu',weights_only=True)['state_dict'],strict=True)
+        guard.check(model)
+        if off:
             with torch.no_grad(): model.pose_head.p3_masf.alpha.zero_()
-        results[case] = validate(model, source, output/case, 4, kind)
+        attempt=1
+        while (output/f'{case}-attempt-{attempt}').exists(): attempt+=1
+        results[case] = validate(model, source, output/f'{case}-attempt-{attempt}', epoch-1, kind)
+        if not off and kind == 'bittrue':
+            expected = summary['metrics_by_epoch'][str(epoch)]
+            assert all(abs(v-expected[k])<1e-8 for k,v in results[case].items())
         save(result_path, results[case])
+        del model
     base = parent.payload()['metadata']['metrics']; e5 = summary['metrics_by_epoch']['5']
     keys = [k for k in base if k.endswith('/map50_95')]
     lines = ['# B 組 Pose MASF 專項訓練結果', '',
@@ -305,7 +360,7 @@ def analyze():
     edit(HERE/'RESULTS.md','\n'.join(lines))
     save(output/'summary.json', {'status':'completed','results':results,'e5':e5,'baseline':base,
         'checkpoint':str(artifact),'sha256':sha256(artifact),'A_canceled':True,'auto_promoted':False})
-    print('ALL_DONE B 組與 alpha-off 分析完成',flush=True)
+    print('JOB_DONE B 組重驗與 alpha-off，等待最後 CPU 稽核報告',flush=True)
 
 if __name__ == '__main__':
     parser=argparse.ArgumentParser(); parser.add_argument('mode',choices=['smoke','train','analyze'])

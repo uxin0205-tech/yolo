@@ -1,6 +1,6 @@
 # 實驗工作區
 
-[Attention 恢復研究計畫](<attention_recovery_v1/README.md>)：native QK E2 已完成並暫停；scale_bias 尚未正式訓練。
+[Attention 恢復研究計畫](<attention_recovery_v1/README.md>)：native QK E2 已完成並暫停；新 scale/bias 與後續 Rep 三組已完成，見 [0914 完整更新](<../reports/update-0914/README.md>)。
 
 此處是實際程式、原始結果與 checkpoint 所在位置，不是連到舊根目錄的捷徑。各階段保留內部目錄關係，避免把不同 parent 的 run 混合。
 
@@ -20,4 +20,6 @@
 
 [benchmark：跨階段推論成本實驗](<benchmark/README.md>)，不重新訓練。
 
-[Pose MASF 已完成移接分析](<pose_masf_priority_v1/RESULTS.md>)與 [B 組專項架構／CPU 檢查](<pose_masf_training_v1/README.md>)：A 已取消，B 的 GPU 訓練與等待佇列尚未啟動。
+[Pose MASF 已完成移接分析](<pose_masf_priority_v1/RESULTS.md>)與 [B 組專項架構／CPU 檢查](<pose_masf_training_v1/README.md>)：A 已取消，B 的 5E／驗證／分析已完成。
+
+[BinaryQK 後接 Rep 三組](<post_binary_rep_v1/README.md>)：Rep17／Rep20／Rep17＋20 全部完成，未過採用閘。

@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "gpu_used": false,
+  "arm": "rep17_20",
+  "layers": [
+    17,
+    20
+  ],
+  "parent_sha256": "1b46fca17f4ae414f622e39afb6d4bae8686ac3a760e23b65fd971500a39e2c7",
+  "initial_output_matches_B5": true,
+  "nonzero_branches_fold_equivalent": true,
+  "float_bittrue_materialization": true,
+  "both_layers_trainable_at_rep_lr": true,
+  "attention_and_both_masf_frozen": true,
+  "extra_training_parameters": 329216,
+  "extra_training_conv_MAC": 209715200,
+  "extra_deploy_conv_MAC": 0,
+  "limitation": "CPU合成輸入與非零branch fold；實際task-loss梯度須先GPU smoke"
+}
