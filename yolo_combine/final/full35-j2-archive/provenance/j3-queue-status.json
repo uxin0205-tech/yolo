@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/home/uxin/yolo/yolo_combine/.venv/bin/python",
+    "variants/full35/joint.py",
+    "train",
+    "--device",
+    "0",
+    "--name",
+    "full35-joint-adamw-v2-j3-b32-challenger-seed0",
+    "--resume",
+    "/home/uxin/yolo/yolo_combine/variants/full35/artifacts/fusion/formal/full35-joint-adamw-v2-j0e8-j1e20-j2e80-seed0/checkpoints/last.pt",
+    "--enable-j3",
+    "--j3-detect-microbatch",
+    "32"
+  ],
+  "parent_run_name": "full35-joint-adamw-v2-j0e8-j1e20-j2e80-seed0",
+  "run_name": "full35-joint-adamw-v2-j3-b32-challenger-seed0",
+  "schema_version": 1,
+  "status": "training_j3",
+  "updated_at_utc": "2026-08-26T16:33:09.445736+00:00"
+}

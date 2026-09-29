@@ -1,0 +1,27 @@
+{
+  "coco_train_list": "/home/uxin/yolo/coco2017/train2017.txt",
+  "derived_version": "bbat5-v1",
+  "destination": "/home/uxin/yolo/original/pose/derived/bbat5-v1",
+  "detect_source": "/home/uxin/yolo/original/pose/detect_dataset",
+  "entrypoint": "prepare-pose-data",
+  "expected_patch_count": 4,
+  "images_in_git": false,
+  "labels_in_git": false,
+  "pose_source": "/home/uxin/yolo/original/pose/dataset",
+  "repository_dataset_yamls": {
+    "detect": {
+      "path": "/home/uxin/yolo/yolo_achitechure/achitechure_2/configs/data/bbat5-detect.yaml",
+      "sha256": "7a3057633a522f664c2ee9308533cf7e12176889c257de07e1e2a7e2fde097df"
+    },
+    "pose": {
+      "path": "/home/uxin/yolo/yolo_achitechure/achitechure_2/configs/data/bbat5-pose.yaml",
+      "sha256": "da16e724b6048c932342da1629c445ca2d6a2a798f0dd708aadc3ece7d181988"
+    }
+  },
+  "schema_version": 1,
+  "search_val_ratio": 0.1,
+  "seed": 0,
+  "spec_sha256": "75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b",
+  "spec_version": "2.0.0",
+  "train_ratio": 0.9
+}

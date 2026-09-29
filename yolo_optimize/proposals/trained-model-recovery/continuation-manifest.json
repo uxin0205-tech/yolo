@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "purpose": "planning_reference_not_training_config",
+  "latest_integrated_plan": "../integrated-roadmap/direction1-plan.json",
+  "candidate_is_not_selected_parent": true,
+  "best_selection_pending": true,
+  "status": "prepared_pending_baseline_verification",
+  "training_enabled": false,
+  "training_ready": false,
+  "gpu_authorized": false,
+  "source_root": "/home/uxin/yolo/yolo_combine/final/full35",
+  "source_policy": "read_only_do_not_overwrite",
+  "code_snapshot": "/home/uxin/yolo/yolo_combine/final/full35/code/project",
+  "source_bundle": "/home/uxin/yolo/yolo_combine/final/full35/source_bundle",
+  "candidate_inference_checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+  "candidate_full_resume_checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/full-resume/best_joint.pt",
+  "stage_complete_checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/full-resume/last.pt",
+  "accepted_optimization_parent": null,
+  "baseline_quality": "unassessed_for_current_user_requirements",
+  "checkpoint_contents_inspected": false,
+  "run_output_root": null,
+  "resolved_training_config": null,
+  "resume_mode": "undecided_after_state_and_quality_checks",
+  "excluded_direct_joint_parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_detect.pt",
+    "reason": "既有發布報告明記 Pose 尚未適應，八項 gate 未通過；不直接作 task=both parent"
+  },
+  "datasets": {
+    "detect": "/home/uxin/yolo/coco2017.yaml",
+    "pose": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml",
+    "registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml",
+    "assignment_and_labels_immutable": true,
+    "person_only_enabled": false
+  },
+  "runtime_contract_from_release_not_import_verified": {
+    "python": "3.12",
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.90"
+  },
+  "source_audit": {
+    "manifest_records": 407,
+    "missing_files": 0,
+    "size_mismatches": 0,
+    "unsafe_paths": 0,
+    "symlinks_in_manifest": 0,
+    "selected_text_hashes_matched": 6,
+    "full_package_sha256_verified": false,
+    "checkpoint_file_contents_read": false,
+    "selected_text_sha256": {
+      "README.md": "9736f6289865c66b683687b1478e615fca5941bceff64b5f4d9b3067aceaeb0d",
+      "run.py": "7b3871ed140213a501bcf2ff411d6a3b4d7e18d22becb400ff2633ca5bba94e4",
+      "verify.py": "589863e2a4371df9fc98bef5cf18f85fcbd49e6aa51be0e43598e24d237ebd92",
+      "configs/joint.yaml": "0244cd5c36c4ca7bef9bf2e89a8f8cb2d27d8e9db67adb86ede1d5c78d4138ef",
+      "configs/experiment-joint.yaml": "5d19d1067e25a517acb44d9a81dfc20615e0846d5aae7b8d2558bfe46bcd409a",
+      "code/project/src/yolo_combine/joint_cli.py": "5f94da51e5d99f711355930c1aba2138a3b76442aa7fa2ce9cd6269e941e89a6"
+    }
+  },
+  "current_limitations": [
+    "J3 stage-complete 不等於符合目前視覺品質要求",
+    "baseline 驗證與必要原生loss修復尚未執行",
+    "CLI/stage覆寫後的完整resolved config尚未建立",
+    "checkpoint內容與exact-resume相容性尚未驗證",
+    "正式baseline禁止qk_ste=true；Q/K新訓練需獨立challenger契約",
+    "本次只準備文件，沒有GPU執行授權"
+  ],
+  "next_sequence": [
+    "final_source_and_status_inventory",
+    "compare_best_candidates_before_selecting_parent",
+    "resolve_config_and_reproduce_baseline_when_authorized",
+    "native_loss_baseline_repair_only_if_needed",
+    "accept_baseline_as_optimization_parent",
+    "one_matched_optimization_at_a_time"
+  ]
+}

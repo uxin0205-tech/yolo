@@ -1,0 +1,861 @@
+{
+  "status": "complete",
+  "epochs": [
+    {
+      "epoch": 1,
+      "fixed_states_exact": true,
+      "branches": {
+        "detect/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.05741210230693383,
+          "parent_squared": 1977.1189723014832,
+          "relative_l2": 0.005388716341836467
+        },
+        "detect/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.05387150854812717,
+          "parent_squared": 45539.59337234497,
+          "relative_l2": 0.0010876395570937137
+        },
+        "detect/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.07166662895693321,
+          "parent_squared": 2409.0679516792297,
+          "relative_l2": 0.00545423647358677
+        },
+        "detect/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.05712347710868926,
+          "parent_squared": 63010.31792163849,
+          "relative_l2": 0.0009521414723777031
+        },
+        "pose/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.04970181150673625,
+          "parent_squared": 944.7178654521704,
+          "relative_l2": 0.007253290051983508
+        },
+        "pose/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.06519003972721293,
+          "parent_squared": 5636.433106511831,
+          "relative_l2": 0.0034008575738179096
+        },
+        "pose/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.057760210751936825,
+          "parent_squared": 961.8838593959808,
+          "relative_l2": 0.00774913212796913
+        },
+        "pose/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.0670788191794145,
+          "parent_squared": 5698.5276178866625,
+          "relative_l2": 0.0034309261949363643
+        },
+        "pose/cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.07437415609547315,
+          "parent_squared": 846.6004590317607,
+          "relative_l2": 0.009372852349917858
+        },
+        "pose/one2one_cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.10426004184955673,
+          "parent_squared": 875.416910842061,
+          "relative_l2": 0.010913184098626606
+        },
+        "pose/flow_model": {
+          "tensors": 72,
+          "changed": 72,
+          "optimizer_states": 72,
+          "nonzero_moments": 72,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.003304283404004807,
+          "parent_squared": 222.87522682885174,
+          "relative_l2": 0.0038504168167670994
+        },
+        "pose/cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.00012268078387478454,
+          "parent_squared": 29.402220278978348,
+          "relative_l2": 0.0020426699860925917
+        },
+        "pose/cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 2.5131343466711087e-05,
+          "parent_squared": 37.3312828540802,
+          "relative_l2": 0.000820486416790831
+        },
+        "pose/one2one_cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 0.00015398166840441263,
+          "parent_squared": 24.649433493614197,
+          "relative_l2": 0.0024993727999689137
+        },
+        "pose/one2one_cv4_sigma": {
+          "tensors": 6,
+          "changed": 4,
+          "optimizer_states": 6,
+          "nonzero_moments": 4,
+          "step_min": 463,
+          "step_max": 463,
+          "delta_squared": 4.6331945895872195e-05,
+          "parent_squared": 14.492497444152832,
+          "relative_l2": 0.0017880046916671846
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "fixed_states_exact": true,
+      "branches": {
+        "detect/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.1935673819719348,
+          "parent_squared": 1977.1189723014832,
+          "relative_l2": 0.00989463290434304
+        },
+        "detect/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.17846660757913924,
+          "parent_squared": 45539.59337234497,
+          "relative_l2": 0.0019796294681179573
+        },
+        "detect/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.25729557161001537,
+          "parent_squared": 2409.0679516792297,
+          "relative_l2": 0.010334551425346858
+        },
+        "detect/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.21236725265862333,
+          "parent_squared": 63010.31792163849,
+          "relative_l2": 0.0018358531496299939
+        },
+        "pose/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.18380250674221088,
+          "parent_squared": 944.7178654521704,
+          "relative_l2": 0.013948408276258489
+        },
+        "pose/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.23268779302543408,
+          "parent_squared": 5636.433106511831,
+          "relative_l2": 0.00642516998159494
+        },
+        "pose/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.2064320745491557,
+          "parent_squared": 961.8838593959808,
+          "relative_l2": 0.014649650707427369
+        },
+        "pose/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.23753598840221457,
+          "parent_squared": 5698.5276178866625,
+          "relative_l2": 0.0064562952117196435
+        },
+        "pose/cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.2831229302637439,
+          "parent_squared": 846.6004590317607,
+          "relative_l2": 0.01828724454260527
+        },
+        "pose/one2one_cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.35810854979899887,
+          "parent_squared": 875.416910842061,
+          "relative_l2": 0.02022552851495128
+        },
+        "pose/flow_model": {
+          "tensors": 72,
+          "changed": 72,
+          "optimizer_states": 72,
+          "nonzero_moments": 72,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.004474208708137306,
+          "parent_squared": 222.87522682885174,
+          "relative_l2": 0.004480507620147499
+        },
+        "pose/cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.00039498056031561646,
+          "parent_squared": 29.402220278978348,
+          "relative_l2": 0.0036652010077378233
+        },
+        "pose/cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 2.51358136331703e-05,
+          "parent_squared": 37.3312828540802,
+          "relative_l2": 0.0008205593843936975
+        },
+        "pose/one2one_cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.0005758639621404882,
+          "parent_squared": 24.649433493614197,
+          "relative_l2": 0.004833441640422328
+        },
+        "pose/one2one_cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 926,
+          "step_max": 926,
+          "delta_squared": 0.00014979037399598383,
+          "parent_squared": 14.492497444152832,
+          "relative_l2": 0.003214921228200834
+        }
+      }
+    },
+    {
+      "epoch": 3,
+      "fixed_states_exact": true,
+      "branches": {
+        "detect/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.3215201188470296,
+          "parent_squared": 1977.1189723014832,
+          "relative_l2": 0.012752275159940069
+        },
+        "detect/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.3006062022777769,
+          "parent_squared": 45539.59337234497,
+          "relative_l2": 0.0025692383401010738
+        },
+        "detect/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.430785907540141,
+          "parent_squared": 2409.0679516792297,
+          "relative_l2": 0.013372303311639196
+        },
+        "detect/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.3822477021785744,
+          "parent_squared": 63010.31792163849,
+          "relative_l2": 0.0024630124451929915
+        },
+        "pose/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.3226578678452938,
+          "parent_squared": 944.7178654521704,
+          "relative_l2": 0.01848077015043081
+        },
+        "pose/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.35698470654210723,
+          "parent_squared": 5636.433106511831,
+          "relative_l2": 0.007958342521741407
+        },
+        "pose/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.35276756442399915,
+          "parent_squared": 961.8838593959808,
+          "relative_l2": 0.019150627316039493
+        },
+        "pose/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.3906553758465634,
+          "parent_squared": 5698.5276178866625,
+          "relative_l2": 0.008279718542825075
+        },
+        "pose/cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.5280569947972253,
+          "parent_squared": 846.6004590317607,
+          "relative_l2": 0.024974750028878605
+        },
+        "pose/one2one_cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.6257991499896889,
+          "parent_squared": 875.416910842061,
+          "relative_l2": 0.02673683639291309
+        },
+        "pose/flow_model": {
+          "tensors": 72,
+          "changed": 72,
+          "optimizer_states": 72,
+          "nonzero_moments": 72,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.016691563534118714,
+          "parent_squared": 222.87522682885174,
+          "relative_l2": 0.008654014346758382
+        },
+        "pose/cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.0006948248691287517,
+          "parent_squared": 29.402220278978348,
+          "relative_l2": 0.004861246166380176
+        },
+        "pose/cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.00018127411420110207,
+          "parent_squared": 37.3312828540802,
+          "relative_l2": 0.002203593276775231
+        },
+        "pose/one2one_cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.0009211496058014745,
+          "parent_squared": 24.649433493614197,
+          "relative_l2": 0.006113101602533605
+        },
+        "pose/one2one_cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 1389,
+          "step_max": 1389,
+          "delta_squared": 0.00014979037399598383,
+          "parent_squared": 14.492497444152832,
+          "relative_l2": 0.003214921228200834
+        }
+      }
+    },
+    {
+      "epoch": 4,
+      "fixed_states_exact": true,
+      "branches": {
+        "detect/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.4408742627414597,
+          "parent_squared": 1977.1189723014832,
+          "relative_l2": 0.014932790473296029
+        },
+        "detect/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.4169852307340989,
+          "parent_squared": 45539.59337234497,
+          "relative_l2": 0.0030259779722549627
+        },
+        "detect/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.5933841928010395,
+          "parent_squared": 2409.0679516792297,
+          "relative_l2": 0.01569435461841979
+        },
+        "detect/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.5516585465329626,
+          "parent_squared": 63010.31792163849,
+          "relative_l2": 0.0029588935421363725
+        },
+        "pose/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.46876197735002734,
+          "parent_squared": 944.7178654521704,
+          "relative_l2": 0.022275380160270992
+        },
+        "pose/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.48421235064620305,
+          "parent_squared": 5636.433106511831,
+          "relative_l2": 0.009268634420217498
+        },
+        "pose/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.5017337263005004,
+          "parent_squared": 961.8838593959808,
+          "relative_l2": 0.022838907675458448
+        },
+        "pose/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.5327865109775303,
+          "parent_squared": 5698.5276178866625,
+          "relative_l2": 0.009669305496145829
+        },
+        "pose/cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.7728680011914548,
+          "parent_squared": 846.6004590317607,
+          "relative_l2": 0.03021436097989531
+        },
+        "pose/one2one_cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.898540334577774,
+          "parent_squared": 875.416910842061,
+          "relative_l2": 0.03203769942473291
+        },
+        "pose/flow_model": {
+          "tensors": 72,
+          "changed": 72,
+          "optimizer_states": 72,
+          "nonzero_moments": 72,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.016691691620787097,
+          "parent_squared": 222.87522682885174,
+          "relative_l2": 0.008654047551009651
+        },
+        "pose/cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.0010393431930424413,
+          "parent_squared": 29.402220278978348,
+          "relative_l2": 0.00594551425286094
+        },
+        "pose/cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.0001812744416191947,
+          "parent_squared": 37.3312828540802,
+          "relative_l2": 0.0022035952668442074
+        },
+        "pose/one2one_cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.0012284667994322263,
+          "parent_squared": 24.649433493614197,
+          "relative_l2": 0.007059569865219882
+        },
+        "pose/one2one_cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 1852,
+          "step_max": 1852,
+          "delta_squared": 0.00014979037399598383,
+          "parent_squared": 14.492497444152832,
+          "relative_l2": 0.003214921228200834
+        }
+      }
+    },
+    {
+      "epoch": 5,
+      "fixed_states_exact": true,
+      "branches": {
+        "detect/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.5484307235957431,
+          "parent_squared": 1977.1189723014832,
+          "relative_l2": 0.016654994223313825
+        },
+        "detect/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.5268519691426263,
+          "parent_squared": 45539.59337234497,
+          "relative_l2": 0.0034013375183689415
+        },
+        "detect/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.7281979602724391,
+          "parent_squared": 2409.0679516792297,
+          "relative_l2": 0.017386021164971715
+        },
+        "detect/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.7218891638267451,
+          "parent_squared": 63010.31792163849,
+          "relative_l2": 0.0033847720485050458
+        },
+        "pose/cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.6103340312194518,
+          "parent_squared": 944.7178654521704,
+          "relative_l2": 0.02541749395399158
+        },
+        "pose/cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.5966261077694526,
+          "parent_squared": 5636.433106511831,
+          "relative_l2": 0.010288426238306671
+        },
+        "pose/one2one_cv2": {
+          "tensors": 24,
+          "changed": 24,
+          "optimizer_states": 24,
+          "nonzero_moments": 24,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.6466832281411143,
+          "parent_squared": 961.8838593959808,
+          "relative_l2": 0.025928923128341233
+        },
+        "pose/one2one_cv3": {
+          "tensors": 42,
+          "changed": 42,
+          "optimizer_states": 42,
+          "nonzero_moments": 42,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.6282555829532157,
+          "parent_squared": 5698.5276178866625,
+          "relative_l2": 0.010499940778864717
+        },
+        "pose/cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 1.0628303613120806,
+          "parent_squared": 846.6004590317607,
+          "relative_l2": 0.0354317600590569
+        },
+        "pose/one2one_cv4": {
+          "tensors": 18,
+          "changed": 18,
+          "optimizer_states": 18,
+          "nonzero_moments": 18,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 1.2069984246008971,
+          "parent_squared": 875.416910842061,
+          "relative_l2": 0.03713179000741495
+        },
+        "pose/flow_model": {
+          "tensors": 72,
+          "changed": 72,
+          "optimizer_states": 72,
+          "nonzero_moments": 72,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.016691691620787097,
+          "parent_squared": 222.87522682885174,
+          "relative_l2": 0.008654047551009651
+        },
+        "pose/cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.0014593299083571765,
+          "parent_squared": 29.402220278978348,
+          "relative_l2": 0.007045092151240814
+        },
+        "pose/cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.0001812744416191947,
+          "parent_squared": 37.3312828540802,
+          "relative_l2": 0.0022035952668442074
+        },
+        "pose/one2one_cv4_kpts": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.0016392906634337123,
+          "parent_squared": 24.649433493614197,
+          "relative_l2": 0.008155010253246747
+        },
+        "pose/one2one_cv4_sigma": {
+          "tensors": 6,
+          "changed": 6,
+          "optimizer_states": 6,
+          "nonzero_moments": 6,
+          "step_min": 2315,
+          "step_max": 2315,
+          "delta_squared": 0.00014979037399598383,
+          "parent_squared": 14.492497444152832,
+          "relative_l2": 0.003214921228200834
+        }
+      }
+    }
+  ],
+  "note": "moment 為累積證據，不等於每一個 minibatch 梯度都非零"
+}

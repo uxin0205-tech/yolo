@@ -1,0 +1,593 @@
+{
+  "parent_id": "full35-b-f10",
+  "historical_gate": "rollback",
+  "models": {
+    "float": {
+      "path": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/float/full35-b-f10.pt",
+      "sha256": "81dc8629fc6db2915242ba950c522c249d89ba1aa6d53ab39389c9b5a4ed0047",
+      "graph": {
+        "p3_index": 16,
+        "detect_inputs": [
+          16,
+          19,
+          22
+        ],
+        "strides": [
+          8,
+          16,
+          32
+        ],
+        "end2end": true,
+        "attention_paths": [
+          "model.10.m.0.attn",
+          "model.22.m.0.1.attn"
+        ]
+      },
+      "checkpoint_keys": [
+        "date",
+        "version",
+        "license",
+        "docs",
+        "epoch",
+        "best_fitness",
+        "model",
+        "ema",
+        "updates",
+        "optimizer",
+        "scaler",
+        "train_args",
+        "train_metrics",
+        "train_results",
+        "git"
+      ],
+      "epoch": -1,
+      "updates": null,
+      "has_optimizer": false,
+      "has_ema": false,
+      "parameters": 21973037,
+      "attention": {
+        "model.10.m.0.attn": {
+          "config": {
+            "name": "PWL-FINAL-FLOAT-SURROGATE",
+            "basis": "hadamard",
+            "bias": "decomposed_2d",
+            "scale_mode": "power_of_two",
+            "normalization": "piecewise_linear",
+            "row_correction": "none",
+            "use_ste": true,
+            "max_bias_size": 32,
+            "score_step": 0.125,
+            "score_min": -80,
+            "exp_bits": 15,
+            "pwl_segments": 20,
+            "relu_margin": 1.0,
+            "multimax_top_k": 5,
+            "normalization_progressive": false,
+            "normalization_transition_epochs": 5,
+            "bdcn_codebook": null,
+            "bdcn_sharing": null,
+            "bdcn_projection": null,
+            "bdcn_denominator": null,
+            "bdcn_levels": 16,
+            "bdcn_step": 0.125,
+            "bdcn_distance_max": null,
+            "bdcn_log_ratio_bound": null,
+            "bdcn_fused_value": true,
+            "bdcn_reciprocal_newton_steps": 0,
+            "p_bits": null,
+            "v_bits": null,
+            "projection_weight_bits": null,
+            "projection_activation_bits": null,
+            "progressive": false
+          },
+          "buffers": {
+            "current_epoch": 0,
+            "qkv.q.bn.num_batches_tracked": 0,
+            "qkv.k.bn.num_batches_tracked": 0,
+            "qkv.v.bn.num_batches_tracked": 0,
+            "pe.bn.num_batches_tracked": 0,
+            "proj.bn.num_batches_tracked": 0,
+            "score.fixed_coefficients": [
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ]
+            ],
+            "score.fixed_coefficients_ready": true,
+            "score.calibration_sums": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "score.calibration_counts": [
+              0.0,
+              0.0
+            ],
+            "score.calibration_enabled": false,
+            "normalize.knots": [
+              -10.0,
+              -9.5,
+              -9.0,
+              -8.5,
+              -8.0,
+              -7.5,
+              -7.0,
+              -6.5,
+              -6.0,
+              -5.5,
+              -5.0,
+              -4.5,
+              -4.0,
+              -3.5,
+              -3.0,
+              -2.5,
+              -2.0,
+              -1.5,
+              -1.0,
+              -0.5,
+              0.0
+            ],
+            "normalize.values": [
+              4.5418739318847656e-05,
+              7.486343383789062e-05,
+              0.0001233816146850586,
+              0.0002034902572631836,
+              0.00033545494079589844,
+              0.000553131103515625,
+              0.000911712646484375,
+              0.00150299072265625,
+              0.00247955322265625,
+              0.004085540771484375,
+              0.00673675537109375,
+              0.0111083984375,
+              0.018310546875,
+              0.0301971435546875,
+              0.049774169921875,
+              0.08209228515625,
+              0.1353759765625,
+              0.22314453125,
+              0.367919921875,
+              0.6064453125,
+              1.0
+            ]
+          }
+        },
+        "model.22.m.0.1.attn": {
+          "config": {
+            "name": "PWL-FINAL-FLOAT-SURROGATE",
+            "basis": "hadamard",
+            "bias": "decomposed_2d",
+            "scale_mode": "power_of_two",
+            "normalization": "piecewise_linear",
+            "row_correction": "none",
+            "use_ste": true,
+            "max_bias_size": 32,
+            "score_step": 0.125,
+            "score_min": -80,
+            "exp_bits": 15,
+            "pwl_segments": 20,
+            "relu_margin": 1.0,
+            "multimax_top_k": 5,
+            "normalization_progressive": false,
+            "normalization_transition_epochs": 5,
+            "bdcn_codebook": null,
+            "bdcn_sharing": null,
+            "bdcn_projection": null,
+            "bdcn_denominator": null,
+            "bdcn_levels": 16,
+            "bdcn_step": 0.125,
+            "bdcn_distance_max": null,
+            "bdcn_log_ratio_bound": null,
+            "bdcn_fused_value": true,
+            "bdcn_reciprocal_newton_steps": 0,
+            "p_bits": null,
+            "v_bits": null,
+            "projection_weight_bits": null,
+            "projection_activation_bits": null,
+            "progressive": false
+          },
+          "buffers": {
+            "current_epoch": 0,
+            "qkv.q.bn.num_batches_tracked": 0,
+            "qkv.k.bn.num_batches_tracked": 0,
+            "qkv.v.bn.num_batches_tracked": 0,
+            "pe.bn.num_batches_tracked": 0,
+            "proj.bn.num_batches_tracked": 0,
+            "score.fixed_coefficients": [
+              [
+                0.125,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ]
+            ],
+            "score.fixed_coefficients_ready": true,
+            "score.calibration_sums": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "score.calibration_counts": [
+              0.0,
+              0.0
+            ],
+            "score.calibration_enabled": false,
+            "normalize.knots": [
+              -10.0,
+              -9.5,
+              -9.0,
+              -8.5,
+              -8.0,
+              -7.5,
+              -7.0,
+              -6.5,
+              -6.0,
+              -5.5,
+              -5.0,
+              -4.5,
+              -4.0,
+              -3.5,
+              -3.0,
+              -2.5,
+              -2.0,
+              -1.5,
+              -1.0,
+              -0.5,
+              0.0
+            ],
+            "normalize.values": [
+              4.5418739318847656e-05,
+              7.486343383789062e-05,
+              0.0001233816146850586,
+              0.0002034902572631836,
+              0.00033545494079589844,
+              0.000553131103515625,
+              0.000911712646484375,
+              0.00150299072265625,
+              0.00247955322265625,
+              0.004085540771484375,
+              0.00673675537109375,
+              0.0111083984375,
+              0.018310546875,
+              0.0301971435546875,
+              0.049774169921875,
+              0.08209228515625,
+              0.1353759765625,
+              0.22314453125,
+              0.367919921875,
+              0.6064453125,
+              1.0
+            ]
+          }
+        }
+      },
+      "masf_alpha": 0.1031494140625
+    },
+    "bittrue": {
+      "path": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/full35-b-f10.pt",
+      "sha256": "a8780ae988e61905fa78134b16bf362d2392d2a71f43941f770769bd42265cae",
+      "graph": {
+        "p3_index": 16,
+        "detect_inputs": [
+          16,
+          19,
+          22
+        ],
+        "strides": [
+          8,
+          16,
+          32
+        ],
+        "end2end": true,
+        "attention_paths": [
+          "model.10.m.0.attn",
+          "model.22.m.0.1.attn"
+        ]
+      },
+      "checkpoint_keys": [
+        "date",
+        "version",
+        "license",
+        "docs",
+        "epoch",
+        "best_fitness",
+        "model",
+        "ema",
+        "updates",
+        "optimizer",
+        "scaler",
+        "train_args",
+        "train_metrics",
+        "train_results",
+        "git"
+      ],
+      "epoch": -1,
+      "updates": null,
+      "has_optimizer": false,
+      "has_ema": false,
+      "parameters": 21973037,
+      "attention": {
+        "model.10.m.0.attn": {
+          "config": {
+            "name": "PWL-FINAL-BITTRUE",
+            "basis": "hadamard",
+            "bias": "decomposed_2d",
+            "scale_mode": "power_of_two",
+            "normalization": "bit_true_pwl",
+            "row_correction": "none",
+            "use_ste": false,
+            "max_bias_size": 32,
+            "score_step": 0.125,
+            "score_min": -80,
+            "exp_bits": 15,
+            "pwl_segments": 20,
+            "relu_margin": 1.0,
+            "multimax_top_k": 5,
+            "normalization_progressive": false,
+            "normalization_transition_epochs": 5,
+            "bdcn_codebook": null,
+            "bdcn_sharing": null,
+            "bdcn_projection": null,
+            "bdcn_denominator": null,
+            "bdcn_levels": 16,
+            "bdcn_step": 0.125,
+            "bdcn_distance_max": null,
+            "bdcn_log_ratio_bound": null,
+            "bdcn_fused_value": true,
+            "bdcn_reciprocal_newton_steps": 0,
+            "p_bits": null,
+            "v_bits": null,
+            "projection_weight_bits": null,
+            "projection_activation_bits": null,
+            "progressive": false
+          },
+          "buffers": {
+            "current_epoch": 0,
+            "qkv.q.bn.num_batches_tracked": 0,
+            "qkv.k.bn.num_batches_tracked": 0,
+            "qkv.v.bn.num_batches_tracked": 0,
+            "pe.bn.num_batches_tracked": 0,
+            "proj.bn.num_batches_tracked": 0,
+            "score.fixed_coefficients": [
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ]
+            ],
+            "score.fixed_coefficients_ready": true,
+            "score.calibration_sums": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "score.calibration_counts": [
+              0.0,
+              0.0
+            ],
+            "score.calibration_enabled": false,
+            "normalize.endpoint_table": [
+              1,
+              2,
+              4,
+              7,
+              11,
+              18,
+              30,
+              49,
+              81,
+              134,
+              221,
+              364,
+              600,
+              990,
+              1631,
+              2690,
+              4435,
+              7312,
+              12055,
+              19875,
+              32768
+            ]
+          }
+        },
+        "model.22.m.0.1.attn": {
+          "config": {
+            "name": "PWL-FINAL-BITTRUE",
+            "basis": "hadamard",
+            "bias": "decomposed_2d",
+            "scale_mode": "power_of_two",
+            "normalization": "bit_true_pwl",
+            "row_correction": "none",
+            "use_ste": false,
+            "max_bias_size": 32,
+            "score_step": 0.125,
+            "score_min": -80,
+            "exp_bits": 15,
+            "pwl_segments": 20,
+            "relu_margin": 1.0,
+            "multimax_top_k": 5,
+            "normalization_progressive": false,
+            "normalization_transition_epochs": 5,
+            "bdcn_codebook": null,
+            "bdcn_sharing": null,
+            "bdcn_projection": null,
+            "bdcn_denominator": null,
+            "bdcn_levels": 16,
+            "bdcn_step": 0.125,
+            "bdcn_distance_max": null,
+            "bdcn_log_ratio_bound": null,
+            "bdcn_fused_value": true,
+            "bdcn_reciprocal_newton_steps": 0,
+            "p_bits": null,
+            "v_bits": null,
+            "projection_weight_bits": null,
+            "projection_activation_bits": null,
+            "progressive": false
+          },
+          "buffers": {
+            "current_epoch": 0,
+            "qkv.q.bn.num_batches_tracked": 0,
+            "qkv.k.bn.num_batches_tracked": 0,
+            "qkv.v.bn.num_batches_tracked": 0,
+            "pe.bn.num_batches_tracked": 0,
+            "proj.bn.num_batches_tracked": 0,
+            "score.fixed_coefficients": [
+              [
+                0.125,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ],
+              [
+                0.25,
+                0.25
+              ]
+            ],
+            "score.fixed_coefficients_ready": true,
+            "score.calibration_sums": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "score.calibration_counts": [
+              0.0,
+              0.0
+            ],
+            "score.calibration_enabled": false,
+            "normalize.endpoint_table": [
+              1,
+              2,
+              4,
+              7,
+              11,
+              18,
+              30,
+              49,
+              81,
+              134,
+              221,
+              364,
+              600,
+              990,
+              1631,
+              2690,
+              4435,
+              7312,
+              12055,
+              19875,
+              32768
+            ]
+          }
+        }
+      },
+      "masf_alpha": 0.1031494140625
+    }
+  },
+  "float_vs_bittrue_state": {
+    "changed": [
+      "model.10.m.0.attn.normalize.knots",
+      "model.10.m.0.attn.normalize.values",
+      "model.22.m.0.1.attn.normalize.knots",
+      "model.22.m.0.1.attn.normalize.values"
+    ],
+    "extra": [
+      "model.10.m.0.attn.normalize.endpoint_table",
+      "model.22.m.0.1.attn.normalize.endpoint_table"
+    ]
+  },
+  "data_yaml": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/datasets/coco2017-runtime/coco2017.yaml",
+  "status": "passed",
+  "training_performed": false
+}

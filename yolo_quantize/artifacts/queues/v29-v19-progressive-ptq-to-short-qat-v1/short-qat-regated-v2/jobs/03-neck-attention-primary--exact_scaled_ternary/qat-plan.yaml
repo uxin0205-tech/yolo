@@ -1,0 +1,220 @@
+schema_version: 1
+plan_id: v29-short-qat-03-neck-attention-primary--exact_scaled_ternary
+date: '2026-09-04'
+execution_authorized: true
+formal_validation: false
+execution_authorization:
+  authorization_id: user-2026-09-04-arrange-and-continue-training-queue
+  arms:
+  - sham
+  - qat
+  scope: paired_progressive_short_qat_search_only
+sources:
+  parent_checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+    sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+  accepted_metrics:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/runs/v15-poly-shift-backbone-early-w8-search-v1/validation/accepted/epoch-0000/bittrue/metrics.json
+    sha256: 2e97e4a60039741cc1fc45a03d67615bbc5b851bcf60a56cd153251366c4a355
+  matched_metrics:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v19-poly-shift-all-w8-qat-pilot-v1-qat-seed1/validation/epoch-0005/bittrue/metrics.json
+    sha256: c626ec9b5e1c84a04882032a9856d1c9fd2282b52c684b26c75c522756ffe42f
+  joint_config:
+    path: /home/uxin/yolo/yolo_combine/final/full35/configs/joint.yaml
+    sha256: 0244cd5c36c4ca7bef9bf2e89a8f8cb2d27d8e9db67adb86ede1d5c78d4138ef
+  activation_recipe:
+    path: /home/uxin/yolo/yolo_activation/training/full35/activation-recipe.yaml
+    sha256: ff067b31dd1627930cf21509bcc231310f87aab2761adc325e438b4f305c057a
+  weight_plan:
+    path: /home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml
+    sha256: a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c
+  candidate_evidence:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/03-neck-attention-primary--exact_scaled_ternary/candidate-evidence.json
+    sha256: 2875c9d2ec7b98ff439f7a9199dc8b42db6772b5a0b9d5de922980e8539e29e2
+  candidate_dual_regate:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/03-neck-attention-primary--exact_scaled_ternary/candidate-dual-regate.json
+    sha256: 2cae10d6d622014871af6f9aaafb16b6ea08c7d1d57c467a88c7840897cd6bfa
+activation:
+  name: poly_shift
+  bits: 8
+  signed_codes: false
+  region_assignments: []
+data:
+  coco:
+    path: /home/uxin/yolo/coco2017.yaml
+    sha256: 1ed971749ec00b84db8ffe850b05e34e0acfd63a9654a9224ac8d80f5e068068
+  registry:
+    path: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+    sha256: 208e0f9e5bfded11f5739e9c598d98b4e5414699c64b9faf6f9625680988754a
+  pose_search:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+    sha256: a9069992cf21bff802466fa8adb46cba9bd55585f5adc8f3c183d33c8ede0b5d
+  diagnostic_manifest:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+    sha256: 76b4392d2d07232967018b20af82149ba67ee036fad2cb75bb15d2d7565f4356
+  diagnostic_manifest_identity: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+graph_inventory:
+  master:
+    totals:
+      modules: 251
+      weight_elements: 26451392
+      deployment_modules: 148
+      deployment_weight_elements: 22571840
+      training_only_modules: 99
+      training_only_weight_elements: 3748480
+      protected_modules: 4
+      protected_weight_elements: 131072
+    deployment_regions: &id001
+      backbone_early:
+        modules: 21
+        weight_elements: 1218240
+      backbone_deep:
+        modules: 22
+        weight_elements: 8126464
+      backbone_attention_safe:
+        modules: 7
+        weight_elements: 919808
+      neck:
+        modules: 33
+        weight_elements: 8142848
+      masf:
+        modules: 3
+        weight_elements: 74240
+      neck_attention_safe:
+        modules: 5
+        weight_elements: 395520
+      detect_one2one_tower:
+        modules: 18
+        weight_elements: 1390592
+      detect_one2one_predictor:
+        modules: 6
+        weight_elements: 62208
+      pose_one2one_tower:
+        modules: 24
+        weight_elements: 2238464
+      pose_one2one_predictor:
+        modules: 9
+        weight_elements: 3456
+  deployment:
+    totals:
+      modules: 152
+      weight_elements: 22702912
+      deployment_modules: 148
+      deployment_weight_elements: 22571840
+      training_only_modules: 0
+      training_only_weight_elements: 0
+      protected_modules: 4
+      protected_weight_elements: 131072
+    deployment_regions: *id001
+weight_policy:
+  candidate_id: neck-attention-primary--exact_scaled_ternary
+  assignments:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: masf
+    paths:
+    - graph.model.16.p3_masf.context.project.conv
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    paths:
+    - graph.model.22.m.0.1.ffn.1.conv
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+optimizer:
+  name: AdamW
+  weight_decay: 0.00027
+  beta1: 0.948
+  beta2: 0.999
+  qparam_lr_ratio: 1.0
+  learning_rates:
+    backbone: 3.8e-07
+    neck: 1.9e-06
+    masf: 3.8e-06
+    attention: 5.0e-08
+    detect_head: 5.0e-06
+    pose_head: 5.0e-06
+training:
+  epochs: 15
+  seed: 1
+  patience: 5
+  warmup_epochs: 1
+  scale_only_epochs: 9
+  progressive_start_epoch: 2
+  progressive_full_epoch: 9
+  detect_logical_batch: 128
+  detect_microbatch: 16
+  pose_batch: 16
+  gradient_clip_norm: 10.0
+  added_noise: false
+gates:
+  map50_max_drop: 0.015
+  map50_95_max_drop: 0.04
+  matched_sham_max_absolute_drift: 0.01
+monitoring:
+  mode: low_token
+  events:
+  - epoch_end
+  - checkpoint
+  - gate
+  - anomaly
+  full_artifact_logging: true
+run_root: /home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v29-progressive-short
+warm_start:
+  locked_parent:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/manifests/v19-epoch5-locked-parent-v1.yaml
+    sha256: 6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7
+  checkpoint_role: full_resume
+  state_key: ema_state
+  reset_path_override_quantizers: true
+  optimizer_state: fresh

@@ -1,0 +1,26 @@
+{
+  "status": "cpu_probe_passed_not_kd_ready",
+  "student": "/home/uxin/yolo/yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/inference/best_joint.pt",
+  "sha256": "1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a",
+  "results": [
+    {
+      "site": "model.10.m.0.attn",
+      "raw_binary_score_has_qk_gradient": false,
+      "surrogate_forward_exact": true,
+      "surrogate_q_gradient_norm": 0.22493262588977814,
+      "surrogate_k_gradient_norm": 0.22636115550994873,
+      "eval_exact": true,
+      "state_unchanged": true
+    },
+    {
+      "site": "model.22.m.0.1.attn",
+      "raw_binary_score_has_qk_gradient": false,
+      "surrogate_forward_exact": true,
+      "surrogate_q_gradient_norm": 0.21429887413978577,
+      "surrogate_k_gradient_norm": 0.21401360630989075,
+      "eval_exact": true,
+      "state_unchanged": true
+    }
+  ],
+  "limits": "\u5c1a\u672a\u9a57\u8b49\u5168\u6a21\u578b KD-only \u66f4\u65b0\u3001AMP\u3001GT mapping\u3001teacher\u512a\u52e2\uff1b\u672a\u555f\u52d5KD\u8a13\u7df4\u3002"
+}

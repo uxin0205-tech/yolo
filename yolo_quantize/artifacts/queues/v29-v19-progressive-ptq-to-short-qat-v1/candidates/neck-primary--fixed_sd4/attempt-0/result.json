@@ -1,0 +1,114 @@
+{
+  "assignments": [
+    {
+      "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "fixed_sd4",
+      "path": "graph.model.13.cv2.conv",
+      "region": "neck",
+      "stage_id": "neck-primary",
+      "weight_format_id": "fixed-sd4"
+    }
+  ],
+  "candidate_id": "neck-primary--fixed_sd4",
+  "formal_training": false,
+  "formal_validation": false,
+  "materialization": {
+    "detect_complete": true,
+    "pose_complete": true
+  },
+  "metrics": {
+    "bbat/ball/box/map50": 0.9666637602646456,
+    "bbat/ball/box/map50_95": 0.7588459240841353,
+    "bbat/ball/pose/map50": 0.9692918499450384,
+    "bbat/ball/pose/map50_95": 0.9692844374386983,
+    "bbat/bat/box/map50": 0.9916634400613797,
+    "bbat/bat/box/map50_95": 0.8789756171063672,
+    "bbat/bat/pose/map50": 0.992057281812932,
+    "bbat/bat/pose/map50_95": 0.9914287656306989,
+    "bbat/box/map50": 0.9791636001630126,
+    "bbat/box/map50_95": 0.8189107705952514,
+    "bbat/pose/map50": 0.9806745658789852,
+    "bbat/pose/map50_95": 0.9803566015346986,
+    "coco/box/map50": 0.6464675139635491,
+    "coco/box/map50_95": 0.47733094681833016,
+    "coco/person/box/map50": 0.827504031190546,
+    "coco/person/box/map50_95": 0.6084854512263373
+  },
+  "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+  "metrics_sha256": "55185fb47448765cc0d44a89c7a59f8e53762f4a78138bbe5c3d7a618381034b",
+  "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue",
+  "parent_id": "v19-poly-shift-a8-all-w8-qat-epoch5",
+  "parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "schema_version": 1,
+  "seconds": 73.69715910498053,
+  "status": "completed",
+  "weight_quantization": [
+    {
+      "format_id": "fixed-sd4",
+      "numeric": {
+        "clipping_rate": 0.0030543009440104165,
+        "code_histogram": [
+          3048,
+          25646,
+          53547,
+          51760,
+          34609,
+          19374,
+          14157,
+          11724,
+          14197,
+          19127,
+          32981,
+          46940,
+          44972,
+          19018,
+          2116
+        ],
+        "code_max": 7,
+        "code_min": -7,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9825685169763945,
+        "encoded_bits": 4,
+        "logical_code_count": 15,
+        "maximum_absolute_error": 0.20670580863952637,
+        "mse": 0.0001620397864220043,
+        "normalized_rmse": 0.18590074974669502,
+        "occupied_codes": 15,
+        "scale_bytes": 2048,
+        "scale_count": 512,
+        "scale_maximum": 1.0323201417922974,
+        "scale_mean": 0.31387633085250854,
+        "scale_minimum": 0.07707220315933228,
+        "sqnr_db": 14.614377173879308,
+        "weight_code_bytes": 196608,
+        "zero_ratio": 0.029815673828125
+      },
+      "quantized_modules": 1,
+      "region": "neck",
+      "sites": [
+        {
+          "clipping_rate": 0.0030543009440104165,
+          "code_max": 7,
+          "code_min": -7,
+          "cosine": 0.9825685169763945,
+          "elements": 393216,
+          "maximum_absolute_error": 0.20670580863952637,
+          "mse": 0.0001620397864220043,
+          "normalized_rmse": 0.18590074974669502,
+          "occupied_codes": 15,
+          "output_channels": 512,
+          "path": "graph.model.13.cv2.conv",
+          "region": "neck",
+          "scale_maximum": 1.0323201417922974,
+          "scale_mean": 0.31387633085250854,
+          "scale_minimum": 0.07707220315933228,
+          "sqnr_db": 14.614377173879308,
+          "zero_ratio": 0.029815673828125
+        }
+      ],
+      "weight_elements": 393216
+    }
+  ]
+}

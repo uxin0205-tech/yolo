@@ -1,0 +1,104 @@
+{
+  "formal_validation": false,
+  "jobs": [
+    {
+      "arms": {
+        "qat": {
+          "status": "completed"
+        },
+        "sham": {
+          "status": "completed"
+        }
+      },
+      "candidate_id": "pose-tower-primary--exact_scaled_ternary",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/00-pose-tower-primary--exact_scaled_ternary/qat-plan.yaml",
+      "plan_sha256": "45d3a9e0b7cae61dcedd350f07aec75ba14bd67902f7ac4df99b6eb249e5c094",
+      "status": "completed"
+    },
+    {
+      "arms": {
+        "qat": {
+          "status": "pending"
+        },
+        "sham": {
+          "attempt": 0,
+          "resume": null,
+          "status": "running"
+        }
+      },
+      "candidate_id": "detect-predictor-control--fixed_sd4",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/01-detect-predictor-control--fixed_sd4/qat-plan.yaml",
+      "plan_sha256": "cb043acc31b8357ac1d732f17e5f232d494cdecdeb9595e2ad1e717584522dca"
+    },
+    {
+      "arms": {
+        "qat": {
+          "status": "pending"
+        },
+        "sham": {
+          "status": "pending"
+        }
+      },
+      "candidate_id": "neck-attention-primary--twn_v3_filterwise",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/02-neck-attention-primary--twn_v3_filterwise/qat-plan.yaml",
+      "plan_sha256": "1313d1daebf942036f68fa8b5cf8518358823b8446f8ff9789d189105ae9fb09"
+    },
+    {
+      "arms": {
+        "qat": {
+          "status": "pending"
+        },
+        "sham": {
+          "status": "pending"
+        }
+      },
+      "candidate_id": "neck-attention-primary--exact_scaled_ternary",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/03-neck-attention-primary--exact_scaled_ternary/qat-plan.yaml",
+      "plan_sha256": "00517a7011c14e75a5038e12f0e03402dc3609829806c0d98d4ebe8910d59132"
+    },
+    {
+      "arms": {
+        "qat": {
+          "status": "pending"
+        },
+        "sham": {
+          "status": "pending"
+        }
+      },
+      "candidate_id": "neck-primary--exact_w4",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/04-neck-primary--exact_w4/qat-plan.yaml",
+      "plan_sha256": "7a150a8be80e5805ebc6b859dc57e9dd325cb19eee1265b6e99dba14171e8ae8"
+    },
+    {
+      "arms": {
+        "qat": {
+          "status": "pending"
+        },
+        "sham": {
+          "status": "pending"
+        }
+      },
+      "candidate_id": "backbone-deep-primary--fixed_sd4",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/05-backbone-deep-primary--fixed_sd4/qat-plan.yaml",
+      "plan_sha256": "f7d8564b2f3e3aa7f4810e12eda7382a1e0b8a8a51f42b6461a2e79e0743e498"
+    },
+    {
+      "arms": {
+        "qat": {
+          "status": "pending"
+        },
+        "sham": {
+          "status": "pending"
+        }
+      },
+      "candidate_id": "pose-predictor-diagnostic--twn_v3_filterwise",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/06-pose-predictor-diagnostic--twn_v3_filterwise/qat-plan.yaml",
+      "plan_sha256": "03795352f9a67d45a56d7fdc5b10b72912229196f7fa5773551082faac6075c2"
+    }
+  ],
+  "long_qat_authorized": false,
+  "queue_id": "v29-v19-progressive-ptq-to-short-qat-v1--materialized-short-qat",
+  "schema_version": 1,
+  "source_queue_sha256": "e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06",
+  "status": "failed"
+}

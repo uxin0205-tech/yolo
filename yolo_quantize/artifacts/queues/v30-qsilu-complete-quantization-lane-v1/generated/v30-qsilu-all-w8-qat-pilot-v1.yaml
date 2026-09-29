@@ -1,0 +1,200 @@
+schema_version: 1
+plan_id: v30-qsilu-all-w8-qat-pilot-v1
+date: '2026-09-05'
+execution_authorized: true
+formal_validation: false
+execution_authorization:
+  authorization_id: user-2026-09-05-complete-qsilu-quantization-lane
+  arms:
+  - sham
+  - qat
+  scope: paired_qsilu_all_w8_search_qat_only_no_formal_validation
+sources:
+  parent_checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+    sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+  accepted_metrics:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/accepted/epoch-0000/bittrue/metrics.json
+    sha256: 2e97e4a60039741cc1fc45a03d67615bbc5b851bcf60a56cd153251366c4a355
+  matched_metrics:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/matched/epoch-0000/bittrue/metrics.json
+    sha256: e2b3501a98a25f90519919d11c6e5c77d2327a04f2a58e6ea5291fb9c65cd0a3
+  joint_config:
+    path: /home/uxin/yolo/yolo_combine/final/full35/configs/joint.yaml
+    sha256: 0244cd5c36c4ca7bef9bf2e89a8f8cb2d27d8e9db67adb86ede1d5c78d4138ef
+  activation_recipe:
+    path: /home/uxin/yolo/yolo_activation/training/full35/activation-recipe.yaml
+    sha256: ff067b31dd1627930cf21509bcc231310f87aab2761adc325e438b4f305c057a
+  weight_plan:
+    path: /home/uxin/yolo/yolo_quantize/configs/experiments/weight-region-sensitivity-plan-v9.yaml
+    sha256: 9bc7084e9217754153cc2ad69e83e6ae658304944ffa0ab6318ebd57c1d5d394
+  candidate_evidence:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/reports/v30-qsilu-all-ten-regions-w8-search-v1.json
+    sha256: 50d7449ef7728824ae23cf2b535aa5477860086062fafb6f50f424c99d79617e
+  candidate_dual_regate:
+    path: /home/uxin/yolo/yolo_quantize/artifacts/reports/v30-qsilu-all-ten-regions-w8-dual-regate-v1.json
+    sha256: efef87f1dcc74ff23f08c19c5f812108ad32783d2fa5368625536f6e657b3928
+activation:
+  name: qsilu_pq
+  bits: 8
+  signed_codes: false
+  region_assignments: []
+data:
+  coco:
+    path: /home/uxin/yolo/coco2017.yaml
+    sha256: 1ed971749ec00b84db8ffe850b05e34e0acfd63a9654a9224ac8d80f5e068068
+  registry:
+    path: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+    sha256: 208e0f9e5bfded11f5739e9c598d98b4e5414699c64b9faf6f9625680988754a
+  pose_search:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+    sha256: a9069992cf21bff802466fa8adb46cba9bd55585f5adc8f3c183d33c8ede0b5d
+  diagnostic_manifest:
+    path: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+    sha256: 76b4392d2d07232967018b20af82149ba67ee036fad2cb75bb15d2d7565f4356
+  diagnostic_manifest_identity: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+graph_inventory:
+  master:
+    totals:
+      modules: 251
+      weight_elements: 26451392
+      deployment_modules: 148
+      deployment_weight_elements: 22571840
+      training_only_modules: 99
+      training_only_weight_elements: 3748480
+      protected_modules: 4
+      protected_weight_elements: 131072
+    deployment_regions: &id001
+      backbone_early:
+        modules: 21
+        weight_elements: 1218240
+      backbone_deep:
+        modules: 22
+        weight_elements: 8126464
+      backbone_attention_safe:
+        modules: 7
+        weight_elements: 919808
+      neck:
+        modules: 33
+        weight_elements: 8142848
+      masf:
+        modules: 3
+        weight_elements: 74240
+      neck_attention_safe:
+        modules: 5
+        weight_elements: 395520
+      detect_one2one_tower:
+        modules: 18
+        weight_elements: 1390592
+      detect_one2one_predictor:
+        modules: 6
+        weight_elements: 62208
+      pose_one2one_tower:
+        modules: 24
+        weight_elements: 2238464
+      pose_one2one_predictor:
+        modules: 9
+        weight_elements: 3456
+  deployment:
+    totals:
+      modules: 152
+      weight_elements: 22702912
+      deployment_modules: 148
+      deployment_weight_elements: 22571840
+      training_only_modules: 0
+      training_only_weight_elements: 0
+      protected_modules: 4
+      protected_weight_elements: 131072
+    deployment_regions: *id001
+weight_policy:
+  candidate_id: qsilu-all-ten-regions-w8
+  assignments:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: mse_grid_v1
+optimizer:
+  name: AdamW
+  weight_decay: 0.00027
+  beta1: 0.948
+  beta2: 0.999
+  qparam_lr_ratio: 1.0
+  learning_rates:
+    backbone: 3.8e-07
+    neck: 1.9e-06
+    masf: 3.8e-06
+    attention: 5.0e-08
+    detect_head: 5.0e-06
+    pose_head: 5.0e-06
+training:
+  epochs: 15
+  seed: 1
+  patience: 5
+  warmup_epochs: 3
+  scale_only_epochs: 5
+  progressive_start_epoch: 0
+  progressive_full_epoch: 5
+  detect_logical_batch: 128
+  detect_microbatch: 16
+  pose_batch: 16
+  gradient_clip_norm: 10.0
+  added_noise: false
+gates:
+  map50_max_drop: 0.015
+  map50_95_max_drop: 0.04
+  matched_sham_max_absolute_drift: 0.01
+monitoring:
+  mode: low_token
+  events:
+  - epoch_end
+  - checkpoint
+  - gate
+  - anomaly
+  full_artifact_logging: true
+run_root: artifacts/runs/qat

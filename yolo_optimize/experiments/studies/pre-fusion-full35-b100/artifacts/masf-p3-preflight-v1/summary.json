@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "parent_sha256": "27c09c6685a003e9ff106898fd898199e184ee195cce643dd668079abadb9342",
+  "arms": {
+    "shared": {
+      "initial_cpu160_exact": true,
+      "base_state_exact": true,
+      "p4_p5_raw_and_logits_isolated": false,
+      "nonzero_alpha_probe": 0.1,
+      "initial_metrics": {
+        "coco/box/map50_95": 0.5081536353965246,
+        "coco/person/box/map50_95": 0.6275205166051038,
+        "coco/ball/box/map50_95": 0.5135635499155172,
+        "coco/bat/box/map50_95": 0.48043776950279105
+      },
+      "initial_delta": {
+        "coco/box/map50_95": 0.0,
+        "coco/person/box/map50_95": 0.0,
+        "coco/ball/box/map50_95": 0.0,
+        "coco/bat/box/map50_95": 0.0
+      }
+    },
+    "fork": {
+      "initial_cpu160_exact": true,
+      "base_state_exact": true,
+      "p4_p5_raw_and_logits_isolated": true,
+      "nonzero_alpha_probe": 0.1,
+      "initial_metrics": {
+        "coco/box/map50_95": 0.5081536353965246,
+        "coco/person/box/map50_95": 0.6275205166051038,
+        "coco/ball/box/map50_95": 0.5135635499155172,
+        "coco/bat/box/map50_95": 0.48043776950279105
+      },
+      "initial_delta": {
+        "coco/box/map50_95": 0.0,
+        "coco/person/box/map50_95": 0.0,
+        "coco/ball/box/map50_95": 0.0,
+        "coco/bat/box/map50_95": 0.0
+      }
+    }
+  },
+  "full_coco_images": 5000,
+  "initial_ap_tolerance": 1e-08,
+  "training_performed": false,
+  "shared_fork_context_initialization_exact": true
+}

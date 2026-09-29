@@ -1,0 +1,6 @@
+schema_version: 1
+
+# map_loss 定義為 baseline mAP50-95 - candidate mAP50-95；越小越好，改善可為負值。
+# COCO2017 與 Canonical BBAT5 v1 必須各自一列，不能先平均再填入。
+# policy 必須原樣複製自前一輪 TrainingPlan 的 experiment policy。
+observations: []

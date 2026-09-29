@@ -1,0 +1,71 @@
+{
+  "status": "passed_search_parent_revalidation",
+  "parent_manifest_sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a",
+  "metrics": {
+    "coco/box/map50": 0.6623716990597434,
+    "coco/person/box/map50": 0.834405527172791,
+    "bbat/box/map50": 0.9819782700568114,
+    "bbat/pose/map50": 0.9820649536801789,
+    "bbat/ball/box/map50": 0.9716540692366583,
+    "bbat/bat/box/map50": 0.9923024708769644,
+    "bbat/ball/pose/map50": 0.9716540692366583,
+    "bbat/bat/pose/map50": 0.9924758381236995,
+    "coco/box/map50_95": 0.4864552104960669,
+    "coco/person/box/map50_95": 0.6117342569660269,
+    "bbat/box/map50_95": 0.8304191842216895,
+    "bbat/pose/map50_95": 0.9818256399441001,
+    "bbat/ball/box/map50_95": 0.7725241472925666,
+    "bbat/bat/box/map50_95": 0.8883142211508124,
+    "bbat/ball/pose/map50_95": 0.9714850520097654,
+    "bbat/bat/pose/map50_95": 0.9921662278784348
+  },
+  "drift_from_recorded_parent": {
+    "bbat/ball/box/map50": 0.0,
+    "bbat/ball/box/map50_95": 0.0,
+    "bbat/ball/pose/map50": 0.0,
+    "bbat/ball/pose/map50_95": 0.0,
+    "bbat/bat/box/map50": 0.0,
+    "bbat/bat/box/map50_95": 0.0,
+    "bbat/bat/pose/map50": 0.0,
+    "bbat/bat/pose/map50_95": 0.0,
+    "bbat/box/map50": 0.0,
+    "bbat/box/map50_95": 0.0,
+    "bbat/pose/map50": 0.0,
+    "bbat/pose/map50_95": 0.0,
+    "coco/box/map50": 0.0,
+    "coco/box/map50_95": 0.0,
+    "coco/person/box/map50": 0.0,
+    "coco/person/box/map50_95": 0.0
+  },
+  "total_deltas": {
+    "bbat/ball/box/map50": 0.013271502729915396,
+    "bbat/ball/box/map50_95": -0.006516034909971213,
+    "bbat/ball/pose/map50": 0.012165214630579624,
+    "bbat/ball/pose/map50_95": 0.011996197403686737,
+    "bbat/bat/box/map50": -0.001775869541385644,
+    "bbat/bat/box/map50_95": -0.005530467919060977,
+    "bbat/bat/pose/map50": -0.0016025022946505318,
+    "bbat/bat/pose/map50_95": -0.0019121125399153005,
+    "bbat/box/map50": 0.005747816594264821,
+    "bbat/box/map50_95": -0.006023251414516095,
+    "bbat/pose/map50": 0.005281356167964546,
+    "bbat/pose/map50_95": 0.005042042431885441,
+    "coco/box/map50": -0.008347308097677475,
+    "coco/box/map50_95": -0.011567125974855264,
+    "coco/person/box/map50": -0.005004060303952507,
+    "coco/person/box/map50_95": -0.008647231456421989
+  },
+  "reproduction_tolerance": 0.0001,
+  "contract": {
+    "recovered_observed_completed_attempt": true,
+    "plan_sha256": "fe2f42ae4edadd0e05062f58562e5cad9fe0437fbb8b869f29fc5bcf7d26615d",
+    "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/continuous-0907-parent-revalidation-v1/validation/parent/epoch-0000/bittrue/metrics.json",
+    "metrics_report_sha256": "c7c5bfa6dbbbe0ae81dac4b7c19c88f77518acefcb125b079184c4694df51b75"
+  },
+  "build": {
+    "inference_sha256": "8c1f3652fd21c0e38221cfc3acba7ee013c5e88df641b9331c33796f6f11b66c",
+    "parent_manifest_sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a"
+  },
+  "formal_validation": false,
+  "training_run": false
+}

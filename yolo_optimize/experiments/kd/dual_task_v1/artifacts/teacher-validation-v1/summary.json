@@ -1,0 +1,62 @@
+{
+  "status": "completed",
+  "results": {
+    "detect": {
+      "coco/box/precision": 0.7389119817235054,
+      "coco/box/recall": 0.641710929053278,
+      "coco/box/map50": 0.7088334207022194,
+      "coco/box/map75": 0.5886315046882327,
+      "coco/box/map50_95": 0.5375833865412111,
+      "coco/person/box/precision": 0.8030380391202054,
+      "coco/person/box/recall": 0.7804583835946924,
+      "coco/person/box/map50": 0.8530191331977873,
+      "coco/person/box/map75": 0.7024844952946351,
+      "coco/person/box/map50_95": 0.6406114964288638
+    },
+    "pose": {
+      "bbat/box/precision": 0.8947804010124971,
+      "bbat/box/recall": 0.8612251345178317,
+      "bbat/box/map50": 0.9100262441282004,
+      "bbat/box/map75": 0.6982246756253739,
+      "bbat/box/map50_95": 0.6311585813484119,
+      "bbat/pose/precision": 0.8997992248607355,
+      "bbat/pose/recall": 0.8650872113689922,
+      "bbat/pose/map50": 0.915239022790419,
+      "bbat/pose/map75": 0.9126719495108524,
+      "bbat/pose/map50_95": 0.9122011644384923,
+      "bbat/ball/box/precision": 0.8676509501522593,
+      "bbat/ball/box/recall": 0.8244274809160306,
+      "bbat/ball/box/map50": 0.8753977380100878,
+      "bbat/ball/box/map75": 0.5335919014218962,
+      "bbat/ball/box/map50_95": 0.5114377772575687,
+      "bbat/ball/pose/precision": 0.8739168078471042,
+      "bbat/ball/pose/recall": 0.8289318710212114,
+      "bbat/ball/pose/map50": 0.8777547092289396,
+      "bbat/ball/pose/map75": 0.8775313607918722,
+      "bbat/ball/pose/map50_95": 0.8763627781317785,
+      "bbat/bat/box/precision": 0.921909851872735,
+      "bbat/bat/box/recall": 0.8980227881196327,
+      "bbat/bat/box/map50": 0.9446547502463131,
+      "bbat/bat/box/map75": 0.8628574498288517,
+      "bbat/bat/box/map50_95": 0.7508793854392551,
+      "bbat/bat/pose/precision": 0.9256816418743667,
+      "bbat/bat/pose/recall": 0.9012425517167733,
+      "bbat/bat/pose/map50": 0.9527233363518983,
+      "bbat/bat/pose/map75": 0.9478125382298326,
+      "bbat/bat/pose/map50_95": 0.9480395507452066
+    }
+  },
+  "teacher_minus_student": {
+    "coco/box/map50_95": 0.033698082113363226,
+    "coco/person/box/map50_95": 0.014724494018010015,
+    "bbat/box/map50_95": 0.013151058820727757,
+    "bbat/pose/map50_95": 0.020872282467345515,
+    "bbat/ball/box/map50_95": 0.006245325612906361,
+    "bbat/ball/pose/map50_95": 0.016713337658079697,
+    "bbat/bat/box/map50_95": 0.020056792028549375,
+    "bbat/bat/pose/map50_95": 0.02503122727661189
+  },
+  "student_sha256": "1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a",
+  "bbat_dataset": "bbat5-v1 unchanged",
+  "training_performed": false
+}

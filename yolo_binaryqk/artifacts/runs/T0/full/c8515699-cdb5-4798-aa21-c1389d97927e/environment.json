@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/home/hplab/uxin/yolo11/yolo_binaryqk/binary_attention/cli.py",
+    "run",
+    "--variant",
+    "T0",
+    "--stage",
+    "full",
+    "--data-manifest",
+    "/home/hplab/uxin/yolo11/yolo_binaryqk/data/coco_full.txt",
+    "--data",
+    "/home/hplab/uxin/yolo11/yolo_binaryqk/data/coco-full.yaml",
+    "--source-weights",
+    "/home/hplab/uxin/yolo11/yolo_binaryqk/../original/weight/yolo11m.pt",
+    "--device",
+    "0",
+    "--execute"
+  ],
+  "cuda": "12.8",
+  "cuda_available": true,
+  "git_revision": "c2e2849bd2c88b87d88c112dd1a9eaa81463722e",
+  "gpu": "NVIDIA GeForce RTX 4080 SUPER, 16376 MiB, 595.95",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "python": "3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]",
+  "torch": "2.11.0+cu128",
+  "ultralytics": "8.4.90"
+}

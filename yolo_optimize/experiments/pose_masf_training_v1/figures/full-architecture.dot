@@ -1,0 +1,54 @@
+digraph Architecture {
+graph [rankdir=TB, newrank=true, compound=true, splines=polyline, ranksep=0.32, nodesep=0.28, bgcolor="white", fontname="Noto Sans CJK TC", fontsize=20, labelloc=t, label="Pose MASF 專項重訓：完整 YOLO26M 架構（B 組 CPU 通過，GPU 尚未訓練）\n640×640｜藍色＝固定；橘色＝候選可訓練；虛線＝原 E2 接法，非 A 組加訓"];
+node [shape=box, style="rounded,filled", fillcolor="#e8f1fb", color="#527aa3", fontname="Noto Sans CJK TC", fontsize=12, margin="0.14,0.08"];
+edge [color="#527aa3", arrowsize=0.65, fontname="Noto Sans CJK TC", fontsize=10];
+subgraph cluster_backbone { label="共享 Backbone（固定）"; color="#a9c1d8"; input [label="輸入影像\n3 × 640 × 640"];
+n0 [label="layer 0 · Conv\n64 × 320 × 320"];
+n1 [label="layer 1 · Conv\n128 × 160 × 160"];
+n2 [label="layer 2 · C3k2\n256 × 160 × 160 · P2（不接 head）"];
+n3 [label="layer 3 · Conv\n256 × 80 × 80"];
+n4 [label="layer 4 · C3k2\n512 × 80 × 80"];
+n5 [label="layer 5 · Conv\n512 × 40 × 40"];
+n6 [label="layer 6 · C3k2\n512 × 40 × 40"];
+n7 [label="layer 7 · Conv\n512 × 20 × 20"];
+n8 [label="layer 8 · C3k2\n512 × 20 × 20"];
+n9 [label="layer 9 · SPPF\n512 × 20 × 20"];
+n10 [label="layer 10 · C2PSA\n512 × 20 × 20\n內含原生 QK＋PWL Attention ①"];
+input -> n0;
+n0 -> n1 -> n2 -> n3 -> n4 -> n5 -> n6 -> n7 -> n8 -> n9 -> n10;
+}
+subgraph cluster_neck { label="共享 FPN／PAN Neck（固定）"; color="#a9c1d8";
+n11 [label="layer 11 · Upsample\n512 × 40 × 40"];
+n12 [label="layer 12 · Concat\n1024 × 40 × 40\n來源：11 + 6"];
+n13 [label="layer 13 · C3k2\n512 × 40 × 40"];
+n14 [label="layer 14 · Upsample\n512 × 80 × 80"];
+n15 [label="layer 15 · Concat\n1024 × 80 × 80\n來源：14 + 4"];
+n16 [label="layer 16 · C3k2\n256 × 80 × 80\np3_raw／stride 8"];
+n17 [label="layer 17 · Conv\n256 × 40 × 40"];
+n18 [label="layer 18 · Concat\n768 × 40 × 40\n來源：17 + 13"];
+n19 [label="layer 19 · C3k2\n512 × 40 × 40\np4_raw／stride 16"];
+n20 [label="layer 20 · Conv\n512 × 20 × 20"];
+n21 [label="layer 21 · Concat\n1024 × 20 × 20\n來源：20 + 10"];
+n22 [label="layer 22 · C3k2\n512 × 20 × 20\np5_raw／stride 32\n內含原生 QK＋PWL Attention ②"];
+n11 -> n12 -> n13 -> n14 -> n15 -> n16 -> n17 -> n18 -> n19 -> n20 -> n21 -> n22;
+}
+subgraph cluster_heads { label="layer 23 · DualHeadPrediction"; color="#c9c3b4";
+dm [label="Detect P3 MASF（原有，固定）\nx + α_D F_D(x)"];
+detect [label="COCO80 Detect head（固定）\n輸入：p3_det, p4_raw, p5_raw\n80 類別＋框"];
+pm [label="Pose P3 MASF（新分支）\nx + α_P F_P(x)\ncontext 複製；α_P=0 開始學",fillcolor="#fff0d9",color="#c27b29"];
+pose [label="BBAT5 Pose26 head（可訓練）\n輸入：p3_pose, p4_raw, p5_raw\n2 類＋框＋2×(x,y,v) 關鍵點槽",fillcolor="#fff0d9",color="#c27b29"];
+note [shape=note,fillcolor="#fff9ec",color="#c27b29",label="A 組加訓已取消\n僅 B：Pose head＋Pose MASF\n固定 E2；B 5 epoch／warmup 1\n正式推論只算一次 Pose MASF\n訓練 one2many／one2one 共用 θ_P\n不新增 Detect head，不改 P2"];
+dm -> detect; pm -> pose [color="#c27b29"]; detect -> pm [style=invis]; pose -> note [style=invis];
+}
+{rank=same; input; n11; dm;}
+n10 -> n11 [constraint=false,label="上採樣輸入"];
+n6 -> n12 [constraint=false,label="P4 skip"];
+n4 -> n15 [constraint=false,label="P3 skip"];
+n13 -> n18 [constraint=false,label="PAN skip"];
+n10 -> n21 [constraint=false,label="P5 skip"];
+n16 -> dm [constraint=false,label="p3_raw"];
+n16 -> pm [constraint=false,color="#c27b29",label="p3_raw"];
+n16 -> pose [constraint=false,style=dashed,color="#888888",label="原 E2 直通參考"];
+n19 -> detect [constraint=false,label="p4_raw"]; n22 -> detect [constraint=false,label="p5_raw"];
+n19 -> pose [constraint=false,label="p4_raw"]; n22 -> pose [constraint=false,label="p5_raw"];
+}

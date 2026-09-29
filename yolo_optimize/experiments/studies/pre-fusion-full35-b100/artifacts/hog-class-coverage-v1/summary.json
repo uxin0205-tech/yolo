@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "images": 1024,
+  "device": "cpu",
+  "optimizer_steps": 0,
+  "sample_rule": "固定 seed20260919 的前1024張增強後 train 影像；不依 AP 選樣",
+  "categories": {
+    "all80": {
+      "instances": 7002,
+      "no_cell_center": 196,
+      "no_valid_energy_cell": 196,
+      "short_side_lt8px": 615,
+      "valid_cells": 2340404,
+      "images": 1015,
+      "zero_valid_cell_fraction": 0.02799200228506141
+    },
+    "person": {
+      "instances": 2103,
+      "no_cell_center": 52,
+      "no_valid_energy_cell": 52,
+      "short_side_lt8px": 181,
+      "valid_cells": 761119,
+      "images": 571,
+      "zero_valid_cell_fraction": 0.024726581074655255
+    },
+    "sports_ball": {
+      "instances": 59,
+      "no_cell_center": 13,
+      "no_valid_energy_cell": 13,
+      "short_side_lt8px": 23,
+      "valid_cells": 657,
+      "images": 40,
+      "zero_valid_cell_fraction": 0.22033898305084745
+    },
+    "baseball_bat": {
+      "instances": 38,
+      "no_cell_center": 1,
+      "no_valid_energy_cell": 1,
+      "short_side_lt8px": 1,
+      "valid_cells": 4527,
+      "images": 33,
+      "zero_valid_cell_fraction": 0.02631578947368421
+    }
+  },
+  "limitation": "自身框無有效cell不代表完全無梯度，仍可能受其他重疊框與原生loss監督；prefix並非全資料估計"
+}

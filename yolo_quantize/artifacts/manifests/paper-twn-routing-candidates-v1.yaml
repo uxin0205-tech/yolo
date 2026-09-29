@@ -1,0 +1,78 @@
+schema_version: 1
+manifest_id: full35-paper-twn-routing-candidates-v1
+status: static_candidates_only_not_validated_not_authorized
+execution_authorized: false
+gpu_used: false
+formal_training: false
+map_validation_run: false
+format:
+  family: paper_twn
+  format_id: paper-twn-layerwise
+  encoded_bits: 2
+  granularity: per_tensor
+  threshold_rule: delta=0.7*mean(abs(weight))
+  levels: [-alpha, '0', +alpha]
+selection:
+  required_parents: [qsilu_pq, hardswish, poly_shift]
+  required_views: [master, deployment]
+  rule: thresholds_must_pass_in_every_active_parent_and_both_master_and_bn_folded_deployment_views
+  thresholds:
+    safe: {maximum_normalized_rmse: 0.35, minimum_cosine: 0.93}
+    balanced: {maximum_normalized_rmse: 0.4, minimum_cosine: 0.91}
+source_artifacts:
+  - parent: qsilu_pq
+    path: artifacts/reports/weight-format-analysis-qsilu-pq-a8-main-v2.json
+    sha256: 159ea7d18aaad6266f05cbc78665581ea336fb562d33e6eed5daa0c4f8e74a12
+    checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+  - parent: hardswish
+    path: artifacts/reports/weight-format-analysis-hardswish-a8-main-v3.json
+    sha256: 7f78a8f46387ce6d9c6d8bc5e5db89a2ac663aab4358af3ddbca971a525c2d52
+    checkpoint_sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+  - parent: poly_shift
+    path: artifacts/reports/weight-format-analysis-poly-shift-a8-main-v2.json
+    sha256: 306deaa51d29f16c3ed49b1a442f513fb09813a0966ba1960544816cfde48f24
+    checkpoint_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+counts:
+  paths_per_view_and_parent: 148
+  safe: 3
+  balanced: 7
+  safe_weight_elements: 1280
+  balanced_weight_elements: 8704
+  safe_regions: {pose_one2one_predictor: 3}
+  balanced_regions: {pose_one2one_predictor: 4, pose_one2one_tower: 3}
+safe_candidates:
+  - graph.model.23.pose_head.one2one_cv2.2.2
+  - graph.model.23.pose_head.one2one_cv3.0.2
+  - graph.model.23.pose_head.one2one_cv3.2.2
+balanced_candidates:
+  - graph.model.23.pose_head.one2one_cv2.2.2
+  - graph.model.23.pose_head.one2one_cv3.0.1.0.conv
+  - graph.model.23.pose_head.one2one_cv3.0.2
+  - graph.model.23.pose_head.one2one_cv3.1.1.0.conv
+  - graph.model.23.pose_head.one2one_cv3.1.2
+  - graph.model.23.pose_head.one2one_cv3.2.1.0.conv
+  - graph.model.23.pose_head.one2one_cv3.2.2
+per_path_worst_case:
+  graph.model.23.pose_head.one2one_cv2.2.2:
+    {region: pose_one2one_predictor, elements: 256, worst_normalized_rmse: 0.3425506009470159, worst_cosine: 0.9394993727271674}
+  graph.model.23.pose_head.one2one_cv3.0.1.0.conv:
+    {region: pose_one2one_tower, elements: 2304, worst_normalized_rmse: 0.38437168056001997, worst_cosine: 0.9231782789588193}
+  graph.model.23.pose_head.one2one_cv3.0.2:
+    {region: pose_one2one_predictor, elements: 512, worst_normalized_rmse: 0.3497855356172515, worst_cosine: 0.9368297862433805}
+  graph.model.23.pose_head.one2one_cv3.1.1.0.conv:
+    {region: pose_one2one_tower, elements: 2304, worst_normalized_rmse: 0.37821550897236766, worst_cosine: 0.9257176179685337}
+  graph.model.23.pose_head.one2one_cv3.1.2:
+    {region: pose_one2one_predictor, elements: 512, worst_normalized_rmse: 0.3616062249713349, worst_cosine: 0.9323308651941195}
+  graph.model.23.pose_head.one2one_cv3.2.1.0.conv:
+    {region: pose_one2one_tower, elements: 2304, worst_normalized_rmse: 0.3733396431703162, worst_cosine: 0.9276948493407193}
+  graph.model.23.pose_head.one2one_cv3.2.2:
+    {region: pose_one2one_predictor, elements: 512, worst_normalized_rmse: 0.3403200339429608, worst_cosine: 0.9403097843443091}
+limitations:
+  - static_weight_reconstruction_only
+  - no_layer_output_nrmse
+  - no_topk_overlap
+  - no_eight_metric_map
+  - no_qat
+  - no_gpu_run
+  - no_bittrue_export_or_hardware_measurement
+  - candidate_manifest_does_not_promote_a_policy

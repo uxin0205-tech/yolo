@@ -1,0 +1,35 @@
+schema_version: 1
+parent_id: v35-qsilu-a8-mixed-11path-qat-epoch3
+status: locked_search_parent
+formal_validation: false
+selected_epoch: 3
+activation:
+  name: qsilu_pq
+  bits: 8
+  quantizer: lsq_plus_a8
+weight_policy:
+  format_id: mixed-ls-sd4-w6-w4-11-paths
+  deployment_modules: 148
+  deployment_weight_elements: 22571840
+plan:
+  path: artifacts/queues/v35-qsilu-mixed-layer-successor-v1/short-qat-mixed-final-v1/generated/qat-plan.yaml
+  sha256: 28d5887dd9cc61b1cecbebc1249b9c7aef5c65cd8782dfd9931e34726f0c9a84
+completion:
+  path: artifacts/runs/qat/v35-qsilu-mixed-final-short-v1/v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1-qat-seed1/qat-experiment.json
+  sha256: 13774bafcca2a1b2b9e138cdd32916d7d55c0da2a39cbf1aba860a37de06e209
+metrics:
+  path: artifacts/runs/qat/v35-qsilu-mixed-final-short-v1/v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1-qat-seed1/validation/epoch-0003/bittrue/metrics.json
+  sha256: dc48c346c466fee39327fe8ab2030e3ba1786de7c8d8658c46f635c52d5c82be
+checkpoints:
+  full_resume:
+    path: artifacts/runs/qat/v35-qsilu-mixed-final-short-v1/v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1-qat-seed1/checkpoints/best_joint.pt
+    sha256: c891d8004f90a439f33d5e71054c145ddb8fcf8d2022fd3839a9c7bf1cafb158
+  inference:
+    path: artifacts/runs/qat/v35-qsilu-mixed-final-short-v1/v35-qsilu-mixed-lssd4-w6-w4-short-qat-v1-qat-seed1/inference/best_joint.pt
+    sha256: c955d8dc859b5c962026ea8216335ea31495e46e7526d9c0aff118bb2e09e2c6
+gate:
+  decision: green
+  map50_max_drop: 0.015
+  map50_95_max_drop: 0.04
+  worst_map50_delta: -0.006746344291639672
+  worst_map50_95_delta: -0.009364924185452761

@@ -1,0 +1,33 @@
+{
+  "attention_class": [
+    "ScaledBinaryAttention"
+  ],
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    ""
+  ],
+  "construction": "parser-direct-concrete-attention",
+  "model_class": "ScaledBinaryAttention",
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "mean_abs_channel_token_per_sample_head",
+    "v8_scale": "none"
+  },
+  "theoretical_cost": {
+    "binary_qk": 0,
+    "pv": 1,
+    "softmax": 1
+  },
+  "total_parameter_count": 912,
+  "trainable_parameter_count": 912,
+  "trainable_parameter_names": [
+    "qkv.weight",
+    "proj.weight",
+    "pe.weight"
+  ],
+  "trainable_scope": "all",
+  "variant_config_hash": "d20a8e50fcc7a91ce94b6fd3d34f4f96a3e718921e3421c3a12f43b238e4f220",
+  "variant_id": "T6-O"
+}

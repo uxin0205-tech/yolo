@@ -1,0 +1,102 @@
+{
+  "formal_validation": false,
+  "results": {
+    "neck-attention-primary--twn_v3_filterwise": {
+      "assignments": [
+        {
+          "cpu_format_id": "exact-scaled-ternary-per_tensor",
+          "format_id": "exact_scaled_ternary",
+          "path": "graph.model.16.p3_masf.context.project.conv",
+          "region": "masf",
+          "stage_id": "masf-weight-primary",
+          "weight_format_id": "exact-scaled-ternary"
+        },
+        {
+          "cpu_format_id": "twn-v3-0.75-filterwise",
+          "format_id": "twn_v3_filterwise",
+          "path": "graph.model.22.m.0.1.ffn.1.conv",
+          "region": "neck_attention_safe",
+          "stage_id": "neck-attention-primary",
+          "weight_format_id": "twn-v3-0.75-filterwise"
+        }
+      ],
+      "candidate_id": "neck-attention-primary--twn_v3_filterwise",
+      "cpu_format_id": "twn-v3-0.75-filterwise",
+      "format_id": "twn_v3_filterwise",
+      "gate": {
+        "decision": "recover",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.002713295102024227,
+          "bbat/ball/box/map50_95": -0.0009540429483457791,
+          "bbat/ball/pose/map50": 0.002851339141106579,
+          "bbat/ball/pose/map50_95": 0.0028598607737995163,
+          "bbat/bat/box/map50": -2.347321994344842e-05,
+          "bbat/bat/box/map50_95": -0.0010875561331777917,
+          "bbat/bat/pose/map50": -2.4176066588332823e-05,
+          "bbat/bat/pose/map50_95": 0.0001540771336336899,
+          "bbat/box/map50": 0.0013449109410403892,
+          "bbat/box/map50_95": -0.0010207995407617299,
+          "bbat/pose/map50": 0.0014135815372591232,
+          "bbat/pose/map50_95": 0.0015069689537167141,
+          "coco/box/map50": -0.0023118693121095824,
+          "coco/box/map50_95": -0.004882069918117404,
+          "coco/person/box/map50": -0.0011980548505821087,
+          "coco/person/box/map50_95": -0.00429717625863546
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.011292385297934193,
+          "bbat/ball/box/map50_95": -0.004717360474311483,
+          "bbat/ball/pose/map50": 0.01377018851308609,
+          "bbat/ball/pose/map50_95": 0.01371107137143901,
+          "bbat/bat/box/map50": -0.0009427339289393988,
+          "bbat/bat/box/map50_95": -0.007263129239544419,
+          "bbat/bat/pose/map50": -0.0004917530656415314,
+          "bbat/bat/pose/map50_95": -0.0008903189213832485,
+          "bbat/box/map50": 0.005174825684497342,
+          "bbat/box/map50_95": -0.0059902448569278954,
+          "bbat/pose/map50": 0.006639217723722335,
+          "bbat/pose/map50_95": 0.006410376225027825,
+          "coco/box/map50": -0.016555275391684998,
+          "coco/box/map50_95": -0.017826093033211032,
+          "coco/person/box/map50": -0.010633974330773954,
+          "coco/person/box/map50_95": -0.014044212879494089
+        },
+        "worst_incremental_map50_95_delta": -0.004882069918,
+        "worst_incremental_map50_delta": -0.002311869312,
+        "worst_total_map50_95_delta": -0.017826093033,
+        "worst_total_map50_delta": -0.016555275392
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9696749518046771,
+        "bbat/ball/box/map50_95": 0.7743228217282263,
+        "bbat/ball/pose/map50": 0.9732590431191648,
+        "bbat/ball/pose/map50_95": 0.9731999259775177,
+        "bbat/bat/box/map50": 0.9931356064894107,
+        "bbat/bat/box/map50_95": 0.8865815598303289,
+        "bbat/bat/pose/map50": 0.9935865873527086,
+        "bbat/bat/pose/map50_95": 0.9931880214969668,
+        "bbat/box/map50": 0.9814052791470439,
+        "bbat/box/map50_95": 0.8304521907792777,
+        "bbat/pose/map50": 0.9834228152359367,
+        "bbat/pose/map50_95": 0.9831939737372425,
+        "coco/box/map50": 0.6541637317657358,
+        "coco/box/map50_95": 0.4801962434377111,
+        "coco/person/box/map50": 0.8287756131459696,
+        "coco/person/box/map50_95": 0.6063372755429548
+      },
+      "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "metrics_sha256": "adeff2a8977be2e1d645b46c966b4fe4a08392673acb82e9f07c41c156246958",
+      "packed_bytes": 22539460,
+      "queue_role": "main",
+      "regated_from_gate_decision": "reject",
+      "savings_from_locked_parent_bytes": 148476,
+      "seconds": 73.15908512799069,
+      "status": "completed",
+      "weight_format_id": "twn-v3-0.75-filterwise"
+    }
+  },
+  "schema_version": 1,
+  "source_queue": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json",
+  "source_queue_sha256": "e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06",
+  "status": "completed"
+}

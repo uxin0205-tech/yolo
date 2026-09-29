@@ -1,0 +1,29 @@
+{
+  "attention_class": "ParallelDualBinaryAttention",
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "bias_type": "none",
+  "binary_forward_count": 3131,
+  "distillation_enabled": false,
+  "distillation_type": null,
+  "experiment_schema_version": 3,
+  "magnitude_bits": null,
+  "model_yaml_hash": "7789404e5d73351efd112940fa52ceef954ef7c5bfba52147829ba514bdd838e",
+  "p_bits": null,
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "residual_basis_channel_per_token",
+    "v8_scale": "none"
+  },
+  "quantizer_types": {
+    "model.10.m.0.attn": "none"
+  },
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "v_bits": null,
+  "variant_config_hash": "9a95c24f2a195beb1a90be662e10a570706a81c616323025a774b914c491c88c",
+  "variant_id": "T3"
+}

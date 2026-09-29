@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pipeline.schema.json",
+  "title": "SIPA-BCSP Pipeline",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "architecture_id", "datasets", "activations", "search"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "architecture_id": {"type": "string", "minLength": 1},
+    "seed": {"type": "integer", "minimum": 0},
+    "optional_finalist_seed": {"type": ["integer", "null"], "minimum": 0},
+    "datasets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["dataset_id", "source_kind", "yaml_path", "task", "num_classes", "immutable"],
+        "properties": {
+          "dataset_id": {"type": "string", "minLength": 1},
+          "source_kind": {"enum": ["canonical_bbat5_v1", "coco80_detect"]},
+          "yaml_path": {"type": "string", "minLength": 1},
+          "task": {"const": "detect"},
+          "num_classes": {"type": "integer", "minimum": 1},
+          "immutable": {"const": true}
+        }
+      }
+    },
+    "activations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accuracy_reference", "hardware_neighbor_baseline", "cheap_control", "proposed_candidates", "region_search_candidates"],
+      "properties": {
+        "accuracy_reference": {"const": "silu"},
+        "hardware_neighbor_baseline": {"const": "hardswish"},
+        "cheap_control": {"const": "relu"},
+        "proposed_candidates": {"type": "array", "items": {"enum": ["qsilu_pq", "poly_shift", "poly_quality"]}, "uniqueItems": true},
+        "region_search_candidates": {"type": "array", "items": {"enum": ["poly_shift", "poly_quality"]}, "uniqueItems": true}
+      }
+    },
+    "search": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_deployment_kernels", "beam_width", "max_changed_regions", "max_finalists", "max_map_loss", "max_ap_s_loss"],
+      "properties": {
+        "max_deployment_kernels": {"type": "integer", "minimum": 1, "maximum": 3},
+        "beam_width": {"type": "integer", "minimum": 1},
+        "max_changed_regions": {"type": "integer", "minimum": 1},
+        "max_finalists": {"type": "integer", "minimum": 1, "maximum": 2},
+        "max_map_loss": {"type": ["number", "null"]},
+        "max_ap_s_loss": {"type": ["number", "null"]}
+      }
+    }
+  }
+}

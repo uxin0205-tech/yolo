@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "case": "hog_control_e3",
+  "checkpoint_sha256": "c4ef561b0b4073d9ceda63a5d414b61a38c494aa0ae45c8ec215ca933daa2c79",
+  "cost": {
+    "conv_mac": 37382758400,
+    "binary_qk_bit_products": 40960000,
+    "float_matrix_mac": 81920000,
+    "integer_matrix_mac": 0,
+    "dense_mac_subtotal": 37464678400,
+    "float_flops_subtotal": 74929356800,
+    "integer_ops_subtotal": 0,
+    "binary_sites": [
+      {
+        "q": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "k": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "bit_products": 20480000
+      },
+      {
+        "q": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "k": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "bit_products": 20480000
+      }
+    ],
+    "excludes": "BN/activation/PWL/reciprocal/pooling/decode/sort/NMS/reductions/memory traffic",
+    "accounting_mode": "eval, no_grad, inference_mode=False to preserve dispatcher visibility"
+  },
+  "no_gpu": true,
+  "note": "補正 inference_mode dispatcher 漏算矩陣乘法；不重跑 latency／energy。"
+}

@@ -1,0 +1,118 @@
+schema_version: 17
+plan_id: full35-weight-region-sensitivity-v17-poly-shift-w5-exact
+date: '2026-09-03'
+supersedes: full35-weight-region-sensitivity-v16-poly-shift-w6-exact
+status: poly_shift_seven_dual_green_w6_regions_w5_exact_diagnostic_authorized
+execution_authorized: true
+formal_training_started: false
+implementation_started: true
+graph_view: bn_folded_deployment
+
+revision:
+  frozen_history: configs/experiments/weight-region-sensitivity-plan-v16.yaml
+  evidence:
+    isolated_w6: artifacts/reports/v20-poly-shift-eight-regions-w6-exact-search-v1.json
+    isolated_w6_sha256: a8c997c0ce13539188d788261eeee6f44b152da343984e641ff53cb5c7a595bd
+    dual_regate: artifacts/reports/v20-poly-shift-eight-regions-w6-exact-dual-regate-v1.json
+    dual_regate_sha256: cfc195a783d366315d65c93232dae9cab53b085dcfc8eb9ada6d745a8a712ab0
+  changes:
+    - isolated W6有七區同時通過mAP50與mAP50-95門檻
+    - backbone_deep為recover，不向W5下降
+    - 只授權七個dual-green區域的isolated W5 exact diagnostic
+
+execution_authorization:
+  authorization_id: user-2026-09-03-autonomous-poly-shift-stage5-w5-exact
+  scope: diagnostic_only_poly_shift_w5_exact_seven_dual_green_regions
+  cells:
+    - poly_shift--lsq-plus-a8--neck--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--masf--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--neck_attention_safe--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--detect_one2one_tower--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--detect_one2one_predictor--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--pose_one2one_tower--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--pose_one2one_predictor--w5-optimal_scaled_codebook
+  training: false
+  formal_validation: false
+  stop_after: write_diagnostic_then_hash_pin_candidate_search
+
+activation_policies:
+  new_silu_runs: false
+  historical_silu_reference_only: true
+  primary_a8:
+    - policy_id: poly_shift--lsq-plus-a8
+      role: map50_accuracy_and_hardware_candidate
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+      parent_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+
+graph_inventory:
+  master:
+    total_conv_linear_modules: 251
+    total_weight_elements: 26451392
+    deployment_candidate_modules: 148
+    deployment_candidate_weight_elements: 22571840
+    training_only_excluded_modules: 99
+    training_only_excluded_weight_elements: 3748480
+    binary_qk_protected_modules: 4
+    binary_qk_protected_weight_elements: 131072
+  deployment:
+    total_conv_linear_modules: 152
+    total_weight_elements: 22702912
+    deployment_candidate_modules: 148
+    deployment_candidate_weight_elements: 22571840
+    training_only_excluded_modules: 0
+    training_only_excluded_weight_elements: 0
+    binary_qk_protected_modules: 4
+    binary_qk_protected_weight_elements: 131072
+
+regions:
+  - {order: 1, id: backbone_early, modules: 21, weights: 1218240}
+  - {order: 2, id: backbone_deep, modules: 22, weights: 8126464}
+  - {order: 3, id: backbone_attention_safe, modules: 7, weights: 919808}
+  - {order: 4, id: neck, modules: 33, weights: 8142848}
+  - {order: 5, id: masf, modules: 3, weights: 74240}
+  - {order: 6, id: neck_attention_safe, modules: 5, weights: 395520}
+  - {order: 7, id: detect_one2one_tower, modules: 18, weights: 1390592}
+  - {order: 8, id: detect_one2one_predictor, modules: 6, weights: 62208}
+  - {order: 9, id: pose_one2one_tower, modules: 24, weights: 2238464}
+  - {order: 10, id: pose_one2one_predictor, modules: 9, weights: 3456}
+
+protected:
+  training_only_regions: [detect_one2many, pose_one2many, pose_flow, pose_sigma]
+  semantics: [binary_qk, attention_pwl, topk, gather, box_decode, keypoint_decode]
+  dfl_quantization: false
+  nms_quantization: false
+
+uniform_weight_formats:
+  bits: [8, 7, 6, 5, 4]
+  granularity: per_output_channel
+  scale_methods: [mse_grid_v1, optimal_scaled_codebook]
+  active_scale_method: optimal_scaled_codebook
+  rounding: nearest_even
+  accumulator: int32
+
+diagnostic:
+  manifest: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+  manifest_sha256: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+  runner_probe_per_task: 1
+  selection_claim: false
+  promotion_authorized: false
+
+data_governance:
+  bbat5_dataset_id: bbat5-v1
+  assignment_changed: false
+  tuning_validation: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+  formal_validation: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  new_random_split: false
+
+gates:
+  metric_family: map50
+  total_max_drop: 0.015
+  map50_95_companion_max_drop: 0.04
+  activation_replacement_included: true
+  w8_incremental_max_drop: 0.01
+  matched_sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+
+training:
+  qat_authorized: false
+  augmentation: accepted_full35_exact_no_added_noise

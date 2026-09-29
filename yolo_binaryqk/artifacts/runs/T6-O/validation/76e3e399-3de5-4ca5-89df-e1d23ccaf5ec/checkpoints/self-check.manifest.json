@@ -1,0 +1,29 @@
+{
+  "experiment_schema_version": 3,
+  "variant_id": "T6-O",
+  "attention_class": "ScaledBinaryAttention",
+  "attention_module_paths": [
+    ""
+  ],
+  "attention_module_count": 1,
+  "variant_config_hash": "d20a8e50fcc7a91ce94b6fd3d34f4f96a3e718921e3421c3a12f43b238e4f220",
+  "model_yaml_hash": "unavailable",
+  "source_checkpoint_hash": "unavailable",
+  "binary_forward_count": 1,
+  "quantizer_types": {
+    "": "none"
+  },
+  "distillation_enabled": true,
+  "distillation_type": "positional_encoding",
+  "bias_type": "none",
+  "p_bits": null,
+  "v_bits": null,
+  "magnitude_bits": null,
+  "quantization_contract": {
+    "qk_scale": "mean_abs_channel_token_per_sample_head",
+    "p8_scale": "none",
+    "v8_scale": "none",
+    "bias_parameterization": "none",
+    "bias_initialization": "none"
+  }
+}

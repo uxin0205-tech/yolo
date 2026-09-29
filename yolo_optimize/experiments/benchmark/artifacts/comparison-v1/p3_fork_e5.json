@@ -1,0 +1,274 @@
+{
+  "case": {
+    "id": "p3_fork_e5",
+    "stage": "MASF",
+    "checkpoint": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/masf-p3-fork-v1/epoch-05-resume.pt",
+    "sha256": "132c74576946cdaa4ef606dfddaa2b56fddf219a0987b9ddfe12ca051d40c33e",
+    "metrics": {
+      "coco/box/map50_95": 0.5079630665625217,
+      "coco/person/box/map50_95": 0.6276271886806426,
+      "coco/ball/box/map50_95": 0.5122888587588309,
+      "coco/bat/box/map50_95": 0.4806833113865737,
+      "bbat/box/map50_95": 0.42878239543986973,
+      "bbat/ball/box/map50_95": 0.29768808396552193,
+      "bbat/bat/box/map50_95": 0.5598767069142175
+    },
+    "metrics_source": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/masf-p3-fork-v1/summary.json",
+    "metrics_source_sha256": "fdd14c3b9de7ea0de1fd1eb576d438a63c81d1748b6d760596b1fa4195c2031a",
+    "task": "detect",
+    "loader": "pickle",
+    "backend": "bittrue",
+    "state": "ema",
+    "epoch": 5,
+    "checkpoint_is_training_snapshot": true,
+    "bbat_secondary_source": "/home/uxin/yolo/yolo_optimize/experiments/combine/artifacts/existing-masf-bbat-v1/summary.json"
+  },
+  "build": {
+    "prefold_registered_params": 21973037,
+    "pwl_contract": [
+      {
+        "site": "model.10.m.0.attn.normalize",
+        "class": "BitTruePiecewiseLinearSoftmax",
+        "range": [
+          -10.0,
+          0.0
+        ],
+        "segments": 20,
+        "segment_width": 0.5
+      },
+      {
+        "site": "model.22.m.0.1.attn.normalize",
+        "class": "BitTruePiecewiseLinearSoftmax",
+        "range": [
+          -10.0,
+          0.0
+        ],
+        "segments": 20,
+        "segment_width": 0.5
+      }
+    ]
+  },
+  "registered_params": 21973037,
+  "parameter_bytes": 87892148,
+  "buffer_bytes": 232460,
+  "checkpoint_bytes": 343013341,
+  "torch_version": "2.11.0+cu128",
+  "input": "synthetic uniform FP32 NCHW 1x3x640x640; seed50900912",
+  "cpu_threads": 4,
+  "mode": "eager eval inference_mode, no fuse, no autocast, no compile, TF32 disabled",
+  "target_hardware_latency_ms": null,
+  "target_energy_j_per_frame": null,
+  "target_status": "not measured: target board/equipment not specified or attached",
+  "cost": {
+    "conv_mac": 37857894400,
+    "binary_qk_bit_products": 40960000,
+    "float_mm_mac": 0,
+    "dense_mac_subtotal": 37857894400,
+    "dense_flops_subtotal": 75715788800,
+    "excluded": "BN, activations, PWL/reciprocal, pooling, integer/boolean reductions, sorting/NMS, memory traffic; binary products listed separately",
+    "binary_sites": [
+      {
+        "shape_q": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "shape_k": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "bit_products": 20480000
+      },
+      {
+        "shape_q": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "shape_k": [
+          1,
+          4,
+          32,
+          400
+        ],
+        "bit_products": 20480000
+      }
+    ]
+  },
+  "cpu_latency": {
+    "n": 10,
+    "median_ms": 222.5312669761479,
+    "mean_ms": 223.9944768603891,
+    "p90_ms": 233.08261586353183,
+    "min_ms": 215.59743396937847,
+    "max_ms": 236.6007948294282,
+    "samples_ms": [
+      223.60434802249074,
+      220.3066200017929,
+      232.69170708954334,
+      215.59743396937847,
+      219.47004180401564,
+      224.3042909540236,
+      236.6007948294282,
+      221.45818592980504,
+      218.89120806008577,
+      227.02013794332743
+    ]
+  },
+  "cpu_process_peak_rss_bytes": 1170006016,
+  "gpu_resident_allocated_bytes": 134361600,
+  "gpu_latency": {
+    "n": 50,
+    "median_ms": 25.48025608062744,
+    "mean_ms": 25.536158638000487,
+    "p90_ms": 25.735071754455568,
+    "min_ms": 25.304351806640625,
+    "max_ms": 26.80873680114746,
+    "samples_ms": [
+      25.7825927734375,
+      25.478944778442383,
+      25.540767669677734,
+      25.534944534301758,
+      25.480575561523438,
+      25.479936599731445,
+      25.479616165161133,
+      25.401248931884766,
+      25.496511459350586,
+      25.485055923461914,
+      25.459423065185547,
+      25.481887817382812,
+      25.400991439819336,
+      25.391263961791992,
+      25.39263916015625,
+      25.401695251464844,
+      25.900415420532227,
+      25.5729923248291,
+      25.55504035949707,
+      25.5218563079834,
+      25.405439376831055,
+      25.50841522216797,
+      25.459583282470703,
+      25.596256256103516,
+      25.829343795776367,
+      25.647136688232422,
+      25.48134422302246,
+      26.459583282470703,
+      25.72979164123535,
+      25.528928756713867,
+      25.465280532836914,
+      25.49510383605957,
+      25.446815490722656,
+      25.477279663085938,
+      25.472639083862305,
+      25.48371124267578,
+      25.339839935302734,
+      25.479167938232422,
+      25.36751937866211,
+      25.443071365356445,
+      25.304351806640625,
+      25.39628791809082,
+      25.38755226135254,
+      25.484832763671875,
+      25.30988883972168,
+      25.496095657348633,
+      25.314271926879883,
+      25.505695343017578,
+      25.445568084716797,
+      26.80873680114746
+    ]
+  },
+  "gpu_sync_wall_latency": {
+    "n": 50,
+    "median_ms": 25.493260473012924,
+    "mean_ms": 25.549610080197453,
+    "p90_ms": 25.751301273703575,
+    "min_ms": 25.317128747701645,
+    "max_ms": 26.822741143405437,
+    "samples_ms": [
+      25.81945201382041,
+      25.492507964372635,
+      25.554527062922716,
+      25.54783085361123,
+      25.493585038930178,
+      25.49293590709567,
+      25.492358952760696,
+      25.41382610797882,
+      25.50939889624715,
+      25.49768891185522,
+      25.472391862422228,
+      25.494825094938278,
+      25.413887109607458,
+      25.404255837202072,
+      25.405663065612316,
+      25.414238683879375,
+      25.913790334016085,
+      25.585865136235952,
+      25.568191427737474,
+      25.534554850310087,
+      25.41788574308157,
+      25.52084904164076,
+      25.47257672995329,
+      25.609356351196766,
+      25.844092946499586,
+      25.66099027171731,
+      25.49481764435768,
+      26.474633254110813,
+      25.74372896924615,
+      25.542351882904768,
+      25.478155817836523,
+      25.50762426108122,
+      25.459934026002884,
+      25.490012019872665,
+      25.485525839030743,
+      25.496444199234247,
+      25.351499672979116,
+      25.49147792160511,
+      25.38062585517764,
+      25.456109084188938,
+      25.317128747701645,
+      25.408943183720112,
+      25.400198996067047,
+      25.497640948742628,
+      25.321501772850752,
+      25.50850762054324,
+      25.327029172331095,
+      25.51819197833538,
+      25.458153802901506,
+      26.822741143405437
+    ]
+  },
+  "gpu_peak_allocated_bytes": 477139968,
+  "gpu_peak_reserved_bytes": 744488960,
+  "gpu_name": "NVIDIA GeForce RTX 5090",
+  "cuda_version": "12.8",
+  "gpu_energy": {
+    "scope": "whole GPU telemetry, includes desktop/idle; not system or target-board energy",
+    "blocks": [
+      {
+        "frames": 78,
+        "seconds": 2.0032923379912972,
+        "energy_mj": 350066,
+        "j_per_frame": 4.488025641025641
+      },
+      {
+        "frames": 79,
+        "seconds": 2.0111991008743644,
+        "energy_mj": 352329,
+        "j_per_frame": 4.459860759493671
+      },
+      {
+        "frames": 78,
+        "seconds": 2.023318463936448,
+        "energy_mj": 348699,
+        "j_per_frame": 4.4705
+      }
+    ],
+    "median_j_per_frame": 4.4705
+  },
+  "status": "passed",
+  "quick": false
+}

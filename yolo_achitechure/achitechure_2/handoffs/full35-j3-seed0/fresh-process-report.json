@@ -1,0 +1,210 @@
+{
+  "accepted_stage": "j3",
+  "checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+  "checkpoint_kind": "inference_only",
+  "checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+  "detect_nc": 80,
+  "device": "cpu",
+  "executed_at": "2026-08-27T04:14:03.931749+00:00",
+  "factory_complete": true,
+  "feature_channels": [
+    256,
+    512,
+    512
+  ],
+  "gpu_used": false,
+  "head_inputs": [
+    16,
+    19,
+    22
+  ],
+  "input": {
+    "batch": 1,
+    "channels": 3,
+    "height": 64,
+    "values": "zeros",
+    "width": 64
+  },
+  "kpt_shape": [
+    2,
+    3
+  ],
+  "loaded_tensors": 1238,
+  "model_kind": "graph_shared_dual_head",
+  "output_shapes": {
+    "detect": [
+      [
+        1,
+        84,
+        6
+      ],
+      {
+        "one2many": {
+          "boxes": [
+            1,
+            4,
+            84
+          ],
+          "feats": [
+            [
+              1,
+              256,
+              8,
+              8
+            ],
+            [
+              1,
+              512,
+              4,
+              4
+            ],
+            [
+              1,
+              512,
+              2,
+              2
+            ]
+          ],
+          "scores": [
+            1,
+            80,
+            84
+          ]
+        },
+        "one2one": {
+          "boxes": [
+            1,
+            4,
+            84
+          ],
+          "feats": [
+            [
+              1,
+              256,
+              8,
+              8
+            ],
+            [
+              1,
+              512,
+              4,
+              4
+            ],
+            [
+              1,
+              512,
+              2,
+              2
+            ]
+          ],
+          "scores": [
+            1,
+            80,
+            84
+          ]
+        }
+      }
+    ],
+    "pose": [
+      [
+        1,
+        84,
+        12
+      ],
+      {
+        "one2many": {
+          "boxes": [
+            1,
+            4,
+            84
+          ],
+          "feats": [
+            [
+              1,
+              256,
+              8,
+              8
+            ],
+            [
+              1,
+              512,
+              4,
+              4
+            ],
+            [
+              1,
+              512,
+              2,
+              2
+            ]
+          ],
+          "kpts": [
+            1,
+            6,
+            84
+          ],
+          "scores": [
+            1,
+            2,
+            84
+          ]
+        },
+        "one2one": {
+          "boxes": [
+            1,
+            4,
+            84
+          ],
+          "feats": [
+            [
+              1,
+              256,
+              8,
+              8
+            ],
+            [
+              1,
+              512,
+              4,
+              4
+            ],
+            [
+              1,
+              512,
+              2,
+              2
+            ]
+          ],
+          "kpts": [
+            1,
+            6,
+            84
+          ],
+          "scores": [
+            1,
+            2,
+            84
+          ]
+        }
+      }
+    ]
+  },
+  "output_tasks": [
+    "detect",
+    "pose"
+  ],
+  "pose_nc": 2,
+  "release_state": "accepted_j3_with_j2_rollback",
+  "result": "passed",
+  "schema_version": 2,
+  "shared_layers": 23,
+  "shared_parameters": 26529701,
+  "state_source": "ema",
+  "strict_load": true,
+  "strides": [
+    8.0,
+    16.0,
+    32.0
+  ],
+  "task": "both"
+}

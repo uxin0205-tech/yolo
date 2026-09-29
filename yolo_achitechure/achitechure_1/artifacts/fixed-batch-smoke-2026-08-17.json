@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "blocked",
+  "reason": "fixed batch 16 at imgsz 640 raised torch.OutOfMemoryError during hardware-friendly attention score construction",
+  "contract_response": "stopped without batch reduction or gradient accumulation",
+  "variants_attempted": ["full35", "partial75"],
+  "batch": 16,
+  "imgsz": 640,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "total_vram_mib": 32607,
+  "concurrent_process": {
+    "pid": 2333463,
+    "command": "python -m yolo_attention.cli queue run --queue-root artifacts/lr-sweep-queue --execute",
+    "used_vram_mib": 15510
+  },
+  "observed_free_vram_after_attempt_mib": 16204,
+  "date": "2026-08-17"
+}

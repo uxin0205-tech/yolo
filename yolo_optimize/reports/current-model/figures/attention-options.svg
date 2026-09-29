@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="790" viewBox="0 0 1120 790" role="img" aria-labelledby="title desc">
+<title id="title">目前 BinaryQK 與預計移除後重訓的 Attention</title>
+<desc id="desc">左側目前使用兩條二值分支、固定 scale 和 relative bias；右側未實施的新實驗恢復浮點 QK。兩側都保留 PWL Softmax。</desc>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0 L0 6 L9 3 z" fill="#475569"/></marker></defs>
+<rect width="1120" height="790" fill="#f8fafc"/>
+<g font-family="Noto Sans CJK TC,Microsoft JhengHei,sans-serif" fill="#172033" text-anchor="middle">
+<text x="560" y="45" font-size="29" font-weight="bold">兩條研究路線，不能混成同一個模型</text>
+<text x="280" y="96" font-size="25" fill="#1d4ed8" font-weight="bold">目前已使用</text>
+<text x="840" y="96" font-size="25" fill="#92400e" font-weight="bold">預計重訓，尚無新精度</text>
+<rect x="55" y="122" width="450" height="60" rx="10" fill="#dbeafe"/><text x="280" y="161" font-size="23">Q、K 投影</text>
+<rect x="615" y="122" width="450" height="60" rx="10" fill="#fef3c7"/><text x="840" y="161" font-size="23">保留已學 Q、K、V 投影</text>
+<path d="M840 182 V215" stroke="#475569" stroke-width="3" marker-end="url(#a)"/>
+<path d="M280 182 V215" stroke="#475569" stroke-width="3" marker-end="url(#a)"/>
+<rect x="55" y="218" width="450" height="110" rx="10" fill="#dbeafe"/><text x="280" y="254" font-size="22">原座標 sign／XNOR</text><text x="280" y="288" font-size="22">＋ Hadamard 後 sign／XNOR</text><text x="280" y="315" font-size="17">兩條相似度分支</text>
+<rect x="615" y="218" width="450" height="110" rx="10" fill="#fef3c7"/><text x="840" y="257" font-size="25">QᵀK × 0.176776695…</text><text x="840" y="292" font-size="21">d = 32；縮放是固定常數</text><text x="840" y="317" font-size="17">沒有逐圖 sqrt，沒有二值補償分支</text>
+<path d="M840 328 V362" stroke="#475569" stroke-width="3" marker-end="url(#a)"/>
+<path d="M280 328 V362" stroke="#475569" stroke-width="3" marker-end="url(#a)"/>
+<rect x="55" y="365" width="450" height="77" rx="10" fill="#dbeafe"/><text x="280" y="397" font-size="22">固定尺度加權＋相對位置偏置</text><text x="280" y="425" font-size="18">16 個尺度 slots，並非每張圖選 1 個</text>
+<rect x="615" y="365" width="450" height="77" rx="10" fill="#fef3c7"/><text x="840" y="398" font-size="22">之後再評估 Q/K INT8 固定尺度</text><text x="840" y="426" font-size="18">這一步是量化候選，不是已完成部署</text>
+<path d="M840 442 V475" stroke="#475569" stroke-width="3" marker-end="url(#a)"/>
+<path d="M280 442 V475" stroke="#475569" stroke-width="3" marker-end="url(#a)"/>
+<rect x="55" y="478" width="450" height="72" rx="10" fill="#dcfce7"/><text x="280" y="508" font-size="22">PWL Softmax [-10,0]、20 段</text><text x="280" y="535" font-size="18">減 row max → PWL → 正規化</text>
+<rect x="615" y="478" width="450" height="72" rx="10" fill="#dcfce7"/><text x="840" y="508" font-size="22">同樣保留 PWL [-10,0]、20 段</text><text x="840" y="535" font-size="18">使用者已確認，不改成原生 Softmax</text>
+<path d="M840 550 V584" stroke="#475569" stroke-width="3" marker-end="url(#a)"/>
+<path d="M280 550 V584" stroke="#475569" stroke-width="3" marker-end="url(#a)"/>
+<rect x="55" y="587" width="450" height="68" rx="10" fill="#e2e8f0"/><text x="280" y="629" font-size="23">與 V 混合＋原生 pe／proj</text>
+<rect x="615" y="587" width="450" height="68" rx="10" fill="#e2e8f0"/><text x="840" y="629" font-size="23">與 V 混合＋保留 pe／proj</text>
+<text x="560" y="706" font-size="21">pe 位置卷積 ≠ 額外 relative bias；移除右側補償時不要誤刪原生 pe。</text>
+<text x="560" y="745" font-size="19">目前 PWL 最後正規化仍使用軟體 reciprocal reference；不是整網全整數硬體。</text>
+</g></svg>

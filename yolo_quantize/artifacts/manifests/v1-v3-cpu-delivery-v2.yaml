@@ -1,0 +1,218 @@
+schema_version: 2
+delivery_id: full35-quantization-v1-v3-cpu-delivery-v2
+date: '2026-08-31'
+status: hardswish_revision_cpu_complete_v4_plus_prepared_not_run
+supersedes: artifacts/manifests/v1-v3-cpu-delivery-v1.yaml
+
+decision_boundary:
+  active_uniform_parents: [qsilu_pq, hardswish, poly_shift]
+  historical_only_parents: [poly_quality]
+  historical_artifacts_preserved: true
+  historical_artifacts_rewritten: false
+  new_silu_runs: false
+  requested_spelling_alias:
+    user_term: poly_quantity
+    registry_identifier: poly_quality
+
+execution_boundary:
+  gpu_used: false
+  cuda_visible_devices: '-1'
+  formal_training: false
+  validation_map_run: false
+  ptq_calibration_or_probe_run: false
+  qat_run: false
+  export_run: false
+  hardware_benchmark_run: false
+  v4_or_later_run: false
+
+q3_evidence:
+  source_url: https://github.com/uxin0205-tech/yolo/blob/main/yolo_activation/reports/full35-q3-cpu-final-report.md
+  audited_remote_commit: 30bd50e2c9e16feb7adb989cb042e1a13091c067
+  source_report_git_blob: cf21ddd028f527f0d6a00bdd28531b3fc9014a7c
+  source_report_bytes: 13794
+  local_and_remote_blob_equal: true
+  source_report_sha256: 8c495d71a7d4e50db7dd29676dfc8919a88cac3e362ab3f7d4737428c9b41d77
+  source_summary_sha256: 1e3b553484cd9eaceafd19603292804a9d3a55e74a5e5fcbb8db7edc33c08316
+  source_rows_sha256: c3afc1a7ab1daf063c805ef9d3f98547c471411e78c06c527a7c405b2f3cb345
+  source_activation_manifest_sha256: c71038f0eac232af14d4214c59f0697fb365aaa0bacd28aeb72e79545017fdfc
+  completed_cells: 22
+  total_cells: 22
+  semantics: cpu_zero_shot_single_activation_region_sensitivity
+  training_performed: false
+  quantized_weights_or_activations: false
+  direct_use: rank_qsilu_root_single_region_hardswish_policies
+  forbidden_claim: uniform_hardswish_or_a8_w8_winner
+  audit_report:
+    path: docs/reports/2026-08-31-q3-activation-parent-evidence.md
+    sha256: 85575a64a0827509baa09bb0cce3ac90dda4c74c58a3bdf8285f68442430f5e4
+
+uniform_parents:
+  qsilu_pq:
+    role: accuracy_fallback_and_q3_checkpoint_root
+    checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    view_manifest:
+      path: artifacts/manifests/weight-views-qsilu-pq-a8-v2.json
+      sha256: e5b06fdd97bc77c376dcf50bf371a2a6b6368045e308318b236ace4ba69ae391
+    analysis:
+      path: artifacts/reports/weight-format-analysis-qsilu-pq-a8-main-v2.json
+      sha256: 159ea7d18aaad6266f05cbc78665581ea336fb562d33e6eed5daa0c4f8e74a12
+      measurements: 2960
+  hardswish:
+    role: standard_hardware_operator_experimental_parent
+    checkpoint_sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+    checkpoint_selector: best_joint_epoch_8_zero_based
+    checkpoint_worst_delta_vs_accepted: -0.014120813616487593
+    upstream_final_epoch_worst_delta: -0.016884422501412644
+    selector_warning: best_joint_passes_old_gate_but_run_final_epoch_fails_old_gate
+    intake:
+      path: artifacts/manifests/hardswish-uniform-parent-intake-v1.yaml
+      bytes: 3910
+      sha256: 0d51086a005b5f5e70b19808adb0270a7d99055596bd9e2f7c2069fbc0a70c90
+    view_manifest:
+      path: artifacts/manifests/weight-views-hardswish-a8-v3.json
+      bytes: 4791
+      sha256: fce59622ded49b59b254fbd90ff3ed0bc48744c72bd45fb3663a01cbc2e427df
+      source_batch_norm_modules: 179
+      deployment_batch_norm_modules: 0
+      deployment_modules: 148
+      forward_nrmse: 0.000005759841715128737
+      forward_max_relative_to_reference_peak: 0.000032022208099091574
+      parity_passed: true
+    analysis:
+      path: artifacts/reports/weight-format-analysis-hardswish-a8-main-v3.json
+      bytes: 3360552
+      sha256: 7f78a8f46387ce6d9c6d8bc5e5db89a2ac663aab4358af3ddbca971a525c2d52
+      measurements: 2960
+      nonfinite_measurements: 0
+  poly_shift:
+    role: dyadic_hardware_extreme
+    checkpoint_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+    view_manifest:
+      path: artifacts/manifests/weight-views-poly-shift-a8-v2.json
+      sha256: 13c740589e9fde432e3fd32cbfd8551df1a7add84c880ad82e9835b083c1402c
+    analysis:
+      path: artifacts/reports/weight-format-analysis-poly-shift-a8-main-v2.json
+      sha256: 306deaa51d29f16c3ed49b1a442f513fb09813a0966ba1960544816cfde48f24
+      measurements: 2960
+  poly_quality_historical:
+    future_active: false
+    checkpoint_sha256: eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968
+    view_manifest: artifacts/manifests/weight-views-poly-quality-a8-v2.json
+    analysis: artifacts/reports/weight-format-analysis-poly-quality-a8-main-v2.json
+    historical_measurements_preserved: 2960
+
+static_analysis:
+  active_measurements: 8880
+  historical_additional_measurements: 2960
+  views: [master, deployment]
+  deployment_modules: 148
+  uniform_bits: [8, 7, 6, 5, 4]
+  deployment_global_nrmse_range_across_active_parents:
+    w8: [0.006240446440676085, 0.006272093024965403]
+    w7: [0.012459389614218247, 0.012513969662271729]
+    w6: [0.02446201278411409, 0.024547261056130105]
+    w5: [0.049416963804894555, 0.04952104608614649]
+    w4: [0.09572429352643387, 0.09584016172644375]
+    fixed_sd4_per_output_channel_mse: [0.160326880, 0.1604001128110533]
+    paper_twn_layerwise: [0.677474360936731, 0.677598446]
+  interpretation: weight_reconstruction_proxy_not_map_or_hardware_latency
+
+q3_regional_hardswish_views:
+  base_checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+  default_activation: qsilu_pq
+  override_activation: hardswish
+  scope: graph_and_dual_weight_view_parity_only
+  repeated_weight_analysis_skipped: true
+  skip_reason: all_policies_share_identical_checkpoint_weights
+  policies:
+    neck_attention:
+      activation_counts: {qsilu_pq: 189, hardswish: 1}
+      q3_worst_global_delta: -0.008581
+      manifest: artifacts/manifests/weight-views-qsilu-pq-hardswish-neck-attention-a8-v3.json
+      bytes: 5141
+      sha256: ac7ef83fc7915e34676394abd97ccb036e52f214f43b9f606272c6b185e13e54
+      forward_nrmse: 0.000003395364459199613
+      forward_max_relative_to_reference_peak: 0.0000071184478580367945
+      parity_passed: true
+    masf:
+      activation_counts: {qsilu_pq: 187, hardswish: 3}
+      q3_worst_global_delta: -0.010301
+      manifest: artifacts/manifests/weight-views-qsilu-pq-hardswish-masf-a8-v3.json
+      bytes: 5116
+      sha256: 5e2070006c1632d332fe59a7cb080bd36b9c1cc8c4765795b20eafdfa64c3c35
+      forward_nrmse: 0.000003423227744803728
+      forward_max_relative_to_reference_peak: 0.000006440058526067506
+      parity_passed: true
+    backbone_attention:
+      activation_counts: {qsilu_pq: 187, hardswish: 3}
+      q3_worst_global_delta: -0.013518
+      manifest: artifacts/manifests/weight-views-qsilu-pq-hardswish-backbone-attention-a8-v3.json
+      bytes: 5159
+      sha256: 7677fcf99aa28ae69c39d1265f0d9d8bd461c4382e844ed4aa0735084c737ed6
+      forward_nrmse: 0.0000038090682490757345
+      forward_max_relative_to_reference_peak: 0.000005286479538196974
+      parity_passed: true
+  multi_region_combination_measured: false
+
+fixed_sd4_routing:
+  path: artifacts/manifests/fixed-sd4-routing-candidates-v2.yaml
+  bytes: 3967
+  sha256: 16cec15ccb299c1e1ea61b88f8ce07aa3d0b35e64cc7c9c12043aa87d017ed9f
+  deployment_winners_each_active_parent: 37
+  master_winners_each_active_parent: 35
+  both_view_cross_parent_candidates: 34
+  candidates_equal_historical_v1_set: true
+  source_hashes_equal_historical_v1: false
+  map_gate_passed: false
+
+diagnostic_and_metric_contract:
+  diagnostic_manifest:
+    path: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+    sha256: 76b4392d2d07232967018b20af82149ba67ee036fad2cb75bb15d2d7565f4356
+    bbat_assignment_changed: false
+    coco_person_required: true
+  metric_count: 8
+  total_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  qat_matched_sham_max_absolute_drift: 0.01
+  recovery_floor: 0.06
+
+future_boundary:
+  plan: configs/experiments/v4-plus-prepared-plan-v3.yaml
+  uniform_v4_quantized_cells: 15
+  uniform_fp32_weight_matched_controls: 3
+  q3_regional_stage_a_jobs: 6
+  q3_regional_conditional_combination_jobs: 2
+  uniform_v5_quantized_cells: 150
+  regional_v5_expansion_preallocated: false
+  execution_authorized: false
+  next_required_authority: explicit_gpu_validation_authorization
+  auto_qat: false
+
+validation:
+  pytest:
+    command: env CUDA_VISIBLE_DEVICES=-1 /home/uxin/yolo/.venv/bin/pytest -q
+    result: 62_passed_in_57.37_seconds
+  ruff_check:
+    command: /home/uxin/yolo/.venv/bin/ruff check src tests scripts
+    result: passed
+  ruff_format:
+    command: /home/uxin/yolo/.venv/bin/ruff format --check src tests scripts
+    result: 34_files_already_formatted
+  yaml_json_hash_audit:
+    result: passed
+    yaml_files: 17
+    json_files: 16
+    hashes_verified: 9
+    hardswish_measurements: 2960
+    hardswish_nonfinite_values: 0
+    uniform_v4_cells_verified: 15
+    q3_regional_cells_verified: 6_plus_2_conditional
+    uniform_v5_cells_verified: 150
+    execution_authorized_verified_false: true
+
+git_boundary:
+  checkout_reset_commit_or_push_performed: false
+  root_worktree_dirty: true
+  root_branch_diverged: true
+  release_status: not_committed_or_published

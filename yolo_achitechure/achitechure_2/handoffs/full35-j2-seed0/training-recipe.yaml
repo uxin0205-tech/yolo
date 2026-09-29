@@ -1,0 +1,68 @@
+# architecture_2 從 accepted Full35 J2 parent 執行公平 Float20 恢復的完整 recipe。
+schema_version: 1
+spec_version: 2.2.0
+spec_sha256: 8297f934fc7946cd0a0d32a4d18b1fa2e87b736e39980977702896238fe9d88e
+recipe_id: full35-j2-float20-recovery-seed0
+
+batch:
+  detect_logical: 128
+  detect_physical_microbatch: 32
+  detect_oom_fallback_microbatch: 16
+  pose_physical: 16
+  validation_detect: 16
+  validation_pose: 16
+fraction: 1.0
+scale: 0.5
+cache: false
+imgsz: 640
+optimizer: MuSGD
+lr0: 0.0000038
+lrf: 0.5
+momentum: 0.948
+weight_decay: 0.00027
+warmup_epochs: 1
+nbs: 64
+losses:
+  detect: {box: 7.5, cls: 0.5, dfl: 1.5}
+  pose: {box: 7.5, cls: 0.5, dfl: 1.5, pose: 12.0, kobj: 1.0, rle: 1.0}
+augmentation:
+  scale: 0.5
+  detect_fliplr: 0.5
+  pose_fliplr: 0.0
+  mosaic: 0.0
+  mixup: 0.0
+  cutmix: 0.0
+  copy_paste: 0.0
+freeze_policy:
+  inherited_masf: frozen_parameters_buffers_eval
+  inherited_attention: frozen_parameters_buffers_eval
+  shared_batch_norm: eval
+  heads: trainable
+amp: true
+deterministic: true
+seed: 0
+optimizer_steps: 1860
+validation_interval: 1
+task_ratio:
+  detect_logical_batches_per_macro: 2
+  pose_batches_per_macro: 1
+  detect_weight: 1.0
+  pose_weight: 0.25
+epochs: 20
+patience: 0
+
+learning_rates:
+  backbone: 0.0000038
+  neck: 0.000019
+  masf: 0.0
+  attention: 0.0
+  detect_head: 0.00005
+  pose_head: 0.00005
+scheduler:
+  warmup_start_factor: 0.1
+  cosine_final_lr_factor: 0.5
+source_references:
+  accepted_recipe: /home/uxin/yolo/yolo_combine/final/full35/configs/joint.yaml
+  accepted_stage: j2
+  recovery_reference: j3_oom_safe_batch_plan
+  note_zh: 不把仍在執行的 J3 challenger 權重當 parent；只沿用已驗證的恢復 LR 與 OOM 經驗。

@@ -1,0 +1,97 @@
+schema_version: 1
+manifest_id: full35-uniform-hardswish-parent-intake-v1
+date: '2026-08-31'
+status: active_experimental_parent_not_activation_winner
+formal_release: false
+
+decision:
+  authority: explicit_user_revision_2026_08_31
+  action: include_uniform_hardswish_in_quantization_screen
+  upstream_final_epoch_promotion_overridden: true
+  reason: use_checkpoint_level_best_joint_selector_and_revised_project_minus_0_04_screen
+  q3_regional_evidence_is_separate: true
+
+checkpoint:
+  path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt
+  sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+  bytes: 106825541
+  kind: inference_only
+  state_source: ema
+  stage: j3
+  selector: best_joint
+  selected_epoch_zero_based: 8
+  global_macro_step: 4167
+
+source_run:
+  run_name: short-recovery-v2-lr01-uniform-hardswish-seed1
+  phase: short_recovery
+  epochs_completed: 10
+  seed: 1
+  data_fraction: 1.0
+  resampling: false
+  optimizer: AdamW
+  detect_logical_batch: 128
+  detect_physical_microbatch: 32
+  numerical_stability:
+    model_amp: true
+    ciou_loss_precision: fp32
+    ciou_formula_changed: false
+  evidence:
+    activation_experiment:
+      path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/activation-experiment.json
+      sha256: 8d9f2a6ec33ffac6194aaf0a965c14dcd1b86fff58334eeb478706ec0f0f8074
+    resolved_config:
+      path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/resolved-config.json
+      sha256: 05c49d01bc1367a4f0325ef16c36973647f3eeb32465425759e14dc838f0d2cc
+    selected_metrics:
+      path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0008/bittrue/metrics.json
+      sha256: fdf621f8624a1e022bae320dceabb1619040524f0d8b5bbfbc2c26fdb0689422
+    gate_log:
+      path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/logs/gate.csv
+      sha256: 96174ab5f6be9eeb90c3e653a56a23558aa7b92f5ce66660b88007636d959c0c
+
+selected_epoch_metrics:
+  coco/box/map50_95: 0.48390152285443455
+  coco/person/box/map50_95: 0.6077847482722392
+  bbat/box/map50_95: 0.6205909049451159
+  bbat/pose/map50_95: 0.9007067680046446
+  bbat/ball/box/map50_95: 0.4994613260349907
+  bbat/bat/box/map50_95: 0.741720483855241
+  bbat/ball/pose/map50_95: 0.8669179758784136
+  bbat/bat/pose/map50_95: 0.9344955601308756
+
+selected_epoch_deltas_vs_accepted:
+  coco/box/map50_95: -0.014120813616487593
+  coco/person/box/map50_95: -0.012596740150209729
+  bbat/box/map50_95: -0.009444616811949635
+  bbat/pose/map50_95: -0.0030104061083001674
+  bbat/ball/box/map50_95: -0.007975710152337997
+  bbat/bat/box/map50_95: -0.010913523471561593
+  bbat/ball/pose/map50_95: 0.007009260686637098
+  bbat/bat/pose/map50_95: -0.01303007290323785
+  worst_metric: coco/box/map50_95
+  worst_delta: -0.014120813616487593
+
+selector_boundary:
+  original_upstream_gate_max_drop: 0.015
+  selected_epoch_passes_original_gate: true
+  run_final_epoch: 9
+  run_final_epoch_worst_metric: bbat/bat/pose/map50_95
+  run_final_epoch_worst_delta: -0.016884422501412644
+  run_final_epoch_passes_original_gate: false
+  upstream_run_level_status_remains: failed
+  project_total_max_drop: 0.04
+  checkpoint_passes_project_screen: true
+
+comparability_warnings:
+  - q3_uses_qsilu_checkpoint_and_does_not_validate_this_uniform_parent
+  - q3_regional_and_uniform_hardswish_must_have_distinct_policy_ids
+  - qsilu_short_recovery_predated_the_fp32_ciou_stability_patch
+  - checkpoint_is_local_experimental_and_not_an_upstream_formal_release
+  - no_a8_wbit_map_validation_or_hardware_measurement_is_implied
+
+revision_execution:
+  gpu_used: false
+  training_performed: false
+  validation_performed: false
+  purpose: provenance_intake_only

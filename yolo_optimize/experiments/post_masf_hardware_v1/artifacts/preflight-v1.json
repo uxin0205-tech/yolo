@@ -1,0 +1,106 @@
+{
+  "status": "passed",
+  "gpu_used": false,
+  "results": {
+    "scale_bias": {
+      "score_train_eval_exact": true,
+      "sites": {
+        "model.10.m.0.attn": {
+          "q_grad_max": 0.0057967063039541245,
+          "k_grad_max": 0.00808916985988617,
+          "scale_grad_max": 0.15851399302482605,
+          "bias_x_grad_max": 1.487467646598816,
+          "bias_y_grad_max": 1.5916208028793335,
+          "scales": [
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ]
+          ],
+          "q_ste_coverage": 0.6831597089767456,
+          "k_ste_coverage": 0.6744791865348816,
+          "offset_entries": 504
+        },
+        "model.22.m.0.1.attn": {
+          "q_grad_max": 0.007353441324084997,
+          "k_grad_max": 0.007120216265320778,
+          "scale_grad_max": 0.15761351585388184,
+          "bias_x_grad_max": 0.8608365058898926,
+          "bias_y_grad_max": 1.1684868335723877,
+          "scales": [
+            [
+              0.125,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ],
+            [
+              0.25,
+              0.25
+            ]
+          ],
+          "q_ste_coverage": 0.6870659589767456,
+          "k_ste_coverage": 0.6870659589767456,
+          "offset_entries": 504
+        }
+      },
+      "dynamic_image_scales": false,
+      "real_task_loss_checked": false
+    },
+    "rep17": {
+      "zero_branch_initial_equivalence": true,
+      "fold_equivalence": true,
+      "identity_branch": false,
+      "channels": [
+        256,
+        256
+      ],
+      "stride": [
+        2,
+        2
+      ],
+      "extra_training_parameters": 66048,
+      "deployment_extra_conv_mac": 0
+    },
+    "rep20": {
+      "zero_branch_initial_equivalence": true,
+      "fold_equivalence": true,
+      "identity_branch": false,
+      "channels": [
+        512,
+        512
+      ],
+      "stride": [
+        2,
+        2
+      ],
+      "extra_training_parameters": 263168,
+      "deployment_extra_conv_mac": 0
+    }
+  },
+  "parent_sha256": "1b46fca17f4ae414f622e39afb6d4bae8686ac3a760e23b65fd971500a39e2c7",
+  "pwl": [
+    -10,
+    0,
+    20
+  ],
+  "limitation": "合成 score CPU 梯度，不是 task loss 精度；真實雙任務梯度須 GPU smoke。"
+}

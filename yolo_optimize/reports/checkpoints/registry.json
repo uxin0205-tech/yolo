@@ -1,0 +1,47 @@
+[
+  {
+    "id": "default_joint",
+    "path": "experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/inference/best_joint.pt",
+    "sha256": "1bbbbe0f87cb853827af1bb625e7066178e3fb2c7e14c410d997efb24e94834a",
+    "bytes": 106825797,
+    "role": "目前新研究預設；activation-relative，非原嚴格gate全過",
+    "training_snapshot": "experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/checkpoints/best_joint.pt"
+  },
+  {
+    "id": "prefusion_masf",
+    "path": "experiments/studies/pre-fusion-full35-b100/artifacts/direction1-candidate-verification-v1/masf-e8-bittrue.pt",
+    "sha256": "73705178305e55e497ead1e1d8948114b67e1d17bf528861c9606e66cd372721",
+    "bytes": 88557505,
+    "role": "使用者選定融合前P3 bridge E8"
+  },
+  {
+    "id": "prefusion_control",
+    "path": "experiments/studies/pre-fusion-full35-b100/artifacts/direction1-candidate-verification-v1/control-e8-bittrue.pt",
+    "sha256": "5c6ac574aff5d16d0b2035e4571beb024ba137354687e389001d562f86b3009d",
+    "bytes": 88240689,
+    "role": "融合前無MASF配對"
+  },
+  {
+    "id": "pose_recovery",
+    "path": "experiments/combine/bridge_v1/artifacts/fusion/j3-pose-head-recovery-v1/inference/best_pose.pt",
+    "sha256": "d5b2083b2b736ded790578a2779d223d82413ce0c6cbac1468601105c094f9a6",
+    "bytes": 106824553,
+    "role": "activation父模型",
+    "training_snapshot": "experiments/combine/bridge_v1/artifacts/fusion/j3-pose-head-recovery-v1/checkpoints/best_pose.pt"
+  },
+  {
+    "id": "pose_kd_candidate",
+    "path": "experiments/kd/pose_focus_v1/artifacts/runs/kd-e5-seed1-v1/inference/best_pose.pt",
+    "sha256": "b67a5a82c3b36ff1bc701630ab7b874b06485ca2c9c6fff42074f6f202ebe0e4",
+    "bytes": 106824553,
+    "role": "headKD E2；框退化，不升版",
+    "training_snapshot": "experiments/kd/pose_focus_v1/artifacts/runs/kd-e5-seed1-v1/checkpoints/best_pose.pt"
+  },
+  {
+    "id": "mixed_keypoint_candidate",
+    "path": "experiments/inference/pose_branch_v1/artifacts/branch-v2/candidate.pt",
+    "sha256": "dceec1215c8d8b7e252b8e77ac40549b559999cf1ea6df2dea8c68e0ac212e6c",
+    "bytes": 106814209,
+    "role": "推論重組負結果，不升版"
+  }
+]

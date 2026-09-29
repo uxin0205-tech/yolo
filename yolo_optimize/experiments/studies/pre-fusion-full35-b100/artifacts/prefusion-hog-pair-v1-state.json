@@ -1,0 +1,41 @@
+{
+  "status": "awaiting_analysis",
+  "jobs": [
+    {
+      "name": "prefusion-hog-control-smoke-v1",
+      "arm": "control",
+      "status": "passed",
+      "smoke": true
+    },
+    {
+      "name": "prefusion-hog-hog-smoke-v1",
+      "arm": "hog",
+      "status": "passed",
+      "smoke": true
+    },
+    {
+      "name": "prefusion-hog-control-v1",
+      "arm": "control",
+      "status": "complete",
+      "smoke": false,
+      "last_epoch": 5
+    },
+    {
+      "name": "prefusion-hog-hog-v1",
+      "arm": "hog",
+      "status": "patience_stop",
+      "smoke": false,
+      "last_epoch": 4
+    }
+  ],
+  "monitor_wait_seconds": 600,
+  "accuracy_winner": null,
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "control_epochs": 5,
+  "hog_max_epochs": 10,
+  "hog_patience": 4,
+  "parent": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/a0-scope-late-v1/epoch-08-resume.pt"
+}

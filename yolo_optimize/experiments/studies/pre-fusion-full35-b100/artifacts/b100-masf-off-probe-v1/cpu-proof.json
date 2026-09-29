@@ -1,0 +1,35 @@
+{
+  "status": "cpu_passed",
+  "source": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/full35-b-f10.pt",
+  "sha256": "a8780ae988e61905fa78134b16bf362d2392d2a71f43941f770769bd42265cae",
+  "original_alpha": 0.1031494140625,
+  "effective_alpha": 0.0,
+  "changed_state_keys": [
+    "model.16.p3_masf.alpha"
+  ],
+  "zero_residual_identity_exact": true,
+  "cpu160_propagation": {
+    "16": {
+      "changed": true,
+      "relative_l2": 0.17443671822547913
+    },
+    "19": {
+      "changed": true,
+      "relative_l2": 0.16859306395053864
+    },
+    "22": {
+      "changed": true,
+      "relative_l2": 0.06259401887655258
+    }
+  },
+  "diagnostic_only": true,
+  "optimizer_steps": 0,
+  "accuracy_winner": false,
+  "relocation_performed": false,
+  "baseline": {
+    "coco/box/map50_95": 0.5035890013622638,
+    "coco/person/box/map50_95": 0.6241112368127075,
+    "coco/ball/box/map50_95": 0.5162344721834129,
+    "coco/bat/box/map50_95": 0.4694824178771039
+  }
+}

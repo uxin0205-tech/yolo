@@ -1,0 +1,1434 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-08",
+  "status": "executed_after_user_approval",
+  "scope_root": "/home/uxin/yolo/yolo_quantize",
+  "approval_required_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "M11",
+    "M12"
+  ],
+  "counts": {
+    "report_files": 25,
+    "daily_required": 5,
+    "dependency_required": 5,
+    "delete_proposed": 3,
+    "archive_proposed": 12
+  },
+  "delete_bytes": 13051,
+  "archive_bytes": 111452,
+  "reference_scan": {
+    "text_files_in_initial_scan": 1565,
+    "filename_matched_files": 47,
+    "unmatched_current_sha_for_archive_candidates": true,
+    "limitations": "refs 是檔名字面命中，包含同名 worklog 的可能誤命中；執行時必須解析實際目標。不涵蓋外部使用者、動態字串、Git 歷史或所有舊版 hash。"
+  },
+  "backup": {
+    "created": true,
+    "policy": "R01–R03 核准後先以 mktemp 建立專用 /tmp 備份並驗證 SHA，再刪原檔；/tmp 非永久保管。M01–M12 保存於專案歷史區，不永久刪除。",
+    "path": "/tmp/yolo-quantize-report-backup-0908.rJlv9s",
+    "verified_report_count": 25
+  },
+  "gpu_policy": "deferred_no_gpu_operations",
+  "entries": [
+    {
+      "id": "K01",
+      "action": "keep_in_place",
+      "group": "daily_required",
+      "path": "docs/reports/2026-09-08-quantization-phase-handoff.md",
+      "bytes": 11616,
+      "sha256": "0ac13311befe6344d14c946fc8df023563880eafb94bd196f37a78fc1f95f6be",
+      "refs": [
+        {
+          "path": "README.md",
+          "lines": [
+            9
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "artifacts/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/CURRENT_PLAN.md",
+          "lines": [
+            3,
+            54
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            9
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/README.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/2026-09-08-cumulative-ptq-continuation.md",
+          "lines": [
+            54
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-quantization-method-and-decisions.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-cumulative-ptq-plan.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "artifacts/queues/full-model-continuous-0907/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "artifacts/queues/full-model-cumulative-0908/phase-hold.json",
+          "lines": [
+            45
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "artifacts/queues/full-model-cumulative-0908/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "本輪完整收尾、十二候選與兩個取捨點。"
+    },
+    {
+      "id": "K02",
+      "action": "keep_in_place",
+      "group": "daily_required",
+      "path": "docs/reports/2026-09-07-continuous-qat-recovery-results.md",
+      "bytes": 7979,
+      "sha256": "ce391d90675a500aa1c3d19439109a897eaa4e28ab395815203cfb30950213cf",
+      "refs": [
+        {
+          "path": "deliverables/full-model-audit-2026-09-07/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "README.md",
+          "lines": [
+            28
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "deliverables/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "scripts/summarize_continuous_qat.py",
+          "lines": [
+            138
+          ],
+          "kind": "code"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1985
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            7
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/README.md",
+          "lines": [
+            8
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-quantization-method-and-decisions.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-cumulative-ptq-plan.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-07-full-model-audit-four-day-plan.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-07-evidence-consistency-boundaries.md",
+          "lines": [
+            41
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-quantization-phase-handoff.md",
+          "lines": [
+            50
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "artifacts/queues/full-model-continuous-0907/README.md",
+          "lines": [
+            22
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "六組 QAT 的三十回合及逐指標 PTQ→QAT 差異。"
+    },
+    {
+      "id": "K03",
+      "action": "keep_in_place",
+      "group": "daily_required",
+      "path": "docs/reports/2026-09-07-evidence-consistency-boundaries.md",
+      "bytes": 4389,
+      "sha256": "d673cef66118aa8029e318afd37bd63c77cae65a5d443a1fff86589f09e7b8fa",
+      "refs": [
+        {
+          "path": "deliverables/full-model-audit-2026-09-07/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "README.md",
+          "lines": [
+            11
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "deliverables/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/CURRENT_PLAN.md",
+          "lines": [
+            54
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2045
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/README.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/README.md",
+          "lines": [
+            9
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-quantization-method-and-decisions.md",
+          "lines": [
+            11
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-07-full-model-audit-four-day-plan.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-07-weight-distribution-detailed-analysis.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "同 benchmark／同 parent 的證據分層及不可混用邊界。"
+    },
+    {
+      "id": "K04",
+      "action": "keep_in_place",
+      "group": "daily_required",
+      "path": "docs/reports/2026-09-08-quantization-method-and-decisions.md",
+      "bytes": 7478,
+      "sha256": "ca797d46f64cd817a25ed43d0dfa53e4561ce90c6b3ca09d94767d557bc27136",
+      "refs": [
+        {
+          "path": "README.md",
+          "lines": [
+            15
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/README.md",
+          "lines": [
+            6
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-quantization-phase-handoff.md",
+          "lines": [
+            50
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "qSiLU、LSQ+、SD4／三元的選擇理由。"
+    },
+    {
+      "id": "K05",
+      "action": "keep_in_place",
+      "group": "daily_required",
+      "path": "docs/reports/2026-09-08-cumulative-ptq-plan.md",
+      "bytes": 4520,
+      "sha256": "3b0b6990ebe9c5ee74db5788a77695bb33675bc57496dcf070924fe4834ec412",
+      "refs": [
+        {
+          "path": "docs/reports/README.md",
+          "lines": [
+            7
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-quantization-method-and-decisions.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "artifacts/queues/full-model-cumulative-0908/README.md",
+          "lines": [
+            20
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "十二個累積候選的提名規則、同前綴比較與接受邏輯。"
+    },
+    {
+      "id": "K06",
+      "action": "keep_in_place",
+      "group": "dependency_required",
+      "path": "docs/reports/2026-08-29-activation-output-smoke-v2.md",
+      "bytes": 6148,
+      "sha256": "2d2292f6a819aadbe579282ab349d3b7764a3ac6b15bf79d7306748a6c7bb3d6",
+      "refs": [
+        {
+          "path": "PUBLICATION_MANIFEST.yaml",
+          "lines": [
+            62
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            28
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2021
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            48
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "PUBLICATION_MANIFEST.yaml 有具體檔案與 SHA；不因清理移動。"
+    },
+    {
+      "id": "K07",
+      "action": "keep_in_place",
+      "group": "dependency_required",
+      "path": "docs/reports/2026-08-29-activation-preselection-report.md",
+      "bytes": 9878,
+      "sha256": "c9f56c9f5eb51d9f88d4a491d09c79b93df91a4c5caa4a1bc8758e9f1b8514b6",
+      "refs": [
+        {
+          "path": "PUBLICATION_MANIFEST.yaml",
+          "lines": [
+            65
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "configs/experiments/activation-preselection-v1.yaml",
+          "lines": [
+            77
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "deliverables/README.md",
+          "lines": [
+            7
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/README.md",
+          "lines": [
+            10
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/2026-08-30-v0-v3-cpu-implementation.md",
+          "lines": [
+            14
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            27
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1997
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            49
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "artifacts/manifests/v1-v3-cpu-delivery-v1.yaml",
+          "lines": [
+            20
+          ],
+          "kind": "metadata"
+        }
+      ],
+      "reason": "圖表、activation-preselection-v1.yaml 及發行 manifest 引用。"
+    },
+    {
+      "id": "K08",
+      "action": "keep_in_place",
+      "group": "dependency_required",
+      "path": "docs/reports/2026-08-31-q3-activation-parent-evidence.md",
+      "bytes": 18827,
+      "sha256": "85575a64a0827509baa09bb0cce3ac90dda4c74c58a3bdf8285f68442430f5e4",
+      "refs": [
+        {
+          "path": "configs/experiments/v32-qsilu-regional-hardswish-conditional-v1.yaml",
+          "lines": [
+            18
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/README.md",
+          "lines": [
+            9
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            25
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2063
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            44
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/2026-08-31-hardswish-policy-revision.md",
+          "lines": [
+            16,
+            114
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-08-31-hardswish-policy-revision.md",
+          "lines": [
+            53,
+            193
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "artifacts/manifests/v1-v3-cpu-delivery-v2.yaml",
+          "lines": [
+            46
+          ],
+          "kind": "metadata"
+        }
+      ],
+      "reason": "v32 條件旁支與 v1-v3-cpu-delivery-v2.yaml 釘住 report SHA。"
+    },
+    {
+      "id": "K09",
+      "action": "keep_in_place",
+      "group": "dependency_required",
+      "path": "docs/reports/2026-09-03-v4-qsilu-backbone-early-w8-search-validation.md",
+      "bytes": 9402,
+      "sha256": "33647a029cd06aaae41bea85b281616e12ae1d1001767d514584e1c358cab8d1",
+      "refs": [
+        {
+          "path": "configs/experiments/full35-quantization-plan-v4.yaml",
+          "lines": [
+            39
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            21
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1937,
+            2087
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            35
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            45
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/2026-09-03-v4-qsilu-backbone-early-w8-search-validation.md",
+          "lines": [
+            43
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-03-v5-map50-bit-boundary-search.md",
+          "lines": [
+            35
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "full35-quantization-plan-v4.yaml 的 first_gpu_bridge.report 引用。"
+    },
+    {
+      "id": "K10",
+      "action": "keep_in_place",
+      "group": "dependency_required",
+      "path": "docs/reports/2026-09-07-weight-distribution-detailed-analysis.md",
+      "bytes": 12095,
+      "sha256": "6967eaed5b9fc4181dbfbca0c85081c9aa9f181b11ec60168591b40aed698db6",
+      "refs": [
+        {
+          "path": "deliverables/full-model-audit-2026-09-07/weight-evidence-tables.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "deliverables/full-model-audit-2026-09-07/README.md",
+          "lines": [
+            7
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "scripts/report_weight_evidence.py",
+          "lines": [
+            117
+          ],
+          "kind": "code"
+        },
+        {
+          "path": "docs/archive/README.md",
+          "lines": [
+            12
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            11
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2039
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            19
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-08-quantization-method-and-decisions.md",
+          "lines": [
+            43
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-07-full-model-audit-four-day-plan.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "權重分布獨有數據；report_weight_evidence.py 生成的附錄仍連結此報告。"
+    },
+    {
+      "id": "R01",
+      "action": "delete_after_verified_backup",
+      "group": "recommended_after_approval",
+      "path": "docs/reports/2026-09-07-continuous-five-epoch-plan.md",
+      "bytes": 4264,
+      "sha256": "c9d9c055313044129c37cae1c930a8d2512a02d8b40d9ebcc893057db6e85f38",
+      "refs": [
+        {
+          "path": "IMPLEMENTATION_PLAN.md",
+          "lines": [
+            323
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            9
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1901,
+            2069
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            15
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            23
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "5-epoch 與四天規劃已由 CURRENT_PLAN、實際六組結果及 phase-hold 取代；舊 planned_not_enqueued 會混淆進度。",
+      "risk": "低至中：僅冗餘敘述；先核對引用、建立備份，不能靠 Git 保證恢復。"
+    },
+    {
+      "id": "R02",
+      "action": "delete_after_verified_backup",
+      "group": "recommended_after_approval",
+      "path": "docs/reports/2026-08-29-weight-region-replan.md",
+      "bytes": 6215,
+      "sha256": "3f3fee6151b8db112ce889de98e3acfedfe356ca4884a618ba0bca7dc6672cf6",
+      "refs": [
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            29
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1871,
+            2057
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            51
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            53
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "舊 151-layer、poly_quality 與 20-epoch 規劃已被取代；A3–A8 數值另有保留的 activation 報告，現行 148 路徑與比較契約已集中。",
+      "risk": "低至中：僅冗餘敘述；先核對引用、建立備份，不能靠 Git 保證恢復。"
+    },
+    {
+      "id": "R03",
+      "action": "delete_after_verified_backup",
+      "group": "recommended_after_approval",
+      "path": "docs/reports/2026-09-07-ptq-to-qat-recovery-interpretation.md",
+      "bytes": 2572,
+      "sha256": "3615d06aa64079e7829f484f5128ff1bc97f2d16d5feb79f36eadad0e28e736b",
+      "refs": [
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            7
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2075
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            9
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/README.md",
+          "lines": [
+            10
+          ],
+          "kind": "document"
+        }
+      ],
+      "reason": "PTQ 不等於 QAT 最終精度的說明已整合到方法／收尾報告，具體恢復結果另有完整六組報告。",
+      "risk": "低至中：僅冗餘敘述；先核對引用、建立備份，不能靠 Git 保證恢復。"
+    },
+    {
+      "id": "M01",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-08-29-weight-ptq-backbone-early-v1.md",
+      "bytes": 5412,
+      "sha256": "621f9ccd2467321ab7e4ec862bd3aeab153ad9adc050be63b41bdb4de4eb3388",
+      "refs": [
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            30
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1847,
+            2027
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            53
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            51
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-08-29-weight-ptq-backbone-early-v1.md",
+      "reason": "早期 W8／W4 六格 probe 與 collapse 負結果，不能當現行 mAP。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M02",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-08-30-v1-v3-cpu-implementation.md",
+      "bytes": 11827,
+      "sha256": "3e747f6c4214ab95548966db7a2402f3dee990460475d6e68a3815c187296b28",
+      "refs": [
+        {
+          "path": "docs/worklogs/2026-08-30-v0-v3-cpu-implementation.md",
+          "lines": [
+            85
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            26
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2093
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            47
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-08-30-v1-v3-cpu-implementation.md",
+      "reason": "8,880 筆歷史 CPU 分析、catalog 修訂與舊發行沿革。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M03",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-08-31-hardswish-policy-revision.md",
+      "bytes": 11157,
+      "sha256": "3402a015782016d9eb6f94200f25191443bc42e55918c5c4372297e9a8fd7bd7",
+      "refs": [
+        {
+          "path": "deliverables/README.md",
+          "lines": [
+            7
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/README.md",
+          "lines": [
+            9
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            24
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1913,
+            2081
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/research/2026-09-01-quantization-literature-and-innovation-audit.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            43
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            48
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/2026-08-31-hardswish-policy-revision.md",
+          "lines": [
+            113
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-08-29-weight-region-replan.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-08-30-v1-v3-cpu-implementation.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-08-29-activation-preselection-report.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-08-31-hardswish-policy-revision.md",
+      "reason": "Hardswish／poly_quality 政策變更及 CPU 證據，保留原日期和限制。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M04",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-01-architecture-experiment-audit.md",
+      "bytes": 12910,
+      "sha256": "a5a2398b6c82f5662cf2323d84b3a259120faa0e5c6b4c944e59434f3e4cdee0",
+      "refs": [
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            22
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2009
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            40
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/2026-09-01-architecture-experiment-audit-and-v4.md",
+          "lines": [
+            112
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-01-architecture-experiment-audit.md",
+      "reason": "舊 catalog／BN fold／grid solver／formal leakage 的修正依據。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M05",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-01-cpu-p0-integer-exact-routing.md",
+      "bytes": 7321,
+      "sha256": "4e856c9ed10b99454b4c434309385dc107be9b2715ea3e2bbd6aeae886589b4c",
+      "refs": [
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1775,
+            1979
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/research/2026-09-01-quantization-literature-and-innovation-audit.md",
+          "lines": [
+            477
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            38
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            46
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-01-architecture-experiment-audit.md",
+          "lines": [
+            182
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-01-cpu-p0-integer-exact-routing.md",
+      "reason": "整數邊界及 exact W4／SD4 routing 的 CPU 工程證據。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M06",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-03-poly-shift-ptq-special-format-and-qat-entry.md",
+      "bytes": 8226,
+      "sha256": "40669153850bb3590e3955f2f94975a8ad249391d65b0fef3eb2a34a7d1d7adc",
+      "refs": [
+        {
+          "path": "IMPLEMENTATION_PLAN.md",
+          "lines": [
+            25
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2003
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            32
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/2026-09-03-poly-shift-w8-w7-and-qat-p0.md",
+          "lines": [
+            12
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-03-poly-shift-ptq-special-format-and-qat-entry.md",
+      "reason": "poly_shift 位元搜尋、特殊格式與耦合 PTQ 的獨有結果。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M07",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-03-v5-map50-bit-boundary-search.md",
+      "bytes": 6633,
+      "sha256": "846d2895cbff7efca4775ebc8cff70a7749923d0245b4d5fe01a6a528e9ae425",
+      "refs": [
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            20
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1967,
+            2105
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            33
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            44
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-03-v5-map50-bit-boundary-search.md",
+      "reason": "早期 qSiLU 的 W7–W4 mAP 負結果與總門檻沿革。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M08",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-03-v5-nine-region-w8-sensitivity.md",
+      "bytes": 5212,
+      "sha256": "c155b9756b1ff05291e56909b6e4ec41b54d534f3402e26fea02c449626b58fa",
+      "refs": [
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            19
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1799,
+            1991
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            43
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-03-v5-nine-region-w8-sensitivity.md",
+      "reason": "早期九區 W8 隔離 mAP，保留同 parent 限制。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M09",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-04-integrated-quantization-and-paper-twn-plan.md",
+      "bytes": 12980,
+      "sha256": "8612a6074ea186d1f9d6150bbf41a0316de62ace42e303fe8dab952f062c1642",
+      "refs": [
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            17
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2111
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            28
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/2026-09-04-integrated-paper-twn-roadmap.md",
+          "lines": [
+            7
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-04-integrated-quantization-and-paper-twn-plan.md",
+      "reason": "含 Paper-TWN 早期實測反例和候選設計，不只是一份排程。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M10",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-04-v19-v29-progressive-quantization-execution.md",
+      "bytes": 12457,
+      "sha256": "7f479dd237e031d8a187a8b70e0daa2c30a5a38b366f871212bd6c13e330d371",
+      "refs": [
+        {
+          "path": "docs/archive/README.md",
+          "lines": [
+            11
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2033
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            30
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-04-integrated-quantization-and-paper-twn-plan.md",
+          "lines": [
+            3
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-04-v19-v29-progressive-quantization-execution.md",
+      "reason": "V19／V29 結果及 recovery gate 修復的歷史證據。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M11",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-05-v29-selection-and-qsilu-handoff-plan.md",
+      "bytes": 6239,
+      "sha256": "ebf3c7271aa7e8b7c0c0aee32619fb68d79b49197a2eccf3c57d0179cbeb66b3",
+      "refs": [
+        {
+          "path": "docs/archive/README.md",
+          "lines": [
+            11
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            2015
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            29
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-05-v29-selection-and-qsilu-handoff-plan.md",
+      "reason": "七組選擇依據、負 QAT、poly_shift 封存與 qSiLU 接手原因。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    },
+    {
+      "id": "M12",
+      "action": "archive_after_approval",
+      "group": "preserve_unique_history",
+      "path": "docs/reports/2026-09-07-full-model-audit-four-day-plan.md",
+      "bytes": 11078,
+      "sha256": "04869ddfc93a0b5fda4795b17aeb07209af9c4f252d3e054646a09e6ed723486",
+      "refs": [
+        {
+          "path": "IMPLEMENTATION_PLAN.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "deliverables/full-model-audit-2026-09-07/README.md",
+          "lines": [
+            9
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/README.md",
+          "lines": [
+            12
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/superpowers/plans/2026-09-06-v36-full-coverage-plan.md",
+          "lines": [
+            11
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/archive/report-index-before-2026-09-08.md",
+          "lines": [
+            13
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/organization/inventory-2026-09-08.json",
+          "lines": [
+            1865,
+            2051
+          ],
+          "kind": "metadata"
+        },
+        {
+          "path": "docs/archive/project-readme-before-2026-09-08.md",
+          "lines": [
+            21
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/worklogs/README.md",
+          "lines": [
+            29
+          ],
+          "kind": "document"
+        },
+        {
+          "path": "docs/reports/2026-09-07-weight-distribution-detailed-analysis.md",
+          "lines": [
+            5
+          ],
+          "kind": "document"
+        }
+      ],
+      "destination": "docs/archive/reports/2026-09-07-full-model-audit-four-day-plan.md",
+      "reason": "V35／V36 盤點及跨 parent 證據限制；三回合草案不是目前排程。",
+      "risk": "中：需修正真實相對連結；若發現 source pin 或唯一外部依賴無法安全維持則保留原位。"
+    }
+  ],
+  "execution_record": "docs/organization/report-retention-execution-2026-09-08.json",
+  "inventory_semantics": "entries、counts、bytes、SHA 與 refs 保留核准前快照；執行後位置與變更見 execution_record。"
+}

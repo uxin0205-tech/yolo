@@ -1,0 +1,47 @@
+{
+  "epochs": 5,
+  "warmup_epochs": 1,
+  "seed": 1,
+  "imgsz": 640,
+  "optimizer": "AdamW",
+  "betas": [
+    0.948,
+    0.999
+  ],
+  "weight_decay": 0.00027,
+  "lrs": {
+    "heads": 5e-06,
+    "attention": 1e-05,
+    "scale": 0.0002,
+    "bias": 1e-05,
+    "rep": 1e-05
+  },
+  "detect_physical_batch": 16,
+  "detect_microbatches_per_macro": 16,
+  "detect_images_per_macro_max": 256,
+  "pose_physical_batch": 16,
+  "reference_batch": 64,
+  "task_weights": {
+    "detect": 1.0,
+    "pose": 0.25
+  },
+  "steps_per_epoch": 463,
+  "coco_train_images": 118287,
+  "bbat_train_images": 5964,
+  "coco_val_images": 5000,
+  "bbat_val_images": 683,
+  "all_bn_running_fixed": true,
+  "both_masf_fixed": true,
+  "shared_only_selected_attention_or_rep_trainable": true,
+  "parent_sha256": "c8dcaf439b68c77d45a4f213972e57d51912028b558418511badee55fafbf681",
+  "no_unchanged_control_training": true,
+  "no_extra_epochs": true,
+  "original_paused_jobs_not_resumed": true,
+  "binary_scale_format": "unsigned m/1024, 1<=m<=1024",
+  "binary_bias_format": "signed 16-bit m/1024",
+  "catastrophic_ap_drop_from_own_e0": 0.05,
+  "validation_tolerance_vs_parent_for_candidate": 0.001,
+  "reference_reuse": "/home/uxin/yolo/yolo_optimize/experiments/post_masf_hardware_v1/artifacts/scale_bias/train/summary.json",
+  "attention_fixed": true,
+  "sequential_lineage": "MASF B5 -> scale_bias E5 -> independent Rep17 / Rep20 / Rep17_20"
+}

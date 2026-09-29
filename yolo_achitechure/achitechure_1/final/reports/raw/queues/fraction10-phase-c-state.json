@@ -1,0 +1,298 @@
+{
+  "accepted_candidates": {
+    "full35": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a1-full35-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/continuation/full35-accepted-a2/float-best.pt",
+      "label": "full35:source-a2",
+      "map50_95": 0.50639125121949,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a1-full35-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue/metrics.json"
+    },
+    "partial75": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/continuation/partial75-accepted-a2/float-best.pt",
+      "label": "partial75:source-a2",
+      "map50_95": 0.5067544912590529,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue/metrics.json"
+    }
+  },
+  "accepted_phase_b_candidates": {
+    "full35": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a1-full35-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/continuation/full35-accepted-a2/float-best.pt",
+      "label": "full35:source-a2",
+      "map50_95": 0.50639125121949,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a1-full35-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue/metrics.json"
+    },
+    "partial75": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/continuation/partial75-accepted-a2/float-best.pt",
+      "label": "partial75:source-a2",
+      "map50_95": 0.5067544912590529,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue/metrics.json"
+    }
+  },
+  "available_ram_bytes": 15525007360,
+  "candidate": {
+    "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue.pt",
+    "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/runs/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2/ultralytics/weights/best.pt",
+    "label": "partial75:c",
+    "map50_95": 0.5004282490623231,
+    "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue/metrics.json"
+  },
+  "created_at": "2026-08-22T05:24:09.820415+00:00",
+  "current_job": null,
+  "error": null,
+  "events": [
+    {
+      "at": "2026-08-22T05:24:09.820432+00:00",
+      "current_job": "verify:phase-b-source-and-contract",
+      "status": "starting"
+    },
+    {
+      "at": "2026-08-22T05:24:09.828608+00:00",
+      "current_job": "probe:gpu",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T05:24:11.996482+00:00",
+      "current_job": "recovered:probe:gpu",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T05:24:11.997077+00:00",
+      "current_job": "accepted-phase-b-gates",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T05:24:12.093862+00:00",
+      "current_job": "profile:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T05:24:24.169137+00:00",
+      "current_job": "recovered:profile:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T05:24:24.170291+00:00",
+      "current_job": "profile-passed:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T05:24:24.240270+00:00",
+      "current_job": "train:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:24:14.149854+00:00",
+      "current_job": "recovered:train:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:24:14.224819+00:00",
+      "current_job": "materialize:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:24:17.701109+00:00",
+      "current_job": "recovered:materialize:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:24:17.957454+00:00",
+      "current_job": "validate:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:26:23.423293+00:00",
+      "current_job": "recovered:validate:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:26:23.447789+00:00",
+      "current_job": "accepted-metric:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:26:23.449354+00:00",
+      "current_job": "gate:full35:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:26:23.581009+00:00",
+      "current_job": "profile:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:26:35.324070+00:00",
+      "current_job": "recovered:profile:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:26:35.326036+00:00",
+      "current_job": "profile-passed:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-22T21:26:35.402265+00:00",
+      "current_job": "train:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-23T15:14:07.903614+00:00",
+      "current_job": "recovered:train:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-23T15:14:07.965845+00:00",
+      "current_job": "materialize:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-23T15:14:12.642663+00:00",
+      "current_job": "recovered:materialize:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-23T15:14:12.829078+00:00",
+      "current_job": "validate:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-23T15:16:15.842560+00:00",
+      "current_job": "recovered:validate:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-23T15:16:15.869019+00:00",
+      "current_job": "accepted-metric:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-23T15:16:15.871170+00:00",
+      "current_job": "gate:partial75:c",
+      "status": "running"
+    },
+    {
+      "at": "2026-08-23T15:16:15.872000+00:00",
+      "current_job": null,
+      "status": "completed"
+    }
+  ],
+  "execution_order": [
+    "full35:c",
+    "partial75:c"
+  ],
+  "fixed_settings": {
+    "amp": true,
+    "batch": 8,
+    "effective_batch": 16,
+    "fraction": 1.0,
+    "gradient_accumulation": true,
+    "in_training_validation_workers": 0,
+    "maximum_concurrent_data_workers": 6,
+    "minimum_available_ram_bytes": 536870912,
+    "minimum_free_vram_bytes": 9663676416,
+    "nbs": 16,
+    "phase_c_batch": 8,
+    "phase_c_effective_batch": 16,
+    "phase_c_gradient_accumulation": true,
+    "phase_c_nbs": 16,
+    "phase_c_patience": 7,
+    "standalone_validation_workers": 6,
+    "training_workers": 6,
+    "validation_batch": 8
+  },
+  "free_vram_bytes": 15165554688,
+  "gate": {
+    "child": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/runs/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2/ultralytics/weights/best.pt",
+      "label": "partial75:c",
+      "map50_95": 0.5004282490623231,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue/metrics.json"
+    },
+    "parent": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/continuation/partial75-accepted-a2/float-best.pt",
+      "label": "partial75:source-a2",
+      "map50_95": 0.5067544912590529,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue/metrics.json"
+    },
+    "policy": "phase-c-strict-improvement",
+    "selected": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/continuation/partial75-accepted-a2/float-best.pt",
+      "label": "partial75:source-a2",
+      "map50_95": 0.5067544912590529,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-source-accepted-a2-rtx5060ti-fraction10-b16-workers6-r1-bittrue/metrics.json"
+    }
+  },
+  "gpu": {
+    "cuda_available": true,
+    "device": 0,
+    "free_vram_bytes": 15894315008,
+    "gpu_name": "NVIDIA GeForce RTX 5060 Ti",
+    "total_vram_bytes": 17102864384
+  },
+  "pending_phase_c": [],
+  "phase_b_candidates": {
+    "full35": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a1-full35-phase-b-rtx5060ti-fraction10-b16-workers6-r1-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/runs/a1-full35-phase-b-rtx5060ti-fraction10-b16-workers6-r1/ultralytics/weights/best.pt",
+      "label": "full35:b",
+      "map50_95": 0.5035027108346335,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a1-full35-phase-b-rtx5060ti-fraction10-b16-workers6-r1-bittrue/metrics.json"
+    },
+    "partial75": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-phase-b-rtx5060ti-fraction10-b16-workers6-r1-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/runs/a2-partial75-phase-b-rtx5060ti-fraction10-b16-workers6-r1/ultralytics/weights/best.pt",
+      "label": "partial75:b",
+      "map50_95": 0.5040094609568293,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-phase-b-rtx5060ti-fraction10-b16-workers6-r1-bittrue/metrics.json"
+    }
+  },
+  "phase_c_candidates": {
+    "full35": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a1-full35-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/runs/a1-full35-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2/ultralytics/weights/best.pt",
+      "label": "full35:c",
+      "map50_95": 0.5013946996070097,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a1-full35-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue/metrics.json"
+    },
+    "partial75": {
+      "bittrue_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue.pt",
+      "float_checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/runs/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2/ultralytics/weights/best.pt",
+      "label": "partial75:c",
+      "map50_95": 0.5004282490623231,
+      "metrics_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/validation/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-bittrue/metrics.json"
+    }
+  },
+  "phase_c_profile": {
+    "accumulate": 2,
+    "amp": true,
+    "batch": 8,
+    "checkpoint": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/continuation/partial75-accepted-a2/float-best.pt",
+    "detected_total_vram_bytes": 17102864384,
+    "effective_batch": 16,
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "imgsz": 640,
+    "peak_vram_bytes": 5165796352,
+    "profile_path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/profiles/a2-partial75-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2-training-smoke-amp.json",
+    "required_vram_bytes": 6239538176,
+    "status": "passed",
+    "steps": 2,
+    "train_step_ms": {
+      "mean": 4067.358360509388,
+      "p50": 4067.358360509388
+    }
+  },
+  "purpose": "fraction=1.0 Phase C\uff0cbatch8\u00d7accumulate2\uff0cpatience=7",
+  "run_tag": "rtx5060ti-fraction10-phasec8x2-workers6-patience7-ram05-r2",
+  "schema_version": 1,
+  "source_a1_run": "fraction10-phase-b-gated-candidates",
+  "source_state": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/artifacts/queues/fraction10-phase-b-rtx5060ti-fraction10-b16-workers6-r1/state.json",
+  "status": "completed",
+  "total_vram_bytes": 17103323136,
+  "updated_at": "2026-08-23T15:16:15.872000+00:00"
+}

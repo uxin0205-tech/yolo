@@ -1,0 +1,31 @@
+{
+  "status": "ready",
+  "arm": "rep17_20",
+  "layers": [
+    17,
+    20
+  ],
+  "predecessor_pid": 2517588,
+  "predecessor_start_ticks": "363683726",
+  "requires": [
+    "scale_bias completed",
+    "rep17 completed",
+    "rep20 completed",
+    "rep-both CPU passed",
+    "GPU idle"
+  ],
+  "epochs": 5,
+  "warmup_epochs": 1,
+  "independent_parent": "MASF B5, not trained Rep17 or Rep20",
+  "parent_sha256": "1b46fca17f4ae414f622e39afb6d4bae8686ac3a760e23b65fd971500a39e2c7",
+  "running_queue_or_job_restarted": false,
+  "monitor_seconds": 600,
+  "source_sha256": {
+    "models.py": "070afac23331119ffb337504e7ecaec2beae98c620f25fb5768c0a211fceb634",
+    "run_arm.py": "dcd1e8e1b1ac91f465a844337075f1d4229ff35da812c86e6f83e66de81b53dc",
+    "run_queue.py": "cc9a4d59eb4a9076ef6730d8b5d7a84377ddf595696630c12addb9016ae63b90",
+    "run_rep_both.py": "f554d3af27f84349a66f3f44315d2de1bcdd5c6227d23ebdd5f6888fa1cb4e08",
+    "queue_rep_both.py": "13721fe41f4e1bfa2cfd089957416613e783e3df469b8ea296985ca0c9e03b5a",
+    "config.json": "e114198ad9b8d325fc8258af696b73899c9fe1d8251567034f638bf3b9270179"
+  }
+}

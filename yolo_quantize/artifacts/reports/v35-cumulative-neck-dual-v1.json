@@ -1,0 +1,203 @@
+{
+  "candidates": {
+    "cumulative-neck-fixed-sd4": {
+      "decision": "recover",
+      "dual_gate_passed": false,
+      "failed_map50_95_metrics": [
+        "coco/person/box/map50_95"
+      ],
+      "failed_map50_metrics": [],
+      "incremental_deltas": {
+        "bbat/ball/box/map50": -0.0015453874573155835,
+        "bbat/ball/box/map50_95": 0.001074249051499443,
+        "bbat/ball/pose/map50": -0.0025984832791913215,
+        "bbat/ball/pose/map50_95": -0.0025984832791913215,
+        "bbat/bat/box/map50": 0.0008923489111862803,
+        "bbat/bat/box/map50_95": -0.000973130747546791,
+        "bbat/bat/pose/map50": 0.0008923489111862803,
+        "bbat/bat/pose/map50_95": 0.0008028758157824223,
+        "bbat/box/map50": -0.00032651927306459605,
+        "bbat/box/map50_95": 5.05591519763815e-05,
+        "bbat/pose/map50": -0.0008530671840025761,
+        "bbat/pose/map50_95": -0.0008978037317044496,
+        "coco/box/map50": -0.0013485508479603725,
+        "coco/box/map50_95": -0.020649883178272765,
+        "coco/person/box/map50": -0.003955889376223931,
+        "coco/person/box/map50_95": -0.029376955353441425
+      },
+      "metric_summaries": {
+        "accepted": {
+          "joint_priority_map50": 0.8879852486242279,
+          "joint_priority_map50_95": 0.7816826911108012,
+          "mean_required_map50": 0.9211463434448058,
+          "mean_required_map50_95": 0.8197602405423289
+        },
+        "candidate": {
+          "joint_priority_map50": 0.8857487673577922,
+          "joint_priority_map50_95": 0.7679767251776339,
+          "mean_required_map50": 0.9211301588772196,
+          "mean_required_map50_95": 0.8112609644533544
+        },
+        "incremental_deltas": {
+          "joint_priority_map50": -0.0014674187730507882,
+          "joint_priority_map50_95": -0.01035437736862943,
+          "mean_required_map50": -0.0011053999494232691,
+          "mean_required_map50_95": -0.006571071533862272
+        },
+        "matched": {
+          "joint_priority_map50": 0.887216186130843,
+          "joint_priority_map50_95": 0.7783311025462634,
+          "mean_required_map50": 0.9222355588266429,
+          "mean_required_map50_95": 0.8178320359872167
+        },
+        "semantics": {
+          "joint_priority": "fixed_0.2_0.2_0.2_0.4_selection_score_not_official_map",
+          "mean_required": "diagnostic_mean_not_official_map"
+        },
+        "total_deltas": {
+          "joint_priority_map50": -0.002236481266435719,
+          "joint_priority_map50_95": -0.013705965933167308,
+          "mean_required_map50": -1.6184567586230436e-05,
+          "mean_required_map50_95": -0.008499276088974494
+        }
+      },
+      "source_map50_decision": "green",
+      "source_map50_gate_passed": true,
+      "status": "completed",
+      "total_deltas": {
+        "bbat/ball/box/map50": 0.008030863953085388,
+        "bbat/ball/box/map50_95": -5.289389146234669e-06,
+        "bbat/ball/pose/map50": 0.007946583402850815,
+        "bbat/ball/pose/map50_95": 0.007946583402850704,
+        "bbat/bat/box/map50": -0.0006341505753479915,
+        "bbat/bat/box/map50_95": -0.0028972982044236373,
+        "bbat/bat/pose/map50": -0.0006341505753479915,
+        "bbat/bat/pose/map50_95": -0.0010701663076320145,
+        "bbat/box/map50": 0.0036983566888686426,
+        "bbat/box/map50_95": -0.0014512937967848805,
+        "bbat/pose/map50": 0.0036562164137514674,
+        "bbat/pose/map50_95": 0.003438208547609234,
+        "coco/box/map50": -0.012924638112715936,
+        "coco/box/map50_95": -0.03378078772074383,
+        "coco/person/box/map50": -0.009268557735834682,
+        "coco/person/box/map50_95": -0.040174165243525684
+      },
+      "worst_incremental_map50_95_delta": -0.029376955353441425,
+      "worst_incremental_map50_95_metric": "coco/person/box/map50_95",
+      "worst_incremental_map50_delta": -0.003955889376223931,
+      "worst_incremental_map50_metric": "coco/person/box/map50",
+      "worst_map50_95_delta": -0.040174165243525684,
+      "worst_map50_95_metric": "coco/person/box/map50_95",
+      "worst_map50_delta": -0.012924638112715936,
+      "worst_map50_metric": "coco/box/map50"
+    },
+    "cumulative-neck-w6": {
+      "decision": "green",
+      "dual_gate_passed": true,
+      "failed_map50_95_metrics": [],
+      "failed_map50_metrics": [],
+      "incremental_deltas": {
+        "bbat/ball/box/map50": -0.0019178396244659002,
+        "bbat/ball/box/map50_95": 5.583906714357045e-05,
+        "bbat/ball/pose/map50": -0.002953547123457634,
+        "bbat/ball/pose/map50_95": -0.002953547123457523,
+        "bbat/bat/box/map50": 0.0010713451297101884,
+        "bbat/bat/box/map50_95": -0.00017457949322186028,
+        "bbat/bat/pose/map50": 0.0010713451297101884,
+        "bbat/bat/pose/map50_95": 0.0010097295200106604,
+        "bbat/box/map50": -0.0004232472473777449,
+        "bbat/box/map50_95": -5.937021303925594e-05,
+        "bbat/pose/map50": -0.0009411009968738338,
+        "bbat/pose/map50_95": -0.0009719088017235977,
+        "coco/box/map50": -0.0015625668604958287,
+        "coco/box/map50_95": -0.020924955811911672,
+        "coco/person/box/map50": -0.003320055989813109,
+        "coco/person/box/map50_95": -0.028830653138580686
+      },
+      "metric_summaries": {
+        "accepted": {
+          "joint_priority_map50": 0.8879852486242279,
+          "joint_priority_map50_95": 0.7816826911108012,
+          "mean_required_map50": 0.9211463434448058,
+          "mean_required_map50_95": 0.8197602405423289
+        },
+        "candidate": {
+          "joint_priority_map50": 0.8857785717125561,
+          "joint_priority_map50_95": 0.7679793431928676,
+          "mean_required_map50": 0.9211136003787599,
+          "mean_required_map50_95": 0.8112258552378692
+        },
+        "incremental_deltas": {
+          "joint_priority_map50": -0.0014376144182868256,
+          "joint_priority_map50_95": -0.010351759353395718,
+          "mean_required_map50": -0.001121958447882987,
+          "mean_required_map50_95": -0.00660618074934749
+        },
+        "matched": {
+          "joint_priority_map50": 0.887216186130843,
+          "joint_priority_map50_95": 0.7783311025462634,
+          "mean_required_map50": 0.9222355588266429,
+          "mean_required_map50_95": 0.8178320359872167
+        },
+        "semantics": {
+          "joint_priority": "fixed_0.2_0.2_0.2_0.4_selection_score_not_official_map",
+          "mean_required": "diagnostic_mean_not_official_map"
+        },
+        "total_deltas": {
+          "joint_priority_map50": -0.0022066769116717566,
+          "joint_priority_map50_95": -0.013703347917933595,
+          "mean_required_map50": -3.274306604594823e-05,
+          "mean_required_map50_95": -0.008534385304459713
+        }
+      },
+      "source_map50_decision": "green",
+      "source_map50_gate_passed": true,
+      "status": "completed",
+      "total_deltas": {
+        "bbat/ball/box/map50": 0.007658411785935071,
+        "bbat/ball/box/map50_95": -0.0010236993735021072,
+        "bbat/ball/pose/map50": 0.007591519558584503,
+        "bbat/ball/pose/map50_95": 0.007591519558584503,
+        "bbat/bat/box/map50": -0.00045515435682408345,
+        "bbat/bat/box/map50_95": -0.0020987469500987066,
+        "bbat/bat/pose/map50": -0.00045515435682408345,
+        "bbat/bat/pose/map50_95": -0.0008633126034037764,
+        "bbat/box/map50": 0.0036016287145554937,
+        "bbat/box/map50_95": -0.001561223161800518,
+        "bbat/pose/map50": 0.0035681826008802098,
+        "bbat/pose/map50_95": 0.0033641034775900858,
+        "coco/box/map50": -0.013138654125251392,
+        "coco/box/map50_95": -0.03405586035438274,
+        "coco/person/box/map50": -0.00863272434942386,
+        "coco/person/box/map50_95": -0.039627863028664945
+      },
+      "worst_incremental_map50_95_delta": -0.028830653138580686,
+      "worst_incremental_map50_95_metric": "coco/person/box/map50_95",
+      "worst_incremental_map50_delta": -0.003320055989813109,
+      "worst_incremental_map50_metric": "coco/person/box/map50",
+      "worst_map50_95_delta": -0.039627863028664945,
+      "worst_map50_95_metric": "coco/person/box/map50_95",
+      "worst_map50_delta": -0.013138654125251392,
+      "worst_map50_metric": "coco/box/map50"
+    }
+  },
+  "formal_training": false,
+  "formal_validation": false,
+  "gpu_used": false,
+  "kind": "full35_dual_metric_candidate_regate",
+  "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-dual-v1",
+  "schema_version": 1,
+  "source": {
+    "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-cumulative-neck-v1.json",
+    "report_sha256": "4e5c744c04b0b67b2173d2d4de611df3259ef65ba8e9a26c2a58d1756828724e"
+  },
+  "status": "completed",
+  "thresholds": {
+    "activation_replacement_included": true,
+    "all_eight_metrics_per_family_required": true,
+    "map50_95_recovery_floor": 0.08,
+    "map50_95_total_max_drop": 0.04,
+    "map50_total_max_drop": 0.015
+  },
+  "validation_rerun": false
+}

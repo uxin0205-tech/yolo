@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "plan_id": "full-model-cumulative-0908-v1",
+  "parent": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/parent-manifest.json",
+    "sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a"
+  },
+  "sources": [
+    {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/single-layer-probe.json",
+      "sha256": "396a1d25c61fc8755e02aabd0d362b3b324c210895124ca3c0112a2a3f5c1982"
+    },
+    {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/qat-recovery-summary.json",
+      "sha256": "c52802bdd70ce2afdc7017a88dc92735e67d317ec842427222d719388d97fe0d"
+    },
+    {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/evidence-consistency-audit.json",
+      "sha256": "534bdf3b134ad634b368fee5d98e1fc8f54aef780120f3c90f573bdb8edc2932"
+    },
+    {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/parent-revalidation.json",
+      "sha256": "0ff5654a30d3fd13a38afb55aff2a0e7ccb4df74ab3fc43d4f68b2db64a31a8b"
+    }
+  ],
+  "runner": {
+    "path": "/home/uxin/yolo/yolo_quantize/scripts/run_cumulative_ptq_queue.py",
+    "sha256": "1e286f172c6098fa7f641ca31de476962147494004488d2710903e03df9ac553"
+  },
+  "template": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/generated/isolated-special-plan.json",
+    "sha256": "fe2f42ae4edadd0e05062f58562e5cad9fe0437fbb8b869f29fc5bcf7d26615d"
+  },
+  "stages": [
+    {
+      "stage_id": "backbone_early",
+      "additions": {
+        "graph.model.3.conv": "fixed-sd4"
+      },
+      "reason": {
+        "rule": "最低 raw 輸出誤差前 25% 中選 nominal 位元節省最大；不是 mAP 保證",
+        "path": "graph.model.3.conv",
+        "format_id": "fixed-sd4",
+        "raw_risk": 0.19834164208611857,
+        "nominal_saved_bits": 2359296
+      }
+    },
+    {
+      "stage_id": "backbone_deep",
+      "additions": {
+        "graph.model.5.conv": "fixed-sd4"
+      },
+      "reason": {
+        "rule": "最低 raw 輸出誤差前 25% 中選 nominal 位元節省最大；不是 mAP 保證",
+        "path": "graph.model.5.conv",
+        "format_id": "fixed-sd4",
+        "raw_risk": 0.13574700922399496,
+        "nominal_saved_bits": 9437184
+      }
+    },
+    {
+      "stage_id": "backbone_attention_safe",
+      "additions": {
+        "graph.model.10.cv1.conv": "fixed-sd4"
+      },
+      "reason": {
+        "rule": "最低 raw 輸出誤差前 25% 中選 nominal 位元節省最大；不是 mAP 保證",
+        "path": "graph.model.10.cv1.conv",
+        "format_id": "fixed-sd4",
+        "raw_risk": 0.25942544555965497,
+        "nominal_saved_bits": 1048576
+      }
+    },
+    {
+      "stage_id": "neck",
+      "additions": {
+        "graph.model.20.conv": "fixed-sd4"
+      },
+      "reason": {
+        "rule": "最低 raw 輸出誤差前 25% 中選 nominal 位元節省最大；不是 mAP 保證",
+        "path": "graph.model.20.conv",
+        "format_id": "fixed-sd4",
+        "raw_risk": 0.023674434568673648,
+        "nominal_saved_bits": 4718592
+      }
+    },
+    {
+      "stage_id": "neck_attention_safe",
+      "additions": {
+        "graph.model.22.m.0.1.attn.qkv.v.conv": "fixed-sd4",
+        "graph.model.22.m.0.1.attn.pe.conv": "fixed-sd4",
+        "graph.model.22.m.0.1.attn.proj.conv": "fixed-sd4",
+        "graph.model.22.m.0.1.ffn.0.conv": "fixed-sd4",
+        "graph.model.22.m.0.1.ffn.1.conv": "fixed-sd4"
+      },
+      "reason": "已有同區 PTQ／短 QAT 證據；需重驗累積交互作用"
+    },
+    {
+      "stage_id": "masf",
+      "additions": {
+        "graph.model.16.p3_masf.context.dw3.conv": "twn-v3-0.75-filterwise",
+        "graph.model.16.p3_masf.context.dw5.conv": "twn-v3-0.75-filterwise",
+        "graph.model.16.p3_masf.context.project.conv": "twn-v3-0.75-filterwise"
+      },
+      "reason": "已有同區 PTQ／短 QAT 證據；需重驗累積交互作用"
+    },
+    {
+      "stage_id": "detect_one2one_tower",
+      "additions": {
+        "graph.model.23.detect_head.one2one_cv3.2.0.1.conv": "fixed-sd4"
+      },
+      "reason": {
+        "rule": "最低 raw 輸出誤差前 25% 中選 nominal 位元節省最大；不是 mAP 保證",
+        "path": "graph.model.23.detect_head.one2one_cv3.2.0.1.conv",
+        "format_id": "fixed-sd4",
+        "raw_risk": 0.041291522519710695,
+        "nominal_saved_bits": 524288
+      }
+    },
+    {
+      "stage_id": "pose_one2one_tower",
+      "additions": {
+        "graph.model.23.pose_head.one2one_cv2.0.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv2.0.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv2.1.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv2.1.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv2.2.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv2.2.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.0.0.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.0.0.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.0.1.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.0.1.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.1.0.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.1.0.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.1.1.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.1.1.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.2.0.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.2.0.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.2.1.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv3.2.1.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv4.0.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv4.0.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv4.1.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv4.1.1.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv4.2.0.conv": "fixed-sd4",
+        "graph.model.23.pose_head.one2one_cv4.2.1.conv": "fixed-sd4"
+      },
+      "reason": "已有同區 PTQ／短 QAT 證據；需重驗累積交互作用"
+    },
+    {
+      "stage_id": "detect_one2one_predictor",
+      "additions": {
+        "graph.model.23.detect_head.one2one_cv2.0.2": "fixed-sd4",
+        "graph.model.23.detect_head.one2one_cv2.1.2": "fixed-sd4",
+        "graph.model.23.detect_head.one2one_cv2.2.2": "fixed-sd4",
+        "graph.model.23.detect_head.one2one_cv3.0.2": "fixed-sd4",
+        "graph.model.23.detect_head.one2one_cv3.1.2": "fixed-sd4",
+        "graph.model.23.detect_head.one2one_cv3.2.2": "fixed-sd4"
+      },
+      "reason": "已有同區 PTQ／短 QAT 證據；需重驗累積交互作用"
+    },
+    {
+      "stage_id": "pose_one2one_predictor",
+      "additions": {
+        "graph.model.23.pose_head.one2one_cv3.2.2": "paper-twn"
+      },
+      "reason": {
+        "rule": "最低 raw 輸出誤差前 25% 中選 nominal 位元節省最大；不是 mAP 保證",
+        "path": "graph.model.23.pose_head.one2one_cv3.2.2",
+        "format_id": "paper-twn",
+        "raw_risk": 0.014066535660165984,
+        "nominal_saved_bits": 3072
+      }
+    }
+  ],
+  "formats": {
+    "fixed-sd4": {
+      "family": "fixed_sd4",
+      "scale_method": "optimal_scaled_codebook"
+    },
+    "exact-scaled-ternary": {
+      "family": "exact_scaled_ternary",
+      "scale_method": "optimal_scaled_codebook"
+    },
+    "twn-v3-0.75-filterwise": {
+      "family": "twn_filterwise",
+      "threshold_multiplier": 0.75
+    },
+    "paper-twn": {
+      "family": "paper_twn",
+      "threshold_multiplier": 0.7
+    },
+    "w6": {
+      "family": "uniform",
+      "bits": 6,
+      "scale_method": "optimal_scaled_codebook"
+    },
+    "w5": {
+      "family": "uniform",
+      "bits": 5,
+      "scale_method": "optimal_scaled_codebook"
+    }
+  },
+  "max_ptq_candidates": 12,
+  "max_additional_qat_jobs": 2,
+  "qat_epochs": 5,
+  "new_training_started": false,
+  "uniform_alternatives": [
+    6,
+    5
+  ],
+  "activation": "unchanged_qsilu_lsq_plus_a8",
+  "formal_validation": false,
+  "selection": "all_16_total_gates_then_smaller_codes_plus_scales_estimate",
+  "lineage": "reuse_V36_export; QAT nominates formats only; never splice independently trained states"
+}

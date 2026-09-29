@@ -1,0 +1,110 @@
+{
+  "formal_validation": false,
+  "results": {
+    "detect-predictor-control--fixed_sd4": {
+      "assignments": [
+        {
+          "cpu_format_id": "exact-scaled-ternary-per_tensor",
+          "format_id": "exact_scaled_ternary",
+          "path": "graph.model.16.p3_masf.context.project.conv",
+          "region": "masf",
+          "stage_id": "masf-weight-primary",
+          "weight_format_id": "exact-scaled-ternary"
+        },
+        {
+          "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+          "format_id": "fixed_sd4",
+          "path": "graph.model.22.m.0.1.ffn.1.conv",
+          "region": "neck_attention_safe",
+          "stage_id": "neck-attention-primary",
+          "weight_format_id": "fixed-sd4"
+        },
+        {
+          "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+          "format_id": "fixed_sd4",
+          "path": "graph.model.23.detect_head.one2one_cv3.2.2",
+          "region": "detect_one2one_predictor",
+          "stage_id": "detect-predictor-control",
+          "weight_format_id": "fixed-sd4"
+        }
+      ],
+      "candidate_id": "detect-predictor-control--fixed_sd4",
+      "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "fixed_sd4",
+      "gate": {
+        "decision": "recover",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.0,
+          "bbat/ball/box/map50_95": 0.0,
+          "bbat/ball/pose/map50": 0.0,
+          "bbat/ball/pose/map50_95": 0.0,
+          "bbat/bat/box/map50": 0.0,
+          "bbat/bat/box/map50_95": 0.0,
+          "bbat/bat/pose/map50": 0.0,
+          "bbat/bat/pose/map50_95": 0.0,
+          "bbat/box/map50": 0.0,
+          "bbat/box/map50_95": 0.0,
+          "bbat/pose/map50": 0.0,
+          "bbat/pose/map50_95": 0.0,
+          "coco/box/map50": -0.0019426686746760735,
+          "coco/box/map50_95": -0.0029604729307170508,
+          "coco/person/box/map50": -8.438481696848577e-05,
+          "coco/person/box/map50_95": -0.0006536372986453154
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.010218006275294567,
+          "bbat/ball/box/map50_95": -0.002773616091071074,
+          "bbat/ball/pose/map50": 0.012549087738816023,
+          "bbat/ball/pose/map50_95": 0.012481783119602574,
+          "bbat/bat/box/map50": -0.0009200591121896196,
+          "bbat/bat/box/map50_95": -0.0061373081365051485,
+          "bbat/bat/pose/map50": -0.0004690782488917522,
+          "bbat/bat/pose/map50_95": -0.0010270655240331994,
+          "bbat/box/map50": 0.0046489735815524735,
+          "bbat/box/map50_95": -0.004455462113788222,
+          "bbat/pose/map50": 0.006040004744962246,
+          "bbat/pose/map50_95": 0.00572735879778441,
+          "coco/box/map50": -0.015784428759321067,
+          "coco/box/map50_95": -0.016058413592508758,
+          "coco/person/box/map50": -0.009155721766586078,
+          "coco/person/box/map50_95": -0.010661107144060988
+        },
+        "worst_incremental_map50_95_delta": -0.002960472931,
+        "worst_incremental_map50_delta": -0.001942668675,
+        "worst_total_map50_95_delta": -0.016058413593,
+        "worst_total_map50_delta": -0.015784428759
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9686005727820375,
+        "bbat/ball/box/map50_95": 0.7762665661114667,
+        "bbat/ball/pose/map50": 0.9720379423448947,
+        "bbat/ball/pose/map50_95": 0.9719706377256813,
+        "bbat/bat/box/map50": 0.9931582813061605,
+        "bbat/bat/box/map50_95": 0.8877073809333682,
+        "bbat/bat/pose/map50": 0.9936092621694583,
+        "bbat/bat/pose/map50_95": 0.9930512748943169,
+        "bbat/box/map50": 0.980879427044099,
+        "bbat/box/map50_95": 0.8319869735224174,
+        "bbat/pose/map50": 0.9828236022571766,
+        "bbat/pose/map50_95": 0.9825109563099991,
+        "coco/box/map50": 0.6549345783980998,
+        "coco/box/map50_95": 0.4819639228784134,
+        "coco/person/box/map50": 0.8302538657101575,
+        "coco/person/box/map50_95": 0.6097203812783879
+      },
+      "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-predictor-control--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "metrics_sha256": "52ed0cd59a3f726474efa7b6ef3b810822c7d87ec05f0e467564fcb5a09cecfb",
+      "packed_bytes": 22561988,
+      "queue_role": "main",
+      "regated_from_gate_decision": "reject",
+      "savings_from_locked_parent_bytes": 125948,
+      "seconds": 75.50523166218773,
+      "status": "completed",
+      "weight_format_id": "fixed-sd4"
+    }
+  },
+  "schema_version": 1,
+  "source_queue": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json",
+  "source_queue_sha256": "e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06",
+  "status": "completed"
+}

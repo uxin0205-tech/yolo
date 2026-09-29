@@ -1,0 +1,1194 @@
+{
+  "candidates": [
+    {
+      "candidate_id": "backbone_attention_safe",
+      "compression_ratio": 4.545188010864067,
+      "format_id": "mixed-fixed-sd4",
+      "hard_gate_passed": false,
+      "packed_weight_bytes": 19864384,
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "reference_fp32_bytes": 90287360,
+      "worst_total_delta": -0.02703863521830563
+    }
+  ],
+  "contract": {
+    "calibration_manifest": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+      "samples_per_task": 32,
+      "sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+      "split": "canonical_train_exemplars_only"
+    },
+    "diagnostic": {
+      "all_finite_required": true,
+      "fixed_probe_per_task": 1,
+      "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+      "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+      "same_structure_required": true,
+      "selection_claim": false
+    },
+    "formal_training": false,
+    "formal_validation": false,
+    "kind": "full35_mixed_weight_policy_map50_search",
+    "reference_reuse": {
+      "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json",
+      "roles": [
+        "accepted",
+        "matched"
+      ],
+      "sha256": "738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2",
+      "validation_rerun": false
+    },
+    "reviewed_plan": {
+      "accuracy_tolerance": 0.002,
+      "activation_checkpoint": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/inference/best_joint.pt",
+      "activation_checkpoint_sha256": "8c1f3652fd21c0e38221cfc3acba7ee013c5e88df641b9331c33796f6f11b66c",
+      "activation_policy_id": "qsilu_pq--lsq-plus-a8",
+      "base_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml",
+      "base_plan_sha256": "3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985",
+      "batch": {
+        "detect": 32,
+        "pose": 16
+      },
+      "candidates": [
+        {
+          "candidate_id": "backbone_attention_safe",
+          "format_id": "mixed-fixed-sd4",
+          "path_routes": [
+            {
+              "format": {
+                "bits": 4,
+                "family": "fixed_sd4",
+                "scale_method": "optimal_scaled_codebook"
+              },
+              "path_count": 2,
+              "paths": [
+                "graph.model.10.cv1.conv",
+                "graph.model.3.conv"
+              ],
+              "route_id": "backbone_attention_safe-fixed-sd4"
+            }
+          ],
+          "region_defaults": []
+        }
+      ],
+      "comparison_candidates": [
+        {
+          "candidate_id": "accuracy-a05-add-pose-tower-w8",
+          "compression_ratio": 1.1011530283776738,
+          "format_id": "mixed-w8-mse_grid_v1",
+          "hard_gate_passed": true,
+          "packed_weight_bytes": 81993472,
+          "policy_id": "qsilu_pq--lsq-plus-a8",
+          "reference_fp32_bytes": 90287360,
+          "source_path": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+          "source_sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+          "worst_total_delta": -0.010876715913442636
+        },
+        {
+          "candidate_id": "compression-c04-add-pose-tower-w8",
+          "compression_ratio": 2.8948529426853016,
+          "format_id": "mixed-w8-mse_grid_v1",
+          "hard_gate_passed": true,
+          "packed_weight_bytes": 31188928,
+          "policy_id": "qsilu_pq--lsq-plus-a8",
+          "reference_fp32_bytes": 90287360,
+          "source_path": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+          "source_sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+          "worst_total_delta": -0.012283302180263633
+        },
+        {
+          "candidate_id": "accuracy-a09-add-neck-w8",
+          "compression_ratio": 3.5494332691751267,
+          "format_id": "mixed-w8-mse_grid_v1",
+          "hard_gate_passed": true,
+          "packed_weight_bytes": 25437120,
+          "policy_id": "qsilu_pq--lsq-plus-a8",
+          "reference_fp32_bytes": 90287360,
+          "source_path": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+          "source_sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+          "worst_total_delta": -0.01330265480336612
+        }
+      ],
+      "datasets": {
+        "assignment_changed": false,
+        "bbat5_pose_search": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml",
+        "bbat5_registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml",
+        "coco": "/home/uxin/yolo/coco2017.yaml",
+        "runtime_view": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1"
+      },
+      "execution_authorization_id": "user-0908-continue-bounded-cumulative",
+      "formal_training": false,
+      "formal_validation": false,
+      "gates": {
+        "metric_family": "map50",
+        "recovery_floor": 0.04,
+        "sham_absolute_drift": 0.01,
+        "total_drop": 0.015,
+        "w8_incremental_drop": 0.01
+      },
+      "image_size": 640,
+      "locked_qat_parent": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/parent-manifest.json",
+        "sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a"
+      },
+      "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-dual-v1",
+      "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-cumulative-0908/generated/backbone_attention_safe-plan.json",
+      "plan_id": "cumulative-0908-backbone_attention_safe-v1",
+      "plan_sha256": "293095b69cc302f7ad28615bb0dfc98bc273d1a4ce1ccdad0249d09c9678bb50",
+      "routes": {
+        "backbone_attention_safe-fixed-sd4": {
+          "list_key": "paths",
+          "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-cumulative-0908/generated/backbone_attention_safe-fixed-sd4-paths.json",
+          "path_count": 2,
+          "sha256": "538a12b82af7b4f649ae8441f10cfae39600035e0e7be6b0af55daee27c9e9bd",
+          "source_execution_authorized": true,
+          "source_map_validation_run": false
+        }
+      },
+      "weight_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/weight-region-sensitivity-plan-v9.yaml",
+      "weight_plan_sha256": "9bc7084e9217754153cc2ad69e83e6ae658304944ffa0ab6318ebd57c1d5d394",
+      "workers": {
+        "detect": 4,
+        "pose": 8
+      }
+    },
+    "runtime": {
+      "cuda": "12.8",
+      "device_index": 0,
+      "device_name": "NVIDIA GeForce RTX 5090",
+      "torch": "2.11.0+cu128"
+    },
+    "runtime_view": {
+      "assignment_changed": false,
+      "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1/manifest.json",
+      "manifest_sha256": "2a5a9593d3703d86cfebb315fa5d2e5954fac1860d777cb0222d153416196ac5",
+      "root": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1",
+      "storage": "symlink-only-runtime-view",
+      "train_images": 5364,
+      "val_images": 600,
+      "yaml": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1/data.yaml",
+      "yaml_sha256": "55699d2a0c7cb06505388348612451afbe90083289e9c4c9f114b914e1c78eaf"
+    },
+    "schema_version": 1,
+    "selection_claim": false,
+    "validator": {
+      "augmentation": false,
+      "backend": "bittrue",
+      "rect": true,
+      "source": "/home/uxin/yolo/yolo_combine/final/full35/code/project/src/yolo_combine/validation.py",
+      "source_sha256": "83a9ba7f518d30a97790986171b4d41444a30657e2c0f658be3e9dbfda358779",
+      "split": "val"
+    }
+  },
+  "diagnostics": {
+    "backbone_attention_safe": {
+      "all_finite": true,
+      "candidate": {
+        "candidate_id": "backbone_attention_safe",
+        "format_id": "mixed-fixed-sd4",
+        "path_routes": [
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 2,
+            "paths": [
+              "graph.model.10.cv1.conv",
+              "graph.model.3.conv"
+            ],
+            "route_id": "backbone_attention_safe-fixed-sd4"
+          }
+        ],
+        "region_defaults": []
+      },
+      "same_structure": true,
+      "seconds": 0.4040730041451752,
+      "selection_claim": false,
+      "status": "diagnostic_pass",
+      "tasks": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 0.9299628472580037,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7872157032467003,
+              "elements": 1800,
+              "maximum_absolute_error": 665.627685546875,
+              "mean_absolute_error": 123.28849826388888,
+              "normalized_rmse": 0.6546195531652503,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7872157032467003,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 665.627685546875,
+                  "mean_absolute_error": 123.28849826388888,
+                  "normalized_rmse": 0.6546195531652503,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9929145461873726,
+              "elements": 705600,
+              "maximum_absolute_error": 86.06197357177734,
+              "mean_absolute_error": 1.724680408296131,
+              "normalized_rmse": 0.12000014453816124,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 0.9836877074330804,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 9.465091705322266,
+                  "mean_absolute_error": 0.30546119326636906,
+                  "normalized_rmse": 0.18142057640056275,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9929223248178697,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 86.06197357177734,
+                  "mean_absolute_error": 1.795641369047619,
+                  "normalized_rmse": 0.11993496109084979,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.013333333656191826,
+              "ordered_pair_match": 0.013333333656191826,
+              "selected_anchor_jaccard": 0.5325077399380805,
+              "selected_pair_overlap": 0.67,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 665.627685546875,
+          "mean_absolute_error": 0.5153225397742448,
+          "normalized_rmse": 0.37598480864661177,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 0.7872157032467003,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 665.627685546875,
+              "mean_absolute_error": 123.28849826388888,
+              "normalized_rmse": 0.6546195531652503,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 0.9836877074330804,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 9.465091705322266,
+              "mean_absolute_error": 0.30546119326636906,
+              "normalized_rmse": 0.18142057640056275,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9929223248178697,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 86.06197357177734,
+              "mean_absolute_error": 1.795641369047619,
+              "normalized_rmse": 0.11993496109084979,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9630031963772497,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 4.34345006942749,
+              "mean_absolute_error": 0.07022521018981934,
+              "normalized_rmse": 0.2714004721061637,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9303149762221797,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 7.9938483238220215,
+              "mean_absolute_error": 0.11740264892578126,
+              "normalized_rmse": 0.3705696976305928,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9211037764603905,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 30.530227661132812,
+              "mean_absolute_error": 0.42210384368896486,
+              "normalized_rmse": 0.3957430494735675,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 0.7566547452716795,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 0.7502980517847518,
+              "elements": 3600,
+              "maximum_absolute_error": 636.9617309570312,
+              "mean_absolute_error": 143.89513888888888,
+              "normalized_rmse": 0.7287525923813772,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 0.7502980517847518,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 636.9617309570312,
+                  "mean_absolute_error": 143.89513888888888,
+                  "normalized_rmse": 0.7287525923813772,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 0.9938725149184996,
+              "elements": 100800,
+              "maximum_absolute_error": 42.34624481201172,
+              "mean_absolute_error": 0.4362654234871032,
+              "normalized_rmse": 0.1112068995413796,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 0.9923430190085109,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 3.4243836402893066,
+                  "mean_absolute_error": 0.18041335332961309,
+                  "normalized_rmse": 0.12896928315455716,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.994717461677022,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 42.34624481201172,
+                  "mean_absolute_error": 1.4031360444568453,
+                  "normalized_rmse": 0.10332529535718885,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 0.9465926546795499,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 7.024328231811523,
+                  "mean_absolute_error": 0.2845432632688492,
+                  "normalized_rmse": 0.3224604875742991,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 0.013333333656191826,
+              "ordered_pair_match": 0.013333333656191826,
+              "selected_anchor_jaccard": 0.2871287128712871,
+              "selected_pair_overlap": 0.43666666666666665,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 636.9617309570312,
+          "mean_absolute_error": 0.3142374341522698,
+          "normalized_rmse": 0.7187133014600385,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 0.7502980517847518,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 636.9617309570312,
+              "mean_absolute_error": 143.89513888888888,
+              "normalized_rmse": 0.7287525923813772,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 0.9923430190085109,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 3.4243836402893066,
+              "mean_absolute_error": 0.18041335332961309,
+              "normalized_rmse": 0.12896928315455716,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.994717461677022,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 42.34624481201172,
+              "mean_absolute_error": 1.4031360444568453,
+              "normalized_rmse": 0.10332529535718885,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 0.9442984185127242,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 6.878796100616455,
+              "mean_absolute_error": 0.08247476577758789,
+              "normalized_rmse": 0.33396833833277567,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 0.9264312830394581,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 10.141448974609375,
+              "mean_absolute_error": 0.11761514663696289,
+              "normalized_rmse": 0.38331888646784434,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 0.9391542772905794,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 49.48002243041992,
+              "mean_absolute_error": 0.3708842468261719,
+              "normalized_rmse": 0.343892434822932,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 0.9465926546795499,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 7.024328231811523,
+              "mean_absolute_error": 0.2845432632688492,
+              "normalized_rmse": 0.3224604875742991,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "weight_quantization": {
+        "assignments": [
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "backbone_attention_safe",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.10.cv1.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "backbone_early",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.3.conv"
+              ]
+            }
+          }
+        ],
+        "cost_scope": "deployment_weight_codes_and_fp32_scales_estimate_excludes_bias_protected_alignment",
+        "effective_quantized_modules": 148,
+        "formats": [
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.00380706787109375,
+              "code_histogram": [
+                2062,
+                14365,
+                30152,
+                31744,
+                24665,
+                15480,
+                11901,
+                10814,
+                11830,
+                15002,
+                23918,
+                29676,
+                26238,
+                12305,
+                1992
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9834131106473212,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.25686317682266235,
+              "mse": 0.00012981246982235461,
+              "normalized_rmse": 0.18137991136447865,
+              "occupied_codes": 15,
+              "scale_bytes": 2048,
+              "scale_count": 512,
+              "scale_maximum": 1.3004215955734253,
+              "scale_mean": 0.31174758076667786,
+              "scale_minimum": 0.08001076430082321,
+              "sqnr_db": 14.828216293332176,
+              "weight_code_bytes": 131072,
+              "zero_ratio": 0.04125213623046875
+            },
+            "quantized_modules": 1,
+            "region": "backbone_attention_safe",
+            "sites": [
+              {
+                "clipping_rate": 0.00380706787109375,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9834131106473212,
+                "elements": 262144,
+                "maximum_absolute_error": 0.25686317682266235,
+                "mse": 0.00012981246982235461,
+                "normalized_rmse": 0.18137991136447865,
+                "occupied_codes": 15,
+                "output_channels": 512,
+                "path": "graph.model.10.cv1.conv",
+                "region": "backbone_attention_safe",
+                "scale_maximum": 1.3004215955734253,
+                "scale_mean": 0.31174758076667786,
+                "scale_minimum": 0.08001076430082321,
+                "sqnr_db": 14.828216293332176,
+                "zero_ratio": 0.04125213623046875
+              }
+            ],
+            "weight_elements": 262144
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.0013410780164930555,
+              "code_histogram": [
+                1954,
+                15963,
+                48089,
+                72548,
+                67337,
+                44720,
+                35379,
+                28945,
+                35053,
+                44435,
+                67044,
+                70334,
+                43572,
+                13079,
+                1372
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.98210049115148,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.13581669330596924,
+              "mse": 3.802819669039713e-05,
+              "normalized_rmse": 0.1883577537075531,
+              "occupied_codes": 15,
+              "scale_bytes": 1024,
+              "scale_count": 256,
+              "scale_maximum": 0.6001216769218445,
+              "scale_mean": 0.20776771008968353,
+              "scale_minimum": 0.046355072408914566,
+              "sqnr_db": 14.500329949023707,
+              "weight_code_bytes": 294912,
+              "zero_ratio": 0.04907396104600695
+            },
+            "quantized_modules": 1,
+            "region": "backbone_early",
+            "sites": [
+              {
+                "clipping_rate": 0.0013410780164930555,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.98210049115148,
+                "elements": 589824,
+                "maximum_absolute_error": 0.13581669330596924,
+                "mse": 3.802819669039713e-05,
+                "normalized_rmse": 0.1883577537075531,
+                "occupied_codes": 15,
+                "output_channels": 256,
+                "path": "graph.model.3.conv",
+                "region": "backbone_early",
+                "scale_maximum": 0.6001216769218445,
+                "scale_mean": 0.20776771008968353,
+                "scale_minimum": 0.046355072408914566,
+                "sqnr_db": 14.500329949023707,
+                "zero_ratio": 0.04907396104600695
+              }
+            ],
+            "weight_elements": 589824
+          }
+        ],
+        "inherited_unmodified_bytes": 19435328,
+        "quantized_modules": 2,
+        "scale_bytes": 3072,
+        "weight_code_bytes": 425984,
+        "weight_elements": 851968
+      }
+    }
+  },
+  "formal_training": false,
+  "formal_validation": false,
+  "incremental_reference": {
+    "kind": "locked_qat_parent",
+    "metrics": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/validation/epoch-0001/bittrue/metrics.json",
+    "sha256": "9ee666d9b25fdb7ada93fddbf57af9d4c4e50c3c32893875d4c7b4ebd238a53b"
+  },
+  "kind": "full35_mixed_weight_policy_map50_search",
+  "reference": {
+    "formal_training": false,
+    "formal_validation": false,
+    "gate": {
+      "accepted_run_id": "legacy-search:accepted:regate-map50",
+      "candidate_run_id": "legacy-search:candidate:regate-map50",
+      "decision": "green",
+      "incremental_deltas": {
+        "bbat/ball/box/map50": 0.0009800300818973984,
+        "bbat/ball/pose/map50": -0.0005203629393314424,
+        "bbat/bat/box/map50": -0.0005990640244449841,
+        "bbat/bat/pose/map50": 0.00029859961957767744,
+        "bbat/box/map50": 0.00019048302872626266,
+        "bbat/pose/map50": -0.00011088165987693799,
+        "coco/box/map50": 0.00016828185060069334,
+        "coco/person/box/map50": -0.0007814821457564625
+      },
+      "matched_run_id": "legacy-search:matched:regate-map50",
+      "maximum_sham_drift": 0.0,
+      "passed": true,
+      "sham_deltas": {},
+      "sham_gate_applicable": false,
+      "sham_gate_passed": true,
+      "thresholds": {
+        "metric_family": "map50",
+        "recovery_floor": 0.04,
+        "sham_absolute_drift": 0.01,
+        "total_drop": 0.015,
+        "w8_incremental_drop": 0.01
+      },
+      "total_deltas": {
+        "bbat/ball/box/map50": 0.01055628149229837,
+        "bbat/ball/pose/map50": 0.010024703742710694,
+        "bbat/bat/box/map50": -0.002125563510979256,
+        "bbat/bat/pose/map50": -0.0012278998669565944,
+        "bbat/box/map50": 0.004215358990659501,
+        "bbat/pose/map50": 0.0043984019378771055,
+        "coco/box/map50": -0.01140780541415487,
+        "coco/person/box/map50": -0.006094150505367213
+      },
+      "total_gate_passed": true,
+      "w8_incremental_gate_applicable": true,
+      "w8_incremental_gate_passed": true,
+      "worst_incremental_delta": -0.0007814821457564625,
+      "worst_incremental_metric": "coco/person/box/map50",
+      "worst_total_delta": -0.01140780541415487,
+      "worst_total_metric": "coco/box/map50"
+    },
+    "gpu_used": false,
+    "kind": "full35_search_metric_regate",
+    "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-dual-v1",
+    "roles": {
+      "accepted": {
+        "metrics": {
+          "bbat/ball/box/map50": 0.9583825665067429,
+          "bbat/ball/pose/map50": 0.9594888546060787,
+          "bbat/bat/box/map50": 0.9940783404183501,
+          "bbat/bat/pose/map50": 0.9940783404183501,
+          "bbat/box/map50": 0.9762304534625466,
+          "bbat/pose/map50": 0.9767835975122143,
+          "coco/box/map50": 0.6707190071574208,
+          "coco/person/box/map50": 0.8394095874767435
+        },
+        "policy_id": "accepted-full35-silu-bittrue",
+        "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/accepted/epoch-0000/bittrue/metrics.json",
+        "source_metrics_report_sha256": "2e97e4a60039741cc1fc45a03d67615bbc5b851bcf60a56cd153251366c4a355"
+      },
+      "candidate": {
+        "metrics": {
+          "bbat/ball/box/map50": 0.9689388479990413,
+          "bbat/ball/pose/map50": 0.9695135583487894,
+          "bbat/bat/box/map50": 0.9919527769073708,
+          "bbat/bat/pose/map50": 0.9928504405513935,
+          "bbat/box/map50": 0.9804458124532061,
+          "bbat/pose/map50": 0.9811819994500914,
+          "coco/box/map50": 0.659311201743266,
+          "coco/person/box/map50": 0.8333154369713763
+        },
+        "policy_id": "qsilu_pq--lsq-plus-a8",
+        "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/candidate/epoch-0000/bittrue/metrics.json",
+        "source_metrics_report_sha256": "a40932555b0b5d6f2e409fcfd49557d5fce30ec55984a09a983d5961e4a7bfd5"
+      },
+      "matched": {
+        "metrics": {
+          "bbat/ball/box/map50": 0.9679588179171439,
+          "bbat/ball/pose/map50": 0.9700339212881208,
+          "bbat/bat/box/map50": 0.9925518409318158,
+          "bbat/bat/pose/map50": 0.9925518409318158,
+          "bbat/box/map50": 0.9802553294244798,
+          "bbat/pose/map50": 0.9812928811099684,
+          "coco/box/map50": 0.6591429198926653,
+          "coco/person/box/map50": 0.8340969191171328
+        },
+        "policy_id": "qsilu_pq--lsq-plus-a8",
+        "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v4-qsilu-backbone-early-w8-search-v1/validation/matched/epoch-0000/bittrue/metrics.json",
+        "source_metrics_report_sha256": "e2b3501a98a25f90519919d11c6e5c77d2327a04f2a58e6ea5291fb9c65cd0a3"
+      }
+    },
+    "schema_version": 1,
+    "selection_claim": "single_cell_gate_only",
+    "source": {
+      "plan_id": "legacy-search",
+      "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json",
+      "report_sha256": "738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2"
+    },
+    "status": "completed",
+    "validation_rerun": false
+  },
+  "results": {
+    "backbone_attention_safe": {
+      "activation_output_quantization": "locked_learned_lsq_plus_a8",
+      "all_metric_count": 40,
+      "all_search_metrics": {
+        "bbat/ball/box/map50": 0.9661559015287502,
+        "bbat/ball/box/map50_95": 0.7379388462665835,
+        "bbat/ball/pose/map50": 0.9685988791146484,
+        "bbat/ball/pose/map50_95": 0.9683158355262071,
+        "bbat/bat/box/map50": 0.9912951136053154,
+        "bbat/bat/box/map50_95": 0.8799312923731917,
+        "bbat/bat/pose/map50": 0.9913658676940348,
+        "bbat/bat/pose/map50_95": 0.9909589918724577,
+        "bbat/box/map50": 0.9787255075670328,
+        "bbat/box/map50_95": 0.8089350693198876,
+        "bbat/pose/map50": 0.9799823734043416,
+        "bbat/pose/map50_95": 0.9796374136993327,
+        "coco/box/map50": 0.6436803719391152,
+        "coco/box/map50_95": 0.47238269296422386,
+        "coco/person/box/map50": 0.8298019486553838,
+        "coco/person/box/map50_95": 0.6075379040130986
+      },
+      "build": {
+        "activation_quantizers": 124,
+        "activation_recalibrated": false,
+        "checkpoint": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "8c1f3652fd21c0e38221cfc3acba7ee013c5e88df641b9331c33796f6f11b66c",
+        "locked_qat_parent": {
+          "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/parent-manifest.json",
+          "sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a"
+        }
+      },
+      "calibration": {
+        "kind": "reused_locked_qat_activation",
+        "parent": {
+          "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/parent-manifest.json",
+          "sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a"
+        },
+        "recalibrated": false
+      },
+      "candidate": {
+        "candidate_id": "backbone_attention_safe",
+        "format_id": "mixed-fixed-sd4",
+        "path_routes": [
+          {
+            "format": {
+              "bits": 4,
+              "family": "fixed_sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "path_count": 2,
+            "paths": [
+              "graph.model.10.cv1.conv",
+              "graph.model.3.conv"
+            ],
+            "route_id": "backbone_attention_safe-fixed-sd4"
+          }
+        ],
+        "region_defaults": []
+      },
+      "gate": {
+        "accepted_run_id": "cumulative-0908-backbone_attention_safe-v1:accepted-reused",
+        "candidate_run_id": "cumulative-0908-backbone_attention_safe-v1:backbone_attention_safe",
+        "decision": "recover",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": -0.005498167707908119,
+          "bbat/ball/pose/map50": -0.003055190122009943,
+          "bbat/bat/box/map50": -0.0010073572716490231,
+          "bbat/bat/pose/map50": -0.0011099704296647639,
+          "bbat/box/map50": -0.003252762489778571,
+          "bbat/pose/map50": -0.002082580275837298,
+          "coco/box/map50": -0.018691327120628154,
+          "coco/person/box/map50": -0.004603578517407225
+        },
+        "matched_run_id": "cumulative-0908-backbone_attention_safe-v1:matched-reused",
+        "maximum_sham_drift": 0.0,
+        "passed": false,
+        "sham_deltas": {},
+        "sham_gate_applicable": false,
+        "sham_gate_passed": true,
+        "thresholds": {
+          "metric_family": "map50",
+          "recovery_floor": 0.04,
+          "sham_absolute_drift": 0.01,
+          "total_drop": 0.015,
+          "w8_incremental_drop": 0.01
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.007773335022007277,
+          "bbat/ball/pose/map50": 0.00911002450856968,
+          "bbat/bat/box/map50": -0.002783226813034667,
+          "bbat/bat/pose/map50": -0.0027124727243152957,
+          "bbat/box/map50": 0.0024950541044862495,
+          "bbat/pose/map50": 0.003198775892127248,
+          "coco/box/map50": -0.02703863521830563,
+          "coco/person/box/map50": -0.009607638821359732
+        },
+        "total_gate_passed": false,
+        "w8_incremental_gate_applicable": false,
+        "w8_incremental_gate_passed": true,
+        "worst_incremental_delta": -0.018691327120628154,
+        "worst_incremental_metric": "coco/box/map50",
+        "worst_total_delta": -0.02703863521830563,
+        "worst_total_metric": "coco/box/map50"
+      },
+      "materialization": {
+        "detect_compatible_tensors": 753,
+        "detect_complete": true,
+        "pose_compatible_tensors": 801,
+        "pose_complete": true
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9661559015287502,
+        "bbat/ball/pose/map50": 0.9685988791146484,
+        "bbat/bat/box/map50": 0.9912951136053154,
+        "bbat/bat/pose/map50": 0.9913658676940348,
+        "bbat/box/map50": 0.9787255075670328,
+        "bbat/pose/map50": 0.9799823734043416,
+        "coco/box/map50": 0.6436803719391152,
+        "coco/person/box/map50": 0.8298019486553838
+      },
+      "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/cumulative-0908-backbone_attention_safe-v1/validation/backbone_attention_safe/epoch-0000/bittrue/metrics.json",
+      "metrics_report_sha256": "567f43b6a23ce93f99cf6edda2ac9398657e7c229f259a12a77436e9e28f5aae",
+      "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/runs/cumulative-0908-backbone_attention_safe-v1/validation/backbone_attention_safe/epoch-0000/bittrue",
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "role": "backbone_attention_safe",
+      "seconds": 87.01924477797002,
+      "status": "completed",
+      "weight_quantization": {
+        "assignments": [
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "backbone_attention_safe",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.10.cv1.conv"
+              ]
+            }
+          },
+          {
+            "format": {
+              "encoded_bits": 4,
+              "format_id": "fixed-sd4",
+              "scale_method": "optimal_scaled_codebook"
+            },
+            "region": "backbone_early",
+            "selector": {
+              "kind": "paths",
+              "paths": [
+                "graph.model.3.conv"
+              ]
+            }
+          }
+        ],
+        "cost_scope": "deployment_weight_codes_and_fp32_scales_estimate_excludes_bias_protected_alignment",
+        "effective_quantized_modules": 148,
+        "formats": [
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.00380706787109375,
+              "code_histogram": [
+                2062,
+                14365,
+                30152,
+                31744,
+                24665,
+                15480,
+                11901,
+                10814,
+                11830,
+                15002,
+                23918,
+                29676,
+                26238,
+                12305,
+                1992
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.9834131106473212,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.25686317682266235,
+              "mse": 0.00012981246982235461,
+              "normalized_rmse": 0.18137991136447865,
+              "occupied_codes": 15,
+              "scale_bytes": 2048,
+              "scale_count": 512,
+              "scale_maximum": 1.3004215955734253,
+              "scale_mean": 0.31174758076667786,
+              "scale_minimum": 0.08001076430082321,
+              "sqnr_db": 14.828216293332176,
+              "weight_code_bytes": 131072,
+              "zero_ratio": 0.04125213623046875
+            },
+            "quantized_modules": 1,
+            "region": "backbone_attention_safe",
+            "sites": [
+              {
+                "clipping_rate": 0.00380706787109375,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.9834131106473212,
+                "elements": 262144,
+                "maximum_absolute_error": 0.25686317682266235,
+                "mse": 0.00012981246982235461,
+                "normalized_rmse": 0.18137991136447865,
+                "occupied_codes": 15,
+                "output_channels": 512,
+                "path": "graph.model.10.cv1.conv",
+                "region": "backbone_attention_safe",
+                "scale_maximum": 1.3004215955734253,
+                "scale_mean": 0.31174758076667786,
+                "scale_minimum": 0.08001076430082321,
+                "sqnr_db": 14.828216293332176,
+                "zero_ratio": 0.04125213623046875
+              }
+            ],
+            "weight_elements": 262144
+          },
+          {
+            "format_id": "fixed-sd4",
+            "numeric": {
+              "clipping_rate": 0.0013410780164930555,
+              "code_histogram": [
+                1954,
+                15963,
+                48089,
+                72548,
+                67337,
+                44720,
+                35379,
+                28945,
+                35053,
+                44435,
+                67044,
+                70334,
+                43572,
+                13079,
+                1372
+              ],
+              "code_max": 7,
+              "code_min": -7,
+              "code_occupancy_ratio": 1.0,
+              "cosine": 0.98210049115148,
+              "encoded_bits": 4,
+              "logical_code_count": 15,
+              "maximum_absolute_error": 0.13581669330596924,
+              "mse": 3.802819669039713e-05,
+              "normalized_rmse": 0.1883577537075531,
+              "occupied_codes": 15,
+              "scale_bytes": 1024,
+              "scale_count": 256,
+              "scale_maximum": 0.6001216769218445,
+              "scale_mean": 0.20776771008968353,
+              "scale_minimum": 0.046355072408914566,
+              "sqnr_db": 14.500329949023707,
+              "weight_code_bytes": 294912,
+              "zero_ratio": 0.04907396104600695
+            },
+            "quantized_modules": 1,
+            "region": "backbone_early",
+            "sites": [
+              {
+                "clipping_rate": 0.0013410780164930555,
+                "code_max": 7,
+                "code_min": -7,
+                "cosine": 0.98210049115148,
+                "elements": 589824,
+                "maximum_absolute_error": 0.13581669330596924,
+                "mse": 3.802819669039713e-05,
+                "normalized_rmse": 0.1883577537075531,
+                "occupied_codes": 15,
+                "output_channels": 256,
+                "path": "graph.model.3.conv",
+                "region": "backbone_early",
+                "scale_maximum": 0.6001216769218445,
+                "scale_mean": 0.20776771008968353,
+                "scale_minimum": 0.046355072408914566,
+                "sqnr_db": 14.500329949023707,
+                "zero_ratio": 0.04907396104600695
+              }
+            ],
+            "weight_elements": 589824
+          }
+        ],
+        "inherited_unmodified_bytes": 19435328,
+        "quantized_modules": 2,
+        "scale_bytes": 3072,
+        "weight_code_bytes": 425984,
+        "weight_elements": 851968
+      }
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "accuracy_tolerance": 0.002,
+    "eligible_ids": [],
+    "pareto_ids": [],
+    "rejected_ids": [
+      "backbone_attention_safe"
+    ],
+    "roles": {
+      "accuracy": null,
+      "balanced": null,
+      "hardware": null
+    },
+    "total_max_drop": 0.015
+  },
+  "status": "completed"
+}

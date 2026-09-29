@@ -1,0 +1,34 @@
+{
+  "fake_quantization": true,
+  "hardware_speed_claim": false,
+  "modules": [
+    {
+      "binary_forward_count": 1,
+      "binary_qk_count": 1,
+      "class": "ScaledBinaryAttention",
+      "path": "",
+      "probability_finite": true,
+      "probability_shape": [
+        2,
+        2,
+        16,
+        16
+      ],
+      "pv_count": 1,
+      "score_finite": true,
+      "score_shape": [
+        2,
+        2,
+        16,
+        16
+      ],
+      "softmax_count": 1
+    }
+  ],
+  "theoretical_cost": {
+    "binary_qk": 1,
+    "pv": 1,
+    "softmax": 1
+  },
+  "variant_id": "T5-PV"
+}

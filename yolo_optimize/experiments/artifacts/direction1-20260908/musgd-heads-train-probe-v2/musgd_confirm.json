@@ -1,0 +1,70 @@
+{
+  "label": "musgd_confirm",
+  "updates": 16,
+  "trace_sha256": "910d69af0a00cc5924be7ae16135586db7590a4d8b4b9a0c8f02cdfb80c09003",
+  "parent_state_sha256": "8f2081413525c08973daf91d4fa155cddeabe3a84780bf7d3f9df150ece3eaec",
+  "optimizer": "MuSGD",
+  "role_lrs": {
+    "detect_head": 0.0006089066182347083,
+    "pose_head": 0.0012429811973384405
+  },
+  "statistics": {
+    "detect_head.decay": {
+      "median": 2.211399896623334e-05,
+      "count": 768,
+      "zero_fraction": 0.0
+    },
+    "detect_head": {
+      "median": 1.6753163549765304e-06,
+      "count": 2112,
+      "zero_fraction": 0.000946969696969697
+    },
+    "detect_head.no_decay": {
+      "median": 2.619057397623692e-07,
+      "count": 1344,
+      "zero_fraction": 0.001488095238095238
+    },
+    "pose_head.decay": {
+      "median": 3.481359271972906e-05,
+      "count": 960,
+      "zero_fraction": 0.0
+    },
+    "pose_head": {
+      "median": 8.716694992472185e-06,
+      "count": 2624,
+      "zero_fraction": 0.012195121951219513
+    },
+    "pose_head.no_decay": {
+      "median": 1.7047095752786845e-06,
+      "count": 1664,
+      "zero_fraction": 0.019230769230769232
+    }
+  },
+  "zero_initial_absolute_updates": {},
+  "losses": [
+    1.5695715546607971,
+    1.6034083247184754,
+    1.617476499080658,
+    1.592284047603607,
+    1.6249136090278626,
+    1.5591481685638429,
+    1.6779640555381774,
+    1.5655595660209656,
+    1.7154325127601624,
+    1.6222538471221923,
+    1.5898542642593383,
+    1.5965600490570069,
+    1.6286360383033753,
+    1.5678087234497071,
+    1.6901816248893737,
+    1.6926594495773315
+  ],
+  "excluded_no_nonzero_finite_gradient": {
+    "pose_head.decay": 768,
+    "pose_head.no_decay": 832
+  },
+  "gradient_eligibility": "actual_unscaled_clipped_gradient_before_successful_optimizer_step",
+  "fixed_states_exact": true,
+  "updates_discarded": true,
+  "validation_used": false
+}

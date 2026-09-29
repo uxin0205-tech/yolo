@@ -1,0 +1,84 @@
+# Q2L：只檢查短 QAT 能否恢復部分 PTQ gap，不取代正式 Q2。
+schema_version: 3
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+kind: training_template
+config_id: quant-qat-lite
+title_zh: Q2L W8A8 QAT-lite 相容性檢查
+summary_zh: 從同候選 Q1 calibrated lineage 建立新 optimizer，固定200 steps，不自動接受量化。
+phase: C
+status: blocked_until_handoff_float_screen_ptq_candidate_approval_and_gpu_authorization
+model_scale: m
+candidate_policy:
+  base_candidates: [C0, C1, C2, C3]
+  resolved_from_handoff: true
+  same_recipe_for_all: true
+  requires_quantization_eligible: true
+  screening_only: true
+execution:
+  device: "0"
+  force_cuda_hidden: false
+  requires_execute_flag: true
+  requires_gpu_authorization: true
+  pose_opt_in_required: true
+  formal_training: false
+routes:
+  detect:
+    enabled_by_default: true
+    loss_on_dataset: coco2017-screen-20
+  pose:
+    enabled_by_default: false
+    loss_on_dataset: bbat5-pose-screen-20
+formal_ranking_requires: []
+datasets:
+  detect: configs/data/coco2017-screen-20.yaml
+  pose: configs/data/bbat5-pose-screen-20.yaml
+  diagnostic_detect: configs/data/bbat5-detect-screen-20.yaml
+recipe:
+  source: handoff
+  task_ratio: {source: handoff, value: null}
+  optimizer: {source: handoff, value: null}
+  lr0: {source: derived, value: parent_lr0_times_0.1}
+  lrf: {source: handoff, value: null}
+  momentum: {source: handoff, value: null}
+  weight_decay: {source: handoff, value: null}
+  warmup_epochs: {source: local, value: 0.0}
+  nbs: {source: handoff, value: null}
+  losses: {source: handoff, value: null}
+  augmentation: {source: handoff, value: null}
+  freeze_policy: {source: handoff, value: null}
+  amp: {source: local, value: false}
+  deterministic: {source: local, value: true}
+  seed: {source: local, value: 0}
+  optimizer_steps: {source: local, value: 200}
+  validation_interval: {source: local, value: 50}
+adjustable:
+  batch: {source: handoff, value: null}
+  fraction: {source: local, value: 1.0}
+  scale: {source: handoff, value: null}
+  cache: {source: local, value: false}
+  imgsz: {source: handoff, value: null}
+  device: {source: local, value: "0"}
+  workers: {source: local, value: 8}
+  epochs: {source: local, value: 3}
+  patience: {source: local, value: 0}
+validation:
+  selection_backend: w8a8_qat_lite_simulation
+  simulation_only: true
+  screening_only: true
+  automatic_acceptance: false
+  prerequisite_stages: [Q0, Q1]
+  observer_update_steps: 50
+  report_deltas:
+    - q0_minus_q1
+    - q0_minus_q2_lite
+    - q2_lite_minus_q1
+  metrics: [map50, map50_95, macro_f1, micro_f1]
+transition:
+  mode: fresh
+  input: candidate_q1_calibrated_checkpoint
+  optimizer_state: new
+lineage:
+  require_all_hashes: true
+  require_screening_manifest_hash: true
+  effective_yaml_output: artifacts/effective-configs

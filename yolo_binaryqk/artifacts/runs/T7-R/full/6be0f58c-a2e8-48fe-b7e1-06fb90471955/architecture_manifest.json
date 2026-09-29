@@ -1,0 +1,46 @@
+{
+  "attention_class": [
+    "ResidualDualFullBasisAttention"
+  ],
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "construction": "parser-direct-concrete-attention",
+  "model_class": "DetectionModel",
+  "quantization_contract": {
+    "bias_initialization": "zeros",
+    "bias_parameterization": "axis_decomposed_relative_position",
+    "p8_scale": "none",
+    "qk_scale": "residual_basis_channel_per_token",
+    "v8_scale": "none"
+  },
+  "theoretical_cost": {
+    "binary_qk": 4,
+    "pv": 1,
+    "softmax": 1
+  },
+  "total_parameter_count": 20115708,
+  "trainable_parameter_count": 201980,
+  "trainable_parameter_names": [
+    "model.10.m.0.attn.threshold_q1",
+    "model.10.m.0.attn.threshold_q2",
+    "model.10.m.0.attn.threshold_k1",
+    "model.10.m.0.attn.threshold_k2",
+    "model.10.m.0.attn.relative_bias_h",
+    "model.10.m.0.attn.relative_bias_w",
+    "model.10.m.0.attn.basis_lambda",
+    "model.10.m.0.attn.qkv.conv.weight",
+    "model.10.m.0.attn.qkv.bn.weight",
+    "model.10.m.0.attn.qkv.bn.bias",
+    "model.10.m.0.attn.proj.conv.weight",
+    "model.10.m.0.attn.proj.bn.weight",
+    "model.10.m.0.attn.proj.bn.bias",
+    "model.10.m.0.attn.pe.conv.weight",
+    "model.10.m.0.attn.pe.bn.weight",
+    "model.10.m.0.attn.pe.bn.bias"
+  ],
+  "trainable_scope": "attention_only",
+  "variant_config_hash": "fff3546ce2a21ef467f89ff4f2418dd5a4d0cda0ab6fc1001af1ad460f04c031",
+  "variant_id": "T7-R"
+}

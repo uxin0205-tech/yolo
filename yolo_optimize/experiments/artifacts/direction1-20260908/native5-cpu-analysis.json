@@ -1,0 +1,5164 @@
+{
+  "status": "paused_for_analysis",
+  "parent_joint": 0.7111747389752653,
+  "parent_metrics": {
+    "coco/box/map50_95": 0.49802233647092214,
+    "coco/person/box/map50_95": 0.6203814884224489,
+    "bbat/box/map50_95": 0.6300355217570656,
+    "bbat/pose/map50_95": 0.9037171741129448,
+    "bbat/ball/box/map50_95": 0.5074370361873287,
+    "bbat/bat/box/map50_95": 0.7526340073268026,
+    "bbat/ball/pose/map50_95": 0.8599087151917765,
+    "bbat/bat/pose/map50_95": 0.9475256330341134
+  },
+  "snapshot_count": 5,
+  "epochs": [
+    {
+      "epoch": 1,
+      "banks": {
+        "live": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 105,
+              "exact_changed_element_count": 8420856,
+              "material_changed_element_count": 7818771,
+              "maxabs": 0.0014030933380126953,
+              "rel_l2": 0.0018445612384109472,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 238,
+                  "maxabs": 0.0014030933380126953,
+                  "rel_l2": 0.00012936933385285644
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65533,
+                  "material_changed_elements": 60903,
+                  "maxabs": 0.0013896673917770386,
+                  "rel_l2": 0.0036471225914358
+                },
+                {
+                  "name": "graph.model.13.cv1.conv.weight",
+                  "shape": [
+                    512,
+                    1024,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 524288,
+                  "material_changed_elements": 486559,
+                  "maxabs": 0.000628352165222168,
+                  "rel_l2": 0.005142545654280055
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460976,
+              "material_changed_element_count": 1411245,
+              "maxabs": 0.0018024593591690063,
+              "rel_l2": 0.0014429259334692523,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 19749,
+                  "maxabs": 0.0018024593591690063,
+                  "rel_l2": 0.0027460240017922227
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 255,
+                  "material_changed_elements": 247,
+                  "maxabs": 0.0015726089477539062,
+                  "rel_l2": 8.658168293211483e-05
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294907,
+                  "material_changed_elements": 284065,
+                  "maxabs": 0.0015497878193855286,
+                  "rel_l2": 0.013197370745180233
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7793,
+              "maxabs": 50.986328125,
+              "rel_l2": 0.07083677352431705,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 50.986328125,
+                  "rel_l2": 0.0709883414295169
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.8252534866333008,
+                  "rel_l2": 0.05012236475771104
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.7013454437255859,
+                  "rel_l2": 0.020748848298405943
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460954,
+              "material_changed_element_count": 1417224,
+              "maxabs": 0.004089832305908203,
+              "rel_l2": 0.0013692950967627386,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 63565,
+                  "maxabs": 0.004089832305908203,
+                  "rel_l2": 0.002527582216077756
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 19716,
+                  "maxabs": 0.0031417906284332275,
+                  "rel_l2": 0.0029429106882915296
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 19725,
+                  "maxabs": 0.002940922975540161,
+                  "rel_l2": 0.0028616300148506532
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7793,
+              "maxabs": 64.91278076171875,
+              "rel_l2": 0.06640935278860842,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 64.91278076171875,
+                  "rel_l2": 0.076372626095183
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 63.145233154296875,
+                  "rel_l2": 0.13471469425617613
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 226,
+                  "maxabs": 26.0472412109375,
+                  "rel_l2": 0.07351050709997778
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 168,
+              "exact_changed_element_count": 2301444,
+              "material_changed_element_count": 2222500,
+              "maxabs": 0.0020591020584106445,
+              "rel_l2": 0.004988600484617017,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 373,
+                  "maxabs": 0.0020591020584106445,
+                  "rel_l2": 0.001733197260767356
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.1.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    512,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 131072,
+                  "material_changed_elements": 127881,
+                  "maxabs": 0.0017407299019396305,
+                  "rel_l2": 0.010145989315126084
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.1.1.conv.weight",
+                  "shape": [
+                    64,
+                    64,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 36864,
+                  "material_changed_elements": 35669,
+                  "maxabs": 0.0016808751970529556,
+                  "rel_l2": 0.008349237318674136
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8703,
+              "material_changed_element_count": 8659,
+              "maxabs": 77.92498779296875,
+              "rel_l2": 0.0718067197043084,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 77.92498779296875,
+                  "rel_l2": 0.06884470406813273
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 36.081573486328125,
+                  "rel_l2": 0.08584123976566353
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 2.407001495361328,
+                  "rel_l2": 0.06452450671463525
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 94,
+              "material_changed_tensor_count": 94,
+              "exact_changed_element_count": 2248947,
+              "material_changed_element_count": 2180494,
+              "maxabs": 0.002390461042523384,
+              "rel_l2": 0.00551073375506215,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 64055,
+                  "maxabs": 0.002390461042523384,
+                  "rel_l2": 0.008321855573967352
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.1.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294912,
+                  "material_changed_elements": 288419,
+                  "maxabs": 0.002068236470222473,
+                  "rel_l2": 0.016393914400882354
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 64036,
+                  "maxabs": 0.002023281529545784,
+                  "rel_l2": 0.007713650159943784
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8665,
+              "maxabs": 78.957275390625,
+              "rel_l2": 0.07552874369540195,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 78.957275390625,
+                  "rel_l2": 0.06986580651793661
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 60.4371337890625,
+                  "rel_l2": 0.09489045215154009
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 2.288005828857422,
+                  "rel_l2": 0.06437808282350437
+                }
+              ]
+            }
+          }
+        },
+        "ema": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 72,
+              "exact_changed_element_count": 8418946,
+              "material_changed_element_count": 690,
+              "maxabs": 0.0001773834228515625,
+              "rel_l2": 3.222189386497237e-05,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.22.m.0.1.ffn.1.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 252,
+                  "material_changed_elements": 112,
+                  "maxabs": 0.0001773834228515625,
+                  "rel_l2": 4.293114464079334e-06
+                },
+                {
+                  "name": "graph.model.13.cv2.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 507,
+                  "material_changed_elements": 30,
+                  "maxabs": 9.5367431640625e-05,
+                  "rel_l2": 4.699712458497439e-06
+                },
+                {
+                  "name": "graph.model.13.cv1.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 504,
+                  "material_changed_elements": 25,
+                  "maxabs": 7.2479248046875e-05,
+                  "rel_l2": 4.1019493598944885e-06
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 60,
+              "exact_changed_element_count": 1460698,
+              "material_changed_element_count": 52483,
+              "maxabs": 0.00010967254638671875,
+              "rel_l2": 2.5895733256813336e-05,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.0.0.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 509,
+                  "material_changed_elements": 90,
+                  "maxabs": 0.00010967254638671875,
+                  "rel_l2": 5.276807831269451e-06
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.1.1.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 255,
+                  "material_changed_elements": 47,
+                  "maxabs": 8.869171142578125e-05,
+                  "rel_l2": 6.287810437126182e-06
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.bias",
+                  "shape": [
+                    80
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 80,
+                  "material_changed_elements": 66,
+                  "maxabs": 8.20159912109375e-05,
+                  "rel_l2": 4.292244797304121e-06
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 5762,
+              "maxabs": 0.99346923828125,
+              "rel_l2": 0.0018276540887031103,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.99346923828125,
+                  "rel_l2": 0.0018314040265318817
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.02736663818359375,
+                  "rel_l2": 0.0015339639578704923
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.016958236694335938,
+                  "rel_l2": 0.0004930817093222761
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 62,
+              "exact_changed_element_count": 1460681,
+              "material_changed_element_count": 75213,
+              "maxabs": 0.000102996826171875,
+              "rel_l2": 2.4413597590993144e-05,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.2.bias",
+                  "shape": [
+                    80
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 78,
+                  "material_changed_elements": 55,
+                  "maxabs": 0.000102996826171875,
+                  "rel_l2": 3.1979167833593735e-06
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 507,
+                  "material_changed_elements": 162,
+                  "maxabs": 0.00010204315185546875,
+                  "rel_l2": 4.5030913122629275e-06
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.0.0.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 507,
+                  "material_changed_elements": 166,
+                  "maxabs": 9.822845458984375e-05,
+                  "rel_l2": 4.448732180585385e-06
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 5928,
+              "maxabs": 2.13238525390625,
+              "rel_l2": 0.0018397084769677778,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 490,
+                  "maxabs": 2.13238525390625,
+                  "rel_l2": 0.004550467331997675
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 1.42279052734375,
+                  "rel_l2": 0.002036785287247619
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 14,
+                  "maxabs": 1.2513427734375,
+                  "rel_l2": 0.0035315387301945575
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 88,
+              "exact_changed_element_count": 2304771,
+              "material_changed_element_count": 128314,
+              "maxabs": 4.673004150390625e-05,
+              "rel_l2": 8.828796312010062e-05,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.2.bias",
+                  "shape": [
+                    2
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 2,
+                  "material_changed_elements": 2,
+                  "maxabs": 4.673004150390625e-05,
+                  "rel_l2": 4.389954106639534e-06
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 14,
+                  "maxabs": 3.8504600524902344e-05,
+                  "rel_l2": 3.373657002445229e-05
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.0.1.0.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 253,
+                  "material_changed_elements": 86,
+                  "maxabs": 3.743171691894531e-05,
+                  "rel_l2": 1.081620005781308e-05
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 7672,
+              "maxabs": 2.43463134765625,
+              "rel_l2": 0.0022079024592740488,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 2.43463134765625,
+                  "rel_l2": 0.0020894460559384835
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 1.1009521484375,
+                  "rel_l2": 0.0027516832511781625
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 502,
+                  "maxabs": 0.0670175552368164,
+                  "rel_l2": 0.0016265009815569847
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 82,
+              "exact_changed_element_count": 2250998,
+              "material_changed_element_count": 178575,
+              "maxabs": 6.008148193359375e-05,
+              "rel_l2": 9.761927048522675e-05,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.2.bias",
+                  "shape": [
+                    2
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 2,
+                  "material_changed_elements": 2,
+                  "maxabs": 6.008148193359375e-05,
+                  "rel_l2": 4.874028837923332e-06
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.2.bias",
+                  "shape": [
+                    2
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 2,
+                  "material_changed_elements": 2,
+                  "maxabs": 5.7697296142578125e-05,
+                  "rel_l2": 5.69470698842099e-06
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65521,
+                  "material_changed_elements": 9222,
+                  "maxabs": 3.976374864578247e-05,
+                  "rel_l2": 0.00015894534934582244
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8703,
+              "material_changed_element_count": 7710,
+              "maxabs": 2.587890625,
+              "rel_l2": 0.0024106350713270198,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 2.587890625,
+                  "rel_l2": 0.002215103966498541
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 1.90277099609375,
+                  "rel_l2": 0.003073469556821577
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 502,
+                  "maxabs": 0.06597137451171875,
+                  "rel_l2": 0.0015793771567189723
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ema_updates": 27060,
+      "scheduler_step": 463,
+      "criterion_state": {
+        "schema_version": 1,
+        "native": {
+          "detect": {
+            "end2end": true,
+            "updates": 52,
+            "o2m": 0.49411764705882355,
+            "o2o": 0.5058823529411764,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          },
+          "pose": {
+            "end2end": true,
+            "updates": 60,
+            "o2m": 0.46929133858267713,
+            "o2o": 0.5307086614173229,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          }
+        },
+        "mu": 0.0,
+        "calibration": null
+      },
+      "ema_joint": 0.7112260043801761,
+      "live_joint": 0.7071994219042768,
+      "ema_delta": {
+        "coco/box/map50_95": -3.988887488581838e-05,
+        "coco/person/box/map50_95": 7.470232862061277e-05,
+        "bbat/box/map50_95": -0.000381818400498668,
+        "bbat/pose/map50_95": 0.0003016659856591719,
+        "bbat/ball/box/map50_95": -0.0005105163865625206,
+        "bbat/bat/box/map50_95": -0.00025312041443514843,
+        "bbat/ball/pose/map50_95": 0.0005541013475960366,
+        "bbat/bat/pose/map50_95": 4.923062372175213e-05
+      },
+      "live_delta": {
+        "coco/box/map50_95": -0.0017143696340631287,
+        "coco/person/box/map50_95": 9.546174657482087e-05,
+        "bbat/box/map50_95": -0.007615816460297853,
+        "bbat/pose/map50_95": -0.005320930503578403,
+        "bbat/ball/box/map50_95": -0.0100511445632398,
+        "bbat/bat/box/map50_95": -0.005180488357356183,
+        "bbat/ball/pose/map50_95": -0.006467268762647138,
+        "bbat/bat/pose/map50_95": -0.004174592244510444
+      },
+      "gradients": {
+        "samples": [
+          {
+            "detect_norm": 86.16291226627615,
+            "pose_norm": 50.003176337321186,
+            "cosine_similarity": -0.03344812653937726
+          },
+          {
+            "detect_norm": 93.09098258755431,
+            "pose_norm": 90.67865884082488,
+            "cosine_similarity": 0.025064600852218934
+          },
+          {
+            "detect_norm": 84.51919285709,
+            "pose_norm": 142.24675042299054,
+            "cosine_similarity": -0.051396808267639045
+          },
+          {
+            "detect_norm": 69.69819303481417,
+            "pose_norm": 65.81387380019434,
+            "cosine_similarity": 0.023453800346559167
+          },
+          {
+            "detect_norm": 73.95927210899009,
+            "pose_norm": 85.65232099812367,
+            "cosine_similarity": -0.03419398525187105
+          }
+        ],
+        "cosine": {
+          "count": 5,
+          "min": -0.051396808267639045,
+          "median": -0.03344812653937726,
+          "max": 0.025064600852218934,
+          "mean": -0.01410410377202185
+        },
+        "negative_fraction": 0.6,
+        "pose_projection_fraction": {
+          "count": 5,
+          "min": 0,
+          "median": 0.03344812653937726,
+          "max": 0.051396808267639045,
+          "mean": 0.02380778401177747
+        },
+        "pose_to_detect_norm_ratio": {
+          "count": 5,
+          "min": 0.5803329416581506,
+          "median": 0.9740863864611099,
+          "max": 1.6830112263791925,
+          "mean": 1.0679602370541699
+        },
+        "preclip_norm": {
+          "count": 463,
+          "min": 101.85501098632812,
+          "median": 136.802490234375,
+          "max": 916.0906372070312,
+          "mean": 141.5243390208959
+        },
+        "clipped_fraction": 1.0,
+        "amp_retries": 7
+      }
+    },
+    {
+      "epoch": 2,
+      "banks": {
+        "live": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 105,
+              "exact_changed_element_count": 8420899,
+              "material_changed_element_count": 8092729,
+              "maxabs": 0.0037049055099487305,
+              "rel_l2": 0.0034448711524820977,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 243,
+                  "maxabs": 0.0037049055099487305,
+                  "rel_l2": 0.00029680760083370647
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 63002,
+                  "maxabs": 0.0035104304552078247,
+                  "rel_l2": 0.006944048450518799
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 233,
+                  "maxabs": 0.0015401840209960938,
+                  "rel_l2": 0.00011355602832917567
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460982,
+              "material_changed_element_count": 1432719,
+              "maxabs": 0.004149287939071655,
+              "rel_l2": 0.0026507988537560236,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 20041,
+                  "maxabs": 0.004149287939071655,
+                  "rel_l2": 0.004955666571453662
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294910,
+                  "material_changed_elements": 288719,
+                  "maxabs": 0.0031872435356490314,
+                  "rel_l2": 0.024625524928165287
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 254,
+                  "maxabs": 0.0026807785034179688,
+                  "rel_l2": 0.00016860093744013594
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7831,
+              "maxabs": 61.139495849609375,
+              "rel_l2": 0.09942018554667,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 61.139495849609375,
+                  "rel_l2": 0.09960643075641464
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 1.4734621047973633,
+                  "rel_l2": 0.08553966487250915
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 1.3904876708984375,
+                  "rel_l2": 0.04657620470773499
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460963,
+              "material_changed_element_count": 1436738,
+              "maxabs": 0.011115670204162598,
+              "rel_l2": 0.0026182325307818003,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 64498,
+                  "maxabs": 0.011115670204162598,
+                  "rel_l2": 0.0054883336165264494
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv.weight",
+                  "shape": [
+                    512,
+                    1,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 4608,
+                  "material_changed_elements": 4538,
+                  "maxabs": 0.007176756858825684,
+                  "rel_l2": 0.010910465788677513
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.1.1.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 252,
+                  "maxabs": 0.006762504577636719,
+                  "rel_l2": 0.000321401649549516
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7805,
+              "maxabs": 91.4410400390625,
+              "rel_l2": 0.0862862420986629,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 91.4410400390625,
+                  "rel_l2": 0.10000161319076346
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 503,
+                  "maxabs": 76.94863891601562,
+                  "rel_l2": 0.16428639197541553
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 232,
+                  "maxabs": 26.158721923828125,
+                  "rel_l2": 0.0738251290831929
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 168,
+              "exact_changed_element_count": 2301972,
+              "material_changed_element_count": 2257020,
+              "maxabs": 0.00481867790222168,
+              "rel_l2": 0.009274526999855115,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 372,
+                  "maxabs": 0.00481867790222168,
+                  "rel_l2": 0.0034874780779387826
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.2.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 382,
+                  "maxabs": 0.003793954849243164,
+                  "rel_l2": 0.0068438835826303895
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294018,
+                  "material_changed_elements": 287599,
+                  "maxabs": 0.00346019072458148,
+                  "rel_l2": 0.03187351015873447
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8669,
+              "maxabs": 129.2425537109375,
+              "rel_l2": 0.10657201905259908,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 129.2425537109375,
+                  "rel_l2": 0.10347312881088316
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 52.68890380859375,
+                  "rel_l2": 0.12179500735732633
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 7.738578796386719,
+                  "rel_l2": 0.12710667458012648
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 96,
+              "exact_changed_element_count": 2249708,
+              "material_changed_element_count": 2209959,
+              "maxabs": 0.005499064922332764,
+              "rel_l2": 0.010033751329428407,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 372,
+                  "maxabs": 0.005499064922332764,
+                  "rel_l2": 0.004457894465014667
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 64699,
+                  "maxabs": 0.0042107366025447845,
+                  "rel_l2": 0.014630010614616157
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 293972,
+                  "material_changed_elements": 287436,
+                  "maxabs": 0.0037190932780504227,
+                  "rel_l2": 0.032333763581801955
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8665,
+              "maxabs": 89.79510498046875,
+              "rel_l2": 0.1072641326230119,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 89.79510498046875,
+                  "rel_l2": 0.10239901878135815
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 75.4111328125,
+                  "rel_l2": 0.124993192082556
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 9.073028564453125,
+                  "rel_l2": 0.13248863731767319
+                }
+              ]
+            }
+          }
+        },
+        "ema": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 104,
+              "exact_changed_element_count": 8420535,
+              "material_changed_element_count": 1956257,
+              "maxabs": 0.00034999847412109375,
+              "rel_l2": 0.0001365245218098576,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.22.m.0.1.ffn.1.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 255,
+                  "material_changed_elements": 134,
+                  "maxabs": 0.00034999847412109375,
+                  "rel_l2": 6.729954081590528e-06
+                },
+                {
+                  "name": "graph.model.13.cv2.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 69,
+                  "maxabs": 0.00018739700317382812,
+                  "rel_l2": 7.436079012042703e-06
+                },
+                {
+                  "name": "graph.model.13.cv1.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 510,
+                  "material_changed_elements": 75,
+                  "maxabs": 0.00018215179443359375,
+                  "rel_l2": 7.0072541335860165e-06
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 63,
+              "exact_changed_element_count": 1460916,
+              "material_changed_element_count": 831024,
+              "maxabs": 0.00021457672119140625,
+              "rel_l2": 0.00010642995646479073,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 182,
+                  "maxabs": 0.00021457672119140625,
+                  "rel_l2": 9.170336674406282e-06
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.1.0.0.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 511,
+                  "material_changed_elements": 352,
+                  "maxabs": 0.00018167495727539062,
+                  "rel_l2": 1.0857923499453775e-05
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20479,
+                  "material_changed_elements": 11014,
+                  "maxabs": 0.00015223026275634766,
+                  "rel_l2": 0.00020620792629204074
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 6633,
+              "maxabs": 3.16107177734375,
+              "rel_l2": 0.005627486550797997,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 3.16107177734375,
+                  "rel_l2": 0.005639025883127572
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.08357906341552734,
+                  "rel_l2": 0.004423792944222552
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.055850982666015625,
+                  "rel_l2": 0.0019723499464927336
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 64,
+              "exact_changed_element_count": 1460905,
+              "material_changed_element_count": 907844,
+              "maxabs": 0.0004115104675292969,
+              "rel_l2": 0.00010324297681276083,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65527,
+                  "material_changed_elements": 40407,
+                  "maxabs": 0.0004115104675292969,
+                  "rel_l2": 0.0002094072277891619
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.1.1.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 158,
+                  "maxabs": 0.0003376007080078125,
+                  "rel_l2": 1.5207995657126448e-05
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv.weight",
+                  "shape": [
+                    512,
+                    1,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 4608,
+                  "material_changed_elements": 3091,
+                  "maxabs": 0.0002474784851074219,
+                  "rel_l2": 0.0004186467923622519
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 6698,
+              "maxabs": 4.69244384765625,
+              "rel_l2": 0.005224772323952484,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 4.69244384765625,
+                  "rel_l2": 0.0060286715062175195
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 495,
+                  "maxabs": 4.46722412109375,
+                  "rel_l2": 0.00956700201880392
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 49,
+                  "maxabs": 2.43426513671875,
+                  "rel_l2": 0.006869981425627545
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 166,
+              "exact_changed_element_count": 2305066,
+              "material_changed_element_count": 1382361,
+              "maxabs": 0.00020056962966918945,
+              "rel_l2": 0.00036738046070916363,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 383,
+                  "material_changed_elements": 153,
+                  "maxabs": 0.00020056962966918945,
+                  "rel_l2": 0.00014551888209468332
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.2.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 291,
+                  "maxabs": 0.0001513659954071045,
+                  "rel_l2": 0.0003127116543336178
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294885,
+                  "material_changed_elements": 193588,
+                  "maxabs": 0.00013635866343975067,
+                  "rel_l2": 0.0011577990265167874
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8259,
+              "maxabs": 7.06890869140625,
+              "rel_l2": 0.006326204210403851,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 7.06890869140625,
+                  "rel_l2": 0.006061682207028125
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 3.166778564453125,
+                  "rel_l2": 0.007583765339113617
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 502,
+                  "maxabs": 0.21896743774414062,
+                  "rel_l2": 0.005342762337483984
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 96,
+              "exact_changed_element_count": 2251313,
+              "material_changed_element_count": 1447943,
+              "maxabs": 0.00019538775086402893,
+              "rel_l2": 0.00040736887527963444,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65534,
+                  "material_changed_elements": 46141,
+                  "maxabs": 0.00019538775086402893,
+                  "rel_l2": 0.000628608489044992
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 220,
+                  "maxabs": 0.00018107891082763672,
+                  "rel_l2": 0.00019096162434732876
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65531,
+                  "material_changed_elements": 48185,
+                  "maxabs": 0.00016235746443271637,
+                  "rel_l2": 0.0006512236178881997
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8299,
+              "maxabs": 6.78515625,
+              "rel_l2": 0.006682315598208332,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 6.78515625,
+                  "rel_l2": 0.006214896456846207
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 5.20013427734375,
+                  "rel_l2": 0.008302586798677859
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 501,
+                  "maxabs": 0.2663307189941406,
+                  "rel_l2": 0.005468430657152654
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ema_updates": 27523,
+      "scheduler_step": 926,
+      "criterion_state": {
+        "schema_version": 1,
+        "native": {
+          "detect": {
+            "end2end": true,
+            "updates": 53,
+            "o2m": 0.4882352941176471,
+            "o2o": 0.5117647058823529,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          },
+          "pose": {
+            "end2end": true,
+            "updates": 61,
+            "o2m": 0.46377952755905516,
+            "o2o": 0.5362204724409448,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          }
+        },
+        "mu": 0.0,
+        "calibration": null
+      },
+      "ema_joint": 0.7110669309905167,
+      "live_joint": 0.7052167288454597,
+      "ema_delta": {
+        "coco/box/map50_95": 0.00021002085563148754,
+        "coco/person/box/map50_95": -7.295001726992378e-05,
+        "bbat/box/map50_95": -0.0009039754864413885,
+        "bbat/pose/map50_95": 0.00011393236216827862,
+        "bbat/ball/box/map50_95": -0.0010199402096159327,
+        "bbat/bat/box/map50_95": -0.0007880107632672884,
+        "bbat/ball/pose/map50_95": 0.00028272056718459115,
+        "bbat/bat/pose/map50_95": -5.4855842848255953e-05
+      },
+      "live_delta": {
+        "coco/box/map50_95": -0.002866228758519218,
+        "coco/person/box/map50_95": -0.0005507945921551238,
+        "bbat/box/map50_95": -0.015371699610023937,
+        "bbat/pose/map50_95": -0.005500663844164699,
+        "bbat/ball/box/map50_95": -0.026608233698474093,
+        "bbat/bat/box/map50_95": -0.0041351655215741134,
+        "bbat/ball/pose/map50_95": -0.008656028911637192,
+        "bbat/bat/pose/map50_95": -0.002345298776692206
+      },
+      "gradients": {
+        "samples": [
+          {
+            "detect_norm": 83.01700067879926,
+            "pose_norm": 75.79812094093298,
+            "cosine_similarity": 0.028946761139879044
+          },
+          {
+            "detect_norm": 84.97593264885437,
+            "pose_norm": 92.92018722830223,
+            "cosine_similarity": -0.03871345662735775
+          },
+          {
+            "detect_norm": 106.21757539259576,
+            "pose_norm": 68.6615494018354,
+            "cosine_similarity": -0.027721754158192904
+          },
+          {
+            "detect_norm": 77.0640477832511,
+            "pose_norm": 64.14354470477193,
+            "cosine_similarity": -0.012201303454685406
+          },
+          {
+            "detect_norm": 71.33759561067184,
+            "pose_norm": 94.90539006958639,
+            "cosine_similarity": -0.0044151136035873685
+          }
+        ],
+        "cosine": {
+          "count": 5,
+          "min": -0.03871345662735775,
+          "median": -0.012201303454685406,
+          "max": 0.028946761139879044,
+          "mean": -0.010820973340788877
+        },
+        "negative_fraction": 0.8,
+        "pose_projection_fraction": {
+          "count": 5,
+          "min": 0,
+          "median": 0.012201303454685406,
+          "max": 0.03871345662735775,
+          "mean": 0.016610325568764687
+        },
+        "pose_to_detect_norm_ratio": {
+          "count": 5,
+          "min": 0.646423618201152,
+          "median": 0.9130433564349448,
+          "max": 1.3303699018332051,
+          "mean": 0.9631331763513276
+        },
+        "preclip_norm": {
+          "count": 463,
+          "min": 106.54940032958984,
+          "median": 140.251708984375,
+          "max": 474.11505126953125,
+          "mean": 143.41053785155196
+        },
+        "clipped_fraction": 1.0,
+        "amp_retries": 0
+      }
+    },
+    {
+      "epoch": 3,
+      "banks": {
+        "live": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 105,
+              "exact_changed_element_count": 8420927,
+              "material_changed_element_count": 8164861,
+              "maxabs": 0.0055779218673706055,
+              "rel_l2": 0.004467147043003796,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 239,
+                  "maxabs": 0.0055779218673706055,
+                  "rel_l2": 0.0004180510219730661
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 63543,
+                  "maxabs": 0.005131140351295471,
+                  "rel_l2": 0.009143603018626895
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 241,
+                  "maxabs": 0.0022449493408203125,
+                  "rel_l2": 0.00014499778766296367
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460986,
+              "material_changed_element_count": 1438677,
+              "maxabs": 0.005847185850143433,
+              "rel_l2": 0.0034307754095617643,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 20147,
+                  "maxabs": 0.005847185850143433,
+                  "rel_l2": 0.006671749976639024
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    512,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 131072,
+                  "material_changed_elements": 129539,
+                  "maxabs": 0.004992440342903137,
+                  "rel_l2": 0.01825064496168663
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 252,
+                  "maxabs": 0.0046749114990234375,
+                  "rel_l2": 0.00024753597847563397
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7839,
+              "maxabs": 59.196929931640625,
+              "rel_l2": 0.11713044726039173,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 59.196929931640625,
+                  "rel_l2": 0.11733894008933816
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 2.3803634643554688,
+                  "rel_l2": 0.06679776539134272
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 1.815627098083496,
+                  "rel_l2": 0.09847913658034058
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460975,
+              "material_changed_element_count": 1442164,
+              "maxabs": 0.018086552619934082,
+              "rel_l2": 0.0034495760689031863,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 64719,
+                  "maxabs": 0.018086552619934082,
+                  "rel_l2": 0.008046085271619185
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv.weight",
+                  "shape": [
+                    512,
+                    1,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 4608,
+                  "material_changed_elements": 4562,
+                  "maxabs": 0.011431753635406494,
+                  "rel_l2": 0.0150306043185159
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.1.1.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 253,
+                  "maxabs": 0.010412216186523438,
+                  "rel_l2": 0.0005002854974854785
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7821,
+              "maxabs": 82.01629638671875,
+              "rel_l2": 0.1077569011450842,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 82.01629638671875,
+                  "rel_l2": 0.12761056682087898
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 58.7723388671875,
+                  "rel_l2": 0.1269682300101567
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 224,
+                  "maxabs": 26.2786865234375,
+                  "rel_l2": 0.07416369211497832
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 168,
+              "exact_changed_element_count": 2302096,
+              "material_changed_element_count": 2266695,
+              "maxabs": 0.007863402366638184,
+              "rel_l2": 0.012146622915915289,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 375,
+                  "maxabs": 0.007863402366638184,
+                  "rel_l2": 0.005132272177334889
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.2.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 380,
+                  "maxabs": 0.005681842565536499,
+                  "rel_l2": 0.008366270043232668
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294106,
+                  "material_changed_elements": 288809,
+                  "maxabs": 0.005166102200746536,
+                  "rel_l2": 0.04075967150017966
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8674,
+              "maxabs": 142.6556396484375,
+              "rel_l2": 0.1388136798405088,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 142.6556396484375,
+                  "rel_l2": 0.1353801693572999
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 68.55410766601562,
+                  "rel_l2": 0.15604552535228797
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 5.209859848022461,
+                  "rel_l2": 0.13469257618295116
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 96,
+              "exact_changed_element_count": 2249844,
+              "material_changed_element_count": 2217701,
+              "maxabs": 0.008404791355133057,
+              "rel_l2": 0.01296082298617225,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 372,
+                  "maxabs": 0.008404791355133057,
+                  "rel_l2": 0.005979428792912235
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 64855,
+                  "maxabs": 0.005061697214841843,
+                  "rel_l2": 0.018241783174753782
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.1.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294912,
+                  "material_changed_elements": 291625,
+                  "maxabs": 0.004893162986263633,
+                  "rel_l2": 0.03395565319268515
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8666,
+              "maxabs": 137.27069091796875,
+              "rel_l2": 0.1398272894341039,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 137.27069091796875,
+                  "rel_l2": 0.1336026264579503
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 101.2696533203125,
+                  "rel_l2": 0.1626110309060944
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 6.432323455810547,
+                  "rel_l2": 0.13692486095687564
+                }
+              ]
+            }
+          }
+        },
+        "ema": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 105,
+              "exact_changed_element_count": 8420843,
+              "material_changed_element_count": 4750986,
+              "maxabs": 0.00046634674072265625,
+              "rel_l2": 0.000288477887566476,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.22.m.0.1.ffn.1.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 251,
+                  "material_changed_elements": 148,
+                  "maxabs": 0.00046634674072265625,
+                  "rel_l2": 8.517486582860692e-06
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 255,
+                  "material_changed_elements": 134,
+                  "maxabs": 0.0003521442413330078,
+                  "rel_l2": 2.820774587392017e-05
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65534,
+                  "material_changed_elements": 36465,
+                  "maxabs": 0.00032660365104675293,
+                  "rel_l2": 0.000590428724930489
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460954,
+              "material_changed_element_count": 1135477,
+              "maxabs": 0.00038561224937438965,
+              "rel_l2": 0.0002232162627312291,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20479,
+                  "material_changed_elements": 15580,
+                  "maxabs": 0.00038561224937438965,
+                  "rel_l2": 0.0004382095266601772
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 219,
+                  "maxabs": 0.00033473968505859375,
+                  "rel_l2": 1.760979773850954e-05
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.1.0.0.bn.bias",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 444,
+                  "maxabs": 0.0003209114074707031,
+                  "rel_l2": 2.16366454675608e-05
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7072,
+              "maxabs": 5.96697998046875,
+              "rel_l2": 0.010673096968853858,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 5.96697998046875,
+                  "rel_l2": 0.010694503553746668
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.15246963500976562,
+                  "rel_l2": 0.008353516661615155
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.13479232788085938,
+                  "rel_l2": 0.004387739836646921
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 65,
+              "exact_changed_element_count": 1460940,
+              "material_changed_element_count": 1185165,
+              "maxabs": 0.001047968864440918,
+              "rel_l2": 0.00022060224391045666,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65533,
+                  "material_changed_elements": 53310,
+                  "maxabs": 0.001047968864440918,
+                  "rel_l2": 0.0004920193633858025
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.1.1.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 210,
+                  "maxabs": 0.0007839202880859375,
+                  "rel_l2": 3.3698175246492876e-05
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv.weight",
+                  "shape": [
+                    512,
+                    1,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 4608,
+                  "material_changed_elements": 3884,
+                  "maxabs": 0.0006621479988098145,
+                  "rel_l2": 0.0009302461135950864
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7095,
+              "maxabs": 8.835205078125,
+              "rel_l2": 0.009680111468327998,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 8.835205078125,
+                  "rel_l2": 0.011294547983655666
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 496,
+                  "maxabs": 7.369415283203125,
+                  "rel_l2": 0.01575874984329735
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 88,
+                  "maxabs": 3.527618408203125,
+                  "rel_l2": 0.009955642310724662
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 166,
+              "exact_changed_element_count": 2305141,
+              "material_changed_element_count": 1833664,
+              "maxabs": 0.00047791004180908203,
+              "rel_l2": 0.0007875504348879704,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 242,
+                  "maxabs": 0.00047791004180908203,
+                  "rel_l2": 0.00032431021986768137
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.2.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 346,
+                  "maxabs": 0.00036722421646118164,
+                  "rel_l2": 0.0006233317086423381
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294899,
+                  "material_changed_elements": 246542,
+                  "maxabs": 0.00031400052830576897,
+                  "rel_l2": 0.00264387761850268
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8438,
+              "maxabs": 12.5906982421875,
+              "rel_l2": 0.011693657139840875,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 12.5906982421875,
+                  "rel_l2": 0.011271315700248644
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 5.809295654296875,
+                  "rel_l2": 0.013734737792747108
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 502,
+                  "maxabs": 0.5162467956542969,
+                  "rel_l2": 0.01089079102329109
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 96,
+              "exact_changed_element_count": 2251362,
+              "material_changed_element_count": 1847340,
+              "maxabs": 0.0004976987838745117,
+              "rel_l2": 0.0008613601317748593,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 296,
+                  "maxabs": 0.0004976987838745117,
+                  "rel_l2": 0.00040754108376366124
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65535,
+                  "material_changed_elements": 55787,
+                  "maxabs": 0.00039223581552505493,
+                  "rel_l2": 0.0012570948761911655
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294891,
+                  "material_changed_elements": 252933,
+                  "maxabs": 0.0003056321293115616,
+                  "rel_l2": 0.002865622542576979
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8480,
+              "maxabs": 11.771240234375,
+              "rel_l2": 0.012175218886036213,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 11.771240234375,
+                  "rel_l2": 0.011445529151047953
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 9.12249755859375,
+                  "rel_l2": 0.014757676317030038
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 502,
+                  "maxabs": 0.6189651489257812,
+                  "rel_l2": 0.011223815702880334
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ema_updates": 27986,
+      "scheduler_step": 1389,
+      "criterion_state": {
+        "schema_version": 1,
+        "native": {
+          "detect": {
+            "end2end": true,
+            "updates": 54,
+            "o2m": 0.48235294117647065,
+            "o2o": 0.5176470588235293,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          },
+          "pose": {
+            "end2end": true,
+            "updates": 62,
+            "o2m": 0.4582677165354331,
+            "o2o": 0.5417322834645669,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          }
+        },
+        "mu": 0.0,
+        "calibration": null
+      },
+      "ema_joint": 0.7110187195653098,
+      "live_joint": 0.7059868092962232,
+      "ema_delta": {
+        "coco/box/map50_95": 0.0005758442400723984,
+        "coco/person/box/map50_95": 0.0004330670707727302,
+        "bbat/box/map50_95": -0.001011985270421678,
+        "bbat/pose/map50_95": -0.00038851154510033403,
+        "bbat/ball/box/map50_95": -0.0015126882706333333,
+        "bbat/bat/box/map50_95": -0.0005112822702102449,
+        "bbat/ball/pose/map50_95": -0.0004731695659773161,
+        "bbat/bat/pose/map50_95": -0.00030385352422312994
+      },
+      "live_delta": {
+        "coco/box/map50_95": -0.002380366627996011,
+        "coco/person/box/map50_95": -0.00018275439068038413,
+        "bbat/box/map50_95": -0.0059853231288896636,
+        "bbat/pose/map50_95": -0.008695602123822255,
+        "bbat/ball/box/map50_95": -0.010382145433564027,
+        "bbat/bat/box/map50_95": -0.0015885008242159104,
+        "bbat/ball/pose/map50_95": -0.010927718856738489,
+        "bbat/bat/pose/map50_95": -0.006463485390906132
+      },
+      "gradients": {
+        "samples": [
+          {
+            "detect_norm": 84.21859552490031,
+            "pose_norm": 105.62314940574916,
+            "cosine_similarity": -0.05752940377409245
+          },
+          {
+            "detect_norm": 98.4187165099371,
+            "pose_norm": 71.44809696083937,
+            "cosine_similarity": -0.013714050538382863
+          },
+          {
+            "detect_norm": 71.14962708189422,
+            "pose_norm": 67.85809734680444,
+            "cosine_similarity": -0.007117820744336454
+          },
+          {
+            "detect_norm": 87.52464716400596,
+            "pose_norm": 79.81258436764142,
+            "cosine_similarity": -0.028449625146951957
+          }
+        ],
+        "cosine": {
+          "count": 4,
+          "min": -0.05752940377409245,
+          "median": -0.02108183784266741,
+          "max": -0.007117820744336454,
+          "mean": -0.026702725050940932
+        },
+        "negative_fraction": 1.0,
+        "pose_projection_fraction": {
+          "count": 4,
+          "min": 0.007117820744336454,
+          "median": 0.02108183784266741,
+          "max": 0.05752940377409245,
+          "mean": 0.026702725050940932
+        },
+        "pose_to_detect_norm_ratio": {
+          "count": 4,
+          "min": 0.7259604625470342,
+          "median": 0.9328124396930237,
+          "max": 1.2541547237571817,
+          "mean": 0.9614350164225658
+        },
+        "preclip_norm": {
+          "count": 463,
+          "min": 107.59272766113281,
+          "median": 138.45614624023438,
+          "max": 487.0528869628906,
+          "mean": 141.66641662136269
+        },
+        "clipped_fraction": 1.0,
+        "amp_retries": 0
+      }
+    },
+    {
+      "epoch": 4,
+      "banks": {
+        "live": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 105,
+              "exact_changed_element_count": 8420939,
+              "material_changed_element_count": 8200297,
+              "maxabs": 0.007075846195220947,
+              "rel_l2": 0.0052263445270099235,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 247,
+                  "maxabs": 0.007075846195220947,
+                  "rel_l2": 0.0005175116502693337
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 63831,
+                  "maxabs": 0.006414070725440979,
+                  "rel_l2": 0.010718002692550528
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 239,
+                  "maxabs": 0.0026865005493164062,
+                  "rel_l2": 0.00015758805507061708
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460986,
+              "material_changed_element_count": 1441610,
+              "maxabs": 0.007306098937988281,
+              "rel_l2": 0.004028040134829758,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 252,
+                  "maxabs": 0.007306098937988281,
+                  "rel_l2": 0.00033633757965363686
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    512,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 131072,
+                  "material_changed_elements": 129768,
+                  "maxabs": 0.006582938134670258,
+                  "rel_l2": 0.02154225425269676
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 20208,
+                  "maxabs": 0.0061730146408081055,
+                  "rel_l2": 0.008114242633684755
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7847,
+              "maxabs": 82.77264404296875,
+              "rel_l2": 0.15487775648377491,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 82.77264404296875,
+                  "rel_l2": 0.15517637723452607
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 2.733976364135742,
+                  "rel_l2": 0.12629913057230358
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 2.065580368041992,
+                  "rel_l2": 0.07224643088848746
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460976,
+              "material_changed_element_count": 1444790,
+              "maxabs": 0.02427852153778076,
+              "rel_l2": 0.004103939950162718,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 64810,
+                  "maxabs": 0.02427852153778076,
+                  "rel_l2": 0.010252660863771747
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv.weight",
+                  "shape": [
+                    512,
+                    1,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 4608,
+                  "material_changed_elements": 4575,
+                  "maxabs": 0.015010952949523926,
+                  "rel_l2": 0.017964600729609037
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 254,
+                  "maxabs": 0.013715744018554688,
+                  "rel_l2": 0.00041403772317792794
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7825,
+              "maxabs": 122.8438720703125,
+              "rel_l2": 0.13774917110588508,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 122.8438720703125,
+                  "rel_l2": 0.16392005732755374
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 503,
+                  "maxabs": 63.925323486328125,
+                  "rel_l2": 0.13823246540299947
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 230,
+                  "maxabs": 24.732635498046875,
+                  "rel_l2": 0.0698004294214363
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 168,
+              "exact_changed_element_count": 2302112,
+              "material_changed_element_count": 2271547,
+              "maxabs": 0.010386884212493896,
+              "rel_l2": 0.014358805893623686,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 376,
+                  "maxabs": 0.010386884212493896,
+                  "rel_l2": 0.006507080973462639
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.2.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 381,
+                  "maxabs": 0.006985664367675781,
+                  "rel_l2": 0.010385730718834956
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294122,
+                  "material_changed_elements": 289564,
+                  "maxabs": 0.006624527275562286,
+                  "rel_l2": 0.04970575673609963
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8669,
+              "maxabs": 144.38958740234375,
+              "rel_l2": 0.16443405611040446,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 144.38958740234375,
+                  "rel_l2": 0.1601937119306884
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 73.73806762695312,
+                  "rel_l2": 0.18570474696107256
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 8.376832962036133,
+                  "rel_l2": 0.17455826470633268
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 96,
+              "exact_changed_element_count": 2249888,
+              "material_changed_element_count": 2222363,
+              "maxabs": 0.011089026927947998,
+              "rel_l2": 0.01541683230514121,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 377,
+                  "maxabs": 0.011089026927947998,
+                  "rel_l2": 0.007099934864469751
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 64932,
+                  "maxabs": 0.006277719512581825,
+                  "rel_l2": 0.0221045792031275
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.1.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294912,
+                  "material_changed_elements": 292152,
+                  "maxabs": 0.006270711775869131,
+                  "rel_l2": 0.040448456490804446
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8663,
+              "maxabs": 143.33203125,
+              "rel_l2": 0.16774070733017235,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 143.33203125,
+                  "rel_l2": 0.16190747434850233
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 103.104248046875,
+                  "rel_l2": 0.18983322180800227
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 9.841501235961914,
+                  "rel_l2": 0.1799100115073794
+                }
+              ]
+            }
+          }
+        },
+        "ema": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 105,
+              "exact_changed_element_count": 8420938,
+              "material_changed_element_count": 6069507,
+              "maxabs": 0.0006324648857116699,
+              "rel_l2": 0.0004704709645485746,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 255,
+                  "material_changed_elements": 167,
+                  "maxabs": 0.0006324648857116699,
+                  "rel_l2": 4.7950506814385706e-05
+                },
+                {
+                  "name": "graph.model.22.m.0.1.ffn.1.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 254,
+                  "material_changed_elements": 181,
+                  "maxabs": 0.0005807876586914062,
+                  "rel_l2": 1.0584315514680198e-05
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65534,
+                  "material_changed_elements": 46716,
+                  "maxabs": 0.0005747973918914795,
+                  "rel_l2": 0.0009718096894018148
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460967,
+              "material_changed_element_count": 1255529,
+              "maxabs": 0.0006507039070129395,
+              "rel_l2": 0.00036388409402945705,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 17440,
+                  "maxabs": 0.0006507039070129395,
+                  "rel_l2": 0.0007295841148370927
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 255,
+                  "material_changed_elements": 231,
+                  "maxabs": 0.0005893707275390625,
+                  "rel_l2": 2.8763558553981444e-05
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    512,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 131070,
+                  "material_changed_elements": 117143,
+                  "maxabs": 0.0004896372556686401,
+                  "rel_l2": 0.0019413749690276947
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7306,
+              "maxabs": 9.079833984375,
+              "rel_l2": 0.01693355995055145,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 9.079833984375,
+                  "rel_l2": 0.016967209410288807
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.2555112838745117,
+                  "rel_l2": 0.013459723687440805
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.2279071807861328,
+                  "rel_l2": 0.0071750795035789945
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460960,
+              "material_changed_element_count": 1289448,
+              "maxabs": 0.001967787742614746,
+              "rel_l2": 0.0003642293066198867,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65535,
+                  "material_changed_elements": 57874,
+                  "maxabs": 0.001967787742614746,
+                  "rel_l2": 0.000869174190393593
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.1.1.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 225,
+                  "maxabs": 0.0012617111206054688,
+                  "rel_l2": 5.7002191050394804e-05
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv.weight",
+                  "shape": [
+                    512,
+                    1,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 4608,
+                  "material_changed_elements": 4181,
+                  "maxabs": 0.0012350082397460938,
+                  "rel_l2": 0.0015631265459483366
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7342,
+              "maxabs": 13.79107666015625,
+              "rel_l2": 0.015137101894286156,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 13.79107666015625,
+                  "rel_l2": 0.017870603466557
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 501,
+                  "maxabs": 8.924560546875,
+                  "rel_l2": 0.01918415645083504
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 122,
+                  "maxabs": 4.553924560546875,
+                  "rel_l2": 0.012852082883288407
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 166,
+              "exact_changed_element_count": 2305171,
+              "material_changed_element_count": 2008374,
+              "maxabs": 0.000873565673828125,
+              "rel_l2": 0.0013007522306272515,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 294,
+                  "maxabs": 0.000873565673828125,
+                  "rel_l2": 0.0005625083469647829
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.2.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 366,
+                  "maxabs": 0.0006381571292877197,
+                  "rel_l2": 0.0010006032801798894
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294903,
+                  "material_changed_elements": 264536,
+                  "maxabs": 0.0005600377917289734,
+                  "rel_l2": 0.004456863045093634
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8703,
+              "material_changed_element_count": 8537,
+              "maxabs": 18.963134765625,
+              "rel_l2": 0.01829480418343473,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 18.963134765625,
+                  "rel_l2": 0.01771203378700688
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 8.785430908203125,
+                  "rel_l2": 0.021154153965960633
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 503,
+                  "maxabs": 0.7928886413574219,
+                  "rel_l2": 0.01732125673760007
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 96,
+              "exact_changed_element_count": 2251387,
+              "material_changed_element_count": 1996191,
+              "maxabs": 0.000912785530090332,
+              "rel_l2": 0.0014063332158138105,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 323,
+                  "maxabs": 0.000912785530090332,
+                  "rel_l2": 0.0006703298294658066
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65535,
+                  "material_changed_elements": 59328,
+                  "maxabs": 0.0006319209933280945,
+                  "rel_l2": 0.002008036721148522
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.1.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294908,
+                  "material_changed_elements": 265894,
+                  "maxabs": 0.0005049966275691986,
+                  "rel_l2": 0.003803120797304702
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8546,
+              "maxabs": 18.0953369140625,
+              "rel_l2": 0.018854762957829257,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 18.0953369140625,
+                  "rel_l2": 0.017878931137927278
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 13.52197265625,
+                  "rel_l2": 0.022376486958578953
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 501,
+                  "maxabs": 0.9485740661621094,
+                  "rel_l2": 0.017797533931543454
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ema_updates": 28449,
+      "scheduler_step": 1852,
+      "criterion_state": {
+        "schema_version": 1,
+        "native": {
+          "detect": {
+            "end2end": true,
+            "updates": 55,
+            "o2m": 0.4764705882352941,
+            "o2o": 0.5235294117647059,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          },
+          "pose": {
+            "end2end": true,
+            "updates": 63,
+            "o2m": 0.4527559055118111,
+            "o2o": 0.5472440944881889,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          }
+        },
+        "mu": 0.0,
+        "calibration": null
+      },
+      "ema_joint": 0.7100520603451678,
+      "live_joint": 0.7026842243224684,
+      "ema_delta": {
+        "coco/box/map50_95": 0.000572137123524441,
+        "coco/person/box/map50_95": 0.00019895585476592537,
+        "bbat/box/map50_95": -0.0021769129679115595,
+        "bbat/pose/map50_95": -0.002103786580433309,
+        "bbat/ball/box/map50_95": -0.003729289485111198,
+        "bbat/bat/box/map50_95": -0.0006245364507121431,
+        "bbat/ball/pose/map50_95": -0.004019701482856242,
+        "bbat/bat/pose/map50_95": -0.0001878716780104872
+      },
+      "live_delta": {
+        "coco/box/map50_95": -0.002100261622438482,
+        "coco/person/box/map50_95": -0.0004142978637492467,
+        "bbat/box/map50_95": -0.014609495632576519,
+        "bbat/pose/map50_95": -0.012664259072610262,
+        "bbat/ball/box/map50_95": -0.025057406483471212,
+        "bbat/bat/box/map50_95": -0.004161584781681937,
+        "bbat/ball/pose/map50_95": -0.022117225985711086,
+        "bbat/bat/pose/map50_95": -0.00321129215950966
+      },
+      "gradients": {
+        "samples": [
+          {
+            "detect_norm": 87.602797469845,
+            "pose_norm": 71.24102908904867,
+            "cosine_similarity": 0.005315248811236772
+          },
+          {
+            "detect_norm": 80.59437610961685,
+            "pose_norm": 83.1009399750188,
+            "cosine_similarity": -0.04402305976245781
+          },
+          {
+            "detect_norm": 83.16569896738932,
+            "pose_norm": 88.9664061582835,
+            "cosine_similarity": -0.012122920553257815
+          },
+          {
+            "detect_norm": 105.27995058027057,
+            "pose_norm": 67.46330838003433,
+            "cosine_similarity": 0.09695641887092073
+          },
+          {
+            "detect_norm": 73.51489613259955,
+            "pose_norm": 66.89407381196015,
+            "cosine_similarity": 0.03785508218658819
+          }
+        ],
+        "cosine": {
+          "count": 5,
+          "min": -0.04402305976245781,
+          "median": 0.005315248811236772,
+          "max": 0.09695641887092073,
+          "mean": 0.016796153910606012
+        },
+        "negative_fraction": 0.4,
+        "pose_projection_fraction": {
+          "count": 5,
+          "min": 0,
+          "median": 0,
+          "max": 0.04402305976245781,
+          "mean": 0.011229196063143125
+        },
+        "pose_to_detect_norm_ratio": {
+          "count": 5,
+          "min": 0.640799202585083,
+          "median": 0.9099390372707955,
+          "max": 1.0697487938286763,
+          "mean": 0.8929631595317342
+        },
+        "preclip_norm": {
+          "count": 463,
+          "min": 104.3950424194336,
+          "median": 138.74853515625,
+          "max": 418.1297607421875,
+          "mean": 141.21416117460114
+        },
+        "clipped_fraction": 1.0,
+        "amp_retries": 0
+      }
+    },
+    {
+      "epoch": 5,
+      "banks": {
+        "live": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 105,
+              "exact_changed_element_count": 8420945,
+              "material_changed_element_count": 8221764,
+              "maxabs": 0.008316397666931152,
+              "rel_l2": 0.005815646228397768,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 248,
+                  "maxabs": 0.008316397666931152,
+                  "rel_l2": 0.0006038754902037296
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 63945,
+                  "maxabs": 0.007422029972076416,
+                  "rel_l2": 0.011995609474686302
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 244,
+                  "maxabs": 0.0031232833862304688,
+                  "rel_l2": 0.00017359485978419616
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460988,
+              "material_changed_element_count": 1443529,
+              "maxabs": 0.008874334394931793,
+              "rel_l2": 0.004508848369998867,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    512,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 131072,
+                  "material_changed_elements": 129986,
+                  "maxabs": 0.008874334394931793,
+                  "rel_l2": 0.02440109969637583
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 255,
+                  "maxabs": 0.007951736450195312,
+                  "rel_l2": 0.0003892087063632104
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 20207,
+                  "maxabs": 0.006593167781829834,
+                  "rel_l2": 0.009430223720674978
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7867,
+              "maxabs": 83.40390014648438,
+              "rel_l2": 0.15833511893920477,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 83.40390014648438,
+                  "rel_l2": 0.1586394048466604
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 3.073702812194824,
+                  "rel_l2": 0.12339511805575053
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 2.5346317291259766,
+                  "rel_l2": 0.07806847645124348
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460973,
+              "material_changed_element_count": 1446305,
+              "maxabs": 0.0289456844329834,
+              "rel_l2": 0.004597662923720633,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65535,
+                  "material_changed_elements": 64923,
+                  "maxabs": 0.0289456844329834,
+                  "rel_l2": 0.011963335376838774
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv.weight",
+                  "shape": [
+                    512,
+                    1,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 4608,
+                  "material_changed_elements": 4571,
+                  "maxabs": 0.01774895191192627,
+                  "rel_l2": 0.020217227497229675
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.1.1.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 254,
+                  "maxabs": 0.016218185424804688,
+                  "rel_l2": 0.0007987199927108233
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7823,
+              "maxabs": 128.89849853515625,
+              "rel_l2": 0.14171755930304408,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 128.89849853515625,
+                  "rel_l2": 0.16851513737744991
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 502,
+                  "maxabs": 69.538330078125,
+                  "rel_l2": 0.15017560548267916
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 230,
+                  "maxabs": 23.136444091796875,
+                  "rel_l2": 0.06529566003161934
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 168,
+              "exact_changed_element_count": 2302147,
+              "material_changed_element_count": 2275171,
+              "maxabs": 0.01145845651626587,
+              "rel_l2": 0.01639803835546373,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 377,
+                  "maxabs": 0.01145845651626587,
+                  "rel_l2": 0.007548296354945106
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.2.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 381,
+                  "maxabs": 0.008125990629196167,
+                  "rel_l2": 0.012316704710968284
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294144,
+                  "material_changed_elements": 290049,
+                  "maxabs": 0.00782802700996399,
+                  "rel_l2": 0.05921678711746251
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8682,
+              "maxabs": 157.68408203125,
+              "rel_l2": 0.1705515421849973,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 157.68408203125,
+                  "rel_l2": 0.16541201726802585
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 84.41319274902344,
+                  "rel_l2": 0.19586303761312499
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 6.5498199462890625,
+                  "rel_l2": 0.17264349604802157
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 96,
+              "exact_changed_element_count": 2249899,
+              "material_changed_element_count": 2225854,
+              "maxabs": 0.013938188552856445,
+              "rel_l2": 0.01760340047826475,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 380,
+                  "maxabs": 0.013938188552856445,
+                  "rel_l2": 0.008353986839790108
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 65037,
+                  "maxabs": 0.008182605728507042,
+                  "rel_l2": 0.024522842109737254
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.1.1.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 254,
+                  "maxabs": 0.0076326727867126465,
+                  "rel_l2": 0.00827103101854248
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8675,
+              "maxabs": 161.8310546875,
+              "rel_l2": 0.17226830833217233,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 161.8310546875,
+                  "rel_l2": 0.1646105830067387
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 108.9088134765625,
+                  "rel_l2": 0.20038266596567245
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 504,
+                  "maxabs": 7.863880157470703,
+                  "rel_l2": 0.17716630623651228
+                }
+              ]
+            }
+          }
+        },
+        "ema": {
+          "changed_fixed_states": [],
+          "groups": {
+            "neck_parameters": {
+              "tensor_count": 105,
+              "element_count": 8421120,
+              "exact_changed_tensor_count": 105,
+              "material_changed_tensor_count": 105,
+              "exact_changed_element_count": 8420993,
+              "material_changed_element_count": 6751598,
+              "maxabs": 0.0009571313858032227,
+              "rel_l2": 0.0006737109149492293,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.13.m.0.cv3.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 255,
+                  "material_changed_elements": 179,
+                  "maxabs": 0.0009571313858032227,
+                  "rel_l2": 7.08918452486951e-05
+                },
+                {
+                  "name": "graph.model.13.m.0.cv3.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65535,
+                  "material_changed_elements": 52096,
+                  "maxabs": 0.0008648782968521118,
+                  "rel_l2": 0.0013985180173119794
+                },
+                {
+                  "name": "graph.model.22.m.0.1.ffn.1.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 254,
+                  "material_changed_elements": 198,
+                  "maxabs": 0.0006990432739257812,
+                  "rel_l2": 1.264430291457219e-05
+                }
+              ]
+            },
+            "detect_one2many_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460972,
+              "material_changed_element_count": 1316020,
+              "maxabs": 0.0009679794311523438,
+              "rel_l2": 0.0005220553500208271,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv3.0.0.0.bn.bias",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 240,
+                  "maxabs": 0.0009679794311523438,
+                  "rel_l2": 4.34303954027839e-05
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.2.weight",
+                  "shape": [
+                    80,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 20480,
+                  "material_changed_elements": 18292,
+                  "maxabs": 0.0009143054485321045,
+                  "rel_l2": 0.001071820183559425
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv3.2.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    512,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 131071,
+                  "material_changed_elements": 121407,
+                  "maxabs": 0.0008173286914825439,
+                  "rel_l2": 0.0027980809450083633
+                }
+              ]
+            },
+            "detect_one2many_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7469,
+              "maxabs": 12.21697998046875,
+              "rel_l2": 0.023448590992410596,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 12.21697998046875,
+                  "rel_l2": 0.02349489101747101
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.2.0.bn.running_mean",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.37769508361816406,
+                  "rel_l2": 0.018461948481212662
+                },
+                {
+                  "name": "graph.model.23.detect_head.cv2.1.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 0.33896636962890625,
+                  "rel_l2": 0.010420386864189704
+                }
+              ]
+            },
+            "detect_one2one_parameters": {
+              "tensor_count": 66,
+              "element_count": 1460988,
+              "exact_changed_tensor_count": 66,
+              "material_changed_tensor_count": 66,
+              "exact_changed_element_count": 1460958,
+              "material_changed_element_count": 1339423,
+              "maxabs": 0.0031058788299560547,
+              "rel_l2": 0.0005266290624106701,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65534,
+                  "material_changed_elements": 60171,
+                  "maxabs": 0.0031058788299560547,
+                  "rel_l2": 0.0013223589433590663
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv.weight",
+                  "shape": [
+                    512,
+                    1,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 4608,
+                  "material_changed_elements": 4322,
+                  "maxabs": 0.0019299983978271484,
+                  "rel_l2": 0.002293186931826041
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.1.1.1.bn.weight",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 235,
+                  "maxabs": 0.0017681121826171875,
+                  "rel_l2": 8.514848478481859e-05
+                }
+              ]
+            },
+            "detect_one2one_bn_statistics": {
+              "tensor_count": 36,
+              "element_count": 7936,
+              "exact_changed_tensor_count": 36,
+              "material_changed_tensor_count": 36,
+              "exact_changed_element_count": 7936,
+              "material_changed_element_count": 7434,
+              "maxabs": 18.43670654296875,
+              "rel_l2": 0.020918992441853492,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 18.43670654296875,
+                  "rel_l2": 0.02472548377769409
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 501,
+                  "maxabs": 12.319061279296875,
+                  "rel_l2": 0.026450213651024332
+                },
+                {
+                  "name": "graph.model.23.detect_head.one2one_cv3.0.1.0.bn.running_var",
+                  "shape": [
+                    256
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 256,
+                  "material_changed_elements": 133,
+                  "maxabs": 5.42498779296875,
+                  "rel_l2": 0.015310397018836876
+                }
+              ]
+            },
+            "pose_one2many_parameters": {
+              "tensor_count": 168,
+              "element_count": 2305224,
+              "exact_changed_tensor_count": 168,
+              "material_changed_tensor_count": 166,
+              "exact_changed_element_count": 2305182,
+              "material_changed_element_count": 2093913,
+              "maxabs": 0.0013287663459777832,
+              "rel_l2": 0.001880817222730919,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 322,
+                  "maxabs": 0.0013287663459777832,
+                  "rel_l2": 0.000845800707074738
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4_kpts.2.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 363,
+                  "maxabs": 0.0009521543979644775,
+                  "rel_l2": 0.001445416718603838
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294900,
+                  "material_changed_elements": 273318,
+                  "maxabs": 0.0008552111685276031,
+                  "rel_l2": 0.006569967280712786
+                }
+              ]
+            },
+            "pose_one2many_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8578,
+              "maxabs": 25.2802734375,
+              "rel_l2": 0.0251365190972618,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 25.2802734375,
+                  "rel_l2": 0.024385161201631162
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 11.86199951171875,
+                  "rel_l2": 0.028849624930090537
+                },
+                {
+                  "name": "graph.model.23.pose_head.cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 503,
+                  "maxabs": 1.1166191101074219,
+                  "rel_l2": 0.024369290472466016
+                }
+              ]
+            },
+            "pose_one2one_parameters": {
+              "tensor_count": 96,
+              "element_count": 2251440,
+              "exact_changed_tensor_count": 96,
+              "material_changed_tensor_count": 96,
+              "exact_changed_element_count": 2251405,
+              "material_changed_element_count": 2070496,
+              "maxabs": 0.0014462471008300781,
+              "rel_l2": 0.0020234596445315796,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4_kpts.0.weight",
+                  "shape": [
+                    6,
+                    64,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 384,
+                  "material_changed_elements": 335,
+                  "maxabs": 0.0014462471008300781,
+                  "rel_l2": 0.0009760209705976148
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv.weight",
+                  "shape": [
+                    256,
+                    256,
+                    1,
+                    1
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 65536,
+                  "material_changed_elements": 61223,
+                  "maxabs": 0.000935656949877739,
+                  "rel_l2": 0.002860877386254797
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.1.0.conv.weight",
+                  "shape": [
+                    64,
+                    512,
+                    3,
+                    3
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 294909,
+                  "material_changed_elements": 274638,
+                  "maxabs": 0.0007901214994490147,
+                  "rel_l2": 0.0054494889278628895
+                }
+              ]
+            },
+            "pose_one2one_bn_statistics": {
+              "tensor_count": 48,
+              "element_count": 8704,
+              "exact_changed_tensor_count": 48,
+              "material_changed_tensor_count": 48,
+              "exact_changed_element_count": 8704,
+              "material_changed_element_count": 8581,
+              "maxabs": 24.545654296875,
+              "rel_l2": 0.025799547139434394,
+              "nonfinite_tensor_count": 0,
+              "material_drift": true,
+              "top_changes": [
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv2.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 24.545654296875,
+                  "rel_l2": 0.024576411030151988
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv4.2.0.bn.running_var",
+                  "shape": [
+                    64
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 64,
+                  "material_changed_elements": 64,
+                  "maxabs": 17.995361328125,
+                  "rel_l2": 0.030263024950945273
+                },
+                {
+                  "name": "graph.model.23.pose_head.one2one_cv3.2.0.0.bn.running_var",
+                  "shape": [
+                    512
+                  ],
+                  "dtype": "torch.float32",
+                  "exact_changed_elements": 512,
+                  "material_changed_elements": 503,
+                  "maxabs": 1.3309555053710938,
+                  "rel_l2": 0.02509368461477663
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ema_updates": 28912,
+      "scheduler_step": 2315,
+      "criterion_state": {
+        "schema_version": 1,
+        "native": {
+          "detect": {
+            "end2end": true,
+            "updates": 56,
+            "o2m": 0.47058823529411764,
+            "o2o": 0.5294117647058824,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          },
+          "pose": {
+            "end2end": true,
+            "updates": 64,
+            "o2m": 0.447244094488189,
+            "o2o": 0.552755905511811,
+            "o2m_copy": 0.8,
+            "final_o2m": 0.1,
+            "total": 1.0
+          }
+        },
+        "mu": 0.0,
+        "calibration": null
+      },
+      "ema_joint": 0.7101160556236886,
+      "live_joint": 0.7053870730369839,
+      "ema_delta": {
+        "coco/box/map50_95": 4.274315736008116e-05,
+        "coco/person/box/map50_95": 0.00012309344568028902,
+        "bbat/box/map50_95": -0.0025562735017069516,
+        "bbat/pose/map50_95": -0.0014514899296083072,
+        "bbat/ball/box/map50_95": -0.0050611186058755475,
+        "bbat/bat/box/map50_95": -5.142839753813355e-05,
+        "bbat/ball/pose/map50_95": -0.003588997039241426,
+        "bbat/bat/pose/map50_95": 0.0006860171800245896
+      },
+      "live_delta": {
+        "coco/box/map50_95": -0.001377845572876235,
+        "coco/person/box/map50_95": -0.0007074138566245392,
+        "bbat/box/map50_95": -0.006047912234097064,
+        "bbat/pose/map50_95": -0.010402579013904623,
+        "bbat/ball/box/map50_95": -0.0130876801380726,
+        "bbat/bat/box/map50_95": 0.000991855669878694,
+        "bbat/ball/pose/map50_95": -0.015142861724547374,
+        "bbat/bat/pose/map50_95": -0.005662296303262204
+      },
+      "gradients": {
+        "samples": [
+          {
+            "detect_norm": 80.78040290600346,
+            "pose_norm": 69.54587334551456,
+            "cosine_similarity": 0.043200008434939194
+          },
+          {
+            "detect_norm": 78.91849669111743,
+            "pose_norm": 48.21539439062085,
+            "cosine_similarity": -0.02222025089356008
+          },
+          {
+            "detect_norm": 94.66991569841576,
+            "pose_norm": 93.20532262538471,
+            "cosine_similarity": -0.025359153736717138
+          },
+          {
+            "detect_norm": 80.29076730711078,
+            "pose_norm": 70.72896227276141,
+            "cosine_similarity": 0.014296884419823283
+          },
+          {
+            "detect_norm": 89.28832497175033,
+            "pose_norm": 61.39622083812543,
+            "cosine_similarity": 0.028399291138163665
+          }
+        ],
+        "cosine": {
+          "count": 5,
+          "min": -0.025359153736717138,
+          "median": 0.014296884419823283,
+          "max": 0.043200008434939194,
+          "mean": 0.007663355872529785
+        },
+        "negative_fraction": 0.4,
+        "pose_projection_fraction": {
+          "count": 5,
+          "min": 0,
+          "median": 0,
+          "max": 0.025359153736717138,
+          "mean": 0.009515880926055443
+        },
+        "pose_to_detect_norm_ratio": {
+          "count": 5,
+          "min": 0.6109517592476856,
+          "median": 0.8609250615701749,
+          "max": 0.9845294773717057,
+          "mean": 0.8049868290787259
+        },
+        "preclip_norm": {
+          "count": 463,
+          "min": 105.96597290039062,
+          "median": 138.26235961914062,
+          "max": 327.2173767089844,
+          "mean": 139.91463636888543
+        },
+        "clipped_fraction": 1.0,
+        "amp_retries": 0
+      }
+    }
+  ],
+  "notes": [
+    "CPU checkpoint／已保存日誌分析，沒有重新推論，相關性不是根因證明。",
+    "clipped_gradient_norm 欄位是 clip_grad_norm_ 回傳的裁剪前 norm。",
+    "gradient samples 是定期抽取的既有 macro 統計，不是完整訓練母體。"
+  ]
+}

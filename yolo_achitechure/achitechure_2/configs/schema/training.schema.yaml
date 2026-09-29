@@ -1,0 +1,134 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: training.schema.yaml
+title: architecture_2 訓練模板
+description: 一個檔案包含完整專案控制；handoff fields 以 source/value 明示。
+x-spec-version: 2.3.0
+x-spec-sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - spec_version
+  - spec_sha256
+  - kind
+  - config_id
+  - title_zh
+  - summary_zh
+  - phase
+  - status
+  - model_scale
+  - candidate_policy
+  - execution
+  - routes
+  - formal_ranking_requires
+  - datasets
+  - recipe
+  - adjustable
+  - validation
+  - transition
+  - lineage
+properties:
+  schema_version: {const: 3}
+  spec_version: {const: 2.3.0}
+  spec_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+  kind: {const: training_template}
+  config_id: {enum: [cpu-smoke, float-screen-20, float-main, float-extension, quant-qat-lite, quant-qat]}
+  title_zh: {type: string}
+  summary_zh: {type: string}
+  phase: {enum: [A, C]}
+  status: {type: string}
+  model_scale: {const: m}
+  candidate_policy: {type: object}
+  execution: {type: object}
+  routes: {type: object}
+  formal_ranking_requires: {type: array}
+  datasets: {type: object}
+  recipe: {type: object}
+  adjustable:
+    type: object
+    required: [batch, fraction, scale, cache, imgsz, device, workers, epochs, patience]
+  validation: {type: object}
+  transition: {type: object}
+  lineage: {type: object}
+allOf:
+  - if:
+      properties:
+        config_id:
+          enum: [float-main, float-extension]
+    then:
+      properties:
+        validation:
+          type: object
+          required: [selection_backend, checkpoint_selection]
+          properties:
+            selection_backend: {const: float_model}
+            checkpoint_selection:
+              type: object
+              additionalProperties: false
+              required: [detect, pose_research, pose_official]
+              properties:
+                detect: {const: handoff_defined}
+                pose_research: {const: pose_map50_95}
+                pose_official: {const: combined_fitness_recorded_separately}
+  - if:
+      properties:
+        config_id: {const: float-extension}
+    then:
+      properties:
+        transition:
+          type: object
+          additionalProperties: false
+          required:
+            - mode
+            - input
+            - optimizer_state
+            - gate
+            - requires_unstripped_state
+            - required_checkpoint_state
+            - required_resume_evidence
+            - stripped_last_or_best_policy
+          properties:
+            mode: {const: resume}
+            input: {const: own_unstripped_continuation_checkpoint}
+            optimizer_state: {const: restore}
+            gate: {const: handoff_late_improvement}
+            requires_unstripped_state: {const: true}
+            required_checkpoint_state:
+              const: [epoch, best_fitness, optimizer, scaler, ema, updates]
+            required_resume_evidence:
+              const: [scheduler_position, optimizer_parameter_groups]
+            stripped_last_or_best_policy: {const: reject}
+  - if:
+      properties:
+        config_id: {const: float-screen-20}
+    then:
+      properties:
+        validation:
+          type: object
+          required: [selection_backend, screening_only]
+          properties:
+            selection_backend: {const: screening_float_model}
+            screening_only: {const: true}
+  - if:
+      properties:
+        config_id: {const: quant-qat-lite}
+    then:
+      properties:
+        validation:
+          type: object
+          required: [selection_backend, simulation_only, screening_only]
+          properties:
+            selection_backend: {const: w8a8_qat_lite_simulation}
+            simulation_only: {const: true}
+            screening_only: {const: true}
+  - if:
+      properties:
+        config_id: {const: quant-qat}
+    then:
+      properties:
+        validation:
+          type: object
+          required: [selection_backend, simulation_only]
+          properties:
+            selection_backend: {const: w8a8_simulation}
+            simulation_only: {const: true}

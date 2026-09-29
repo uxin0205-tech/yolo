@@ -1,0 +1,27 @@
+phase: recovery-full
+parent: recovery-backbone-gate
+trainable_scope: full_model_recovery
+weights: weights/v1-br-best.pt
+data: data/coco2017.yaml
+epochs: 20
+batch: 16
+imgsz: 640
+device: '0'
+workers: 8
+seed: 0
+patience: 6
+optimizer: AdamW
+lr0: 5.0e-6
+layer_lrs:
+  attention: 5.0e-6
+  adjacent_block: 1.0e-6
+  neck_detect: 5.0e-7
+  backbone: 1.0e-7
+scheduler: constant
+lrf: 1.0
+warmup_epochs: 0.0
+warmup_bias_lr: 0.0
+weight_decay: 0.0005
+selection_metric: metrics/mAP50-95(B)
+amp: true
+deterministic: true

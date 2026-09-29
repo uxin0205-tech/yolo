@@ -1,0 +1,115 @@
+{
+  "assignments": [
+    {
+      "cpu_format_id": "uniform-w4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "exact_w4",
+      "path": "graph.model.6.cv2.conv",
+      "region": "backbone_deep",
+      "stage_id": "backbone-deep-primary",
+      "weight_format_id": "w4"
+    }
+  ],
+  "candidate_id": "backbone-deep-primary--exact_w4",
+  "formal_training": false,
+  "formal_validation": false,
+  "materialization": {
+    "detect_complete": true,
+    "pose_complete": true
+  },
+  "metrics": {
+    "bbat/ball/box/map50": 0.966779792035566,
+    "bbat/ball/box/map50_95": 0.7704275894846767,
+    "bbat/ball/pose/map50": 0.9693232471270558,
+    "bbat/ball/pose/map50_95": 0.9691083124197574,
+    "bbat/bat/box/map50": 0.9925292896373553,
+    "bbat/bat/box/map50_95": 0.8855839244675089,
+    "bbat/bat/pose/map50": 0.9927143475705796,
+    "bbat/bat/pose/map50_95": 0.9922732464216448,
+    "bbat/box/map50": 0.9796545408364606,
+    "bbat/box/map50_95": 0.8280057569760928,
+    "bbat/pose/map50": 0.9810187973488177,
+    "bbat/pose/map50_95": 0.9806907794207012,
+    "coco/box/map50": 0.6504642855342324,
+    "coco/box/map50_95": 0.47932445676051616,
+    "coco/person/box/map50": 0.8283168391201667,
+    "coco/person/box/map50_95": 0.6077356370553259
+  },
+  "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-deep-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+  "metrics_sha256": "3e48b8b8dffa05cc29441c1bb91b4140a68b4995d420108bac2e20bdac5048b3",
+  "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-deep-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue",
+  "parent_id": "v19-poly-shift-a8-all-w8-qat-epoch5",
+  "parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "schema_version": 1,
+  "seconds": 73.7941024499014,
+  "status": "completed",
+  "weight_quantization": [
+    {
+      "format_id": "w4",
+      "numeric": {
+        "clipping_rate": 0.005688985188802083,
+        "code_histogram": [
+          1746,
+          1685,
+          3491,
+          7337,
+          14259,
+          26044,
+          44133,
+          66504,
+          78801,
+          63645,
+          39849,
+          22548,
+          11647,
+          5859,
+          2844,
+          2824
+        ],
+        "code_max": 7,
+        "code_min": -8,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9880523105873517,
+        "encoded_bits": 4,
+        "logical_code_count": 16,
+        "maximum_absolute_error": 0.5052003860473633,
+        "mse": 9.074613141516845e-05,
+        "normalized_rmse": 0.15411961264794108,
+        "occupied_codes": 16,
+        "scale_bytes": 2048,
+        "scale_count": 512,
+        "scale_maximum": 0.08273277431726456,
+        "scale_mean": 0.0263112410902977,
+        "scale_minimum": 0.010111816227436066,
+        "sqnr_db": 16.24284182358213,
+        "weight_code_bytes": 196608,
+        "zero_ratio": 0.20040130615234375
+      },
+      "quantized_modules": 1,
+      "region": "backbone_deep",
+      "sites": [
+        {
+          "clipping_rate": 0.005688985188802083,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9880523105873517,
+          "elements": 393216,
+          "maximum_absolute_error": 0.5052003860473633,
+          "mse": 9.074613141516845e-05,
+          "normalized_rmse": 0.15411961264794108,
+          "occupied_codes": 16,
+          "output_channels": 512,
+          "path": "graph.model.6.cv2.conv",
+          "region": "backbone_deep",
+          "scale_maximum": 0.08273277431726456,
+          "scale_mean": 0.0263112410902977,
+          "scale_minimum": 0.010111816227436066,
+          "sqnr_db": 16.24284182358213,
+          "zero_ratio": 0.20040130615234375
+        }
+      ],
+      "weight_elements": 393216
+    }
+  ]
+}

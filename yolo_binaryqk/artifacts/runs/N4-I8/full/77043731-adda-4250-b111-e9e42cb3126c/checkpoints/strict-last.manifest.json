@@ -1,0 +1,29 @@
+{
+  "experiment_schema_version": 3,
+  "variant_id": "N4-I8",
+  "attention_class": "MagnitudeSideChannelAttention",
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "attention_module_count": 1,
+  "variant_config_hash": "7e08cf68e8e0692147e0c165afa15bbeb0fb3548cd363da2167522d214bf1bce",
+  "model_yaml_hash": "838c7ce930dfabb7600f1bd90976ae28c6f832fd8262141180d72b2ec30eca90",
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "binary_forward_count": 3131,
+  "quantizer_types": {
+    "model.10.m.0.attn": "M8"
+  },
+  "distillation_enabled": false,
+  "distillation_type": null,
+  "bias_type": "dense_2d",
+  "p_bits": null,
+  "v_bits": null,
+  "magnitude_bits": 8,
+  "quantization_contract": {
+    "qk_scale": "residual_basis_channel_per_token",
+    "p8_scale": "none",
+    "v8_scale": "none",
+    "bias_parameterization": "full_2d_relative_position",
+    "bias_initialization": "truncated_normal_std_0.02"
+  }
+}

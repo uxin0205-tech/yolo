@@ -1,0 +1,333 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: screen-run.schema.yaml
+title: architecture_2 Full35 Float20 執行設定
+description: 所有可調訓練、驗證、OOM 與 queue 欄位的單一 machine-readable 契約。
+x-spec-version: 2.3.0
+x-spec-sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - spec_version
+  - spec_sha256
+  - kind
+  - config_id
+  - title_zh
+  - status
+  - authorization
+  - handoff
+  - candidates
+  - datasets
+  - training
+  - queue
+  - lineage
+properties:
+  schema_version: {const: 1}
+  spec_version: {const: 2.3.0}
+  spec_sha256: {const: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216}
+  kind: {const: float_screen_run}
+  config_id: {const: full35-j3-float20-seed0}
+  title_zh: {type: string, minLength: 1}
+  status: {type: string, minLength: 1}
+  authorization:
+    type: object
+    additionalProperties: false
+    required: [gpu, gpu_authorized_at, pose, note_zh]
+    properties:
+      gpu: {const: true}
+      gpu_authorized_at: {const: "2026-08-27"}
+      pose:
+        oneOf:
+          - type: boolean
+          - const: pending_user_decision
+      note_zh: {type: string}
+  handoff:
+    type: object
+    additionalProperties: false
+    required: [manifest, full35_root, accepted_stage, rollback_j2_policy]
+    properties:
+      manifest: {const: handoffs/full35-j3-seed0/manifest.json}
+      full35_root: {const: /home/uxin/yolo/yolo_combine/final/full35}
+      accepted_stage: {const: j3}
+      rollback_j2_policy: {type: string}
+  candidates:
+    const: [C0, C1, C2, C3]
+  datasets:
+    type: object
+    additionalProperties: false
+    required:
+      - screen_manifest
+      - screen_root
+      - detect
+      - pose
+      - diagnostic_detect
+      - canonical_bbat5_root
+      - coco_root
+      - fraction_note_zh
+    properties:
+      screen_manifest: {const: artifacts/datasets/architecture-screen-20-v1/screening-manifest.json}
+      screen_root: {const: artifacts/datasets/architecture-screen-20-v1}
+      detect: {const: configs/data/coco2017-screen-20.yaml}
+      pose: {const: configs/data/bbat5-pose-screen-20.yaml}
+      diagnostic_detect: {const: configs/data/bbat5-detect-screen-20.yaml}
+      canonical_bbat5_root: {const: /home/uxin/yolo/original/pose/derived/bbat5-v1}
+      coco_root: {const: /home/uxin/yolo/coco2017}
+      fraction_note_zh: {type: string}
+  training:
+    type: object
+    additionalProperties: false
+    required:
+      - run_root
+      - device
+      - pose_enabled
+      - imgsz
+      - epochs
+      - seed
+      - deterministic
+      - amp
+      - fraction
+      - scale
+      - cache
+      - batch
+      - workers
+      - nbs
+      - optimizer
+      - momentum
+      - weight_decay
+      - reference_batch_size
+      - max_grad_norm
+      - amp_max_overflow_retries
+      - validation_interval
+      - expected_optimizer_steps_per_candidate
+      - task_weights
+      - learning_rates
+      - scheduler
+      - loss_overrides
+      - augmentation
+    properties:
+      run_root: {const: artifacts/runs/full35-j3-float20-seed0}
+      device: {const: "0"}
+      pose_enabled:
+        oneOf:
+          - type: boolean
+          - const: pending_user_decision
+      imgsz: {const: 640}
+      epochs: {type: integer, minimum: 1}
+      seed: {const: 0}
+      deterministic: {const: true}
+      amp: {const: true}
+      fraction: {const: 1.0}
+      scale: {type: number, minimum: 0}
+      cache:
+        enum: [false, true, ram]
+      batch:
+        type: object
+        additionalProperties: false
+        required:
+          - detect_logical
+          - detect_physical_microbatch
+          - detect_oom_fallback_microbatch
+          - detect_logical_batches_per_macro
+          - pose_physical
+          - validation_detect
+          - validation_pose
+        properties:
+          detect_logical: {const: 128}
+          detect_physical_microbatch: {const: 32}
+          detect_oom_fallback_microbatch: {const: 16}
+          detect_logical_batches_per_macro: {const: 2}
+          pose_physical: {const: 16}
+          validation_detect: {const: 16}
+          validation_pose: {const: 16}
+      workers:
+        type: object
+        additionalProperties: false
+        required: [detect, pose]
+        properties:
+          detect: {type: integer, minimum: 0}
+          pose: {type: integer, minimum: 0}
+      nbs: {type: integer, minimum: 1}
+      optimizer: {const: MuSGD}
+      momentum: {type: number, minimum: 0, exclusiveMaximum: 1}
+      weight_decay: {type: number, minimum: 0}
+      reference_batch_size: {type: integer, minimum: 1}
+      max_grad_norm: {type: number, exclusiveMinimum: 0}
+      amp_max_overflow_retries: {type: integer, minimum: 0}
+      validation_interval: {const: 1}
+      expected_optimizer_steps_per_candidate: {const: 1860}
+      task_weights:
+        type: object
+        additionalProperties: false
+        required: [detect, pose]
+        properties:
+          detect: {type: number, minimum: 0}
+          pose: {type: number, minimum: 0}
+      learning_rates:
+        type: object
+        additionalProperties: false
+        required: [backbone, neck, masf, attention, detect_head, pose_head]
+        properties:
+          backbone: {type: number, minimum: 0}
+          neck: {type: number, minimum: 0}
+          masf: {const: 0.0}
+          attention: {const: 0.0}
+          detect_head: {type: number, minimum: 0}
+          pose_head: {type: number, minimum: 0}
+      scheduler:
+        type: object
+        additionalProperties: false
+        required: [warmup_epochs, warmup_start_factor, final_lr_factor]
+        properties:
+          warmup_epochs: {type: integer, minimum: 0}
+          warmup_start_factor: {type: number, minimum: 0, maximum: 1}
+          final_lr_factor: {type: number, minimum: 0, maximum: 1}
+      loss_overrides:
+        type: object
+        additionalProperties: false
+        required: [detect, pose]
+        properties:
+          detect: {$ref: "#/$defs/detect_losses"}
+          pose: {$ref: "#/$defs/pose_losses"}
+      augmentation:
+        type: object
+        additionalProperties: false
+        required: [detect, pose]
+        properties:
+          detect: {$ref: "#/$defs/detect_augmentation"}
+          pose: {$ref: "#/$defs/pose_augmentation"}
+  queue:
+    type: object
+    additionalProperties: false
+    required:
+      - queue_id
+      - gpu_index
+      - min_free_memory_mib
+      - max_utilization_percent
+      - stable_polls
+      - poll_seconds
+      - lock
+      - state
+      - log
+      - start_after_current_gpu_job
+      - automatic_post_float_quantization
+    properties:
+      queue_id: {const: architecture2-full35-j3-float20-seed0}
+      gpu_index: {const: 0}
+      min_free_memory_mib: {type: integer, minimum: 30000}
+      max_utilization_percent: {type: integer, maximum: 10}
+      stable_polls: {type: integer, minimum: 3}
+      poll_seconds: {type: integer, minimum: 1}
+      lock: {const: artifacts/queue/full35-j3-float20-seed0.lock}
+      state: {const: artifacts/queue/full35-j3-float20-seed0.json}
+      log: {const: artifacts/queue/full35-j3-float20-seed0.log}
+      start_after_current_gpu_job: {const: true}
+      automatic_post_float_quantization: {const: false}
+  lineage:
+    type: object
+    additionalProperties: false
+    required:
+      - require_spec_sha256
+      - require_architecture_yaml_sha256
+      - require_training_yaml_sha256
+      - require_dataset_yaml_sha256
+      - require_screening_manifest_sha256
+      - require_handoff_manifest_sha256
+      - require_parent_checkpoint_sha256
+      - selection_status_after_run
+      - c_best_after_run
+    properties:
+      require_spec_sha256: {const: true}
+      require_architecture_yaml_sha256: {const: true}
+      require_training_yaml_sha256: {const: true}
+      require_dataset_yaml_sha256: {const: true}
+      require_screening_manifest_sha256: {const: true}
+      require_handoff_manifest_sha256: {const: true}
+      require_parent_checkpoint_sha256: {const: true}
+      selection_status_after_run: {const: pending_user_decision}
+      c_best_after_run: {type: "null"}
+$defs:
+  detect_losses:
+    type: object
+    additionalProperties: false
+    required: [box, cls, dfl]
+    properties:
+      box: {type: number, minimum: 0}
+      cls: {type: number, minimum: 0}
+      dfl: {type: number, minimum: 0}
+  pose_losses:
+    type: object
+    additionalProperties: false
+    required: [box, cls, dfl, pose, kobj, rle]
+    properties:
+      box: {type: number, minimum: 0}
+      cls: {type: number, minimum: 0}
+      dfl: {type: number, minimum: 0}
+      pose: {type: number, minimum: 0}
+      kobj: {type: number, minimum: 0}
+      rle: {type: number, minimum: 0}
+  detect_augmentation:
+    type: object
+    additionalProperties: false
+    required:
+      - hsv_h
+      - hsv_s
+      - hsv_v
+      - degrees
+      - translate
+      - scale
+      - shear
+      - perspective
+      - flipud
+      - fliplr
+      - mosaic
+      - mixup
+      - cutmix
+      - copy_paste
+    properties:
+      hsv_h: {type: number, minimum: 0}
+      hsv_s: {type: number, minimum: 0}
+      hsv_v: {type: number, minimum: 0}
+      degrees: {type: number, minimum: 0}
+      translate: {type: number, minimum: 0}
+      scale: {type: number, minimum: 0}
+      shear: {type: number, minimum: 0}
+      perspective: {type: number, minimum: 0}
+      flipud: {const: 0.0}
+      fliplr: {const: 0.5}
+      mosaic: {const: 0.0}
+      mixup: {const: 0.0}
+      cutmix: {const: 0.0}
+      copy_paste: {const: 0.0}
+  pose_augmentation:
+    type: object
+    additionalProperties: false
+    required:
+      - hsv_h
+      - hsv_s
+      - hsv_v
+      - degrees
+      - translate
+      - scale
+      - shear
+      - perspective
+      - flipud
+      - fliplr
+      - mosaic
+      - mixup
+      - cutmix
+      - copy_paste
+    properties:
+      hsv_h: {type: number, minimum: 0}
+      hsv_s: {type: number, minimum: 0}
+      hsv_v: {type: number, minimum: 0}
+      degrees: {type: number, minimum: 0}
+      translate: {type: number, minimum: 0}
+      scale: {type: number, minimum: 0}
+      shear: {type: number, minimum: 0}
+      perspective: {type: number, minimum: 0}
+      flipud: {const: 0.0}
+      fliplr: {const: 0.0}
+      mosaic: {const: 0.0}
+      mixup: {const: 0.0}
+      cutmix: {const: 0.0}
+      copy_paste: {const: 0.0}

@@ -1,0 +1,23 @@
+schema_version: 1
+
+# 這只是 Ultralytics-like 命名的草案，不能直接標成 reviewed manifest。
+# 收到交付模型後必須以 named_modules 實際輸出逐項核對；多重匹配會直接報錯。
+rules:
+  - pattern: '^model\.[0-4]\..*act$'
+    region: early
+    eligible: true
+  - pattern: '^model\.[5-9]\..*act$'
+    region: deep
+    eligible: true
+  - pattern: '^model\.(10|11)\..*act$'
+    region: attention_ffn
+    eligible: true
+  - pattern: '^model\.(1[2-9]|2[0-2])\..*act$'
+    region: neck
+    eligible: true
+  - pattern: ^model\.[2-9][0-9]*\..*\.(cv2|cv3)\..*act$
+    region: head_one2many
+    eligible: true
+  - pattern: '^model\.[2-9][0-9]*\..*one2one_(cv2|cv3)\..*act$'
+    region: head_one2one
+    eligible: true

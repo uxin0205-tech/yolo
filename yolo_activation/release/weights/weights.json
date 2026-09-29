@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "chunk_bytes": 90000000,
+  "weights": {
+    "accepted-silu-best-joint": {
+      "role": "accepted_silu_quantization_parent",
+      "output_filename": "best_joint.pt",
+      "bytes": 106825541,
+      "sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+      "parts": [
+        {
+          "path": "accepted-silu-best-joint/best_joint.pt.part-00",
+          "bytes": 90000000,
+          "sha256": "d3de7ddecb4c959e6fae64e17d9cc714b3f7dda555ed5102f8515e42ed42404b"
+        },
+        {
+          "path": "accepted-silu-best-joint/best_joint.pt.part-01",
+          "bytes": 16825541,
+          "sha256": "414710bcfcd7b3ce1c473e0a2b2a1ac943309ca5dd1caf26dcd01a9e3a4cda8d"
+        }
+      ]
+    },
+    "qsilu-pq-short-recovery-best-joint": {
+      "role": "completed_10epoch_qsilu_pq_quantization_candidate",
+      "output_filename": "best_joint.pt",
+      "bytes": 106825541,
+      "sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+      "parts": [
+        {
+          "path": "qsilu-pq-short-recovery-best-joint/best_joint.pt.part-00",
+          "bytes": 90000000,
+          "sha256": "bcb21b3c7ed947ca0c12052fb34dff1caf83a0785ac33ee685b593462c8a08e8"
+        },
+        {
+          "path": "qsilu-pq-short-recovery-best-joint/best_joint.pt.part-01",
+          "bytes": 16825541,
+          "sha256": "3c22dedb717270ab60fa30081b6f15456e00ae5263763ce6949ed6e27ee8f257"
+        }
+      ]
+    }
+  }
+}

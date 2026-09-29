@@ -1,0 +1,41 @@
+schema_version: 1
+delivery_id: v28-progressive-weight-cpu-delivery-v1
+date: '2026-09-04'
+status: completed
+formal_training: false
+formal_validation: false
+gpu_used: false
+parent:
+  id: v19-poly-shift-a8-all-w8-qat-epoch5
+  manifest:
+    path: artifacts/manifests/v19-epoch5-locked-parent-v1.yaml
+    sha256: 6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7
+profile:
+  path: artifacts/reports/v19-epoch5-progressive-weight-formats-cpu-v1.json
+  sha256: cfcfc25269499e4bb309f9c4c5c757d35f1b152906c45b2c0edfd807838eb217
+  coverage:
+    deployment_paths: 148
+    formats_per_path: 5
+    measurements: 740
+formats:
+  - uniform-w4-per_output_channel-optimal_scaled_codebook
+  - fixed-sd4-per_output_channel-optimal_scaled_codebook
+  - paper-twn-layerwise
+  - twn-v3-0.75-filterwise
+  - exact-scaled-ternary-per_tensor
+implementation:
+  progressive_preparation:
+    path: src/yolo_quantize/progressive_preparation.py
+    sha256: 353be65bb44da74fc37a2df3f29c340dda18f245472a75a92b492620536411eb
+  weight_formats:
+    path: src/yolo_quantize/weight_formats.py
+    sha256: c23a5e0c2209f42e6664e84cfb66089b8b2d90b8e07da7fd173c282918721252
+  weight_quantization:
+    path: src/yolo_quantize/weight_quantization.py
+    sha256: 7e068be14a071c17197c2b0448b717895e67a3c338692df01d3e7ca2205e6bec
+limitations:
+  - cpu_weight_reconstruction_ranking_only
+  - no_task_map_gate_in_this_delivery
+  - no_training
+  - no_formal_validation
+  - native_latency_requires_future_kernel_and_hardware_measurement

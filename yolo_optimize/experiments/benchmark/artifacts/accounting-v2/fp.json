@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "case": "fp",
+  "checkpoint_sha256": "401cea9ab23ad19246ff7744859816bc599f350e93c9dd30367b6f0a0745d0b7",
+  "cost": {
+    "conv_mac": 37382758400,
+    "binary_qk_bit_products": 0,
+    "float_matrix_mac": 122880000,
+    "integer_matrix_mac": 0,
+    "dense_mac_subtotal": 37505638400,
+    "float_flops_subtotal": 75011276800,
+    "integer_ops_subtotal": 0,
+    "binary_sites": [],
+    "excludes": "BN/activation/PWL/reciprocal/pooling/decode/sort/NMS/reductions/memory traffic",
+    "accounting_mode": "eval, no_grad, inference_mode=False to preserve dispatcher visibility"
+  },
+  "no_gpu": true,
+  "note": "補正 inference_mode dispatcher 漏算矩陣乘法；不重跑 latency／energy。"
+}

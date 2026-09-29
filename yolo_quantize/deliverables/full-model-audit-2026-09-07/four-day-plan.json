@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "plan_id": "full-model-four-day-2026-09-07",
+  "status": "planned_not_enqueued",
+  "execution_authorized_by_this_file": false,
+  "window_hours": 96,
+  "start_condition": "GPU available and unified-parent preflight passed",
+  "baseline": "V36 completed QAT; reload and pin export before use",
+  "activation": "qsilu_pq_lsq_plus_a8",
+  "regions": ["backbone_early", "backbone_deep", "backbone_attention_safe", "neck", "masf", "neck_attention_safe", "detect_one2one_tower", "detect_one2one_predictor", "pose_one2one_tower", "pose_one2one_predictor"],
+  "gates": {"total_map50_max_drop": 0.015, "total_map50_95_max_drop": 0.04, "required_metrics": 16, "coco_person_required": true},
+  "training": {"max_new_qat_jobs": 6, "max_epochs_per_job": 3, "patience": 5, "detect_logical_batch": 128, "detect_microbatch": 16, "pose_batch": 16, "optimizer": "AdamW", "added_noise": false, "new_sham_training": false},
+  "days": [
+    {"id": "D1", "depends_on": [], "tasks": ["reload_export_and_validate", "unify_parent_loader", "coverage_and_protected_ops", "terminal_monitor_and_resume", "queue_dry_run"], "max_accuracy_jobs": 1, "gate": "parent_hash_data_evaluator_and_parity_valid"},
+    {"id": "D2", "depends_on": ["D1"], "tasks": ["ten_region_special_ptq", "148_path_fixed_probe_sensitivity", "selected_special_short_qat"], "formats": ["optimal_fixed_sd4", "exact_ternary", "filterwise_twn", "paper_twn"], "max_ptq_jobs": 40, "max_probe_jobs": 592, "max_qat_jobs": 2},
+    {"id": "D3", "depends_on": ["D2"], "tasks": ["w6_w5_region_ptq", "w7_w4_optional", "sequential_backbone_neck_head_lock", "selected_short_qat"], "max_primary_ptq_jobs": 20, "max_extension_ptq_jobs": 20, "max_cumulative_ptq_jobs": 20, "single_path_accuracy_consumes_extension_budget": true, "max_qat_jobs": 2},
+    {"id": "D4", "depends_on": ["D3"], "tasks": ["lock_max_two_finalists", "optional_short_qat", "formal_validation", "export_precision_parity_and_bytes", "supported_backend_latency", "teacher_report"], "max_qat_jobs": 2, "reserved_report_hours": 8}
+  ],
+  "monitor": {"poll_seconds": 600, "initial_terminal_returns_immediately": true, "unchanged_action": "shell_wait", "on_error": "diagnose_then_verified_resume", "completion_requires_artifact_verification": true},
+  "deferred": ["exhaustive_148_layer_accuracy_all_formats", "A_SD4", "MuSGD_sweep", "new_KD", "custom_integer_kernels", "multi_seed_all_candidates"],
+  "deadline_action": "deliver measured results and mark remaining jobs pending; no fabricated cells"
+}

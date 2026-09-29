@@ -1,0 +1,29 @@
+{
+  "python": "3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "cuda_available": false,
+  "gpu": "Failed to initialize NVML: GPU access blocked by the operating system\nFailed to properly shut down NVML: GPU access blocked by the operating system",
+  "ultralytics": "8.4.90",
+  "git_revision": "a053b12c2c82567a7eb5295cb2ad4dd8a4781142",
+  "command": [
+    "/home/hplab/uxin/yolo11/yolo_binaryqk/binary_attention/cli.py",
+    "run",
+    "--variant",
+    "T0",
+    "--stage",
+    "full",
+    "--profile",
+    "official-yolo11m",
+    "--data-manifest",
+    "data/coco_full_seed42.txt",
+    "--data",
+    "data/coco-full.yaml",
+    "--source-weights",
+    "../original/weight/yolo11m.pt",
+    "--device",
+    "0",
+    "--execute"
+  ]
+}

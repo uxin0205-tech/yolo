@@ -1,0 +1,125 @@
+{
+  "dataset": {
+    "baseball_bat": "baseball bat",
+    "path": "/home/uxin0/yolo/coco2017",
+    "sports_ball": "sports ball"
+  },
+  "environment": {
+    "cuda_available": true,
+    "cuda_runtime": "12.8",
+    "driver": "591.86",
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "musgd": "ultralytics.optim.muon.MuSGD",
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.90",
+    "ultralytics_source": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/.venv/lib/python3.12/site-packages/ultralytics",
+    "vram_bytes": 17102864384,
+    "vram_free_bytes": 15894315008
+  },
+  "errors": [],
+  "fresh_process_reload": {
+    "ok": true,
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "1 3"
+  },
+  "graph": {
+    "attention_paths": [
+      "model.10.m.0.attn",
+      "model.22.m.0.1.attn"
+    ],
+    "detect_inputs": [
+      16,
+      19,
+      22
+    ],
+    "end2end": true,
+    "p3_index": 16,
+    "strides": [
+      8,
+      16,
+      32
+    ]
+  },
+  "parent": {
+    "path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/parent/best.pt",
+    "sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123"
+  },
+  "parent_study": {
+    "best_observed": {
+      "delta_vs_formal_winner": 0.0002017688624028,
+      "map50_95": 0.5069386684559859,
+      "selected": false,
+      "sha256": "c70cd1d0315518d61b6ac6b5936173f04dc5b0eadcb86b288699655434dcf9fb"
+    },
+    "completed": true,
+    "completed_at": "2026-08-18",
+    "formal_winner": {
+      "map50_95": 0.5067368995935831,
+      "reason": "Only seed 0 was requested; the trained gain cannot satisfy the three-seed mean +0.001 formal gate.",
+      "selected": true,
+      "sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123"
+    },
+    "queue": {
+      "revision": 95,
+      "succeeded": 19,
+      "total": 19
+    }
+  },
+  "training_contract": {
+    "a1_a2_b_accumulation": false,
+    "a1_a2_b_batch": 16,
+    "a1_a2_b_nbs": 16,
+    "amp": true,
+    "expected_torch": "2.11.0+cu128",
+    "expected_ultralytics": "8.4.90",
+    "fraction": 0.3,
+    "imgsz": 640,
+    "phase_c_accumulation": true,
+    "phase_c_batch": 8,
+    "phase_c_epochs": 70,
+    "phase_c_nbs": 16,
+    "phase_c_patience": 9,
+    "seed": 0,
+    "validation_batch": 8,
+    "workers": 6
+  },
+  "transfer": {
+    "compatible_tensors": 804,
+    "coverage": 0.9721886336154776,
+    "missing_tensors": [
+      "model.10.m.0.attn.normalize.knots",
+      "model.10.m.0.attn.normalize.values",
+      "model.16.p3_masf.alpha",
+      "model.16.p3_masf.context.dw3.bn.bias",
+      "model.16.p3_masf.context.dw3.bn.num_batches_tracked",
+      "model.16.p3_masf.context.dw3.bn.running_mean",
+      "model.16.p3_masf.context.dw3.bn.running_var",
+      "model.16.p3_masf.context.dw3.bn.weight",
+      "model.16.p3_masf.context.dw3.conv.weight",
+      "model.16.p3_masf.context.dw5.bn.bias",
+      "model.16.p3_masf.context.dw5.bn.num_batches_tracked",
+      "model.16.p3_masf.context.dw5.bn.running_mean",
+      "model.16.p3_masf.context.dw5.bn.running_var",
+      "model.16.p3_masf.context.dw5.bn.weight",
+      "model.16.p3_masf.context.dw5.conv.weight",
+      "model.16.p3_masf.context.project.bn.bias",
+      "model.16.p3_masf.context.project.bn.num_batches_tracked",
+      "model.16.p3_masf.context.project.bn.running_mean",
+      "model.16.p3_masf.context.project.bn.running_var",
+      "model.16.p3_masf.context.project.bn.weight",
+      "model.16.p3_masf.context.project.conv.weight",
+      "model.22.m.0.1.attn.normalize.knots",
+      "model.22.m.0.1.attn.normalize.values"
+    ],
+    "source_tensors": 806,
+    "target_tensors": 827,
+    "unexpected_tensors": [
+      "model.10.m.0.attn.normalize.endpoint_table",
+      "model.22.m.0.1.attn.normalize.endpoint_table"
+    ]
+  },
+  "valid": true,
+  "warnings": []
+}

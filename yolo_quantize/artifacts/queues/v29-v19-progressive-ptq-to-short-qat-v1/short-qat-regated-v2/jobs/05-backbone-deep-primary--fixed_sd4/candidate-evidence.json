@@ -1,0 +1,94 @@
+{
+  "formal_validation": false,
+  "results": {
+    "backbone-deep-primary--fixed_sd4": {
+      "assignments": [
+        {
+          "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+          "format_id": "fixed_sd4",
+          "path": "graph.model.6.cv2.conv",
+          "region": "backbone_deep",
+          "stage_id": "backbone-deep-primary",
+          "weight_format_id": "fixed-sd4"
+        }
+      ],
+      "candidate_id": "backbone-deep-primary--fixed_sd4",
+      "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "fixed_sd4",
+      "gate": {
+        "decision": "recover",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.005283893903877956,
+          "bbat/ball/box/map50_95": 0.0055614995788974,
+          "bbat/ball/pose/map50": 0.002578584988567334,
+          "bbat/ball/pose/map50_95": 0.0025943687331247967,
+          "bbat/bat/box/map50": -0.0013903407411047786,
+          "bbat/bat/box/map50_95": -0.004045225900466298,
+          "bbat/bat/pose/map50": -0.0013272828388747326,
+          "bbat/bat/pose/map50_95": -0.0013006643164351628,
+          "bbat/box/map50": 0.0019467765813865334,
+          "bbat/box/map50_95": 0.0007581368392155508,
+          "bbat/pose/map50": 0.0006256510748463562,
+          "bbat/pose/map50_95": 0.0006468522083447059,
+          "coco/box/map50": -0.004387429241048402,
+          "coco/box/map50_95": -0.003396894941122608,
+          "coco/person/box/map50": -0.0006210450889596597,
+          "coco/person/box/map50_95": -0.001421121518819568
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.01267365418642774,
+          "bbat/ball/box/map50_95": 0.0012957592326300338,
+          "bbat/ball/pose/map50": 0.011567366087091968,
+          "bbat/ball/pose/map50_95": 0.011567366087091968,
+          "bbat/bat/box/map50": -0.0020212470591650655,
+          "bbat/bat/box/map50_95": -0.008524048647781002,
+          "bbat/bat/pose/map50": -0.0015078867858761003,
+          "bbat/bat/pose/map50_95": -0.0021222491230580287,
+          "bbat/box/map50": 0.005326203563631227,
+          "bbat/box/map50_95": -0.003614144707575484,
+          "bbat/pose/map50": 0.005029739650608045,
+          "bbat/pose/map50_95": 0.004722558482016859,
+          "coco/box/map50": -0.018520784012383218,
+          "coco/box/map50_95": -0.01634738088334886,
+          "coco/person/box/map50": -0.010259196426304129,
+          "coco/person/box/map50_95": -0.011354079255576965
+        },
+        "worst_incremental_map50_95_delta": -0.0040452259,
+        "worst_incremental_map50_delta": -0.004387429241,
+        "worst_total_map50_95_delta": -0.016347380883,
+        "worst_total_map50_delta": -0.018520784012
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9710562206931707,
+        "bbat/ball/box/map50_95": 0.7803359414351678,
+        "bbat/ball/pose/map50": 0.9710562206931707,
+        "bbat/ball/pose/map50_95": 0.9710562206931707,
+        "bbat/bat/box/map50": 0.992057093359185,
+        "bbat/bat/box/map50_95": 0.8853206404220924,
+        "bbat/bat/pose/map50": 0.992570453632474,
+        "bbat/bat/pose/map50_95": 0.991956091295292,
+        "bbat/box/map50": 0.9815566570261778,
+        "bbat/box/map50_95": 0.8328282909286301,
+        "bbat/pose/map50": 0.9818133371628224,
+        "bbat/pose/map50_95": 0.9815061559942315,
+        "coco/box/map50": 0.6521982231450376,
+        "coco/box/map50_95": 0.4816749555875733,
+        "coco/person/box/map50": 0.8291503910504394,
+        "coco/person/box/map50_95": 0.6090274091668719
+      },
+      "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-deep-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "metrics_sha256": "e5897829bcc57a3b98b45277da4ec4817df372334017610113791707a6e83be9",
+      "packed_bytes": 22491328,
+      "queue_role": "main",
+      "regated_from_gate_decision": "reject",
+      "savings_from_locked_parent_bytes": 196608,
+      "seconds": 72.95891687320545,
+      "status": "completed",
+      "weight_format_id": "fixed-sd4"
+    }
+  },
+  "schema_version": 1,
+  "source_queue": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json",
+  "source_queue_sha256": "e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06",
+  "status": "completed"
+}

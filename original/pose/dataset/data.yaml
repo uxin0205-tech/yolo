@@ -1,0 +1,15 @@
+train: train/images
+val: valid/images
+
+kpt_shape: [2, 3]
+flip_idx: [0, 1]
+
+nc: 2
+names: ['ball', 'bat']
+
+roboflow:
+  workspace: baseball-yalwh
+  project: bbt5
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/baseball-yalwh/bbt5/dataset/1

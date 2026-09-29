@@ -1,0 +1,88 @@
+# C0-Control/C1/C2/C3 共用固定 manifest；fraction 必須保持 1.0。
+schema_version: 3
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+kind: training_template
+config_id: float-screen-20
+title_zh: C0–C3 Float 固定20%架構初篩
+summary_zh: 使用相同 seed 0 manifests 與 winner recipe 比較相對趨勢；不產生正式 C_best。
+phase: C
+status: blocked_until_handoff_screen_manifests_and_user_gpu_authorization
+model_scale: m
+candidate_policy:
+  base_candidates: [C0, C1, C2, C3]
+  resolved_from_handoff: true
+  same_recipe_for_all: true
+  screening_only: true
+  automatic_rejection: false
+execution:
+  device: "0"
+  force_cuda_hidden: false
+  requires_execute_flag: true
+  requires_gpu_authorization: true
+  pose_opt_in_required: true
+  formal_training: false
+routes:
+  detect:
+    enabled_by_default: true
+    loss_on_dataset: coco2017-screen-20
+  pose:
+    enabled_by_default: false
+    loss_on_dataset: bbat5-pose-screen-20
+formal_ranking_requires: []
+datasets:
+  detect: configs/data/coco2017-screen-20.yaml
+  pose: configs/data/bbat5-pose-screen-20.yaml
+  diagnostic_detect: configs/data/bbat5-detect-screen-20.yaml
+recipe:
+  source: handoff
+  task_ratio: {source: handoff, value: null}
+  optimizer: {source: handoff, value: null}
+  lr0: {source: handoff, value: null}
+  lrf: {source: handoff, value: null}
+  momentum: {source: handoff, value: null}
+  weight_decay: {source: handoff, value: null}
+  warmup_epochs: {source: handoff, value: null}
+  nbs: {source: handoff, value: null}
+  losses: {source: handoff, value: null}
+  augmentation: {source: handoff, value: null}
+  freeze_policy: {source: handoff, value: null}
+  amp: {source: handoff, value: null}
+  deterministic: {source: local, value: true}
+  seed: {source: local, value: 0}
+  optimizer_steps: {source: handoff, value: null}
+  validation_interval: {source: handoff, value: null}
+adjustable:
+  batch: {source: handoff, value: null}
+  fraction: {source: local, value: 1.0}
+  scale: {source: handoff, value: null}
+  cache: {source: local, value: false}
+  imgsz: {source: handoff, value: null}
+  device: {source: local, value: "0"}
+  workers: {source: local, value: 8}
+  epochs: {source: handoff, value: null}
+  patience: {source: local, value: 0}
+validation:
+  selection_backend: screening_float_model
+  screening_only: true
+  automatic_acceptance: false
+  fixed_f1_threshold_source: c0_control_screen_search_val
+  metrics:
+    - map50
+    - map50_95
+    - per_class_ap50
+    - per_class_ap50_95
+    - precision
+    - recall
+    - per_class_f1
+    - macro_f1
+    - micro_f1
+  formal_split_used: false
+transition:
+  mode: fresh
+  input: c0_handoff
+  optimizer_state: new
+lineage:
+  require_all_hashes: true
+  require_screening_manifest_hash: true
+  effective_yaml_output: artifacts/effective-configs

@@ -1,0 +1,40 @@
+{
+  "attention_type": "ResidualDualFullBasisAttention",
+  "base_variant": "T4",
+  "baseline_epochs": 600,
+  "baseline_source": "original/weight/yolo11m.pt",
+  "bias_type": "none",
+  "config_hash": "408e3cb1e9ea50918b08039d0d2454cbcf7fb9f4148e98005ca6ec0faae14f5e",
+  "dataset_scope": "COCO2017 train2017/val2017 full",
+  "distillation_type": "feature",
+  "engineering_gates": "not executed by plan",
+  "formal_epochs": 10,
+  "id": "T6-F",
+  "initialization": "full-precision source checkpoint fine-tuning",
+  "kd_components": [
+    "feature"
+  ],
+  "kd_target_family": "T1-T5",
+  "magnitude_bits": null,
+  "num_binary_qk": 4,
+  "num_pv": 1,
+  "num_softmax": 1,
+  "p_bits": null,
+  "paper_profile": "BinaryAttention QAT fine-tuning; batch=128, lr=5e-5, min_lr=5e-6, wd=0.02",
+  "paper_reference_epochs": 300,
+  "plan_name": "YOLO11 BinaryAttention complete 10-epoch attention-only QAT plan",
+  "qk_mode": "dual",
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "residual_basis_channel_per_token",
+    "v8_scale": "none"
+  },
+  "run_epochs": 10,
+  "teacher": "full-precision source checkpoint",
+  "trainable_scope": "attention_only",
+  "use_distillation": true,
+  "use_qat": true,
+  "v_bits": null
+}

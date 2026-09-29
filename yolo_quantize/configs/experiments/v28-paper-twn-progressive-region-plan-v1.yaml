@@ -1,0 +1,188 @@
+schema_version: 1
+plan_id: v28-paper-twn-progressive-region-plan-v1
+date: '2026-09-04'
+status: cpu_shortlist_ready_gpu_waiting_for_v19_parent_lock
+execution_authorized: false
+formal_training: false
+formal_validation: false
+
+purpose: 以backbone到neck再到head的順序，逐path判斷Paper-TWN可替代位置，避免整區一次三元化。
+
+prerequisites:
+  - v19_w8_qat_finished_and_reviewed
+  - locked_poly_shift_a8_weight_parent_manifest
+  - exact_scaled_ternary_cpu_baseline_completed
+  - all_candidate_and_control_paths_identical
+
+frozen_evidence:
+  paper_static_profile:
+    path: artifacts/reports/weight-format-analysis-poly-shift-a8-main-v2.json
+    sha256: 306deaa51d29f16c3ed49b1a442f513fb09813a0966ba1960544816cfde48f24
+  old_static_shortlist:
+    path: artifacts/manifests/paper-twn-routing-candidates-v1.yaml
+    sha256: 05540a7fcc1f5c5adbc87b65a6c49d90446162d526cda5ac634746fe9885f145
+    disposition: frozen_failed_task_level_evidence
+  old_task_result:
+    path: artifacts/reports/v24-poly-shift-special-format-route-dual-regate-v1.json
+    sha256: bdd9cd2169e4f1827fdcf71ee317ed5c63cfe5dfd24baba46cb111fa193feade
+    outcomes:
+      safe_pose_predictor_group: {decision: reject, worst_map50: -0.06437008036486946, worst_map50_95: -0.11151597612591868}
+      balanced_pose_group: {decision: recover, worst_map50: -0.037325195046028936, worst_map50_95: -0.07497822185246139}
+      exact_w4_same_safe_paths: {decision: green, worst_map50: -0.008532110800092196, worst_map50_95: -0.01239444599145878}
+      exact_w4_same_balanced_paths: {decision: green, worst_map50: -0.008532110800092196, worst_map50_95: -0.01746555933929972}
+  sd4_supported_path_groups:
+    path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml
+    interpretation: 提供有另一種非均勻codebook支持的候選母集合，不代表ternary通過。
+
+selection_principles:
+  - static_error_is_ranking_only_not_a_map_gate
+  - use_sd4_supported_paths_plus_one_predeclared_sentinel_per_stage
+  - probe_single_path_before_cumulative_group
+  - rerun_the_complete_cumulative_policy_after_every_addition
+  - lock_backbone_before_neck_and_lock_neck_before_head
+  - retain_previous_w8_or_fp32_when_no_ternary_candidate_passes
+  - require_meaningful_packed_byte_saving_for_final_promotion
+
+formats_per_exact_path_set:
+  unchanged_parent: {role: baseline}
+  exact_uniform_w4: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}
+  twn_v2_0_70_layerwise_static_proxy:
+    {family: paper_twn, bits: 2, threshold_multiplier: 0.7, granularity: per_tensor, paper_faithfulness: simplified_static_proxy}
+  twn_v3_0_75_filterwise_static_initialization:
+    {family: twn_filterwise, bits: 2, threshold_multiplier: 0.75, granularity: per_output_filter, implementation_status: pending}
+  exact_scaled_ternary: {family: exact_scaled_ternary, bits: 2, scale_method: optimal_scaled_codebook, granularity: per_tensor}
+
+stages:
+  backbone:
+    order: [backbone_early, backbone_deep, backbone_attention_safe_sentinel]
+    routes:
+      backbone_early:
+        source: {path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml, list_key: backbone_early}
+        micro_order:
+          - graph.model.2.m.0.m.0.cv2.conv
+          - graph.model.2.m.0.m.0.cv1.conv
+        paper_distribution_sentinel: [graph.model.4.m.0.cv3.conv]
+        note: micro_order是SD4-supported集合內的Paper-TWN NRMSE排序；sentinel稽核不同選法。
+      backbone_deep:
+        source: {path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml, list_key: backbone_deep}
+        micro_order:
+          - graph.model.8.m.0.m.1.cv1.conv
+          - graph.model.8.m.0.m.0.cv2.conv
+        paper_distribution_sentinel: [graph.model.8.m.0.cv2.conv]
+        note: micro_order是SD4-supported集合內的Paper-TWN NRMSE排序；sentinel不代表promotion。
+      backbone_attention_safe_sentinel:
+        paths: [graph.model.10.m.0.attn.proj.conv]
+        initial_action: defer
+        reason: 該region連isolated W8都未通過total gate；Binary Q/K仍受保護。
+    lock_after_stage: true
+  neck:
+    prerequisite: locked_backbone_policy
+    order: [neck, masf_weight_only, neck_attention_safe]
+    routes:
+      neck:
+        source: {path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml, list_key: neck}
+        micro_order:
+          - graph.model.13.m.0.m.0.cv1.conv
+          - graph.model.19.m.0.m.0.cv1.conv
+          - graph.model.16.cv1.conv
+        paper_distribution_sentinel: [graph.model.13.m.0.cv2.conv]
+      masf_weight_only:
+        paths:
+          - graph.model.16.p3_masf.context.project.conv
+          - graph.model.16.p3_masf.context.dw5.conv
+          - graph.model.16.p3_masf.context.dw3.conv
+        topology_changed: false
+      neck_attention_safe:
+        source: {path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml, list_key: neck_attention_safe}
+        extra_static_probe: [graph.model.22.m.0.1.attn.proj.conv]
+        protected_subpaths: [binary_q, binary_k]
+    lock_after_stage: true
+  head:
+    prerequisite: locked_backbone_and_neck_policy
+    order: [detect_one2one_tower, detect_one2one_predictor, pose_one2one_tower, pose_one2one_predictor]
+    routes:
+      detect_one2one_tower:
+        source: {path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml, list_key: detect_one2one_tower}
+      detect_one2one_predictor:
+        source: {path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml, list_key: detect_one2one_predictor}
+        required_path: graph.model.23.detect_head.one2one_cv3.2.2
+        reason: 相同path的Fixed-SD4已通過；ternary仍須獨立驗證。
+      pose_one2one_tower:
+        single_path_only_initially:
+          - graph.model.23.pose_head.one2one_cv3.2.1.0.conv
+          - graph.model.23.pose_head.one2one_cv3.1.1.0.conv
+          - graph.model.23.pose_head.one2one_cv3.0.1.0.conv
+        old_combined_route_forbidden: true
+      pose_one2one_predictor:
+        single_path_only_initially:
+          - graph.model.23.pose_head.one2one_cv3.2.2
+          - graph.model.23.pose_head.one2one_cv2.2.2
+          - graph.model.23.pose_head.one2one_cv3.0.2
+        old_safe_group_forbidden: true
+    lock_after_stage: true
+
+dynamic_racing:
+  round_0_cpu:
+    scope: all_148_deployment_paths
+    formats: [twn_v2_0_70_layerwise_static_proxy, twn_v3_0_75_filterwise_static_initialization, exact_scaled_ternary, exact_uniform_w4]
+    gpu: false
+  round_1_single_path_search:
+    action: 每個region先測排名第一path與一個sentinel。
+    promote_if: dual_metric_green_and_not_dominated
+  round_2_cumulative_paths:
+    action: 只有上一個single path green才加入下一path並完整重跑。
+    stop_on_first_failure: true
+  round_3_region_lock:
+    action: 在accuracy差距0.002內選packed bytes較小者；否則選精度較高者。
+  gpu_search_cell_caps:
+    backbone: 12
+    neck: 12
+    head: 16
+    total_before_qat: 40
+
+gates:
+  reference: accepted_full35
+  activation_replacement_included: true
+  all_eight_map50_each_at_least: -0.015
+  all_eight_map50_95_each_at_least: -0.04
+  intermediate_before_head_required_worst_map50: -0.013
+  intermediate_before_head_required_worst_map50_95: -0.035
+  mean_cannot_override_worst_task: true
+  matched_path_controls_required: true
+
+qat_promotion:
+  ptq_green: no_training_required
+  ptq_recover: eligible_only_if_worst_map50_at_least_minus_0.04_and_capacity_gain_is_material
+  ptq_reject: no_direct_long_qat
+  maximum_short_candidates: 8
+  composition: {main_candidates: 6, preregistered_sentinels: 2}
+  short_recipe:
+    epochs: 15
+    patience: 5
+    schedule: {fp32: 3, progressive_ramp: 6, fully_ternary: 6}
+    from_scratch: false
+    optimizer: AdamW
+    matched_sham_required: true
+  separate_algorithms:
+    - learned_alpha_layerwise_twn_project_extension
+    - faithful_filterwise_twn
+    - channel_twn
+    - ttq
+
+report_columns:
+  - stage
+  - locked_parent_id_and_sha256
+  - region_and_exact_paths
+  - algorithm_and_scale_granularity
+  - eight_map50_total_and_incremental_deltas
+  - eight_map50_95_total_and_incremental_deltas
+  - worst_metric_key
+  - packed_bytes_and_compression_ratio
+  - nrmse_cosine_zero_ratio_code_occupancy
+  - decision_and_rollback_target
+
+stop_rules:
+  gpu_must_wait_for_v19: true
+  formal_validation: false
+  no_automatic_long_qat: true
+  no_native_speed_claim: true

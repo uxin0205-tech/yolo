@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "arms": {
+    "control": {
+      "trace": "e2adc77c5e398c4213900fcfca1eb868981e081dfeaac27dc8e8260e3f530299",
+      "optimizer_steps": 4626,
+      "ema_updates": 12026,
+      "criterion_updates": 5,
+      "update_ratios": {
+        "p3_head": 4.733851058673555e-06
+      },
+      "gradient_norms": {
+        "p3_head": 264.70851237795796,
+        "context": 0.0,
+        "alpha": 0.0
+      },
+      "export_cpu160_reload_exact": true
+    },
+    "fork": {
+      "trace": "e2adc77c5e398c4213900fcfca1eb868981e081dfeaac27dc8e8260e3f530299",
+      "optimizer_steps": 4626,
+      "ema_updates": 12026,
+      "criterion_updates": 5,
+      "update_ratios": {
+        "p3_head": 4.715984639255078e-06,
+        "context": 1.0203555121060929e-05,
+        "alpha": 0.0007490063039357209
+      },
+      "gradient_norms": {
+        "p3_head": 265.0707232356719,
+        "context": 0.15039345056079123,
+        "alpha": 0.26484679780179754
+      },
+      "export_cpu160_reload_exact": true
+    }
+  }
+}

@@ -1,0 +1,72 @@
+schema_version: 1
+release_date: 2026-08-23
+commit_subject: 5090 CLEAR WEIGHT 0823
+
+training_authority:
+  dataset_id: bbat5-v1
+  registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+  spec_version: 2.0.3
+  spec_sha256: 8b07bdb4195e88c8c9bf4a95dab782c75a77854ef5022ede4757290348a95471
+  data_lineage_spec_version: 2.0.0
+  data_lineage_spec_sha256: 75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b
+
+included:
+  raw_pose:
+    path: original/pose/dataset
+    regular_files: 13297
+    images: 6647
+    labels: 6647
+  historical_detect:
+    path: original/pose/detect_dataset
+    regular_files: 26592
+    paired_images: 6647
+    paired_labels: 6647
+  canonical:
+    path: original/pose/derived/bbat5-v1
+    regular_files: 13312
+    relative_image_symlinks: 13294
+    pose_images: 6647
+    detect_images: 6647
+    formal_train_images: 5964
+    formal_val_images: 683
+    source_group_overlap: 0
+    patched_coordinates: 4
+  total:
+    regular_files: 53204
+    relative_symlinks: 13294
+
+excluded:
+  - path: yolo_achitechure/achitechure_2/artifacts/datasets/bbat5-v1
+    previous_tracked_paths: 26612
+    previous_blob_bytes: 724846884
+    current_tree_paths: 0
+    reason: superseded_duplicate_dataset_snapshot
+  - path: original/weight/yolo11m.pt
+    bytes: 40684120
+    sha256: d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95
+    reason: weight_forbidden
+  - path: original/pose/weight/yolo11m_bat.pt
+    bytes: 42235795
+    sha256: 7a8c720b8f5acef3a3cb465fbffb1b41b2dd3fee4519600389cdcd0d58c54009
+    reason: weight_forbidden
+  - path: original/pose/dataset/valid/labels.cache
+    bytes: 179238
+    reason: reconstructable_ultralytics_cache
+  - path: original/pose/detect_dataset/coco80/valid/labels.cache
+    bytes: 145658
+    reason: reconstructable_ultralytics_cache
+  - path: original/pose/detect_dataset.zip
+    bytes: 726351400
+    sha256: 4f63b6248bfc326cb81a50f6a161ba182aeb01c45e405c26015ac804ff4ccb2c
+    reason: redundant_archive_exceeds_github_100mb
+
+validation:
+  source_untouched: true
+  archive_integrity: passed
+  absolute_symlinks_in_git_tree: 0
+  broken_symlinks_in_git_tree: 0
+  forbidden_artifacts_in_git_tree: 0
+  files_over_99mb_in_git_tree: 0
+  architecture_dataset_duplicate_paths: 0
+  sole_bbat5_asset_root: /home/uxin/yolo/original/pose
+  active_bbat5_data_roots_outside_asset_root: 0

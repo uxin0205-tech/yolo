@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "plan_id": "cumulative-0908-detect_one2one_tower-v1",
+  "date": "2026-09-08",
+  "execution_authorized": true,
+  "formal_training": false,
+  "formal_validation": false,
+  "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-dual-v1",
+  "execution_authorization": {
+    "authorization_id": "user-0908-continue-bounded-cumulative",
+    "validation_roles": [
+      "candidate"
+    ],
+    "candidate_ids": [
+      "detect_one2one_tower"
+    ],
+    "route_ids": [
+      "detect_one2one_tower-fixed-sd4",
+      "detect_one2one_tower-twn-v3-0.75-filterwise"
+    ],
+    "training": false,
+    "stop_after": "cumulative_dual_gate"
+  },
+  "upstream": {
+    "base_search_plan": {
+      "path": "configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml",
+      "sha256": "3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985"
+    },
+    "weight_plan": {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v9.yaml",
+      "sha256": "9bc7084e9217754153cc2ad69e83e6ae658304944ffa0ab6318ebd57c1d5d394"
+    },
+    "reference_search_report": {
+      "path": "artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json",
+      "sha256": "738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2",
+      "reuse_roles": [
+        "accepted",
+        "matched"
+      ]
+    },
+    "reference_map50_regate": {
+      "path": "artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json",
+      "sha256": "67fce27506fac33e7655e791d815c04d7030ba213978a1ab27873369a396573e"
+    },
+    "comparison_candidates": [
+      {
+        "path": "artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+        "sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+        "candidate_id": "accuracy-a05-add-pose-tower-w8"
+      },
+      {
+        "path": "artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+        "sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+        "candidate_id": "compression-c04-add-pose-tower-w8"
+      },
+      {
+        "path": "artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+        "sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+        "candidate_id": "accuracy-a09-add-neck-w8"
+      }
+    ]
+  },
+  "activation": {
+    "default": "qsilu_pq",
+    "bits": 8,
+    "signed_codes": false,
+    "region_assignments": {},
+    "policy_id": "qsilu_pq--lsq-plus-a8",
+    "checkpoint": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/inference/best_joint.pt",
+      "sha256": "8c1f3652fd21c0e38221cfc3acba7ee013c5e88df641b9331c33796f6f11b66c"
+    }
+  },
+  "routes": {
+    "detect_one2one_tower-fixed-sd4": {
+      "manifest": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-cumulative-0908/generated/detect_one2one_tower-fixed-sd4-paths.json",
+        "sha256": "8c560df2b46ca144e0386906070995a721538669e16c75fca840aef006da0c86"
+      },
+      "list_key": "paths"
+    },
+    "detect_one2one_tower-twn-v3-0.75-filterwise": {
+      "manifest": {
+        "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-cumulative-0908/generated/detect_one2one_tower-twn-v3-0.75-filterwise-paths.json",
+        "sha256": "597ba9c0e782e3f0b8601de51ed5443824bd725d3197072ad468f93596933071"
+      },
+      "list_key": "paths"
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": "detect_one2one_tower",
+      "region_defaults": [],
+      "path_routes": [
+        {
+          "route_id": "detect_one2one_tower-fixed-sd4",
+          "format": {
+            "family": "fixed_sd4",
+            "scale_method": "optimal_scaled_codebook"
+          }
+        },
+        {
+          "route_id": "detect_one2one_tower-twn-v3-0.75-filterwise",
+          "format": {
+            "family": "twn_filterwise",
+            "threshold_multiplier": 0.75
+          }
+        }
+      ]
+    }
+  ],
+  "diagnostic": {
+    "manifest": "inherit_weight_plan",
+    "fixed_probe_per_task": 1,
+    "all_finite_required": true,
+    "same_structure_required": true,
+    "selection_claim": false
+  },
+  "validation": {
+    "source": "inherit_base_search_plan",
+    "backend": "bittrue",
+    "image_size": 640,
+    "batch": {
+      "detect": 32,
+      "pose": 16
+    },
+    "workers": {
+      "detect": 4,
+      "pose": 8
+    },
+    "plots": false,
+    "save_coco_json": false,
+    "augmentation": false
+  },
+  "gates": {
+    "all_eight_metrics_required": true,
+    "metric_family": "map50",
+    "activation_replacement_included": true,
+    "total_max_drop": 0.015,
+    "w8_incremental_max_drop": 0.01,
+    "sham_max_absolute_drift": 0.01,
+    "recovery_floor": 0.04
+  },
+  "selection": {
+    "hard_gate_first": true,
+    "objectives": [
+      "maximize_worst_total_map50_delta",
+      "minimize_total_packed_weight_bytes"
+    ],
+    "accuracy_tolerance": 0.002,
+    "roles": [
+      "accuracy",
+      "balanced",
+      "hardware"
+    ],
+    "mean_metric_can_override_worst_task": false
+  },
+  "successor_provenance": {
+    "phase": "special",
+    "parent": "v35-qsilu-a8-mixed-11path-qat-epoch3",
+    "activation": "qsilu_pq_a8",
+    "cpu_profile": {
+      "path": "artifacts/reports/v36-qsilu-v35-parent-148-layer-9format-cpu-v1.json",
+      "sha256": "e646c2b2ae994ec082fdf667e796bf3538998a1d37ca69c5643b2542e520d295"
+    },
+    "full_coverage": true,
+    "all_deployment_paths_default_to": "w8",
+    "special_formats_before_uniform": true,
+    "map50_max_drop": 0.015,
+    "map50_95_max_drop": 0.04,
+    "formal_training": false,
+    "formal_validation": false
+  },
+  "locked_qat_parent": {
+    "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/parent-manifest.json",
+    "sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a"
+  },
+  "continuous_contract": {
+    "blueprint": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-cumulative-0908/plan.json",
+      "sha256": "c2e83797f85e858cf6cec7c897dd75f22579e7b49823a4e8eda461e5ac7982e1"
+    },
+    "unmodified_paths": "inherit_locked_quantized_parent_without_reprojection",
+    "stage": "detect_one2one_tower"
+  }
+}

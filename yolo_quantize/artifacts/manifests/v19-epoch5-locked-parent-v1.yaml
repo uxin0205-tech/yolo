@@ -1,0 +1,35 @@
+schema_version: 1
+parent_id: v19-poly-shift-a8-all-w8-qat-epoch5
+status: locked_search_parent
+formal_validation: false
+selected_epoch: 5
+activation:
+  name: poly_shift
+  bits: 8
+  quantizer: lsq_plus_a8
+weight_policy:
+  format_id: all-w8
+  deployment_modules: 148
+  deployment_weight_elements: 22571840
+plan:
+  path: configs/experiments/v19-poly-shift-all-w8-qat-pilot-v1.yaml
+  sha256: 2745da54f419b529233da5d149c617981d9ad9ffe55b6b5291d84676e47e10a8
+completion:
+  path: artifacts/runs/qat/v19-poly-shift-all-w8-qat-pilot-v1-qat-seed1/qat-experiment.json
+  sha256: 5d26c51ea161ce7dd7a12e6eb18cd890abae79372820005601672292a97d4c34
+metrics:
+  path: artifacts/runs/qat/v19-poly-shift-all-w8-qat-pilot-v1-qat-seed1/validation/epoch-0005/bittrue/metrics.json
+  sha256: c626ec9b5e1c84a04882032a9856d1c9fd2282b52c684b26c75c522756ffe42f
+checkpoints:
+  full_resume:
+    path: artifacts/runs/qat/v19-poly-shift-all-w8-qat-pilot-v1-qat-seed1/checkpoints/best_joint.pt
+    sha256: 61f70406e5d5412530298ad26d585dd856942e68830be127891fd61e0877936e
+  inference:
+    path: artifacts/runs/qat/v19-poly-shift-all-w8-qat-pilot-v1-qat-seed1/inference/best_joint.pt
+    sha256: 51a62d5ce60e104e0bf593fbd34769d280ab39cb5b5cbcff9b3f675709b5435b
+gate:
+  decision: green
+  map50_max_drop: 0.015
+  map50_95_max_drop: 0.04
+  worst_map50_delta: -0.014133354771334816
+  worst_map50_95_delta: -0.012950485942226253

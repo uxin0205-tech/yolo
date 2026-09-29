@@ -1,0 +1,25 @@
+{
+  "status": "awaiting_analysis",
+  "jobs": [
+    {
+      "name": "a0-control-recovery-v2",
+      "arm": "control",
+      "status": "complete",
+      "last_epoch": 3
+    },
+    {
+      "name": "a0-qk-recovery-v2",
+      "arm": "qk",
+      "status": "complete",
+      "last_epoch": 3
+    }
+  ],
+  "monitor_wait_seconds": 600,
+  "accuracy_winner": null,
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "planned_endpoint_epoch": 3,
+  "ball_bat_gate": false
+}

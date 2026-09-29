@@ -1,0 +1,1216 @@
+schema_version: 1
+plan_id: v36-qsilu-full-coverage-special-ptq-v1
+date: '2026-09-06'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-dual-v1
+execution_authorization:
+  authorization_id: user-2026-09-06-v36-special
+  validation_roles:
+  - candidate
+  candidate_ids:
+  - special-backbone-fixed-sd4
+  - special-backbone-exact-ternary
+  - special-backbone-twn-v3
+  - special-backbone-paper-twn-v2
+  - special-neck-fixed-sd4
+  - special-neck-exact-ternary
+  - special-neck-twn-v3
+  - special-neck-paper-twn-v2
+  - special-head-fixed-sd4
+  - special-head-exact-ternary
+  - special-head-twn-v3
+  - special-head-paper-twn-v2
+  route_ids:
+  - fixed-sd4-neck-attention
+  - fixed-sd4-detect-tower
+  - fixed-sd4-detect-predictor
+  - layer-backbone-high
+  - layer-neck-high
+  - layer-head-high
+  - special-backbone-fixed-sd4
+  - special-backbone-exact-ternary
+  - special-backbone-twn-v3
+  - special-backbone-paper-twn-v2
+  - special-neck-fixed-sd4
+  - special-neck-exact-ternary
+  - special-neck-twn-v3
+  - special-neck-paper-twn-v2
+  - special-head-fixed-sd4
+  - special-head-exact-ternary
+  - special-head-twn-v3
+  - special-head-paper-twn-v2
+  training: false
+  stop_after: special_dual_regate
+upstream:
+  base_search_plan:
+    path: configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml
+    sha256: 3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v9.yaml
+    sha256: 9bc7084e9217754153cc2ad69e83e6ae658304944ffa0ab6318ebd57c1d5d394
+  reference_search_report:
+    path: artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json
+    sha256: 738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2
+    reuse_roles:
+    - accepted
+    - matched
+  reference_map50_regate:
+    path: artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json
+    sha256: 67fce27506fac33e7655e791d815c04d7030ba213978a1ab27873369a396573e
+  comparison_candidates:
+  - path: artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json
+    sha256: 2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b
+    candidate_id: accuracy-a05-add-pose-tower-w8
+  - path: artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json
+    sha256: 2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b
+    candidate_id: compression-c04-add-pose-tower-w8
+  - path: artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json
+    sha256: 2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b
+    candidate_id: accuracy-a09-add-neck-w8
+activation:
+  default: qsilu_pq
+  bits: 8
+  signed_codes: false
+  region_assignments: {}
+  policy_id: qsilu_pq--lsq-plus-a8
+  checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+    sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+routes:
+  fixed-sd4-neck-attention:
+    manifest: &id001
+      path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml
+      sha256: 33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665
+    list_key: neck_attention_safe
+  fixed-sd4-detect-tower:
+    manifest: *id001
+    list_key: detect_one2one_tower
+  fixed-sd4-detect-predictor:
+    manifest: *id001
+    list_key: detect_one2one_predictor
+  layer-backbone-high:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-backbone-high
+  layer-neck-high:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-neck-high
+  layer-head-high:
+    manifest:
+      path: artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml
+      sha256: c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594
+    list_key: layer-head-high
+  special-backbone-fixed-sd4:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-backbone-fixed-sd4
+  special-backbone-exact-ternary:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-backbone-exact-ternary
+  special-backbone-twn-v3:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-backbone-twn-v3
+  special-backbone-paper-twn-v2:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-backbone-paper-twn-v2
+  special-neck-fixed-sd4:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-neck-fixed-sd4
+  special-neck-exact-ternary:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-neck-exact-ternary
+  special-neck-twn-v3:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-neck-twn-v3
+  special-neck-paper-twn-v2:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-neck-paper-twn-v2
+  special-head-fixed-sd4:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-head-fixed-sd4
+  special-head-exact-ternary:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-head-exact-ternary
+  special-head-twn-v3:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-head-twn-v3
+  special-head-paper-twn-v2:
+    manifest:
+      path: artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml
+      sha256: 32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab
+    list_key: special-head-paper-twn-v2
+candidates:
+- candidate_id: special-backbone-fixed-sd4
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-backbone-fixed-sd4
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: special-backbone-exact-ternary
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-backbone-exact-ternary
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+- candidate_id: special-backbone-twn-v3
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-backbone-twn-v3
+    format:
+      family: twn_filterwise
+      threshold_multiplier: 0.75
+- candidate_id: special-backbone-paper-twn-v2
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-backbone-paper-twn-v2
+    format:
+      family: paper_twn
+      threshold_multiplier: 0.7
+- candidate_id: special-neck-fixed-sd4
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-neck-fixed-sd4
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: special-neck-exact-ternary
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-neck-exact-ternary
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+- candidate_id: special-neck-twn-v3
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-neck-twn-v3
+    format:
+      family: twn_filterwise
+      threshold_multiplier: 0.75
+- candidate_id: special-neck-paper-twn-v2
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-neck-paper-twn-v2
+    format:
+      family: paper_twn
+      threshold_multiplier: 0.7
+- candidate_id: special-head-fixed-sd4
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-head-fixed-sd4
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+- candidate_id: special-head-exact-ternary
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-head-exact-ternary
+    format:
+      family: exact_scaled_ternary
+      scale_method: optimal_scaled_codebook
+- candidate_id: special-head-twn-v3
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-head-twn-v3
+    format:
+      family: twn_filterwise
+      threshold_multiplier: 0.75
+- candidate_id: special-head-paper-twn-v2
+  region_defaults:
+  - region: backbone_early
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_deep
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: backbone_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: masf
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: neck_attention_safe
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: detect_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_tower
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  - region: pose_one2one_predictor
+    format:
+      family: uniform
+      bits: 8
+      scale_method: optimal_scaled_codebook
+  path_routes:
+  - route_id: fixed-sd4-neck-attention
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-tower
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: fixed-sd4-detect-predictor
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-backbone-high
+    format:
+      family: fixed_sd4
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-neck-high
+    format:
+      family: uniform
+      bits: 6
+      scale_method: optimal_scaled_codebook
+  - route_id: layer-head-high
+    format:
+      family: uniform
+      bits: 4
+      scale_method: optimal_scaled_codebook
+  - route_id: special-head-paper-twn-v2
+    format:
+      family: paper_twn
+      threshold_multiplier: 0.7
+diagnostic:
+  manifest: inherit_weight_plan
+  fixed_probe_per_task: 1
+  all_finite_required: true
+  same_structure_required: true
+  selection_claim: false
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch:
+    detect: 32
+    pose: 16
+  workers:
+    detect: 4
+    pose: 8
+  plots: false
+  save_coco_json: false
+  augmentation: false
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+selection:
+  hard_gate_first: true
+  objectives:
+  - maximize_worst_total_map50_delta
+  - minimize_total_packed_weight_bytes
+  accuracy_tolerance: 0.002
+  roles:
+  - accuracy
+  - balanced
+  - hardware
+  mean_metric_can_override_worst_task: false
+successor_provenance:
+  phase: special
+  parent: v35-qsilu-a8-mixed-11path-qat-epoch3
+  activation: qsilu_pq_a8
+  cpu_profile:
+    path: artifacts/reports/v36-qsilu-v35-parent-148-layer-9format-cpu-v1.json
+    sha256: e646c2b2ae994ec082fdf667e796bf3538998a1d37ca69c5643b2542e520d295
+  full_coverage: true
+  all_deployment_paths_default_to: w8
+  special_formats_before_uniform: true
+  map50_max_drop: 0.015
+  map50_95_max_drop: 0.04
+  formal_training: false
+  formal_validation: false

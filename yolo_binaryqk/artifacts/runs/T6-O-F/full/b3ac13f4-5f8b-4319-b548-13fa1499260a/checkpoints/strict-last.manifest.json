@@ -1,0 +1,29 @@
+{
+  "experiment_schema_version": 3,
+  "variant_id": "T6-O/F",
+  "attention_class": "ResidualDualFullBasisAttention",
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "attention_module_count": 1,
+  "variant_config_hash": "5cd67df67ed177917c88bcb0609eda5732c691f97083d3dd48c1b76b28d87c83",
+  "model_yaml_hash": "ddd6d32aa6cd49f78407fffdd87659f878cb4c8f8b6ba737998baae6083b88d6",
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "binary_forward_count": 3131,
+  "quantizer_types": {
+    "model.10.m.0.attn": "none"
+  },
+  "distillation_enabled": true,
+  "distillation_type": "positional+feature",
+  "bias_type": "none",
+  "p_bits": null,
+  "v_bits": null,
+  "magnitude_bits": null,
+  "quantization_contract": {
+    "qk_scale": "residual_basis_channel_per_token",
+    "p8_scale": "none",
+    "v8_scale": "none",
+    "bias_parameterization": "none",
+    "bias_initialization": "none"
+  }
+}

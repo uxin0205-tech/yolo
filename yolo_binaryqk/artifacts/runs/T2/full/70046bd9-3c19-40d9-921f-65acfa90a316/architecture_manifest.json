@@ -1,0 +1,39 @@
+{
+  "attention_class": [
+    "UltralyticsBinaryAttention"
+  ],
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "construction": "parser-direct-concrete-attention",
+  "model_class": "DetectionModel",
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "mean_abs_channel_token_per_sample_head",
+    "v8_scale": "none"
+  },
+  "theoretical_cost": {
+    "binary_qk": 1,
+    "pv": 1,
+    "softmax": 1
+  },
+  "total_parameter_count": 20114688,
+  "trainable_parameter_count": 200960,
+  "trainable_parameter_names": [
+    "model.10.m.0.attn.qkv.conv.weight",
+    "model.10.m.0.attn.qkv.bn.weight",
+    "model.10.m.0.attn.qkv.bn.bias",
+    "model.10.m.0.attn.proj.conv.weight",
+    "model.10.m.0.attn.proj.bn.weight",
+    "model.10.m.0.attn.proj.bn.bias",
+    "model.10.m.0.attn.pe.conv.weight",
+    "model.10.m.0.attn.pe.bn.weight",
+    "model.10.m.0.attn.pe.bn.bias"
+  ],
+  "trainable_scope": "attention_only",
+  "variant_config_hash": "ed7a5b51d8e62db06315774b14190551896596eecca3e952dc6954f528aaec08",
+  "variant_id": "T2"
+}

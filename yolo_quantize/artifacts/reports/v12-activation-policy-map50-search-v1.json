@@ -1,0 +1,3510 @@
+{
+  "candidates": [
+    {
+      "analytic_hardware_rank": 100,
+      "candidate_id": "uniform-qsilu-comparison",
+      "gate_passed": true,
+      "policy_id": "qsilu_pq--lsq-plus-a8",
+      "source": "pinned_reference_matched_role",
+      "worst_total_delta": -0.011576087264755563
+    },
+    {
+      "analytic_hardware_rank": 90,
+      "candidate_id": "qsilu-hswish-neck-attention",
+      "gate_passed": true,
+      "policy_id": "qsilu_pq--regional--neck_attention=hardswish--lsq-plus-a8",
+      "source": "current_gpu_search_val",
+      "worst_total_delta": -0.011861941280070232
+    },
+    {
+      "analytic_hardware_rank": 80,
+      "candidate_id": "qsilu-hswish-neck-attention-masf",
+      "gate_passed": true,
+      "policy_id": "qsilu_pq--regional--masf=hardswish__neck_attention=hardswish--lsq-plus-a8",
+      "source": "current_gpu_search_val",
+      "worst_total_delta": -0.011909838547719986
+    },
+    {
+      "analytic_hardware_rank": 70,
+      "candidate_id": "qsilu-hswish-neck-attention-masf-backbone-attention",
+      "gate_passed": true,
+      "policy_id": "qsilu_pq--regional--backbone_attention=hardswish__masf=hardswish__neck_attention=hardswish--lsq-plus-a8",
+      "source": "current_gpu_search_val",
+      "worst_total_delta": -0.012606432389645539
+    },
+    {
+      "analytic_hardware_rank": 10,
+      "candidate_id": "uniform-hardswish",
+      "gate_passed": false,
+      "policy_id": "hardswish--lsq-plus-a8",
+      "source": "current_gpu_search_val",
+      "worst_total_delta": -0.019855804002770983
+    },
+    {
+      "analytic_hardware_rank": 0,
+      "candidate_id": "uniform-poly-shift",
+      "gate_passed": true,
+      "policy_id": "poly_shift--lsq-plus-a8",
+      "source": "current_gpu_search_val",
+      "worst_total_delta": -0.008532110800092196
+    }
+  ],
+  "contract": {
+    "calibration_manifest": {
+      "path": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+      "samples_per_task": 32,
+      "sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+      "split": "canonical_train_exemplars_only"
+    },
+    "formal_training": false,
+    "formal_validation": false,
+    "kind": "full35_activation_policy_map50_search",
+    "q3_use": "candidate_order_and_rationale_only_not_metric_reuse",
+    "reference_reuse": {
+      "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json",
+      "roles": [
+        "accepted",
+        "matched_qsilu_comparison"
+      ],
+      "sha256": "738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2",
+      "validation_rerun": false
+    },
+    "reviewed_plan": {
+      "accuracy_tolerance": 0.002,
+      "base_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml",
+      "base_plan_sha256": "3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985",
+      "batch": {
+        "detect": 32,
+        "pose": 16
+      },
+      "candidate_count": 5,
+      "candidates": [
+        {
+          "activation_bits": 8,
+          "analytic_hardware_rank": 90,
+          "candidate_id": "qsilu-hswish-neck-attention",
+          "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+          "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+          "default_activation": "qsilu_pq",
+          "policy_id": "qsilu_pq--regional--neck_attention=hardswish--lsq-plus-a8",
+          "region_assignments": [
+            {
+              "activation": "hardswish",
+              "region": "neck_attention"
+            }
+          ],
+          "signed_codes": false
+        },
+        {
+          "activation_bits": 8,
+          "analytic_hardware_rank": 80,
+          "candidate_id": "qsilu-hswish-neck-attention-masf",
+          "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+          "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+          "default_activation": "qsilu_pq",
+          "policy_id": "qsilu_pq--regional--masf=hardswish__neck_attention=hardswish--lsq-plus-a8",
+          "region_assignments": [
+            {
+              "activation": "hardswish",
+              "region": "neck_attention"
+            },
+            {
+              "activation": "hardswish",
+              "region": "masf"
+            }
+          ],
+          "signed_codes": false
+        },
+        {
+          "activation_bits": 8,
+          "analytic_hardware_rank": 70,
+          "candidate_id": "qsilu-hswish-neck-attention-masf-backbone-attention",
+          "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+          "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+          "default_activation": "qsilu_pq",
+          "policy_id": "qsilu_pq--regional--backbone_attention=hardswish__masf=hardswish__neck_attention=hardswish--lsq-plus-a8",
+          "region_assignments": [
+            {
+              "activation": "hardswish",
+              "region": "neck_attention"
+            },
+            {
+              "activation": "hardswish",
+              "region": "masf"
+            },
+            {
+              "activation": "hardswish",
+              "region": "backbone_attention"
+            }
+          ],
+          "signed_codes": false
+        },
+        {
+          "activation_bits": 8,
+          "analytic_hardware_rank": 10,
+          "candidate_id": "uniform-hardswish",
+          "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt",
+          "checkpoint_sha256": "79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731",
+          "default_activation": "hardswish",
+          "policy_id": "hardswish--lsq-plus-a8",
+          "region_assignments": [],
+          "signed_codes": false
+        },
+        {
+          "activation_bits": 8,
+          "analytic_hardware_rank": 0,
+          "candidate_id": "uniform-poly-shift",
+          "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+          "checkpoint_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+          "default_activation": "poly_shift",
+          "policy_id": "poly_shift--lsq-plus-a8",
+          "region_assignments": [],
+          "signed_codes": false
+        }
+      ],
+      "datasets": {
+        "assignment_changed": false,
+        "bbat5_pose_search": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml",
+        "bbat5_registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml",
+        "coco": "/home/uxin/yolo/coco2017.yaml",
+        "runtime_view": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1"
+      },
+      "execution_authorization_id": "user-2026-09-03-autonomous-v12-activation-coupling-search",
+      "formal_training": false,
+      "formal_validation": false,
+      "gates": {
+        "metric_family": "map50",
+        "recovery_floor": 0.04,
+        "sham_absolute_drift": 0.01,
+        "total_drop": 0.015,
+        "w8_incremental_drop": 0.01
+      },
+      "image_size": 640,
+      "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-map50-v1",
+      "plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v12-activation-policy-map50-search-v1.yaml",
+      "plan_id": "v12-activation-policy-map50-search-v1",
+      "plan_sha256": "73ab6b3c3d9a8d9ef095fa2e7c2b3925b808f894d116e8a66fcde935cf5cd127",
+      "q3_evidence": {
+        "path": "/home/uxin/yolo/yolo_activation/reports/full35-q3-cpu-final-report.md",
+        "sha256": "8c495d71a7d4e50db7dd29676dfc8919a88cac3e362ab3f7d4737428c9b41d77",
+        "use": "candidate_order_and_rationale_only"
+      },
+      "reference_regate": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json",
+      "reference_report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json",
+      "reference_report_sha256": "738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2",
+      "workers": {
+        "detect": 4,
+        "pose": 8
+      }
+    },
+    "runtime": {
+      "cuda": "12.8",
+      "device_index": 0,
+      "device_name": "NVIDIA GeForce RTX 5090",
+      "torch": "2.11.0+cu128"
+    },
+    "runtime_view": {
+      "assignment_changed": false,
+      "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1/manifest.json",
+      "manifest_sha256": "2a5a9593d3703d86cfebb315fa5d2e5954fac1860d777cb0222d153416196ac5",
+      "root": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1",
+      "storage": "symlink-only-runtime-view",
+      "train_images": 5364,
+      "val_images": 600,
+      "yaml": "/home/uxin/yolo/yolo_quantize/artifacts/datasets/bbat5-v1-pose-search-v1/data.yaml",
+      "yaml_sha256": "55699d2a0c7cb06505388348612451afbe90083289e9c4c9f114b914e1c78eaf"
+    },
+    "schema_version": 1,
+    "selection_claim": false,
+    "validator": {
+      "augmentation": false,
+      "backend": "bittrue",
+      "rect": true,
+      "source": "/home/uxin/yolo/yolo_combine/final/full35/code/project/src/yolo_combine/validation.py",
+      "source_sha256": "83a9ba7f518d30a97790986171b4d41444a30657e2c0f658be3e9dbfda358779",
+      "split": "val"
+    },
+    "weight_quantization": "disabled"
+  },
+  "formal_training": false,
+  "formal_validation": false,
+  "kind": "full35_activation_policy_map50_search",
+  "results": {
+    "qsilu-hswish-neck-attention": {
+      "activation_output_quantization": "calibrated_lsq_plus_a8",
+      "all_metric_count": 40,
+      "build": {
+        "activation": "qsilu_pq",
+        "activation_policy_id": "qsilu_pq--regional--neck_attention=hardswish--lsq-plus-a8",
+        "activation_quantizers": 124,
+        "activation_region_assignments": [
+          {
+            "activation": "hardswish",
+            "region": "neck_attention"
+          }
+        ],
+        "build_seconds": 2.4595624688081443,
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+        "checkpoint_state_source": "ema",
+        "protected_modules": {
+          "achitechure_1.masf.P3MASFFull35": 1,
+          "ultralytics.nn.modules.block.RealNVP": 1,
+          "ultralytics.nn.modules.head.Detect": 1,
+          "ultralytics.nn.modules.head.Pose26": 1,
+          "yolo_attention.attention.HardwareFriendlyAttention": 2,
+          "yolo_attention.binary_basis.BinaryScore": 2,
+          "yolo_attention.normalization.PiecewiseLinearSoftmax": 2,
+          "yolo_attention.projection.ModularQKVProjection": 2,
+          "yolo_attention.relative_bias.RelativePositionBias": 2
+        },
+        "training_only_unquantized_sites": 66,
+        "weight_view_parity": {
+          "deployment_batch_norm_modules": 0,
+          "deployment_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 152,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 0,
+              "training_only_weight_elements": 0,
+              "weight_elements": 22702912
+            }
+          },
+          "deployment_path_parity": true,
+          "deployment_state_sha256": "ebc32f865e118d7417d8e315cb9983f4ce435ce423f0f29d66a4bbe924eaa143",
+          "folded_batch_norm_modules": 179,
+          "forward_all_finite": true,
+          "forward_maximum_absolute_error": 0.000732421875,
+          "forward_maximum_relative_to_reference_peak": 7.118447858036794e-06,
+          "forward_normalized_rmse": 3.395364459199613e-06,
+          "forward_parity_evaluated": true,
+          "forward_parity_passed": true,
+          "forward_removed_training_only_tensor_paths": [
+            "output.detect[1].one2many.boxes",
+            "output.detect[1].one2many.scores",
+            "output.detect[1].one2many.feats[0]",
+            "output.detect[1].one2many.feats[1]",
+            "output.detect[1].one2many.feats[2]",
+            "output.pose[1].one2many.boxes",
+            "output.pose[1].one2many.scores",
+            "output.pose[1].one2many.feats[0]",
+            "output.pose[1].one2many.feats[1]",
+            "output.pose[1].one2many.feats[2]",
+            "output.pose[1].one2many.kpts"
+          ],
+          "forward_same_structure": true,
+          "inference_contract_parity": true,
+          "master_batch_norm_modules": 179,
+          "master_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 251,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 99,
+              "training_only_weight_elements": 3748480,
+              "weight_elements": 26451392
+            }
+          },
+          "master_matches_source": true,
+          "master_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "schema_version": 1,
+          "source_batch_norm_modules": 179,
+          "source_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "source_unchanged": true
+        }
+      },
+      "calibration": {
+        "invalid_observers": [],
+        "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+        "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+        "observed_maximum": 268.2339782714844,
+        "observed_minimum": -0.375,
+        "peak_gpu_memory_mib": 474.9541015625,
+        "quantizers": 124,
+        "samples": {
+          "detect": 32,
+          "pose": 32
+        },
+        "seconds": 4.056200290098786,
+        "valid_observers": 124
+      },
+      "candidate": {
+        "activation_bits": 8,
+        "analytic_hardware_rank": 90,
+        "candidate_id": "qsilu-hswish-neck-attention",
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+        "default_activation": "qsilu_pq",
+        "policy_id": "qsilu_pq--regional--neck_attention=hardswish--lsq-plus-a8",
+        "region_assignments": [
+          {
+            "activation": "hardswish",
+            "region": "neck_attention"
+          }
+        ],
+        "signed_codes": false
+      },
+      "fixed_probe": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 1800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 705600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 3600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 100800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "gate": {
+        "accepted_run_id": "v12-activation-policy-map50-search-v1:accepted-reused",
+        "candidate_run_id": "v12-activation-policy-map50-search-v1:qsilu-hswish-neck-attention",
+        "decision": "green",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.0,
+          "bbat/ball/pose/map50": 0.0,
+          "bbat/bat/box/map50": 0.0,
+          "bbat/bat/pose/map50": 0.0,
+          "bbat/box/map50": 0.0,
+          "bbat/pose/map50": 0.0,
+          "coco/box/map50": 0.0,
+          "coco/person/box/map50": 0.0
+        },
+        "matched_run_id": "v12-activation-policy-map50-search-v1:qsilu-hswish-neck-attention:matched",
+        "maximum_sham_drift": 0.0,
+        "passed": true,
+        "sham_deltas": {},
+        "sham_gate_applicable": false,
+        "sham_gate_passed": true,
+        "thresholds": {
+          "metric_family": "map50",
+          "recovery_floor": 0.04,
+          "sham_absolute_drift": 0.01,
+          "total_drop": 0.015,
+          "w8_incremental_drop": 0.01
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.009754844077269342,
+          "bbat/ball/pose/map50": 0.010578866374496565,
+          "bbat/bat/box/map50": -0.0015264994865342718,
+          "bbat/bat/pose/map50": -0.0015264994865342718,
+          "bbat/box/map50": 0.00411417229536748,
+          "bbat/pose/map50": 0.004526183443981147,
+          "coco/box/map50": -0.011861941280070232,
+          "coco/person/box/map50": -0.005066752912315509
+        },
+        "total_gate_passed": true,
+        "w8_incremental_gate_applicable": false,
+        "w8_incremental_gate_passed": true,
+        "worst_incremental_delta": 0.0,
+        "worst_incremental_metric": "coco/box/map50",
+        "worst_total_delta": -0.011861941280070232,
+        "worst_total_metric": "coco/box/map50"
+      },
+      "materialization": {
+        "detect_compatible_tensors": 753,
+        "detect_complete": true,
+        "pose_compatible_tensors": 801,
+        "pose_complete": true
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9681374105840123,
+        "bbat/ball/pose/map50": 0.9700677209805753,
+        "bbat/bat/box/map50": 0.9925518409318158,
+        "bbat/bat/pose/map50": 0.9925518409318158,
+        "bbat/box/map50": 0.980344625757914,
+        "bbat/pose/map50": 0.9813097809561955,
+        "coco/box/map50": 0.6588570658773506,
+        "coco/person/box/map50": 0.834342834564428
+      },
+      "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/qsilu-hswish-neck-attention/epoch-0000/bittrue/metrics.json",
+      "metrics_report_sha256": "4988815a7928fbbc9cc0e03486619096698a21ca7aca3fbcedd71a3773ad1ad0",
+      "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/qsilu-hswish-neck-attention/epoch-0000/bittrue",
+      "role": "qsilu-hswish-neck-attention",
+      "seconds": 88.51684826007113,
+      "status": "completed",
+      "weight_quantization": "disabled"
+    },
+    "qsilu-hswish-neck-attention-masf": {
+      "activation_output_quantization": "calibrated_lsq_plus_a8",
+      "all_metric_count": 40,
+      "build": {
+        "activation": "qsilu_pq",
+        "activation_policy_id": "qsilu_pq--regional--masf=hardswish__neck_attention=hardswish--lsq-plus-a8",
+        "activation_quantizers": 124,
+        "activation_region_assignments": [
+          {
+            "activation": "hardswish",
+            "region": "neck_attention"
+          },
+          {
+            "activation": "hardswish",
+            "region": "masf"
+          }
+        ],
+        "build_seconds": 1.986540379934013,
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+        "checkpoint_state_source": "ema",
+        "protected_modules": {
+          "achitechure_1.masf.P3MASFFull35": 1,
+          "ultralytics.nn.modules.block.RealNVP": 1,
+          "ultralytics.nn.modules.head.Detect": 1,
+          "ultralytics.nn.modules.head.Pose26": 1,
+          "yolo_attention.attention.HardwareFriendlyAttention": 2,
+          "yolo_attention.binary_basis.BinaryScore": 2,
+          "yolo_attention.normalization.PiecewiseLinearSoftmax": 2,
+          "yolo_attention.projection.ModularQKVProjection": 2,
+          "yolo_attention.relative_bias.RelativePositionBias": 2
+        },
+        "training_only_unquantized_sites": 66,
+        "weight_view_parity": {
+          "deployment_batch_norm_modules": 0,
+          "deployment_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 152,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 0,
+              "training_only_weight_elements": 0,
+              "weight_elements": 22702912
+            }
+          },
+          "deployment_path_parity": true,
+          "deployment_state_sha256": "ebc32f865e118d7417d8e315cb9983f4ce435ce423f0f29d66a4bbe924eaa143",
+          "folded_batch_norm_modules": 179,
+          "forward_all_finite": true,
+          "forward_maximum_absolute_error": 0.00066375732421875,
+          "forward_maximum_relative_to_reference_peak": 6.449980916953011e-06,
+          "forward_normalized_rmse": 3.42266934712892e-06,
+          "forward_parity_evaluated": true,
+          "forward_parity_passed": true,
+          "forward_removed_training_only_tensor_paths": [
+            "output.detect[1].one2many.boxes",
+            "output.detect[1].one2many.scores",
+            "output.detect[1].one2many.feats[0]",
+            "output.detect[1].one2many.feats[1]",
+            "output.detect[1].one2many.feats[2]",
+            "output.pose[1].one2many.boxes",
+            "output.pose[1].one2many.scores",
+            "output.pose[1].one2many.feats[0]",
+            "output.pose[1].one2many.feats[1]",
+            "output.pose[1].one2many.feats[2]",
+            "output.pose[1].one2many.kpts"
+          ],
+          "forward_same_structure": true,
+          "inference_contract_parity": true,
+          "master_batch_norm_modules": 179,
+          "master_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 251,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 99,
+              "training_only_weight_elements": 3748480,
+              "weight_elements": 26451392
+            }
+          },
+          "master_matches_source": true,
+          "master_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "schema_version": 1,
+          "source_batch_norm_modules": 179,
+          "source_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "source_unchanged": true
+        }
+      },
+      "calibration": {
+        "invalid_observers": [],
+        "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+        "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+        "observed_maximum": 268.2416076660156,
+        "observed_minimum": -0.375,
+        "peak_gpu_memory_mib": 499.7978515625,
+        "quantizers": 124,
+        "samples": {
+          "detect": 32,
+          "pose": 32
+        },
+        "seconds": 3.5737476209178567,
+        "valid_observers": 124
+      },
+      "candidate": {
+        "activation_bits": 8,
+        "analytic_hardware_rank": 80,
+        "candidate_id": "qsilu-hswish-neck-attention-masf",
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+        "default_activation": "qsilu_pq",
+        "policy_id": "qsilu_pq--regional--masf=hardswish__neck_attention=hardswish--lsq-plus-a8",
+        "region_assignments": [
+          {
+            "activation": "hardswish",
+            "region": "neck_attention"
+          },
+          {
+            "activation": "hardswish",
+            "region": "masf"
+          }
+        ],
+        "signed_codes": false
+      },
+      "fixed_probe": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 1800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 705600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 3600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 100800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "gate": {
+        "accepted_run_id": "v12-activation-policy-map50-search-v1:accepted-reused",
+        "candidate_run_id": "v12-activation-policy-map50-search-v1:qsilu-hswish-neck-attention-masf",
+        "decision": "green",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.0,
+          "bbat/ball/pose/map50": 0.0,
+          "bbat/bat/box/map50": 0.0,
+          "bbat/bat/pose/map50": 0.0,
+          "bbat/box/map50": 0.0,
+          "bbat/pose/map50": 0.0,
+          "coco/box/map50": 0.0,
+          "coco/person/box/map50": 0.0
+        },
+        "matched_run_id": "v12-activation-policy-map50-search-v1:qsilu-hswish-neck-attention-masf:matched",
+        "maximum_sham_drift": 0.0,
+        "passed": true,
+        "sham_deltas": {},
+        "sham_gate_applicable": false,
+        "sham_gate_passed": true,
+        "thresholds": {
+          "metric_family": "map50",
+          "recovery_floor": 0.04,
+          "sham_absolute_drift": 0.01,
+          "total_drop": 0.015,
+          "w8_incremental_drop": 0.01
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.011034249530975648,
+          "bbat/ball/pose/map50": 0.010413330571391377,
+          "bbat/bat/box/map50": -0.0011010497427205168,
+          "bbat/bat/pose/map50": -0.0011010497427205168,
+          "bbat/box/map50": 0.00496659989412751,
+          "bbat/pose/map50": 0.004656140414335486,
+          "coco/box/map50": -0.011909838547719986,
+          "coco/person/box/map50": -0.005100073809018557
+        },
+        "total_gate_passed": true,
+        "w8_incremental_gate_applicable": false,
+        "w8_incremental_gate_passed": true,
+        "worst_incremental_delta": 0.0,
+        "worst_incremental_metric": "coco/box/map50",
+        "worst_total_delta": -0.011909838547719986,
+        "worst_total_metric": "coco/box/map50"
+      },
+      "materialization": {
+        "detect_compatible_tensors": 753,
+        "detect_complete": true,
+        "pose_compatible_tensors": 801,
+        "pose_complete": true
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9694168160377186,
+        "bbat/ball/pose/map50": 0.9699021851774701,
+        "bbat/bat/box/map50": 0.9929772906756296,
+        "bbat/bat/pose/map50": 0.9929772906756296,
+        "bbat/box/map50": 0.9811970533566741,
+        "bbat/pose/map50": 0.9814397379265498,
+        "coco/box/map50": 0.6588091686097008,
+        "coco/person/box/map50": 0.834309513667725
+      },
+      "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/qsilu-hswish-neck-attention-masf/epoch-0000/bittrue/metrics.json",
+      "metrics_report_sha256": "09dad53d3d4b4630d674e7d9878bfbadf9864580482c411ba90e9b54bd3df9b6",
+      "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/qsilu-hswish-neck-attention-masf/epoch-0000/bittrue",
+      "role": "qsilu-hswish-neck-attention-masf",
+      "seconds": 83.62042504036799,
+      "status": "completed",
+      "weight_quantization": "disabled"
+    },
+    "qsilu-hswish-neck-attention-masf-backbone-attention": {
+      "activation_output_quantization": "calibrated_lsq_plus_a8",
+      "all_metric_count": 40,
+      "build": {
+        "activation": "qsilu_pq",
+        "activation_policy_id": "qsilu_pq--regional--backbone_attention=hardswish__masf=hardswish__neck_attention=hardswish--lsq-plus-a8",
+        "activation_quantizers": 124,
+        "activation_region_assignments": [
+          {
+            "activation": "hardswish",
+            "region": "neck_attention"
+          },
+          {
+            "activation": "hardswish",
+            "region": "masf"
+          },
+          {
+            "activation": "hardswish",
+            "region": "backbone_attention"
+          }
+        ],
+        "build_seconds": 1.8666651281528175,
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+        "checkpoint_state_source": "ema",
+        "protected_modules": {
+          "achitechure_1.masf.P3MASFFull35": 1,
+          "ultralytics.nn.modules.block.RealNVP": 1,
+          "ultralytics.nn.modules.head.Detect": 1,
+          "ultralytics.nn.modules.head.Pose26": 1,
+          "yolo_attention.attention.HardwareFriendlyAttention": 2,
+          "yolo_attention.binary_basis.BinaryScore": 2,
+          "yolo_attention.normalization.PiecewiseLinearSoftmax": 2,
+          "yolo_attention.projection.ModularQKVProjection": 2,
+          "yolo_attention.relative_bias.RelativePositionBias": 2
+        },
+        "training_only_unquantized_sites": 66,
+        "weight_view_parity": {
+          "deployment_batch_norm_modules": 0,
+          "deployment_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 152,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 0,
+              "training_only_weight_elements": 0,
+              "weight_elements": 22702912
+            }
+          },
+          "deployment_path_parity": true,
+          "deployment_state_sha256": "ebc32f865e118d7417d8e315cb9983f4ce435ce423f0f29d66a4bbe924eaa143",
+          "folded_batch_norm_modules": 179,
+          "forward_all_finite": true,
+          "forward_maximum_absolute_error": 0.000492095947265625,
+          "forward_maximum_relative_to_reference_peak": 4.810124260051873e-06,
+          "forward_normalized_rmse": 3.5503441017258436e-06,
+          "forward_parity_evaluated": true,
+          "forward_parity_passed": true,
+          "forward_removed_training_only_tensor_paths": [
+            "output.detect[1].one2many.boxes",
+            "output.detect[1].one2many.scores",
+            "output.detect[1].one2many.feats[0]",
+            "output.detect[1].one2many.feats[1]",
+            "output.detect[1].one2many.feats[2]",
+            "output.pose[1].one2many.boxes",
+            "output.pose[1].one2many.scores",
+            "output.pose[1].one2many.feats[0]",
+            "output.pose[1].one2many.feats[1]",
+            "output.pose[1].one2many.feats[2]",
+            "output.pose[1].one2many.kpts"
+          ],
+          "forward_same_structure": true,
+          "inference_contract_parity": true,
+          "master_batch_norm_modules": 179,
+          "master_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 251,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 99,
+              "training_only_weight_elements": 3748480,
+              "weight_elements": 26451392
+            }
+          },
+          "master_matches_source": true,
+          "master_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "schema_version": 1,
+          "source_batch_norm_modules": 179,
+          "source_state_sha256": "1424ca4cddead178ffd4db66266fab1649282839d16e48ca228ea580a50411cb",
+          "source_unchanged": true
+        }
+      },
+      "calibration": {
+        "invalid_observers": [],
+        "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+        "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+        "observed_maximum": 270.8653259277344,
+        "observed_minimum": -0.375,
+        "peak_gpu_memory_mib": 501.6455078125,
+        "quantizers": 124,
+        "samples": {
+          "detect": 32,
+          "pose": 32
+        },
+        "seconds": 3.5653024478815496,
+        "valid_observers": 124
+      },
+      "candidate": {
+        "activation_bits": 8,
+        "analytic_hardware_rank": 70,
+        "candidate_id": "qsilu-hswish-neck-attention-masf-backbone-attention",
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+        "default_activation": "qsilu_pq",
+        "policy_id": "qsilu_pq--regional--backbone_attention=hardswish__masf=hardswish__neck_attention=hardswish--lsq-plus-a8",
+        "region_assignments": [
+          {
+            "activation": "hardswish",
+            "region": "neck_attention"
+          },
+          {
+            "activation": "hardswish",
+            "region": "masf"
+          },
+          {
+            "activation": "hardswish",
+            "region": "backbone_attention"
+          }
+        ],
+        "signed_codes": false
+      },
+      "fixed_probe": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 1800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 705600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 3600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 100800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "gate": {
+        "accepted_run_id": "v12-activation-policy-map50-search-v1:accepted-reused",
+        "candidate_run_id": "v12-activation-policy-map50-search-v1:qsilu-hswish-neck-attention-masf-backbone-attention",
+        "decision": "green",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.0,
+          "bbat/ball/pose/map50": 0.0,
+          "bbat/bat/box/map50": 0.0,
+          "bbat/bat/pose/map50": 0.0,
+          "bbat/box/map50": 0.0,
+          "bbat/pose/map50": 0.0,
+          "coco/box/map50": 0.0,
+          "coco/person/box/map50": 0.0
+        },
+        "matched_run_id": "v12-activation-policy-map50-search-v1:qsilu-hswish-neck-attention-masf-backbone-attention:matched",
+        "maximum_sham_drift": 0.0,
+        "passed": true,
+        "sham_deltas": {},
+        "sham_gate_applicable": false,
+        "sham_gate_passed": true,
+        "thresholds": {
+          "metric_family": "map50",
+          "recovery_floor": 0.04,
+          "sham_absolute_drift": 0.01,
+          "total_drop": 0.015,
+          "w8_incremental_drop": 0.01
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.009782056150522966,
+          "bbat/ball/pose/map50": 0.0086919755066166,
+          "bbat/bat/box/map50": -0.0011153909351783176,
+          "bbat/bat/pose/map50": -0.0011153909351783176,
+          "bbat/box/map50": 0.004333332607672213,
+          "bbat/pose/map50": 0.003788292285719197,
+          "coco/box/map50": -0.012606432389645539,
+          "coco/person/box/map50": -0.0059235154751335894
+        },
+        "total_gate_passed": true,
+        "w8_incremental_gate_applicable": false,
+        "w8_incremental_gate_passed": true,
+        "worst_incremental_delta": 0.0,
+        "worst_incremental_metric": "coco/box/map50",
+        "worst_total_delta": -0.012606432389645539,
+        "worst_total_metric": "coco/box/map50"
+      },
+      "materialization": {
+        "detect_compatible_tensors": 753,
+        "detect_complete": true,
+        "pose_compatible_tensors": 801,
+        "pose_complete": true
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9681646226572659,
+        "bbat/ball/pose/map50": 0.9681808301126953,
+        "bbat/bat/box/map50": 0.9929629494831718,
+        "bbat/bat/pose/map50": 0.9929629494831718,
+        "bbat/box/map50": 0.9805637860702188,
+        "bbat/pose/map50": 0.9805718897979335,
+        "coco/box/map50": 0.6581125747677753,
+        "coco/person/box/map50": 0.83348607200161
+      },
+      "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/qsilu-hswish-neck-attention-masf-backbone-attention/epoch-0000/bittrue/metrics.json",
+      "metrics_report_sha256": "665be7b25022d81299377797be7feaddb31b59fb4030832ce78be49f15ac66ec",
+      "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/qsilu-hswish-neck-attention-masf-backbone-attention/epoch-0000/bittrue",
+      "role": "qsilu-hswish-neck-attention-masf-backbone-attention",
+      "seconds": 84.1400494822301,
+      "status": "completed",
+      "weight_quantization": "disabled"
+    },
+    "uniform-hardswish": {
+      "activation_output_quantization": "calibrated_lsq_plus_a8",
+      "all_metric_count": 40,
+      "build": {
+        "activation": "hardswish",
+        "activation_policy_id": "hardswish--lsq-plus-a8",
+        "activation_quantizers": 124,
+        "activation_region_assignments": [],
+        "build_seconds": 1.8124704803340137,
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731",
+        "checkpoint_state_source": "ema",
+        "protected_modules": {
+          "achitechure_1.masf.P3MASFFull35": 1,
+          "ultralytics.nn.modules.block.RealNVP": 1,
+          "ultralytics.nn.modules.head.Detect": 1,
+          "ultralytics.nn.modules.head.Pose26": 1,
+          "yolo_attention.attention.HardwareFriendlyAttention": 2,
+          "yolo_attention.binary_basis.BinaryScore": 2,
+          "yolo_attention.normalization.PiecewiseLinearSoftmax": 2,
+          "yolo_attention.projection.ModularQKVProjection": 2,
+          "yolo_attention.relative_bias.RelativePositionBias": 2
+        },
+        "training_only_unquantized_sites": 66,
+        "weight_view_parity": {
+          "deployment_batch_norm_modules": 0,
+          "deployment_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 152,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 0,
+              "training_only_weight_elements": 0,
+              "weight_elements": 22702912
+            }
+          },
+          "deployment_path_parity": true,
+          "deployment_state_sha256": "15e4b703ed94d2d998918d623a983f7376b20c9b5caa1f21566a1cf0fb419a3c",
+          "folded_batch_norm_modules": 179,
+          "forward_all_finite": true,
+          "forward_maximum_absolute_error": 0.003238677978515625,
+          "forward_maximum_relative_to_reference_peak": 3.2022208099091574e-05,
+          "forward_normalized_rmse": 5.759841715128737e-06,
+          "forward_parity_evaluated": true,
+          "forward_parity_passed": true,
+          "forward_removed_training_only_tensor_paths": [
+            "output.detect[1].one2many.boxes",
+            "output.detect[1].one2many.scores",
+            "output.detect[1].one2many.feats[0]",
+            "output.detect[1].one2many.feats[1]",
+            "output.detect[1].one2many.feats[2]",
+            "output.pose[1].one2many.boxes",
+            "output.pose[1].one2many.scores",
+            "output.pose[1].one2many.feats[0]",
+            "output.pose[1].one2many.feats[1]",
+            "output.pose[1].one2many.feats[2]",
+            "output.pose[1].one2many.kpts"
+          ],
+          "forward_same_structure": true,
+          "inference_contract_parity": true,
+          "master_batch_norm_modules": 179,
+          "master_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 251,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 99,
+              "training_only_weight_elements": 3748480,
+              "weight_elements": 26451392
+            }
+          },
+          "master_matches_source": true,
+          "master_state_sha256": "949bbd3f8a961c1f6d8d76c07bf3e1e1d58ae08a6de506d36116704bd527b915",
+          "schema_version": 1,
+          "source_batch_norm_modules": 179,
+          "source_state_sha256": "949bbd3f8a961c1f6d8d76c07bf3e1e1d58ae08a6de506d36116704bd527b915",
+          "source_unchanged": true
+        }
+      },
+      "calibration": {
+        "invalid_observers": [],
+        "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+        "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+        "observed_maximum": 298.3653259277344,
+        "observed_minimum": -0.375,
+        "peak_gpu_memory_mib": 312.587890625,
+        "quantizers": 124,
+        "samples": {
+          "detect": 32,
+          "pose": 32
+        },
+        "seconds": 2.88967920280993,
+        "valid_observers": 124
+      },
+      "candidate": {
+        "activation_bits": 8,
+        "analytic_hardware_rank": 10,
+        "candidate_id": "uniform-hardswish",
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731",
+        "default_activation": "hardswish",
+        "policy_id": "hardswish--lsq-plus-a8",
+        "region_assignments": [],
+        "signed_codes": false
+      },
+      "fixed_probe": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 1800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 705600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 3600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 100800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "gate": {
+        "accepted_run_id": "v12-activation-policy-map50-search-v1:accepted-reused",
+        "candidate_run_id": "v12-activation-policy-map50-search-v1:uniform-hardswish",
+        "decision": "recover",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.0,
+          "bbat/ball/pose/map50": 0.0,
+          "bbat/bat/box/map50": 0.0,
+          "bbat/bat/pose/map50": 0.0,
+          "bbat/box/map50": 0.0,
+          "bbat/pose/map50": 0.0,
+          "coco/box/map50": 0.0,
+          "coco/person/box/map50": 0.0
+        },
+        "matched_run_id": "v12-activation-policy-map50-search-v1:uniform-hardswish:matched",
+        "maximum_sham_drift": 0.0,
+        "passed": false,
+        "sham_deltas": {},
+        "sham_gate_applicable": false,
+        "sham_gate_passed": true,
+        "thresholds": {
+          "metric_family": "map50",
+          "recovery_floor": 0.04,
+          "sham_absolute_drift": 0.01,
+          "total_drop": 0.015,
+          "w8_incremental_drop": 0.01
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": -0.007726136288134233,
+          "bbat/ball/pose/map50": 0.001808042215911576,
+          "bbat/bat/box/map50": -0.005647217002673455,
+          "bbat/bat/pose/map50": -0.005514015082448198,
+          "bbat/box/map50": -0.0066866766454038995,
+          "bbat/pose/map50": -0.0018529864332682555,
+          "coco/box/map50": -0.019855804002770983,
+          "coco/person/box/map50": -0.013872497079911561
+        },
+        "total_gate_passed": false,
+        "w8_incremental_gate_applicable": false,
+        "w8_incremental_gate_passed": true,
+        "worst_incremental_delta": 0.0,
+        "worst_incremental_metric": "coco/box/map50",
+        "worst_total_delta": -0.019855804002770983,
+        "worst_total_metric": "coco/box/map50"
+      },
+      "materialization": {
+        "detect_compatible_tensors": 753,
+        "detect_complete": true,
+        "pose_compatible_tensors": 801,
+        "pose_complete": true
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9506564302186087,
+        "bbat/ball/pose/map50": 0.9612968968219903,
+        "bbat/bat/box/map50": 0.9884311234156766,
+        "bbat/bat/pose/map50": 0.9885643253359019,
+        "bbat/box/map50": 0.9695437768171427,
+        "bbat/pose/map50": 0.9749306110789461,
+        "coco/box/map50": 0.6508632031546498,
+        "coco/person/box/map50": 0.825537090396832
+      },
+      "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/uniform-hardswish/epoch-0000/bittrue/metrics.json",
+      "metrics_report_sha256": "ee435b66b105c2c4c8c9955e4baa56e1f903d38a5fd4747020dcee217e183269",
+      "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/uniform-hardswish/epoch-0000/bittrue",
+      "role": "uniform-hardswish",
+      "seconds": 41.97059647925198,
+      "status": "completed",
+      "weight_quantization": "disabled"
+    },
+    "uniform-poly-shift": {
+      "activation_output_quantization": "calibrated_lsq_plus_a8",
+      "all_metric_count": 40,
+      "build": {
+        "activation": "poly_shift",
+        "activation_policy_id": "poly_shift--lsq-plus-a8",
+        "activation_quantizers": 124,
+        "activation_region_assignments": [],
+        "build_seconds": 1.7894150451757014,
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+        "checkpoint_state_source": "ema",
+        "protected_modules": {
+          "achitechure_1.masf.P3MASFFull35": 1,
+          "ultralytics.nn.modules.block.RealNVP": 1,
+          "ultralytics.nn.modules.head.Detect": 1,
+          "ultralytics.nn.modules.head.Pose26": 1,
+          "yolo_attention.attention.HardwareFriendlyAttention": 2,
+          "yolo_attention.binary_basis.BinaryScore": 2,
+          "yolo_attention.normalization.PiecewiseLinearSoftmax": 2,
+          "yolo_attention.projection.ModularQKVProjection": 2,
+          "yolo_attention.relative_bias.RelativePositionBias": 2
+        },
+        "training_only_unquantized_sites": 66,
+        "weight_view_parity": {
+          "deployment_batch_norm_modules": 0,
+          "deployment_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 152,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 0,
+              "training_only_weight_elements": 0,
+              "weight_elements": 22702912
+            }
+          },
+          "deployment_path_parity": true,
+          "deployment_state_sha256": "094df3459309b1baa0aa8548258321928531d2107bdcb93eca24f4b9c4961600",
+          "folded_batch_norm_modules": 179,
+          "forward_all_finite": true,
+          "forward_maximum_absolute_error": 0.002288818359375,
+          "forward_maximum_relative_to_reference_peak": 2.23624863626104e-05,
+          "forward_normalized_rmse": 4.893338920355796e-06,
+          "forward_parity_evaluated": true,
+          "forward_parity_passed": true,
+          "forward_removed_training_only_tensor_paths": [
+            "output.detect[1].one2many.boxes",
+            "output.detect[1].one2many.scores",
+            "output.detect[1].one2many.feats[0]",
+            "output.detect[1].one2many.feats[1]",
+            "output.detect[1].one2many.feats[2]",
+            "output.pose[1].one2many.boxes",
+            "output.pose[1].one2many.scores",
+            "output.pose[1].one2many.feats[0]",
+            "output.pose[1].one2many.feats[1]",
+            "output.pose[1].one2many.feats[2]",
+            "output.pose[1].one2many.kpts"
+          ],
+          "forward_same_structure": true,
+          "inference_contract_parity": true,
+          "master_batch_norm_modules": 179,
+          "master_catalog": {
+            "deployment_regions": {
+              "backbone_attention_safe": {
+                "modules": 7,
+                "weight_elements": 919808
+              },
+              "backbone_deep": {
+                "modules": 22,
+                "weight_elements": 8126464
+              },
+              "backbone_early": {
+                "modules": 21,
+                "weight_elements": 1218240
+              },
+              "detect_one2one_predictor": {
+                "modules": 6,
+                "weight_elements": 62208
+              },
+              "detect_one2one_tower": {
+                "modules": 18,
+                "weight_elements": 1390592
+              },
+              "masf": {
+                "modules": 3,
+                "weight_elements": 74240
+              },
+              "neck": {
+                "modules": 33,
+                "weight_elements": 8142848
+              },
+              "neck_attention_safe": {
+                "modules": 5,
+                "weight_elements": 395520
+              },
+              "pose_one2one_predictor": {
+                "modules": 9,
+                "weight_elements": 3456
+              },
+              "pose_one2one_tower": {
+                "modules": 24,
+                "weight_elements": 2238464
+              }
+            },
+            "totals": {
+              "deployment_modules": 148,
+              "deployment_weight_elements": 22571840,
+              "modules": 251,
+              "protected_modules": 4,
+              "protected_weight_elements": 131072,
+              "training_only_modules": 99,
+              "training_only_weight_elements": 3748480,
+              "weight_elements": 26451392
+            }
+          },
+          "master_matches_source": true,
+          "master_state_sha256": "6990d72c91ebcc3169997d2a4968db0f35fde6ed1d0775a4af4bb6bd75d02ce4",
+          "schema_version": 1,
+          "source_batch_norm_modules": 179,
+          "source_state_sha256": "6990d72c91ebcc3169997d2a4968db0f35fde6ed1d0775a4af4bb6bd75d02ce4",
+          "source_unchanged": true
+        }
+      },
+      "calibration": {
+        "invalid_observers": [],
+        "manifest": "/home/uxin/yolo/yolo_quantize/artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+        "manifest_sha256": "b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2",
+        "observed_maximum": 252.97195434570312,
+        "observed_minimum": -0.2898893654346466,
+        "peak_gpu_memory_mib": 500.208984375,
+        "quantizers": 124,
+        "samples": {
+          "detect": 32,
+          "pose": 32
+        },
+        "seconds": 3.3464649356901646,
+        "valid_observers": 124
+      },
+      "candidate": {
+        "activation_bits": 8,
+        "analytic_hardware_rank": 0,
+        "candidate_id": "uniform-poly-shift",
+        "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt",
+        "checkpoint_sha256": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+        "default_activation": "poly_shift",
+        "policy_id": "poly_shift--lsq-plus-a8",
+        "region_assignments": [],
+        "signed_codes": false
+      },
+      "fixed_probe": {
+        "detect": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 1800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 1800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    6
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 705600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 2,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 672000,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.detect[1].one2one.scores",
+                  "shape": [
+                    1,
+                    80,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 3369800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 6,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 1800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[0]",
+              "shape": [
+                1,
+                300,
+                6
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 672000,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.scores",
+              "shape": [
+                1,
+                80,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.detect[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            }
+          ]
+        },
+        "pose": {
+          "all_finite": true,
+          "cosine": 1.0,
+          "deployment": {
+            "decoded": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 3600,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 1,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 3600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output",
+                  "shape": [
+                    1,
+                    300,
+                    12
+                  ]
+                }
+              ]
+            },
+            "one2one_raw": {
+              "all_finite": true,
+              "cosine": 1.0,
+              "elements": 100800,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "same_structure": true,
+              "tensor_count": 3,
+              "tensors": [
+                {
+                  "cosine": 1.0,
+                  "elements": 33600,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.boxes",
+                  "shape": [
+                    1,
+                    4,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 16800,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.scores",
+                  "shape": [
+                    1,
+                    2,
+                    8400
+                  ]
+                },
+                {
+                  "cosine": 1.0,
+                  "elements": 50400,
+                  "finite": true,
+                  "maximum_absolute_error": 0.0,
+                  "mean_absolute_error": 0.0,
+                  "normalized_rmse": 0.0,
+                  "path": "output.output.pose[1].one2one.kpts",
+                  "shape": [
+                    1,
+                    6,
+                    8400
+                  ]
+                }
+              ]
+            },
+            "topk_overlap": {
+              "ordered_anchor_match": 1.0,
+              "ordered_pair_match": 1.0,
+              "selected_anchor_jaccard": 1.0,
+              "selected_pair_overlap": 1.0,
+              "topk": 300
+            }
+          },
+          "elements": 2766800,
+          "maximum_absolute_error": 0.0,
+          "mean_absolute_error": 0.0,
+          "normalized_rmse": 0.0,
+          "same_structure": true,
+          "tensor_count": 7,
+          "tensors": [
+            {
+              "cosine": 1.0,
+              "elements": 3600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[0]",
+              "shape": [
+                1,
+                300,
+                12
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 33600,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.boxes",
+              "shape": [
+                1,
+                4,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 16800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.scores",
+              "shape": [
+                1,
+                2,
+                8400
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 1638400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[0]",
+              "shape": [
+                1,
+                256,
+                80,
+                80
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 819200,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[1]",
+              "shape": [
+                1,
+                512,
+                40,
+                40
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 204800,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.feats[2]",
+              "shape": [
+                1,
+                512,
+                20,
+                20
+              ]
+            },
+            {
+              "cosine": 1.0,
+              "elements": 50400,
+              "finite": true,
+              "maximum_absolute_error": 0.0,
+              "mean_absolute_error": 0.0,
+              "normalized_rmse": 0.0,
+              "path": "output.pose[1].one2one.kpts",
+              "shape": [
+                1,
+                6,
+                8400
+              ]
+            }
+          ]
+        }
+      },
+      "gate": {
+        "accepted_run_id": "v12-activation-policy-map50-search-v1:accepted-reused",
+        "candidate_run_id": "v12-activation-policy-map50-search-v1:uniform-poly-shift",
+        "decision": "green",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.0,
+          "bbat/ball/pose/map50": 0.0,
+          "bbat/bat/box/map50": 0.0,
+          "bbat/bat/pose/map50": 0.0,
+          "bbat/box/map50": 0.0,
+          "bbat/pose/map50": 0.0,
+          "coco/box/map50": 0.0,
+          "coco/person/box/map50": 0.0
+        },
+        "matched_run_id": "v12-activation-policy-map50-search-v1:uniform-poly-shift:matched",
+        "maximum_sham_drift": 0.0,
+        "passed": true,
+        "sham_deltas": {},
+        "sham_gate_applicable": false,
+        "sham_gate_passed": true,
+        "thresholds": {
+          "metric_family": "map50",
+          "recovery_floor": 0.04,
+          "sham_absolute_drift": 0.01,
+          "total_drop": 0.015,
+          "w8_incremental_drop": 0.01
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.01048441867915162,
+          "bbat/ball/pose/map50": 0.012666357565272124,
+          "bbat/bat/box/map50": -0.0006133458979729056,
+          "bbat/bat/pose/map50": -0.0006133458979729056,
+          "bbat/box/map50": 0.004935536390589301,
+          "bbat/pose/map50": 0.00602650583364972,
+          "coco/box/map50": -0.008532110800092196,
+          "coco/person/box/map50": -0.00610629373613214
+        },
+        "total_gate_passed": true,
+        "w8_incremental_gate_applicable": false,
+        "w8_incremental_gate_passed": true,
+        "worst_incremental_delta": 0.0,
+        "worst_incremental_metric": "coco/box/map50",
+        "worst_total_delta": -0.008532110800092196,
+        "worst_total_metric": "coco/box/map50"
+      },
+      "materialization": {
+        "detect_compatible_tensors": 753,
+        "detect_complete": true,
+        "pose_compatible_tensors": 801,
+        "pose_complete": true
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9688669851858945,
+        "bbat/ball/pose/map50": 0.9721552121713508,
+        "bbat/bat/box/map50": 0.9934649945203772,
+        "bbat/bat/pose/map50": 0.9934649945203772,
+        "bbat/box/map50": 0.9811659898531359,
+        "bbat/pose/map50": 0.982810103345864,
+        "coco/box/map50": 0.6621868963573286,
+        "coco/person/box/map50": 0.8333032937406114
+      },
+      "metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/uniform-poly-shift/epoch-0000/bittrue/metrics.json",
+      "metrics_report_sha256": "1270d0907f789af77c6cec38781cc5f1242859f41404765f2ecba96d1f311687",
+      "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v12-activation-policy-map50-search-v1/validation/uniform-poly-shift/epoch-0000/bittrue",
+      "role": "uniform-poly-shift",
+      "seconds": 73.32628252822906,
+      "status": "completed",
+      "weight_quantization": "disabled"
+    }
+  },
+  "schema_version": 1,
+  "selection": {
+    "accuracy_tolerance": 0.002,
+    "analytic_hardware_rank_is_not_measured_latency": true,
+    "eligible_ids": [
+      "uniform-qsilu-comparison",
+      "qsilu-hswish-neck-attention",
+      "qsilu-hswish-neck-attention-masf",
+      "qsilu-hswish-neck-attention-masf-backbone-attention",
+      "uniform-poly-shift"
+    ],
+    "rejected_ids": [
+      "uniform-hardswish"
+    ],
+    "roles": {
+      "accuracy": "uniform-poly-shift",
+      "balanced": "uniform-poly-shift",
+      "hardware": "uniform-poly-shift"
+    },
+    "total_max_drop": 0.015
+  },
+  "status": "completed"
+}

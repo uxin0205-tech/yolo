@@ -1,0 +1,33 @@
+{
+  "candidate_mAP50_95": {
+    "N4-FP": 0.50384,
+    "N4-I4": 0.50406,
+    "N4-I8": 0.50374,
+    "N4-PV": 0.50402,
+    "T7-D": 0.50616,
+    "T7-P": 0.50562,
+    "T7-PV": 0.50513,
+    "T7-R": 0.50577,
+    "T7-V": 0.50506
+  },
+  "epochs": 10,
+  "initialization": "independent full-precision source checkpoint",
+  "n4_kd": false,
+  "n4_non_kd_parent_family": "best T7+T1-T5, no KD",
+  "selected_mAP50_95": 0.50616,
+  "selected_n4_artifact": "N4-I4",
+  "selected_n4_magnitude_bits": 4,
+  "selected_n4_parent": "T7-D",
+  "selected_t6_base_variant": "T4",
+  "selected_t6_components": [
+    "positional",
+    "feature"
+  ],
+  "selected_t7_artifact": "T7-D",
+  "selected_t7_bias_type": "dense_2d",
+  "selected_variant": "T7-D",
+  "selection_metric": "mAP50_95",
+  "selection_stage": "full",
+  "t6_kd_target_family": "T1-T5",
+  "trainable_scope": "attention_only"
+}

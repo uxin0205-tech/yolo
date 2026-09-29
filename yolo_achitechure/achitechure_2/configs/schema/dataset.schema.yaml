@@ -1,0 +1,30 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: dataset.schema.yaml
+title: architecture_2 Dataset 設定
+x-spec-version: 2.3.0
+x-spec-sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+type: object
+required: [schema_version, spec_version, spec_sha256, kind, project_metadata, path, train, val, names]
+properties:
+  schema_version: {const: 3}
+  spec_version: {const: 2.3.0}
+  spec_sha256: {type: string, pattern: "^[0-9a-f]{64}$"}
+  kind: {const: dataset}
+  project_metadata:
+    type: object
+    required: [title_zh, summary_zh, task, role, original_read_only, ultralytics_dataset_yaml]
+    properties:
+      title_zh: {type: string}
+      summary_zh: {type: string}
+      task: {enum: [detect, pose]}
+      role: {enum: [main_detect, main_pose, diagnostic_detect, search_pose, search_diagnostic_detect, screening_detect, screening_pose, screening_diagnostic_detect]}
+      original_read_only: {type: string}
+      ultralytics_dataset_yaml: {const: true}
+  path: {type: string}
+  train: {type: string}
+  val: {type: string}
+  test: {type: [string, "null"]}
+  nc: {type: integer, minimum: 1}
+  names: {type: [array, object]}
+  kpt_shape: {type: array}
+  flip_idx: {type: array}

@@ -1,0 +1,10 @@
+reference_id: B0
+checkpoint: bbt5-detect-baseline/weights/yolo11m_bat_detect_init.pt
+checkpoint_sha256: 9adacdd1a86cde27b7568c0756ca06f7be83160445fc90a10449206c82b06f4d
+task: detect
+class_names: [ball, bat]
+strides: [8, 16, 32]
+ultralytics: 8.4.90
+provenance: BBT5 pose-trained checkpoint with the pose head removed and a detection head installed
+data_exposed: true
+selection_eligible: false

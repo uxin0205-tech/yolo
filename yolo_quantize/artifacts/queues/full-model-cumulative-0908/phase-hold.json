@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "decision_date": "2026-09-08",
+  "state": "deferred_by_user",
+  "reason": "使用者依老師建議，要求先在階段邊界收尾，量化延後至模型最後階段處理。",
+  "stop_method": "existing_ptq_batch_completed_and_supervisor_exited_naturally",
+  "supervisor_exit_code": 0,
+  "monitor_state": "exited_on_terminal_event",
+  "completed_work": {
+    "single_layer_output_probes": 592,
+    "isolated_region_ptq_candidates": 40,
+    "short_qat_jobs": 6,
+    "epochs_per_short_qat_job": 5,
+    "cumulative_ptq_stages": 11,
+    "cumulative_ptq_candidates": 12
+  },
+  "followup_authorization": {
+    "new_gpu_jobs": false,
+    "additional_qat_jobs_now": 0,
+    "formal_validation_now": false,
+    "deployment_optimization_now": false,
+    "resume_requires_explicit_user_request": true
+  },
+  "handoff_scope": "本檔是作業交接決策，不是 OS 或 CLI 強制阻擋器。原 runner 已自然結束且沒有自動建立下一批 QAT；舊計畫的候選名額不得當作目前啟動授權。",
+  "preserved_execution_status": {
+    "path": "artifacts/queues/full-model-cumulative-0908/execution-status.json",
+    "sha256": "bbbea1b3e79fb4f1a7928508c98de499aa1a7b46db5ce96038fb2f49352c419a",
+    "status": "decision_required",
+    "current_index": 11,
+    "completed_jobs": 12,
+    "error": null
+  },
+  "preserved_plan": {
+    "path": "artifacts/queues/full-model-cumulative-0908/plan.json",
+    "sha256": "c2e83797f85e858cf6cec7c897dd75f22579e7b49823a4e8eda461e5ac7982e1"
+  },
+  "selection_evidence": {
+    "path": "artifacts/queues/full-model-cumulative-0908/cumulative-selection.json",
+    "sha256": "abba6715dd86589cb1ccb263519a6cd5cef3ecf29e4e4450b581e4592833b525"
+  },
+  "retained_tradeoffs": ["masf", "pose_one2one_tower"],
+  "selected_finalist": null,
+  "formal_validation_completed": false,
+  "integer_deployment_completed": false,
+  "report": "docs/reports/2026-09-08-quantization-phase-handoff.md"
+}

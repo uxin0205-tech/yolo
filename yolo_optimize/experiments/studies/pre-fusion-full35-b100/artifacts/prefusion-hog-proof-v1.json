@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "arms": {
+    "control": {
+      "trace": "d14c28c1d1c2470d9c0e169227345f03ac64b2d11ac3264dbe55708a06ae5be1",
+      "strip_cpu160_exact": true,
+      "stripped_keys": [
+        "hog_aux.projection.bias",
+        "hog_aux.projection.weight"
+      ],
+      "p3_grad_norm": 100.42382049560547,
+      "hog_grad_norm": null,
+      "optimizer_steps": 1,
+      "ema_updates": 7401
+    },
+    "hog": {
+      "trace": "d14c28c1d1c2470d9c0e169227345f03ac64b2d11ac3264dbe55708a06ae5be1",
+      "strip_cpu160_exact": true,
+      "stripped_keys": [
+        "hog_aux.projection.bias",
+        "hog_aux.projection.weight"
+      ],
+      "p3_grad_norm": 134.3937530517578,
+      "hog_grad_norm": 67.333984375,
+      "optimizer_steps": 1,
+      "ema_updates": 7401
+    }
+  }
+}

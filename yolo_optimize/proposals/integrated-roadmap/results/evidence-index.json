@@ -1,0 +1,174 @@
+{
+  "status": "evidence_tables_built_not_goal_complete",
+  "parent": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+  "parent_sha256_verified": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+  "parent_joint": 0.7111747389752653,
+  "metric_keys": [
+    "bbat/ball/box/map50_95",
+    "bbat/ball/pose/map50_95",
+    "bbat/bat/box/map50_95",
+    "bbat/bat/pose/map50_95",
+    "bbat/box/map50_95",
+    "bbat/pose/map50_95",
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "rows": 50,
+  "training_runs": [
+    {
+      "run": "native",
+      "completed_epochs": 5,
+      "best_ema_epoch": 1,
+      "best_ema_joint": 0.7112260043801761,
+      "best_parent_numeric_gate": false,
+      "checkpoint_files_present": true,
+      "scope": {
+        "name": "j3",
+        "task_mode": "joint",
+        "epochs": 10,
+        "patience": 4,
+        "backbone_start_layer": 11,
+        "tune_attention": false,
+        "learning_rates": {
+          "backbone": 0.0,
+          "neck": 1e-05,
+          "masf": 0.0,
+          "attention": 0.0,
+          "detect_head": 2.5e-05,
+          "pose_head": 2.5e-05
+        },
+        "warmup_epochs": 1
+      }
+    },
+    {
+      "run": "quarter_lr",
+      "completed_epochs": 2,
+      "best_ema_epoch": 1,
+      "best_ema_joint": 0.7109339701451989,
+      "best_parent_numeric_gate": false,
+      "checkpoint_files_present": true,
+      "scope": {
+        "name": "j3",
+        "task_mode": "joint",
+        "epochs": 10,
+        "patience": 4,
+        "backbone_start_layer": 11,
+        "tune_attention": false,
+        "learning_rates": {
+          "backbone": 0.0,
+          "neck": 2.5e-06,
+          "masf": 0.0,
+          "attention": 0.0,
+          "detect_head": 6.25e-06,
+          "pose_head": 6.25e-06
+        },
+        "warmup_epochs": 1
+      }
+    },
+    {
+      "run": "hog",
+      "completed_epochs": 4,
+      "best_ema_epoch": 2,
+      "best_ema_joint": 0.711277968460211,
+      "best_parent_numeric_gate": false,
+      "checkpoint_files_present": true,
+      "scope": {
+        "name": "j3",
+        "task_mode": "joint",
+        "epochs": 10,
+        "patience": 4,
+        "backbone_start_layer": 11,
+        "tune_attention": false,
+        "learning_rates": {
+          "backbone": 0.0,
+          "neck": 1e-05,
+          "masf": 0.0,
+          "attention": 0.0,
+          "detect_head": 2.5e-05,
+          "pose_head": 2.5e-05
+        },
+        "warmup_epochs": 1
+      }
+    },
+    {
+      "run": "rep17",
+      "completed_epochs": 5,
+      "best_ema_epoch": 3,
+      "best_ema_joint": 0.7108208400132181,
+      "best_parent_numeric_gate": false,
+      "checkpoint_files_present": true,
+      "scope": {
+        "name": "j3",
+        "task_mode": "joint",
+        "epochs": 10,
+        "patience": 4,
+        "backbone_start_layer": 11,
+        "tune_attention": false,
+        "learning_rates": {
+          "backbone": 0.0,
+          "neck": 1e-05,
+          "masf": 0.0,
+          "attention": 0.0,
+          "detect_head": 2.5e-05,
+          "pose_head": 2.5e-05
+        },
+        "warmup_epochs": 1
+      }
+    },
+    {
+      "run": "masf_off",
+      "completed_epochs": 4,
+      "best_ema_epoch": 2,
+      "best_ema_joint": 0.710323323743087,
+      "best_parent_numeric_gate": false,
+      "checkpoint_files_present": true,
+      "scope": {
+        "name": "j3",
+        "task_mode": "joint",
+        "epochs": 10,
+        "patience": 4,
+        "backbone_start_layer": 11,
+        "tune_attention": false,
+        "learning_rates": {
+          "backbone": 0.0,
+          "neck": 1e-05,
+          "masf": 0.0,
+          "attention": 0.0,
+          "detect_head": 2.5e-05,
+          "pose_head": 2.5e-05
+        },
+        "warmup_epochs": 1
+      }
+    },
+    {
+      "run": "heads",
+      "completed_epochs": 5,
+      "best_ema_epoch": 2,
+      "best_ema_joint": 0.7111691393426429,
+      "best_parent_numeric_gate": false,
+      "checkpoint_files_present": true,
+      "scope": {
+        "name": "j3",
+        "task_mode": "joint",
+        "epochs": 10,
+        "patience": 4,
+        "backbone_start_layer": 11,
+        "tune_attention": false,
+        "learning_rates": {
+          "backbone": 0.0,
+          "neck": 0.0,
+          "masf": 0.0,
+          "attention": 0.0,
+          "detect_head": 2.5e-05,
+          "pose_head": 2.5e-05
+        },
+        "warmup_epochs": 1
+      }
+    }
+  ],
+  "limitations": [
+    "CSV 僅比較 EMA 對同 epoch native EMA；live 不混入 selector。",
+    "不同長度只比較共同 epoch；本腳本核對 checkpoint 存在與大小，不聲稱重新載入每份完整快照。",
+    "numeric gate 不代替同場景盲測、paired seed 或目標硬體驗證。"
+  ]
+}

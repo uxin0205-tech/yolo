@@ -1,0 +1,96 @@
+{
+  "provenance": {
+    "candidate": "qk_fp22",
+    "checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+    "checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+    "phase": "preflight",
+    "intervention": {
+      "kind": "eval_only_fp_dot_retained_bias_and_pwl",
+      "fp_site": 22,
+      "binary_site": 10,
+      "baseline_config_modified": false,
+      "state_tensors_modified": false,
+      "qk_ste_enabled": false,
+      "deployable": false,
+      "latency_valid": false,
+      "installations": [
+        {
+          "task": "detect",
+          "backend": "bittrue",
+          "fp_site": 22,
+          "calls": 159
+        },
+        {
+          "task": "pose",
+          "backend": "bittrue",
+          "fp_site": 22,
+          "calls": 45
+        }
+      ]
+    }
+  },
+  "loaded": {
+    "path": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+    "checkpoint_kind": "inference_only",
+    "state_source": "ema",
+    "tensors": 1238
+  },
+  "metrics": {
+    "bittrue": {
+      "coco/box/precision": 0.7274004766866844,
+      "coco/box/recall": 0.601298384025538,
+      "coco/box/map50": 0.6635733075672816,
+      "coco/box/map75": 0.5327480760375973,
+      "coco/box/map50_95": 0.4848291562164387,
+      "coco/person/box/precision": 0.7910651192760916,
+      "coco/person/box/recall": 0.7645912591630324,
+      "coco/person/box/map50": 0.8341382882866237,
+      "coco/person/box/map75": 0.6713785636716445,
+      "coco/person/box/map50_95": 0.6064424523168512,
+      "bbat/box/precision": 0.8749429912510995,
+      "bbat/box/recall": 0.8783253142355312,
+      "bbat/box/map50": 0.8894720193275164,
+      "bbat/box/map75": 0.6770870702112768,
+      "bbat/box/map50_95": 0.6247772095710828,
+      "bbat/pose/precision": 0.884149024145888,
+      "bbat/pose/recall": 0.8981687689932388,
+      "bbat/pose/map50": 0.904285676856165,
+      "bbat/pose/map75": 0.9010182259603061,
+      "bbat/pose/map50_95": 0.899215089216348,
+      "bbat/ball/box/precision": 0.8585462683540822,
+      "bbat/ball/box/recall": 0.8494150069497265,
+      "bbat/ball/box/map50": 0.8489772666886473,
+      "bbat/ball/box/map75": 0.48099775411971213,
+      "bbat/ball/box/map50_95": 0.4971423268861462,
+      "bbat/ball/pose/precision": 0.8680388941768522,
+      "bbat/ball/pose/recall": 0.8753180661577609,
+      "bbat/ball/pose/map50": 0.8571738025601575,
+      "bbat/ball/pose/map75": 0.8526432557486205,
+      "bbat/ball/pose/map50_95": 0.8518811473184383,
+      "bbat/bat/box/precision": 0.8913397141481169,
+      "bbat/bat/box/recall": 0.9072356215213359,
+      "bbat/bat/box/map50": 0.9299667719663856,
+      "bbat/bat/box/map75": 0.8731763863028413,
+      "bbat/bat/box/map50_95": 0.7524120922560196,
+      "bbat/bat/pose/precision": 0.9002591541149239,
+      "bbat/bat/pose/recall": 0.9210194718287168,
+      "bbat/bat/pose/map50": 0.9513975511521725,
+      "bbat/bat/pose/map75": 0.9493931961719917,
+      "bbat/bat/pose/map50_95": 0.9465490311142574
+    }
+  },
+  "joint_scores": {
+    "bittrue": 0.7028957993074139
+  },
+  "gate_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95",
+    "bbat/box/map50_95",
+    "bbat/pose/map50_95",
+    "bbat/ball/box/map50_95",
+    "bbat/bat/box/map50_95",
+    "bbat/ball/pose/map50_95",
+    "bbat/bat/pose/map50_95"
+  ],
+  "elapsed_seconds": 36.57873320579529
+}

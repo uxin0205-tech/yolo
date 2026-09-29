@@ -1,0 +1,103 @@
+# COCO train-only 固定20%架構篩選；官方 val2017 不參與。
+schema_version: 3
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+kind: dataset
+project_metadata:
+  title_zh: COCO2017 Detect 固定20%架構篩選
+  summary_zh: 從 train2017 固定隨機抽20%訓練並使用互斥 train-only search-val；只作初篩。
+  task: detect
+  role: screening_detect
+  runtime_view: architecture-screen-20-v1
+  source_scope: train2017_only
+  formal_val_excluded: true
+  screening_manifest: artifacts/datasets/architecture-screen-20-v1/screening-manifest.json
+  original_read_only: /home/uxin/yolo/coco2017
+  overlap_exclusion_manifest: /home/uxin/yolo/original/pose/derived/bbat5-v1/manifests/coco-exclusion-manifest.json
+  ultralytics_dataset_yaml: true
+path: /home/uxin/yolo/coco2017
+train: /home/uxin/yolo/yolo_achitechure/achitechure_2/artifacts/datasets/architecture-screen-20-v1/coco/train.txt
+val: /home/uxin/yolo/yolo_achitechure/achitechure_2/artifacts/datasets/architecture-screen-20-v1/coco/search-val.txt
+screening_fraction: 0.2
+split_seed: 0
+names:
+  0: person
+  1: bicycle
+  2: car
+  3: motorcycle
+  4: airplane
+  5: bus
+  6: train
+  7: truck
+  8: boat
+  9: traffic light
+  10: fire hydrant
+  11: stop sign
+  12: parking meter
+  13: bench
+  14: bird
+  15: cat
+  16: dog
+  17: horse
+  18: sheep
+  19: cow
+  20: elephant
+  21: bear
+  22: zebra
+  23: giraffe
+  24: backpack
+  25: umbrella
+  26: handbag
+  27: tie
+  28: suitcase
+  29: frisbee
+  30: skis
+  31: snowboard
+  32: sports ball
+  33: kite
+  34: baseball bat
+  35: baseball glove
+  36: skateboard
+  37: surfboard
+  38: tennis racket
+  39: bottle
+  40: wine glass
+  41: cup
+  42: fork
+  43: knife
+  44: spoon
+  45: bowl
+  46: banana
+  47: apple
+  48: sandwich
+  49: orange
+  50: broccoli
+  51: carrot
+  52: hot dog
+  53: pizza
+  54: donut
+  55: cake
+  56: chair
+  57: couch
+  58: potted plant
+  59: bed
+  60: dining table
+  61: toilet
+  62: tv
+  63: laptop
+  64: mouse
+  65: remote
+  66: keyboard
+  67: cell phone
+  68: microwave
+  69: oven
+  70: toaster
+  71: sink
+  72: refrigerator
+  73: book
+  74: clock
+  75: vase
+  76: scissors
+  77: teddy bear
+  78: hair drier
+  79: toothbrush

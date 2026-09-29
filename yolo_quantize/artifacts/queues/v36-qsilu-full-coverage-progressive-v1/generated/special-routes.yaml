@@ -1,0 +1,66 @@
+schema_version: 1
+manifest_id: v36-special-routes-v1
+date: '2026-09-06'
+execution_authorized: false
+map_validation_run: false
+selection_claim: false
+special-backbone-fixed-sd4:
+- graph.model.10.m.0.attn.pe.conv
+- graph.model.2.m.0.cv2.conv
+- graph.model.2.m.0.cv1.conv
+- graph.model.2.cv1.conv
+special-backbone-exact-ternary:
+- graph.model.10.m.0.attn.proj.conv
+- graph.model.10.m.0.ffn.0.conv
+- graph.model.8.m.0.cv2.conv
+- graph.model.6.m.0.cv2.conv
+special-backbone-twn-v3:
+- graph.model.0.conv
+- graph.model.10.m.0.ffn.1.conv
+- graph.model.10.m.0.attn.pe.conv
+- graph.model.10.m.0.attn.proj.conv
+special-backbone-paper-twn-v2:
+- graph.model.10.m.0.attn.proj.conv
+- graph.model.8.m.0.cv2.conv
+- graph.model.10.m.0.ffn.0.conv
+- graph.model.6.m.0.cv2.conv
+special-neck-fixed-sd4:
+- graph.model.22.m.0.1.attn.pe.conv
+- graph.model.16.p3_masf.context.dw3.conv
+- graph.model.16.p3_masf.context.dw5.conv
+- graph.model.16.m.0.cv3.conv
+special-neck-exact-ternary:
+- graph.model.16.p3_masf.context.project.conv
+- graph.model.13.m.0.cv2.conv
+- graph.model.16.p3_masf.context.dw5.conv
+- graph.model.22.m.0.1.attn.proj.conv
+special-neck-twn-v3:
+- graph.model.16.p3_masf.context.dw3.conv
+- graph.model.16.p3_masf.context.dw5.conv
+- graph.model.16.p3_masf.context.project.conv
+- graph.model.13.m.0.cv2.conv
+special-neck-paper-twn-v2:
+- graph.model.16.p3_masf.context.project.conv
+- graph.model.13.m.0.cv2.conv
+- graph.model.16.p3_masf.context.dw5.conv
+- graph.model.22.m.0.1.attn.proj.conv
+special-head-fixed-sd4:
+- graph.model.23.detect_head.one2one_cv3.0.1.0.conv
+- graph.model.23.detect_head.one2one_cv3.1.1.0.conv
+- graph.model.23.detect_head.one2one_cv3.2.1.0.conv
+- graph.model.23.detect_head.one2one_cv3.0.0.0.conv
+special-head-exact-ternary:
+- graph.model.23.pose_head.one2one_cv3.2.2
+- graph.model.23.detect_head.one2one_cv2.1.2
+- graph.model.23.pose_head.one2one_cv2.2.2
+- graph.model.23.pose_head.one2one_cv3.0.2
+special-head-twn-v3:
+- graph.model.23.detect_head.one2one_cv3.1.1.0.conv
+- graph.model.23.pose_head.one2one_cv3.2.0.0.conv
+- graph.model.23.pose_head.one2one_cv3.1.1.0.conv
+- graph.model.23.pose_head.one2one_cv3.0.1.0.conv
+special-head-paper-twn-v2:
+- graph.model.23.pose_head.one2one_cv3.2.2
+- graph.model.23.pose_head.one2one_cv2.2.2
+- graph.model.23.pose_head.one2one_cv3.0.2
+- graph.model.23.pose_head.one2one_cv3.1.2

@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-08",
+  "status": "executed",
+  "approval": "使用者核准 R01–R03、M01–M12，並要求保留日後恢復與發布 5090 Stop 0908。",
+  "backup": {
+    "path": "/tmp/yolo-quantize-report-backup-0908.rJlv9s",
+    "reports": 25,
+    "sha256_verified": true,
+    "permanent": false
+  },
+  "deleted": [
+    {
+      "id": "R01",
+      "path": "docs/reports/2026-09-07-continuous-five-epoch-plan.md",
+      "bytes": 4264,
+      "sha256": "c9d9c055313044129c37cae1c930a8d2512a02d8b40d9ebcc893057db6e85f38",
+      "backup_path": "/tmp/yolo-quantize-report-backup-0908.rJlv9s/docs/reports/2026-09-07-continuous-five-epoch-plan.md"
+    },
+    {
+      "id": "R02",
+      "path": "docs/reports/2026-08-29-weight-region-replan.md",
+      "bytes": 6215,
+      "sha256": "3f3fee6151b8db112ce889de98e3acfedfe356ca4884a618ba0bca7dc6672cf6",
+      "backup_path": "/tmp/yolo-quantize-report-backup-0908.rJlv9s/docs/reports/2026-08-29-weight-region-replan.md"
+    },
+    {
+      "id": "R03",
+      "path": "docs/reports/2026-09-07-ptq-to-qat-recovery-interpretation.md",
+      "bytes": 2572,
+      "sha256": "3615d06aa64079e7829f484f5128ff1bc97f2d16d5feb79f36eadad0e28e736b",
+      "backup_path": "/tmp/yolo-quantize-report-backup-0908.rJlv9s/docs/reports/2026-09-07-ptq-to-qat-recovery-interpretation.md"
+    }
+  ],
+  "changes": [
+    {
+      "source": "IMPLEMENTATION_PLAN.md",
+      "destination": "IMPLEMENTATION_PLAN.md",
+      "action": "relink",
+      "sha256_before": "d0dcc726f944531e4004ef9bf79f32c6ca0a905f5be4c378ca0850dc7f37e6c8",
+      "sha256_after": "0dcca3c622299ae5055b6dc592fecafc487035df614d154d6e9cd23f3fd5d45a"
+    },
+    {
+      "source": "deliverables/README.md",
+      "destination": "deliverables/README.md",
+      "action": "relink",
+      "sha256_before": "e1d5ec52d788dd05dce04ccee602fa17345c2670322fbd8b55c279e683e6e0fc",
+      "sha256_after": "b75669c3f489b8ebf772043c40062c674f4621f2162112ea1bec85dd62d5d56b"
+    },
+    {
+      "source": "deliverables/full-model-audit-2026-09-07/README.md",
+      "destination": "deliverables/full-model-audit-2026-09-07/README.md",
+      "action": "relink",
+      "sha256_before": "e7262e9e68c54c6d5b56910c5d22a4230d0e1485ecb9dd10fa8e58c1926a761d",
+      "sha256_after": "c3f23a9f14fc33b4c338395e19774be9c4806504860a0f3d9f65221d26fb21c5"
+    },
+    {
+      "source": "docs/archive/README.md",
+      "destination": "docs/archive/README.md",
+      "action": "relink",
+      "sha256_before": "18461450112de58d0db0e0015356ed3dd997891d72d04dafbf823a482086a930",
+      "sha256_after": "83fabdbda7793a7922b10822a2870e180a5cd68690940d1fe9f4090a7a9c8296"
+    },
+    {
+      "source": "docs/archive/project-readme-before-2026-09-08.md",
+      "destination": "docs/archive/project-readme-before-2026-09-08.md",
+      "action": "relink",
+      "sha256_before": "ec7abae5032c3258defe5bef918839756296fb37a054020bbaf54f3bd0b9a0f2",
+      "sha256_after": "6530a8b045ec0ad7bd17bff30c0cb1c833195d2403c83733fce897002d4bec9f"
+    },
+    {
+      "source": "docs/archive/report-index-before-2026-09-08.md",
+      "destination": "docs/archive/report-index-before-2026-09-08.md",
+      "action": "relink",
+      "sha256_before": "705169ea618988fb0079ed0a14f1b2fdab210d5a7ef3f55ad37ecf1a3f087c64",
+      "sha256_after": "51826f139c1dacf89f58db8554f402ce23066b7414c998b38e53ab230c7c0b76"
+    },
+    {
+      "source": "docs/reports/2026-08-29-activation-preselection-report.md",
+      "destination": "docs/reports/2026-08-29-activation-preselection-report.md",
+      "action": "relink",
+      "sha256_before": "c9f56c9f5eb51d9f88d4a491d09c79b93df91a4c5caa4a1bc8758e9f1b8514b6",
+      "sha256_after": "1accbb8c1bc9fb7eaec813a6acc99e279b3e6f9c796cb4b5a0d42b19dd9315f5"
+    },
+    {
+      "source": "docs/reports/2026-08-29-weight-ptq-backbone-early-v1.md",
+      "destination": "docs/archive/reports/2026-08-29-weight-ptq-backbone-early-v1.md",
+      "action": "move_and_relink",
+      "sha256_before": "621f9ccd2467321ab7e4ec862bd3aeab153ad9adc050be63b41bdb4de4eb3388",
+      "sha256_after": "621f9ccd2467321ab7e4ec862bd3aeab153ad9adc050be63b41bdb4de4eb3388"
+    },
+    {
+      "source": "docs/reports/2026-08-30-v1-v3-cpu-implementation.md",
+      "destination": "docs/archive/reports/2026-08-30-v1-v3-cpu-implementation.md",
+      "action": "move_and_relink",
+      "sha256_before": "3e747f6c4214ab95548966db7a2402f3dee990460475d6e68a3815c187296b28",
+      "sha256_after": "b39ce7770675521ea50ebdc49ff39f7f63799c9a737a8c71292454ad5086c0c5"
+    },
+    {
+      "source": "docs/reports/2026-08-31-hardswish-policy-revision.md",
+      "destination": "docs/archive/reports/2026-08-31-hardswish-policy-revision.md",
+      "action": "move_and_relink",
+      "sha256_before": "3402a015782016d9eb6f94200f25191443bc42e55918c5c4372297e9a8fd7bd7",
+      "sha256_after": "3b558ac053d82161d75f56b0a45b548cddd165742df057e57098fc7e672ec4b5"
+    },
+    {
+      "source": "docs/reports/2026-09-01-architecture-experiment-audit.md",
+      "destination": "docs/archive/reports/2026-09-01-architecture-experiment-audit.md",
+      "action": "move_and_relink",
+      "sha256_before": "a5a2398b6c82f5662cf2323d84b3a259120faa0e5c6b4c944e59434f3e4cdee0",
+      "sha256_after": "ca5cb42d2f3d5ee3c582ba9e6dc5e5535ca8aa30bf07bb5e7e34d8c4984493c4"
+    },
+    {
+      "source": "docs/reports/2026-09-01-cpu-p0-integer-exact-routing.md",
+      "destination": "docs/archive/reports/2026-09-01-cpu-p0-integer-exact-routing.md",
+      "action": "move_and_relink",
+      "sha256_before": "4e856c9ed10b99454b4c434309385dc107be9b2715ea3e2bbd6aeae886589b4c",
+      "sha256_after": "4e856c9ed10b99454b4c434309385dc107be9b2715ea3e2bbd6aeae886589b4c"
+    },
+    {
+      "source": "docs/reports/2026-09-03-poly-shift-ptq-special-format-and-qat-entry.md",
+      "destination": "docs/archive/reports/2026-09-03-poly-shift-ptq-special-format-and-qat-entry.md",
+      "action": "move_and_relink",
+      "sha256_before": "40669153850bb3590e3955f2f94975a8ad249391d65b0fef3eb2a34a7d1d7adc",
+      "sha256_after": "40669153850bb3590e3955f2f94975a8ad249391d65b0fef3eb2a34a7d1d7adc"
+    },
+    {
+      "source": "docs/reports/2026-09-03-v5-map50-bit-boundary-search.md",
+      "destination": "docs/archive/reports/2026-09-03-v5-map50-bit-boundary-search.md",
+      "action": "move_and_relink",
+      "sha256_before": "846d2895cbff7efca4775ebc8cff70a7749923d0245b4d5fe01a6a528e9ae425",
+      "sha256_after": "9d583a39cc63eb4af3f9c69ef44ac7e5d1952108d4320b6fe41c1847b28d970b"
+    },
+    {
+      "source": "docs/reports/2026-09-03-v5-nine-region-w8-sensitivity.md",
+      "destination": "docs/archive/reports/2026-09-03-v5-nine-region-w8-sensitivity.md",
+      "action": "move_and_relink",
+      "sha256_before": "c155b9756b1ff05291e56909b6e4ec41b54d534f3402e26fea02c449626b58fa",
+      "sha256_after": "94b6a7eefcc49a8fca16e649d074522300cb6c25f45fbf45924b646dca79bd9b"
+    },
+    {
+      "source": "docs/reports/2026-09-04-integrated-quantization-and-paper-twn-plan.md",
+      "destination": "docs/archive/reports/2026-09-04-integrated-quantization-and-paper-twn-plan.md",
+      "action": "move_and_relink",
+      "sha256_before": "8612a6074ea186d1f9d6150bbf41a0316de62ace42e303fe8dab952f062c1642",
+      "sha256_after": "0520c896c0f06af6a1209e180ab82646e4a0cb2cbc21849e832f50c2151172d1"
+    },
+    {
+      "source": "docs/reports/2026-09-04-v19-v29-progressive-quantization-execution.md",
+      "destination": "docs/archive/reports/2026-09-04-v19-v29-progressive-quantization-execution.md",
+      "action": "move_and_relink",
+      "sha256_before": "7f479dd237e031d8a187a8b70e0daa2c30a5a38b366f871212bd6c13e330d371",
+      "sha256_after": "7f479dd237e031d8a187a8b70e0daa2c30a5a38b366f871212bd6c13e330d371"
+    },
+    {
+      "source": "docs/reports/2026-09-05-v29-selection-and-qsilu-handoff-plan.md",
+      "destination": "docs/archive/reports/2026-09-05-v29-selection-and-qsilu-handoff-plan.md",
+      "action": "move_and_relink",
+      "sha256_before": "ebf3c7271aa7e8b7c0c0aee32619fb68d79b49197a2eccf3c57d0179cbeb66b3",
+      "sha256_after": "ebf3c7271aa7e8b7c0c0aee32619fb68d79b49197a2eccf3c57d0179cbeb66b3"
+    },
+    {
+      "source": "docs/reports/2026-09-07-full-model-audit-four-day-plan.md",
+      "destination": "docs/archive/reports/2026-09-07-full-model-audit-four-day-plan.md",
+      "action": "move_and_relink",
+      "sha256_before": "04869ddfc93a0b5fda4795b17aeb07209af9c4f252d3e054646a09e6ed723486",
+      "sha256_after": "b3fe95c341124eed402388a8a049675c0e090ff237449e8c69d5bc1c1cd85955"
+    },
+    {
+      "source": "docs/reports/2026-09-07-weight-distribution-detailed-analysis.md",
+      "destination": "docs/reports/2026-09-07-weight-distribution-detailed-analysis.md",
+      "action": "relink",
+      "sha256_before": "6967eaed5b9fc4181dbfbca0c85081c9aa9f181b11ec60168591b40aed698db6",
+      "sha256_after": "2e9dca92519f8b5161e013e016f9ffb17e350dd49cdd7ef9441b867911335a44"
+    },
+    {
+      "source": "docs/research/2026-09-01-quantization-literature-and-innovation-audit.md",
+      "destination": "docs/research/2026-09-01-quantization-literature-and-innovation-audit.md",
+      "action": "relink",
+      "sha256_before": "f65e9ed7822615d46132c2957e958d8adb78cf28c777aedbdd6d0ebf9c671792",
+      "sha256_after": "a8975dc9b2be39427b662c6418730a6aa3c8e69f87ad72a25832945255fa7410"
+    },
+    {
+      "source": "docs/superpowers/plans/2026-09-06-v36-full-coverage-plan.md",
+      "destination": "docs/superpowers/plans/2026-09-06-v36-full-coverage-plan.md",
+      "action": "relink",
+      "sha256_before": "9c60aaf221dacfc7cd968ee60cf77b6aa73519eabd92deead303b69a04c1a7d0",
+      "sha256_after": "d5524ade7adfb07a52e7c52b76fdcf5bbd32a7ba89cf1b9a011255c73e7ef892"
+    }
+  ],
+  "changes_hash_scope": "連結修正剛完成時快照；後續 README／archive 入口更新可能有新 hash，最終以 publication-files-0908.json 為準。",
+  "validation": {
+    "kept_reports": 10,
+    "archived_reports": 12,
+    "deleted_reports": 3,
+    "relinked_files": 22,
+    "relinked_links": 76,
+    "archive_non_link_text_unchanged": true,
+    "original_reports_backup_hash_verified": 25,
+    "cpu_tests_passed": 351,
+    "cpu_test_seconds": 50.33,
+    "global_ruff_existing_findings": 6
+  },
+  "unchanged": [
+    "原始 JSON/CSV 結果",
+    "checkpoint",
+    "datasets",
+    "queue 執行程式與既有 plan/status",
+    "歷史 publication manifest"
+  ],
+  "risks": [
+    "/tmp 備份不是永久保存；必要實驗原始資料仍在本機原位。",
+    "歷史文件 hash 保留當時意義，不改寫成最新。"
+  ],
+  "gpu_operations": false
+}

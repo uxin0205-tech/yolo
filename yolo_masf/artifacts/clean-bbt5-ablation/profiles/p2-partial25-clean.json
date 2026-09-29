@@ -1,0 +1,24 @@
+{
+  "checkpoint": "/home/uxin/yolo/yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed42/weights/best.pt",
+  "checkpoint_sha256": "429d205ab5320e59d9499daa6b3872c4418bf8bae0292044d76ae6fd334e6a70",
+  "depthwise_conv_count": 11,
+  "experiment": "P2-Partial25-Clean",
+  "feature_traffic_bytes": 1072944000,
+  "gflops": 89.1222528,
+  "gpu_peak_allocated_bytes": 165827072,
+  "latency": {
+    "batch": 1,
+    "iterations": 100,
+    "mean_ms": 4.453241281509399,
+    "p50_ms": 4.426688194274902,
+    "p95_ms": 4.612383842468262,
+    "precision": "fp16",
+    "warmup": 20
+  },
+  "macs": 44561126400,
+  "p2_activation_bytes": 13107200,
+  "params": 20872088,
+  "peak_live_activation_bytes": 26214400,
+  "pointwise_conv_count": 77,
+  "representative_seed": 42
+}

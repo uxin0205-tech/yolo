@@ -1,0 +1,114 @@
+{
+  "assignments": [
+    {
+      "cpu_format_id": "fixed-sd4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "fixed_sd4",
+      "path": "graph.model.10.m.0.attn.proj.conv",
+      "region": "backbone_attention_safe",
+      "stage_id": "backbone-attention-sentinel",
+      "weight_format_id": "fixed-sd4"
+    }
+  ],
+  "candidate_id": "backbone-attention-sentinel--fixed_sd4",
+  "formal_training": false,
+  "formal_validation": false,
+  "materialization": {
+    "detect_complete": true,
+    "pose_complete": true
+  },
+  "metrics": {
+    "bbat/ball/box/map50": 0.2308632339596919,
+    "bbat/ball/box/map50_95": 0.13927379122309427,
+    "bbat/ball/pose/map50": 0.2471923494391024,
+    "bbat/ball/pose/map50_95": 0.2406761608456245,
+    "bbat/bat/box/map50": 0.041426073926073934,
+    "bbat/bat/box/map50_95": 0.025204761000491786,
+    "bbat/bat/pose/map50": 0.05582290353212223,
+    "bbat/bat/pose/map50_95": 0.03767615191378324,
+    "bbat/box/map50": 0.13614465394288291,
+    "bbat/box/map50_95": 0.08223927611179303,
+    "bbat/pose/map50": 0.1515076264856123,
+    "bbat/pose/map50_95": 0.13917615637970387,
+    "coco/box/map50": 0.0375515400054679,
+    "coco/box/map50_95": 0.023579218191226894,
+    "coco/person/box/map50": 0.22990424592517594,
+    "coco/person/box/map50_95": 0.12574418614607435
+  },
+  "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-attention-sentinel--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+  "metrics_sha256": "8eabb96e853dcd555a381135f7e2fe8b33514109e86949ac9f4e25b90b2d6b88",
+  "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-attention-sentinel--fixed_sd4/attempt-0/validation/epoch-0000/bittrue",
+  "parent_id": "v19-poly-shift-a8-all-w8-qat-epoch5",
+  "parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "schema_version": 1,
+  "seconds": 72.39139460818842,
+  "status": "completed",
+  "weight_quantization": [
+    {
+      "format_id": "fixed-sd4",
+      "numeric": {
+        "clipping_rate": 0.009735107421875,
+        "code_histogram": [
+          1302,
+          6714,
+          9517,
+          7155,
+          3969,
+          2066,
+          1493,
+          1245,
+          1596,
+          2065,
+          4025,
+          7084,
+          9399,
+          6709,
+          1197
+        ],
+        "code_max": 7,
+        "code_min": -7,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.983488014897925,
+        "encoded_bits": 4,
+        "logical_code_count": 15,
+        "maximum_absolute_error": 0.1338619589805603,
+        "mse": 0.00016131295706145465,
+        "normalized_rmse": 0.18097351515215268,
+        "occupied_codes": 15,
+        "scale_bytes": 1024,
+        "scale_count": 256,
+        "scale_maximum": 1.046903133392334,
+        "scale_mean": 0.22956614196300507,
+        "scale_minimum": 0.09190056473016739,
+        "sqnr_db": 14.847699559510053,
+        "weight_code_bytes": 32768,
+        "zero_ratio": 0.0189971923828125
+      },
+      "quantized_modules": 1,
+      "region": "backbone_attention_safe",
+      "sites": [
+        {
+          "clipping_rate": 0.009735107421875,
+          "code_max": 7,
+          "code_min": -7,
+          "cosine": 0.983488014897925,
+          "elements": 65536,
+          "maximum_absolute_error": 0.1338619589805603,
+          "mse": 0.00016131295706145465,
+          "normalized_rmse": 0.18097351515215268,
+          "occupied_codes": 15,
+          "output_channels": 256,
+          "path": "graph.model.10.m.0.attn.proj.conv",
+          "region": "backbone_attention_safe",
+          "scale_maximum": 1.046903133392334,
+          "scale_mean": 0.22956614196300507,
+          "scale_minimum": 0.09190056473016739,
+          "sqnr_db": 14.847699559510053,
+          "zero_ratio": 0.0189971923828125
+        }
+      ],
+      "weight_elements": 65536
+    }
+  ]
+}

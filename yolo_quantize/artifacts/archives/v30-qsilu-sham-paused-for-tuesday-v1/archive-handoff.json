@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "archive_id": "v30-qsilu-sham-paused-for-tuesday-v1",
+  "status": "archived_at_completed_epoch_boundary",
+  "date": "2026-09-06",
+  "reason": "user_prioritized_a_small_tuesday_result_before_the_complete_qat_lane",
+  "source": {
+    "lane_plan": "configs/experiments/v30-qsilu-complete-quantization-lane-v1.yaml",
+    "lane_plan_sha256": "1ae2965674a91b5e75def5c7c3d18d75d2067d0762e669916a3c4548fe10512a",
+    "q2_plan": "artifacts/queues/v30-qsilu-complete-quantization-lane-v1/generated/v30-qsilu-all-w8-qat-pilot-v1.yaml",
+    "q2_plan_sha256": "25f8f50a4a0e83b14716ecf48d0e6411d89b2dc171cdb6bb1b7b991a8ad0035c",
+    "run": "artifacts/runs/qat/v30-qsilu-all-w8-qat-pilot-v1-sham-seed1",
+    "arm": "sham",
+    "attempt": 0
+  },
+  "completed_boundary": {
+    "completed_epoch_indices": [0, 1, 2, 3, 4, 5, 6, 7],
+    "completed_epochs": 8,
+    "resume_next_epoch_index": 8,
+    "partial_epoch_index_discarded": 8,
+    "partial_epoch_last_macro_index_observed": 179,
+    "best_joint_epoch": 6,
+    "best_joint_score": 0.8345276157009675,
+    "last_completed_epoch_score": 0.8339510507216843,
+    "stale_epochs": 1,
+    "patience": 5
+  },
+  "checkpoints": {
+    "resume_last": {
+      "path": "artifacts/runs/qat/v30-qsilu-all-w8-qat-pilot-v1-sham-seed1/checkpoints/last.pt",
+      "bytes": 425038877,
+      "sha256": "15a9ea76aab2190f864c52f0eb83c725e40ea97d6ef997f3b9a9b4bc951966c4"
+    },
+    "best_joint_full_resume": {
+      "path": "artifacts/runs/qat/v30-qsilu-all-w8-qat-pilot-v1-sham-seed1/checkpoints/best_joint.pt",
+      "bytes": 425071337,
+      "sha256": "28126678a7e6f1bc7b738b4401062810f8248e974bcc6cce2a2e147850f38f7a"
+    },
+    "best_joint_inference": {
+      "path": "artifacts/runs/qat/v30-qsilu-all-w8-qat-pilot-v1-sham-seed1/inference/best_joint.pt",
+      "bytes": 91240458,
+      "sha256": "33f38520a6bd39dac258c3b6c31ebc07027a45a68803dcf26ed8f088f5d99ea0"
+    }
+  },
+  "logs": {
+    "epoch_csv": {
+      "path": "artifacts/runs/qat/v30-qsilu-all-w8-qat-pilot-v1-sham-seed1/logs/epoch.csv",
+      "sha256": "ae0db5c32f0de1d1ef54c0500a396cd9fadfe309cec006a73408b0cc94ac8244"
+    },
+    "early_stop_csv": {
+      "path": "artifacts/runs/qat/v30-qsilu-all-w8-qat-pilot-v1-sham-seed1/logs/early_stop.csv",
+      "sha256": "5849619e80dff387040c7695db113ebab0c129ed1d55faa5246af4d934f34a98"
+    }
+  },
+  "interpretation": {
+    "sham_is_not_a_quantized_winner": true,
+    "qat_arm_started": false,
+    "may_resume_without_retraining_completed_epochs": true,
+    "must_not_be_used_as_q3_locked_parent": true
+  },
+  "resume_command": "PYTHONPATH=src /home/uxin/yolo/.venv/bin/python -m yolo_quantize.qsilu_lane_queue --plan configs/experiments/v30-qsilu-complete-quantization-lane-v1.yaml --queue-root artifacts/queues/v30-qsilu-complete-quantization-lane-v1 --device 0 --execute-reviewed-queue",
+  "process_stop": {
+    "signal": "SIGINT",
+    "process_group": 1621525,
+    "remaining_matching_processes": 0,
+    "remaining_gpu_compute_processes": 0
+  },
+  "files_deleted": false
+}
+

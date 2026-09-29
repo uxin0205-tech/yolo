@@ -1,0 +1,44 @@
+{
+  "attention_class": [
+    "ParallelDualBinaryAttention"
+  ],
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    ""
+  ],
+  "construction": "parser-direct-concrete-attention",
+  "model_class": "ParallelDualBinaryAttention",
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "residual_basis_channel_per_token",
+    "v8_scale": "none"
+  },
+  "theoretical_cost": {
+    "binary_qk": 2,
+    "pv": 2,
+    "softmax": 2
+  },
+  "total_parameter_count": 1076,
+  "trainable_parameter_count": 1076,
+  "trainable_parameter_names": [
+    "threshold_q1",
+    "threshold_q2",
+    "threshold_k1",
+    "threshold_k2",
+    "basis_lambda",
+    "qkv.conv.weight",
+    "qkv.bn.weight",
+    "qkv.bn.bias",
+    "proj.conv.weight",
+    "proj.bn.weight",
+    "proj.bn.bias",
+    "pe.conv.weight",
+    "pe.bn.weight",
+    "pe.bn.bias"
+  ],
+  "trainable_scope": "all",
+  "variant_config_hash": "9a95c24f2a195beb1a90be662e10a570706a81c616323025a774b914c491c88c",
+  "variant_id": "T3"
+}

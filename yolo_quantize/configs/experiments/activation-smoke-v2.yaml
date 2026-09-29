@@ -1,0 +1,69 @@
+schema_version: 1
+experiment_id: full35-activation-output-gpu-smoke-v2
+date: 2026-08-29
+status: completed
+purpose: 無訓練檢查activation函數與LSQ+ activation-output位寬的耦合可執行性
+formal_training: false
+selection_claim: false
+
+source:
+  full35_root: /home/uxin/yolo/yolo_combine/final/full35
+  checkpoint: weights/combined/inference/best_joint.pt
+  checkpoint_sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+  activation_root: /home/uxin/yolo/yolo_activation
+  activation2_dependency: false
+
+data:
+  image_size: 640
+  calibration:
+    split: canonical_train_exemplars_only
+    per_task: 2
+  probe:
+    split: canonical_val_exemplars_only
+    per_task: 1
+  bbat5_dataset_id: bbat5-v1
+  bbat5_assignment_changed: false
+  new_dataset_view_created: false
+
+matrix:
+  activations: [silu, qsilu_pq, poly_quality, poly_shift, hardswish]
+  activation_bits: [3, 4, 5, 6, 7, 8]
+  activation_quantizer: lsq_plus
+  weight_format: fp32
+  planned_cells: 30
+  passed_cells: 30
+  failed_cells: 0
+
+adapter:
+  replaceable_silu_function_sites: 190
+  quantized_deployment_activation_outputs: 124
+  training_only_unquantized_sites: 66
+  training_only_regions: [detect_one2many, pose_one2many, pose_flow]
+  protected_signature_unchanged: true
+
+comparison:
+  reference: matched_same_activation_fp32_output
+  metrics:
+    - aggregate_output_nrmse_and_cosine
+    - decoded_output_nrmse_and_cosine
+    - one2one_raw_nrmse_and_cosine
+    - topk_selected_pair_overlap
+    - topk_selected_anchor_jaccard
+  caveat: proxy數值不是mAP，不能用來宣布正式winner或判斷0.04 mAP gate。
+
+artifacts:
+  report:
+    path: artifacts/reports/activation-smoke-v2.json
+    sha256: 3c9301adaa1937f50bdd0c059f7d8000ea4699ce229e98c8ddb387651340c1f1
+    bytes: 1058343
+  summary:
+    path: artifacts/reports/activation-smoke-v2-summary.csv
+    sha256: e5d76871d3119e681cdcb7707dc2c4a6a24ad3e35c54815c666c6c72a2f51ab6
+    bytes: 8694
+
+hold:
+  formal_validation: not_started
+  qat: not_started
+  weight_quantization: not_started
+  long_epoch_training: not_started
+  reason: 依使用者指示完成測試後先回報，不進正式訓練

@@ -1,0 +1,220 @@
+schema_version: 1
+lane_id: v30-qsilu-complete-quantization-lane-v1
+date: '2026-09-05'
+language: zh-TW
+status: ready_after_v29_user_archive_handoff
+execution_authorized: true
+formal_training: false
+formal_validation: false
+
+authorization:
+  authorization_id: user-2026-09-05-complete-qsilu-quantization-lane
+  scope: complete_search_pipeline_without_formal_or_long_training
+  gpu_start_condition: hash_pinned_v29_user_archive_handoff
+  no_user_command_required_after_executable_queue_is_materialized: true
+
+queue:
+  dependency_state: artifacts/archives/v29-poly-shift-paused-for-qsilu-v1/archive-handoff.json
+  dependency_sha256: ce73d390f2c62421d7c98a26e5b46e980d89bc5443641bb7956e87031cdffb17
+  dependency_required_status: archived_for_qsilu_handoff
+  poll_seconds: 600
+  monitoring: event_only_json
+  full_console_redirected_to_artifact: true
+  retry_per_arm: 1
+  fail_closed_on_hash_or_contract_drift: true
+  current_state: ready_to_launch
+  note: V29已依使用者要求在完整checkpoint邊界暫停並hash封存；原artifact保持可續跑。
+
+objective:
+  activation_and_weight_must_be_coupled: true
+  accepted_full35_total_gates:
+    every_map50_delta_at_least: -0.015
+    every_map50_95_delta_at_least: -0.04
+    mean_cannot_override_worst_task: true
+  priority: [pass_all_task_gates, maximize_worst_task_accuracy, minimize_packed_weight_bytes]
+
+immutable_activation_parent:
+  activation: qsilu_pq
+  activation_bits: 8
+  activation_quantizer: lsq_plus
+  checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+    sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+  activation_training_is_not_repeated_before_weight_baseline: true
+
+canonical_data:
+  coco: /home/uxin/yolo/coco2017.yaml
+  bbat5_registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+  bbat5_search: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+  bbat5_formal: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  split_or_sampling_changes: false
+
+coverage:
+  deployment_weight_paths: 148
+  deployment_regions:
+    - backbone_early
+    - backbone_deep
+    - backbone_attention_safe
+    - neck
+    - masf
+    - neck_attention_safe
+    - detect_one2one_tower
+    - detect_one2one_predictor
+    - pose_one2one_tower
+    - pose_one2one_predictor
+  protected:
+    - binary_q
+    - binary_k
+    - attention_pwl
+    - masf_topology
+    - topk
+    - gather
+    - box_decode
+    - keypoint_decode
+  training_only_not_counted_as_deployment_savings:
+    - detect_one2many
+    - pose_one2many
+    - pose_flow
+    - pose_sigma
+
+frozen_historical_evidence:
+  isolated_and_cumulative_w8:
+    path: artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json
+    sha256: 2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b
+    interpretation: 九區累積W8已通過；不包含backbone_attention_safe。
+  isolated_backbone_attention_w8:
+    path: artifacts/reports/v5-qsilu-remaining-nine-regions-w8-search-v1.json
+    sha256: 6df5efd6e0094538b7b66bc068246c2cd525e90a2557819fa280606ef74b4665
+    worst_total_map50_delta: -0.017921761035523787
+    decision: recover_not_green
+  mixed_weight:
+    path: artifacts/reports/v10-qsilu-mixed-weight-policy-search-v1.json
+    sha256: 614d8318d1d79390b0294504e88edcd49b4ec0c0115730f31e442cbf16db939a
+  sd4_coupling:
+    path: artifacts/reports/v13-qsilu-sd4-coupled-policy-search-v1.json
+    sha256: f6cbaa5b8f31cf5ced502b2fd017ca6598b537974343212409c44afb6a323bee
+  reuse_rule: 只作歷史control與避免重複；新parent形成後的逐path結果必須重驗。
+
+stages:
+  - id: q0
+    name: dependency_and_hash_intake
+    gpu: false
+    state: ready
+    action: 驗證V29 archive handoff SHA，再重驗qSiLU checkpoint、資料、graph與metric contract。
+  - id: q1
+    name: qsilu_all_ten_regions_w8_ptq
+    gpu: true
+    state: reviewed_plan_ready_waiting_dependency
+    depends_on: [q0]
+    reviewed_plan: configs/experiments/v30-qsilu-all-ten-regions-w8-search-v1.yaml
+    output: artifacts/reports/v30-qsilu-all-ten-regions-w8-search-v1.json
+    dual_output: artifacts/reports/v30-qsilu-all-ten-regions-w8-dual-regate-v1.json
+    action: 在qSiLU+A8 checkpoint上把十區148個deployment paths同時套W8，補齊舊九區證據缺口。
+    formats: [{family: uniform, bits: 8, scale_method: mse_grid_v1}]
+    output_gate: [green, recover]
+  - id: q2
+    name: qsilu_all_w8_paired_qat
+    gpu: true
+    state: conditional_q1_green_or_recover
+    depends_on: [q1]
+    arms: [matched_sham, qat]
+    materialized_plan: artifacts/queues/v30-qsilu-complete-quantization-lane-v1/generated/v30-qsilu-all-w8-qat-pilot-v1.yaml
+    preflight: artifacts/queues/v30-qsilu-complete-quantization-lane-v1/q2-preflight.json
+    action: 以qSiLU自身checkpoint訓練all-W8；不得接用poly_shift的V19 weight checkpoint。
+  - id: q3
+    name: lock_qsilu_all_w8_parent
+    gpu: false
+    state: pending_q2
+    manifest: artifacts/manifests/v30-qsilu-all-w8-locked-parent-v1.yaml
+    action: 只鎖定通過雙門檻的best_joint epoch、full-resume與inference SHA-256。
+  - id: q4
+    name: qsilu_148_by_8_cpu_profile
+    gpu: false
+    state: pending_q3
+    output: artifacts/reports/v30-qsilu-all-w8-progressive-weight-formats-cpu-v1.json
+    profile_id: v30-qsilu-all-w8-progressive-weight-formats-cpu-v1
+    coverage: 148_paths_x_8_formats
+    formats: [exact_w7, exact_w6, exact_w5, exact_w4, fixed_sd4, paper_twn_v2, twn_v3_filterwise, exact_scaled_ternary]
+    action: 只排序候選，不以NRMSE直接promotion。
+  - id: q5
+    name: qsilu_progressive_ptq
+    gpu: true
+    state: pending_q4
+    depends_on: [q3, q4]
+    materialized_plan: artifacts/queues/v30-qsilu-complete-quantization-lane-v1/generated/v31-qsilu-progressive-ptq-queue-v1.yaml
+    run_root: artifacts/queues/v31-qsilu-progressive-ptq-to-short-qat-v1
+    order:
+      - backbone_early
+      - backbone_deep
+      - backbone_attention_safe_sentinel
+      - neck
+      - masf
+      - neck_attention_safe
+      - detect_one2one_tower
+      - detect_one2one_predictor
+      - pose_one2one_tower
+      - pose_one2one_predictor_diagnostic
+    formats_per_selected_path: [exact_w7, exact_w6, exact_w5, exact_w4, fixed_sd4, paper_twn_v2, twn_v3_filterwise, exact_scaled_ternary]
+    rule: 每次只在上一個green parent加入一個path；失敗保留上一版並繼續下一區。
+  - id: q6
+    name: qsilu_corrected_recovery_regate_and_short_qat
+    gpu: mixed
+    state: pending_q5
+    depends_on: [q5]
+    output_root: artifacts/queues/v31-qsilu-progressive-ptq-to-short-qat-v1/short-qat
+    qat_run_root: artifacts/runs/qat/v31-qsilu-progressive-short
+    recovery_floors: {map50: -0.04, map50_95: -0.08}
+    maximum_jobs: {main: 6, sentinel: 2}
+    arms: [matched_sham, qat]
+  - id: q7
+    name: activation_weight_pareto_comparison
+    gpu: false
+    state: pending_q6
+    depends_on: [q6]
+    report: artifacts/reports/v30-qsilu-complete-lane-summary-v1.json
+    compare_with: v29_poly_shift_complete_lane
+    action: 只比較相同資料、16指標、QAT預算與packing定義；不得把兩個activation各自孤立最佳直接拼接。
+
+training:
+  optimizer: AdamW
+  optimizer_state: fresh_per_paired_experiment
+  weight_decay: 0.00027
+  betas: [0.948, 0.999]
+  detect_logical_batch: 128
+  detect_physical_microbatch: 16
+  pose_batch: 16
+  loss_weights: {detect: 1.0, pose: 0.25}
+  augmentation: accepted_full35_exact
+  added_noise: false
+  all_w8_qat:
+    epochs_max: 15
+    patience: 5
+    warmup_epochs: 3
+    scale_only_epochs: 5
+    progressive_schedule: {start_epoch: 0, full_epoch: 5}
+  recovery_qat:
+    epochs_max: 15
+    patience: 5
+    warmup_epochs: 1
+    schedule: {fp32_blend_epochs: 3, ramp_epochs: 6, full_quant_epochs: 6}
+
+deferred_until_finalists_confirmed:
+  - a7_or_a6_activation_search
+  - activation_sd4_research_branch
+  - 20_or_60_epoch_extension
+  - musgd_matched_pilot
+  - multi_seed
+  - formal_validation
+  - export_and_hardware_measurement
+
+handoff:
+  next_activation_lane_after_qsilu: hardswish_and_q3_regional_hardswish
+  poly_quality_active_execution: false
+  report_every_stage:
+    - 8_map50_total_deltas
+    - 8_map50_95_total_deltas
+    - candidate_vs_locked_parent
+    - candidate_vs_matched_sham
+    - packed_weight_bytes
+    - compression_ratio
+    - code_occupancy

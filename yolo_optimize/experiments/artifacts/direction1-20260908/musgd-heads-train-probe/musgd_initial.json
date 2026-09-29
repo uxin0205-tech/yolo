@@ -1,0 +1,65 @@
+{
+  "label": "musgd_initial",
+  "updates": 16,
+  "trace_sha256": "910d69af0a00cc5924be7ae16135586db7590a4d8b4b9a0c8f02cdfb80c09003",
+  "parent_state_sha256": "8f2081413525c08973daf91d4fa155cddeabe3a84780bf7d3f9df150ece3eaec",
+  "optimizer": "MuSGD",
+  "role_lrs": {
+    "detect_head": 0.0025,
+    "pose_head": 0.0025
+  },
+  "statistics": {
+    "detect_head.decay": {
+      "median": 8.923067071009427e-05,
+      "count": 768,
+      "zero_fraction": 0.0
+    },
+    "detect_head": {
+      "median": 5.747193199567846e-06,
+      "count": 2112,
+      "zero_fraction": 0.0
+    },
+    "detect_head.no_decay": {
+      "median": 1.0081288905894326e-06,
+      "count": 1344,
+      "zero_fraction": 0.0
+    },
+    "pose_head.decay": {
+      "median": 3.5302044125273824e-05,
+      "count": 1728,
+      "zero_fraction": 0.0
+    },
+    "pose_head": {
+      "median": 1.9082856965724204e-06,
+      "count": 4224,
+      "zero_fraction": 0.17116477272727273
+    },
+    "pose_head.no_decay": {
+      "median": 9.954932806977013e-07,
+      "count": 2496,
+      "zero_fraction": 0.28966346153846156
+    }
+  },
+  "zero_initial_absolute_updates": {},
+  "losses": [
+    1.5695715546607971,
+    1.6037681221961975,
+    1.6195958614349366,
+    1.5948416352272035,
+    1.625177812576294,
+    1.560069239139557,
+    1.6802041053771972,
+    1.5705090165138245,
+    1.7206494331359863,
+    1.6266716599464417,
+    1.59242525100708,
+    1.5984845399856566,
+    1.628975760936737,
+    1.5755455493927002,
+    1.6915481209754943,
+    1.6967670798301697
+  ],
+  "fixed_states_exact": true,
+  "updates_discarded": true,
+  "validation_used": false
+}

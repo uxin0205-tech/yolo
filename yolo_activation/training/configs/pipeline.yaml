@@ -1,0 +1,38 @@
+schema_version: 1
+architecture_id: sipa-bcsp-v1
+seed: 1
+optional_finalist_seed: 2
+
+datasets:
+  - dataset_id: bbat5-v1-detect
+    source_kind: canonical_bbat5_v1
+    yaml_path: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml
+    task: detect
+    num_classes: 2
+    immutable: true
+  - dataset_id: coco2017-detect
+    source_kind: coco80_detect
+    yaml_path: /home/uxin/yolo/coco2017.yaml
+    task: detect
+    num_classes: 80
+    immutable: true
+
+activations:
+  accuracy_reference: silu
+  hardware_neighbor_baseline: hardswish
+  cheap_control: relu
+  proposed_candidates:
+    - qsilu_pq
+    - poly_shift
+    - poly_quality
+  region_search_candidates:
+    - poly_shift
+
+search:
+  max_deployment_kernels: 3
+  beam_width: 4
+  max_changed_regions: 3
+  max_finalists: 2
+  # 收到 baseline pilot 後、正式比較前凍結；null 表示只輸出 Pareto、不擅自設門檻。
+  max_map_loss: null
+  max_ap_s_loss: null

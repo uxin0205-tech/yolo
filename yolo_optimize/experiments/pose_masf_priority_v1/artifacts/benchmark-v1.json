@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) Ultra 9 285K",
+    "gpu": "NVIDIA GeForce RTX 5090"
+  },
+  "torch_version": "2.11.0+cu128",
+  "cuda_version": "12.8",
+  "cpu_threads": 4,
+  "batch": 1,
+  "imgsz": 640,
+  "dtype": "float32",
+  "normalizer": "BitTrue PWL [-10,0],20 segments",
+  "task": "both; shared trunk once; both heads; existing native postprocess",
+  "input": "seeded synthetic tensor; same shape/distribution; no new dataset split",
+  "timing_excludes": "模型載入、影像讀取、resize/letterbox、H2D/D2H、可視化",
+  "order": [
+    "baseline",
+    "pose_masf"
+  ],
+  "repeated_independent_sessions": false,
+  "rows": {
+    "baseline": {
+      "cpu": {
+        "samples": 20,
+        "median_ms": 668.6488355044276,
+        "p95_ms": 689.8905271664262,
+        "mean_ms": 671.5646831784397
+      },
+      "gpu": {
+        "samples": 100,
+        "median_ms": 21.63856029510498,
+        "p95_ms": 22.661888122558594,
+        "mean_ms": 21.789193000793457
+      },
+      "gpu_peak_allocated_bytes": 496952832,
+      "gpu_peak_reserved_bytes": 650117120,
+      "operation_estimate": {
+        "mac": 47923712000,
+        "flops_at_2_per_mac": 95847424000,
+        "components_mac": {
+          "conv": 47800832000,
+          "linear": 0,
+          "qk_av": 122880000
+        },
+        "excluded": "BN、qSiLU/PWL、逐元素加乘、decode/top-k、資料搬移；不是完整硬體指令計數"
+      }
+    },
+    "pose_masf": {
+      "cpu": {
+        "samples": 20,
+        "median_ms": 681.4079410396516,
+        "p95_ms": 685.8981372788548,
+        "mean_ms": 682.650140626356
+      },
+      "gpu": {
+        "samples": 100,
+        "median_ms": 22.03646469116211,
+        "p95_ms": 22.43027114868164,
+        "mean_ms": 22.08803457260132
+      },
+      "gpu_peak_allocated_bytes": 497772032,
+      "gpu_peak_reserved_bytes": 643825664,
+      "operation_estimate": {
+        "mac": 48398848000,
+        "flops_at_2_per_mac": 96797696000,
+        "components_mac": {
+          "conv": 48275968000,
+          "linear": 0,
+          "qk_av": 122880000
+        },
+        "excluded": "BN、qSiLU/PWL、逐元素加乘、decode/top-k、資料搬移；不是完整硬體指令計數"
+      }
+    }
+  },
+  "target_hardware_latency": null,
+  "energy_per_frame": null,
+  "limitations": "單機單次順序量測，不宣稱小差異顯著；MAC 只涵蓋列出的運算。"
+}

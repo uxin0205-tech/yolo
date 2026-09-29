@@ -1,0 +1,155 @@
+{
+  "formal_training": false,
+  "gpu_used": false,
+  "kind": "full35_weight_dual_view_manifest",
+  "parent": {
+    "activation": "poly_quality",
+    "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_joint.pt",
+    "checkpoint_sha256": "eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968",
+    "policy_id": "poly_quality--lsq-plus-a8",
+    "role": "numeric"
+  },
+  "parity": {
+    "deployment_batch_norm_modules": 0,
+    "deployment_catalog": {
+      "deployment_regions": {
+        "backbone_attention_safe": {
+          "modules": 7,
+          "weight_elements": 919808
+        },
+        "backbone_deep": {
+          "modules": 22,
+          "weight_elements": 8126464
+        },
+        "backbone_early": {
+          "modules": 21,
+          "weight_elements": 1218240
+        },
+        "detect_one2one_predictor": {
+          "modules": 6,
+          "weight_elements": 62208
+        },
+        "detect_one2one_tower": {
+          "modules": 18,
+          "weight_elements": 1390592
+        },
+        "masf": {
+          "modules": 3,
+          "weight_elements": 74240
+        },
+        "neck": {
+          "modules": 33,
+          "weight_elements": 8142848
+        },
+        "neck_attention_safe": {
+          "modules": 5,
+          "weight_elements": 395520
+        },
+        "pose_one2one_predictor": {
+          "modules": 9,
+          "weight_elements": 3456
+        },
+        "pose_one2one_tower": {
+          "modules": 24,
+          "weight_elements": 2238464
+        }
+      },
+      "totals": {
+        "deployment_modules": 148,
+        "deployment_weight_elements": 22571840,
+        "modules": 152,
+        "protected_modules": 4,
+        "protected_weight_elements": 131072,
+        "training_only_modules": 0,
+        "training_only_weight_elements": 0,
+        "weight_elements": 22702912
+      }
+    },
+    "deployment_path_parity": true,
+    "deployment_state_sha256": "72ea152e08e8d592bd59cf1a9ca4ad3bb6011ba8309141b6661a358476e00791",
+    "folded_batch_norm_modules": 179,
+    "forward_all_finite": true,
+    "forward_maximum_absolute_error": 0.00145721435546875,
+    "forward_maximum_relative_to_reference_peak": 1.4447632588987773e-05,
+    "forward_normalized_rmse": 4.142677382657168e-06,
+    "forward_parity_evaluated": true,
+    "forward_parity_passed": true,
+    "forward_removed_training_only_tensor_paths": [
+      "output.detect[1].one2many.boxes",
+      "output.detect[1].one2many.scores",
+      "output.detect[1].one2many.feats[0]",
+      "output.detect[1].one2many.feats[1]",
+      "output.detect[1].one2many.feats[2]",
+      "output.pose[1].one2many.boxes",
+      "output.pose[1].one2many.scores",
+      "output.pose[1].one2many.feats[0]",
+      "output.pose[1].one2many.feats[1]",
+      "output.pose[1].one2many.feats[2]",
+      "output.pose[1].one2many.kpts"
+    ],
+    "forward_same_structure": true,
+    "inference_contract_parity": true,
+    "master_batch_norm_modules": 179,
+    "master_catalog": {
+      "deployment_regions": {
+        "backbone_attention_safe": {
+          "modules": 7,
+          "weight_elements": 919808
+        },
+        "backbone_deep": {
+          "modules": 22,
+          "weight_elements": 8126464
+        },
+        "backbone_early": {
+          "modules": 21,
+          "weight_elements": 1218240
+        },
+        "detect_one2one_predictor": {
+          "modules": 6,
+          "weight_elements": 62208
+        },
+        "detect_one2one_tower": {
+          "modules": 18,
+          "weight_elements": 1390592
+        },
+        "masf": {
+          "modules": 3,
+          "weight_elements": 74240
+        },
+        "neck": {
+          "modules": 33,
+          "weight_elements": 8142848
+        },
+        "neck_attention_safe": {
+          "modules": 5,
+          "weight_elements": 395520
+        },
+        "pose_one2one_predictor": {
+          "modules": 9,
+          "weight_elements": 3456
+        },
+        "pose_one2one_tower": {
+          "modules": 24,
+          "weight_elements": 2238464
+        }
+      },
+      "totals": {
+        "deployment_modules": 148,
+        "deployment_weight_elements": 22571840,
+        "modules": 251,
+        "protected_modules": 4,
+        "protected_weight_elements": 131072,
+        "training_only_modules": 99,
+        "training_only_weight_elements": 3748480,
+        "weight_elements": 26451392
+      }
+    },
+    "master_matches_source": true,
+    "master_state_sha256": "89e7dae8fcf521ff1eee4cea9b9676a1ec4e32ccd101b93eeb21ff91a3841472",
+    "schema_version": 1,
+    "source_batch_norm_modules": 179,
+    "source_state_sha256": "89e7dae8fcf521ff1eee4cea9b9676a1ec4e32ccd101b93eeb21ff91a3841472",
+    "source_unchanged": true
+  },
+  "schema_version": 1
+}

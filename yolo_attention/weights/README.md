@@ -1,0 +1,23 @@
+# weights
+
+> **Cleanup-v1 發行範圍：** 本分支保留程式、設定、報告、統計圖表與 manifests；checkpoint、資料集影像／標註、逐筆預測、batch 預覽和冗長執行日誌已從此發行快照排除。下文的歷史權重路徑、數量、checksums 與實驗結果仍保留作研究紀錄；訓練、推論、完整交付驗證及資料重建需要另行提供原始資產，不代表 clone 後即可直接重跑。 詳見[清理範圍與資產需求](../../docs/cleanup-v1/README.md)。
+
+
+本目錄存放官方模型 checkpoint。一般新增權重不提交 Git；`yolo26m.pt` 已依使用者明確要求作為本研究可重現 baseline 提交。
+
+- `yolo26m.pt`：官方 Ultralytics YOLO26m baseline 與所有研究階段的初始權重。
+- training YAML 統一使用 `weights/yolo26m.pt`，命令應從 repository root 執行。
+- checkpoint 下載後以 SHA-256 記錄 provenance；重新下載或更換權重時必須更新實驗 manifest。
+
+目前 checkpoint：
+
+- 來源：Ultralytics assets `v8.4.0/yolo26m.pt`。
+- 下載時使用的 Ultralytics：`8.4.90`。
+- 大小：44,255,705 bytes。
+- SHA-256：`401cea9ab23ad19246ff7744859816bc599f350e93c9dd30367b6f0a0745d0b7`。
+
+確認權重可載入：
+
+~~~bash
+../.venv/bin/python -c "from ultralytics import YOLO; YOLO('weights/yolo26m.pt')"
+~~~

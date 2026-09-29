@@ -1,0 +1,108 @@
+{
+  "formal_training": false,
+  "formal_validation": false,
+  "gate": {
+    "accepted_run_id": "legacy-search:accepted:regate-map50",
+    "candidate_run_id": "legacy-search:candidate:regate-map50",
+    "decision": "green",
+    "incremental_deltas": {
+      "bbat/ball/box/map50": -0.0008388798359909577,
+      "bbat/ball/pose/map50": -0.003877931897125486,
+      "bbat/bat/box/map50": -0.0005877677501658907,
+      "bbat/bat/pose/map50": 2.921551828816149e-05,
+      "bbat/box/map50": -0.0007133237930784242,
+      "bbat/pose/map50": -0.0019243581894187178,
+      "coco/box/map50": -0.005079403566033536,
+      "coco/person/box/map50": -0.001539714884671084
+    },
+    "matched_run_id": "legacy-search:matched:regate-map50",
+    "maximum_sham_drift": 0.0,
+    "passed": true,
+    "sham_deltas": {},
+    "sham_gate_applicable": false,
+    "sham_gate_passed": true,
+    "thresholds": {
+      "metric_family": "map50",
+      "recovery_floor": 0.04,
+      "sham_absolute_drift": 0.01,
+      "total_drop": 0.015,
+      "w8_incremental_drop": 0.01
+    },
+    "total_deltas": {
+      "bbat/ball/box/map50": 0.009645538843160661,
+      "bbat/ball/pose/map50": 0.008788425668146638,
+      "bbat/bat/box/map50": -0.0012011136481387963,
+      "bbat/bat/pose/map50": -0.0005841303796847441,
+      "bbat/box/map50": 0.004222212597510877,
+      "bbat/pose/map50": 0.004102147644231002,
+      "coco/box/map50": -0.013611514366125732,
+      "coco/person/box/map50": -0.007646008620803224
+    },
+    "total_gate_passed": true,
+    "w8_incremental_gate_applicable": true,
+    "w8_incremental_gate_passed": true,
+    "worst_incremental_delta": -0.005079403566033536,
+    "worst_incremental_metric": "coco/box/map50",
+    "worst_total_delta": -0.013611514366125732,
+    "worst_total_metric": "coco/box/map50"
+  },
+  "gpu_used": false,
+  "kind": "full35_search_metric_regate",
+  "metric_contract_id": "full35-coco-val-bbat5-search-val-bittrue-map50-v1",
+  "roles": {
+    "accepted": {
+      "metrics": {
+        "bbat/ball/box/map50": 0.9583825665067429,
+        "bbat/ball/pose/map50": 0.9594888546060787,
+        "bbat/bat/box/map50": 0.9940783404183501,
+        "bbat/bat/pose/map50": 0.9940783404183501,
+        "bbat/box/map50": 0.9762304534625466,
+        "bbat/pose/map50": 0.9767835975122143,
+        "coco/box/map50": 0.6707190071574208,
+        "coco/person/box/map50": 0.8394095874767435
+      },
+      "policy_id": "accepted-full35-silu-bittrue",
+      "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v15-poly-shift-backbone-early-w8-search-v1/validation/accepted/epoch-0000/bittrue/metrics.json",
+      "source_metrics_report_sha256": "2e97e4a60039741cc1fc45a03d67615bbc5b851bcf60a56cd153251366c4a355"
+    },
+    "candidate": {
+      "metrics": {
+        "bbat/ball/box/map50": 0.9680281053499036,
+        "bbat/ball/pose/map50": 0.9682772802742253,
+        "bbat/bat/box/map50": 0.9928772267702113,
+        "bbat/bat/pose/map50": 0.9934942100386653,
+        "bbat/box/map50": 0.9804526660600574,
+        "bbat/pose/map50": 0.9808857451564453,
+        "coco/box/map50": 0.6571074927912951,
+        "coco/person/box/map50": 0.8317635788559403
+      },
+      "policy_id": "poly_shift--lsq-plus-a8",
+      "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v15-poly-shift-backbone-early-w8-search-v1/validation/candidate/epoch-0000/bittrue/metrics.json",
+      "source_metrics_report_sha256": "4f48597c663fe365f1d0c07c924f54752d1e32a0061bfdfcfe763c156cb68d70"
+    },
+    "matched": {
+      "metrics": {
+        "bbat/ball/box/map50": 0.9688669851858945,
+        "bbat/ball/pose/map50": 0.9721552121713508,
+        "bbat/bat/box/map50": 0.9934649945203772,
+        "bbat/bat/pose/map50": 0.9934649945203772,
+        "bbat/box/map50": 0.9811659898531359,
+        "bbat/pose/map50": 0.982810103345864,
+        "coco/box/map50": 0.6621868963573286,
+        "coco/person/box/map50": 0.8333032937406114
+      },
+      "policy_id": "poly_shift--lsq-plus-a8",
+      "source_metrics_report": "/home/uxin/yolo/yolo_quantize/artifacts/runs/v15-poly-shift-backbone-early-w8-search-v1/validation/matched/epoch-0000/bittrue/metrics.json",
+      "source_metrics_report_sha256": "1270d0907f789af77c6cec38781cc5f1242859f41404765f2ecba96d1f311687"
+    }
+  },
+  "schema_version": 1,
+  "selection_claim": "single_cell_gate_only",
+  "source": {
+    "plan_id": "legacy-search",
+    "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v15-poly-shift-backbone-early-w8-search-v1.json",
+    "report_sha256": "563bf656c731ce44c790dd75d5bf8f65a28a5f9157408303ee4dbd8f9e1f8c56"
+  },
+  "status": "completed",
+  "validation_rerun": false
+}

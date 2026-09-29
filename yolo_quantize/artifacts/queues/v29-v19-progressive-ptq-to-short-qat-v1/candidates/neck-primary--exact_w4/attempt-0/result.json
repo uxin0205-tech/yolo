@@ -1,0 +1,115 @@
+{
+  "assignments": [
+    {
+      "cpu_format_id": "uniform-w4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "exact_w4",
+      "path": "graph.model.13.cv2.conv",
+      "region": "neck",
+      "stage_id": "neck-primary",
+      "weight_format_id": "w4"
+    }
+  ],
+  "candidate_id": "neck-primary--exact_w4",
+  "formal_training": false,
+  "formal_validation": false,
+  "materialization": {
+    "detect_complete": true,
+    "pose_complete": true
+  },
+  "metrics": {
+    "bbat/ball/box/map50": 0.9705731952224202,
+    "bbat/ball/box/map50_95": 0.7718390579740979,
+    "bbat/ball/pose/map50": 0.9695106244392305,
+    "bbat/ball/pose/map50_95": 0.9695106244392304,
+    "bbat/bat/box/map50": 0.9935406653751535,
+    "bbat/bat/box/map50_95": 0.8887159733236054,
+    "bbat/bat/pose/map50": 0.9937747088997599,
+    "bbat/bat/pose/map50_95": 0.9933131971176797,
+    "bbat/box/map50": 0.9820569302987869,
+    "bbat/box/map50_95": 0.8302775156488515,
+    "bbat/pose/map50": 0.9816426666694953,
+    "bbat/pose/map50_95": 0.9814119107784551,
+    "coco/box/map50": 0.6523624912458625,
+    "coco/box/map50_95": 0.4830025631940556,
+    "coco/person/box/map50": 0.8289628885572763,
+    "coco/person/box/map50_95": 0.608295834412842
+  },
+  "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+  "metrics_sha256": "8089bfca2044413074068ce5e454151b591fe80ed3dda1b37ab8f9972ac4fb80",
+  "output_dir": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue",
+  "parent_id": "v19-poly-shift-a8-all-w8-qat-epoch5",
+  "parent_manifest_sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+  "queue_plan": "/home/uxin/yolo/yolo_quantize/configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+  "queue_plan_sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+  "schema_version": 1,
+  "seconds": 74.0139717720449,
+  "status": "completed",
+  "weight_quantization": [
+    {
+      "format_id": "w4",
+      "numeric": {
+        "clipping_rate": 0.0056915283203125,
+        "code_histogram": [
+          2042,
+          2062,
+          4434,
+          8764,
+          16181,
+          27402,
+          44629,
+          64482,
+          76187,
+          60514,
+          38920,
+          23041,
+          12391,
+          6310,
+          3111,
+          2746
+        ],
+        "code_max": 7,
+        "code_min": -8,
+        "code_occupancy_ratio": 1.0,
+        "cosine": 0.9879012340436706,
+        "encoded_bits": 4,
+        "logical_code_count": 16,
+        "maximum_absolute_error": 0.578128457069397,
+        "mse": 0.00011277049391840895,
+        "normalized_rmse": 0.15508437764409175,
+        "occupied_codes": 16,
+        "scale_bytes": 2048,
+        "scale_count": 512,
+        "scale_maximum": 0.09228519350290298,
+        "scale_mean": 0.028569737449288368,
+        "scale_minimum": 0.01099054329097271,
+        "sqnr_db": 16.18863896889629,
+        "weight_code_bytes": 196608,
+        "zero_ratio": 0.1937535603841146
+      },
+      "quantized_modules": 1,
+      "region": "neck",
+      "sites": [
+        {
+          "clipping_rate": 0.0056915283203125,
+          "code_max": 7,
+          "code_min": -8,
+          "cosine": 0.9879012340436706,
+          "elements": 393216,
+          "maximum_absolute_error": 0.578128457069397,
+          "mse": 0.00011277049391840895,
+          "normalized_rmse": 0.15508437764409175,
+          "occupied_codes": 16,
+          "output_channels": 512,
+          "path": "graph.model.13.cv2.conv",
+          "region": "neck",
+          "scale_maximum": 0.09228519350290298,
+          "scale_mean": 0.028569737449288368,
+          "scale_minimum": 0.01099054329097271,
+          "sqnr_db": 16.18863896889629,
+          "zero_ratio": 0.1937535603841146
+        }
+      ],
+      "weight_elements": 393216
+    }
+  ]
+}

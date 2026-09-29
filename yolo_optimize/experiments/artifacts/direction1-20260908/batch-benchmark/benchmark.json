@@ -1,0 +1,168 @@
+{
+  "status": "complete",
+  "cases": [
+    {
+      "status": "ok",
+      "variant": "native",
+      "physical_batch": 32,
+      "logical_detect_batch": 128,
+      "detect_images_per_macro": 256,
+      "pose_images_per_macro": 16,
+      "warmup_macros": 2,
+      "timed_macros": 5,
+      "macro_seconds_end_to_end": [
+        1.1701624118722975,
+        1.1422644234262407,
+        1.150953819975257,
+        1.16856211097911,
+        3.3193416139110923
+      ],
+      "macro_seconds_engine": [
+        1.1595222279429436,
+        1.1397691410966218,
+        1.1474583563394845,
+        1.164429843891412,
+        3.318520999047905
+      ],
+      "images_per_second": 171.0415493870123,
+      "peak_allocated_bytes": 10370846208,
+      "peak_reserved_bytes": 11240734720,
+      "benchmark_mu_not_formal": 0.0,
+      "updates_discarded": true,
+      "base_state_sha256": "8f2081413525c08973daf91d4fa155cddeabe3a84780bf7d3f9df150ece3eaec",
+      "memory_headroom": {
+        "total_bytes": 33661911040,
+        "allocator_budget_bytes": 32531021824,
+        "required_headroom_bytes": 5049286656,
+        "remaining_headroom_bytes": 21290287104,
+        "eligible": true
+      }
+    },
+    {
+      "status": "ok",
+      "variant": "hog",
+      "physical_batch": 32,
+      "logical_detect_batch": 128,
+      "detect_images_per_macro": 256,
+      "pose_images_per_macro": 16,
+      "warmup_macros": 2,
+      "timed_macros": 5,
+      "macro_seconds_end_to_end": [
+        1.1776230530813336,
+        1.1722901347093284,
+        1.1749069700017571,
+        1.1826577000319958,
+        3.4219164079986513
+      ],
+      "macro_seconds_engine": [
+        1.1741022299975157,
+        1.168812084943056,
+        1.1734247696585953,
+        1.1816209270618856,
+        3.418397866655141
+      ],
+      "images_per_second": 167.29413724188538,
+      "peak_allocated_bytes": 10376752128,
+      "peak_reserved_bytes": 11297357824,
+      "benchmark_mu_not_formal": 0.001,
+      "updates_discarded": true,
+      "base_state_sha256": "8f2081413525c08973daf91d4fa155cddeabe3a84780bf7d3f9df150ece3eaec",
+      "memory_headroom": {
+        "total_bytes": 33661911040,
+        "allocator_budget_bytes": 32264683520,
+        "required_headroom_bytes": 5049286656,
+        "remaining_headroom_bytes": 20967325696,
+        "eligible": true
+      }
+    },
+    {
+      "status": "ok",
+      "variant": "native",
+      "physical_batch": 64,
+      "logical_detect_batch": 128,
+      "detect_images_per_macro": 256,
+      "pose_images_per_macro": 16,
+      "warmup_macros": 2,
+      "timed_macros": 5,
+      "macro_seconds_end_to_end": [
+        1.1442539258860052,
+        1.1428809300996363,
+        1.136666436214,
+        1.1497861337848008,
+        3.318383856676519
+      ],
+      "macro_seconds_engine": [
+        1.143808954861015,
+        1.1420791679993272,
+        1.1362144039012492,
+        1.1464858599938452,
+        3.317660804837942
+      ],
+      "images_per_second": 172.3270335496513,
+      "peak_allocated_bytes": 20186103808,
+      "peak_reserved_bytes": 22089302016,
+      "benchmark_mu_not_formal": 0.0,
+      "updates_discarded": true,
+      "base_state_sha256": "8f2081413525c08973daf91d4fa155cddeabe3a84780bf7d3f9df150ece3eaec",
+      "memory_headroom": {
+        "total_bytes": 33661911040,
+        "allocator_budget_bytes": 32262586368,
+        "required_headroom_bytes": 5049286656,
+        "remaining_headroom_bytes": 10173284352,
+        "eligible": true
+      }
+    },
+    {
+      "status": "ok",
+      "variant": "hog",
+      "physical_batch": 64,
+      "logical_detect_batch": 128,
+      "detect_images_per_macro": 256,
+      "pose_images_per_macro": 16,
+      "warmup_macros": 2,
+      "timed_macros": 5,
+      "macro_seconds_end_to_end": [
+        1.1691489480435848,
+        1.1561688771471381,
+        1.1512554748915136,
+        1.158171741757542,
+        3.3708202722482383
+      ],
+      "macro_seconds_engine": [
+        1.1647257870063186,
+        1.1556386849842966,
+        1.1507180202752352,
+        1.1549368128180504,
+        3.367092443164438
+      ],
+      "images_per_second": 169.8818192897261,
+      "peak_allocated_bytes": 20186152448,
+      "peak_reserved_bytes": 22089302016,
+      "benchmark_mu_not_formal": 0.001,
+      "updates_discarded": true,
+      "base_state_sha256": "8f2081413525c08973daf91d4fa155cddeabe3a84780bf7d3f9df150ece3eaec",
+      "memory_headroom": {
+        "total_bytes": 33661911040,
+        "allocator_budget_bytes": 32256294912,
+        "required_headroom_bytes": 5049286656,
+        "remaining_headroom_bytes": 10166992896,
+        "eligible": true
+      }
+    },
+    {
+      "status": "oom",
+      "physical_batch": 128,
+      "variant": "native",
+      "error": "CUDA out of memory. Tried to allocate 400.00 MiB. GPU 0 has a total capacity of 31.35 GiB of which 75.44 MiB is free. Including non-PyTorch memory, this process has 30.81 GiB memory in use. Of the allocated memory 29.81 GiB is allocated by PyTorch, and 160.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)"
+    },
+    {
+      "status": "oom",
+      "physical_batch": 128,
+      "variant": "hog",
+      "error": "CUDA out of memory. Tried to allocate 400.00 MiB. GPU 0 has a total capacity of 31.35 GiB of which 75.44 MiB is free. Including non-PyTorch memory, this process has 30.81 GiB memory in use. Of the allocated memory 29.81 GiB is allocated by PyTorch, and 160.09 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)"
+    }
+  ],
+  "recommended_physical_batch": 64,
+  "selection_rule": "兩臂成功且各保留 max(15% total VRAM, 2 GiB) 餘裕，再選較慢一臂 throughput 最大者；仍需驗證 BN/AP",
+  "formal_training_started": false
+}

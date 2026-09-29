@@ -1,0 +1,29 @@
+{
+  "attention_class": "ResidualDualFullBasisAttention",
+  "attention_module_count": 1,
+  "attention_module_paths": [
+    "model.10.m.0.attn"
+  ],
+  "bias_type": "decomposed_2d",
+  "binary_forward_count": 3131,
+  "distillation_enabled": true,
+  "distillation_type": "positional+feature",
+  "experiment_schema_version": 3,
+  "magnitude_bits": null,
+  "model_yaml_hash": "6516e728112f81c456548fd853667ef3c6082be4546302e6c7344eadf34a7cee",
+  "p_bits": null,
+  "quantization_contract": {
+    "bias_initialization": "zeros",
+    "bias_parameterization": "axis_decomposed_relative_position",
+    "p8_scale": "none",
+    "qk_scale": "residual_basis_channel_per_token",
+    "v8_scale": "none"
+  },
+  "quantizer_types": {
+    "model.10.m.0.attn": "none"
+  },
+  "source_checkpoint_hash": "d5ffc1a674953a08e11a8d21e022781b1b23a19b730afc309290bd9fb5305b95",
+  "v_bits": null,
+  "variant_config_hash": "fff3546ce2a21ef467f89ff4f2418dd5a4d0cda0ab6fc1001af1ad460f04c031",
+  "variant_id": "T7-R"
+}

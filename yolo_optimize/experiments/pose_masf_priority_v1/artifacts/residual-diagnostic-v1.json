@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "images": 683,
+  "sampled": false,
+  "tuned_parameters": false,
+  "metric_reproduction_with_hook": true,
+  "warmup_excluded": true,
+  "alpha": 0.017398657277226448,
+  "relative_residual_l2_global": 0.021408828628298883,
+  "relative_residual_l2_median": 0.021681709499145704,
+  "relative_residual_l2_p95": 0.02348481296553932,
+  "relative_residual_l2_max": 0.02541874465147934,
+  "definition": "||MASF(P3)-P3||_2 / ||P3||_2；per-image 與全資料聚合分開記錄",
+  "note": "特徵擾動大小不是 AP 的因果證明；不據此調整 alpha。"
+}

@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "source": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/full35-b-f10.pt",
+  "sha256": "a8780ae988e61905fa78134b16bf362d2392d2a71f43941f770769bd42265cae",
+  "original_alpha": 0.1031494140625,
+  "effective_alpha": 0.0,
+  "changed_state_keys": [
+    "model.16.p3_masf.alpha"
+  ],
+  "zero_residual_identity_exact": true,
+  "cpu160_propagation": {
+    "16": {
+      "changed": true,
+      "relative_l2": 0.17443671822547913
+    },
+    "19": {
+      "changed": true,
+      "relative_l2": 0.16859306395053864
+    },
+    "22": {
+      "changed": true,
+      "relative_l2": 0.06259401887655258
+    }
+  },
+  "diagnostic_only": true,
+  "optimizer_steps": 0,
+  "accuracy_winner": false,
+  "relocation_performed": false,
+  "baseline": {
+    "coco/box/map50_95": 0.5035890013622638,
+    "coco/person/box/map50_95": 0.6241112368127075,
+    "coco/ball/box/map50_95": 0.5162344721834129,
+    "coco/bat/box/map50_95": 0.4694824178771039
+  },
+  "images": 5000,
+  "off": {
+    "coco/box/map50_95": 0.5037051696071915,
+    "coco/person/box/map50_95": 0.6240538213747595,
+    "coco/ball/box/map50_95": 0.5184384019367326,
+    "coco/bat/box/map50_95": 0.4729118632087501
+  },
+  "delta_off_minus_original": {
+    "coco/box/map50_95": 0.00011616824492766131,
+    "coco/person/box/map50_95": -5.741543794801629e-05,
+    "coco/ball/box/map50_95": 0.0022039297533197333,
+    "coco/bat/box/map50_95": 0.0034294453316462414
+  },
+  "evaluator": "Ultralytics internal; imgsz640; halfFalse; batch32",
+  "interpretation": "瞬間關閉的反事實診斷；不等同重新訓練的無 MASF 或 Detect-only 模型"
+}

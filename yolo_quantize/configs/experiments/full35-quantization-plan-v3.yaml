@@ -1,0 +1,198 @@
+schema_version: 3
+plan_id: full35-activation-aware-quantization-v3
+date: '2026-08-31'
+supersedes: full35-activation-aware-quantization-v2
+status: hardswish_revision_cpu_only_v4_plus_not_run
+language: zh-TW
+
+decision:
+  requested_changes:
+    include: hardswish
+    exclude_from_future_active_matrix: poly_quality
+  spelling_contract: hardswish
+  preservation_rule: historical_poly_quality_artifacts_are_retained_unchanged
+  reason: Q3 full-validation evidence supersedes the earlier tiny activation-output proxy for placement priority
+
+authorization:
+  cpu_only_revision: true
+  generate_future_configs: true
+  gpu_validation: false
+  qat: false
+  formal_training: false
+  export: false
+
+inherits_unchanged_from_v2:
+  source: configs/experiments/full35-quantization-plan-v2.yaml
+  contracts:
+    - accepted_full35_model_and_checkpoint
+    - coco_and_immutable_bbat5_v1_data
+    - corrected_148_layer_deployment_catalog
+    - binary_qk_attention_pwl_masf_and_decode_protection
+    - dual_master_and_bn_folded_weight_views
+    - uniform_w8_w7_w6_w5_w4_format_definitions
+    - fixed_sd4_ls_sd4_and_ternary_definitions
+    - optimizer_augmentation_and_matched_sham_rules
+    - deferred_finalist_only_optimizations
+
+model:
+  target: Full35 shared Detect+Pose accepted J3 experimental baseline
+  accepted_checkpoint: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt
+  accepted_checkpoint_sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+  deployment_semantics: one_to_one_end2end_nms_free
+  dfl_effective: false
+  reg_max: 1
+
+data:
+  coco_detect_yaml: /home/uxin/yolo/coco2017.yaml
+  bbat5_registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+  bbat5_pose_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  bbat5_detect_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml
+  bbat5_assignment_changed: false
+  physical_merge: false
+  task_specific_loaders: true
+  diagnostic_manifest: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+
+activation_policies:
+  new_silu_runs: false
+  historical_silu_reference_only: true
+  active_uniform_a8:
+    - policy_id: qsilu_pq--lsq-plus-a8
+      activation: qsilu_pq
+      role: accuracy_fallback
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+      parent_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    - policy_id: hardswish--lsq-plus-a8
+      activation: hardswish
+      role: standard_hardware_operator
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt
+      parent_sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+      intake_manifest: artifacts/manifests/hardswish-uniform-parent-intake-v1.yaml
+      checkpoint_epoch: 8
+      checkpoint_kind: inference_only_best_joint
+      checkpoint_worst_delta_vs_accepted: -0.014120813616487593
+      upstream_final_epoch_worst_delta: -0.016884422501412644
+      upstream_final_epoch_gate: failed_original_minus_0_015_contract
+      revised_project_total_gate: passes_minus_0_04_screen
+      comparability_warning: recovery_used_fp32_ciou_while_qsilu_recovery_predated_that_stability_patch
+    - policy_id: poly_shift--lsq-plus-a8
+      activation: poly_shift
+      role: dyadic_hardware_extreme
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+      parent_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+  historical_excluded:
+    poly_quality:
+      policy_id: poly_quality--lsq-plus-a8
+      future_execution: false
+      delete_existing_artifacts: false
+      status: historical_v1_v2_evidence_only
+      reason: explicit_user_exclusion_2026_08_31
+      checkpoint_sha256: eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968
+  q3_regional_hardswish:
+    semantics: regional_override_on_recovered_qsilu_not_uniform_hardswish_parent
+    base_policy_id: qsilu_pq--lsq-plus-a8
+    base_checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    candidate_activation: hardswish
+    source_report: /home/uxin/yolo/yolo_activation/reports/full35-q3-cpu-final-report.md
+    source_report_url: https://github.com/uxin0205-tech/yolo/blob/main/yolo_activation/reports/full35-q3-cpu-final-report.md
+    source_report_sha256: 8c495d71a7d4e50db7dd29676dfc8919a88cac3e362ab3f7d4737428c9b41d77
+    source_summary: /home/uxin/yolo/yolo_activation/reports/q3-nonsilu-cpu/summary.json
+    source_summary_sha256: 1e3b553484cd9eaceafd19603292804a9d3a55e74a5e5fcbb8db7edc33c08316
+    source_gate_max_drop: 0.015
+    source_training_performed: false
+    source_data_fraction: 1.0
+    source_resampling: false
+    quantization_project_cpu_parity_status: complete_three_single_regions
+    priority_single_regions: [neck_attention, masf, backbone_attention]
+    source_global_worst_delta:
+      neck_attention: -0.008581
+      masf: -0.010301
+      backbone_attention: -0.013518
+    multi_region_status: not_measured_must_validate
+    first_combination: [neck_attention, masf]
+    cpu_parity_manifests:
+      neck_attention:
+        path: artifacts/manifests/weight-views-qsilu-pq-hardswish-neck-attention-a8-v3.json
+        sha256: ac7ef83fc7915e34676394abd97ccb036e52f214f43b9f606272c6b185e13e54
+        activation_counts: {qsilu_pq: 189, hardswish: 1}
+      masf:
+        path: artifacts/manifests/weight-views-qsilu-pq-hardswish-masf-a8-v3.json
+        sha256: 5e2070006c1632d332fe59a7cb080bd36b9c1cc8c4765795b20eafdfa64c3c35
+        activation_counts: {qsilu_pq: 187, hardswish: 3}
+      backbone_attention:
+        path: artifacts/manifests/weight-views-qsilu-pq-hardswish-backbone-attention-a8-v3.json
+        sha256: 7677fcf99aa28ae69c39d1265f0d9d8bd461c4382e844ed4aa0735084c737ed6
+        activation_counts: {qsilu_pq: 187, hardswish: 3}
+    parity_scope: graph_and_dual_weight_views_only_no_a8_observer_calibration_or_map
+    forbidden_inference_savings_regions: [detect_one2many, pose_flow, pose_one2many]
+    reject_region: pose_one2one
+    mapping_warning: activation_region_names_are_not_weight_region_identifiers
+    region_links:
+      - activation_region: neck_attention
+        activation_sites: 1
+        related_weight_region: neck_attention_safe
+        weight_modules: 5
+        equivalent_sets: false
+      - activation_region: masf
+        activation_sites: 3
+        related_weight_region: masf
+        weight_modules: 3
+        equivalent_sets: false
+      - activation_region: backbone_attention
+        activation_sites: 3
+        related_weight_region: backbone_attention_safe
+        weight_modules: 7
+        equivalent_sets: false
+  lower_bit_after_weight_map:
+    - qsilu_pq--lsq-plus-a7
+    - qsilu_pq--lsq-plus-a6
+    - hardswish--lsq-plus-a7
+    - poly_shift--lsq-plus-a7
+    - poly_shift--lsq-plus-a6
+  a5_and_below: not_promoted_except_a_sd4_matched_research
+
+metric_gate:
+  accepted_metrics_file: configs/experiments/accepted-full35-eight-metrics-v1.yaml
+  all_eight_required: true
+  total_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  matched_sham_max_absolute_drift: 0.01
+  recovery_floor: 0.06
+  q3_source_labels_remain_under_original_gate: 0.015
+  regional_matched_control: same_regional_activation_policy_with_fp32_weights
+
+history_and_revision:
+  frozen_v2_delivery: artifacts/manifests/v1-v3-cpu-delivery-v1.yaml
+  frozen_v2_parents: [qsilu_pq, poly_quality, poly_shift]
+  frozen_v2_measurements: 8880
+  frozen_v2_sd4_routes: artifacts/manifests/fixed-sd4-routing-candidates-v1.yaml
+  replacement_parent_analysis:
+    activation: hardswish
+    view_manifest: artifacts/manifests/weight-views-hardswish-a8-v3.json
+    analysis: artifacts/reports/weight-format-analysis-hardswish-a8-main-v3.json
+    view_manifest_sha256: fce59622ded49b59b254fbd90ff3ed0bc48744c72bd45fb3663a01cbc2e427df
+    analysis_sha256: 7f78a8f46387ce6d9c6d8bc5e5db89a2ac663aab4358af3ddbca971a525c2d52
+    measurements: 2960
+    gpu_used: false
+    status: complete_cpu_verified
+  active_revised_delivery: artifacts/manifests/v1-v3-cpu-delivery-v2.yaml
+  active_revised_sd4_routes: artifacts/manifests/fixed-sd4-routing-candidates-v2.yaml
+
+future_execution:
+  source: configs/experiments/v4-plus-prepared-plan-v3.yaml
+  uniform_v4_quantized_cells: 15
+  uniform_v5_quantized_cells: 150
+  q3_regional_cells_are_separate: true
+  execution_authorized: false
+  auto_qat: false
+
+weight_and_training_contract:
+  uniform_bits: [8, 7, 6, 5, 4]
+  static_special_formats: [fixed_sd4, paper_twn]
+  qat_special_formats: [ls_sd4, channel_twn, ttq]
+  activation_sd4: later_matched_research
+  detect_logical_batch: 128
+  pose_physical_probe_order: [16, 8, 4]
+  optimizer_control: AdamW
+  optimizer_pilot: MuSGD_with_new_matched_sham
+  augmentation: accepted_full35_exact_no_added_noise
+  final_optimizations: deferred_until_base_finalists

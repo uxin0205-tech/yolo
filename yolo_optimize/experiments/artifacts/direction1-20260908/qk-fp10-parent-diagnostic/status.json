@@ -1,0 +1,31 @@
+{
+  "candidate": "qk_fp10",
+  "checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+  "checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+  "phase": "complete",
+  "intervention": {
+    "kind": "eval_only_fp_dot_retained_bias_and_pwl",
+    "fp_site": 10,
+    "binary_site": 22,
+    "baseline_config_modified": false,
+    "state_tensors_modified": false,
+    "qk_ste_enabled": false,
+    "deployable": false,
+    "latency_valid": false,
+    "installations": [
+      {
+        "task": "detect",
+        "backend": "bittrue",
+        "fp_site": 10,
+        "calls": 159
+      },
+      {
+        "task": "pose",
+        "backend": "bittrue",
+        "fp_site": 10,
+        "calls": 45
+      }
+    ]
+  },
+  "elapsed_seconds": 36.764835357666016
+}

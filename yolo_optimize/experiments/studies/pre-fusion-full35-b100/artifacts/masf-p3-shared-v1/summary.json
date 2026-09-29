@@ -1,0 +1,181 @@
+{
+  "status": "complete",
+  "variant": "shared",
+  "parent": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/a0-scope-late-v1/epoch-08-resume.pt",
+  "parent_sha256": "27c09c6685a003e9ff106898fd898199e184ee195cce643dd668079abadb9342",
+  "parent_state": "late E8 EMA exploratory parent; not promoted winner",
+  "masf_context_initialization": "B100 trained context only; alpha reset to zero",
+  "masf_source_sha256": "a8780ae988e61905fa78134b16bf362d2392d2a71f43941f770769bd42265cae",
+  "scope": "P3 head branches only, plus MASF when present; all other parameters and all BN statistics fixed",
+  "learning_rates": {
+    "p3_head": 2e-06,
+    "context": 1e-05,
+    "alpha": 0.0001
+  },
+  "optimizer": "AdamW",
+  "fresh_optimizer": true,
+  "warmup_epochs": 1,
+  "criterion_horizon": 10,
+  "epochs_budget": 5,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "ema_initial_updates": 7400,
+  "ema_policy": "native decay on active parameters only; fixed state exact",
+  "alpha_initial": 0.0,
+  "alpha_training_bound": [
+    -0.25,
+    0.25
+  ],
+  "native_one2one_detach_preserved": true,
+  "trainable_parameters_by_role": {
+    "p3_head": 686248,
+    "context": 75776,
+    "alpha": 1
+  },
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ],
+  "epochs": [
+    {
+      "epoch": 1,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5082425930201301,
+        "coco/person/box/map50_95": 0.6273970400484143,
+        "coco/ball/box/map50_95": 0.5139320761312169,
+        "coco/bat/box/map50_95": 0.48112454052686926
+      },
+      "live": {
+        "coco/box/map50_95": 0.5082975805551238,
+        "coco/person/box/map50_95": 0.6276490020430388,
+        "coco/ball/box/map50_95": 0.5144029534280676,
+        "coco/bat/box/map50_95": 0.48135211969195124
+      },
+      "elapsed_seconds": 523.1157612800598,
+      "alpha_live": 0.009350933134555817,
+      "alpha_ema": 0.0084116505458951,
+      "delta_parent": {
+        "coco/box/map50_95": 8.895762360550119e-05,
+        "coco/person/box/map50_95": -0.00012347655668942803,
+        "coco/ball/box/map50_95": 0.000368526215699716,
+        "coco/bat/box/map50_95": 0.0006867710240782143
+      }
+    },
+    {
+      "epoch": 2,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5078172896163192,
+        "coco/person/box/map50_95": 0.6276089868630613,
+        "coco/ball/box/map50_95": 0.5115449201178671,
+        "coco/bat/box/map50_95": 0.481121525439726
+      },
+      "live": {
+        "coco/box/map50_95": 0.507468320451932,
+        "coco/person/box/map50_95": 0.6274497856745945,
+        "coco/ball/box/map50_95": 0.5108359677813831,
+        "coco/bat/box/map50_95": 0.47870052031526356
+      },
+      "elapsed_seconds": 520.7388033866882,
+      "alpha_live": 0.017236832529306412,
+      "alpha_ema": 0.014801531098783016,
+      "delta_parent": {
+        "coco/box/map50_95": -0.00033634578020536043,
+        "coco/person/box/map50_95": 8.847025795755137e-05,
+        "coco/ball/box/map50_95": -0.0020186297976501066,
+        "coco/bat/box/map50_95": 0.0006837559369349822
+      }
+    },
+    {
+      "epoch": 3,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5077604204513395,
+        "coco/person/box/map50_95": 0.6276581065689891,
+        "coco/ball/box/map50_95": 0.511748037194046,
+        "coco/bat/box/map50_95": 0.4803000477798364
+      },
+      "live": {
+        "coco/box/map50_95": 0.5079380441814157,
+        "coco/person/box/map50_95": 0.627697634436879,
+        "coco/ball/box/map50_95": 0.5121951141912653,
+        "coco/bat/box/map50_95": 0.481222141370259
+      },
+      "elapsed_seconds": 520.8581945896149,
+      "alpha_live": 0.017121929675340652,
+      "alpha_ema": 0.016688639298081398,
+      "delta_parent": {
+        "coco/box/map50_95": -0.00039321494518507194,
+        "coco/person/box/map50_95": 0.00013758996388535394,
+        "coco/ball/box/map50_95": -0.0018155127214711797,
+        "coco/bat/box/map50_95": -0.00013772172295462015
+      }
+    },
+    {
+      "epoch": 4,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5077508829661314,
+        "coco/person/box/map50_95": 0.6275586378269626,
+        "coco/ball/box/map50_95": 0.5125509843397942,
+        "coco/bat/box/map50_95": 0.4809485537420054
+      },
+      "live": {
+        "coco/box/map50_95": 0.5077461356956315,
+        "coco/person/box/map50_95": 0.62785126397271,
+        "coco/ball/box/map50_95": 0.5123639818764085,
+        "coco/bat/box/map50_95": 0.47956808183146576
+      },
+      "elapsed_seconds": 519.9455478191376,
+      "alpha_live": 0.02042296901345253,
+      "alpha_ema": 0.01911243237555027,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0004027524303932273,
+        "coco/person/box/map50_95": 3.812122185886668e-05,
+        "coco/ball/box/map50_95": -0.0010125655757230456,
+        "coco/bat/box/map50_95": 0.0005107842392143569
+      }
+    },
+    {
+      "epoch": 5,
+      "images": 118287,
+      "macros": 925,
+      "ema": {
+        "coco/box/map50_95": 0.5076143044069705,
+        "coco/person/box/map50_95": 0.6277476524998141,
+        "coco/ball/box/map50_95": 0.5127733395672721,
+        "coco/bat/box/map50_95": 0.48041122031840855
+      },
+      "live": {
+        "coco/box/map50_95": 0.5074713934130497,
+        "coco/person/box/map50_95": 0.6278240755383102,
+        "coco/ball/box/map50_95": 0.5126545184050679,
+        "coco/bat/box/map50_95": 0.47971031921833635
+      },
+      "elapsed_seconds": 520.5638716220856,
+      "alpha_live": 0.02041633613407612,
+      "alpha_ema": 0.020212873816490173,
+      "delta_parent": {
+        "coco/box/map50_95": -0.0005393309895540543,
+        "coco/person/box/map50_95": 0.00022713589471035078,
+        "coco/ball/box/map50_95": -0.0007902103482451128,
+        "coco/bat/box/map50_95": -2.6549184382496094e-05
+      }
+    }
+  ],
+  "script_sha256": "e1beedbd73a6fb739d3d8e24d32cc4cf29d81e0092d4abd17edda659cb46d29d",
+  "topology_sha256": "9e785f7252a6657cbd195e9f4450ff973d7b0d92f45985d5a3ea2fe60431cba8",
+  "first_macro_trace_sha256": "251651aca5ce60c5cd20e34794613cf9983e2298410558d419088a297d4db5bb",
+  "first_macro_native_loss_sum": 212.19842529296875,
+  "first_gradient_norm_by_role": {
+    "p3_head": 203.88270052644194,
+    "context": 0.0,
+    "alpha": 0.0286865234375
+  },
+  "first_update_ratio": 8.222544241915379e-07
+}

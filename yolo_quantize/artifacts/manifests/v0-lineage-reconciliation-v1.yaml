@@ -1,0 +1,55 @@
+schema_version: 1
+manifest_id: yolo-quantize-v0-lineage-reconciliation-v1
+date: '2026-08-30'
+status: reconciled_without_git_history_rewrite
+
+git_state_at_reconciliation:
+  local_branch: main
+  local_relation: ahead_1_behind_52
+  origin_main_tip: 79e4ae3cf02597f09c5feec78768549901c75b66
+  yolo_quantize_publication_commit: bf56249b57697bd1985ae68b6572add655c21c6d
+  yolo_quantize_publication_subject: 5090 Profile 0829
+  yolo_quantize_local_tracking_state: untracked_directory
+  checkout_or_reset_performed: false
+  push_performed: false
+
+published_activation_lineage:
+  status: preserved
+  publication_manifest: PUBLICATION_MANIFEST.yaml
+  scope: activation_preselection_teacher_evidence
+  ptq_included: false
+
+local_historical_ptq_v1:
+  status: preserved_immutable_historical_evidence
+  limitations:
+    - backbone_early_only
+    - three_activation_parents_x_w8_w4
+    - two_calibration_images_per_task
+    - one_probe_image_per_task
+    - no_full_map_validation
+    - old_catalog_151_before_pose_sigma_correction
+  files:
+    - path: artifacts/reports/weight-ptq-smoke-v1.json
+      sha256: 88cdfa9e2ac888593d39445f728817393885bd907cbeaa567f24d99bc8dd2599
+    - path: artifacts/reports/weight-ptq-backbone-early-v1.json
+      sha256: 27ce8fe399cba8ab4e89e4ced955eeadd2a2206e0c74c2ac0e4a54eb7ea90c5e
+    - path: artifacts/reports/weight-ptq-backbone-early-v1-summary.csv
+      sha256: 83a5ae24ee507733ee1a0584886fe22075a1b089bf2c7c780fd4bdd4af8945a2
+    - path: configs/experiments/weight-region-sensitivity-plan-v1.yaml
+      sha256: 070dc5d08729f5d938d7667d560372d10c36ed5d1c6629261344a0fbe8f39253
+    - path: configs/experiments/weight-ptq-backbone-early-result-v1.yaml
+      sha256: e9b655f2ced841d9d2440f6a206b577d0124c214f642ed15ef52768661bea006
+
+superseding_v2:
+  plan: configs/experiments/full35-quantization-plan-v2.yaml
+  corrected_deployment_modules: 148
+  uniform_bits: [8, 7, 6, 5, 4]
+  special_static_formats: [fixed_sd4, paper_twn]
+  gpu_execution_authorized: false
+
+issue_tracker:
+  requested_issue: 11
+  command: gh issue view 11 --comments --repo uxin0205-tech/yolo
+  status: unavailable
+  reason: gh_not_authenticated
+  implementation_authority: user_confirmed_grilling_decisions_in_current_thread

@@ -1,0 +1,42 @@
+{
+  "status": "awaiting_analysis",
+  "jobs": [
+    {
+      "name": "masf-p3-preflight-v1",
+      "status": "passed"
+    },
+    {
+      "name": "masf-p3-control-smoke-v1",
+      "status": "passed"
+    },
+    {
+      "name": "masf-p3-shared-smoke-v1",
+      "status": "passed"
+    },
+    {
+      "name": "masf-p3-fork-smoke-v1",
+      "status": "passed"
+    },
+    {
+      "name": "masf-p3-control-v1",
+      "status": "complete"
+    },
+    {
+      "name": "masf-p3-shared-v1",
+      "status": "complete"
+    },
+    {
+      "name": "masf-p3-fork-v1",
+      "status": "complete"
+    }
+  ],
+  "monitor_wait_seconds": 600,
+  "epochs_per_arm": 5,
+  "variants": [
+    "control",
+    "shared",
+    "fork"
+  ],
+  "accuracy_winner": null,
+  "goal": "驗證 MASF 能否增準；不是刪除 MASF"
+}

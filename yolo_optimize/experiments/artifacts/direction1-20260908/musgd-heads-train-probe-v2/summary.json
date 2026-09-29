@@ -1,0 +1,21 @@
+{
+  "status": "recipe_rejected",
+  "calibrated_role_lrs": {
+    "detect_head": 0.0006089066182347083,
+    "pose_head": 0.0012429811973384405
+  },
+  "group_update_ratios": {
+    "detect_head.decay": 1.063264702834151,
+    "detect_head.no_decay": 0.2684636026722284,
+    "pose_head.decay": 1.5012847693210067,
+    "pose_head.no_decay": 0.9232415919463358
+  },
+  "same_training_trace": true,
+  "training_scope": "heads_only",
+  "handoff": "original_PSEL_ema_fresh_optimizers_not_failed_E5",
+  "macro_budget": 48,
+  "validation_used": false,
+  "weights_saved": false,
+  "long_training_authorized_by_this_result": false,
+  "interpretation": "僅更新量校準前置；未做正式20ep比較、resume契約或AP驗收。"
+}

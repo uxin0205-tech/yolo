@@ -1,0 +1,75 @@
+schema_version: 1
+dataset_id: bbat5-v1
+aliases:
+  - BBAT5
+  - BBT5
+status: canonical
+root: /home/uxin/yolo/original/pose/derived/bbat5-v1
+
+spec:
+  version: 2.0.0
+  sha256: 75db239262de75998171a05a85c8755dea10c2bc76920dd2aabe8ff0dabb7a3b
+
+source_archives:
+  pose: /home/uxin/yolo/original/pose/dataset
+  detect_audit: /home/uxin/yolo/original/pose/detect_dataset
+
+tasks:
+  pose:
+    data_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+    data_yaml_sha256: dece3f4665fad86c2b0b3e3941b1cde9668cbfc6db1208c0e3d10638b3f5b888
+  detect_2class:
+    data_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml
+    data_yaml_sha256: 222f61f7800be52086218bc4e6880f23917abc33382714f8a737013b75aa6aa5
+
+search_tasks:
+  pose:
+    data_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+    data_yaml_sha256: a9069992cf21bff802466fa8adb46cba9bd55585f5adc8f3c183d33c8ede0b5d
+  detect_2class:
+    data_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect-search.yaml
+    data_yaml_sha256: 7b9fbeff82eed0c72f1db2aea003909c8e517c7252574c12ddebfeff69c35016
+
+manifests:
+  source_audit:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/manifests/source-audit-manifest.json
+    sha256: 1710f7bc7449015555c4e7be21285c6d7ff89457a790a0cbda85633b2fc6a308
+  split:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/manifests/split-manifest.json
+    sha256: 48bd6d4ac1c0773830809b5d002e123387f615026c967685a95ffb885bf1ceee
+  patch:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/manifests/patch-manifest.json
+    sha256: 11eda1ad69a9194090a3e0bed8ad5dd7cf7d56bca77316cddb2a25cc4e6c72c5
+  coco_exclusion:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/manifests/coco-exclusion-manifest.json
+    sha256: acc64fa9f414c6f6943e6e98e8a0d45f2c339c2ca4f6506e345b96e47ab5ed35
+  rebuild:
+    path: /home/uxin/yolo/original/pose/derived/bbat5-v1/manifests/rebuild-manifest.json
+    sha256: de0298943d05d40a74f72e6b6cd0966aca515db6aae929407adfd3f8b5c4902f
+
+counts:
+  images: 6647
+  source_groups: 2578
+  patched_coordinates: 4
+  instances:
+    ball: 3613
+    bat: 5453
+
+splits:
+  formal:
+    train_images: 5964
+    val_images: 683
+    source_group_overlap: 0
+  search:
+    train_images: 5364
+    val_images: 600
+    source_group_overlap: 0
+    scope: formal_train_only
+  test: null
+
+policy:
+  canonical_mutability: immutable
+  source_archives: read_only
+  runtime_views: generated_symlink_only
+  github_snapshot: distribution_only
+  training_default: formal

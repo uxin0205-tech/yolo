@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "p2_layer": 2,
+  "p2_channels": 256,
+  "p2_stride": 4,
+  "zero_alpha_forward_exact": true,
+  "base_state_exact": true,
+  "nonzero_alpha_context_gradient_verified": true,
+  "detect_module_count": 1,
+  "detect_inputs": [
+    16,
+    19,
+    22
+  ],
+  "detect_strides": [
+    8,
+    16,
+    32
+  ],
+  "pwl": [
+    {
+      "site": "model.10.m.0.attn.normalize",
+      "class": "PiecewiseLinearSoftmax",
+      "range": [
+        -10.0,
+        0.0
+      ],
+      "segments": 20,
+      "segment_width": 0.5
+    },
+    {
+      "site": "model.22.m.0.1.attn.normalize",
+      "class": "PiecewiseLinearSoftmax",
+      "range": [
+        -10.0,
+        0.0
+      ],
+      "segments": 20,
+      "segment_width": 0.5
+    }
+  ],
+  "initial_full_coco_images": 5000,
+  "initial_ap_delta": {
+    "coco/box/map50_95": 0.0,
+    "coco/person/box/map50_95": 0.0,
+    "coco/ball/box/map50_95": 0.0,
+    "coco/bat/box/map50_95": 0.0
+  },
+  "added_parameters": 75777,
+  "estimated_conv_macs_per_image640": 1900544000,
+  "mac_estimate_excludes": "BN/activation/addition/memory traffic; not hardware latency"
+}

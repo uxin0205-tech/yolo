@@ -1,0 +1,34 @@
+{
+  "fake_quantization": false,
+  "hardware_speed_claim": false,
+  "modules": [
+    {
+      "binary_forward_count": 3131,
+      "binary_qk_count": 3131,
+      "class": "UltralyticsBinaryAttention",
+      "path": "model.10.m.0.attn",
+      "probability_finite": true,
+      "probability_shape": [
+        8,
+        4,
+        231,
+        231
+      ],
+      "pv_count": 3131,
+      "score_finite": true,
+      "score_shape": [
+        8,
+        4,
+        231,
+        231
+      ],
+      "softmax_count": 3131
+    }
+  ],
+  "theoretical_cost": {
+    "binary_qk": 1,
+    "pv": 1,
+    "softmax": 1
+  },
+  "variant_id": "T2"
+}

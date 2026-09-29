@@ -1,0 +1,22 @@
+{
+  "status": "selected_pending_full_validation",
+  "masf_abandoned": true,
+  "detect_checkpoint": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/masf-p2-control-v1/epoch-02-resume.pt",
+  "detect_sha256": "a24a459396c6493307e3711e5228ac8df21e95f4268e1c943f2481de8f3c9a19",
+  "detect_epoch": 2,
+  "detect_expected_metrics": {
+    "coco/box/map50_95": 0.5083300413358366,
+    "coco/person/box/map50_95": 0.6278584227691295,
+    "coco/ball/box/map50_95": 0.5146957264222911,
+    "coco/bat/box/map50_95": 0.4796629055690042
+  },
+  "selection_rule": "max overall EMA among complete control epochs with overall/person >= verified prior parent",
+  "pose_checkpoint": "/home/uxin/yolo/yolo_combine/variants/full35/artifacts/pose/p0-full35-p3-b32a4-e100max-seed0/weights/best.pt",
+  "pose_sha256": "7b46c6af29723cff8ffdad96cf1220fd75975c31f99def58cfec84e80c322f99",
+  "p2_failed": true,
+  "training_enabled": false,
+  "pwl_range": [
+    -10,
+    0
+  ]
+}

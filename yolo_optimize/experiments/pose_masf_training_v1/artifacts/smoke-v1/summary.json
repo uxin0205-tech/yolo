@@ -1,0 +1,86 @@
+{
+  "status": "completed",
+  "formal_epoch": false,
+  "observed": [
+    {
+      "alpha": 0.0,
+      "alpha_gradient": -0.1663263589143753,
+      "context_gradient_max": 0.0
+    },
+    {
+      "alpha": 1.1914891729247756e-05,
+      "alpha_gradient": -0.105533666908741,
+      "context_gradient_max": 2.6855780106416205e-06
+    }
+  ],
+  "reports": [
+    {
+      "detect_mean_loss": 0.0,
+      "pose_mean_loss": 1.3597072958946228,
+      "joint_mean_loss": 1.3597072958946228,
+      "loss_for_backward": 87.02126693725586,
+      "detect_components": [],
+      "pose_components": [
+        0.9052085280418396,
+        0.039978645741939545,
+        0.04274787753820419,
+        0.4173019230365753,
+        0.002771978499367833,
+        0.0
+      ],
+      "detect_batch_sizes": [],
+      "pose_batch_sizes": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "detect_images": 0,
+      "pose_images": 128,
+      "gradient_presence": {},
+      "gradient_statistics": null,
+      "amp_scale": 512.0,
+      "amp_overflow_retries": 1,
+      "clipped_gradient_norm": 464.0959777832031
+    },
+    {
+      "detect_mean_loss": 0.0,
+      "pose_mean_loss": 1.4038744121789932,
+      "joint_mean_loss": 1.4038744121789932,
+      "loss_for_backward": 89.84796237945557,
+      "detect_components": [],
+      "pose_components": [
+        0.8550523519515991,
+        0.030758878216147423,
+        0.016575327143073082,
+        0.3882018029689789,
+        0.003151464043185115,
+        0.0372023805975914
+      ],
+      "detect_batch_sizes": [],
+      "pose_batch_sizes": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "detect_images": 0,
+      "pose_images": 128,
+      "gradient_presence": {},
+      "gradient_statistics": null,
+      "amp_scale": 512.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 835.6083984375
+    }
+  ],
+  "frozen_live_ema_exact": true,
+  "peak_allocated_bytes": 6907776512
+}

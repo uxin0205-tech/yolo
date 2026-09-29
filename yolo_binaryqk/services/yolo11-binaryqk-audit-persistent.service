@@ -1,0 +1,16 @@
+[Unit]
+Description=YOLO11 BinaryAttention post-run artifact audit
+After=yolo11-binaryqk-formal-persistent.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/hplab/uxin/yolo11/yolo_binaryqk
+ExecStart=/home/hplab/uxin/yolo11/yolo_binaryqk/audit_after_formal.sh yolo11-binaryqk-formal-persistent.service
+Restart=on-failure
+RestartSec=60
+KillMode=control-group
+TimeoutStopSec=30
+UMask=0002
+
+[Install]
+WantedBy=default.target

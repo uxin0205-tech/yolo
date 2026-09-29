@@ -1,0 +1,37 @@
+{
+  "attention_class": [
+    "Attention"
+  ],
+  "attention_module_count": 0,
+  "attention_module_paths": [],
+  "construction": "parser-direct-concrete-attention",
+  "model_class": "DetectionModel",
+  "quantization_contract": {
+    "bias_initialization": "none",
+    "bias_parameterization": "none",
+    "p8_scale": "none",
+    "qk_scale": "none",
+    "v8_scale": "none"
+  },
+  "theoretical_cost": {
+    "binary_qk": 0,
+    "pv": 1,
+    "softmax": 1
+  },
+  "total_parameter_count": 20114688,
+  "trainable_parameter_count": 200960,
+  "trainable_parameter_names": [
+    "model.10.m.0.attn.qkv.conv.weight",
+    "model.10.m.0.attn.qkv.bn.weight",
+    "model.10.m.0.attn.qkv.bn.bias",
+    "model.10.m.0.attn.proj.conv.weight",
+    "model.10.m.0.attn.proj.bn.weight",
+    "model.10.m.0.attn.proj.bn.bias",
+    "model.10.m.0.attn.pe.conv.weight",
+    "model.10.m.0.attn.pe.bn.weight",
+    "model.10.m.0.attn.pe.bn.bias"
+  ],
+  "trainable_scope": "attention_only",
+  "variant_config_hash": "217e1156e2e22c1f9d96e5adab974e2e5adf02a3647c5e9c1d1456c320121a4e",
+  "variant_id": "T0"
+}

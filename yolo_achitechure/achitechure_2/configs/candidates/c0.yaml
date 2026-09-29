@@ -1,0 +1,54 @@
+# 正式候選契約。實際 module paths 必須由 yolo_combine handoff 解析。
+schema_version: 3
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+kind: architecture_candidate
+candidate_id: C0
+title_zh: C0：融合 winner 原樣控制
+summary_zh: C0-Handoff 不改任何張量；C0-Control 只增加與候選相同的恢復訓練預算。
+status: required
+model_scale: m
+task_contract:
+  detect_nc: 80
+  pose_nc: 2
+  pose_kpt_shape: [2, 3]
+parent_policy:
+  source: accepted_yolo_combine_winner
+  checkpoint_role: c0_handoff
+  independent_build: true
+  seed: 0
+target_policy:
+  source: handoff.candidate_regions
+  module_type: C3k2-compatible
+  hardcoded_layer_indices: false
+scope_resolution:
+  shared_dual_head: [shared]
+  routed_dual: [detect_specific, pose_specific]
+  partial_shared: [shared, detect_specific, pose_specific]
+factors:
+  e: 0.5
+  inner_n: 2
+  kernel_mode: 3x3_3x3
+  use_rep: false
+baseline_factors:
+  e: 0.5
+  inner_n: 2
+  kernel_mode: 3x3_3x3
+  use_rep: false
+changed_fields: []
+factor_name: none
+protected_policy:
+  source: handoff.protected_module_paths
+  preserve_heads: true
+  preserve_fusion_topology: true
+  preserve_inherited_modules: true
+forbidden_combinations: [C1+C2, C1+C3, C2+C3]
+quantization_eligible: true
+standalone_loadable: false
+builder: achitechure_2
+architecture_delta:
+  changed_zh: []
+  unchanged_zh:
+    - 完整 winner graph、兩個 heads、融合 topology 與所有 state_dict tensors
+  expected_effects_zh:
+    - C0-Handoff 的 Params、MAC、輸出與 parent 必須完全一致

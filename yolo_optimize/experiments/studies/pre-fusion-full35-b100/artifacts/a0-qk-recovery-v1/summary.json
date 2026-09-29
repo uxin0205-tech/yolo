@@ -1,0 +1,60 @@
+{
+  "status": "paused_for_analysis",
+  "arm": "qk",
+  "parent": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/bittrue/a0.pt",
+  "parent_sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+  "fresh_optimizer": true,
+  "fresh_ema_updates": 0,
+  "criterion_horizon": 10,
+  "warmup_epochs": 1,
+  "physical_batch": 32,
+  "logical_batch": 128,
+  "train_images": 118287,
+  "epochs": [
+    {
+      "epoch": 1,
+      "images": 118287,
+      "macros": 925,
+      "elapsed_seconds": 577.010890007019,
+      "ema": {
+        "coco/box/map50_95": 0.5062400410979159,
+        "coco/person/box/map50_95": 0.6259960085842178,
+        "coco/ball/box/map50_95": 0.5147890101748726,
+        "coco/bat/box/map50_95": 0.4879465953715094
+      },
+      "live": {
+        "coco/box/map50_95": 0.506205798160138,
+        "coco/person/box/map50_95": 0.626026355490389,
+        "coco/ball/box/map50_95": 0.5141929390129307,
+        "coco/bat/box/map50_95": 0.48767154499912024
+      },
+      "delta_parent": {
+        "coco/box/map50_95": -0.0004985329362473534,
+        "coco/person/box/map50_95": -0.0008092653932801896,
+        "coco/ball/box/map50_95": 0.0016787515926133256,
+        "coco/bat/box/map50_95": -0.007779139072607522
+      }
+    }
+  ],
+  "qk_lr": 5e-07,
+  "head_lr": 2.5e-05,
+  "fixed_tensors": 556,
+  "training_scope": "Q/K projection + Detect head; all non-head BN statistics fixed",
+  "loss_reduction": "native batch-sum accumulated over four microbatches; partial final macro retained",
+  "challenger_contract": "exact XNOR forward; clipped signed-dot surrogate backward only in qk arm",
+  "qk_projection_gradient_norms": {
+    "model.10.m.0.attn.qkv.q.conv.weight": 127.1717529296875,
+    "model.10.m.0.attn.qkv.q.bn.weight": 0.6970368027687073,
+    "model.10.m.0.attn.qkv.q.bn.bias": 0.9335079193115234,
+    "model.10.m.0.attn.qkv.k.conv.weight": 75.74779510498047,
+    "model.10.m.0.attn.qkv.k.bn.weight": 0.6952327489852905,
+    "model.10.m.0.attn.qkv.k.bn.bias": 0.45884811878204346,
+    "model.22.m.0.1.attn.qkv.q.conv.weight": 16.506227493286133,
+    "model.22.m.0.1.attn.qkv.q.bn.weight": 0.2497265636920929,
+    "model.22.m.0.1.attn.qkv.q.bn.bias": 0.3602597415447235,
+    "model.22.m.0.1.attn.qkv.k.conv.weight": 29.410785675048828,
+    "model.22.m.0.1.attn.qkv.k.bn.weight": 0.4805583357810974,
+    "model.22.m.0.1.attn.qkv.k.bn.bias": 0.2646338641643524
+  },
+  "first_macro_trace_sha256": "1d20be5f68206800ffa5384b4aa4a6cc89fd3ba948ae1aa9a8482ab40568c199"
+}

@@ -1,0 +1,130 @@
+{
+  "blockers": [],
+  "ready": true,
+  "resolved": {
+    "formal_validation": false,
+    "gates": {
+      "map50_95_max_drop": 0.04,
+      "map50_max_drop": 0.015
+    },
+    "graph": {
+      "activation_quantizers": 124,
+      "binary_qk_protected_modules": 4,
+      "catalog": {
+        "deployment_regions": {
+          "backbone_attention_safe": {
+            "modules": 7,
+            "weight_elements": 919808
+          },
+          "backbone_deep": {
+            "modules": 22,
+            "weight_elements": 8126464
+          },
+          "backbone_early": {
+            "modules": 21,
+            "weight_elements": 1218240
+          },
+          "detect_one2one_predictor": {
+            "modules": 6,
+            "weight_elements": 62208
+          },
+          "detect_one2one_tower": {
+            "modules": 18,
+            "weight_elements": 1390592
+          },
+          "masf": {
+            "modules": 3,
+            "weight_elements": 74240
+          },
+          "neck": {
+            "modules": 33,
+            "weight_elements": 8142848
+          },
+          "neck_attention_safe": {
+            "modules": 5,
+            "weight_elements": 395520
+          },
+          "pose_one2one_predictor": {
+            "modules": 9,
+            "weight_elements": 3456
+          },
+          "pose_one2one_tower": {
+            "modules": 24,
+            "weight_elements": 2238464
+          }
+        },
+        "totals": {
+          "deployment_modules": 148,
+          "deployment_weight_elements": 22571840,
+          "modules": 251,
+          "protected_modules": 4,
+          "protected_weight_elements": 131072,
+          "training_only_modules": 99,
+          "training_only_weight_elements": 3748480,
+          "weight_elements": 26451392
+        }
+      },
+      "final_batch_norm_modules": 0,
+      "fold": {
+        "final_batch_norm_modules": 0,
+        "folded_conv_batch_norm_modules": 179,
+        "folded_deconv_batch_norm_modules": 0,
+        "folded_modules": 179,
+        "initial_batch_norm_modules": 179,
+        "reparameterized_repconv_modules": 0,
+        "reparameterized_repvggdw_modules": 0
+      },
+      "quantizer_optimizer_groups": 6,
+      "quantizer_optimizer_parameters": 396,
+      "warm_start": {
+        "checkpoint": "/home/uxin/yolo/yolo_quantize/artifacts/runs/qat/v36-qsilu-full-coverage-short-v2/v36-qsilu-full-coverage-short-qat-v1-qat-seed1/checkpoints/best_joint.pt",
+        "checkpoint_sha256": "f83e1ba22adc737ed05abf68152f621a67915a2104ace3bfd5a3b630d66dcb78",
+        "loaded_tensors": 1390,
+        "optimizer_state_loaded": false,
+        "parent_id": "v36-qsilu-a8-full-coverage-epoch1",
+        "parent_manifest": "/home/uxin/yolo/yolo_quantize/artifacts/queues/full-model-continuous-0907/parent-manifest.json",
+        "parent_manifest_sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a",
+        "reset_override_quantizers": 24,
+        "reset_paths": [
+          "graph.model.23.pose_head.one2one_cv2.0.0.conv",
+          "graph.model.23.pose_head.one2one_cv2.0.1.conv",
+          "graph.model.23.pose_head.one2one_cv2.1.0.conv",
+          "graph.model.23.pose_head.one2one_cv2.1.1.conv",
+          "graph.model.23.pose_head.one2one_cv2.2.0.conv",
+          "graph.model.23.pose_head.one2one_cv2.2.1.conv",
+          "graph.model.23.pose_head.one2one_cv3.0.0.0.conv",
+          "graph.model.23.pose_head.one2one_cv3.0.0.1.conv",
+          "graph.model.23.pose_head.one2one_cv3.0.1.0.conv",
+          "graph.model.23.pose_head.one2one_cv3.0.1.1.conv",
+          "graph.model.23.pose_head.one2one_cv3.1.0.0.conv",
+          "graph.model.23.pose_head.one2one_cv3.1.0.1.conv",
+          "graph.model.23.pose_head.one2one_cv3.1.1.0.conv",
+          "graph.model.23.pose_head.one2one_cv3.1.1.1.conv",
+          "graph.model.23.pose_head.one2one_cv3.2.0.0.conv",
+          "graph.model.23.pose_head.one2one_cv3.2.0.1.conv",
+          "graph.model.23.pose_head.one2one_cv3.2.1.0.conv",
+          "graph.model.23.pose_head.one2one_cv3.2.1.1.conv",
+          "graph.model.23.pose_head.one2one_cv4.0.0.conv",
+          "graph.model.23.pose_head.one2one_cv4.0.1.conv",
+          "graph.model.23.pose_head.one2one_cv4.1.0.conv",
+          "graph.model.23.pose_head.one2one_cv4.1.1.conv",
+          "graph.model.23.pose_head.one2one_cv4.2.0.conv",
+          "graph.model.23.pose_head.one2one_cv4.2.1.conv"
+        ],
+        "selected_epoch": 1,
+        "skipped_override_qparam_tensors": 48,
+        "state_key": "ema_state"
+      },
+      "weight_quantizers": 148
+    },
+    "graph_verified": true,
+    "plan_id": "continuous-0907-pose-ls-sd4-5ep-v1",
+    "plan_sha256": "7fe2bc65c306287147fecaab68fdccc2ce613fd146a294fd8068a53a7102cdf3",
+    "pose_data": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml",
+    "required_metric_count": 16
+  },
+  "warnings": [
+    "TensorBoard 未安裝；auto 模式仍會保留 JSONL、CSV、PNG",
+    "logical Detect batch=128、physical microbatch=16；正式 run 前仍須在空閒 RTX 5090 執行 VRAM gate"
+  ]
+}

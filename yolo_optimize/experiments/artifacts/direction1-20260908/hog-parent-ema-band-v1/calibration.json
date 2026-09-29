@@ -1,0 +1,34 @@
+{
+  "mu": 0.2154849493323042,
+  "unconstrained_mu": 0.19816868839393553,
+  "policy": "global_target_projected_to_shared_task_band_v1",
+  "achieved_global_gradient_ratio": 0.054369070885695626,
+  "target_gradient_ratio": 0.05,
+  "macros": 2,
+  "native_gradient_squared": 0.7305438026622121,
+  "auxiliary_gradient_squared": 0.0465067723392265,
+  "gradient_space": "concatenated_raw_p3_per_image_with_native_macro_task_scaling",
+  "probe_loss_scale": 1024.0,
+  "probe_gradient_accumulation_dtype": "float32_with_float64_sum",
+  "optimizer_steps": 0,
+  "validation_used": false,
+  "tasks": {
+    "detect": {
+      "native_gradient_squared": 0.2648051360923013,
+      "auxiliary_gradient_squared": 0.002281143002563372,
+      "valid_cells": 949069,
+      "images_with_valid_cells": 505,
+      "images": 512,
+      "weighted_auxiliary_to_native_gradient_ratio": 0.020000000000000004
+    },
+    "pose": {
+      "native_gradient_squared": 0.4657386665699108,
+      "auxiliary_gradient_squared": 0.04422562933666313,
+      "valid_cells": 2960,
+      "images_with_valid_cells": 32,
+      "images": 32,
+      "weighted_auxiliary_to_native_gradient_ratio": 0.06640225148588978
+    }
+  },
+  "task_ratios_outside_observation_band": []
+}

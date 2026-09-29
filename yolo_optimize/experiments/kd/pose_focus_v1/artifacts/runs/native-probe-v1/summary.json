@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "arm": "native",
+  "detect_output_exact": true,
+  "fixed_non_pose_state": true,
+  "teacher_unchanged": null,
+  "records": [
+    {
+      "detect_mean_loss": 0.0,
+      "pose_mean_loss": 1.0876554250717163,
+      "joint_mean_loss": 1.0876554250717163,
+      "loss_for_backward": 69.60994720458984,
+      "detect_components": [],
+      "pose_components": [
+        0.7567509412765503,
+        0.030887961387634277,
+        0.008663014508783817,
+        0.342658668756485,
+        0.0022486962843686342,
+        0.0
+      ],
+      "detect_batch_sizes": [],
+      "pose_batch_sizes": [
+        16
+      ],
+      "detect_images": 0,
+      "pose_images": 16,
+      "gradient_presence": {},
+      "gradient_statistics": null,
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 277.0018615722656
+    },
+    {
+      "detect_mean_loss": 0.0,
+      "pose_mean_loss": 1.2138675451278687,
+      "joint_mean_loss": 1.2138675451278687,
+      "loss_for_backward": 77.6875228881836,
+      "detect_components": [],
+      "pose_components": [
+        0.914631187915802,
+        0.021510368213057518,
+        0.007085620891302824,
+        0.3744748532772064,
+        0.0028834138065576553,
+        0.0
+      ],
+      "detect_batch_sizes": [],
+      "pose_batch_sizes": [
+        16
+      ],
+      "detect_images": 0,
+      "pose_images": 16,
+      "gradient_presence": {},
+      "gradient_statistics": null,
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 296.68560791015625
+    }
+  ],
+  "peak_cuda_allocated_bytes": 5191114240
+}

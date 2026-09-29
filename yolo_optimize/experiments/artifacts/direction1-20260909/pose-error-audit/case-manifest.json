@@ -1,0 +1,270 @@
+{
+  "cases": [
+    {
+      "group": "退化案例",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/049eb46a1a99b2a7_jpg.rf.976a753cb12489b58b653ca6dbf6fe07.jpg",
+      "error_delta": 2
+    },
+    {
+      "group": "退化案例",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/049eb46a1a99b2a7_jpg.rf.aa9316c99aa6516b4bae2bee2f87d502.jpg",
+      "error_delta": 2
+    },
+    {
+      "group": "退化案例",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/20250312_143347_mp4-0076_jpg.rf.8234cee7fa8f0052ee0a7d097f264a52.jpg",
+      "error_delta": 2
+    },
+    {
+      "group": "退化案例",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/Untitled_mov-51_jpg.rf.9c218d9a25ac1190beebcfaed3781802.jpg",
+      "error_delta": 2
+    },
+    {
+      "group": "改善案例",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/0002G-1-_mp4-0014_jpg.rf.6c2e2410d1f744bbeb76054bc82e6ee7.jpg",
+      "error_delta": -2
+    },
+    {
+      "group": "改善案例",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/0002G-1-_mp4-0014_jpg.rf.d318d06c2137d07842c520fded227af8.jpg",
+      "error_delta": -2
+    },
+    {
+      "group": "改善案例",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/0004H_mp4-0023_jpg.rf.c70b598e827e5f5ea4a52c8467cf870a.jpg",
+      "error_delta": -2
+    },
+    {
+      "group": "改善案例",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/0014O_mp4-0017_jpg.rf.8c86285d8e3e423621d5b213b877736d.jpg",
+      "error_delta": -2
+    },
+    {
+      "group": "共同失敗",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/image83_jpg.rf.2ed61281edd2859e6f9dacb22f7db1fc.jpg",
+      "error_delta": 0
+    },
+    {
+      "group": "共同失敗",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/image83_jpg.rf.64803b1fba9e8c371f2e3966747881c1.jpg",
+      "error_delta": 0
+    },
+    {
+      "group": "共同失敗",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/image83_jpg.rf.f86dcd42c3862852c9d3fa5eb96bd8fe.jpg",
+      "error_delta": 2
+    },
+    {
+      "group": "共同失敗",
+      "image": "/home/uxin/yolo/original/pose/dataset/train/images/0002G-1-_mp4-0006_jpg.rf.e9a9315972d308d7613d81254cca418c.jpg",
+      "error_delta": 0
+    }
+  ],
+  "totals": {
+    "parent": {
+      "0.001": {
+        "0": {
+          "gt": 393,
+          "pred": 1231,
+          "box50": {
+            "tp": 372,
+            "fp": 859,
+            "fn": 21
+          },
+          "box75": {
+            "tp": 264,
+            "fp": 967,
+            "fn": 129
+          },
+          "pose50": {
+            "tp": 375,
+            "fp": 856,
+            "fn": 18
+          },
+          "pose75": {
+            "tp": 373,
+            "fp": 858,
+            "fn": 20
+          }
+        },
+        "1": {
+          "gt": 539,
+          "pred": 1094,
+          "box50": {
+            "tp": 517,
+            "fp": 577,
+            "fn": 22
+          },
+          "box75": {
+            "tp": 484,
+            "fp": 610,
+            "fn": 55
+          },
+          "pose50": {
+            "tp": 524,
+            "fp": 570,
+            "fn": 15
+          },
+          "pose75": {
+            "tp": 524,
+            "fp": 570,
+            "fn": 15
+          }
+        }
+      },
+      "0.25": {
+        "0": {
+          "gt": 393,
+          "pred": 438,
+          "box50": {
+            "tp": 348,
+            "fp": 90,
+            "fn": 45
+          },
+          "box75": {
+            "tp": 240,
+            "fp": 198,
+            "fn": 153
+          },
+          "pose50": {
+            "tp": 354,
+            "fp": 84,
+            "fn": 39
+          },
+          "pose75": {
+            "tp": 354,
+            "fp": 84,
+            "fn": 39
+          }
+        },
+        "1": {
+          "gt": 539,
+          "pred": 596,
+          "box50": {
+            "tp": 500,
+            "fp": 96,
+            "fn": 39
+          },
+          "box75": {
+            "tp": 479,
+            "fp": 117,
+            "fn": 60
+          },
+          "pose50": {
+            "tp": 506,
+            "fp": 90,
+            "fn": 33
+          },
+          "pose75": {
+            "tp": 506,
+            "fp": 90,
+            "fn": 33
+          }
+        }
+      }
+    },
+    "native_e5": {
+      "0.001": {
+        "0": {
+          "gt": 393,
+          "pred": 1181,
+          "box50": {
+            "tp": 373,
+            "fp": 808,
+            "fn": 20
+          },
+          "box75": {
+            "tp": 265,
+            "fp": 916,
+            "fn": 128
+          },
+          "pose50": {
+            "tp": 374,
+            "fp": 807,
+            "fn": 19
+          },
+          "pose75": {
+            "tp": 373,
+            "fp": 808,
+            "fn": 20
+          }
+        },
+        "1": {
+          "gt": 539,
+          "pred": 1062,
+          "box50": {
+            "tp": 517,
+            "fp": 545,
+            "fn": 22
+          },
+          "box75": {
+            "tp": 483,
+            "fp": 579,
+            "fn": 56
+          },
+          "pose50": {
+            "tp": 524,
+            "fp": 538,
+            "fn": 15
+          },
+          "pose75": {
+            "tp": 524,
+            "fp": 538,
+            "fn": 15
+          }
+        }
+      },
+      "0.25": {
+        "0": {
+          "gt": 393,
+          "pred": 435,
+          "box50": {
+            "tp": 349,
+            "fp": 86,
+            "fn": 44
+          },
+          "box75": {
+            "tp": 240,
+            "fp": 195,
+            "fn": 153
+          },
+          "pose50": {
+            "tp": 353,
+            "fp": 82,
+            "fn": 40
+          },
+          "pose75": {
+            "tp": 353,
+            "fp": 82,
+            "fn": 40
+          }
+        },
+        "1": {
+          "gt": 539,
+          "pred": 584,
+          "box50": {
+            "tp": 496,
+            "fp": 88,
+            "fn": 43
+          },
+          "box75": {
+            "tp": 475,
+            "fp": 109,
+            "fn": 64
+          },
+          "pose50": {
+            "tp": 502,
+            "fp": 82,
+            "fn": 37
+          },
+          "pose75": {
+            "tp": 502,
+            "fp": 82,
+            "fn": 37
+          }
+        }
+      }
+    }
+  }
+}

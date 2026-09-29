@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "sites": [
+    {
+      "forward_exact": true,
+      "q_grad_norm": 0.23605696856975555,
+      "k_grad_norm": 0.24840304255485535
+    },
+    {
+      "forward_exact": true,
+      "q_grad_norm": 0.21199481189250946,
+      "k_grad_norm": 0.20676331222057343
+    }
+  ],
+  "analytic_surrogate_backward_exact": true,
+  "full_graph_160_eval_exact": true,
+  "serialization_and_remove_exact": true,
+  "accuracy_improvement_proven": false,
+  "note": "surrogate gradient 非離散 sign 真導數；GPU AMP、實際 batch loss、optimizer resume 仍待驗證"
+}

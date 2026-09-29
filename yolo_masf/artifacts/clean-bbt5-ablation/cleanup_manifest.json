@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "cleaned_at": "2026-08-16",
+  "scope": "artifacts/clean-bbt5-ablation and repository caches",
+  "before_size_approx": "4.8 GiB",
+  "after_size_approx": "2.9 GiB",
+  "removed": {
+    "smoke_training_directories": 12,
+    "queue_console_logs": 40,
+    "smoke_worker_receipts": 12,
+    "evaluation_rebuildable_json": 112,
+    "training_preview_files": 227,
+    "postprocess_lock": 1,
+    "repository_caches": [
+      ".pytest_cache",
+      ".ruff_cache",
+      "**/__pycache__"
+    ]
+  },
+  "retained": {
+    "formal_training_stages": 28,
+    "best_checkpoints": 28,
+    "last_checkpoints": 28,
+    "validation_metrics": 28,
+    "validation_predictions": 28,
+    "historical_test_metrics": 28,
+    "historical_test_predictions": 28,
+    "hardware_profile_files": 15,
+    "selection_freeze": true,
+    "final_audit": true,
+    "formal_report": true
+  },
+  "recovery": "Removed files are reproducible intermediate artifacts. Smoke checkpoints and caches are intentionally not recoverable from this commit; formal best/last checkpoints and evidence are retained."
+}

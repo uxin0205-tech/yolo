@@ -1,0 +1,94 @@
+{
+  "formal_validation": false,
+  "results": {
+    "neck-primary--exact_w4": {
+      "assignments": [
+        {
+          "cpu_format_id": "uniform-w4-per_output_channel-optimal_scaled_codebook",
+          "format_id": "exact_w4",
+          "path": "graph.model.13.cv2.conv",
+          "region": "neck",
+          "stage_id": "neck-primary",
+          "weight_format_id": "w4"
+        }
+      ],
+      "candidate_id": "neck-primary--exact_w4",
+      "cpu_format_id": "uniform-w4-per_output_channel-optimal_scaled_codebook",
+      "format_id": "exact_w4",
+      "gate": {
+        "decision": "recover",
+        "incremental_deltas": {
+          "bbat/ball/box/map50": 0.0048008684331275475,
+          "bbat/ball/box/map50_95": -0.0029353838821725153,
+          "bbat/ball/pose/map50": 0.0010329887346272049,
+          "bbat/ball/pose/map50_95": 0.0010487724791845565,
+          "bbat/bat/box/map50": 9.32312748637143e-05,
+          "bbat/bat/box/map50_95": -0.0006498929989532387,
+          "bbat/bat/pose/map50": -0.0001230275715887741,
+          "bbat/bat/pose/map50_95": 5.644150595252029e-05,
+          "bbat/box/map50": 0.0024470498539956864,
+          "bbat/box/map50_95": -0.001792638440562988,
+          "bbat/pose/map50": 0.0004549805815192709,
+          "bbat/pose/map50_95": 0.0005526069925683164,
+          "coco/box/map50": -0.004223161140223475,
+          "coco/box/map50_95": -0.0020692873346402907,
+          "coco/person/box/map50": -0.0008085475821227872,
+          "coco/person/box/map50_95": -0.0021526962728495302
+        },
+        "total_deltas": {
+          "bbat/ball/box/map50": 0.012190628715677332,
+          "bbat/ball/box/map50_95": -0.007201124228439881,
+          "bbat/ball/pose/map50": 0.010021769833151839,
+          "bbat/ball/pose/map50_95": 0.010021769833151728,
+          "bbat/bat/box/map50": -0.0005376750431965727,
+          "bbat/bat/box/map50_95": -0.005128715746267942,
+          "bbat/bat/pose/map50": -0.0003036315185901417,
+          "bbat/bat/pose/map50_95": -0.0007651433006703456,
+          "bbat/box/map50": 0.00582647683624038,
+          "bbat/box/map50_95": -0.006164919987354023,
+          "bbat/pose/map50": 0.00485906915728096,
+          "bbat/pose/map50_95": 0.004628313266240469,
+          "coco/box/map50": -0.01835651591155829,
+          "coco/box/map50_95": -0.015019773276866544,
+          "coco/person/box/map50": -0.010446698919467257,
+          "coco/person/box/map50_95": -0.012085654009606928
+        },
+        "worst_incremental_map50_95_delta": -0.002935383882,
+        "worst_incremental_map50_delta": -0.00422316114,
+        "worst_total_map50_95_delta": -0.015019773277,
+        "worst_total_map50_delta": -0.018356515912
+      },
+      "metrics": {
+        "bbat/ball/box/map50": 0.9705731952224202,
+        "bbat/ball/box/map50_95": 0.7718390579740979,
+        "bbat/ball/pose/map50": 0.9695106244392305,
+        "bbat/ball/pose/map50_95": 0.9695106244392304,
+        "bbat/bat/box/map50": 0.9935406653751535,
+        "bbat/bat/box/map50_95": 0.8887159733236054,
+        "bbat/bat/pose/map50": 0.9937747088997599,
+        "bbat/bat/pose/map50_95": 0.9933131971176797,
+        "bbat/box/map50": 0.9820569302987869,
+        "bbat/box/map50_95": 0.8302775156488515,
+        "bbat/pose/map50": 0.9816426666694953,
+        "bbat/pose/map50_95": 0.9814119107784551,
+        "coco/box/map50": 0.6523624912458625,
+        "coco/box/map50_95": 0.4830025631940556,
+        "coco/person/box/map50": 0.8289628885572763,
+        "coco/person/box/map50_95": 0.608295834412842
+      },
+      "metrics_path": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "metrics_sha256": "8089bfca2044413074068ce5e454151b591fe80ed3dda1b37ab8f9972ac4fb80",
+      "packed_bytes": 22491328,
+      "queue_role": "main",
+      "regated_from_gate_decision": "reject",
+      "savings_from_locked_parent_bytes": 196608,
+      "seconds": 74.0139717720449,
+      "status": "completed",
+      "weight_format_id": "w4"
+    }
+  },
+  "schema_version": 1,
+  "source_queue": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json",
+  "source_queue_sha256": "e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06",
+  "status": "completed"
+}

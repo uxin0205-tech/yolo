@@ -1,0 +1,39 @@
+{
+  "status": "awaiting_analysis",
+  "jobs": [
+    {
+      "name": "a0-control-e3-smoke-v3",
+      "arm": "control",
+      "status": "passed",
+      "smoke": true
+    },
+    {
+      "name": "a0-qk-e3-smoke-v3",
+      "arm": "qk",
+      "status": "passed",
+      "smoke": true
+    },
+    {
+      "name": "a0-control-recovery-v3",
+      "arm": "control",
+      "status": "complete",
+      "smoke": false,
+      "last_epoch": 5
+    },
+    {
+      "name": "a0-qk-recovery-v3",
+      "arm": "qk",
+      "status": "complete",
+      "smoke": false,
+      "last_epoch": 5
+    }
+  ],
+  "monitor_wait_seconds": 600,
+  "planned_endpoint_epoch": 5,
+  "accuracy_winner": null,
+  "ball_bat_gate": false,
+  "decision_metrics": [
+    "coco/box/map50_95",
+    "coco/person/box/map50_95"
+  ]
+}

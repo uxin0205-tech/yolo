@@ -1,0 +1,81 @@
+schema_version: 1
+report_id: full35-activation-preselection-v1
+date: 2026-08-29
+status: completed_preselection
+source:
+  smoke_report: artifacts/reports/activation-smoke-v2.json
+  smoke_report_sha256: 3c9301adaa1937f50bdd0c059f7d8000ea4699ce229e98c8ddb387651340c1f1
+  formal_training: false
+  weight_format: fp32
+
+metrics:
+  worst_raw_nrmse:
+    direction: lower_is_better
+    definition: Detect與Pose one-to-one raw output的normalized RMS error取較差值
+    warning: 不是mAP，也不能解讀為accuracy百分比下降
+  minimum_topk_selected_pair_overlap:
+    direction: higher_is_better
+    definition: Detect與Pose的Top-300 class-anchor pair交集比例取較差值
+    interpretation:
+      0.0966666667: approximately_29_of_300
+      0.6933333333: approximately_208_of_300
+
+no_new_runs:
+  - silu
+  - hardswish
+  - relu
+
+selected_primary:
+  - {policy_id: qsilu_pq--lsq-plus-a8, role: upstream_map_headroom}
+  - {policy_id: poly_quality--lsq-plus-a8, role: activation_numeric}
+  - {policy_id: poly_shift--lsq-plus-a8, role: hardware}
+
+selected_exploratory:
+  - qsilu_pq--lsq-plus-a6
+  - poly_quality--lsq-plus-a7
+  - poly_shift--lsq-plus-a7
+
+rejected_or_held:
+  a3: rejected_mainline
+  a4: rejected_mainline
+  a5: no_promotion
+  hardswish: pareto_dominated_a3_through_a8
+  silu: historical_reference_only
+
+sd4:
+  weight_sd4:
+    status: included_in_future_weight_matrix
+    activation_parents:
+      - qsilu_pq--lsq-plus-a8
+      - poly_quality--lsq-plus-a8
+      - poly_shift--lsq-plus-a8
+    formats:
+      - fixed_sd4_max
+      - fixed_sd4_mse
+      - ls_sd4_layerwise
+      - ls_sd4_grouped_after_layerwise
+      - ls_sd4_per_output_channel_upper_bound
+  activation_sd4:
+    status: exploratory_not_implemented
+    name: a_sd4
+    requirement: 與uniform LSQ+ A4使用相同parent、boundary、calibration及budget公平比較
+    suitability_metrics:
+      - signed_log_magnitude_occupancy
+      - sign_imbalance
+      - exact_zero_fraction
+      - clipping_rate
+      - codebook_reconstruction_nrmse
+      - layer_output_nrmse
+      - topk_overlap
+      - full_validation_map
+    warning: activation的動態與偏斜分布可能不適合對稱SD4，不能由activation名稱直接判定
+
+deliverables:
+  image_png: deliverables/activation-preselection-teacher-v1.png
+  image_svg: deliverables/activation-preselection-teacher-v1.svg
+  shareable_pdf: deliverables/activation-preselection-teacher-v1.pdf
+  report_markdown: docs/reports/2026-08-29-activation-preselection-report.md
+  sha256:
+    image_png: 3bfe999ce0fd9ed2fde79500cc03a5484d3459647ced29a28ae58023d5c50684
+    image_svg: 82ea786c5be8558659a790f3a85ee834a48bb12f8b77e191ddbe15459b7ec103
+    shareable_pdf: 8b1ca9e44cf1679d924cfe08197782ce575d2c9d1c2ee41965b22e791002a551

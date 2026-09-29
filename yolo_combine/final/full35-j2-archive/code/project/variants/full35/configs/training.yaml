@@ -1,0 +1,98 @@
+schema_version: 2
+architecture: full35
+joint_config: joint.yaml
+pose_stage_source: yolo_combine.pose_stages.POSE_STAGES
+
+gpu_execution:
+  performed_by_workspace_setup: true
+  reason: P1已完成；P2/P3依空卡實測改用保持logical128的可行physical microbatch。
+
+diagnostic_sampling:
+  enabled_for_preliminary_pose_runs: true
+  fraction: 0.3
+  seed: 0
+  strategy: seeded_random_source_group
+  selected_train_groups: 696
+  selected_train_images: 1777
+  full_validation_images: 683
+  validation_fraction: 1.0
+  formal_eligible: false
+  output: artifacts/datasets/diagnostic/pose/f0p3-seed0
+  exclusions: [formal_p1_p2_p3, standalone_baseline, accuracy_gate, preflight]
+
+official_yolo26m_coco_reference:
+  scope: reference_only
+  task: detect
+  dataset: COCO
+  imgsz: 640
+  published_batch: 128
+  epochs: 80
+  optimizer: MuSGD
+
+local_detect_source:
+  checkpoint: /home/uxin/yolo/yolo_achitechure/achitechure_1/final/weights/float/full35-a2.pt
+  physical_batch: 16
+  nbs: 16
+  configured_max_epochs: 10
+  observed_epochs_before_early_stop: 5
+  optimizer: MuSGD
+  lr0: 0.00038
+  lrf: 0.5
+
+observed_full35_p1:
+  applies_to_this_variant: true
+  status: completed_provisional_legacy_split
+  run: artifacts/runs/p0/p0-full35-p1-seed0
+  dataset: BBT5 basic split（僅歷史證據，不可作新 run 輸入）
+  epochs: 10
+  physical_batch: 16
+  nbs: 64
+  steady_state_accumulate: 4
+  trainable_scope: fresh Pose26 head only
+
+pose_schedule:
+  nbs: 128
+  effective_weight_decay: 0.00027
+  optimizer: MuSGD
+  lr0: 0.00038
+  lrf: 0.5
+  momentum: 0.948
+  cosine: true
+  p1:
+    epochs: 17
+    patience: 10
+    physical_batch: 128
+    accumulate: 1
+    trainable_scope: Pose26 head
+  p2:
+    epochs: 22
+    patience: 12
+    physical_batch: 64
+    accumulate: 2
+    trainable_scope: neck、Pose26 head、MASF 與 attention 可訓練部分
+  p3:
+    epochs: 100
+    physical_batch: 32
+    accumulate: 4
+    trainable_scope: full graph；Q/K sign path、gamma、PWL/PoT constants 鎖定
+    patience: 20
+  transition_rule: each stage starts a new optimizer from the previous best checkpoint
+
+batch_decision:
+  status: locked_after_gpu_memory_gates
+  selected:
+    nbs: 128
+    logical_images_per_optimizer_update: 128
+    p1: {physical_batch: 128, accumulate: 1}
+    p2: {physical_batch: 64, accumulate: 2}
+    p3: {physical_batch: 32, accumulate: 4}
+  rationale: P2-b128與P3-b64在空卡可重複OOM；64/32通過真實forward/backward，nbs128維持原weight decay 2.7e-4。
+  validation_batch: independently capped
+  xnor_backend: exact tiled token reduction
+  xnor_token_tile: 32
+  warning: logical128不代表與physical128逐值等價；head/shared BN按實體microbatch更新。
+
+seed_policy:
+  required_first_seed: 0
+  optional_second_seed: 1
+  second_seed_condition: 時間允許且 seed0 通過逐項精度 gate

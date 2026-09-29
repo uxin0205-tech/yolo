@@ -1,0 +1,56 @@
+# 正式候選契約。實際 module paths 必須由 yolo_combine handoff 解析。
+schema_version: 3
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+kind: architecture_candidate
+candidate_id: C2
+title_zh: C2：減少 C3k2 內部深度
+summary_zh: 只將所選 Candidate Region 的 inner_n 從 2 改成 1。
+status: required
+model_scale: m
+task_contract:
+  detect_nc: 80
+  pose_nc: 2
+  pose_kpt_shape: [2, 3]
+parent_policy:
+  source: accepted_yolo_combine_winner
+  checkpoint_role: c0_handoff
+  independent_build: true
+  seed: 0
+target_policy:
+  source: handoff.candidate_regions
+  module_type: C3k2-compatible
+  hardcoded_layer_indices: false
+scope_resolution:
+  shared_dual_head: [shared]
+  routed_dual: [detect_specific, pose_specific]
+  partial_shared: [shared, detect_specific, pose_specific]
+factors:
+  e: 0.5
+  inner_n: 1
+  kernel_mode: 3x3_3x3
+  use_rep: false
+baseline_factors:
+  e: 0.5
+  inner_n: 2
+  kernel_mode: 3x3_3x3
+  use_rep: false
+changed_fields: [inner_n]
+factor_name: inner_depth
+protected_policy:
+  source: handoff.protected_module_paths
+  preserve_heads: true
+  preserve_fusion_topology: true
+  preserve_inherited_modules: true
+forbidden_combinations: [C1+C2, C1+C3, C2+C3]
+quantization_eligible: pending_user_decision
+standalone_loadable: false
+builder: achitechure_2
+architecture_delta:
+  changed_zh:
+    - Candidate Region 的 C3k2 inner bottleneck 數量
+  unchanged_zh:
+    - 其他 regions、兩個 heads、融合 topology、MASF、BinaryQK 與 PWL attention
+  expected_effects_zh:
+    - 預期降低 Params、MAC 與有效深度
+    - 可能降低 context capacity
