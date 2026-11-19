@@ -1,0 +1,43 @@
+{
+  "stage": 1,
+  "next_stage_started": false,
+  "checkpoint": "/home/uxin/yolo/yolo_binaryqk/result/stage1/epoch-00.pt",
+  "sha256": "db8b11ddec3c3263e9a79d815645f320dc74cb646f2ea638b8ded4c2efe268f9",
+  "metrics": {
+    "variant": "B2",
+    "phase": "recovery",
+    "epoch": 0,
+    "AP50": 0.6830273457081868,
+    "AP50_95": 0.5098886554294018,
+    "internal_AP50_95": 0.5033277044247894,
+    "person_AP50": 0.8623837479102249,
+    "person_AP50_95": 0.6395232559160875,
+    "ball_AP50": 0.718776863879493,
+    "ball_AP50_95": 0.514559786394268,
+    "bat_AP50": 0.7261723659678875,
+    "bat_AP50_95": 0.48765072105777896,
+    "checkpoint": "/home/uxin/yolo/yolo_binaryqk/result/stage1/epoch-00.pt",
+    "sha256": "db8b11ddec3c3263e9a79d815645f320dc74cb646f2ea638b8ded4c2efe268f9",
+    "checkpoint_bytes": 88062827,
+    "model_parameters": 21896248,
+    "scale_slots": 16,
+    "training_seconds": 6324.734849214554,
+    "peak_allocated_bytes": 9742119936
+  },
+  "manifest_embedded": true,
+  "selection": {
+    "variant": "B2",
+    "AP50_95": 0.5098886554294018,
+    "required_minimum": 0.47221697939175394,
+    "passed": true,
+    "rule": "best official AP; ties fewer bases then B1/B2/B3 order",
+    "scores": {
+      "B1": 0.5039661738033075,
+      "B2": 0.5098886554294018,
+      "B3": 0.5063545979360358
+    }
+  },
+  "resume": "/home/uxin/yolo/yolo_binaryqk/result/stage1/resume.pt",
+  "recipe": "/home/uxin/yolo/yolo_binaryqk/result/stage1/recipe.json",
+  "original_handoff": "/home/uxin/yolo/yolo_binaryqk/artifacts/stage1/formal-20261018-v2/handoff.json"
+}

@@ -1,0 +1,95 @@
+schema_version: 1
+plan_id: v32-qsilu-regional-hardswish-conditional-v1
+date: "2026-09-05"
+language: zh-TW
+status: registered_conditional_after_qsilu
+formal_training: false
+formal_validation: false
+
+dependency:
+  state: artifacts/queues/v30-qsilu-complete-quantization-lane-v1/execution-state.json
+  required_status: complete_search_pipeline_pending_finalist_review
+  poll_seconds: 600
+  automatic_gpu_start: false
+  reason: 必須先完成qSiLU activation-aware weight主線並審核同一parent指標。
+
+evidence:
+  local_audit:
+    path: docs/reports/2026-08-31-q3-activation-parent-evidence.md
+    sha256: 85575a64a0827509baa09bb0cce3ac90dda4c74c58a3bdf8285f68442430f5e4
+  upstream_report:
+    path: /home/uxin/yolo/yolo_activation/reports/full35-q3-cpu-final-report.md
+    sha256: 8c495d71a7d4e50db7dd29676dfc8919a88cac3e362ab3f7d4737428c9b41d77
+  upstream_summary:
+    path: /home/uxin/yolo/yolo_activation/reports/q3-nonsilu-cpu/summary.json
+    sha256: 1e3b553484cd9eaceafd19603292804a9d3a55e74a5e5fcbb8db7edc33c08316
+
+root:
+  checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+  checkpoint_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+  default_activation: qsilu_pq
+  activation_bits: 8
+  weight_parent: artifacts/manifests/v30-qsilu-all-w8-locked-parent-v1.yaml
+
+q3_observations:
+  qsilu_reference_worst_global_delta: -0.008810
+  policies:
+    - id: hardswish_neck_attention
+      region: neck_attention
+      sites: 1
+      worst_global_delta: -0.008581
+      difference_vs_qsilu: 0.000229
+      role: primary_single_cell
+    - id: hardswish_masf
+      region: masf
+      sites: 3
+      worst_global_delta: -0.010301
+      difference_vs_qsilu: -0.001491
+      role: conditional_only
+    - id: hardswish_backbone_attention
+      region: backbone_attention
+      sites: 3
+      worst_global_delta: -0.013518
+      difference_vs_qsilu: -0.004708
+      role: sentinel_only
+
+matrix:
+  stage_h0:
+    gpu: false
+    action: 建立regional policy、190-site graph parity與qSiLU all-W8 parent hash preflight。
+  stage_h1:
+    gpu: true
+    candidates: [hardswish_neck_attention]
+    weight_format: inherited_all_w8_parent
+    comparison: matched_uniform_qsilu_all_w8
+  stage_h2:
+    gpu: true
+    conditional_on: stage_h1_promoted
+    candidates: [hardswish_masf, hardswish_backbone_attention]
+    policy: isolated_single_region_only
+  stage_h3:
+    gpu: true
+    conditional_on: selected_policy_requires_recovery
+    arms: [matched_sham, activation_recovery]
+    epochs_max: 15
+    patience: 5
+
+gates:
+  every_total_map50_delta_at_least: -0.015
+  every_total_map50_95_delta_at_least: -0.04
+  every_incremental_delta_vs_qsilu_parent_at_least: -0.002
+  promote_when:
+    - worst_task_accuracy_improvement_at_least_0.001
+    - or_equal_accuracy_and_verified_target_backend_benefit
+  mean_cannot_override_worst_task: true
+
+exclusions:
+  - uniform_hardswish
+  - multi_region_delta_addition
+  - poly_quality
+  - training_only_regions_as_hardware_savings
+  - full_weight_matrix_before_single_cell_promotion
+
+stop_line:
+  - 不自動進入formal、multi-seed、長epoch或硬體最終量測。
+  - 若neck-attention沒有明確精度或硬體收益，整個Hardswish旁支停止。

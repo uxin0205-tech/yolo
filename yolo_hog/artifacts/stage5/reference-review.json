@@ -1,0 +1,86 @@
+{
+  "schema": "hog-stage5-review-v1",
+  "reviewed_before_implementation": true,
+  "date": "2026-10-21",
+  "authorization": "保留第四階段結果，融合後再考慮 MASF，開始第五階段 HOG",
+  "sources_sha256": {
+    "yolo_optimize/experiments/src/yolo_optimize/hog.py": "40348850f7bb356a995a0382294f588b97b9563881d62122e9d3d389a5efb55a",
+    "yolo_optimize/experiments/tests/test_hog.py": "6ec9ef33ecf7b426d75350ae57a1e4fc460c772f526863d8334c76fcd3b31ae0",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/train_hog.py": "08d09adf711de3d7caf141520ac7747066cc411b54f1dc6f8cc8f40c14a4b12b",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/probe_hog_coverage.py": "4ffdf8a1cf5f7b2da5203b04437441e41b61d460cfc2a8dbfc57f06c4cede00c",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/run_hog_pair.py": "db11c990981d500a59abd46de4f4676293a4ae7000c5719c7a9b551f0a623440",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/prefusion-hog-calibration-v1/summary.json": "f279da364f55b0189467accf4381db97c07475c6135ae7406f890b1be84b08b9",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/hog-class-coverage-v1/summary.json": "20fe960399cc50a0046b1cc9eb7e7e081d9706efb05b1d32a840562f6f90e164",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/prefusion-hog-hog-v1/summary.json": "99fd1151f3a751b551c7a3335558832a0925384ead8f116e823a2b85f7ac038f",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/prefusion-hog-control-v1/summary.json": "81c191d0fe966d2eec7e635308e3197e4d1dd80b4595bde2440855131a2fdf6e",
+    "yolo_optimize/docs/worklogs/2026-09-09-e10-hog-prefusion.md": "b9c78843de44e2a3e385582c1c5194c59b2ea2c092dde2b4a8aceeeefed740a5",
+    "yolo_optimize/docs/worklogs/2026-09-09-hog-result-ball-bat.md": "05880ca36f06c37ed6460463f6530e734592c34b9f38b6777a8783a3cf091907"
+  },
+  "parent_handoff": "/home/uxin/yolo/yolo_masf/result/stage4/detect/handoff.json",
+  "parent_handoff_sha256": "8b4fe1c0200c0ce3b3387519eeeb6fc745b707865e62c5f981919f3b39516175",
+  "parent": "/home/uxin/yolo/yolo_attention/result/stage3/kd-epoch05/evaluated.pt",
+  "parent_sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c",
+  "parent_metrics": "/home/uxin/yolo/yolo_attention/result/stage3/kd-epoch05/metrics.json",
+  "ema_source_resume": "/home/uxin/yolo/yolo_attention/artifacts/stage3/kd-20261019-v1/training/resume.pt",
+  "ema_source_sha256": "41697db3c5ad1869add2074fd5bed59c37254b2b2db77a59a2c54dd5e373c2c3",
+  "ema_initial_updates": 2315,
+  "ema_parent_state_exact": true,
+  "historical": {
+    "parent": "late E8 exploratory EMA, old B100 normalization; not current parent",
+    "hog_minus_control_e4_AP": -0.000828527,
+    "ball_zero_valid_cell_fraction": 0.22033898305084745,
+    "calibrated_mu": 0.8750700409454109,
+    "mu_reused": false
+  },
+  "protocol": {
+    "candidate": "H2 original center-mask HOG adaptation",
+    "channels": 256,
+    "cell_size": 8,
+    "bins": 9,
+    "energy_epsilon": 1e-06,
+    "train_only": true,
+    "coverage_images": 1024,
+    "calibration_images": 256,
+    "seed": 20260919,
+    "aux_seed": 20260909,
+    "epochs": 10,
+    "minimum_epochs": 5,
+    "patience": 4,
+    "batch": 16,
+    "logical_batch": 128,
+    "reference_batch": 64,
+    "steps_per_epoch": 925,
+    "group_lrs": {
+      "head": 5e-06,
+      "neck": 1e-05,
+      "hog": 0.0003
+    },
+    "scope": "layers13,16,17,19,20,22 non-attention + Detect head + hog_aux; all BN stats frozen",
+    "mu_target_gradient_ratio": 0.05,
+    "mu_median_band": [
+      0.02,
+      0.1
+    ],
+    "mu_schedule": "E1 linear ramp; E2-E8 full; E9-E10 off; no separate control training",
+    "criterion": "native E2E terminal .1/.9 inherited optimization stage; no reset",
+    "selection": "save best overall AP including parent; recommend only > parent and all eight AP drops <=.001",
+    "stop_guard": "any monitored AP falls >.02 from parent; preserve completed epoch and stop queue",
+    "source_guard": "freeze source/protocol at initialization",
+    "hardware": "inherit full B2/S1/PWL-exp/D1/activation; aux sqrt atan2 division logsoftmax train-only",
+    "stage_stop": 5
+  },
+  "differences": [
+    "New Detect KD5 parent; do not convert back to old float normalization.",
+    "No control training; method effect cannot be separated from extra adaptation.",
+    "Head LR reduced 2.5e-5 ->5e-6 and all BN stats frozen because optimize native neck/head adaptation regressed; new scope still permits HOG reaching P3 producer.",
+    "Physical32->16 for memory; preserve logical128 and normalize both losses by64/actual macro consistently with current engine.",
+    "Fresh optimizer for changed scope; EMA age inherited from SHA-pinned source, not arbitrary7400.",
+    "E1 immediately ramps HOG instead of an unchanged HOG-off epoch; terminal E2E clock stays.",
+    "H4 only proposed after new coverage evidence; no second coverage training auto-start."
+  ],
+  "cleanup": {
+    "target_previously_existed": false,
+    "removed": [],
+    "protected_stage4": "all final candidates, resumes and results retained for post-combine review"
+  }
+}

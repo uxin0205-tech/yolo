@@ -1,0 +1,199 @@
+{
+  "schema": "actshape-stage9-v1",
+  "created_at": "2026-11-08T15:42:38.266875+08:00",
+  "reviewed_before_implementation": true,
+  "gpu_authorized": true,
+  "authorization": "使用者已要求固定最終qSiLU Rep17＋20、整理後自主研究下一階段並排GPU queue。 使用者後續要求增加輪數，啟動前調整為每組10E＋降LR10E，最多兩組40E。",
+  "parent": {
+    "checkpoint": "yolo_achitechure/result/stage8-retrain/handoff/rep17_20.pt",
+    "sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+    "candidate": "rep17_20",
+    "epoch": 1,
+    "metrics": {
+      "coco_AP": 0.5143471497030708,
+      "person_AP": 0.6427959303974734,
+      "sports_ball_AP": 0.5157820851022553,
+      "baseball_bat_AP": 0.46957631026676677,
+      "box_AP50_95": 0.6143706928427835,
+      "pose_AP50_95": 0.9013894285347345,
+      "ball_box_AP50_95": 0.49976429858092136,
+      "ball_pose_AP50_95": 0.8645462333785403,
+      "bat_box_AP50_95": 0.7289770871046457,
+      "bat_pose_AP50_95": 0.9382326236909287
+    }
+  },
+  "sources_sha256": {
+    "yolo_optimize/experiments/pose_only_rep_v1/config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/run_arm.py": "5b0e609d7e07823f08102ee15d77ee080550d971cb98177373e87e650a03030f",
+    "yolo_optimize/experiments/pose_only_rep_v1/RESULTS.md": "4b0e059a3397d14faf206d814c6ea6396dbe5f014337a5a98c793efc2ae045e5",
+    "yolo_optimize/experiments/activation/bridge_v1/train.py": "f12ac718dd5efc2ed1622be4df554feb82be2fa4ddfacb9cc3dc6ff7907d4cd0",
+    "yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/resolved-config.json": "deb0233e405ddd57ceaea2360903712780524c4584e5fda8794c41fff9da27d3",
+    "yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/summary.json": "98640a2e3df6a37de5a46e2577f20c2b68dbdda4d00a84270f03369f071dafd9",
+    "yolo_optimize/experiments/combine/bridge_v1/j3_stage.py": "568d3e95e6af2cfc50706c3873788c6a6a62d08371054f86037db4a4d5fedf6e",
+    "yolo_activation/result/stage7/protocol.json": "ff53c2b9eee9565818e28ef088936cbbdda0db5e635593e9ee80afdcde97cf89",
+    "yolo_achitechure/stage8/protocol.json": "3f314b3d7b78da15bb8584444128f40d07cdf259003cdc66258d1ebad0871ecf",
+    "yolo_achitechure/result/stage8-retrain/handoff/rep17_20.json": "bb1f58fa7524fcded88e1aeefe81d12dfcec2a7dc2c657ae023781e469927b4e",
+    "configs/datasets/bbat5-v1.yaml": "208e0f9e5bfded11f5739e9c598d98b4e5414699c64b9faf6f9625680988754a",
+    "yolo_p2/ultralytics/data/base.py": "6915996cdf1a029126c9c61171d65ba60cf863a20557bed2e2af3c34ce9cb029",
+    "yolo_p2/ultralytics/data/augment.py": "697492fd23c9d763b99ed65f56cf4ee5457732e30caa10618a20a1ed96de4b64",
+    "yolo_combine/src/yolo_combine/joint_loss.py": "f96f23e76d8dfc8f47623b7426c1857a01afdbe107ee455dde033ff8552d6ff9",
+    "yolo_combine/stage6/data.py": "7ea7addc67a6f84475b41220f1701ce31cf8a6b12b9f9352b33ead1c0f82ecf5",
+    "yolo_attention/src/yolo_attention/normalization.py": "540855c19a4742b4146ffaa342f5666780f33416a97f25a7e7984fcc9935645b",
+    "yolo_attention/src/yolo_attention/reciprocal.py": "251f1910e051c2ef380021744931174fb5c85b626ec05808f53bfeb099daa260",
+    "yolo_binaryqk/binaryqk/basis.py": "2b19e24d124bb805227c80a5dcd737596c226ef46acdaf8b544ebf0c9935e871"
+  },
+  "seed": 20261003,
+  "candidates": {
+    "reference_rect640": {
+      "shape": null,
+      "train": false,
+      "kind": "reference"
+    },
+    "fixed640": {
+      "shape": [
+        640,
+        640
+      ],
+      "train": false,
+      "kind": "fixed_reference"
+    },
+    "square512": {
+      "shape": [
+        512,
+        512
+      ],
+      "train": true,
+      "kind": "efficient"
+    },
+    "rect384_768": {
+      "shape": [
+        384,
+        768
+      ],
+      "train": true,
+      "kind": "efficient"
+    },
+    "rect512_1024": {
+      "shape": [
+        512,
+        1024
+      ],
+      "train": true,
+      "kind": "quality"
+    },
+    "square1024": {
+      "shape": [
+        1024,
+        1024
+      ],
+      "train": true,
+      "kind": "quality"
+    }
+  },
+  "preprocessing": {
+    "fixed_canvas": "native LetterBox aspect-preserving scalar gain, round resize, center pad114, RGB0-1",
+    "canonical_unchanged": true,
+    "membership": "complete original train/val, no resplit/crop/subset",
+    "shape_order": "H,W",
+    "stride": 32
+  },
+  "training": {
+    "epochs": 10,
+    "low_lr_epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "neck_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "all_bn_running": "fixed",
+    "attention": "all tensors frozen",
+    "backbone": "frozen",
+    "operators": "qSiLU/D1 deployment forward; Float-PWL STE backward",
+    "detect_physical": 8,
+    "detect_accumulation": 32,
+    "pose_physical": 8,
+    "pose_accumulation": 2,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "fresh_ema": true,
+    "amp": true,
+    "fp32_ciou": true,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "max_amp_retries": 16
+  },
+  "calibration": {
+    "macros": 3,
+    "confirm": 2,
+    "attempts": 2,
+    "initial_pose_weight": 0.25,
+    "target_ratio": 0.5,
+    "band": [
+      0.2,
+      0.8
+    ],
+    "bounds": [
+      0.01,
+      1.0
+    ],
+    "step": 0.01
+  },
+  "selection": {
+    "max_train_candidates": 2,
+    "one_per_cost_group": true,
+    "screen_max_any_drop": 0.05,
+    "screen_min_score_delta": -0.02,
+    "deployment_max_any_drop": 0.001,
+    "min_score_gain": 0.0001,
+    "cost_alternative_max_any_drop": 0.003,
+    "cost_alternative_min_mac_saving": 0.2,
+    "promotion": "quality first subject to per-metric guard; cost alternative separate, parent retained if no benefit",
+    "unchanged_control_training": false,
+    "catastrophic_epoch_drop": 0.05,
+    "low_lr_after_initial": "10E half LR from initial best when no safety stop; fresh optimizer/EMA, warmup1/cosine.5; no automatic third segment",
+    "max_training_epochs": 40
+  },
+  "queue": {
+    "monitor_seconds": 600,
+    "resource_check_seconds": 30,
+    "max_sigsegv_retries_per_job": 1,
+    "sigsegv_retry_requires_complete_epoch": true,
+    "gpu_count": 1,
+    "other_gpu_work": "stop own worker at conflict; resume from full epoch; never kill other work",
+    "stop_file": "STOP",
+    "stage_boundary": "Stage9 only; finalize report and stop"
+  },
+  "evaluator": {
+    "coco_val": 5000,
+    "bbat_val": 683,
+    "fp32": true,
+    "end2end": true,
+    "conf": 0.001,
+    "iou": 0.7,
+    "max_det": 300,
+    "data": "BBAT5 v1 immutable; COCO unchanged"
+  },
+  "hardware": {
+    "activation": "qsilu_pq",
+    "rep": "folded17+20",
+    "binary": "B2",
+    "scale": "S1 Q10",
+    "normalization": "D1 integerPWL20 LUT256",
+    "max_attention_axis": 32,
+    "max_tokens": 1024,
+    "denominator_bits": 26,
+    "reciprocal_fraction_bits": 16,
+    "probability_fraction_bits": 24
+  }
+}

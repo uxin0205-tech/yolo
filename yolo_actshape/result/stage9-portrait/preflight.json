@@ -1,0 +1,160 @@
+{
+  "status": "passed",
+  "source_sha256": "6747771224b91b8483d8153281fdfd94f5c0dd1d8d945141dce700b993a20180",
+  "tests": 3,
+  "parent_sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+  "trace": {
+    "input": [
+      768,
+      512
+    ],
+    "shapes": [
+      {
+        "module": "graph.model.10.m.0.attn",
+        "input": [
+          1,
+          256,
+          24,
+          16
+        ],
+        "output": [
+          1,
+          256,
+          24,
+          16
+        ]
+      },
+      {
+        "module": "graph.model.16",
+        "input": [
+          1,
+          1024,
+          96,
+          64
+        ],
+        "output": [
+          1,
+          256,
+          96,
+          64
+        ]
+      },
+      {
+        "module": "graph.model.19",
+        "input": [
+          1,
+          768,
+          48,
+          32
+        ],
+        "output": [
+          1,
+          512,
+          48,
+          32
+        ]
+      },
+      {
+        "module": "graph.model.22.m.0.1.attn",
+        "input": [
+          1,
+          256,
+          24,
+          16
+        ],
+        "output": [
+          1,
+          256,
+          24,
+          16
+        ]
+      },
+      {
+        "module": "graph.model.22",
+        "input": [
+          1,
+          1024,
+          24,
+          16
+        ],
+        "output": [
+          1,
+          512,
+          24,
+          16
+        ]
+      }
+    ],
+    "attention": [
+      {
+        "site": "graph.model.10.m.0.attn",
+        "height": 24,
+        "width": 16,
+        "tokens": 384,
+        "max_denominator_code": 12582912,
+        "required_unsigned_bits": 24,
+        "contract_bits": 26,
+        "score_matrix_fp32_bytes": 2359296,
+        "pv_float_mac": 37748736,
+        "binary_qk_bit_products": 37748736,
+        "pow2_axis_padding_tokens": 512,
+        "pow2_padding_is_estimate_only": true
+      },
+      {
+        "site": "graph.model.22.m.0.1.attn",
+        "height": 24,
+        "width": 16,
+        "tokens": 384,
+        "max_denominator_code": 12582912,
+        "required_unsigned_bits": 24,
+        "contract_bits": 26,
+        "score_matrix_fp32_bytes": 2359296,
+        "pv_float_mac": 37748736,
+        "binary_qk_bit_products": 37748736,
+        "pow2_axis_padding_tokens": 512,
+        "pow2_padding_is_estimate_only": true
+      }
+    ],
+    "conv_mac": 45432668160,
+    "conv_mac_plus_pv": 45508165632,
+    "scope": "CPU FP32 both routing 實際 Conv 與 PV 計數；不含逐元素、搬移或 binary QK，非 latency"
+  },
+  "data": {
+    "detect": {
+      "val": 5000,
+      "train": 118287,
+      "membership_preserved": true,
+      "coordinate_roundtrip_max_pixel_error": 6.103515625e-05,
+      "conditions": {
+        "512x768": {
+          "mean_padding_fraction": 0.19230559895833335,
+          "mean_linear_gain": 1.087771972929346
+        },
+        "768x512": {
+          "mean_padding_fraction": 0.41432578125,
+          "mean_linear_gain": 0.9202706381891322
+        }
+      }
+    },
+    "pose": {
+      "val": 683,
+      "train": 5964,
+      "membership_preserved": true,
+      "coordinate_roundtrip_max_pixel_error": 5.340576171875e-05,
+      "conditions": {
+        "512x768": {
+          "mean_padding_fraction": 0.2156539775500244,
+          "mean_linear_gain": 1.0647490126478871
+        },
+        "768x512": {
+          "mean_padding_fraction": 0.5263009394826745,
+          "mean_linear_gain": 0.8
+        }
+      }
+    }
+  },
+  "shape_cache_bitwise_equal": true,
+  "D1_384_row_sum_error": 0.0012969970703125,
+  "operators_verified": true,
+  "GPU_used": false
+}

@@ -1,0 +1,364 @@
+{
+  "status": "passed",
+  "selected_pose_weight": 0.04,
+  "parent_sha256": "61018101da486a724419bfcf5897bacc9e038423bd9159cc1c09867380324587",
+  "recipe": {
+    "epochs": 10,
+    "low_lr_epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "neck_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "neck": 9.5e-07,
+      "detect_head": 2.5e-06,
+      "pose_head": 2.5e-06
+    },
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "all_bn_running": "fixed",
+    "attention": "all tensors frozen",
+    "backbone": "frozen",
+    "operators": "qSiLU/D1 deployment forward; Float-PWL STE backward",
+    "detect_physical": 8,
+    "detect_accumulation": 32,
+    "pose_physical": 8,
+    "pose_accumulation": 2,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "fresh_ema": true,
+    "amp": true,
+    "fp32_ciou": true,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "max_amp_retries": 16
+  },
+  "shape": [
+    256,
+    512
+  ],
+  "records": [
+    {
+      "phase": "measure",
+      "index": 0,
+      "ratio": 4.503930360939332,
+      "pose_weight": 0.25,
+      "detect_norm": 162.13690194707917,
+      "pose_norm": 730.2533153080934,
+      "cosine_similarity": -0.0893904502040179
+    },
+    {
+      "phase": "measure",
+      "index": 1,
+      "ratio": 1.3771897419537429,
+      "pose_weight": 0.25,
+      "detect_norm": 116.49452754397417,
+      "pose_norm": 160.43506832730898,
+      "cosine_similarity": -0.00740214938485277
+    },
+    {
+      "phase": "measure",
+      "index": 2,
+      "ratio": 8.698817843158375,
+      "pose_weight": 0.25,
+      "detect_norm": 145.29882267753294,
+      "pose_norm": 1263.9279912972283,
+      "cosine_similarity": 0.03232316375116201
+    },
+    {
+      "phase": "measure",
+      "index": 3,
+      "ratio": 1.0964151328530107,
+      "pose_weight": 0.25,
+      "detect_norm": 134.40372356375707,
+      "pose_norm": 147.36227642709605,
+      "cosine_similarity": 0.00987147315157286
+    },
+    {
+      "phase": "measure",
+      "index": 4,
+      "ratio": 1.4426566165004113,
+      "pose_weight": 0.25,
+      "detect_norm": 158.31594963636033,
+      "pose_norm": 228.3955522404411,
+      "cosine_similarity": -0.0032356026447949203
+    },
+    {
+      "phase": "measure",
+      "index": 5,
+      "ratio": 5.3547562395456225,
+      "pose_weight": 0.25,
+      "detect_norm": 151.81826192905868,
+      "pose_norm": 812.9497853415986,
+      "cosine_similarity": -0.030705935363050545
+    },
+    {
+      "phase": "measure",
+      "index": 6,
+      "ratio": 1.3222414987827658,
+      "pose_weight": 0.25,
+      "detect_norm": 158.40671343088388,
+      "pose_norm": 209.451930184104,
+      "cosine_similarity": 0.04479062683262508
+    },
+    {
+      "phase": "measure",
+      "index": 7,
+      "ratio": 1.0459592926328378,
+      "pose_weight": 0.25,
+      "detect_norm": 174.11481696604534,
+      "pose_norm": 182.11701079070082,
+      "cosine_similarity": 0.01035008759342195
+    },
+    {
+      "phase": "measure",
+      "index": 8,
+      "ratio": 1.5997034101557492,
+      "pose_weight": 0.25,
+      "detect_norm": 146.8019489066344,
+      "pose_norm": 234.83957828345314,
+      "cosine_similarity": 0.0011412173147441
+    },
+    {
+      "phase": "measure",
+      "index": 9,
+      "ratio": 0.9762833239204847,
+      "pose_weight": 0.25,
+      "detect_norm": 138.36764762774155,
+      "pose_norm": 135.0860269490699,
+      "cosine_similarity": -0.015473977966516653
+    },
+    {
+      "phase": "measure",
+      "index": 10,
+      "ratio": 5.025338373365804,
+      "pose_weight": 0.25,
+      "detect_norm": 162.04042027456674,
+      "pose_norm": 814.3079420421025,
+      "cosine_similarity": 0.006727414167518028
+    },
+    {
+      "phase": "measure",
+      "index": 11,
+      "ratio": 0.9321062661176671,
+      "pose_weight": 0.25,
+      "detect_norm": 166.48465789849791,
+      "pose_norm": 155.18139283964607,
+      "cosine_similarity": 0.006003251229089676
+    },
+    {
+      "phase": "measure",
+      "index": 12,
+      "ratio": 5.93504066148839,
+      "pose_weight": 0.25,
+      "detect_norm": 136.9182073273827,
+      "pose_norm": 812.615127786114,
+      "cosine_similarity": -0.002918714010296259
+    },
+    {
+      "phase": "measure",
+      "index": 13,
+      "ratio": 1.6620940595371514,
+      "pose_weight": 0.25,
+      "detect_norm": 151.9924376294743,
+      "pose_norm": 252.6257276785202,
+      "cosine_similarity": 0.03178812631573311
+    },
+    {
+      "phase": "measure",
+      "index": 14,
+      "ratio": 5.4989310830007305,
+      "pose_weight": 0.25,
+      "detect_norm": 134.53123749881476,
+      "pose_norm": 739.7780035167859,
+      "cosine_similarity": -0.025737821090561584
+    },
+    {
+      "phase": "measure",
+      "index": 15,
+      "ratio": 1.843905362244438,
+      "pose_weight": 0.25,
+      "detect_norm": 115.42314867114574,
+      "pose_norm": 212.8293627618626,
+      "cosine_similarity": 0.03816865446682209
+    },
+    {
+      "phase": "confirm-0",
+      "index": 0,
+      "ratio": 1.7288568537553806,
+      "pose_weight": 0.08,
+      "detect_norm": 138.42737712291589,
+      "pose_norm": 239.3211196863339,
+      "cosine_similarity": -0.004091710886119249
+    },
+    {
+      "phase": "confirm-0",
+      "index": 1,
+      "ratio": 1.4638295027799448,
+      "pose_weight": 0.08,
+      "detect_norm": 167.1564102248247,
+      "pose_norm": 244.68848486588564,
+      "cosine_similarity": 0.05377012279579982
+    },
+    {
+      "phase": "confirm-0",
+      "index": 2,
+      "ratio": 0.2874472381083114,
+      "pose_weight": 0.08,
+      "detect_norm": 263.76437945243,
+      "pose_norm": 75.81834238495364,
+      "cosine_similarity": -0.06412432450692207
+    },
+    {
+      "phase": "confirm-0",
+      "index": 3,
+      "ratio": 0.40531135788605926,
+      "pose_weight": 0.08,
+      "detect_norm": 195.51099214426006,
+      "pose_norm": 79.2428257076407,
+      "cosine_similarity": 0.028187879399129215
+    },
+    {
+      "phase": "confirm-0",
+      "index": 4,
+      "ratio": 1.637382878599092,
+      "pose_weight": 0.08,
+      "detect_norm": 163.5234049919379,
+      "pose_norm": 267.7504235840244,
+      "cosine_similarity": -0.008475370703508296
+    },
+    {
+      "phase": "confirm-0",
+      "index": 5,
+      "ratio": 2.7553088130338708,
+      "pose_weight": 0.08,
+      "detect_norm": 178.45260929303024,
+      "pose_norm": 491.69204709397627,
+      "cosine_similarity": 0.013624362731552217
+    },
+    {
+      "phase": "confirm-0",
+      "index": 6,
+      "ratio": 0.40119483207115375,
+      "pose_weight": 0.08,
+      "detect_norm": 150.50344017323604,
+      "pose_norm": 60.38120240643237,
+      "cosine_similarity": -0.008654120673792945
+    },
+    {
+      "phase": "confirm-0",
+      "index": 7,
+      "ratio": 0.5862571682780254,
+      "pose_weight": 0.08,
+      "detect_norm": 149.27803057183553,
+      "pose_norm": 87.5153154891648,
+      "cosine_similarity": -0.024672977050255982
+    },
+    {
+      "phase": "confirm-1",
+      "index": 0,
+      "ratio": 0.12756145481382436,
+      "pose_weight": 0.04,
+      "detect_norm": 238.56374733354264,
+      "pose_norm": 30.431538675704314,
+      "cosine_similarity": -0.021473254562189157
+    },
+    {
+      "phase": "confirm-1",
+      "index": 1,
+      "ratio": 0.7893965960079281,
+      "pose_weight": 0.04,
+      "detect_norm": 190.55187417608272,
+      "pose_norm": 150.42100083753073,
+      "cosine_similarity": -0.1059485510465228
+    },
+    {
+      "phase": "confirm-1",
+      "index": 2,
+      "ratio": 0.2791751566997642,
+      "pose_weight": 0.04,
+      "detect_norm": 193.9741038735276,
+      "pose_norm": 54.15275084458842,
+      "cosine_similarity": 0.021528105534125187
+    },
+    {
+      "phase": "confirm-1",
+      "index": 3,
+      "ratio": 0.14728007939567336,
+      "pose_weight": 0.04,
+      "detect_norm": 183.830108272894,
+      "pose_norm": 27.07451294174706,
+      "cosine_similarity": -0.06219679546820447
+    },
+    {
+      "phase": "confirm-1",
+      "index": 4,
+      "ratio": 0.21952287668441112,
+      "pose_weight": 0.04,
+      "detect_norm": 169.6020560533725,
+      "pose_norm": 37.231531236427074,
+      "cosine_similarity": -0.05787059259750735
+    },
+    {
+      "phase": "confirm-1",
+      "index": 5,
+      "ratio": 0.27418761314797613,
+      "pose_weight": 0.04,
+      "detect_norm": 150.07003609566522,
+      "pose_norm": 41.14734500210107,
+      "cosine_similarity": -0.011347353528841126
+    },
+    {
+      "phase": "confirm-1",
+      "index": 6,
+      "ratio": 1.0397974724674064,
+      "pose_weight": 0.04,
+      "detect_norm": 137.26463459020883,
+      "pose_norm": 142.72742010606126,
+      "cosine_similarity": 0.036946759511577415
+    },
+    {
+      "phase": "confirm-1",
+      "index": 7,
+      "ratio": 1.141034596994106,
+      "pose_weight": 0.04,
+      "detect_norm": 164.34530185129918,
+      "pose_norm": 187.52367526577189,
+      "cosine_similarity": -0.03796876530888631
+    }
+  ],
+  "validation_used": false,
+  "parent_restored": true,
+  "calibration_recovery": {
+    "policy": "/home/uxin/yolo/yolo_actshape/artifacts/calibration-recovery-20261110/policy.json",
+    "policy_sha256": "6c94a9f381d50ebf40ed252d71c7897338d34c6ba6a551969675f1275e84e48c",
+    "source_sha256": "bfe92ac19712f66ecf3bd3a7111ccbc362b9bf0267120edc4a0c60a1c6112ac1",
+    "original_job_sha256": "a536e9facf79fcc167a4cc82765df4cd1a3fe6cf340ecefbd7ac513571a02bd4",
+    "failed_result_sha256": "b94af27c477821a078e4bc07767e629aa12be93cfc222dd8069b182098c0b9ef",
+    "base_source_sha256": "d8212a644a473d3bdd0e9d1f15cd38c14e8601d48d3b62dfd379f1a8f3da168b",
+    "result_path": "/home/uxin/yolo/yolo_actshape/artifacts/calibration-recovery-20261110/jobs/rect256_512/low-lr-calibrate/result.json",
+    "confirmation_median": 0.2766813849238702,
+    "calibration": {
+      "macros": 16,
+      "confirm": 8,
+      "attempts": 2,
+      "initial_pose_weight": 0.25,
+      "target_ratio": 0.5,
+      "band": [
+        0.2,
+        0.8
+      ],
+      "bounds": [
+        0.01,
+        1.0
+      ],
+      "step": 0.01
+    },
+    "reason": "原3+2校準逐批次完全重現；擴大至optimize的16+8，保留原門檻"
+  }
+}

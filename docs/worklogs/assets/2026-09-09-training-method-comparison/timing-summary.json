@@ -1,0 +1,103 @@
+{
+  "summary": {
+    "optimize": {
+      "macro_gap_median_s": {
+        "mean": 1.162244737148285,
+        "min": 1.1555631160736084,
+        "max": 1.165279507637024
+      },
+      "epoch_cycle_s": {
+        "mean": 651.4525048136711,
+        "min": 649.493026971817,
+        "max": 654.6400349140167
+      },
+      "validation_s": {
+        "mean": 104.77382946014404,
+        "min": 103.23374366760254,
+        "max": 106.23161458969116
+      }
+    },
+    "quantize": {
+      "macro_gap_median_s": {
+        "mean": 5.943431129058202,
+        "min": 5.897058963775635,
+        "max": 5.976520895957947
+      },
+      "epoch_cycle_s": {
+        "mean": 2845.0940174857774,
+        "min": 2817.2884051799774,
+        "max": 2870.599165916443
+      },
+      "validation_s": {
+        "mean": 88.60142063101132,
+        "min": 87.95837545394897,
+        "max": 89.36611199378967
+      }
+    },
+    "ratios": {
+      "macro_gap_median_s": 5.113751810691064,
+      "epoch_cycle_s": 4.367308432254064
+    }
+  },
+  "sources": [
+    {
+      "path": "yolo_optimize/artifacts/direction1-20260908/native-parent-ema-control-adopted/progress.jsonl",
+      "sha256": "3fb771a7ea8c3221096663e3cb89ecc72e7a727be11cb7112c2494ff1dbaed8a"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-detect-predictor-ls-sd4-recovery-5ep-v1-qat-seed1/logs/events.jsonl",
+      "sha256": "ba7bfb19133e1c3322963b81e8f02f8b9846eb809d2d0875edfccf97d96067c2"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-exact-ternary-5ep-v1-qat-seed1/logs/events.jsonl",
+      "sha256": "45c570ed2b4ab8b3f1d212dfa567da855068fcf86e814c959b5c6b0795db9b5e"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-paper-twn-5ep-v1-qat-seed1/logs/events.jsonl",
+      "sha256": "3fb5453cbb240bfe548d207b8540ad1a04c3992da10db0298dc980768c755940"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-twn-5ep-v1-qat-seed1/logs/events.jsonl",
+      "sha256": "ce7706c7a168c1ad593c7f6b8172418b09deceba25f25b87275f0fcc46065363"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-pose-ls-sd4-5ep-v1-qat-seed1/logs/events.jsonl",
+      "sha256": "66b92e5ce8d0f7cc6a3913c5b9162dde552e88444bffb188fa472c6085bb6ce1"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-pose-sd4-fixed-5ep-v1-qat-seed1/logs/events.jsonl",
+      "sha256": "38d86cf2b872108de1dbd44dfb865dd3562aeff40c037f951ee7a3d8736f6318"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/a0-control-recovery-v1/progress.jsonl",
+      "sha256": "db8a27efd53e81cfdbbd23a06053e4b9c38f0ce41c63b06f2c60ec64a4afe5a9"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/a0-qk-recovery-v1/progress.jsonl",
+      "sha256": "446a12c71e930d29aa014a48224aaa9fe774f1781948476c391be18a65be2c2d"
+    }
+  ],
+  "new_detect_study": [
+    {
+      "run": "a0-control-recovery-v1",
+      "epoch": 1,
+      "elapsed_seconds_including_validation": 495.7048144340515,
+      "images": 118287,
+      "macros": 925
+    },
+    {
+      "run": "a0-qk-recovery-v1",
+      "epoch": 1,
+      "elapsed_seconds_including_validation": 577.010890007019,
+      "images": 118287,
+      "macros": 925
+    }
+  ],
+  "limitations": [
+    "歷史紀錄比較，沒有單變因 GPU profiler；不分配各因素的因果百分比。",
+    "QAT macro 使用相鄰日誌時間差；optimize 同樣以相鄰時間差比较。",
+    "optimize epoch 為 start 至 complete；QAT 為相鄰 validation 完成，後者包含邊界存檔。",
+    "QAT E1 無完整開始時間，epoch_cycle_s 留空；穩態比較均使用 E2–E5。",
+    "optimize E1 沿用已完成前綴，不用延續程序時間冒稱完整五回合耗時。"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-08T15:11:04.675824+08:00",
+  "checks": {
+    "metrics_rows": 11,
+    "epoch_rows": 43,
+    "source_lock_files": 410,
+    "snapshot_sources": 35,
+    "checkpoint_sha_matches": {
+      "rep17": "ee0d578a3331f3294c3b11d2561296917db70461f304aed67d5fba83cf5ee304",
+      "rep20": "a21f44cd9cc930c97155c1e7a74edef11d199b3d433321b7f08d4d68392cc308",
+      "rep17_20": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+      "rep17_20_silu": "4335968378626630747e0424f2a346fef70c82e96333f65bd6854f7d506e4493",
+      "acb17_20": "e5b2f2e3e27991bb1e4068b19b8202b8213eda426ac29cd8722e7e91ffc8e3e0",
+      "qsilu_pq": "2f91ec1862ad62304f1e2727e9b9ee64a27c5a46a45137f83a74dc7f14c46a69",
+      "poly_quality": "447b06043eae81cc4422c4b1a05f40d7843526f2ac3eec15860e4b454d2aac7d"
+    },
+    "local_report_links": 12,
+    "regenerated_figures": 6,
+    "redraw_syntax": "passed",
+    "handoff_default": "rep17_20_silu",
+    "queue_and_recovery": "complete",
+    "stage7_epoch_metadata": "兩組既有 Stage7 各 10E；Stage8 epoch CSV 仍為 43 筆",
+    "data_readme_links": "passed"
+  },
+  "gpu_used": false,
+  "task_AP_rerun": false,
+  "basis": "核對已完成正式 AP／folding／可攜驗證；本次只做資料、文件、SHA 與離線重畫檢查。"
+}

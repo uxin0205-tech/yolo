@@ -1,0 +1,163 @@
+{
+  "variant": "S2",
+  "phase": "scale_bias",
+  "smoke": true,
+  "recipe": {
+    "version": 3,
+    "batch": 16,
+    "logical_batch": 256,
+    "imgsz": 640,
+    "seed": 1,
+    "optimizer": "AdamW",
+    "lr0": 1e-05,
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "warmup_epochs": 1,
+    "warmup_bias_lr": 0.0,
+    "linear_final_fraction": 0.5,
+    "gradient_clip": 10.0,
+    "amp": true,
+    "initial_loss_scale": 1024.0,
+    "overflow_attempts": 16,
+    "dtype": "AMP-FP16; score/softmax/parameters/evaluation-FP32",
+    "bn": "all running statistics frozen; selected affine trainable",
+    "loss": "native E2E batch-sum * 64/actual macro images; 16x16; retain final partial macro",
+    "ema": "native .9999 tau2000; trainable parameters only; all buffers fixed",
+    "normalization": "inherited native softmax; integer Q10 score affine forward",
+    "selection": "best official bbox AP50_95 including epoch0; strict improvement",
+    "resume": "last complete epoch; exact live/EMA/optimizer/scaler; repeat interrupted epoch",
+    "reference_review_sha256": "e44e7c8964ca603bec416463e2c07b5f6f243c4b008a3258ae1c9906b01d4d0d",
+    "phase": "scale_bias",
+    "epochs": 5,
+    "patience": 0,
+    "scope": "attention-and-detect-head",
+    "reference_batch": 64,
+    "warmup_start_factor": 0.1,
+    "scheduler": "warmup-cosine",
+    "steps_per_epoch": 463,
+    "group_lrs": {
+      "attention": 1e-05,
+      "head": 5e-06,
+      "scale": 0.0002,
+      "bias": 1e-05
+    },
+    "smoke_steps": 2
+  },
+  "best": {
+    "AP50_95": 0.0,
+    "epoch": 1,
+    "checkpoint": "epoch-01.pt"
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "evaluation": {
+        "protocol": "E2E FP32 conf=.001 iou=.7 max_det=300; native matching and official COCO bbox",
+        "images": 16,
+        "formal": false,
+        "internal": {
+          "metrics/precision(B)": 0.6327814332594979,
+          "metrics/recall(B)": 0.7325568789121271,
+          "metrics/mAP50(B)": 0.790206805440574,
+          "metrics/mAP50-95(B)": 0.552268831643147,
+          "fitness": 0.552268831643147
+        },
+        "classes_internal": {
+          "person": {
+            "AP50": 0.8170737862324893,
+            "AP50_95": 0.5565437462341374,
+            "precision": 0.8401975446748617,
+            "recall": 0.7288135593220338,
+            "instances": 59
+          },
+          "sports_ball": {
+            "AP50": null,
+            "AP50_95": null,
+            "reason": "no evaluated class targets"
+          },
+          "baseball_bat": {
+            "AP50": null,
+            "AP50_95": null,
+            "reason": "no evaluated class targets"
+          }
+        },
+        "seconds": 1.0665861330926418
+      }
+    },
+    {
+      "epoch": 1,
+      "images": 512,
+      "optimizer_steps": 2,
+      "seconds": 16.196108102798462,
+      "training_seconds": 12.43964171409607,
+      "peak_allocated_bytes": 6240560128,
+      "amp_retries": 0,
+      "first_batch_images": [
+        "000000452198.jpg",
+        "000000103730.jpg",
+        "000000089174.jpg",
+        "000000162693.jpg",
+        "000000571125.jpg",
+        "000000239010.jpg",
+        "000000544408.jpg",
+        "000000483362.jpg",
+        "000000008965.jpg",
+        "000000482305.jpg",
+        "000000364470.jpg",
+        "000000138397.jpg",
+        "000000282706.jpg",
+        "000000559682.jpg",
+        "000000127324.jpg",
+        "000000271712.jpg"
+      ],
+      "qk_update_abs_max": {
+        "model.10.m.0.attn.qkv.q.conv.weight": 2.000480890274048e-05,
+        "model.10.m.0.attn.qkv.k.conv.weight": 2.000480890274048e-05,
+        "model.10.m.0.attn.score.affine.coefficients": 0.0004000663757324219,
+        "model.10.m.0.attn.score.affine.table_x": 2.0003079043817706e-05,
+        "model.10.m.0.attn.score.affine.table_y": 2.0003351892228238e-05,
+        "model.22.m.0.1.attn.qkv.q.conv.weight": 2.000480890274048e-05,
+        "model.22.m.0.1.attn.qkv.k.conv.weight": 2.000480890274048e-05,
+        "model.22.m.0.1.attn.score.affine.coefficients": 0.00039733201265335083,
+        "model.22.m.0.1.attn.score.affine.table_x": 2.0003302779514343e-05,
+        "model.22.m.0.1.attn.score.affine.table_y": 1.9999821233795956e-05
+      },
+      "evaluation": {
+        "protocol": "E2E FP32 conf=.001 iou=.7 max_det=300; native matching and official COCO bbox",
+        "images": 16,
+        "formal": false,
+        "internal": {
+          "metrics/precision(B)": 0.63700388776365,
+          "metrics/recall(B)": 0.7273795626188356,
+          "metrics/mAP50(B)": 0.7905322901585508,
+          "metrics/mAP50-95(B)": 0.5540742207842846,
+          "fitness": 0.5540742207842846
+        },
+        "classes_internal": {
+          "person": {
+            "AP50": 0.8167683099665684,
+            "AP50_95": 0.5561180778387715,
+            "precision": 0.8426915483836755,
+            "recall": 0.7288135593220338,
+            "instances": 59
+          },
+          "sports_ball": {
+            "AP50": null,
+            "AP50_95": null,
+            "reason": "no evaluated class targets"
+          },
+          "baseball_bat": {
+            "AP50": null,
+            "AP50_95": null,
+            "reason": "no evaluated class targets"
+          }
+        },
+        "seconds": 0.5280035771429539
+      }
+    }
+  ],
+  "stop_reason": "smoke"
+}

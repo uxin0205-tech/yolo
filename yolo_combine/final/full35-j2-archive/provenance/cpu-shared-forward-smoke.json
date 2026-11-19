@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "executed_on": "2026-08-27",
+  "device": "cpu",
+  "gpu_used": false,
+  "input": {
+    "batch": 1,
+    "channels": 3,
+    "height": 64,
+    "width": 64,
+    "values": "zeros"
+  },
+  "source_bundle": "source_bundle",
+  "checkpoint": "weights/combined/inference/best_joint.pt",
+  "checkpoint_kind": "inference_only",
+  "state_source": "ema",
+  "loaded_tensors": 1238,
+  "factory_complete": true,
+  "strict_load": true,
+  "task": "both",
+  "output_tasks": [
+    "detect",
+    "pose"
+  ],
+  "shared_parameters": 26529701,
+  "model_kind": "graph_shared_dual_head",
+  "shared_layers": 23,
+  "head_inputs": [
+    16,
+    19,
+    22
+  ],
+  "feature_channels": [
+    256,
+    512,
+    512
+  ],
+  "strides": [
+    8.0,
+    16.0,
+    32.0
+  ],
+  "detect_nc": 80,
+  "pose_nc": 2,
+  "kpt_shape": [
+    2,
+    3
+  ],
+  "result": "passed",
+  "end_to_end_cli": {
+    "result": "passed",
+    "imgsz": 640,
+    "task": "both",
+    "source": "/home/uxin/yolo/original/pose/derived/bbat5-v1/pose/images/val/00019ee392d03976_jpg.rf.5faf2313d265f270d3951b781a123c66.jpg",
+    "detect_results": 1,
+    "pose_results": 1,
+    "output": "outputs/smoke/cpu-bbat5-task-both.json",
+    "wall_time_seconds_including_factory_and_checkpoint_load": 28.564618033,
+    "latency_benchmark": false
+  }
+}

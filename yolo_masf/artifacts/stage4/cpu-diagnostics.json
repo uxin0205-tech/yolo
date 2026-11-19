@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "tasks": {
+    "detect": {
+      "alpha_zero_exact": true,
+      "raw_p3_p4_p5_exact_with_alpha_nonzero": true,
+      "bridge_context_gradient_ratio": 0.25,
+      "bridge_head_gradient_ratio": 1.0,
+      "one2one_no_trunk_gradient": true,
+      "zero_alpha_context_gradient_zero": true,
+      "strict_reload_exact": true,
+      "qsilu_fallback_rejected": true,
+      "nontrivial_bn_fold_max_abs_fp32": 2.384185791015625e-07,
+      "added_parameters": 75777,
+      "inference_masf_conv_MACs_640": 475136000,
+      "alpha_multiplications_640": 1638400,
+      "hardware_measured": false,
+      "frozen_tensor_count": 683
+    },
+    "pose": {
+      "alpha_zero_exact": true,
+      "raw_p3_p4_p5_exact_with_alpha_nonzero": true,
+      "bridge_context_gradient_ratio": 0.25,
+      "bridge_head_gradient_ratio": 1.0,
+      "one2one_no_trunk_gradient": true,
+      "zero_alpha_context_gradient_zero": true,
+      "strict_reload_exact": true,
+      "qsilu_fallback_rejected": true,
+      "nontrivial_bn_fold_max_abs_fp32": 2.384185791015625e-07,
+      "added_parameters": 75777,
+      "inference_masf_conv_MACs_640": 475136000,
+      "alpha_multiplications_640": 1638400,
+      "hardware_measured": false,
+      "frozen_tensor_count": 684
+    }
+  }
+}

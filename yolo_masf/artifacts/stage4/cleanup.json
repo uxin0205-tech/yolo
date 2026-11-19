@@ -1,0 +1,2418 @@
+{
+  "stage": 4,
+  "authorization": "使用者要求移除被取代內容，不封存；本階段資料夾重建",
+  "historical_jobs_completed": 40,
+  "external_dependency_scan": "optimize only uses two retained CSV; no external imports of old masf_yolo code found",
+  "protected_external_dependencies": {
+    "/home/uxin/yolo/yolo_masf/clean_bbt5_study/results/comparison_mean_std.csv": "5732fa5c9ad89f2dccc285701d6abc36b54e2257ff372a01a1bcf42f11a159cd",
+    "/home/uxin/yolo/yolo_masf/clean_bbt5_study/results/per_seed_metrics.csv": "57c792fc9fd93b3baa3695e87913354f65254d40d62c6bedc0fc3bcb424b5986"
+  },
+  "extracted_evidence": "/home/uxin/yolo/yolo_masf/clean_bbt5_study/results/extracted-evidence.json",
+  "extracted_evidence_sha256": "964b3192c13bad979d53455152a77a78b5d9f74b73f60519e53a1735b5d4152e",
+  "removed": [
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/selection.json",
+      "sha256": "93b968effaf7e90c7187e1965b42e3aad50cb6308cc79e716092be798a3b520e",
+      "bytes": 18411
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/final_audit.json",
+      "sha256": "a93822ac61f8507c6ef0dd34831464fb42c297c73ade68c6ebdf04b5e589719a",
+      "bytes": 438
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/cleanup_manifest.json",
+      "sha256": "0f6e44aee10796b3001f4a6e4db045de118054e603716b8f20d87fb31f7a7b6c",
+      "bytes": 1087
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/acceptance.json",
+      "sha256": "8c3e4ebde8b09c44040fdca5849c1b4a98676e458c1adac854299b6639867fe0",
+      "bytes": 3368
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/postprocess_state.json",
+      "sha256": "ad020780b4ae13bf020633b9966e102d82dcd7489cba0189b3cb8dd5fa7ff6ab",
+      "bytes": 101
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/README.md",
+      "sha256": "73d9dbb2c51cad2da4456103e07f13e3d193d3563d3ca35e5c8f7c0e8b4fae7d",
+      "bytes": 1166
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/queue_state.json",
+      "sha256": "b5c9d0207327231c321ffb73babb64063f13c9f0e90137b78426f7c925c66001",
+      "bytes": 1624
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-paperformula-clean-seed42.json",
+      "sha256": "b354c0ede0389f905cce0e3711c14b0c40d48423a84801d779b03871d5984c70",
+      "bytes": 967
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-b0-clean-seed43.json",
+      "sha256": "57ac86e1f15a620d1a9d8d2a7bb512debcacd4281afaa25b10e76ab9e9048c01",
+      "bytes": 915
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-partial50-clean-seed42.json",
+      "sha256": "5b7dac01b02e86d0678eacc38cf2a4ae47e2840d3fd0acd5431186d4cd63f95b",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-m7-clean-seed43.json",
+      "sha256": "726eda18eee32090a27c48a2c583dc8a46f46e45d5bb32f4b14f8a79d347bb1e",
+      "bytes": 927
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-lite35-f7-clean-seed42.json",
+      "sha256": "242d71c69af6d79d0482aeb35b2f9718bb4bcafa6ae0424c4999c9ffc1101833",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-paperformula-clean-seed43.json",
+      "sha256": "c626622add96622d23d587c6c4a04cf1fe27446707b379a4e4f452e98da1fc5c",
+      "bytes": 967
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-partial50-clean-seed43.json",
+      "sha256": "c873237b0cfb18f22d87c721c88d3c76de7e8905fead570a199c05d0fb399d4d",
+      "bytes": 1059
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-m7-clean-seed42.json",
+      "sha256": "af86c617cc2f602379ccb15bbcacf01802d3a27d0e732a788f4f54438d81bdcc",
+      "bytes": 927
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-partial25-clean-seed43.json",
+      "sha256": "56bdc06b56049d20499880ece882b789a689530229b8e1888d3735244c0731b5",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-direct-clean-seed42.json",
+      "sha256": "539c2a787a3d6254161eb948f8ffd4b660c92b7f0e36a57adf55279e33f28eb8",
+      "bytes": 943
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-partial50-clean-seed42.json",
+      "sha256": "e5f063b9a7bd4f497d1cf7acd68dac20a89e9d2985d4b86530228b7f05548260",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-partial25-clean-seed42.json",
+      "sha256": "22ee4a49657e1b9f7c6b7c4dc7de3e6c74a624b4ddb183fed6079f576859ca81",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-control-clean-head-seed42.json",
+      "sha256": "72ed6b79304965cb94e3025ee64b2deb23da8f8775bcf179551841fb1dab8e5b",
+      "bytes": 976
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-lite35-f7-clean-seed43.json",
+      "sha256": "85a768d030e25f91270f28324252c50df426e43c2788d4282236e68cee8cd401",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-b0-clean-seed42.json",
+      "sha256": "67f734aaa524ed75b2e71cf829ad30516d4696c82e91de8b726c661f12d76917",
+      "bytes": 915
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-partial25-clean-seed43.json",
+      "sha256": "bd2b546113200c188a8f95e292b2fc0648bb6794b73d169db6de7ff9f23a80ef",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-partial25-clean-seed42.json",
+      "sha256": "f64d73cecd5c6e8aef47d3f7c98d2b14161e3e9aaca64b7899b192b53cb17ec6",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-direct-clean-seed43.json",
+      "sha256": "c2100e95e775fcbc481343b2e51f1917d6f1b1121eefb01ac12bd571b2e9eb04",
+      "bytes": 943
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-lite35-f7-clean-seed42.json",
+      "sha256": "ea15b7010bccb2d0eb12c1714e33df791de869311037ba582199b44f997cadef",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-lite35-clean-seed43.json",
+      "sha256": "5e7876ce305f5cf7ceabe3dbb491c87972328e07a1fc8d128efb0433f392928d",
+      "bytes": 943
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-control-clean-full-seed43.json",
+      "sha256": "5492f184f1ad8d02d4dd18bc2c514cc1c15ff2d58ebd5a03a4d7bec3c42fde26",
+      "bytes": 1083
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-lite35-clean-seed42.json",
+      "sha256": "5a34cda55ff7844e6889468370afa04a217383c82e2ece601a894ff63bb3d542",
+      "bytes": 943
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-control-clean-full-seed42.json",
+      "sha256": "51b1df5f475e22b11a75369b13e3a576880fb419e3e7b3c97a085fe9c4ea99d5",
+      "bytes": 1083
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-control-clean-head-seed43.json",
+      "sha256": "c28af073620954fec49811e0c2cf4d49eb89289795ba514330deb7d5b4874d77",
+      "bytes": 976
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-lite35-clean-seed43.json",
+      "sha256": "ac94fa8b6a258ef8a95350b14bd60e7590a9cca81d9bfadae0813b3fb3bbb723",
+      "bytes": 943
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p3-partial50-clean-seed43.json",
+      "sha256": "c7c2b30c1837134b4fd3955f24a9e003fefa9ef33a3aa5c77b71e398d247375b",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-lite35-clean-seed42.json",
+      "sha256": "e7960e4be4f069087098627f02bbb3322d837b0bf77fba88a9d09c4b0a13dabe",
+      "bytes": 943
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/worker/formal-p2-lite35-f7-clean-seed43.json",
+      "sha256": "a5aa6b4e58172b5afe9aa5a28e259d7095a96713d9c6bddca68a17003650cedf",
+      "bytes": 955
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/data/evaluation.yaml",
+      "sha256": "a52d052d0ebc82d9142a6c2a708558d05c46dbf139d3dd096e2a93915c9d8a35",
+      "bytes": 133
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/data/train_val_only.yaml",
+      "sha256": "2794c7fb72b83268108405400319b0c7f7e84351e93a21b37b0f070d68393b7b",
+      "bytes": 118
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/audit/formal_runs.json",
+      "sha256": "cc0a356345833110374251c8f2a9080bec240c3e4929af7c77f018770568d945",
+      "bytes": 37592
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p3-partial50-clean.json",
+      "sha256": "4f3553ef370678108a19041fea30059db2550f9b2e392e9de4c1c9807152b7ca",
+      "bytes": 769
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/summary.json",
+      "sha256": "a6ec2ce003d97798628d50d71dcf459736e7e0dbc8526ac31391dc79092368a4",
+      "bytes": 11450
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p3-lite35-clean.json",
+      "sha256": "4620deaa31686f0d4568813cc17865c4c39e7427a1c431939695dec1bbbe01f8",
+      "bytes": 763
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p3-lite35-f7-clean.json",
+      "sha256": "7fdf2685eeb13af1495d947448876ce12b3fa788f5fd596e0a2b38f94f9eb858",
+      "bytes": 766
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/b0-clean.json",
+      "sha256": "3010fa93786290f8c974bdbe469c6b466c72146d2794e7115d2a7ab027faab63",
+      "bytes": 749
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p2-control-clean-full.json",
+      "sha256": "362ab7bb806904fbb4a8b0f79eb1e89727e3679d6003ea9345853440197a36f5",
+      "bytes": 779
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p2-paperformula-clean.json",
+      "sha256": "800721bb223c4dafe9dd80f352192e5beda1c4a64a95e4057f67eb3a1c0bbf36",
+      "bytes": 779
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p2-direct-clean.json",
+      "sha256": "32bddd97c191ca883b218684c13789edea88c288397aec1444f018068e35bf32",
+      "bytes": 765
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p2-partial25-clean.json",
+      "sha256": "ad05045c08c4a286902714165ca2ca28d62e129db35dc4edac78f32d6ca51d8e",
+      "bytes": 774
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p2-partial50-clean.json",
+      "sha256": "d73ae31edc7a9ceebbabba62265d816af8b76766b28a17274e9a5c8a532014d4",
+      "bytes": 776
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p2-lite35-clean.json",
+      "sha256": "af6a62a69bc7fe71eb2fe557f64a1c7ee9d2de5ffca57e60144ce6f63cda28c3",
+      "bytes": 765
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p3-m7-clean.json",
+      "sha256": "26525c5ac287e23b422cfa0baacb84a841a43eff96bb506e1ea7a214b70da7cb",
+      "bytes": 756
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p2-control-clean-head.json",
+      "sha256": "886a261d49de27292fff08d6b56dbe0805426abbbb5690199b26be3465cda9aa",
+      "bytes": 779
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p3-partial25-clean.json",
+      "sha256": "f647a4352e2c7c32738660f9bae14ce5f8882254145489e58732dc1d9d93f3be",
+      "bytes": 768
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/profiles/p2-lite35-f7-clean.json",
+      "sha256": "67d406a72bb2fb93fbae9c34bc469679afeba8117e1c5a765848ab36d545f326",
+      "bytes": 773
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial50-clean-seed42/results.csv",
+      "sha256": "502254abe3f001eb957756a4a51ddce28ca034e47d388457d5793484f6ca95d3",
+      "bytes": 10119
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial50-clean-seed42/args.yaml",
+      "sha256": "ea6b6a07dd02a0841bb3bd85916f408ff8f38e7a06195779abf0f169ef0e2164",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed42/results.csv",
+      "sha256": "41d2e6fa433c45acf5a233d6394bbb3fd6ceaffbf30d7943b20d6f8f7f83ec6a",
+      "bytes": 9136
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed42/args.yaml",
+      "sha256": "ed448a2ba30b06d287f7e6eaba4fb39032734250b40a176e946713ff3fc33a62",
+      "bytes": 1804
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial50-clean-seed43/results.csv",
+      "sha256": "df69281c77f39a67b185dfcbdfcca767de877b8ce8d04579e98c15014ad0f24a",
+      "bytes": 9852
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial50-clean-seed43/args.yaml",
+      "sha256": "3499f8035c77988a2a7bd26a0d855729e824d917721680f2c15a88006bd4cf68",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-paperformula-clean-seed42/results.csv",
+      "sha256": "0d34e967a657d1ac82736490b0739c5963149808fe8fe8c9903733cad660efdd",
+      "bytes": 12478
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-paperformula-clean-seed42/args.yaml",
+      "sha256": "ec916a13ea11a123223399c405fe5b5bfe78e64cb8a357e0137b2f6db1eaef92",
+      "bytes": 1817
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-paperformula-clean-seed43/results.csv",
+      "sha256": "b15f644027933c81903fcbb8403648a1702f47a24c39038eebc7cdb8c473454c",
+      "bytes": 9840
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-paperformula-clean-seed43/args.yaml",
+      "sha256": "334fcd59711c44516f2fb4744eabc09758f6e9765a6a7f102ae0ff4534562a84",
+      "bytes": 1816
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-m7-clean-seed43/results.csv",
+      "sha256": "4c54f823125ca44012cac005836fe90ebd12a8575820b0fea37c958d857bcd61",
+      "bytes": 8897
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-m7-clean-seed43/args.yaml",
+      "sha256": "efca643d9099e7aac45dfae8a0e5a7d7032cbf2c7b19cb40e622e3dc20e0708f",
+      "bytes": 1796
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-f7-clean-seed43/results.csv",
+      "sha256": "25eb0eb7c1cbc2c410e13c80394edfa2639560742380db172f3e49bb0e26b8ef",
+      "bytes": 9991
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-f7-clean-seed43/args.yaml",
+      "sha256": "4ea368071bd8c9d3fa44709c611dfabcacb6c7aa42190d6224371b7a281c1a54",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial50-clean-seed43/results.csv",
+      "sha256": "1eda2430fa092102c93119baa27a6e9f019123710976f8b3b4c10a60de3ad389",
+      "bytes": 10346
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial50-clean-seed43/args.yaml",
+      "sha256": "44f8cd5829cb8be07ca6e77c8d46b618cf99f65800b445322dde539bd9cc7c23",
+      "bytes": 2002
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/b0-clean-seed43/results.csv",
+      "sha256": "775876952b5166626593317de6b3d4761fa0922d450cd36ab8179605e9117dfd",
+      "bytes": 12513
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/b0-clean-seed43/args.yaml",
+      "sha256": "6f21ba651b9a4bd980c034eaa8dde10da1329361c0536f5abff3c87964445a13",
+      "bytes": 1791
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed43/results.csv",
+      "sha256": "5bfa7ff384a2e3f56db1a36a0c9f3e74e94a7a54f81ec49fb91838527b3adb29",
+      "bytes": 5340
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed43/args.yaml",
+      "sha256": "c74488782f42d64b1f2c29f85823a0fd640bde94dde1f2e9682997078ddb9e1f",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-m7-clean-seed42/results.csv",
+      "sha256": "097a999150a61952b4bb97fda2130e4a24dea4c5c09b03ec9d51c413dfd7f7e0",
+      "bytes": 8874
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-m7-clean-seed42/args.yaml",
+      "sha256": "984ae4dd797614f73e0008c6f27761e31c2aa6ef3a3dbd3ddf7678e9d348ee5c",
+      "bytes": 1796
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed42/results.csv",
+      "sha256": "4e3497f0fde8c16aa43dfee64cec88dc6a133395a4fe2e00b21cd39800a6773e",
+      "bytes": 6816
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed42/args.yaml",
+      "sha256": "c4561b1b6cf879cc00b744fdb4cb416bb6eee4dd1c2b673c8763712f55742105",
+      "bytes": 1816
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-clean-seed43/results.csv",
+      "sha256": "fa401e2213496aa43637d37ff71f5a658334b87a76925a4f93db4ae62bf69cfd",
+      "bytes": 12513
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-clean-seed43/args.yaml",
+      "sha256": "e78c2b70308d545298fb942d025a154205b0efda0826b39bc085b6c58df4c7da",
+      "bytes": 1804
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-clean-seed42/results.csv",
+      "sha256": "6ca1e557128248a8ff1b140a92c4981d5c8bf4683bee95001e9cc3613647d7b5",
+      "bytes": 10370
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-clean-seed42/args.yaml",
+      "sha256": "0719907c33c148e2dfe3befbd51f03fbb84f9be88313c49f51ed29eebdd2d107",
+      "bytes": 1804
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-f7-clean-seed42/results.csv",
+      "sha256": "96811654cd5711f2da664ddc974a3df8cf907cbef99b204420b53e59f65acdf3",
+      "bytes": 9377
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-f7-clean-seed42/args.yaml",
+      "sha256": "8066b2f0e792ea3c73eb5908d1ac40b01c9c54b474a5ceace2b044e65b0ce028",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed43/results.csv",
+      "sha256": "64c7612fa9a648ef0372e2568506a50b2e8adeb323162707aab7d1c80ea2a790",
+      "bytes": 6064
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed43/args.yaml",
+      "sha256": "5ec5c4d902e18e4161288e9c46adeff57a154af46225fa32a7a257e0afd7e27e",
+      "bytes": 1816
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial50-clean-seed42/results.csv",
+      "sha256": "44d7a293e133a3cbc6e2bbae88a1263c62e20c12c5bf3940902c2b2c90d66d25",
+      "bytes": 3989
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial50-clean-seed42/args.yaml",
+      "sha256": "89ab2d0e6c6374d1f9d014b7e1ee769547bd1bcc60073922061fda6f6ac2eefb",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial25-clean-seed42/results.csv",
+      "sha256": "6635e4d7b3db1f109ee3a0b6b7cdbbc308a426f2bd31eee367e548511c21f262",
+      "bytes": 9749
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial25-clean-seed42/args.yaml",
+      "sha256": "81d961eb137107334a938e49bca461ab4d8a46ad79a559ee057b3dd7e2fddf90",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-direct-clean-seed42/results.csv",
+      "sha256": "61e3194c4219c2199c2c36796b95595e6c46e40d7273a44c167aee68c6882046",
+      "bytes": 12508
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-direct-clean-seed42/args.yaml",
+      "sha256": "d37946e4ef2ff9918ca62cce0b53bebd0460ef98d580ab869b3748499a771c14",
+      "bytes": 1805
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-f7-clean-seed43/results.csv",
+      "sha256": "6a8f4cdce01e1daad7fc57e05c53b5c8266dda1888a423d7b19a790cf1aa0234",
+      "bytes": 10357
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-f7-clean-seed43/args.yaml",
+      "sha256": "2539d7bc5132556a0523540426006e4b1290afa76c392af95edaa7af2e50aa56",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial25-clean-seed43/results.csv",
+      "sha256": "7c76962a62df190c8232ee14cb9bbbf2fc25b1d69ef1f5d4f39582271818f111",
+      "bytes": 8277
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial25-clean-seed43/args.yaml",
+      "sha256": "09944e7667bb0b6ff177e8924eb723085ab60e22aedc132fd7c6820ef5b30817",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-f7-clean-seed42/results.csv",
+      "sha256": "a5f6bc0da0e6a5bc9a21bd6ce1374c9200829a4e2761a9d7dd71875b3616bcea",
+      "bytes": 3980
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-f7-clean-seed42/args.yaml",
+      "sha256": "24234dab05466d3cbdddd8af0f0ab68307422b04bc3dd9e8f1f62dccfe4e1040",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed43/results.csv",
+      "sha256": "7a5d0e01cc79af3c0685b6bce3225b29fb0c007b8540bc95cf9ee4ad6855cd97",
+      "bytes": 12496
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed43/args.yaml",
+      "sha256": "a80cc81fa5fc11dbf0bd3b8659455fa17d47bf5a2f96471e66315917310167bc",
+      "bytes": 1804
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/b0-clean-seed42/results.csv",
+      "sha256": "e21f190b48de25615e870be0527fdab99a1cecae8490735b9895939dcd177470",
+      "bytes": 12481
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/b0-clean-seed42/args.yaml",
+      "sha256": "68357505694bf9a89ae891739dd1e045a9f4ea2cb5da8194f3b0402847848c6b",
+      "bytes": 1791
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-direct-clean-seed43/results.csv",
+      "sha256": "2c519954c5c3446194980daac73a2d47a61303b9bccb9dd41e12a2aaaa932173",
+      "bytes": 12478
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-direct-clean-seed43/args.yaml",
+      "sha256": "f7e2abde52193dcb9ba4ae8cfd35a81c8e18be95a563856766d95a7ec85923f9",
+      "bytes": 1805
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed42/results.csv",
+      "sha256": "72ab0175b09dcba253b163a37e732388093fe0c7596b7c9af0aa133bed1e42f8",
+      "bytes": 10733
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed42/args.yaml",
+      "sha256": "a1f8f8be20f3f431ca1c5521cbdadb60bae1add27f461a313fb088d737b30041",
+      "bytes": 1810
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-head-seed43/results.csv",
+      "sha256": "24c5af702bc8e53c1d53396b2b9a3f8dd5d9c4b7ee7da236bf4cafede9a65c52",
+      "bytes": 2631
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-head-seed43/args.yaml",
+      "sha256": "2cf7b3771fe6502e2a9f7e6914a1e15e5a37d31b32e3f0dd5ff1b8d8e89e59dc",
+      "bytes": 2025
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-head-seed42/results.csv",
+      "sha256": "5e1a85ff1296b5b73288a03cf92609c3b1cfbeb7984db60dd9b0a9dbf2a9bde5",
+      "bytes": 2392
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-head-seed42/args.yaml",
+      "sha256": "1df00ef09c970348e2b794e953f4d120011c05cabad2d0967b399d126d56dcb8",
+      "bytes": 2025
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial50-clean-seed42/weights/best.pt",
+      "sha256": "a6a2524e5123f47f4c13d5252be63099d2da34a1d4f1b3417d1f3e32bee774f5",
+      "bytes": 42475378
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial50-clean-seed42/weights/last.pt",
+      "sha256": "96a9427cd9dcc38a966396675c3c1b0d6e5ade709d5858e086cc26d90b2d6671",
+      "bytes": 42475378
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed42/weights/best.pt",
+      "sha256": "3c76cd211211e7f73d2176e7f761b01abf8b5d9e487ef2ed23c7d0c69a2b2843",
+      "bytes": 42529522
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed42/weights/last.pt",
+      "sha256": "6705270ac680e1191224da9d03f517d25234df924ff32a0ebe9ed48580741d56",
+      "bytes": 42529522
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial50-clean-seed43/weights/best.pt",
+      "sha256": "0f495cdbe4cdda7ae82e0ab59348f753af10581bddb2e3a312b67c443079415b",
+      "bytes": 40640820
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial50-clean-seed43/weights/last.pt",
+      "sha256": "abbd7ab70bc8938d268f64e8bbf5ed01959841f79f43e9a4f863d13552eaee2e",
+      "bytes": 40640820
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-paperformula-clean-seed42/weights/best.pt",
+      "sha256": "c436ccc354389667c69ea2a097d1150e17bca369ebb175691d4e8fae52777e3c",
+      "bytes": 42553914
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-paperformula-clean-seed42/weights/last.pt",
+      "sha256": "b6a68ade8295639a6fdfbe8d74cf79e83509c56d0d181f136ab7f8018e3b3231",
+      "bytes": 42553914
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-paperformula-clean-seed43/weights/best.pt",
+      "sha256": "54203cd2e4526fd34a59fc0304264213ef6479c69081ed77a6a9666bd386dd36",
+      "bytes": 42551226
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-paperformula-clean-seed43/weights/last.pt",
+      "sha256": "543c957ab9746e69622c1da200f2ae400b7da180fee925a444f9210f6a6678af",
+      "bytes": 42551226
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-m7-clean-seed43/weights/best.pt",
+      "sha256": "b39200bc50dd49bb480c687363602a91de1b20851d896c2307aa88109eebe797",
+      "bytes": 40729366
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-m7-clean-seed43/weights/last.pt",
+      "sha256": "598d80b2a8134607a9c2be31a682a34297cff0cd11355f0f0b56f20a45427300",
+      "bytes": 40729366
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-f7-clean-seed43/weights/best.pt",
+      "sha256": "7f616b366f77d6b56cea61759d8162d2d90c61fd1a4b881a2775209a1f90d7ed",
+      "bytes": 42540342
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-f7-clean-seed43/weights/last.pt",
+      "sha256": "f689d8087a317023410cc7a3b4f1e9e293e0ce5c5b85e5e62b402ddfb55ac84f",
+      "bytes": 42540342
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial50-clean-seed43/weights/best.pt",
+      "sha256": "312e7d461b03418a29121a1359034e1091d1aee6f51bd460dd1e7bc5c23b2204",
+      "bytes": 42475890
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial50-clean-seed43/weights/last.pt",
+      "sha256": "01d9cc9d4df39f591db58499f0320d9b1164f45da6b833e4eaf7aeed7dd337e4",
+      "bytes": 42475890
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/b0-clean-seed43/weights/best.pt",
+      "sha256": "d7c191bfbd1074da4b8f30def0460b9ad51b4c37b46c0498c9c82aded827a968",
+      "bytes": 40552556
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/b0-clean-seed43/weights/last.pt",
+      "sha256": "67ad5dd4f8cc9a3cfb81acf43718119b2d7ebc995d55712f1b4305e2bfaaf7dd",
+      "bytes": 40552556
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed43/weights/best.pt",
+      "sha256": "543c0e6027658c3891a3d5076b4369b7f117ab79271a8d6dce420396d9eee509",
+      "bytes": 42454898
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed43/weights/last.pt",
+      "sha256": "7eb91973c8b79061ba5137fec5a1239f8fbe1500642c282c61ee406badef25c8",
+      "bytes": 42454898
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-m7-clean-seed42/weights/best.pt",
+      "sha256": "e87f0f8998a52adad53b3500606a34ed542eb9721773a1083e62b9f2dac2cea7",
+      "bytes": 40729366
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-m7-clean-seed42/weights/last.pt",
+      "sha256": "911c3e27c7a3f2e3967ed775224fead3857c13477a0bf5f187f70701eced3821",
+      "bytes": 40729366
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed42/weights/best.pt",
+      "sha256": "4744ce87fc8f44ab896271c129df252548ca353ff8adb834cd16e20a83cd1f4d",
+      "bytes": 42440170
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed42/weights/last.pt",
+      "sha256": "f3492bad43bdbff8fe23c3b6b95fd58dcf2d32f45e1ef39011dd4eb4d523d976",
+      "bytes": 42440170
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-clean-seed43/weights/best.pt",
+      "sha256": "8c6587508bc8b7fc719d6726775a97264f2dd72d7ef1c46607ee3d85c5abc8cd",
+      "bytes": 40852468
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-clean-seed43/weights/last.pt",
+      "sha256": "60bdd78f642af9b4dac9dd7784fca54137e6193fc6c35e6b72b45786f9d48835",
+      "bytes": 40852468
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-clean-seed42/weights/best.pt",
+      "sha256": "6deb1a9a719646465e6ed05284aa10696e3da8f643ce26725f94eb3216f66067",
+      "bytes": 40850292
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-clean-seed42/weights/last.pt",
+      "sha256": "9b45adad8d641fe69f1c19ee281de0f32d1181953c73c968e56ff5dbeb9c202b",
+      "bytes": 40850292
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-f7-clean-seed42/weights/best.pt",
+      "sha256": "3ff2d6f6bb13a3e225357bc781beea03f993b4613c776bf1c8d778ee6918b914",
+      "bytes": 42539702
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-f7-clean-seed42/weights/last.pt",
+      "sha256": "9a440d7d28ff46fff3956cac626d8bf16261f0a90dbcdca222fd11fc06c03a46",
+      "bytes": 42539702
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed43/weights/best.pt",
+      "sha256": "ecb0c85868aea1b5fbf28802897dad3b358d6ad51f88f07f86589940020dcee0",
+      "bytes": 42439402
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-full-seed43/weights/last.pt",
+      "sha256": "ce7e6f42d321198d3e192845940bd3dc1efab1e50dffcccfa743d317367a65f6",
+      "bytes": 42439402
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial50-clean-seed42/weights/best.pt",
+      "sha256": "5399cf421af88410b91086c69afcc2bb9ffb8a54913328d82ff28b7740547400",
+      "bytes": 40634676
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial50-clean-seed42/weights/last.pt",
+      "sha256": "9f2246cc5b811c5f49bcd3877e19b5acaed01b32563e657787cfbdc08f902c23",
+      "bytes": 40634676
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial25-clean-seed42/weights/best.pt",
+      "sha256": "bc7ebca210def1a95a2f59cb1f5c6da6b68cbc48c0477379ea5a90077ddb5a5f",
+      "bytes": 40585140
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial25-clean-seed42/weights/last.pt",
+      "sha256": "3c239c628cd6e24efb0ab648fdbc33d970d1e13f3658dc8a72d047082517d9b6",
+      "bytes": 40585140
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-direct-clean-seed42/weights/best.pt",
+      "sha256": "941d6c0fa8e8d4edd9910b6f81279b7d619cea8538d0b13fe06f8774860f772c",
+      "bytes": 42446186
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-direct-clean-seed42/weights/last.pt",
+      "sha256": "7e04107827666dc6fbf33a95db52d363d7af9678cd5e9614672f9baf03ec361b",
+      "bytes": 42446186
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-f7-clean-seed43/weights/best.pt",
+      "sha256": "80b64a5d744fa3126718eea5e602bcdd52ef5384da731bc1bf8f7c9bee985362",
+      "bytes": 40866424
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-f7-clean-seed43/weights/last.pt",
+      "sha256": "910b4f7cdf7b4d8a900275ab2cda09fd1b0a33474098bd35d34a52a6b8b26eca",
+      "bytes": 40866424
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial25-clean-seed43/weights/best.pt",
+      "sha256": "76494ac115003e953d112bf9ae4914a0a89bad8ce8ba32a2a4013f03039fac61",
+      "bytes": 40583604
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-partial25-clean-seed43/weights/last.pt",
+      "sha256": "5ecc4d51ef5a08cc267a612e7b717a233837563dd19f4a7380ba30176ff3b32b",
+      "bytes": 40583604
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-f7-clean-seed42/weights/best.pt",
+      "sha256": "0c053b2552d00ab13ad88e1925cde1464fdb6c941f32e702721cfc3caf9a25ec",
+      "bytes": 40859768
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p3-lite35-f7-clean-seed42/weights/last.pt",
+      "sha256": "bdfdc7d0360565cb15f4c5bc186cb8721fbe6cf16ac60c5ee2a0b5a7047ac6c9",
+      "bytes": 40859768
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed43/weights/best.pt",
+      "sha256": "79b8eaea9d7e05f4b30f9eea5c920ef6f47b60f14afa3c4e9d2439c47b886778",
+      "bytes": 42532978
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-lite35-clean-seed43/weights/last.pt",
+      "sha256": "efd7348a7c06115110e15b24643deb18f8aef216374151065679e99b9ddc2d4a",
+      "bytes": 42532978
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/b0-clean-seed42/weights/best.pt",
+      "sha256": "834c09acea234007f32c8f3c2a682ae1aa7eb0744bcbd5e9b1d20ec1ea42530a",
+      "bytes": 40552556
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/b0-clean-seed42/weights/last.pt",
+      "sha256": "03ac4afd7839b90ba516a1b98e90c5bb362bdb2455e8512e09650d71d8f9ff72",
+      "bytes": 40552556
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-direct-clean-seed43/weights/best.pt",
+      "sha256": "a53a4027bf4b96d557b97a1e5c133de114d768433a5a5b9cde1bb7ef753434e7",
+      "bytes": 42446186
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-direct-clean-seed43/weights/last.pt",
+      "sha256": "9471f72c97efb4fd181085015bc6e15036e076019d06f896d36301721ee0a2b8",
+      "bytes": 42446186
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed42/weights/best.pt",
+      "sha256": "429d205ab5320e59d9499daa6b3872c4418bf8bae0292044d76ae6fd334e6a70",
+      "bytes": 42460530
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-partial25-clean-seed42/weights/last.pt",
+      "sha256": "a59b868441facb4b175a2fb6b71c8f0b43e7fc88f9c8b4f25c21a9223dcea636",
+      "bytes": 42460530
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-head-seed43/weights/best.pt",
+      "sha256": "2ff70727eb966e59dd31630853105104c4e784ca28caf85c7c707b647301da8f",
+      "bytes": 42436266
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-head-seed43/weights/last.pt",
+      "sha256": "1b50d144190182e851820f47ab1f0531bb0d6553719f615d28882108ce131c82",
+      "bytes": 42436266
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-head-seed42/weights/best.pt",
+      "sha256": "75647cfe35340c5c9a046a81fa64f7375f696a4920cf9cf35694ed07ee67eb80",
+      "bytes": 42436266
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/training/p2-control-clean-head-seed42/weights/last.pt",
+      "sha256": "7dfc627fa27696f8754c16770d8a72a09ee5e9324a832d76faae400ed8abfe22",
+      "bytes": 42436266
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial50-clean-seed42/false_positives.png",
+      "sha256": "ab4d4d4324fdd10248506a8bdb1c76f96378b68134a4c1199c09d8659a4ba8ff",
+      "bytes": 7947717
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial50-clean-seed42/metrics.json",
+      "sha256": "25a9d05d9d40207f289f21ff442b6ebffbde384b54c833c0c08f10f2480e73bf",
+      "bytes": 3666
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial50-clean-seed42/predictions.json",
+      "sha256": "85f9f7e095102297625abb80703ad568a27ea8b15996d5a65b409bc57f06cc1f",
+      "bytes": 856840
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-clean-seed42/false_positives.png",
+      "sha256": "f71b39fd39e8e56e447a800079056a3254ee077d9dbe3f0c364cd02daf0f9346",
+      "bytes": 8688786
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-clean-seed42/metrics.json",
+      "sha256": "2f55f80c8b0dd64df0dca7868aedd134753badc6ca1689f2b14a6095c46cba25",
+      "bytes": 3652
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-clean-seed42/predictions.json",
+      "sha256": "9727988c7b515ddb02f681aaf6bf013b8c7baef0a272ab00b96751398a503427",
+      "bytes": 1560480
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial50-clean-seed43/false_positives.png",
+      "sha256": "3fd170e2566ea59755e85b7a1b17ad7ececa8acec13d8299bfdc39dd54dbef79",
+      "bytes": 8862177
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial50-clean-seed43/metrics.json",
+      "sha256": "4799e5564b7abbf64ffc749f2c7583a4d656ef33b844c5a849d64ef1152e28fe",
+      "bytes": 3665
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial50-clean-seed43/predictions.json",
+      "sha256": "41265cab1d730355a9159ccb1025530aa77a7062733fa4e660063efb3abdd687",
+      "bytes": 980557
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-paperformula-clean-seed42/false_positives.png",
+      "sha256": "f9c6e74c1079c225a8bd593b23ecc1c8444da90ef5d5f75864aa908669e5a0e4",
+      "bytes": 9750920
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-paperformula-clean-seed42/metrics.json",
+      "sha256": "30af29a839084a6af2a7365a151b17014ceed5aa1d298a76ac8986b63a7e7eba",
+      "bytes": 3630
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-paperformula-clean-seed42/predictions.json",
+      "sha256": "9a2896dec26f3550aa4c0b490637084da0c4f791808dad21760e45d4bed12b64",
+      "bytes": 1424642
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-paperformula-clean-seed43/false_positives.png",
+      "sha256": "a24833a74c4afee953eee1b9c86fd115f4305dd1588d0be7db7c8803fcba1b4e",
+      "bytes": 9056225
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-paperformula-clean-seed43/metrics.json",
+      "sha256": "f9c70e38b4d204756757880adc283d7fb765321e0fab9a1bec79cc7eee9a29ea",
+      "bytes": 3644
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-paperformula-clean-seed43/predictions.json",
+      "sha256": "01037ff645cd446465b89ec11ea152928863e124576c0e2c145f332f818b8f50",
+      "bytes": 1259227
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-m7-clean-seed43/false_positives.png",
+      "sha256": "22dbfe11e7e679ebcb691891d9442b1bd91d81c4771eae6199ed17b8814cfd89",
+      "bytes": 8753323
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-m7-clean-seed43/metrics.json",
+      "sha256": "39dbeeffb38b67bdd5c6809c74fd5030dd6931887e72bb321728b3228b836847",
+      "bytes": 3650
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-m7-clean-seed43/predictions.json",
+      "sha256": "ab051b8d7a2b8528b0a323fff8eb747c9dba6d0620c99b568f85c3aeeaada11c",
+      "bytes": 1556600
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-f7-clean-seed43/false_positives.png",
+      "sha256": "cdae4f1c72c59f6c963ac0adc625de49cd095699e9e234884871735ee1d2a89a",
+      "bytes": 9204441
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-f7-clean-seed43/metrics.json",
+      "sha256": "0d0d732901f378e2c1378efe3008b5f2991f13e864c47fda7f8f19e759fb98a0",
+      "bytes": 3671
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-f7-clean-seed43/predictions.json",
+      "sha256": "26a4bd310318116793faafb83edddc7a0e3337054769fa8a7592059140e95254",
+      "bytes": 1154084
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial50-clean-seed43/false_positives.png",
+      "sha256": "d9ec25f05616566aee14ab4668f2b06ed404a60dcc302e8aef842ecffa70a75f",
+      "bytes": 8626729
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial50-clean-seed43/metrics.json",
+      "sha256": "80873e7313f3b0c9cff0dbfb7aa9cfb5d11079e86fbe22e9a91b8a208ff8a556",
+      "bytes": 3654
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial50-clean-seed43/predictions.json",
+      "sha256": "ceafb1fc9785adfde9e91077e1a4e7c52c2ed3579b68db2fcfcd4d654e0a6f23",
+      "bytes": 923579
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/b0-clean-seed43/false_positives.png",
+      "sha256": "14e952b3887c15680076cb44828bce79d0798bad67eb03d0ea030a0de5d18744",
+      "bytes": 8484911
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/b0-clean-seed43/metrics.json",
+      "sha256": "fa798b20767768c7d3e6eb19fd557fedcd7a765906b4f705ca0ab49cd13b4195",
+      "bytes": 3680
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/b0-clean-seed43/predictions.json",
+      "sha256": "df94b7689ee077915f72bbd629b8eff195f540cc96829fabd3194bea8e973a2e",
+      "bytes": 827196
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial25-clean-seed43/false_positives.png",
+      "sha256": "bbba6d8b8de3c0445b6e8ff65ac3283b23dcee243db33eb037e9274a71131802",
+      "bytes": 8866056
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial25-clean-seed43/metrics.json",
+      "sha256": "74af85fda03aa1f97e71a04962fad6e40746e514a31ab9e747b06701260dcc82",
+      "bytes": 3680
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial25-clean-seed43/predictions.json",
+      "sha256": "e19b1b39cb9ac7f93f8fd28fe8e48b2322751925f33a8565deb06cfa936f701e",
+      "bytes": 4875674
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-m7-clean-seed42/false_positives.png",
+      "sha256": "88f48c58f007fba9ce340ec8a82061542001530de28367a279c3216e7e14bc50",
+      "bytes": 9143185
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-m7-clean-seed42/metrics.json",
+      "sha256": "6b5f7697af705f080dbfe0b60f224f7b4776d4790f756de8abdc03e358bbed78",
+      "bytes": 3654
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-m7-clean-seed42/predictions.json",
+      "sha256": "ba7190e7c1d1f2b27120c7b449812de101c85c178bcee7b6967327d0cbc38564",
+      "bytes": 1312711
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-full-seed42/false_positives.png",
+      "sha256": "9f49222f902c3c1637d91a1383690000ecd499de841cd471bfdbef5f6657012c",
+      "bytes": 8807025
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-full-seed42/metrics.json",
+      "sha256": "b9ad02b8889322c133104937b0f3a32b2883c3c0b15d48545fb96f5559e9c908",
+      "bytes": 3679
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-full-seed42/predictions.json",
+      "sha256": "be54a42e29e63bba757bc4ee293448e713b139595585c7fa95ce8e7c1c9d2634",
+      "bytes": 772360
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-clean-seed43/false_positives.png",
+      "sha256": "7350fe8047a4f7751e5ee0d3db693e50ad58c18e8301da20c448bfc1efe34410",
+      "bytes": 8269059
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-clean-seed43/metrics.json",
+      "sha256": "11c4b068fe48867153ffaf9bfa000063e5d1aca3eaa4b0f56e6317f89bd55960",
+      "bytes": 3644
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-clean-seed43/predictions.json",
+      "sha256": "f092deb4bb9188f290fc68d3fdd3d7595e7a6eceff355da0094fe08ce353c1a0",
+      "bytes": 662028
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-clean-seed42/false_positives.png",
+      "sha256": "96396077e0edc5404c080091f2d686a75c2af95d49163126cd21a691faffb1b4",
+      "bytes": 8815349
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-clean-seed42/metrics.json",
+      "sha256": "13c7abd5c79945d58991757e4a2268311d18bf0a03f178c24b99b9b99854bf81",
+      "bytes": 3656
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-clean-seed42/predictions.json",
+      "sha256": "1e8078e130482ad4e325770a948b4762e89d338967c1065590fb0aaa14bdbbbb",
+      "bytes": 782408
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-f7-clean-seed42/false_positives.png",
+      "sha256": "830f48caf68f52c4e8ef9d658b444d56f58d6b5a70bd378585f3449b596ae884",
+      "bytes": 8963713
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-f7-clean-seed42/metrics.json",
+      "sha256": "b9f715869a7ad9d9f60b892ce80635e1f9858ed356546eb4396d2d2fcf6b1799",
+      "bytes": 3667
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-f7-clean-seed42/predictions.json",
+      "sha256": "4019eaf1410f768f76c1200bf2496c3b3cdab114ba6fab42fe5eb4ebf886fd2d",
+      "bytes": 1133751
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-full-seed43/false_positives.png",
+      "sha256": "3a07acf28f6ad358e0fab306bb5abab5d305d9200bad7085408918ba5f707aeb",
+      "bytes": 7980387
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-full-seed43/metrics.json",
+      "sha256": "b80500ad29bf8b59a4d87a56a63dd8ee0d97ed0bd38b2388250b40eaade41c7e",
+      "bytes": 3680
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-full-seed43/predictions.json",
+      "sha256": "e07d2093c6850cf5cc69950cbb5ad090c5ad93bbd8af881b03923748ad606665",
+      "bytes": 746100
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial50-clean-seed42/false_positives.png",
+      "sha256": "54766ccc8c968f98dc247aaa743d332a3db22ecdbe0d643086ec139227008cf5",
+      "bytes": 9385716
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial50-clean-seed42/metrics.json",
+      "sha256": "d877ec132156ddbcfd17ea2fc2831fbe565c0f95543f8cd8e530d63036635d6e",
+      "bytes": 3665
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial50-clean-seed42/predictions.json",
+      "sha256": "e5a91536e61f8a77bbafc98accbcc249ff3e4723be1fbdc52a897cc05a4d4f9c",
+      "bytes": 4845440
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial25-clean-seed42/false_positives.png",
+      "sha256": "ebf53b1b86f788b4197a06f9441c2d4965e706dea9dab4efd267046211013464",
+      "bytes": 9192451
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial25-clean-seed42/metrics.json",
+      "sha256": "4d9f6f074ce3aefbe819648319186d723a5b659b8cc8b734a7623f4fda3bd5f4",
+      "bytes": 3669
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial25-clean-seed42/predictions.json",
+      "sha256": "ce0c033079385012951559c72dfaff6ab7a23fc8c8f01713d5229e03851e2ed3",
+      "bytes": 1011163
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-direct-clean-seed42/false_positives.png",
+      "sha256": "d8b679eeb5abe1bcb6306aaa7d930b18b04bef1a52b60167fc4f68c86082ec2f",
+      "bytes": 8478876
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-direct-clean-seed42/metrics.json",
+      "sha256": "54323e234a35f34e93251eb4e0f3f7a5b761d07c3b642f04f1123e6f1f881593",
+      "bytes": 3664
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-direct-clean-seed42/predictions.json",
+      "sha256": "628ab710e9680c4b3d905d319d5507cf586a4f7a76b2532a6c3499d0b6e92d1d",
+      "bytes": 945231
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-f7-clean-seed43/false_positives.png",
+      "sha256": "b04cfa2c59c69e7c7b9978973713a1c298931d00001945ee4e18f40cb2563459",
+      "bytes": 8602394
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-f7-clean-seed43/metrics.json",
+      "sha256": "8f50162293fa95f9641131e2927a76f8aea2d4a9cf0581c6f0a45d20394f27e5",
+      "bytes": 3669
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-f7-clean-seed43/predictions.json",
+      "sha256": "0c22ea8d73ae8d4192dc998f7bde794bf531efb20925086e86360f0d15cf1a7f",
+      "bytes": 843940
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial25-clean-seed43/false_positives.png",
+      "sha256": "54b129ecd3f7dffcc4a2f44ecfb102a80fe3bfb37d0c73162d42b6e99109515e",
+      "bytes": 8962184
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial25-clean-seed43/metrics.json",
+      "sha256": "783817fed942680be0cbf2b004ab55445f70cd0decf68122d3f2ed9416373506",
+      "bytes": 3663
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-partial25-clean-seed43/predictions.json",
+      "sha256": "ea58683e342f317c4e6328f429f984357f93aede45bb32bcdf3ac4dd4e745fe4",
+      "bytes": 1291929
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-f7-clean-seed42/false_positives.png",
+      "sha256": "2b8925795b0a14dbc77a5bc7ee61b71f28730fa8e1d18a4e75835f0b0b0e25f4",
+      "bytes": 8697274
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-f7-clean-seed42/metrics.json",
+      "sha256": "31b534a8b8c320be4b834d27a64dbd34518d808d5a65716063eacfcbe172086e",
+      "bytes": 3617
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p3-lite35-f7-clean-seed42/predictions.json",
+      "sha256": "8624d52ef3f31c3f9d346727b59463993fae9090ef35c6c9e31dfb4a960ab5d4",
+      "bytes": 10097769
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-clean-seed43/false_positives.png",
+      "sha256": "a5139c49c262f3c4df3e1a33c0ff3f5fb7147672890898590fdb578ea9a7b98f",
+      "bytes": 8414253
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-clean-seed43/metrics.json",
+      "sha256": "e7e74a4dfed4493462547b94f421c6bf6822a05ef0261ea4f844c8777f86712a",
+      "bytes": 3692
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-lite35-clean-seed43/predictions.json",
+      "sha256": "cee6145af8f3d4f518f7d851bf70e7be76ec14c4d13230ec546d8f997c0ceb7e",
+      "bytes": 674769
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/b0-clean-seed42/false_positives.png",
+      "sha256": "8ba4f5290211c8c9c80be9fcd4c56cb75e6e2d74749435838a012e1e99dd6868",
+      "bytes": 8506623
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/b0-clean-seed42/metrics.json",
+      "sha256": "e6478de935933a9562f0f1c0eab7dd8c2507652794262a5ac034cc2362de1a74",
+      "bytes": 3661
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/b0-clean-seed42/predictions.json",
+      "sha256": "75e197ddf1b74fb478b0f9269d086e9ee6ded65dd65687424369a08d7d5b50e6",
+      "bytes": 4344382
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-direct-clean-seed43/false_positives.png",
+      "sha256": "03810cbab905c1d61015116b2d05cb7c1e498fbda98c7b4c48d505ca7c0ad6dd",
+      "bytes": 8794177
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-direct-clean-seed43/metrics.json",
+      "sha256": "8893513c8ca870a122c780753db7b2e6a7fd2024bc802643ca2e35802cd9a8ae",
+      "bytes": 3667
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-direct-clean-seed43/predictions.json",
+      "sha256": "3bfa4d8a50a8ca1e47365dbf4c5a1b8a3916657e0085c67e742f34d888c1590f",
+      "bytes": 1244597
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial25-clean-seed42/false_positives.png",
+      "sha256": "1f5e7b613b7d2ae0532909019b34547c7f1db59d514f01fe220e3619551ac1e4",
+      "bytes": 8870721
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial25-clean-seed42/metrics.json",
+      "sha256": "c1428a7a4a14aee8c924d1d14e9e841f63afe1d8212853269a6b18c8d119be08",
+      "bytes": 3668
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-partial25-clean-seed42/predictions.json",
+      "sha256": "0acbd9d50e5af17ad887ff26ed61bb6b7239195cb7d3d408bd2a0186849d8c73",
+      "bytes": 730727
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-head-seed43/false_positives.png",
+      "sha256": "1987d172254bb928c8d6326f0c1c9dad6625775635d08c4a6b9f769e375edd91",
+      "bytes": 4773203
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-head-seed43/metrics.json",
+      "sha256": "f837317034952255f8ddb1acf5363bfbe2afeb8555241fe47313e47ebec2b0ab",
+      "bytes": 3755
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-head-seed43/predictions.json",
+      "sha256": "e6a754187857c2a05337c9bda35971f61801539c3eb42a742217a9728a2df3f7",
+      "bytes": 53850041
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-head-seed42/false_positives.png",
+      "sha256": "0e645f64eb863985c17d5f016499f28a5320b769cce61efd6b6fdd1ff9212d95",
+      "bytes": 1961492
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-head-seed42/metrics.json",
+      "sha256": "feefee88267cabb966963e50939284af1569b0167ea81fce12d9074024e60ea3",
+      "bytes": 3460
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/test/p2-control-clean-head-seed42/predictions.json",
+      "sha256": "1d848d8516444976ea4a32b5690ddc63d13d0ef8bd60fee84c2557cce2864666",
+      "bytes": 52601057
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial50-clean-seed42/false_positives.png",
+      "sha256": "badd72c57420812562dc4d12d4db2a6bb8a39950b719575b0fc2a3577f0cfe29",
+      "bytes": 7478775
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial50-clean-seed42/metrics.json",
+      "sha256": "3a250c9e5e8417d77ea32c87153937ef2a694ce977b69a2b7d2338bb28ad2393",
+      "bytes": 3610
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial50-clean-seed42/predictions.json",
+      "sha256": "b9703f1e98a528fbc45dea020111af1f90223a514a0bd873798a6003d38607e1",
+      "bytes": 744522
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-clean-seed42/false_positives.png",
+      "sha256": "1089806b6403ad289fac9f6a53bb60ef0f810781e7a1afe9c599bb58915d4523",
+      "bytes": 6535223
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-clean-seed42/metrics.json",
+      "sha256": "89d1b0eb65344d87f47637e7b8a68ba81be362951397191b8ae21282cfa8917d",
+      "bytes": 3678
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-clean-seed42/predictions.json",
+      "sha256": "759d23a957361130d65e964b437d62164a1ec68e71810572d5cc1b2dbcec3e9c",
+      "bytes": 637466
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial50-clean-seed43/false_positives.png",
+      "sha256": "b24cf27fce5ffebead3bcaac09d6fe9f04db3ad16add039b9c1688d678612e33",
+      "bytes": 7944295
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial50-clean-seed43/metrics.json",
+      "sha256": "a0af4b3905751f1f7cdf3229b726e4c4a91d9f0f94f1d57d3d47ff218e77d9a9",
+      "bytes": 3676
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial50-clean-seed43/predictions.json",
+      "sha256": "efeb6aaae664ae1742286b44cee58e4999ff6bd4d43cb1252a7dc765bbd54f63",
+      "bytes": 531387
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-paperformula-clean-seed42/false_positives.png",
+      "sha256": "f5e534619e52bc83656ea7b1b843d0d10a06649500934d503bffacb0b3240d8d",
+      "bytes": 7025959
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-paperformula-clean-seed42/metrics.json",
+      "sha256": "d2b853240bd91d85cea881378aad2a7b08b7ec61de6a0824199c44f56ffa264c",
+      "bytes": 3681
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-paperformula-clean-seed42/predictions.json",
+      "sha256": "c75aef30b95f3cedbbac8e29f254e96303256cf889e96cb4c34bd1071b1fc596",
+      "bytes": 1183756
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-paperformula-clean-seed43/false_positives.png",
+      "sha256": "d324f0ff46bd5c14aa87588e9f47daed33832a191146cb699dbd700e6e24a883",
+      "bytes": 6882174
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-paperformula-clean-seed43/metrics.json",
+      "sha256": "8bd9004dae112fa9e59ca15538ff750cdc79609f88e85b87d86ea68e274c086f",
+      "bytes": 3657
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-paperformula-clean-seed43/predictions.json",
+      "sha256": "feff506a25d4b47ab99986f0d62353df6d0c1638243787b90dceebc6088822ef",
+      "bytes": 609727
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-m7-clean-seed43/false_positives.png",
+      "sha256": "bda15314d0e79bca3f80463e3ea4346b71e2e0f5a9ee6f7dcf45c1a06c1447cb",
+      "bytes": 6521151
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-m7-clean-seed43/metrics.json",
+      "sha256": "48512b232054dc5ce03ba30f09aa97f8b2024fd10f3fd69adacb5b7fe657c314",
+      "bytes": 3658
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-m7-clean-seed43/predictions.json",
+      "sha256": "83025900a8f0ff2f66c3f3535d9948581e7b207ae092caada244b8fe336c9edc",
+      "bytes": 947491
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-f7-clean-seed43/false_positives.png",
+      "sha256": "68bdd353890d3d5b921a20f51cecaf6b71ff41fbcd2a2e1370d153101c3f5ca2",
+      "bytes": 7477670
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-f7-clean-seed43/metrics.json",
+      "sha256": "ff9871b324aec01e52788f3e8921dfc765f08006e3a43cff1420c2e3b9c311bf",
+      "bytes": 3626
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-f7-clean-seed43/predictions.json",
+      "sha256": "61e9495ef85d9d1eed872bdfff204712f255d363dfbeb8c57b561a6db15626a9",
+      "bytes": 663951
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial50-clean-seed43/false_positives.png",
+      "sha256": "264dbf480e099c1f3c73f92883e275fc3bcec5ebda69261a1ae8396ced3b7657",
+      "bytes": 8102378
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial50-clean-seed43/metrics.json",
+      "sha256": "5b0b855f03838f672f038288300224f1513cff443ecde6cc7fd9628c6481335f",
+      "bytes": 3683
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial50-clean-seed43/predictions.json",
+      "sha256": "aaecc89d44f4cf908eb9b0ac19e5824c139e43d14b7a40578cf1faa4b6fd876f",
+      "bytes": 586344
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/b0-clean-seed43/false_positives.png",
+      "sha256": "dc84f8ac6b668a38ad8475a3a6dba930ea20976366ec787ba3678152d78b16ce",
+      "bytes": 7418532
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/b0-clean-seed43/metrics.json",
+      "sha256": "6c1fe3995706f467145f2837f700104ddbaa654992b1f5e174b3d7fef28af823",
+      "bytes": 3662
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/b0-clean-seed43/predictions.json",
+      "sha256": "a184ec3a5b59b7fc681683c2ef0420ee1c694860f2b3ee51393cad98a7ce0790",
+      "bytes": 462670
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial25-clean-seed43/false_positives.png",
+      "sha256": "b01977b8a9eecd131a735913c84e7d401e9ced15165094b0394c96b833c6987a",
+      "bytes": 6460211
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial25-clean-seed43/metrics.json",
+      "sha256": "5c9d18ca355abb3fbbef9a5ea0541feb2058d4151c4f9aefc276b9e28f7b8194",
+      "bytes": 3675
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial25-clean-seed43/predictions.json",
+      "sha256": "ea3d045a360749207aa26885b5d7ac93f1ab676fa6643fc5cbc6a38414dcd8d7",
+      "bytes": 3203426
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-m7-clean-seed42/false_positives.png",
+      "sha256": "e4efa77f06e55d4b046a87423be603758f39be3301d99a80221db425d29fbf13",
+      "bytes": 7495152
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-m7-clean-seed42/metrics.json",
+      "sha256": "51ab4152ab54c61e7cbf403c99fa3b71ec8212bc1d072f0f7e47f11fe9e8132c",
+      "bytes": 3621
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-m7-clean-seed42/predictions.json",
+      "sha256": "fad6caa5b653d5b821fa99c28d21eca405dff422daf46d8fd4a505531f42f8f9",
+      "bytes": 812824
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-full-seed42/false_positives.png",
+      "sha256": "5feff3ee86975eff0539df80786139b28acfc706b3b10547f68b5750530d655b",
+      "bytes": 7421114
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-full-seed42/metrics.json",
+      "sha256": "8139cf6bde44ee229960c77de09ca5f58e0c351f64cd4f773736a161fe2318ac",
+      "bytes": 3695
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-full-seed42/predictions.json",
+      "sha256": "e2d24d1e153907f34fb72be47734ee184740295a35c3cb45a54f34b666790403",
+      "bytes": 771716
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-clean-seed43/false_positives.png",
+      "sha256": "44109a06e4035a25ad01fd93bae3812a3884b4981a93aeb97c559f4597f5f250",
+      "bytes": 6986425
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-clean-seed43/metrics.json",
+      "sha256": "dba5bd75c86c7fd0c51b8ae9cc0b9b487ebde6671bc0d033328f72e264adda3f",
+      "bytes": 3656
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-clean-seed43/predictions.json",
+      "sha256": "72b96b080a678f796e74b6d415107b3121b4edb1945a8177eee6f3ea4d7d0297",
+      "bytes": 462675
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-clean-seed42/false_positives.png",
+      "sha256": "8029fe59ae6f892620e2cd93a9a708ba79049c4b03c99ea9f9e0a5b18b30e76f",
+      "bytes": 7417539
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-clean-seed42/metrics.json",
+      "sha256": "c7ba8c7b8cb8993cc8b71a001a027dd5b3fb167d597dae21c0ad38900d388097",
+      "bytes": 3633
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-clean-seed42/predictions.json",
+      "sha256": "2fc513c167204aeac3b9a043de3da711a0151012e985836c55b2cbb03cc3fec8",
+      "bytes": 474917
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-f7-clean-seed42/false_positives.png",
+      "sha256": "19efe283e7bbe5fec7c3fdde2d596580472df8a01be798de18b031d31b73ac3d",
+      "bytes": 6833967
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-f7-clean-seed42/metrics.json",
+      "sha256": "69f2b4a64b20c3bd7ea9442cd10ced356cb0ace4e574adc03794e8a9bb46f06d",
+      "bytes": 3680
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-f7-clean-seed42/predictions.json",
+      "sha256": "32acc6cb660339e7afb9d46716c54836ec0de4c514813304c72529f6face6494",
+      "bytes": 605066
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-full-seed43/false_positives.png",
+      "sha256": "740c728421af5f1df501c2e72d86ed7209a8ad9db01dac77d1c0e9421f70e16d",
+      "bytes": 7924748
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-full-seed43/metrics.json",
+      "sha256": "bd505faf2dfae2523dba2c7bdffd57e9a91e914b8584548ce09617756d6587b4",
+      "bytes": 3691
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-full-seed43/predictions.json",
+      "sha256": "31f09ba840585e3ec788e831cee539d90032a0f385060f765b0b2a84d6a72320",
+      "bytes": 677410
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial50-clean-seed42/false_positives.png",
+      "sha256": "10ffe804c121a3d093d7ef4d9b3565eff86f24e1029cb847f42ddb3798138a4f",
+      "bytes": 5987664
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial50-clean-seed42/metrics.json",
+      "sha256": "b1ab754ce11acda4c7877191086d6e702bbd27c8652fe6f52f101af4291a1691",
+      "bytes": 3680
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial50-clean-seed42/predictions.json",
+      "sha256": "b29956a73227c6081f0588d3e37eee3192ed895f73a2e37df15d04d75598dadd",
+      "bytes": 3857649
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial25-clean-seed42/false_positives.png",
+      "sha256": "5bd1372a71cbcee0cd9640f8a5ec792649c24406ac8f23efc3f7bafe2716b71f",
+      "bytes": 7499227
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial25-clean-seed42/metrics.json",
+      "sha256": "f08ae6a10a899cb1b956d29631134c839a208a0188a27f28cdfa49f99fe63753",
+      "bytes": 3679
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial25-clean-seed42/predictions.json",
+      "sha256": "4f809c97c3123b2ad4a24dce90909b8d4844ef3e5c01ddbf9a17da1cc0b6e685",
+      "bytes": 619031
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-direct-clean-seed42/false_positives.png",
+      "sha256": "0cd3ce97618a64a4f45d31b55df7c4d411286c2c4b2f7179916d1268bb21f388",
+      "bytes": 7226763
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-direct-clean-seed42/metrics.json",
+      "sha256": "bedc7da9c11854c8db43702127d9a9caa62bbcb754258c708470cfd79793d934",
+      "bytes": 3663
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-direct-clean-seed42/predictions.json",
+      "sha256": "70238ea1ff9b2957ff38c37f70b87123ee4e5f32a49dcacd90784006699901fb",
+      "bytes": 612503
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-f7-clean-seed43/false_positives.png",
+      "sha256": "d11a190d41c1dad7d695e0c85e3502ec205f969c2a55500fef9a5c18b38514ca",
+      "bytes": 8345473
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-f7-clean-seed43/metrics.json",
+      "sha256": "0e6602400e82fef2ab41c58ce9b5d77c98c5c5e5bf5f961dc3649d393dd349b0",
+      "bytes": 3698
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-f7-clean-seed43/predictions.json",
+      "sha256": "07f59024109be6b8ab971c007c2703e204b9426af4ef57b88adbbb5b94d8e50d",
+      "bytes": 478038
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial25-clean-seed43/false_positives.png",
+      "sha256": "a7015eb50f92f769f5e0473a66bb9a9ed24dc0a2a0e327d9294ed45c3c4d28a1",
+      "bytes": 7354411
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial25-clean-seed43/metrics.json",
+      "sha256": "a79077733ed50114180a79402c3569b08d74c3537f4e64c46ef342b855fc0a8a",
+      "bytes": 3706
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-partial25-clean-seed43/predictions.json",
+      "sha256": "603dc530a27ceb107dea2895f586cbbd78cef5c207b7efe4881376b7482d2f28",
+      "bytes": 850865
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-f7-clean-seed42/false_positives.png",
+      "sha256": "3e980a5240334c4f4a6f40d8383c5ca98fc07da08120a98324ea040f69e45dae",
+      "bytes": 6971597
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-f7-clean-seed42/metrics.json",
+      "sha256": "d192441e0f1f00a8cec3960084f2c3ff07207d76a630372cb79211150bcc24f9",
+      "bytes": 3690
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p3-lite35-f7-clean-seed42/predictions.json",
+      "sha256": "86e48b6e2e87963f8b563db1f443ae8d9cc3a74d5b51ef608f43f57fba3dcb87",
+      "bytes": 6395363
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-clean-seed43/false_positives.png",
+      "sha256": "d94cc74d5a252809ba17fe2ffeb20c5a988855b1c53e7a8ada511fe04166374d",
+      "bytes": 7875707
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-clean-seed43/metrics.json",
+      "sha256": "cbc33333727b3403eea388d3aea9b1af685bdf734f6dacd61d8463ef8bf93777",
+      "bytes": 3661
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-lite35-clean-seed43/predictions.json",
+      "sha256": "f34bf15520c25a6bc2c9e4f88ca8d199cdcc8c2d93d126c75402582a1bbf51a2",
+      "bytes": 424148
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/b0-clean-seed42/false_positives.png",
+      "sha256": "95219290a5d9f1a255263d79f8f32890ef7ee02ef9714403868309566b8413c7",
+      "bytes": 6753164
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/b0-clean-seed42/metrics.json",
+      "sha256": "425e00a41e11fa5a921617c6147c2b741ad18847a591096086c7aca5b6bfc486",
+      "bytes": 3643
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/b0-clean-seed42/predictions.json",
+      "sha256": "433f8700194aa6942be0bc28033ad78af1ddcaf77ecfd428f4b347667f9a2c7e",
+      "bytes": 2487469
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-direct-clean-seed43/false_positives.png",
+      "sha256": "4ac0679caf3527507e8a5f907aa9b211d0634145c305e9d8fc6d939d7d9bd67d",
+      "bytes": 6925574
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-direct-clean-seed43/metrics.json",
+      "sha256": "25536f9d38b867ec20d2be42f9a83bba16502bb21c3f13a0d9a0018cbbc21723",
+      "bytes": 3643
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-direct-clean-seed43/predictions.json",
+      "sha256": "6597d2fbc107431f69b244490b1dca6c1676ced0b99880acf3cba6f04f7194b5",
+      "bytes": 769439
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial25-clean-seed42/false_positives.png",
+      "sha256": "5feb342d3e122ef5bfe2a474a7af6438d49b20cc9a46c65e63b654609b2949df",
+      "bytes": 6649314
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial25-clean-seed42/metrics.json",
+      "sha256": "f67eca68a5881aec1c7c23b26cd4179829c624b6641b8a5798a32406241f5a2b",
+      "bytes": 3685
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-partial25-clean-seed42/predictions.json",
+      "sha256": "24aeb82d853ff701dda5d199675f82a8f8e80a0b98ad7644e651e104dff1a8eb",
+      "bytes": 457331
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-head-seed43/false_positives.png",
+      "sha256": "2d559a86be36bb5d312963a3e785872bb3c7e8cc4cf699ba7f44831bfcdb16f4",
+      "bytes": 5424237
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-head-seed43/metrics.json",
+      "sha256": "3b323d07ba0220764e24ef3c911fdf4077fe6820dfc3ab94f6bd11e7ff2d767c",
+      "bytes": 3773
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-head-seed43/predictions.json",
+      "sha256": "a72ac867248bfdc00de037898acce30b62e7584247d6f75c011a52e4b1ddad47",
+      "bytes": 56586922
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-head-seed42/false_positives.png",
+      "sha256": "6fb1a0743ca3a54fdb8d216e975e9cc030ec87545dd68dc2afb3004bb788debc",
+      "bytes": 2706390
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-head-seed42/metrics.json",
+      "sha256": "f36e54975b222c01a5da460df2a42de1531d16ee0acf59a8a2241557d6f541b6",
+      "bytes": 3585
+    },
+    {
+      "path": "yolo_masf/artifacts/clean-bbt5-ablation/evaluation/val/p2-control-clean-head-seed42/predictions.json",
+      "sha256": "ec4464554e14b908012ee849d167e08e544da6dc9a539775783999b1b1f94240",
+      "bytes": 55350605
+    },
+    {
+      "path": "yolo_masf/configs/b0-reference.yaml",
+      "sha256": "133bea9f30f7a54956621a934d2cbbbaae42ceeb90308f30bf5aceeb6e4c6818",
+      "bytes": 392
+    },
+    {
+      "path": "yolo_masf/configs/m7-priority.yaml",
+      "sha256": "34a6d3026f1cd7525b33f736d8f6d74e5b25a955e6acd83deff133ed36cbdb95",
+      "bytes": 110
+    },
+    {
+      "path": "yolo_masf/configs/README.md",
+      "sha256": "06c9a1623150ad3115ec41ff9a7721e43e79c1022d516a81341322f2b8a33c4c",
+      "bytes": 840
+    },
+    {
+      "path": "yolo_masf/configs/static-phase1.yaml",
+      "sha256": "c62ae5f4f6d2eb3c2837989fd01c9c8e1567a7a0401f612744dda242bafecbed",
+      "bytes": 1409
+    },
+    {
+      "path": "yolo_masf/configs/models/yolo11m-p2-slots.yaml",
+      "sha256": "82aeef9cc50c2e263eaddd95cc471427259f8f97ec779fade35d577049b7887c",
+      "bytes": 1331
+    },
+    {
+      "path": "yolo_masf/configs/models/yolo11m-p2-slots-b1r.yaml",
+      "sha256": "87622e59d4855dec6c2c4fc082c20a3637f821aa8d0de4c4467edcd1b85976be",
+      "bytes": 1347
+    },
+    {
+      "path": "yolo_masf/configs/retest/b1r_p2_p3_retest.yaml",
+      "sha256": "542558519588dd645e3d186ba14cfce27038820b0d0a52b9facbf0c6facb6ff1",
+      "bytes": 1204
+    },
+    {
+      "path": "yolo_masf/configs/retest/README.md",
+      "sha256": "669a200c8c5aa83a069818fdd4a480ed8c4ccf53e6e338912119a314707dd17e",
+      "bytes": 571
+    },
+    {
+      "path": "yolo_masf/configs/clean/FEASIBILITY.json",
+      "sha256": "07e8c414dcbe2025fdc2c17eb6fbb4b4544e58b84ccbab5522e390459b00590a",
+      "bytes": 14597
+    },
+    {
+      "path": "yolo_masf/configs/clean/clean_ablation.yaml",
+      "sha256": "ea7d1c2bac4eafecf7b31e75554e49e0a2789706d607e51dbaf5bc328fbb3988",
+      "bytes": 1325
+    },
+    {
+      "path": "yolo_masf/configs/clean/README.md",
+      "sha256": "a1526de6116d7032566ea0ef50d7535dbb7748fd94984d618266417137a1a04f",
+      "bytes": 1557
+    },
+    {
+      "path": "yolo_masf/configs/retest/requests/b0_fair.json",
+      "sha256": "6601d029367c839901355399e76611786d60c72b4c20aa1473ef473b2af95190",
+      "bytes": 362
+    },
+    {
+      "path": "yolo_masf/configs/retest/requests/README.md",
+      "sha256": "24fda970db2a3bf71a125c190bbba50a64eef7ccf41814971030decb7be4ff32",
+      "bytes": 816
+    },
+    {
+      "path": "yolo_masf/masf_yolo/contracts.py",
+      "sha256": "4b30c35e4c5c9cb92763873a7792dff10782d5802c10898c88c089a00c1a5421",
+      "bytes": 10546
+    },
+    {
+      "path": "yolo_masf/masf_yolo/training/worker.py",
+      "sha256": "063e5f614c1c54634fede23af2ad6de4d2500edd30b250f536eee8614e1081d3",
+      "bytes": 8079
+    },
+    {
+      "path": "yolo_masf/masf_yolo/training/resume.py",
+      "sha256": "a525a5efae0b1eb71919131e2c1417ad9d2e0c3a77d2c4148236dc8ba2b21eeb",
+      "bytes": 839
+    },
+    {
+      "path": "yolo_masf/masf_yolo/training/__init__.py",
+      "sha256": "4de929d40928edc69c793a80c7608c7ed716babbbe67fa8468a4647e9950103e",
+      "bytes": 188
+    },
+    {
+      "path": "yolo_masf/masf_yolo/training/runner.py",
+      "sha256": "a04b614c22eb8b66861d4c6b50017473bcf7fd472c20772d01429c2588f30017",
+      "bytes": 2779
+    },
+    {
+      "path": "yolo_masf/masf_yolo/training/profiles.py",
+      "sha256": "00908da6edf8b24d58487d174119c1d9d266e50e51bfd22df5aa71efe287020b",
+      "bytes": 1942
+    },
+    {
+      "path": "yolo_masf/masf_yolo/training/preflight.py",
+      "sha256": "acb40d9e84c5953b2b80a5535083cda9da35aeb786e540d1fc1dda28589300db",
+      "bytes": 2909
+    },
+    {
+      "path": "yolo_masf/masf_yolo/training/README.md",
+      "sha256": "1ae918d765af64918d75bc4fb17374aaaa6d62e74669a79e798b0f9a90239344",
+      "bytes": 354
+    },
+    {
+      "path": "yolo_masf/masf_yolo/training/completion.py",
+      "sha256": "45b246bf6193a4c2d75797857ce0e1393019f9c29dfc79cd85bfddcea6c1077f",
+      "bytes": 8513
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/__init__.py",
+      "sha256": "d68ea084f858c4dd3e0baf1aafd0cd552b76ea52171408bb4e13dfe51671a0f1",
+      "bytes": 122
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/selective.py",
+      "sha256": "83d4174976c28c1280be4eba8f982587922ddc48ce70f6d6f7fe1e3166b3d1a4",
+      "bytes": 7858
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/transfer.py",
+      "sha256": "cada875d5adc1c8c8b0562384b03b0c588a1fd9fbb57a268b06a70c4e8a6e1ed",
+      "bytes": 9083
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/builder.py",
+      "sha256": "ac370bb7beb41b8b4a3b6a4728149025af4c30a9e8964f24b411e33ec2bbd912",
+      "bytes": 10620
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/mfam.py",
+      "sha256": "bdd520a05c7131f4c375a0bf078eadad61eaa6cb81d589c2afa5e9e1e6f7ae80",
+      "bytes": 5904
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/README.md",
+      "sha256": "780d3ad6bc673962115ea91fb68f85425ded1360815eda648e158290ddeee259",
+      "bytes": 843
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/__pycache__/selective.cpython-312.pyc",
+      "sha256": "b92e61087eef96e2bbf125ff695d49397e1a9703d37b355b39d8a058ee3f8808",
+      "bytes": 12447
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/__pycache__/transfer.cpython-312.pyc",
+      "sha256": "49fd65f324466c787884b2f2d164223a75242c24eede63cf0969b30b77f90626",
+      "bytes": 11974
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/__pycache__/builder.cpython-312.pyc",
+      "sha256": "9303b1fb96dcac51a1379145b378ead05fe33481ec805d006b3ae67026d3de37",
+      "bytes": 14721
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/__pycache__/__init__.cpython-312.pyc",
+      "sha256": "1ea38ee5c7ee316bac5a29c1d173560f22a00e00f1f4199c5714e989f8a0b844",
+      "bytes": 307
+    },
+    {
+      "path": "yolo_masf/masf_yolo/models/__pycache__/mfam.cpython-312.pyc",
+      "sha256": "ed4fa7ba51c10b828956bcda74e3352ab3c0169449cf5361b9370310474ffdf6",
+      "bytes": 8919
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/worker.py",
+      "sha256": "7875f5034605155ff6f65c39969942cc1d3dad92a7459595c921fc6013ab5cf5",
+      "bytes": 5433
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/contracts.py",
+      "sha256": "ece899f5c546ef46570e3081471c9bcfa18a18bc318135732917a174f2b64b7d",
+      "bytes": 5403
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/__init__.py",
+      "sha256": "6a93f1df30e0cd4fb7226e1f17fd611613c5d20ecf5f09a1860b245d6c797cba",
+      "bytes": 293
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/profile_all.py",
+      "sha256": "f6fac15e6a4aee6a3a6333c9359d57e458d925e3c62d0889a202f889a693a632",
+      "bytes": 1135
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/queue.py",
+      "sha256": "d071e651bf4021982fefd556b8a23c2e4ca791c05755043b59b6b8ca66b42f16",
+      "bytes": 4978
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/builder.py",
+      "sha256": "f7a565efd505a3402f78c5a0aeb094bcaf46612d2026f7924b236b7f45953c81",
+      "bytes": 1026
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/profiles.py",
+      "sha256": "5260e268257c0b869d726ac21e1863854a2f0c0722ceed0ac3f1a544f604136d",
+      "bytes": 2537
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/audit.py",
+      "sha256": "f3d7dd672729d92347dd4dc2ea807f8d5e0461742d254f994a8ddff1cab42369",
+      "bytes": 1196
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/report.py",
+      "sha256": "f32c05d6eca84c4a7e79408bf423e2f33caa6e48a0184c4dffc8f9e9edb1e747",
+      "bytes": 4744
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/README.md",
+      "sha256": "4b039abd948bff7db5681cc3833308df10a2bae54e974b8899eac48715f891c9",
+      "bytes": 744
+    },
+    {
+      "path": "yolo_masf/masf_yolo/retest/postprocess.py",
+      "sha256": "46fffb12d405dda90636cdb7ba2c35ca2bfea4f1f1a5de84fe7489936f4dc1c3",
+      "bytes": 2579
+    },
+    {
+      "path": "yolo_masf/masf_yolo/data/__init__.py",
+      "sha256": "05decd351b83aeed0d9e0e78ad8a839ff2fb8bb6c1755ac8f60ced87cd960b7e",
+      "bytes": 152
+    },
+    {
+      "path": "yolo_masf/masf_yolo/data/labels.py",
+      "sha256": "8e5e8dfc85b845240e0d49a5ed90569b7c42d4585fd714cac8e904b897367b19",
+      "bytes": 1610
+    },
+    {
+      "path": "yolo_masf/masf_yolo/data/audit.py",
+      "sha256": "65825eb7fb2a38c67b60e850fd717aac10334d0f9224441fbee7c24451ade24b",
+      "bytes": 10555
+    },
+    {
+      "path": "yolo_masf/masf_yolo/data/grouping.py",
+      "sha256": "d799464cfb9b7f0ce61a8a68e704e4e3ccc02dc005c191bc4ccc7602cc159e6b",
+      "bytes": 2711
+    },
+    {
+      "path": "yolo_masf/masf_yolo/data/export.py",
+      "sha256": "1b43d4ef80dccb79ed9bb93c07345dbc59c7bf0c0f03936872f5c792deb9cd1f",
+      "bytes": 1603
+    },
+    {
+      "path": "yolo_masf/masf_yolo/data/README.md",
+      "sha256": "85a23536235659bbad38b9a0af3ee8994f663d93afab4697294d18c6e8d0302a",
+      "bytes": 507
+    },
+    {
+      "path": "yolo_masf/masf_yolo/data/split.py",
+      "sha256": "2a5c68d584628b8bfb6f1f9b3cfad4b656554a19a53e1dabdc7be4f6867a53e9",
+      "bytes": 4512
+    },
+    {
+      "path": "yolo_masf/masf_yolo/__pycache__/cli.cpython-312.pyc",
+      "sha256": "8d8ea7ba78c3cd4f9886e13ba8e3c6ba2678f99d46e31c93a1a34c33314e0702",
+      "bytes": 6584
+    },
+    {
+      "path": "yolo_masf/masf_yolo/__pycache__/__init__.cpython-312.pyc",
+      "sha256": "5f2b716f39d7bdbaad11f8f2ede1a1fd9dac8b0d4d030a3bc6165f8bed6bac81",
+      "bytes": 301
+    },
+    {
+      "path": "yolo_masf/masf_yolo/__pycache__/contracts.cpython-312.pyc",
+      "sha256": "f0ddc7f75efdbb2066b4b2a2f4129c81fd674a85f548ec06577841ca9537f7df",
+      "bytes": 13614
+    },
+    {
+      "path": "yolo_masf/masf_yolo/__pycache__/variants.cpython-312.pyc",
+      "sha256": "549c2172f915d4a7696acb21b267c7a11f357b8151716c7f0cc791b661f4e628",
+      "bytes": 5644
+    },
+    {
+      "path": "yolo_masf/masf_yolo/cleanup.py",
+      "sha256": "8f39d7d089b7c71897924111c2fece8014c8c1d499e7cf8468bca30c2041b12a",
+      "bytes": 9558
+    },
+    {
+      "path": "yolo_masf/masf_yolo/runtime.py",
+      "sha256": "90bf2315e0f38e45d42d210885ae27c5c2ccd3783c079362f708fc662beef65e",
+      "bytes": 11511
+    },
+    {
+      "path": "yolo_masf/masf_yolo/workflow.py",
+      "sha256": "71d61bfb55eee4706abcfd2bb1aab5fc864cbf048548ea5f486c0b0bd6579a23",
+      "bytes": 4669
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/__init__.py",
+      "sha256": "f4cef3ffbeca90eb5108710b17b780031feaaaf4396f1546c23fa1e7141f21aa",
+      "bytes": 176
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/runner.py",
+      "sha256": "3646d27329dc17020946264c028e97dbdf634bf31d44085d777094337499daa9",
+      "bytes": 6385
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/exporting.py",
+      "sha256": "c048cb53aa2cd4c29e9bf6b38e613468d5289a197e8a4c0469e66976bc49c40a",
+      "bytes": 3530
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/galleries.py",
+      "sha256": "4414fc50494c5b1e31d73c8d96f94a26f95e89687e6a6ea3ca31800faed288ff",
+      "bytes": 3950
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/reference.py",
+      "sha256": "a61ce3cc63e6d44a5b79a8ca8f8253a9b1e9b651b34e6924e1e2fd192058420b",
+      "bytes": 5563
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/metrics.py",
+      "sha256": "1631c0d92b17a67b365e89729a7846261e07da55769587472c5b2b22ce83f104",
+      "bytes": 6411
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/profiling.py",
+      "sha256": "c91d98e6b6375881fa6db33b87f2239ca73c3a4911164b07eff433c4c5c9c013",
+      "bytes": 4656
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/selection.py",
+      "sha256": "6dbc9bd28f2af13a32ca96b8c959553faaacc7b7fc05c2ba3ca5c4ff0a134523",
+      "bytes": 3731
+    },
+    {
+      "path": "yolo_masf/masf_yolo/evaluation/README.md",
+      "sha256": "d7f5ee1e330c61c88c79be34db2cd2be48905e6c19413324a5cb16fc424858e3",
+      "bytes": 341
+    },
+    {
+      "path": "yolo_masf/masf_yolo/variants.py",
+      "sha256": "21b37c4efb19177ea9322c2c79a350c919a425ad675c91f8112105cbded5a456",
+      "bytes": 3840
+    },
+    {
+      "path": "yolo_masf/masf_yolo/reporting.py",
+      "sha256": "d56b638d5c55e35e50b6b7f292f066559e029004ac1dac44871a766e2724ffd0",
+      "bytes": 7078
+    },
+    {
+      "path": "yolo_masf/masf_yolo/pipeline.py",
+      "sha256": "f61a4de69310ce112561606e75e1391e3bd729796c8f7b48e0eb529d6a9f7d71",
+      "bytes": 33502
+    },
+    {
+      "path": "yolo_masf/masf_yolo/README.md",
+      "sha256": "6f0578f16668a01f68043ef2f57b76f0730ac2a9e301fd4a185e54f68a4abcb8",
+      "bytes": 2017
+    },
+    {
+      "path": "yolo_masf/masf_yolo/artifacts/checkpoints.py",
+      "sha256": "3cf3fc3b4fa6ac64b2a7f19203a048a513fc6480860e324847ec6b3a4cde5241",
+      "bytes": 5297
+    },
+    {
+      "path": "yolo_masf/masf_yolo/artifacts/__init__.py",
+      "sha256": "d2457413ff912788c1fba34dc287ac6adf164787520a7ed83c3ff9d2baabb86b",
+      "bytes": 201
+    },
+    {
+      "path": "yolo_masf/masf_yolo/artifacts/finalize.py",
+      "sha256": "4a524ccde2aa72f7b514c1a31c05951593ef12ccd53b4f9ca25b02cb721dff0a",
+      "bytes": 3050
+    },
+    {
+      "path": "yolo_masf/masf_yolo/artifacts/strict_reload.py",
+      "sha256": "9215535c2578ef60a1baec4285f9241a5fa0387c575cc0bb007b04ee178c6446",
+      "bytes": 2299
+    },
+    {
+      "path": "yolo_masf/masf_yolo/artifacts/io.py",
+      "sha256": "54c9b369f44526b4daa91a5f5a7e3012a5362ad4b58ba5d844c836a1ff2905f5",
+      "bytes": 2190
+    },
+    {
+      "path": "yolo_masf/masf_yolo/artifacts/state.py",
+      "sha256": "5d50166cf879d6fff15f4b8aebf50091603891603215d80921e449c694316f68",
+      "bytes": 479
+    },
+    {
+      "path": "yolo_masf/masf_yolo/artifacts/README.md",
+      "sha256": "1ecdc96f52b55ace73e2390da7440812f1f41807ad0c80c8e69cbec44ea6ee4e",
+      "bytes": 325
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/worker.py",
+      "sha256": "35e95c2e9e26fc037096e1a20313eaf9431eed19c850ea4da359663b416f5520",
+      "bytes": 3738
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/contracts.py",
+      "sha256": "7138a52e8f3ee685f2e6f27b5999cb4aae9600f2089b979ba40b53b7d68d4823",
+      "bytes": 6426
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/acceptance.py",
+      "sha256": "b4d8f3dbd8453b21892595fb8caf036b665eed4b7e9ae09e477554c2ac438ff3",
+      "bytes": 2768
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/data_view.py",
+      "sha256": "b8bef14037df0d76b46fc5e9fde527152c2d8b693c29d30285a7e5f98f742e41",
+      "bytes": 1825
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/__init__.py",
+      "sha256": "922b2bfc4b728742820c5c849a88c3fff85b089aff6cf1bd25c89fea1d0d39dd",
+      "bytes": 270
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/plan.py",
+      "sha256": "07b21a0320fcf08dd9805c754f986d4874c8ada49038177056a58b270ecbc2da",
+      "bytes": 888
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/queue.py",
+      "sha256": "cfb5c125073625585b472324fe4d86e88a5e8f391d2a5edaa4b6c47d16f1fae8",
+      "bytes": 4604
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/builder.py",
+      "sha256": "ba4d8080816e3f1432d946e4661d2042e0bbefc41f2d9f8cf990472ee8a3ca09",
+      "bytes": 1460
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/inspect.py",
+      "sha256": "8d07ef37df59cec37ff6f7301cda6a0e4b5834a44b613be951ed64211b7335d4",
+      "bytes": 3745
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/profiles.py",
+      "sha256": "441fed8132290a91fce1505eae58eef5411e2b4e4756b9b8b124d642015174d3",
+      "bytes": 1969
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/README.md",
+      "sha256": "79ffa538aaa9c820d75c5aef270b705d26ea8841357a077cb9221f4264ed960a",
+      "bytes": 1575
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/postprocess.py",
+      "sha256": "5009ab1d2d66705bc69d649812c31cc844ed1616da0f01c62004720d0c853db7",
+      "bytes": 40414
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/__pycache__/builder.cpython-312.pyc",
+      "sha256": "4706a87b5fa46ab0fee0bb5db82aa49ff51c667ef9522d611b5e74aa3a0da83c",
+      "bytes": 1861
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/__pycache__/__init__.cpython-312.pyc",
+      "sha256": "a65ff0b5114a85cd3009858e611440afc23cc3f7c568d9d6cdce13bc702dbb16",
+      "bytes": 424
+    },
+    {
+      "path": "yolo_masf/masf_yolo/clean/__pycache__/contracts.cpython-312.pyc",
+      "sha256": "995b21fd15fdc25b346a12d38e2a076d4ceb1eee0f58f8bc999713d4733db3c7",
+      "bytes": 8568
+    },
+    {
+      "path": "yolo_masf/tests/test_runtime.py",
+      "sha256": "f4cd9e82752c20a348ccbb255eafe6f83d23e042263d09ea94599bd0c3a29ffa",
+      "bytes": 2487
+    },
+    {
+      "path": "yolo_masf/tests/test_workflow.py",
+      "sha256": "51d54a75e37867bc246a4d86d2f89e5544d9728039dbbc8ccbb328dce1b2c8b6",
+      "bytes": 4756
+    },
+    {
+      "path": "yolo_masf/tests/test_reporting.py",
+      "sha256": "be5c33f7e3bec64229f2e635b8e972ffff9d6f04a9fbc783486105f7b84e4e0a",
+      "bytes": 4934
+    },
+    {
+      "path": "yolo_masf/tests/test_cli.py",
+      "sha256": "474563049f888bc13a4e28a6e470b1de32bca1b5b87cf1f01171673baf0e6c6c",
+      "bytes": 3242
+    },
+    {
+      "path": "yolo_masf/tests/test_cleanup.py",
+      "sha256": "009f62f2aa55ce3e2cc8c527799e3f20643c797d23984a1df7df26e2025a18cd",
+      "bytes": 7029
+    },
+    {
+      "path": "yolo_masf/tests/test_contracts.py",
+      "sha256": "a262ab01f3e2019cd0cd6ae7237e6e71797da1cf42f5b6c73c6ae53804c22126",
+      "bytes": 2413
+    },
+    {
+      "path": "yolo_masf/tests/test_pipeline.py",
+      "sha256": "1c0e179375541efd708c2e8bb5ee79c234a2bfde3129a94e015ef449625b1d30",
+      "bytes": 10688
+    },
+    {
+      "path": "yolo_masf/tests/test_variants.py",
+      "sha256": "7e988a50dc54d5570cb283a7ec6625ee7de2583c2ad8ca48874c44ee21f9b80a",
+      "bytes": 4038
+    },
+    {
+      "path": "yolo_masf/tests/README.md",
+      "sha256": "c2831914feb11907033028f87211fd9298d7b873a77cf5b68c3ad08a1877a7d2",
+      "bytes": 307
+    },
+    {
+      "path": "yolo_masf/tests/training/test_profiles.py",
+      "sha256": "bc4a0f13cde0cac5d3ca911fdb3f490c95513b1ada7f6138f9d9d1a782ea88fc",
+      "bytes": 2654
+    },
+    {
+      "path": "yolo_masf/tests/training/test_runner.py",
+      "sha256": "7fc95cd173e5deccacaa29e4f00659374eb19bb04096d08390d7acd92ae18efe",
+      "bytes": 2163
+    },
+    {
+      "path": "yolo_masf/tests/training/__init__.py",
+      "sha256": "3361b0dae4e5c68669c16a3aefff5068610ed282079c8f598b67087a7b76bb3f",
+      "bytes": 29
+    },
+    {
+      "path": "yolo_masf/tests/training/test_resume.py",
+      "sha256": "fd2447394e8d2b4b6ec222f7df41e42903a64f0b1214bd8bfa0adb4bbccf8684",
+      "bytes": 1382
+    },
+    {
+      "path": "yolo_masf/tests/training/test_worker.py",
+      "sha256": "551ef46f6da37d341ae11c055956c60ce4435e5534624d129ac0622f395006e3",
+      "bytes": 6644
+    },
+    {
+      "path": "yolo_masf/tests/training/test_preflight.py",
+      "sha256": "7cd9ecb20568c212010ae9242ccc8537178266148939bc252ebe3a01dffb61ab",
+      "bytes": 2013
+    },
+    {
+      "path": "yolo_masf/tests/training/test_completion.py",
+      "sha256": "d72a0ec1b213cbafe411d08e89db90478783e1f2794d743eeb15e8c1563c0860",
+      "bytes": 5611
+    },
+    {
+      "path": "yolo_masf/tests/models/test_builder.py",
+      "sha256": "f89135b20fee3dfc8524c461dd8b1153602684ab4c3de1f55b4e67db0841b724",
+      "bytes": 3623
+    },
+    {
+      "path": "yolo_masf/tests/models/test_mfam.py",
+      "sha256": "ad2ee0a21b06772dec4e7e2b5858c0573691cce39b5320f752722cb69160a2db",
+      "bytes": 4121
+    },
+    {
+      "path": "yolo_masf/tests/models/test_transfer.py",
+      "sha256": "cd98b15f92ab5430aedb6d0fb6f712497efce7ca75377f633d13571eae3e15e8",
+      "bytes": 7439
+    },
+    {
+      "path": "yolo_masf/tests/models/test_selective.py",
+      "sha256": "7d584af9022ff4bf2b0dc9106c505a81f7e01e900dd9645d556883b08a3f383f",
+      "bytes": 8537
+    },
+    {
+      "path": "yolo_masf/tests/retest/__init__.py",
+      "sha256": "79de0e7e705bf252f91d157e0c54de955688bc25a887f65ed861f627727f3a4f",
+      "bytes": 48
+    },
+    {
+      "path": "yolo_masf/tests/retest/test_builder.py",
+      "sha256": "700cbd2cc6cdbbedf60fc1a7e4f3b2105296ae3d8d7840a3aa114a4c8a6e1c03",
+      "bytes": 1455
+    },
+    {
+      "path": "yolo_masf/tests/retest/test_worker.py",
+      "sha256": "07e5bf060fe49fb7c3746511ebb699e1d12fb49f55a4cf316e8e17a8076cedc1",
+      "bytes": 2062
+    },
+    {
+      "path": "yolo_masf/tests/retest/test_profile_all.py",
+      "sha256": "bd731b85641d66feb14895efc11dbc44f6340619157f7f210ad3c5c8fb336341",
+      "bytes": 133
+    },
+    {
+      "path": "yolo_masf/tests/retest/test_contracts.py",
+      "sha256": "99c9bebd51f5142a34b7d152a82a3af1cd57b7a4062ec8e96023321271c68a2b",
+      "bytes": 2633
+    },
+    {
+      "path": "yolo_masf/tests/retest/test_audit.py",
+      "sha256": "30fffa163fb0814625e92d574298418b2914dbf001b0b02e2c157fbbce0c8869",
+      "bytes": 333
+    },
+    {
+      "path": "yolo_masf/tests/retest/test_report.py",
+      "sha256": "ccf26c51f5059f6dccdbc137d71efc49e2fcd45318dfd236fa97d29944978c6a",
+      "bytes": 433
+    },
+    {
+      "path": "yolo_masf/tests/retest/test_queue.py",
+      "sha256": "ed8a00e902f2ea23e0f699d0148498193a122da3dee8dbea60f90d21e73f193c",
+      "bytes": 236
+    },
+    {
+      "path": "yolo_masf/tests/retest/README.md",
+      "sha256": "247b71723b45730340acd1392ba712db46226dae430f8bef03640278a0443b1d",
+      "bytes": 196
+    },
+    {
+      "path": "yolo_masf/tests/retest/test_postprocess.py",
+      "sha256": "8822310af17dea25af078c1b8c348535c4a171e0f7b425c4a67d1ef04e2ed1ca",
+      "bytes": 295
+    },
+    {
+      "path": "yolo_masf/tests/data/test_audit.py",
+      "sha256": "615e63c3260c5ce1be6f89b4802abc701437eec3aa22fae4a08268a0569a7f46",
+      "bytes": 3482
+    },
+    {
+      "path": "yolo_masf/tests/data/test_labels.py",
+      "sha256": "2aa2c155d096a18764e099ee19465f58eab80861222890dfce804765f9338751",
+      "bytes": 920
+    },
+    {
+      "path": "yolo_masf/tests/data/test_export.py",
+      "sha256": "059a952b7976bd0807fbf2514ed7669cb5973defdbc2d1304db9de6c75cb0d20",
+      "bytes": 1055
+    },
+    {
+      "path": "yolo_masf/tests/data/test_grouping.py",
+      "sha256": "de8f53ad4d7dc4a130b8bac2f9737ef91e12108fb2426e3f91b6c23c241b68d8",
+      "bytes": 1244
+    },
+    {
+      "path": "yolo_masf/tests/data/test_split.py",
+      "sha256": "6b8d833d03b284c3fc6ff9f63806edca6ccb6d26dca38e9fdff47c2dfd8d0415",
+      "bytes": 1749
+    },
+    {
+      "path": "yolo_masf/tests/evaluation/test_reference.py",
+      "sha256": "99a27210687910c0635d7e3c59e11de0d3f59e43ff225429177e43615e6435b9",
+      "bytes": 2373
+    },
+    {
+      "path": "yolo_masf/tests/evaluation/test_runner.py",
+      "sha256": "98aecd5e12dd325a09672593b5fb82f660fdc936834663f580cef344fd95f932",
+      "bytes": 2559
+    },
+    {
+      "path": "yolo_masf/tests/evaluation/test_selection.py",
+      "sha256": "1f5f3e61a557cf337e711525d114cec5480efbdc7e185611838645b384bec75f",
+      "bytes": 2386
+    },
+    {
+      "path": "yolo_masf/tests/evaluation/__init__.py",
+      "sha256": "940c9e8200503158d1889a6437f0117921ed9eb75d170fa07f8f2224ab311881",
+      "bytes": 31
+    },
+    {
+      "path": "yolo_masf/tests/evaluation/test_metrics.py",
+      "sha256": "8ff000f1323a837fd25a0d33c6f951bfbd52c15a858445374f8bb3a0e6bff043",
+      "bytes": 8361
+    },
+    {
+      "path": "yolo_masf/tests/evaluation/test_galleries.py",
+      "sha256": "b18e23e325bd8597c911fae95a8db936fa4f010925dcf25d18df38d39fa9da1f",
+      "bytes": 879
+    },
+    {
+      "path": "yolo_masf/tests/evaluation/test_profiling.py",
+      "sha256": "55cff19d9e82d5f50b4432a2d7273e3d431567bf9f759522a1bfbed217a5fbfb",
+      "bytes": 1408
+    },
+    {
+      "path": "yolo_masf/tests/artifacts/test_checkpoints.py",
+      "sha256": "ea0a61a90faecabfcab04324fb80f8361060f53989e8f49be6b226dda9db5e84",
+      "bytes": 4036
+    },
+    {
+      "path": "yolo_masf/tests/artifacts/test_finalize.py",
+      "sha256": "7db1d7f9d6b79f09c29f36b2dab9df9ec224d81806876fa27269bd60113da589",
+      "bytes": 2871
+    },
+    {
+      "path": "yolo_masf/tests/artifacts/test_state.py",
+      "sha256": "14f1b3d17fb0b1f18f68c59746e386279dae1eb2e0a2e97d9879898eca162532",
+      "bytes": 1233
+    },
+    {
+      "path": "yolo_masf/tests/artifacts/test_io.py",
+      "sha256": "fe79175630f3af4fc9e5a822401b5e54bb3bb0426c0bf259dced687eee0351e1",
+      "bytes": 908
+    },
+    {
+      "path": "yolo_masf/tests/clean/test_clean_study.py",
+      "sha256": "7a8b8bf152feb7bef18979ec751d547dff0a6af379f450f5c23c8f1b7c75638f",
+      "bytes": 4619
+    },
+    {
+      "path": "yolo_masf/yolo26n.pt",
+      "sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+      "bytes": 5544453
+    },
+    {
+      "path": "yolo_masf/codex_plan.md",
+      "sha256": "6acc9d9534b93788e1ee92a793199db295d5ad3d71dca2ef6c5017d5467add6c",
+      "bytes": 5667
+    },
+    {
+      "path": "yolo_masf/GPU_TEST_PLAN.md",
+      "sha256": "abc31054fddc55b7c748c8d7b906c5c35dafce46b139063baa248ce9e6600b86",
+      "bytes": 950
+    },
+    {
+      "path": "yolo_masf/OPERATIONS.md",
+      "sha256": "d3d9144473c433bfdfcb942100f8eaadf90c5d6f2dba081f15f46746aacf1aca",
+      "bytes": 1169
+    },
+    {
+      "path": "yolo_masf/MFAM_plan.md",
+      "sha256": "b1ea434f2542f18aa1867316f449b4324df127637ce1461e356e76352e448ce6",
+      "bytes": 22798
+    },
+    {
+      "path": "yolo_masf/EXPERIMENT_CATALOG.md",
+      "sha256": "8dc7df64c5470651f2b39b901aab8298e4f687ccab245e887cb45c74e9cbfb45",
+      "bytes": 587
+    }
+  ],
+  "removed_bytes": 3069225754,
+  "preserved": [
+    "bbt5-detect-baseline entire protected source",
+    "artifacts/locked-bbt5-dataset lineage",
+    "clean_bbt5_study small reports and extracted evidence",
+    "field_check unique paper, script and results",
+    "Stage4 and immutable data/runtime views"
+  ],
+  "cross_project_symlink_scan": "no code/weight symlinks to removed run; image/label datasets excluded"
+}

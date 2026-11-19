@@ -1,0 +1,120 @@
+{
+  "candidate": "D2",
+  "formal": true,
+  "AP50_95": 0.514128962752982,
+  "AP50": 0.6874915878842516,
+  "internal_AP50_95": 0.5069801249971806,
+  "checkpoint": "/home/uxin/yolo/yolo_attention/artifacts/stage3/formal-20261019-v1/D2/evaluated.pt",
+  "sha256": "39d9a610f94c10b6f5363c1f0f73055266dba2784b00cae7ff49fa0acc4d3f9d",
+  "checkpoint_bytes": 88095115,
+  "parameters": 21897272,
+  "peak_allocated_bytes": 1289900032,
+  "reason": "完整 COCO val5000；無加訓",
+  "normalization": {
+    "exp_backend": "integer-pwl-10-20",
+    "reciprocal_backend": "pwl16",
+    "pwl_range": [
+      -10,
+      0
+    ],
+    "pwl_segments": 20,
+    "buffers_sha256": {
+      "exp.endpoint_table": "82bd6085e1d2fa9152d24e92ae5d5d30ac3c8373b708c1f2df3bd1703e0323fb",
+      "reciprocal.table": "b3955823cad4fd33999db8d2167b6fc84425f245cf43f4d49addbda310714c07",
+      "proxy.knots": "e64f656006db71cd4742a60ff6961daf26106dacfb29cda1a319bd0d02fd93de",
+      "proxy.values": "964709316d51119bb2ec6ff8340c65f5954ef7f4b73bd125ab767daabf740fa7"
+    },
+    "max_tokens": 1024,
+    "probability_format": "UQ1.24",
+    "remaining_float": [
+      "QKV",
+      "PV",
+      "projection",
+      "Conv",
+      "SiLU"
+    ],
+    "complete_fixed_normalization": true,
+    "backward_proxy": "Float-PWL[-10,0]/20 with exact denominator",
+    "reciprocal": {
+      "backend": "pwl16",
+      "mantissa_format": "unsigned-Q1.16",
+      "exponent": "integer-leading-one; reciprocal=code*2^(-16-e)",
+      "denominator_bits": 26,
+      "denominator_range": [
+        1,
+        33554432
+      ],
+      "normalization_mantissa": "Q1.16 truncated after integer normalization",
+      "probability_format": "unsigned-Q1.24",
+      "max_tokens": 1024,
+      "table": [
+        65536,
+        61681,
+        58254,
+        55188,
+        52429,
+        49932,
+        47663,
+        45590,
+        43691,
+        41943,
+        40330,
+        38836,
+        37449,
+        36158,
+        34953,
+        33825,
+        32768
+      ],
+      "table_storage_bits": 289,
+      "slope_format": "signed17/65536",
+      "newton_steps": 0,
+      "intermediate_container": "int64, full products (up to 34 bits)",
+      "rounding": "nearest-ties-positive-infinity",
+      "output_saturation": [
+        0,
+        16777216
+      ],
+      "power_of_two_denominator": "exact mantissa 65536",
+      "final_renormalization": false
+    },
+    "exp": {
+      "input": "S1 Q10 -> row-max -> Q8.8 (round ties positive infinity)",
+      "endpoints": [
+        1,
+        2,
+        4,
+        7,
+        11,
+        18,
+        30,
+        49,
+        81,
+        134,
+        221,
+        364,
+        600,
+        990,
+        1631,
+        2690,
+        4435,
+        7312,
+        12055,
+        19875,
+        32768
+      ],
+      "format": "UQ1.15",
+      "interpolation": "full integer product then floor >>7",
+      "denominator": "sum UQ1.15, uint26",
+      "tail": "clamp to -10",
+      "exp_zero_code": 32768
+    }
+  },
+  "person_AP50": 0.8650029656806053,
+  "person_AP50_95": 0.6432292393866329,
+  "ball_AP50": 0.7161719719837863,
+  "ball_AP50_95": 0.5126704553442671,
+  "bat_AP50": 0.721319581758622,
+  "bat_AP50_95": 0.4857376555690275,
+  "reciprocal_table_bytes": 37
+}

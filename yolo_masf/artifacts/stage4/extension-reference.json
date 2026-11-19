@@ -1,0 +1,63 @@
+{
+  "schema": "masf-stage4-extension-v1",
+  "reviewed_before_implementation": true,
+  "date": "2026-10-19T21:50:43.136463+08:00",
+  "authorization": "訓練的時間可以拉長，也可以嘗試一些不同的方法去處理",
+  "reference_sha256": {
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/continue_masf_head.py": "419cb0ac84f4e88ba344149776812fbe991f75ee494aa984d3f2b6c8145d6743",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/train_masf_task_bridge.py": "b86e494d0678ab3f198bf86a3435eac5c58ed09775716a160b64da293fc0d87b",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/train_masf_p3.py": "e1beedbd73a6fb739d3d8e24d32cc4cf29d81e0092d4abd17edda659cb46d29d",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/masf_task_bridge.py": "1fe1dfa9ff18652c20726b559439e5515f45b6a39e7a6381308aa52453f4350a",
+    "yolo_optimize/experiments/pose_masf_training_v1/execution-config.json": "b0c41aa139cba3ddbae6224098bb55068208d3f6c4d942989b93b2a5e43a5b64",
+    "yolo_optimize/experiments/pose_masf_training_v1/training_b.py": "f122fa9310cfc27b510448d4b720de801dfe7a72f0528b4dcee9afbf84956788",
+    "yolo_p2/ultralytics/utils/loss.py": "61f2ff23a8a468d6423c38f7629da8d66e71d5463f43a1cf98ea6f170bfb1019"
+  },
+  "original_run": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1",
+  "parents": {
+    "detect": {
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1/detect-training/resume.pt",
+      "resume_sha256": "92708a9a04fd7f32841e116d57be7837ffc53dc89d8fe7a50eac73ea97d422e8",
+      "inference": "/home/uxin/yolo/yolo_masf/result/stage4/detect/trained-epoch05.pt",
+      "inference_sha256": "943d2fe7770271bcdbe17085937f45ba95580469670d0af8d224c040c49cc56f"
+    },
+    "pose": {
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1/pose-training/resume.pt",
+      "resume_sha256": "ce505cffef1e7b11ead658dbccdd234b594671db422879145dbdc17489c7cdf4",
+      "inference": "/home/uxin/yolo/yolo_masf/result/stage4/pose/trained-epoch05.pt",
+      "inference_sha256": "c3df44fbf3e896f8542bde799bb5f78f53959bc0428877561230140e8872146c"
+    }
+  },
+  "protocol": {
+    "start": "both methods inherit same task epoch5 live/EMA/optimizer/scaler/EMA count",
+    "arms": {
+      "L1": "continue existing end LR, cosine decay to .2",
+      "L2": "head LR /5; new context LR *5; alpha unchanged"
+    },
+    "starting_lr": {
+      "L1": {
+        "head": 2.5e-06,
+        "context": 5e-06,
+        "alpha": 5e-05
+      },
+      "L2": {
+        "head": 5e-07,
+        "context": 2.5e-05,
+        "alpha": 5e-05
+      }
+    },
+    "maximum_additional_epochs": 15,
+    "minimum_additional_epochs": 5,
+    "early_stop": "after at least5 new epochs, stop if primary AP has no improvement in5 epochs; report adaptive budget differences",
+    "loss_clock": "keep terminal native E2E .1/.9; criterion age starts5; no warmup restart",
+    "scope": "task head+MASF; frozen trunk/attention/all BN running",
+    "selection": "save highest primary AP even if other classes regress; recommendation needs parent improvement, no monitored AP drop >.001 and positive trained alpha-on/off; preserve candidate and final resume",
+    "diagnostics": "full trained epoch5 reload alpha-on/off; CPU bootstrap and real-loss smoke each method",
+    "hardware": "qSiLU context; Detect B2/S1/PWL/D1 unchanged; beta1",
+    "no_new_control": true,
+    "no_new_kd": true,
+    "data": "full COCO118287/5000 and BBAT5-v1 5964/683 unchanged",
+    "monitor_seconds": 600,
+    "stop_after_stage": 4,
+    "difference_from_optimize": "reuse preservation of optimizer/EMA/scaler and role-wise LR change; specific L2 balance is project extension for a fresh context, not historical trained-donor reproduction"
+  }
+}

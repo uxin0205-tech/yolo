@@ -1,0 +1,156 @@
+{
+  "stages": [
+    {
+      "stage": 1,
+      "selection": "B2 sign + Hadamard",
+      "checkpoint": "yolo_binaryqk/result/stage1/epoch-00.pt",
+      "sha256": "db8b11ddec3c3263e9a79d815645f320dc74cb646f2ea638b8ded4c2efe268f9",
+      "metadata": "yolo_binaryqk/result/stage1/handoff.json",
+      "metadata_sha256": "4eb6027a021bdb86093b581040370f8703002bccb1fbe7f15419d749c6b1fd1f",
+      "metrics": {
+        "coco_AP": 0.5098886554294018,
+        "person_AP": 0.6395232559160875,
+        "sports_ball_AP": 0.514559786394268,
+        "baseball_bat_AP": 0.48765072105777896,
+        "box_AP50_95": null,
+        "pose_AP50_95": null,
+        "ball_box_AP50_95": null,
+        "ball_pose_AP50_95": null,
+        "bat_box_AP50_95": null,
+        "bat_pose_AP50_95": null
+      }
+    },
+    {
+      "stage": 2,
+      "selection": "S1 Q10 + signed16 bias",
+      "checkpoint": "yolo_binaryqk/result/stage2/epoch-05.pt",
+      "sha256": "9cacbd802f089a6e0aca87c2e0d1743d74458e7c030029be3076dd3090b48dea",
+      "metadata": "yolo_binaryqk/result/stage2/handoff.json",
+      "metadata_sha256": "ebaecba0eadf5f8a46bcef1d88d4f4c1302e2d93e90c2cfec6b86fb0c7939ce8",
+      "metrics": {
+        "coco_AP": 0.5141516576900635,
+        "person_AP": 0.6433760947777195,
+        "sports_ball_AP": 0.5126316731661583,
+        "baseball_bat_AP": 0.4859613760847678,
+        "box_AP50_95": null,
+        "pose_AP50_95": null,
+        "ball_box_AP50_95": null,
+        "ball_pose_AP50_95": null,
+        "bat_box_AP50_95": null,
+        "bat_pose_AP50_95": null
+      }
+    },
+    {
+      "stage": 3,
+      "selection": "D1 + KD E5",
+      "checkpoint": "yolo_attention/result/stage3/kd-epoch05/evaluated.pt",
+      "sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c",
+      "metadata": "yolo_attention/result/stage3/handoff.json",
+      "metadata_sha256": "44d69a2d1082a5f926465b38bd93750d46ad891d0c5de4246fd7f53da009b4db",
+      "metrics": {
+        "coco_AP": 0.5146207909643931,
+        "person_AP": 0.643206570344524,
+        "sports_ball_AP": 0.5132240067644241,
+        "baseball_bat_AP": 0.4875940887506186,
+        "box_AP50_95": null,
+        "pose_AP50_95": null,
+        "ball_box_AP50_95": null,
+        "ball_pose_AP50_95": null,
+        "bat_box_AP50_95": null,
+        "bat_pose_AP50_95": null
+      }
+    },
+    {
+      "stage": 5,
+      "selection": "HOG not adopted; same Stage3 parent",
+      "checkpoint": "yolo_hog/result/stage5/selected.pt",
+      "sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c",
+      "metadata": "yolo_hog/result/stage5/handoff.json",
+      "metadata_sha256": "7ede446aa2538907f6cecf38561b7587fbc0982a53581af6db9b4607be381eb6",
+      "metrics": {
+        "coco_AP": 0.5146207909643931,
+        "person_AP": 0.643206570344524,
+        "sports_ball_AP": 0.5132240067644241,
+        "baseball_bat_AP": 0.4875940887506186,
+        "box_AP50_95": null,
+        "pose_AP50_95": null,
+        "ball_box_AP50_95": null,
+        "ball_pose_AP50_95": null,
+        "bat_box_AP50_95": null,
+        "bat_pose_AP50_95": null
+      }
+    },
+    {
+      "stage": 6,
+      "selection": "Detect-Pose fusion E1",
+      "checkpoint": "yolo_combine/result/stage6/selected.pt",
+      "sha256": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7",
+      "metadata": "yolo_combine/result/stage6/handoff.json",
+      "metadata_sha256": "afcc9f6b44d4172689a22d9c14c645bf1adb82cfb22a2f7189614010b2a87e23",
+      "metrics": {
+        "coco_AP": 0.5126760552637888,
+        "person_AP": 0.6412553759835176,
+        "sports_ball_AP": 0.5151605700527103,
+        "baseball_bat_AP": 0.4708406202413094,
+        "box_AP50_95": 0.6092024665178761,
+        "pose_AP50_95": 0.8998503112793659,
+        "ball_box_AP50_95": 0.49388345969797987,
+        "ball_pose_AP50_95": 0.8634740979003016,
+        "bat_box_AP50_95": 0.7245214733377724,
+        "bat_pose_AP50_95": 0.93622652465843
+      }
+    },
+    {
+      "stage": 7,
+      "selection": "qSiLU E8",
+      "checkpoint": "yolo_activation/result/stage7/handoff/qsilu_pq.pt",
+      "sha256": "2f91ec1862ad62304f1e2727e9b9ee64a27c5a46a45137f83a74dc7f14c46a69",
+      "metadata": "yolo_activation/result/stage7/handoff.json",
+      "metadata_sha256": "5e27e2b0aa75fbf058f3e6279ead60730bc543322ec13e2bbcdcfa031233fd36",
+      "metrics": {
+        "coco_AP": 0.513951265381378,
+        "person_AP": 0.643234026088054,
+        "sports_ball_AP": 0.5146623165317121,
+        "baseball_bat_AP": 0.4690357899624067,
+        "box_AP50_95": 0.6139042018842924,
+        "pose_AP50_95": 0.9007615878805139,
+        "ball_box_AP50_95": 0.4974302119527326,
+        "ball_pose_AP50_95": 0.8647309926872065,
+        "bat_box_AP50_95": 0.730378191815852,
+        "bat_pose_AP50_95": 0.9367921830738212
+      }
+    },
+    {
+      "stage": 8,
+      "selection": "qSiLU Rep17+20 E1",
+      "checkpoint": "yolo_actshape/result/stage9/handoff/rep17_20.pt",
+      "sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+      "metadata": "yolo_achitechure/result/stage8-retrain/selection.json",
+      "metadata_sha256": "ba60798569e9f38d3815a9c85b2baf1a25daf414e1472d2e7daedf47eaa72522",
+      "metrics": {
+        "coco_AP": 0.5143471497030708,
+        "person_AP": 0.6427959303974734,
+        "sports_ball_AP": 0.5157820851022553,
+        "baseball_bat_AP": 0.46957631026676677,
+        "box_AP50_95": 0.6143706928427835,
+        "pose_AP50_95": 0.9013894285347345,
+        "ball_box_AP50_95": 0.49976429858092136,
+        "ball_pose_AP50_95": 0.8645462333785403,
+        "bat_box_AP50_95": 0.7289770871046457,
+        "bat_pose_AP50_95": 0.9382326236909287
+      }
+    }
+  ],
+  "stage4": {
+    "detect_selection": "keep Stage3",
+    "pose_selection": "keep pretrained Pose",
+    "results": "yolo_masf/artifacts/stage4/extension-20261019-v1/RESULTS.md"
+  },
+  "fusion": "同血緣完整Pose適應後，D_shared+rho*(P_shared-D_shared)，排除全部Attention；Detect head取D，Pose head取P。",
+  "stage9": {
+    "completed_epochs": 120,
+    "selection": "keep Stage8 qSiLU Rep17+20 E1 / reference_rect640",
+    "portrait_result": "yolo_actshape/result/stage9-portrait/result.json"
+  },
+  "note": "選定節點；Stage6 另外繼承 Pose head 並先做同血緣適應，完整中間 lineage 見各階段 manifest。"
+}

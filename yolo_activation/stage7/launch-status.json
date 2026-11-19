@@ -1,0 +1,118 @@
+{
+  "observed_at_unix": 1793551713.5614505,
+  "supervisor_pid": 2862525,
+  "worker_pid": 2863261,
+  "job": "train-qsilu_pq",
+  "smoke": {
+    "status": "passed",
+    "peak_allocated_GiB": 16.377424716949463,
+    "peak_reserved_GiB": 16.498046875,
+    "updated_parameters": 558,
+    "frozen_tensors_and_ema_verified": true
+  },
+  "training_progress": {
+    "time_unix": 1793551679.072917,
+    "kind": "training",
+    "phase": "qsilu_pq",
+    "epoch": 1,
+    "epochs": 10,
+    "step": 10,
+    "steps": 463,
+    "seconds": 60.22621512413025,
+    "remaining_train_seconds": 2728.2475451231003,
+    "lrs": {
+      "backbone-1": 4.53866090712743e-08,
+      "backbone-0": 4.53866090712743e-08,
+      "neck-1": 2.269330453563715e-07,
+      "neck-0": 2.269330453563715e-07,
+      "detect_head-1": 5.971922246220303e-07,
+      "detect_head-0": 5.971922246220303e-07,
+      "pose_head-1": 5.971922246220303e-07,
+      "pose_head-0": 5.971922246220303e-07
+    },
+    "ema_updates": 10,
+    "criterion": {
+      "detect": {
+        "end2end": true,
+        "updates": 0,
+        "o2m": 0.8,
+        "o2o": 0.19999999999999996,
+        "o2m_copy": 0.8,
+        "final_o2m": 0.1,
+        "total": 1.0
+      },
+      "pose": {
+        "end2end": true,
+        "updates": 0,
+        "o2m": 0.8,
+        "o2o": 0.19999999999999996,
+        "o2m_copy": 0.8,
+        "final_o2m": 0.1,
+        "total": 1.0
+      }
+    },
+    "detect_mean_loss": 1.7271387726068497,
+    "pose_mean_loss": 1.3762290477752686,
+    "joint_mean_loss": 1.7136422447287118,
+    "loss_for_backward": 109.67310366263756,
+    "detect_components": [
+      1.0370045900344849,
+      0.9661999940872192,
+      0.006806179881095886
+    ],
+    "pose_components": [
+      0.9695749878883362,
+      0.025106407701969147,
+      0.01453371811658144,
+      0.4829496145248413,
+      0.002819992834702134,
+      0.0
+    ],
+    "detect_batch_sizes": [
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16
+    ],
+    "pose_batch_sizes": [
+      16
+    ],
+    "detect_images": 256,
+    "pose_images": 16,
+    "gradient_presence": {
+      "shared": true,
+      "detect_head": true,
+      "pose_head": true
+    },
+    "gradient_statistics": null,
+    "amp_scale": 1024.0,
+    "amp_overflow_retries": 0,
+    "clipped_gradient_norm": 519.2883911132812
+  },
+  "queue_root": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102",
+  "stage8_started": false,
+  "eta": {
+    "seconds_per_macro": 5.597971502103303,
+    "qSiLU_estimated_end": "2026-11-02T08:12:42.933563+08:00",
+    "qSiLU_communicated_window": "2026-11-02 08:00–09:00 Asia/Taipei",
+    "whole_queue_estimated_hours": [
+      24,
+      36
+    ],
+    "whole_queue_window": "2026-11-03 01:00–13:00 Asia/Taipei",
+    "basis": "qSiLU training steps1–10；其他候選尚未測得訓練時間，保守估計，不含等待其他 GPU 工作",
+    "estimated_at_unix": 1793551760.525231
+  }
+}

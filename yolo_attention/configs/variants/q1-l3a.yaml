@@ -1,0 +1,15 @@
+name: Q1-L3A
+basis: hadamard
+bias: decomposed_2d
+scale_mode: fixed_head
+normalization: integer_lut
+row_correction: none
+use_ste: true
+max_bias_size: 32
+score_step: 0.125
+score_min: -64
+exp_bits: 15
+p_bits: 8
+v_bits: 8
+projection_weight_bits: 8
+projection_activation_bits: 8

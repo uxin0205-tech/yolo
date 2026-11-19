@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ultralytics/
+coco2017/
+coco2017-*/
+runs/
+weights/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.cache
+*Zone.Identifier*
+
+# GitHub publishes the extracted original data trees, not redundant archives.
+original/**/*.zip
+
+# 已退役的整合參考及根層編輯備份。
+/yolo_optimize/
+/*.orig
+
+# 本機研究簡報與文件。
+/docs/local-materials/

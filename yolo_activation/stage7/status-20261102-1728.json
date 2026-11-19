@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-11-02T17:29:48.319930+08:00",
+  "status": "running",
+  "job": "train-poly_shift",
+  "progress": {
+    "epoch": 9,
+    "epochs": 10,
+    "step": 350,
+    "steps": 463,
+    "seconds": 1711.9358978271484,
+    "amp_overflow_retries": 0
+  },
+  "completed_poly_shift_epochs": 8,
+  "poly_shift_selected_epoch": 8,
+  "poly_shift_metrics": {
+    "coco_AP": 0.5147380753358433,
+    "person_AP": 0.6437534545326837,
+    "sports_ball_AP": 0.5164557227876271,
+    "baseball_bat_AP": 0.4676525312571366,
+    "box_AP50_95": 0.6110864870386258,
+    "pose_AP50_95": 0.8998520487929007,
+    "ball_box_AP50_95": 0.4922535473903185,
+    "ball_pose_AP50_95": 0.8619305294212725,
+    "bat_box_AP50_95": 0.7299194266869328,
+    "bat_pose_AP50_95": 0.937773568164529
+  },
+  "poly_shift_gate": true,
+  "poly_shift_score": 0.645559606947043,
+  "qsilu_selected_epoch": 8,
+  "qsilu_metrics": {
+    "coco_AP": 0.513951265381378,
+    "person_AP": 0.643234026088054,
+    "sports_ball_AP": 0.5146623165317121,
+    "baseball_bat_AP": 0.4690357899624067,
+    "box_AP50_95": 0.6139042018842924,
+    "pose_AP50_95": 0.9007615878805139,
+    "ball_box_AP50_95": 0.4974302119527326,
+    "ball_pose_AP50_95": 0.8647309926872065,
+    "bat_box_AP50_95": 0.730378191815852,
+    "bat_pose_AP50_95": 0.9367921830738212
+  },
+  "qsilu_score": 0.6462768721866454,
+  "hardswish_gate": false,
+  "estimated_poly_shift_finish": "2026-11-02T18:18:39.865226+08:00",
+  "remaining": [
+    "PolyShift remaining epochs",
+    "PolyQuality calibration/smoke/10 epochs",
+    "12 region evaluations",
+    "4 selected checkpoint reload evaluations",
+    "Stage7 handoff"
+  ],
+  "monitor_last_unix": 1793611270.0593824,
+  "stage8_started": false
+}

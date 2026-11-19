@@ -1,0 +1,3792 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-08",
+  "scope": "yolo_quantize",
+  "commit_subject": "5090 Stop 0908",
+  "semantics": "本機可發布檔案的路徑、bytes、SHA-256 與 Git mode；清單本身另由 Git blob 核對，避免自我雜湊循環。完整本機權重／資料集未包含。",
+  "manifest_self_excluded": "docs/organization/publication-files-0908.json",
+  "file_count_excluding_self": 630,
+  "total_bytes_excluding_self": 82273423,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 392,
+      "sha256": "3f47a7576e999107bc13dc12767cf9a716812a67d6f9bfe79f876d3004d53e1e",
+      "git_mode": "100644"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 92,
+      "sha256": "925dae8c824417f974464c758d4923952a788fb7e685532124adc7d5cdaa22fa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "IMPLEMENTATION_PLAN.md",
+      "bytes": 22866,
+      "sha256": "0dcca3c622299ae5055b6dc592fecafc487035df614d154d6e9cd23f3fd5d45a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "PUBLICATION_0907.yaml",
+      "bytes": 923,
+      "sha256": "cdf9db8b3b3d685e19607a941b76e193a36e58f3cb893afe765fb939ad20e23f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "PUBLICATION_0908.yaml",
+      "bytes": 2188,
+      "sha256": "eb5c73af3c0b7b6f2caf9373d0f913d07c8741ea5a27f903ff72062ad0c5d383",
+      "git_mode": "100644"
+    },
+    {
+      "path": "PUBLICATION_MANIFEST.yaml",
+      "bytes": 3798,
+      "sha256": "08c4bb73132114b7c74159fb1c826aa29a69de0467a2e62e6c9cb630f1dca517",
+      "git_mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4732,
+      "sha256": "5a2642f2f15c43ba0ca07dcbec3f32ab1afd3c20c957d0fc45c10754688d3bb9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/README.md",
+      "bytes": 1472,
+      "sha256": "dcbe4295e47d1c364897492b9407615d58cccace63e6682dadd7bf76b41c40dc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/archives/v29-poly-shift-paused-for-qsilu-v1/archive-handoff.json",
+      "bytes": 5052,
+      "sha256": "ce73d390f2c62421d7c98a26e5b46e980d89bc5443641bb7956e87031cdffb17",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/archives/v30-qsilu-sham-paused-for-tuesday-v1/archive-handoff.json",
+      "bytes": 3026,
+      "sha256": "dc21ae1161a6e09d88556be4e51e33b08441c30388ebe006fed649280c471836",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/exact-w4-sd4-cpu-delivery-v1.yaml",
+      "bytes": 2144,
+      "sha256": "158388aed80e6ae1490ab2dbaf6de6be4138b2bbff44d42e25b1ca9f2d607abe",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/fixed-sd4-routing-candidates-v1.yaml",
+      "bytes": 3434,
+      "sha256": "15444caf719f07a4d0c89ff7eb3ddda4d688f826f9eba1004942147f2e181d95",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/fixed-sd4-routing-candidates-v2.yaml",
+      "bytes": 3967,
+      "sha256": "16cec15ccb299c1e1ea61b88f8ce07aa3d0b35e64cc7c9c12043aa87d017ed9f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/fixed-sd4-routing-candidates-v3.yaml",
+      "bytes": 13203,
+      "sha256": "afbefae48e3bafd87a2842da205c3f7a5b5d081f5351a9caf480ecacb1ed98f4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/fixed-sd4-routing-groups-v4.yaml",
+      "bytes": 2156,
+      "sha256": "33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json",
+      "bytes": 120302,
+      "sha256": "76b4392d2d07232967018b20af82149ba67ee036fad2cb75bb15d2d7565f4356",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/full35-integer-boundary-contract-qsilu-pq-a8-v1.json",
+      "bytes": 79114,
+      "sha256": "db0ef0ade253e09701907dd1235c9ab56dea44883dc6d52bb189b0c6a8254e3b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/hardswish-uniform-parent-intake-v1.yaml",
+      "bytes": 3910,
+      "sha256": "0d51086a005b5f5e70b19808adb0270a7d99055596bd9e2f7c2069fbc0a70c90",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/paper-twn-routing-candidates-v1.yaml",
+      "bytes": 3803,
+      "sha256": "05540a7fcc1f5c5adbc87b65a6c49d90446162d526cda5ac634746fe9885f145",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v0-lineage-reconciliation-v1.yaml",
+      "bytes": 2219,
+      "sha256": "f0da2a63f2cb1a3f0e4285a58bbeb0010a09c256f8f465043ee7cfab3316f2b5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v1-v3-cpu-delivery-v1.yaml",
+      "bytes": 11289,
+      "sha256": "7652925b86fa2b9839d22adfd6045c3b4fbc78ec25584273b11832dc7520b28c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v1-v3-cpu-delivery-v2.yaml",
+      "bytes": 9113,
+      "sha256": "aebac20b963f45117420b1327e7cff5d1ccc05da78e8fdf41ff3fd920c3d8162",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v19-epoch5-locked-parent-v1.yaml",
+      "bytes": 1386,
+      "sha256": "6e2034bc6a84ee5f1dac2a22d38afbcdec9763b0fc22e9333b67bb0c1dbd48a7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v28-progressive-weight-cpu-delivery-v1.yaml",
+      "bytes": 1497,
+      "sha256": "53e2c816f888d125c85563d6cc5820817ef280ae12b9f1d8c72d88a9ae328875",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v34-qsilu-structured-dual-view-v1.json",
+      "bytes": 4773,
+      "sha256": "e5b06fdd97bc77c376dcf50bf371a2a6b6368045e308318b236ace4ba69ae391",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v34-qsilu-tuesday-quick-diagnostic-v1.json",
+      "bytes": 120302,
+      "sha256": "76b4392d2d07232967018b20af82149ba67ee036fad2cb75bb15d2d7565f4356",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v35-qsilu-mixed-11path-epoch3-locked-parent-v1.yaml",
+      "bytes": 1595,
+      "sha256": "eb6fa25a5432cb450d05155f201138fb1db2f470fa12b55eb969935a64d11e11",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/v4-qsilu-backbone-early-w8-search-delivery-v1.yaml",
+      "bytes": 4491,
+      "sha256": "d64c419703f68b8ca3a6bdea77a3b9bc24a6b90fda4f6cc39db49559e6a9a920",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/weight-views-hardswish-a8-v3.json",
+      "bytes": 4791,
+      "sha256": "fce59622ded49b59b254fbd90ff3ed0bc48744c72bd45fb3663a01cbc2e427df",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/weight-views-poly-quality-a8-v2.json",
+      "bytes": 4789,
+      "sha256": "1740ff090b2ccda02fa191669675b39182b5b0737b66c6f4fc8631fabdd31008",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/weight-views-poly-shift-a8-v2.json",
+      "bytes": 4780,
+      "sha256": "13c740589e9fde432e3fd32cbfd8551df1a7add84c880ad82e9835b083c1402c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/weight-views-qsilu-pq-a8-v2.json",
+      "bytes": 4773,
+      "sha256": "e5b06fdd97bc77c376dcf50bf371a2a6b6368045e308318b236ace4ba69ae391",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/weight-views-qsilu-pq-hardswish-backbone-attention-a8-v3.json",
+      "bytes": 5159,
+      "sha256": "7677fcf99aa28ae69c39d1265f0d9d8bd461c4382e844ed4aa0735084c737ed6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/weight-views-qsilu-pq-hardswish-masf-a8-v3.json",
+      "bytes": 5116,
+      "sha256": "5e2070006c1632d332fe59a7cb080bd36b9c1cc8c4765795b20eafdfa64c3c35",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/manifests/weight-views-qsilu-pq-hardswish-neck-attention-a8-v3.json",
+      "bytes": 5141,
+      "sha256": "ac7ef83fc7915e34676394abd97ccb036e52f214f43b9f606272c6b185e13e54",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/README.md",
+      "bytes": 616,
+      "sha256": "0e6fe68069f90aa98fec5fdd35ca9a9d524882b1477cb5a1954b2ec2f05a954e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/README.md",
+      "bytes": 2466,
+      "sha256": "b62105358a455dbbc77b08452f273866c955c717a233c77143fa8024255cec70",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/detect-predictor-ls-sd4-recovery-preflight.json",
+      "bytes": 3977,
+      "sha256": "094fb0897cb7a7ed319ee9eb7219313e9853b342169f3bda7f50d0820afb5f5d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/evidence-consistency-audit.json",
+      "bytes": 2934,
+      "sha256": "534bdf3b134ad634b368fee5d98e1fc8f54aef780120f3c90f573bdb8edc2932",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/execution-status.json",
+      "bytes": 278,
+      "sha256": "8a5ebd7d8b9c4632f18281c4e082428a86af9de915bb6a7fa3db63830cb21c0e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/generated/detect-predictor-ls-sd4-recovery-qat-plan.json",
+      "bytes": 50950,
+      "sha256": "b8b0e95fc6392442725b17d658703197b9dfae7f4d01990b9acd90c6bf13e943",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/generated/isolated-special-plan.json",
+      "bytes": 19320,
+      "sha256": "fe2f42ae4edadd0e05062f58562e5cad9fe0437fbb8b869f29fc5bcf7d26615d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/generated/masf-exact-ternary-qat-plan.json",
+      "bytes": 50488,
+      "sha256": "d29431e2a43ba0ad1f1f0f1d4833cbc43cd8ffca3878177414103b09b4e833f0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/generated/masf-paper-twn-qat-plan.json",
+      "bytes": 50676,
+      "sha256": "798d4d86a839a65a35cfda1692b6d72cc5eefbba6396ea4383cf2ecaa3ff3f4a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/generated/masf-twn-qat-plan.json",
+      "bytes": 50682,
+      "sha256": "60524f7ccd849cf83aee8065d436380dda8aa334f0e653f5c1da0f22e72de7e1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/generated/pose-ls-sd4-qat-plan.json",
+      "bytes": 52350,
+      "sha256": "7fe2bc65c306287147fecaab68fdccc2ce613fd146a294fd8068a53a7102cdf3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/generated/pose-sd4-fixed-qat-plan.json",
+      "bytes": 53650,
+      "sha256": "6668a54e3107f741c8c9f50d86d46317b69db8dd7356798a1c27458511b58f17",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/implementation-start.json",
+      "bytes": 137,
+      "sha256": "6fbeb83d0fae70adab324df1636ffbb65156e09f0c611572cc83472dcbfdb556",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/isolated-special-report.json",
+      "bytes": 1921845,
+      "sha256": "7102011a0183a968fc372683cb7056f37f1ce862a3d41f37870102a6f2f85ef2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/masf-exact-ternary-preflight.json",
+      "bytes": 3789,
+      "sha256": "43c2998b114bf57a9df68d715d6b0d4f532bd8bb464480974cbea0a450a74aa6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/masf-paper-twn-preflight.json",
+      "bytes": 3785,
+      "sha256": "2cd1516f8a55e8ab693b2c9960afa64b6d36c6313f28afbccb24785b3baaae80",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/masf-twn-preflight.json",
+      "bytes": 3779,
+      "sha256": "4e4d1a94cc06601d53c027ccff9e951e17f472b9de92b1b7d50ee2ee86c54010",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/operator-precision.json",
+      "bytes": 218732,
+      "sha256": "fe28601de3231fe07e46e199a8802f90d99cb96aab8ad401d219a831f4488fa8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/parent-manifest.json",
+      "bytes": 2003,
+      "sha256": "f25a3caaebe6b7d51663d615c0202be7dedec431683cb0ad0c8fe9dccfc3d48a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/parent-preflight.json",
+      "bytes": 217803,
+      "sha256": "18987028dd9bf137042b1bf0b3eb3f024f72aa4002433b9e43daff57600ee3f4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/parent-revalidation.json",
+      "bytes": 2999,
+      "sha256": "0ff5654a30d3fd13a38afb55aff2a0e7ccb4df74ab3fc43d4f68b2db64a31a8b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/pose-ls-sd4-preflight.json",
+      "bytes": 5061,
+      "sha256": "fd29a13285a4d0ed790d971154af85b0412bef000e9094adce436383940e4523",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/pose-sd4-fixed-preflight.json",
+      "bytes": 5064,
+      "sha256": "1773d5172a787f34c9e0f58f324b2085267655c2aecfea28ab0ef73a1234f528",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/projection-parity.json",
+      "bytes": 650,
+      "sha256": "b0f478a06494061ad5d84cbc71d6c370aec1dcd31f6f8c9ad937f7c25b009974",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/qat-recovery-summary.json",
+      "bytes": 119958,
+      "sha256": "c52802bdd70ce2afdc7017a88dc92735e67d317ec842427222d719388d97fe0d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/selected-qat-jobs-v2.json",
+      "bytes": 3258,
+      "sha256": "4459e10bcc143ebdc7a34f74206a8701910d1d328f227137de53007519b43875",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/selected-qat-jobs.json",
+      "bytes": 1608,
+      "sha256": "86a058270b2d679cd157287eae1c1cd5d82b05b3eba77ddc0b42ba8a47dac8d1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/single-layer-probe.json",
+      "bytes": 3980643,
+      "sha256": "396a1d25c61fc8755e02aabd0d362b3b324c210895124ca3c0112a2a3f5c1982",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/special-dual-summary.json",
+      "bytes": 77792,
+      "sha256": "89b37327cddcd42da5f2f974d884ec06931235f15328910bc85da8f32263270f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/special-qat-dual-gate.json",
+      "bytes": 80525,
+      "sha256": "92b061f79b3df2e462ab032dea02cb454ca0344d0eaff1e8a61c7e8f13fdb653",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/special-qat-recovery-admission.json",
+      "bytes": 80643,
+      "sha256": "ac3c71db83db56acf3ced663f4e3ef0fdae4d018f06452d2e8076f872dc45d12",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-continuous-0907/weight-distribution.json",
+      "bytes": 281585,
+      "sha256": "9dca76c7efb52025af4f9196815f92dfba915480dd851c9354a0d7709ae17b26",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/README.md",
+      "bytes": 1737,
+      "sha256": "d6733980e4cf302dea23f3a40e5d7a6d388b99fca282ce593212d3c8be1ad159",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/backbone_attention_safe-report.json",
+      "bytes": 44736,
+      "sha256": "6b87b03329b525c12e2b8d874737eba697b42875dadfaed2a9928a932885bfaf",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/backbone_deep-report.json",
+      "bytes": 44420,
+      "sha256": "ceb75de4b04a7e9efd89552b6ac9227ab67c2538a899eafc95739832f8d5aff0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/backbone_early-report.json",
+      "bytes": 39032,
+      "sha256": "e6ee9dd2e34d3b66dcf45cf3fe2ea44e75dea1a004d59536b409b29bcded9966",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/cumulative-selection.json",
+      "bytes": 67307,
+      "sha256": "abba6715dd86589cb1ccb263519a6cd5cef3ecf29e4e4450b581e4592833b525",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/detect_one2one_predictor-report.json",
+      "bytes": 122688,
+      "sha256": "ae66a649fb73f5efa0693d40b080f0b01b7d5d971958fd1d02940cd4f71eaf28",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/detect_one2one_tower-report.json",
+      "bytes": 60534,
+      "sha256": "8388d842a05636c1436dada502e325daf52ff733ab25bcf8f6748d36384ace29",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/execution-status.json",
+      "bytes": 185,
+      "sha256": "bbbea1b3e79fb4f1a7928508c98de499aa1a7b46db5ce96038fb2f49352c419a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/backbone_attention_safe-fixed-sd4-paths.json",
+      "bytes": 140,
+      "sha256": "538a12b82af7b4f649ae8441f10cfae39600035e0e7be6b0af55daee27c9e9bd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/backbone_attention_safe-plan.json",
+      "bytes": 5645,
+      "sha256": "293095b69cc302f7ad28615bb0dfc98bc273d1a4ce1ccdad0249d09c9678bb50",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/backbone_deep-fixed-sd4-paths.json",
+      "bytes": 135,
+      "sha256": "4cd32d1976c4088dcc50a60727b13a77ae8d243bd52756e0e7596cf1942a0441",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/backbone_deep-plan.json",
+      "bytes": 5565,
+      "sha256": "ff851c6e742ac5b8ff2354a71ea4c6e2e747c48184ab67bf25212b9a6c5b3314",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/backbone_early-fixed-sd4-paths.json",
+      "bytes": 109,
+      "sha256": "c9c52cc9bd89712b7b74f4257302b7dc749d206cbeb0e7b9f4026e373bc97c9c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/backbone_early-plan.json",
+      "bytes": 5573,
+      "sha256": "df543778a5136f77979a3c2d410228ca5f35475181d0f0b672d79d734b33a04b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/detect_one2one_predictor-fixed-sd4-paths.json",
+      "bytes": 1732,
+      "sha256": "652a46c304e55e71963d0f15d80093dc25bbb8fdc0119c0bc8b5a42fa5d89e69",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/detect_one2one_predictor-plan.json",
+      "bytes": 6285,
+      "sha256": "dfcb29b3ba1ae0637c8a92a59dcc1f88775e91eebe616a09b39c480414b96616",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/detect_one2one_predictor-twn-v3-0.75-filterwise-paths.json",
+      "bytes": 228,
+      "sha256": "597ba9c0e782e3f0b8601de51ed5443824bd725d3197072ad468f93596933071",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/detect_one2one_tower-fixed-sd4-paths.json",
+      "bytes": 193,
+      "sha256": "8c560df2b46ca144e0386906070995a721538669e16c75fca840aef006da0c86",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/detect_one2one_tower-plan.json",
+      "bytes": 6237,
+      "sha256": "d18ebb4d7f7b379627a5a8a5c0e9a357528f101df520210ab664f874fd3769aa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/detect_one2one_tower-twn-v3-0.75-filterwise-paths.json",
+      "bytes": 228,
+      "sha256": "597ba9c0e782e3f0b8601de51ed5443824bd725d3197072ad468f93596933071",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/masf-fixed-sd4-paths.json",
+      "bytes": 136,
+      "sha256": "822b2a0c02eed05959d44080d56be75a03a340d33a50b8928c1540d191a0292f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/masf-plan.json",
+      "bytes": 6045,
+      "sha256": "5028bf84c30cf3287185240bac6b90fcdd04fbaa8fec19cff1da6da509148097",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/masf-twn-v3-0.75-filterwise-paths.json",
+      "bytes": 228,
+      "sha256": "597ba9c0e782e3f0b8601de51ed5443824bd725d3197072ad468f93596933071",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/neck-fixed-sd4-paths.json",
+      "bytes": 136,
+      "sha256": "822b2a0c02eed05959d44080d56be75a03a340d33a50b8928c1540d191a0292f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/neck-plan.json",
+      "bytes": 5493,
+      "sha256": "55019575ff90f4029e2a667e1913499389e0bc0baef7cf569af48ea147a07425",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/neck_attention_safe-fixed-sd4-paths.json",
+      "bytes": 342,
+      "sha256": "40c4fb5d0f08d78e406f21d526b68c8eb1bcd5de15a56d10a7887dfd86c46452",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/neck_attention_safe-plan.json",
+      "bytes": 5613,
+      "sha256": "c24d4f98acdb4ff0564483f2df84447cd456f8f2f41d998735877d2b66c9b90a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/pose_one2one_predictor-fixed-sd4-paths.json",
+      "bytes": 1432,
+      "sha256": "f4cc9b0efe38c9109131da995d573638a954ba30e3a8777f24472dfc73fe64aa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/pose_one2one_predictor-paper-twn-paths.json",
+      "bytes": 131,
+      "sha256": "4dbe9a72ee1f7c13fa9c9ad8a250eedb40da61d1a231ea4501892bd9791f08f3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/pose_one2one_predictor-plan.json",
+      "bytes": 6827,
+      "sha256": "7f1c451f617515758ee201a41cb38bae9918caff4fb2d4b284d5d62d85722a5a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/pose_one2one_predictor-twn-v3-0.75-filterwise-paths.json",
+      "bytes": 228,
+      "sha256": "597ba9c0e782e3f0b8601de51ed5443824bd725d3197072ad468f93596933071",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/pose_one2one_tower-fixed-sd4-paths.json",
+      "bytes": 1432,
+      "sha256": "f4cc9b0efe38c9109131da995d573638a954ba30e3a8777f24472dfc73fe64aa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/pose_one2one_tower-plan.json",
+      "bytes": 6213,
+      "sha256": "aa4f2ebd900a4ad2f8d5f203e93ea35c0876920eba5d39275b493ccfd359ff78",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/pose_one2one_tower-twn-v3-0.75-filterwise-paths.json",
+      "bytes": 228,
+      "sha256": "597ba9c0e782e3f0b8601de51ed5443824bd725d3197072ad468f93596933071",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/uniform-w6-w5-5-fixed-sd4-paths.json",
+      "bytes": 1432,
+      "sha256": "f4cc9b0efe38c9109131da995d573638a954ba30e3a8777f24472dfc73fe64aa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/uniform-w6-w5-5-twn-v3-0.75-filterwise-paths.json",
+      "bytes": 228,
+      "sha256": "597ba9c0e782e3f0b8601de51ed5443824bd725d3197072ad468f93596933071",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/uniform-w6-w5-5-w5-paths.json",
+      "bytes": 2574,
+      "sha256": "999ac479f382f52a6b90da49189143e2e4b5e9044f3609bf5b7dd5c03e0799c6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/uniform-w6-w5-6-fixed-sd4-paths.json",
+      "bytes": 1432,
+      "sha256": "f4cc9b0efe38c9109131da995d573638a954ba30e3a8777f24472dfc73fe64aa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/uniform-w6-w5-6-twn-v3-0.75-filterwise-paths.json",
+      "bytes": 228,
+      "sha256": "597ba9c0e782e3f0b8601de51ed5443824bd725d3197072ad468f93596933071",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/uniform-w6-w5-6-w6-paths.json",
+      "bytes": 2574,
+      "sha256": "999ac479f382f52a6b90da49189143e2e4b5e9044f3609bf5b7dd5c03e0799c6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/generated/uniform-w6-w5-plan.json",
+      "bytes": 8549,
+      "sha256": "05c1abb4aa0581aeb80716770ded6b58c98b2e989a29c0851c3b33bf26256643",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/masf-report.json",
+      "bytes": 54409,
+      "sha256": "281e62c372ec63e66426a981440e61d85c8455d7589ce56708044f9834c7a158",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/neck-report.json",
+      "bytes": 44175,
+      "sha256": "27b0ce34e383334985b2944e6bc034ec7948966c29b2987a55ea47a5a0e58652",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/neck_attention_safe-report.json",
+      "bytes": 57832,
+      "sha256": "32c363ab5f62d8dd8409ce76a86c7fbc1a85f71680e874881782efbb829ce773",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/phase-hold.json",
+      "bytes": 1950,
+      "sha256": "ad28c88af9616694d93804d91fe6a5e4612d8f523b669301b0998e77b319f838",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/plan.json",
+      "bytes": 8487,
+      "sha256": "c2e83797f85e858cf6cec7c897dd75f22579e7b49823a4e8eda461e5ac7982e1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/pose_one2one_predictor-report.json",
+      "bytes": 113652,
+      "sha256": "f6df23f5d8cd66b53226f7ab51206b12cc6e779e969483fd516bf931348dd255",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/pose_one2one_tower-report.json",
+      "bytes": 107135,
+      "sha256": "4d9987d1f4cbb4deda702693697ac20166b32ba94fd97f306e5fd2c5a28813b6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/full-model-cumulative-0908/uniform-w6-w5-report.json",
+      "bytes": 505591,
+      "sha256": "aa255f61f8c3c388424b3ec72cfb102748006cf7269357028605356809bf464f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v19-sham-to-qat-v1/status.json",
+      "bytes": 568,
+      "sha256": "beaaeb8286d5467a3006d43dcdfedf68e25a2cdf162497484a04786a0cdffdfd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-attention-sentinel--exact_w4/attempt-0/result.json",
+      "bytes": 4178,
+      "sha256": "24cd656956374a4f4f2e5fb70c3adbe9231f223d5b9d5f39d911afd113729986",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-attention-sentinel--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2863,
+      "sha256": "08826eb76274679a7c8bf31a2e0ddae657fcd3aa743f79be3d3961c56f526597",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-attention-sentinel--fixed_sd4/attempt-0/result.json",
+      "bytes": 4178,
+      "sha256": "c2403049535452934e6042b76354e089578427e6961560cf6a1bd1e6e163f9cf",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-attention-sentinel--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2861,
+      "sha256": "8eabb96e853dcd555a381135f7e2fe8b33514109e86949ac9f4e25b90b2d6b88",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-deep-primary--exact_w4/attempt-0/result.json",
+      "bytes": 4108,
+      "sha256": "37dc8a5cbf59f7e71cfc3c8c27a8312c4e869614df9c80306c91ddd7a70263e8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-deep-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2829,
+      "sha256": "3e48b8b8dffa05cc29441c1bb91b4140a68b4995d420108bac2e20bdac5048b3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-deep-primary--fixed_sd4/attempt-0/result.json",
+      "bytes": 4111,
+      "sha256": "edd848134bd53c9601d122d0120b96d57a40bc692d7c17a4c5cfd38fd0286a21",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-deep-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2826,
+      "sha256": "e5897829bcc57a3b98b45277da4ec4817df372334017610113791707a6e83be9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-early-primary--exact_w4/attempt-0/result.json",
+      "bytes": 4082,
+      "sha256": "bbcb5049fb3f8d176491d10fba48b6b44b413b03e0ff3caf3b9a15b3b32c853f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-early-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2835,
+      "sha256": "9c1498114ac15cc46cfe6c3cf1061de83818ec65ae8f34f201b53a5b7308dd27",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-early-primary--fixed_sd4/attempt-0/result.json",
+      "bytes": 4084,
+      "sha256": "d4d021063e7bb0daf7e01ecb432ae19a927370a156dbba5f3cd2f24d43b9477c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/backbone-early-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2828,
+      "sha256": "dc338d9dc56018198209c0601d15fa8b9c8135c8fbfb2e4766f34a12c50a6ffe",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-predictor-control--exact_w4/attempt-0/result.json",
+      "bytes": 8306,
+      "sha256": "56220996beae917ec466ba6c6febedf9e97dc5a4934826108aeccd8996b94ead",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-predictor-control--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2831,
+      "sha256": "e0016116c17cdfd8c01df2085d404548dd53f3b424a0e027e709f902bc57799d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-predictor-control--fixed_sd4/attempt-0/result.json",
+      "bytes": 8320,
+      "sha256": "e72f8d4a26906a68e2ee49a1903455f2918b3194095b1b0ec7d9f1fff4fd09a5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-predictor-control--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2833,
+      "sha256": "52ed0cd59a3f726474efa7b6ef3b810822c7d87ec05f0e467564fcb5a09cecfb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-tower-primary--exact_w4/attempt-0/result.json",
+      "bytes": 8328,
+      "sha256": "48b1d7d8ec93e71f3df99e8c2a8f0dc0e5f86987a9e28b01fa29263bab641708",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-tower-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2836,
+      "sha256": "3c05cc1ad5fce178eca033c17775dba2b5029b946c9c33f5492e9c39aa350fbb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-tower-primary--fixed_sd4/attempt-0/result.json",
+      "bytes": 8327,
+      "sha256": "d120f88d997415a8addc980d3c9ea828a4ea87bf908e9d3cf99029fdcebc2847",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/detect-tower-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2834,
+      "sha256": "5e00055219ec47f738133f6d20a643ce7ca9a50aa7f7744ed4a7fef9931b7521",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--exact_scaled_ternary/attempt-0/result.json",
+      "bytes": 3917,
+      "sha256": "32df510d72ca3dd11b1507232192e1591c48679475f30eea4e5553c8f6ee4d27",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--exact_scaled_ternary/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2834,
+      "sha256": "adf59072f82773d5f2564f130b440b3518418e98d2f56d99347a58f62b47648f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--exact_w4/attempt-0/result.json",
+      "bytes": 4093,
+      "sha256": "764d187050cfb15f54fa49c17e71fc4c480bff874ad6b6fc36d9887b75a66e39",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2828,
+      "sha256": "375015817cd576fc1993dae00c1ccc8b50900e78c3fb97939976f48b39d98fb7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--fixed_sd4/attempt-0/result.json",
+      "bytes": 4096,
+      "sha256": "0b0a79e6878b7fbb32e3463b32cf3d932f3c4aab11a54f241b99c98afb4f1268",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2830,
+      "sha256": "eb7e80bc9533506cbb4726ee7f55a74839ba394a2360b1581512384823237cf2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--twn_v3_filterwise/attempt-0/result.json",
+      "bytes": 3894,
+      "sha256": "3effacf9ab2e11e8a3c81fcf0d159d91d0f483ccf8b44d355fdf059987160452",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/masf-weight-primary--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2827,
+      "sha256": "6af0f98eaca239949d7510eb89536d9287313f3caf88668edda3c81f20e98ad9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--exact_scaled_ternary/attempt-0/result.json",
+      "bytes": 5892,
+      "sha256": "b3e4dc3b709270590528cb0e0ca04c7fd0e31104de47ccbad6cc9b54fa7d24b2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--exact_scaled_ternary/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2834,
+      "sha256": "cf9d8e2893b2fcd30d80ba07cc5d292b70d7f3c818dd939ad05772053eb2d4b0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--exact_w4/attempt-0/result.json",
+      "bytes": 6091,
+      "sha256": "46328149933e30be9f8a7a50059bfe1de78b9be3d125fa59218019ca78920801",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2827,
+      "sha256": "959b678c50d07d0526195c947bab4e3ac4df84c2610ea8fe51065d3d0d7da1f3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--fixed_sd4/attempt-0/result.json",
+      "bytes": 6099,
+      "sha256": "06ed2762390d3eca44ea0400bce37359618e6367f6ecaf4e9c35bc3599c9ff78",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2831,
+      "sha256": "8ea3468816ddb541153e22de84d91092125f3460ddc89973c149e7bb26a99e0b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--twn_v3_filterwise/attempt-0/result.json",
+      "bytes": 5890,
+      "sha256": "7d89c81aef93cf3232e17e43613a2ee8b9b4215a597b67e244a36fb442b823a2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-attention-primary--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2832,
+      "sha256": "adeff2a8977be2e1d645b46c966b4fe4a08392673acb82e9f07c41c156246958",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--exact_w4/attempt-0/result.json",
+      "bytes": 4042,
+      "sha256": "383635052ca2e716f288f88fb144a56e119aa705855968b8e2ac901d1d77bf59",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2834,
+      "sha256": "8089bfca2044413074068ce5e454151b591fe80ed3dda1b37ab8f9972ac4fb80",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--fixed_sd4/attempt-0/result.json",
+      "bytes": 4052,
+      "sha256": "bb992ef9e5307a6f6ce7c3db081a1b6974f66bf821ca32e8fe3b84ef67db94c0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/neck-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2826,
+      "sha256": "55185fb47448765cc0d44a89c7a59f8e53762f4a78138bbe5c3d7a618381034b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--exact_scaled_ternary/attempt-0/result.json",
+      "bytes": 10361,
+      "sha256": "5ad27acbd254e7d511f730ef671a88625fdb67d32750af5c964e27e33c02b3a0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--exact_scaled_ternary/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2827,
+      "sha256": "ac61549851c034bcaa05866fbd2f78d3264b084e01e631844489c04439839d44",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--exact_w4/attempt-0/result.json",
+      "bytes": 10501,
+      "sha256": "31ee176b9e68f18c6264b8887fda765c3746de471cbc9b1118a283c8ad9535f5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2833,
+      "sha256": "7fcb1427041d0390d052bd0f2acfa2ce32accf523606a4d29bcbf8bd7e3ee129",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--fixed_sd4/attempt-0/result.json",
+      "bytes": 10506,
+      "sha256": "3aab5c8b7d78e6ec10552e6b566b80ffd1bedfa6a5e6d236421c3dcb0cce63e0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2827,
+      "sha256": "2dc946c7d4db1080a4acdc3a56e54fc1c440d9eb49ae4f3b588f0dfa328deb58",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--twn_v3_filterwise/attempt-0/result.json",
+      "bytes": 10342,
+      "sha256": "3ef0225120e061fd9b2c28080297a0585b303964b289666e22d48dbd92d0ac59",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-predictor-diagnostic--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2826,
+      "sha256": "8182bfea978b2f040a09178ebc6a179b0d93ef711c55c4dde016e93389cc1db5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--exact_scaled_ternary/attempt-0/result.json",
+      "bytes": 8131,
+      "sha256": "60fd0c9a808b35a23e92e58d9096bc027c8a5cabfd85fa4cc02d0a13029e102b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--exact_scaled_ternary/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2833,
+      "sha256": "df3e26ee8f6dbc2590c5fef72996e1ae5498bc998f2996a1e83da3c1399687f5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--exact_w4/attempt-0/result.json",
+      "bytes": 8326,
+      "sha256": "366926147f452772aa78603a00f5845205a96fc08d03bd25caea2815fa01675f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--exact_w4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2831,
+      "sha256": "cfcacd069f275188ae132484e578ba8baab4fa40fa0978562fcaa570c833f44d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--fixed_sd4/attempt-0/result.json",
+      "bytes": 8332,
+      "sha256": "93b7d5e899dd1d5da25b3c871e8cda12fa0623ea9fa8f6d99f71f271e9d2009b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--fixed_sd4/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2828,
+      "sha256": "f5960af5f95412dcafa76ae5f0287ea5ee0f14e2b849defdb8d4e7068d105d7d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--twn_v3_filterwise/attempt-0/result.json",
+      "bytes": 8110,
+      "sha256": "ba35a6406f52aa97d0d001a3704766e4cf4776cd4581fb38fafe5108cbe3f8e7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/candidates/pose-tower-primary--twn_v3_filterwise/attempt-0/validation/epoch-0000/bittrue/metrics.json",
+      "bytes": 2829,
+      "sha256": "3296d036dd81669edbd5b51072419f0f604c739e4846fc8b461a4c792ac75f17",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/queue-state.json",
+      "bytes": 153434,
+      "sha256": "756e2c6fc6432bc9b5f1ce8d2a69a82599cbe9b4f92ea8c42bdf380bf49a1990",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue-regated-v2.json",
+      "bytes": 32691,
+      "sha256": "e3f8cef374c06c7855be193561b87e6ef70c1281939dd5461e2759fdcfa73c06",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-queue.json",
+      "bytes": 1076,
+      "sha256": "cacec41a2de4bdaf512ac735ec112725f79852be85df08036f702c466f4c3866",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/execution-state.json",
+      "bytes": 3811,
+      "sha256": "6f406518c0e917fc282307da7c8f69678fcef43bf8ab6353b87f7cb681d27880",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/execution-status.json",
+      "bytes": 220,
+      "sha256": "44335630c5fa113fd7a0095ce9a370a7651e2ed2f9d18a234ba7b558ebc63693",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/00-pose-tower-primary--exact_scaled_ternary/candidate-dual-regate.json",
+      "bytes": 596,
+      "sha256": "7d8322ae288fc1414a15648836b16189f1083a72c8e790adca9854bb1ad365e7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/00-pose-tower-primary--exact_scaled_ternary/candidate-evidence.json",
+      "bytes": 4940,
+      "sha256": "732405ff638eab4973045d00f0126fdbd77d2a8fcdd5bb17db2fe93f104f62c6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/00-pose-tower-primary--exact_scaled_ternary/qat-plan.yaml",
+      "bytes": 7246,
+      "sha256": "45d3a9e0b7cae61dcedd350f07aec75ba14bd67902f7ac4df99b6eb249e5c094",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/01-detect-predictor-control--fixed_sd4/candidate-dual-regate.json",
+      "bytes": 586,
+      "sha256": "3afd45ba3608491420b76d828c044b2d368e581a2a7a78cc6b014bbc93d6fbe9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/01-detect-predictor-control--fixed_sd4/candidate-evidence.json",
+      "bytes": 4921,
+      "sha256": "3d5aaecf95a7c32231102930916230bf55af66d33bc2aa691870ae3c2bb74e02",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/01-detect-predictor-control--fixed_sd4/qat-plan.yaml",
+      "bytes": 7215,
+      "sha256": "cb043acc31b8357ac1d732f17e5f232d494cdecdeb9595e2ad1e717584522dca",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/02-neck-attention-primary--twn_v3_filterwise/candidate-dual-regate.json",
+      "bytes": 598,
+      "sha256": "4a03f94c01cb45b4ca890e57c62a609458cc5acf109598bbcc691d459cd8648b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/02-neck-attention-primary--twn_v3_filterwise/candidate-evidence.json",
+      "bytes": 4793,
+      "sha256": "17807da94ac50a8b8fb6a9ab968748ec81f9f8a01808202843088dc3d0013302",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/02-neck-attention-primary--twn_v3_filterwise/qat-plan.yaml",
+      "bytes": 7062,
+      "sha256": "1313d1daebf942036f68fa8b5cf8518358823b8446f8ff9789d189105ae9fb09",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/03-neck-attention-primary--exact_scaled_ternary/candidate-dual-regate.json",
+      "bytes": 604,
+      "sha256": "2cae10d6d622014871af6f9aaafb16b6ea08c7d1d57c467a88c7840897cd6bfa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/03-neck-attention-primary--exact_scaled_ternary/candidate-evidence.json",
+      "bytes": 4819,
+      "sha256": "2875c9d2ec7b98ff439f7a9199dc8b42db6772b5a0b9d5de922980e8539e29e2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/03-neck-attention-primary--exact_scaled_ternary/qat-plan.yaml",
+      "bytes": 7091,
+      "sha256": "00517a7011c14e75a5038e12f0e03402dc3609829806c0d98d4ebe8910d59132",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/04-neck-primary--exact_w4/candidate-dual-regate.json",
+      "bytes": 560,
+      "sha256": "d45ec8bfa04546d11b0a0a3ba7404c8424d76ad04cb36206ceea163fe0330d50",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/04-neck-primary--exact_w4/candidate-evidence.json",
+      "bytes": 4381,
+      "sha256": "2276e8fd3ee2fb8d8127d20a5db6ed2712ac48e65f161b282028be52b25f849f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/04-neck-primary--exact_w4/qat-plan.yaml",
+      "bytes": 6812,
+      "sha256": "7a150a8be80e5805ebc6b859dc57e9dd325cb19eee1265b6e99dba14171e8ae8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/05-backbone-deep-primary--fixed_sd4/candidate-dual-regate.json",
+      "bytes": 580,
+      "sha256": "defc9c81dcb14b81459fa3314b59281f03abad8f0f7da5fa1f55f909bba0495e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/05-backbone-deep-primary--fixed_sd4/candidate-evidence.json",
+      "bytes": 4435,
+      "sha256": "675e4676de41a72b6fc489efa79754db08786e772fab3ee5d85715f530c0ecae",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/05-backbone-deep-primary--fixed_sd4/qat-plan.yaml",
+      "bytes": 6845,
+      "sha256": "f7d8564b2f3e3aa7f4810e12eda7382a1e0b8a8a51f42b6461a2e79e0743e498",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/06-pose-predictor-diagnostic--twn_v3_filterwise/candidate-dual-regate.json",
+      "bytes": 603,
+      "sha256": "466740d9613fb01577c1293c2a5d8750b08942057c1009a2ad727e2423855cee",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/06-pose-predictor-diagnostic--twn_v3_filterwise/candidate-evidence.json",
+      "bytes": 5399,
+      "sha256": "deb1a75fce97ac2ea44230a31e250d480789f268e831f2c05c45f7e97d252549",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/jobs/06-pose-predictor-diagnostic--twn_v3_filterwise/qat-plan.yaml",
+      "bytes": 7430,
+      "sha256": "03795352f9a67d45a56d7fdc5b10b72912229196f7fa5773551082faac6075c2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/materialized-queue.json",
+      "bytes": 8768,
+      "sha256": "4a5495ef90e9a1445d6c2ae5e0033f1962ebc6be376f385ad540ce768be02776",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat-regated-v2/preflight-job00.json",
+      "bytes": 3758,
+      "sha256": "2a326a632e5321c9b55625a5c4269834bdd5e7b69c00b0d0b4d5e4a430b6adf0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat/execution-state.json",
+      "bytes": 308,
+      "sha256": "4af9d0427151708b5d1fb8c82da521122aa4b8cfa3b0714c8af647448ed655a0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat/execution-status.json",
+      "bytes": 107,
+      "sha256": "d9170c554cb7c3a70323dfdc684c75ca9fbd0ad405a52d752d48eddcf5b2de6a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/short-qat/materialized-queue.json",
+      "bytes": 948,
+      "sha256": "cb0b149f73a2ece06345fb71587f48544a6dde0dbcba73ed529548075f5ec8d0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v29-v19-progressive-ptq-to-short-qat-v1/status.json",
+      "bytes": 255,
+      "sha256": "f973475a8c305166f859a1df74c33bd346ea9fd9ee0c6f20d9e4839887841317",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v30-qsilu-complete-quantization-lane-v1/execution-state.json",
+      "bytes": 554,
+      "sha256": "59c1f0c7dd9bbdfb49ac36b4f540d2651f02dc081e0b07eb4f0335c3c1527d2e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v30-qsilu-complete-quantization-lane-v1/generated/v30-qsilu-all-w8-qat-pilot-v1.yaml",
+      "bytes": 6115,
+      "sha256": "25f8f50a4a0e83b14716ecf48d0e6411d89b2dc171cdb6bb1b7b991a8ad0035c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v30-qsilu-complete-quantization-lane-v1/q2-preflight.json",
+      "bytes": 2791,
+      "sha256": "235ad91688201bb26ccb0385a6af2cae24e7b9289489aec563535a67b70b85d7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v30-qsilu-complete-quantization-lane-v1/status.json",
+      "bytes": 220,
+      "sha256": "f46eba37f32bd23c52bc0c96fc988a63986c3917cbf177f1113d29026a9fc9af",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v34-qsilu-tuesday-quick-v1/execution-status.json",
+      "bytes": 1397,
+      "sha256": "453368cd4357ba4fdb06e8567d8aa0fb301215205d12306c94e6a86ccd7aee32",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-and-structured-ptq-v1.yaml",
+      "bytes": 13759,
+      "sha256": "3b29ad7a36998534615ce6e6d070d842a1f1c6f4668b88fc9562001c556fe469",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v34-qsilu-tuesday-quick-v1/generated/v34-qsilu-layer-sensitivity-routes-v1.yaml",
+      "bytes": 3472,
+      "sha256": "c509c579e2bd5ba309c250f31ea3dc7c9033d5222a542ea24b4e3cda18baf594",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v34-qsilu-tuesday-quick-v1/short-qat-head-three-lsq-sd4-v1/execution-status.json",
+      "bytes": 593,
+      "sha256": "30bf05be8b84621c8a2fd0f73e8e8758c34ac665f87964271ebc7e9300da1991",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v34-qsilu-tuesday-quick-v1/short-qat-head-three-lsq-sd4-v1/generated/qat-plan.yaml",
+      "bytes": 6431,
+      "sha256": "289d3730d94f376ff54ff88cba0e0083e062af9d9f3c85e8c58ddd2285d5dbe3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v34-qsilu-tuesday-quick-v1/short-qat-head-three-lsq-sd4-v1/gpu-smoke.json",
+      "bytes": 2183,
+      "sha256": "d85a70381ddffb6a80fc747f7cf3e70f4d3baf22fc87921fce43e4e36d283396",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v34-qsilu-tuesday-quick-v1/short-qat-head-three-lsq-sd4-v1/preflight.json",
+      "bytes": 2801,
+      "sha256": "53a7b0106f8ca089ab0b883c12aa75e99626a45fd125affcddb8512962254eea",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/execution-status.json",
+      "bytes": 391,
+      "sha256": "cc97730972ea1622004980afb298d2f47731dc5a2d81937900569a9a95f2ccd8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/generated/v35-cumulative-backbone-v1.yaml",
+      "bytes": 5428,
+      "sha256": "f1efb249ba87a9192c3b4ed8594730e25d25a02f1607a6d0dabb9987aa635481",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/generated/v35-cumulative-head-v1.yaml",
+      "bytes": 6406,
+      "sha256": "c40a4ff33585d1460b538f3df911c94074a6347f4a10c8b00b68dc1eafc82a2c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/generated/v35-cumulative-neck-v1.yaml",
+      "bytes": 5891,
+      "sha256": "23f14a83104e75faf28d8e7bdbd0eeb06a74a8cbaefd38b2c447103eddfafc50",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/generated/v35-independent-layer-format-search-v1.yaml",
+      "bytes": 10376,
+      "sha256": "71b53d73c630d7ff165616be780ee4c8c06feb5cca4a3d656a460e7d04019b0c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/short-qat-mixed-final-v1/execution-status.json",
+      "bytes": 591,
+      "sha256": "8e98210388d687537e4e1d2f6ef7bf2ebe9f3fb8551917fd402a1b53786504f7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/short-qat-mixed-final-v1/generated/qat-plan.yaml",
+      "bytes": 7054,
+      "sha256": "28d5887dd9cc61b1cecbebc1249b9c7aef5c65cd8782dfd9931e34726f0c9a84",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/short-qat-mixed-final-v1/gpu-smoke.json",
+      "bytes": 2188,
+      "sha256": "e17282fcc0eebe0099de8a3f6fb0101628dda1a9b7cdce476e57354ce80fc697",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/short-qat-mixed-final-v1/preflight.json",
+      "bytes": 2801,
+      "sha256": "5632f39818867582575bf4b3835f2b9f716b68f350e093b7a321a2eaa700695b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v35-qsilu-mixed-layer-successor-v1/summary.json",
+      "bytes": 12625,
+      "sha256": "9c88914cc69a624cb1e9221e9e9e80bc10af0545ce15690fc196a2310298082c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/execution-status.json",
+      "bytes": 412,
+      "sha256": "7ead5f1dc406e265842a81b52b74794d9371003939965062f14778df5d80b8d9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/final-plan.yaml",
+      "bytes": 7988,
+      "sha256": "3468f8a994ea408682292901c5c9a0fca1c01d4366bab03f48fd87c430cfe940",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/final-routes.yaml",
+      "bytes": 689,
+      "sha256": "a23079e599c590ef8ceb04f0bd1deec3cc29422134596a6a5b3fcf88bd7e6304",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-plan.yaml",
+      "bytes": 34011,
+      "sha256": "0304d0da63ce75267209263c5325237267d1c8847a6cf1a2bb65ca55958281de",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/special-routes.yaml",
+      "bytes": 2335,
+      "sha256": "32a9eb0983f2e510108a238faee5c68634f5f832ddb517d2131cfaa02f28b5ab",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/uniform-plan.yaml",
+      "bytes": 38598,
+      "sha256": "b57e0a829c70082ed0d316fc9e263bf2306d065fb98272830c1c07346f559945",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/generated/uniform-routes.yaml",
+      "bytes": 2715,
+      "sha256": "541adca6c20b440fe60423d947abeb2aca91c3bc79c35142aded72682506a7f8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/short-qat-full-coverage-v1/generated/qat-plan.yaml",
+      "bytes": 9956,
+      "sha256": "48ac7bbed3b803b3ee7eab37f0ca4817e12b1db491115758d00fa9db6353d6de",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/short-qat-full-coverage-v2/generated/qat-plan.yaml",
+      "bytes": 16709,
+      "sha256": "676e5e8d96d08b50ec2a274855342d9e0d06373df81da1333601c878cbf138ea",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/queues/v36-qsilu-full-coverage-progressive-v1/short-qat-full-coverage-v3/generated/qat-plan.yaml",
+      "bytes": 16709,
+      "sha256": "61f00bf33146c44dda14aba57efaee327c2f47d96102a88abffd8f3e20a17562",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/README.md",
+      "bytes": 2961,
+      "sha256": "c0dbe8d3282e39f0caa6c0603b84c979c53ddb839bb7c7a8e7e143f3a4b666fb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/activation-smoke-v1.json",
+      "bytes": 871353,
+      "sha256": "e5cd6bfa7ad00b47703f0dc0f63b3b24b90dd454645b9ac35f4a59fc70a44d14",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/activation-smoke-v2-summary.csv",
+      "bytes": 8694,
+      "sha256": "e5d76871d3119e681cdcb7707dc2c4a6a24ad3e35c54815c666c6c72a2f51ab6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/activation-smoke-v2.json",
+      "bytes": 1058343,
+      "sha256": "3c9301adaa1937f50bdd0c059f7d8000ea4699ce229e98c8ddb387651340c1f1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v10-qsilu-mixed-weight-policy-search-v1.json",
+      "bytes": 911520,
+      "sha256": "614d8318d1d79390b0294504e88edcd49b4ec0c0115730f31e442cbf16db939a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v11-qsilu-special-format-route-sensitivity-v1.json",
+      "bytes": 335659,
+      "sha256": "eac59d133f59453ce61e148b825996b0e42e46ef3944241f8ab1bc6f4cc2a01a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v12-activation-policy-dual-regate-v1.json",
+      "bytes": 13467,
+      "sha256": "d2a44177c56a5d4adaf6b5938d390e7865283cc78222cfa102b25bcf0c1c078b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v12-activation-policy-map50-search-v1.json",
+      "bytes": 121530,
+      "sha256": "cd1939c3eef15dd38e48cdacb3908d5419ee1abb1b7f06e45493ab757cd3b734",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v13-qsilu-sd4-coupled-policy-search-v1.json",
+      "bytes": 1454883,
+      "sha256": "f6cbaa5b8f31cf5ced502b2fd017ca6598b537974343212409c44afb6a323bee",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v15-poly-shift-backbone-early-w8-map50-regate-v1.json",
+      "bytes": 4649,
+      "sha256": "e8b5d75ad5cde241bf8323727d3544990e9fe9674119759e0483885be956335a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v15-poly-shift-backbone-early-w8-search-v1.json",
+      "bytes": 52132,
+      "sha256": "563bf656c731ce44c790dd75d5bf8f65a28a5f9157408303ee4dbd8f9e1f8c56",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v16-poly-shift-remaining-nine-regions-w8-search-v1.json",
+      "bytes": 268151,
+      "sha256": "619c468b3d49f2ab9036c32fbd8f988fefd7dba20a984e1173026928c5a52274",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v17-poly-shift-cumulative-w8-dual-regate-v1.json",
+      "bytes": 41606,
+      "sha256": "3e58104be08c6a6e89cacd274867bf01d1c19e6b421d0fdc32d1f1ce73ff7c10",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v17-poly-shift-cumulative-w8-policy-search-v1.json",
+      "bytes": 2033636,
+      "sha256": "f5bc68744bd7ff783a0a7f6976e0c26646c371601f9db8e3ad60027d39d2fc3c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v18-poly-shift-ten-regions-w7-exact-dual-regate-v1.json",
+      "bytes": 26038,
+      "sha256": "8709384a7fce40d9c6c8a4a7682e00141a3354820c0fbf380932bc96a80d491b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v18-poly-shift-ten-regions-w7-exact-search-v1.json",
+      "bytes": 280965,
+      "sha256": "974547c55381584216e23076cc6d998814ad45e8388fa4bbccbb6431260dccea",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v19-epoch5-progressive-weight-formats-cpu-v1.json",
+      "bytes": 1493285,
+      "sha256": "cfcfc25269499e4bb309f9c4c5c757d35f1b152906c45b2c0edfd807838eb217",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v19-poly-shift-all-w8-qat-gpu-smoke-v2.json",
+      "bytes": 2169,
+      "sha256": "3ad03a9c282b47d3f20ec3ba1b35fa765b6bba99452a3eba27e9db6ee3c2f551",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v19-poly-shift-all-w8-qat-preflight-v1.json",
+      "bytes": 2770,
+      "sha256": "eab1ba591e19ee91b9cf472998c3eda772748d760b304c8a18593db09b57fe73",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v19-poly-shift-all-w8-qat-preflight-v2.json",
+      "bytes": 2770,
+      "sha256": "dca01925ae073e7a394dd3b042e9fbff5cecde0df68190278b0c4b28c65f7aef",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v19-poly-shift-all-w8-qat-preflight-v3.json",
+      "bytes": 2770,
+      "sha256": "de8783c8cf0200e3b0ec387578ee1d515f1e6e1f878b3880d3b1e7ff7de3d257",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v20-poly-shift-eight-regions-w6-exact-dual-regate-v1.json",
+      "bytes": 20868,
+      "sha256": "cfc195a783d366315d65c93232dae9cab53b085dcfc8eb9ada6d745a8a712ab0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v20-poly-shift-eight-regions-w6-exact-search-v1.json",
+      "bytes": 219040,
+      "sha256": "a8c997c0ce13539188d788261eeee6f44b152da343984e641ff53cb5c7a595bd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v21-poly-shift-seven-regions-w5-exact-dual-regate-v1.json",
+      "bytes": 18492,
+      "sha256": "3a341764f2ef3149b39b3ce4958b1bb918f2f31e0f86b9fdcd6b0f1eb6d80714",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v21-poly-shift-seven-regions-w5-exact-search-v1.json",
+      "bytes": 183765,
+      "sha256": "bc220a4a2e4719489f3c216e94718d097a286b7eb600368e4d40949bcc5cc176",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v22-poly-shift-five-regions-w4-exact-dual-regate-v1.json",
+      "bytes": 13468,
+      "sha256": "1a5489d43ccd84a490e88e548ac265e63f8575b1ea6040745bc96cc1a1233696",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v22-poly-shift-five-regions-w4-exact-search-v1.json",
+      "bytes": 115415,
+      "sha256": "a216037d80ab09079ae961df3bd3f6c00dfe3181042fd4bc37644dac33a943d0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v23-poly-shift-mixed-boundary-dual-regate-v1.json",
+      "bytes": 13880,
+      "sha256": "24cb921d160b6e3031fdd2b2d063e539a012ab652f579142c372b597f9e3678f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v23-poly-shift-mixed-boundary-search-v1.json",
+      "bytes": 1242690,
+      "sha256": "bd69f9bf2701e35868a43e9bbfcbeb0acd65c5166b4fd0e59564af8eb9f1b961",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v24-poly-shift-special-format-route-dual-regate-v1.json",
+      "bytes": 41799,
+      "sha256": "bdd9cd2169e4f1827fdcf71ee317ed5c63cfe5dfd24baba46cb111fa193feade",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v24-poly-shift-special-format-route-search-v1.json",
+      "bytes": 655691,
+      "sha256": "83f954dc857f312763971965263f4a8e4a31fdd940906a6cf682e466fc932ff2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v25-poly-shift-nine-region-quality-qat-preflight-v1.json",
+      "bytes": 2783,
+      "sha256": "1781365f885dfcef2ff570fc371c25ba72d5f11fd963534dedcbe8bec60837d9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v27-poly-shift-coupled-special-route-dual-regate-v1.json",
+      "bytes": 29353,
+      "sha256": "db05395178302647249911773a6a33fc4828006651fac797831a320cc3a00b1b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v27-poly-shift-coupled-special-route-search-v1.json",
+      "bytes": 2831450,
+      "sha256": "68fd8b3a31844390681e0b1692354c572cfc574d349fdae2bca7062db71dc28e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v29-v19-progressive-recovery-regate-v2.json",
+      "bytes": 15030,
+      "sha256": "2c96c5598741bd220a51aed807c3b64dd714b2679c9c227a79bd4d17292e460f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v30-qsilu-all-ten-regions-w8-dual-regate-v1.json",
+      "bytes": 4842,
+      "sha256": "efef87f1dcc74ff23f08c19c5f812108ad32783d2fa5368625536f6e657b3928",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v30-qsilu-all-ten-regions-w8-search-v1.json",
+      "bytes": 429084,
+      "sha256": "50d7449ef7728824ae23cf2b535aa5477860086062fafb6f50f424c99d79617e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v34-qsilu-layer-and-structured-ptq-dual-v1.json",
+      "bytes": 62300,
+      "sha256": "552633cd3c76affde781d5134411f3975ba4ce374459f615fe3b4ebe4319ce83",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v34-qsilu-layer-and-structured-ptq-v1.json",
+      "bytes": 573453,
+      "sha256": "dfa12f851d0d659a45a80c658c7884f96a63b08dc234caf1cf9d706d05358b83",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v34-qsilu-sd4-coupled-dual-regate-v1.json",
+      "bytes": 21168,
+      "sha256": "3b33129068286cc60c8db05ee2c915358499ba183bcc8fa9b2d1ac0bcc569b14",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v34-qsilu-special-format-route-dual-regate-v1.json",
+      "bytes": 33417,
+      "sha256": "188fb72cf0374828dc2afc47bb8e5ef41419b9ef597d0993f8cec0b001b64c0b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v34-qsilu-structured-148-layer-cpu-v1.json",
+      "bytes": 1819236,
+      "sha256": "28280630afb4d11ef75cdbd71032da40fa9a8d7cf6a29d78e8e1017ff13dbb77",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v35-cumulative-backbone-dual-v1.json",
+      "bytes": 8866,
+      "sha256": "d15e7062b602d747884b9622031ad47725efc8010e2597049296ad118f8015e8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v35-cumulative-backbone-v1.json",
+      "bytes": 147063,
+      "sha256": "833f87f5f16df9462d9754659da997e2b2ad7bbedabd865cfdb649421385a841",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v35-cumulative-head-dual-v1.json",
+      "bytes": 8865,
+      "sha256": "71eed7f59afbdeae9f3cd2efbefa05951258ab0099b116cece75462bcad49dc8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v35-cumulative-head-v1.json",
+      "bytes": 167575,
+      "sha256": "c00114d440f84adcfc0dbe810c5f33668e5c417da0e967923d728b3efe7b65b2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v35-cumulative-neck-dual-v1.json",
+      "bytes": 8921,
+      "sha256": "846bc7345fbe607b84ee59acdbe3dd0eec187c84c12ecccca46703ddc9b0d226",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v35-cumulative-neck-v1.json",
+      "bytes": 151863,
+      "sha256": "4e5c744c04b0b67b2173d2d4de611df3259ef65ba8e9a26c2a58d1756828724e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v35-independent-layer-format-dual-v1.json",
+      "bytes": 108701,
+      "sha256": "1bdf4379b09b2dd9990e07b07d9186e32df2cdc29c8d2b3c6eed24d3185673a3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v35-independent-layer-format-search-v1.json",
+      "bytes": 888598,
+      "sha256": "c415930fdeddc5dc2ef0bf9dd75ef0089b61b2999b1222da3f50aa197e8b3836",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v36-qsilu-full-coverage-final-dual-v1.json",
+      "bytes": 5154,
+      "sha256": "a2c903f1a71fbef52ff66ae94278582bd246a8dd280d898a94bd180dbdb245ef",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v36-qsilu-full-coverage-final-v1.json",
+      "bytes": 510276,
+      "sha256": "8a1ab2b0f822aab2cf391663f3f8fa5b20f1873c1bfac900ab0fe0ccdbe0d37c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v36-qsilu-full-coverage-special-dual-v1.json",
+      "bytes": 52251,
+      "sha256": "c21a0423a2e04b66aeda66274e105e0a5f65d26148a7ba431a3689a8d03345ed",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v36-qsilu-full-coverage-special-v1.json",
+      "bytes": 5656004,
+      "sha256": "3720df44b7b920a4ae1cf453559220dadcb5ccbc099f6969bee647c0823ec730",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v36-qsilu-full-coverage-uniform-dual-v1.json",
+      "bytes": 53891,
+      "sha256": "edcc53341bead634eb33768af6d3d3e4a8a39353ada7c6b81ddba07678c94f9e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v36-qsilu-full-coverage-uniform-v1.json",
+      "bytes": 6021622,
+      "sha256": "28379f68a7363750cc1cc3c7df8b4a882599606114a2e94b5efcedc366e1bf13",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v36-qsilu-v35-parent-148-layer-9format-cpu-v1.json",
+      "bytes": 1955144,
+      "sha256": "e646c2b2ae994ec082fdf667e796bf3538998a1d37ca69c5643b2542e520d295",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json",
+      "bytes": 51819,
+      "sha256": "738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v5-qsilu-backbone-early-bit-search-v1.json",
+      "bytes": 159428,
+      "sha256": "fd4442f34df0077243aadd4b6d5855cbf37e1cb215a490e5b43c970191772d9b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json",
+      "bytes": 4630,
+      "sha256": "67fce27506fac33e7655e791d815c04d7030ba213978a1ab27873369a396573e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v5-qsilu-cumulative-w8-policy-search-v1.json",
+      "bytes": 1761157,
+      "sha256": "2daa404b8489bb43bf5d5ed704d4babcba7b3377345444391f1229c6d52d210b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v5-qsilu-remaining-nine-regions-w8-search-v1.json",
+      "bytes": 266747,
+      "sha256": "6df5efd6e0094538b7b66bc068246c2cd525e90a2557819fa280606ef74b4665",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v6-qsilu-eight-regions-w7-search-v1.json",
+      "bytes": 225368,
+      "sha256": "5b40b230f54f404f184c6ef1fe8e1573d843f865e2d5978ea4b1bfc6cb2373db",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v7-qsilu-eight-regions-w6-search-v1.json",
+      "bytes": 216479,
+      "sha256": "a2493438cf1cd62cf2180b4245a9c07c90b6846670bc98b9e9e1bfaa14ff824f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v8-qsilu-w5-exact-and-boundary-rescue-search-v1.json",
+      "bytes": 246350,
+      "sha256": "ba86c21b853ec41ad6b86271215801b7a67d61dd93590b1bfcfb1d3d79902ac8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/v9-qsilu-five-regions-w4-exact-search-v1.json",
+      "bytes": 114629,
+      "sha256": "acc245fa05509e2fe585e2e59f4651e548b94a90bf654a844a97352898b53260",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-format-analysis-hardswish-a8-exact-w4-sd4-v1.json",
+      "bytes": 1384481,
+      "sha256": "8a24e5fabd87542ae28a9bfd4c3081ff7156d9673e46a29569a7bea4f6abe18d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-format-analysis-hardswish-a8-main-v3.json",
+      "bytes": 3360552,
+      "sha256": "7f78a8f46387ce6d9c6d8bc5e5db89a2ac663aab4358af3ddbca971a525c2d52",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-format-analysis-poly-quality-a8-main-v2.json",
+      "bytes": 3360560,
+      "sha256": "478bafe010b4383662a0ad46fc3eec6a0b757a64e67b5a429c8770ec74f8878d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-format-analysis-poly-shift-a8-exact-w4-sd4-v1.json",
+      "bytes": 1384411,
+      "sha256": "e013b3cc78ad8e470ec89bf935f84d37f051282696949cd8657425fcdc6c7def",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-format-analysis-poly-shift-a8-main-v2.json",
+      "bytes": 3361003,
+      "sha256": "306deaa51d29f16c3ed49b1a442f513fb09813a0966ba1960544816cfde48f24",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-format-analysis-qsilu-pq-a8-exact-w4-sd4-v1.json",
+      "bytes": 1384155,
+      "sha256": "26247cf4bb8b88253e3438d45c2797b5b8eb948a1d3761b75bcf46a2923a86b2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-format-analysis-qsilu-pq-a8-main-v2.json",
+      "bytes": 3360453,
+      "sha256": "159ea7d18aaad6266f05cbc78665581ea336fb562d33e6eed5daa0c4f8e74a12",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-backbone-early-v1-summary.csv",
+      "bytes": 2240,
+      "sha256": "83a5ae24ee507733ee1a0584886fe22075a1b089bf2c7c780fd4bdd4af8945a2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-backbone-early-v1.json",
+      "bytes": 238369,
+      "sha256": "27ce8fe399cba8ab4e89e4ced955eeadd2a2206e0c74c2ac0e4a54eb7ea90c5e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-poly-shift-eight-regions-w6-exact-diagnostic-v16.json",
+      "bytes": 244746,
+      "sha256": "64a795e514e27a9bdd322c1fad495c40efd7b65d27f45d9509b5482fd1852513",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-poly-shift-five-regions-w4-exact-diagnostic-v18.json",
+      "bytes": 138883,
+      "sha256": "3ef6c87f178fc905d2c5159df560459aa126f0868b6a98e0d817f7f3848fb635",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-poly-shift-seven-regions-w5-exact-diagnostic-v17.json",
+      "bytes": 209028,
+      "sha256": "38e7439582aaef00db2e5bfd4f329351cdb489f5b19d0be77ae3792a49f5abb1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-poly-shift-ten-regions-w7-exact-diagnostic-v15.json",
+      "bytes": 309038,
+      "sha256": "98d30f1986b8b19aa57bfdfecb13bce205735e25cef2acf0f50307bdb22e5827",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-poly-shift-ten-regions-w8-diagnostic-v14.json",
+      "bytes": 328094,
+      "sha256": "9c8c0f87b6bccf99dcafb166b8aae16434966bd7558ac778305564ae9f71dd3e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-qsilu-backbone-early-w4-exact-diagnostic-v4.json",
+      "bytes": 58402,
+      "sha256": "a65cb8227c4ffd1e42dd4ba6b18da73a92ce1fbe58613b8c1282525212ccd0be",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-qsilu-backbone-early-w7-w4-grid-diagnostic-v4.json",
+      "bytes": 153783,
+      "sha256": "00cfd6007a7a3ce57ddef11e3bb40ba336455787493184691a559767d9e29fd4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-qsilu-backbone-early-w8-diagnostic-v3.json",
+      "bytes": 61884,
+      "sha256": "0a61dc6eafead2f410fadf1373b4bf14c4e5d948a481ece81884e23821a8ab85",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-qsilu-eight-regions-w6-diagnostic-v7.json",
+      "bytes": 244095,
+      "sha256": "0b6d6874511de5fdd10d4f834a723913b45644df28eac58f1baad199be947572",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-qsilu-eight-regions-w7-diagnostic-v6.json",
+      "bytes": 251896,
+      "sha256": "b0134d414920983eba958f7e52233a101bdf452cc9336b1cfdebc66b11d3e5d5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-qsilu-five-regions-w4-exact-diagnostic-v9.json",
+      "bytes": 138775,
+      "sha256": "552a05fc33cd55a5faa03c1bb7425873c35a1a49dcdd1a360a4248677e23fb8f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-qsilu-remaining-nine-regions-w8-diagnostic-v5.json",
+      "bytes": 292884,
+      "sha256": "4122d301a0dbd279559435527ccdcc4ed2e2785091b0865bd6029c9caceff73b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-qsilu-w5-exact-and-boundary-rescue-diagnostic-v8.json",
+      "bytes": 274625,
+      "sha256": "90d48a6526dfc7f373575c0e0c65548481f077cc7f3300b12d11ad14f5a3e434",
+      "git_mode": "100644"
+    },
+    {
+      "path": "artifacts/reports/weight-ptq-smoke-v1.json",
+      "bytes": 46444,
+      "sha256": "88cdfa9e2ac888593d39445f728817393885bd907cbeaa567f24d99bc8dd2599",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/activation/qsilu-pq-lsq-plus.yaml",
+      "bytes": 4052,
+      "sha256": "0acd23499a462203341f90636b8de28aa90967f14ac5d5076738db80267d8919",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/README.md",
+      "bytes": 908,
+      "sha256": "49acd66eaca341cbc9d4100c785be771ee47f13074517f72617ba840e59592f6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/accepted-full35-eight-metrics-v1.yaml",
+      "bytes": 771,
+      "sha256": "0bebecca48e807eed534922374d083d181338f4a2bcce9285ef990fdfb1479b4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/activation-preselection-v1.yaml",
+      "bytes": 2752,
+      "sha256": "db6117aea9b3d5bdb02ca809e3a78c98d8df35919f9b12e2967a8ec5188e9c98",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/activation-smoke-v2.yaml",
+      "bytes": 2145,
+      "sha256": "63bffa50d49078f777fd497f120c18777271525f1d3d5f9cf2936b382071cb1b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/full-model-continuous-0907.json",
+      "bytes": 3688,
+      "sha256": "c4aae8fa0956b746ab485cbc00cd20c7b9ca91be42dde98d31fc9e37e0b00e4e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/full35-integrated-quantization-roadmap-v1.yaml",
+      "bytes": 11283,
+      "sha256": "70d79a5c4de51523b9999e4638e9ec18b1f3dfb19b6ee62f3f93b3b0292bb7b2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/full35-quantization-plan-v2.yaml",
+      "bytes": 10797,
+      "sha256": "0efa04ef8c210bab326d1e947a9f30e452a6a7bb40f78aef8976cdf4a9db8949",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/full35-quantization-plan-v3.yaml",
+      "bytes": 9038,
+      "sha256": "482e0d48a0300ee58a03f2154dfcc3a6c67ef35d3bbf32999a113b466cf194ae",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/full35-quantization-plan-v4.yaml",
+      "bytes": 11545,
+      "sha256": "b25bcb19fa7d74131b5fa3d326320cd90ea3279cc71ba451984a12ba0b3b5486",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/full35-quantization-plan-v5.yaml",
+      "bytes": 6852,
+      "sha256": "ce48d4fad331608892f6ae316dba3920e56cace84f0ef9cc61354e9db51531dd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v10-qsilu-mixed-weight-policy-search-v1.yaml",
+      "bytes": 5154,
+      "sha256": "a2f35ceffe9650aef1de3f2075bdc8f888c48749f098eae7b71b8d251251660d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v11-qsilu-special-format-route-sensitivity-v1.yaml",
+      "bytes": 5798,
+      "sha256": "d6dbac10f1fb62f96eef53654e1ae81bd50dda61a1430dcd4fd3a2e2e7af127b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v12-activation-policy-map50-search-v1.yaml",
+      "bytes": 4485,
+      "sha256": "73ab6b3c3d9a8d9ef095fa2e7c2b3925b808f894d116e8a66fcde935cf5cd127",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v13-qsilu-sd4-coupled-policy-search-v1.yaml",
+      "bytes": 6864,
+      "sha256": "766cf922b0e5a1ee1ceb30407cbfbc74a93721adc7a44066304d8eaa14d9baca",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v15-poly-shift-backbone-early-w8-search-v1.yaml",
+      "bytes": 2353,
+      "sha256": "9d4207d1db4204ee317cfd8d652916cfdd92b569c51a541054428e39e96d0490",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v16-poly-shift-remaining-nine-regions-w8-search-v1.yaml",
+      "bytes": 4678,
+      "sha256": "6db5e590f137f394fac199ee524d843cceb80553f74925c756239948d60735ac",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v17-poly-shift-cumulative-w8-policy-search-v1.yaml",
+      "bytes": 7049,
+      "sha256": "8241bff65f7c6d87c144609f289635b1557ed1c0a8bc5b27d443343c246b4f2f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v18-poly-shift-ten-regions-w7-exact-search-v1.yaml",
+      "bytes": 5430,
+      "sha256": "fd7d3b23ec4ae4638114edc4f8c023def7b226630ac365bb33e9c5c330e70019",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v19-poly-shift-all-w8-qat-patience5-continuation-v1.yaml",
+      "bytes": 1212,
+      "sha256": "4392ceb1d2b1cfcb0c0fbe85aff3e3904bd114946170a8c1bfbc7fae8f8b79e2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v19-poly-shift-all-w8-qat-pilot-v1.yaml",
+      "bytes": 5871,
+      "sha256": "2745da54f419b529233da5d149c617981d9ad9ffe55b6b5291d84676e47e10a8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v20-poly-shift-eight-regions-w6-exact-search-v1.yaml",
+      "bytes": 4769,
+      "sha256": "0ee7e959a68f6f609420d536914e9b3c100596d9bd4d78d854d7d9cd15427ba8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v21-poly-shift-seven-regions-w5-exact-search-v1.yaml",
+      "bytes": 4467,
+      "sha256": "ab26234f76a9579e05fdb9936aca5b0f9332fefc012d85cd2a6d144e9bc90d4d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v22-poly-shift-five-regions-w4-exact-search-v1.yaml",
+      "bytes": 3889,
+      "sha256": "0552bf125fa978fd4e3cded858eb8af9d70c4450fdaa9c386e8d492710bd239e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v23-poly-shift-mixed-boundary-search-v1.yaml",
+      "bytes": 7628,
+      "sha256": "2fbee1c1991ce905364946d4b5bba45c1db838e34d8d1ccf774a277bc243a506",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v24-poly-shift-special-format-route-search-v1.yaml",
+      "bytes": 8496,
+      "sha256": "c9237da09ec9d0f5a3a2e258e1c5d6ae6770063b1dd7600bd944f8006e8124d9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v25-poly-shift-nine-region-quality-qat-pilot-v1.yaml",
+      "bytes": 5848,
+      "sha256": "ec9fae44ecc545e17217fcc471f2c48114766e8f934c36626b5462a4f7f70b1f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v27-poly-shift-coupled-special-route-search-v1.yaml",
+      "bytes": 6995,
+      "sha256": "215f811f34b3f2a94e3048f4ed7f01d39c5afd2abdbaef5ff30cfd5f686af326",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v28-paper-twn-progressive-region-plan-v1.yaml",
+      "bytes": 8320,
+      "sha256": "9d011b8acfda6b6418f962317fc0ffd9c38ac7d6562a6479d844da1c6d151bb0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v29-v19-progressive-ptq-queue-v1.yaml",
+      "bytes": 6621,
+      "sha256": "a7d43eb9bb7a99d845874be471418f4def2cb7ce45793510d827cd40f00d140c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v30-qsilu-all-ten-regions-w8-search-v1.yaml",
+      "bytes": 3709,
+      "sha256": "ebeaaf483ea63319b2724713b111c7a7cb7eff536d0771cff92010a1d586c229",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v30-qsilu-complete-quantization-lane-v1.yaml",
+      "bytes": 8370,
+      "sha256": "1ae2965674a91b5e75def5c7c3d18d75d2067d0762e669916a3c4548fe10512a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v32-qsilu-regional-hardswish-conditional-v1.yaml",
+      "bytes": 3292,
+      "sha256": "dfb0bc0ad3a3d78e0f772f0d55599788586836de3a60c279da11fea5aa1aa48e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v33-qsilu-special-formats-first-continuation-v1.yaml",
+      "bytes": 4731,
+      "sha256": "35ca09921968c013773b6dac344571c4c20c0296bcc01b19ad164be62a1928eb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v4-plus-prepared-plan-v2.yaml",
+      "bytes": 1981,
+      "sha256": "c996a6487ec3a7cf8846cec67f11b037d16342a414352e6d3db55d8af642167a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v4-plus-prepared-plan-v3.yaml",
+      "bytes": 3141,
+      "sha256": "925245467cd68eac5d6b7815950e28dade2eb5c30886480371b29d99d7cc128a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v4-plus-prepared-plan-v4.yaml",
+      "bytes": 5680,
+      "sha256": "d6c0c369c203db41a9177e1ab90a46b3be3d02fed86976f78681a44d04406c79",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml",
+      "bytes": 2297,
+      "sha256": "3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v5-qsilu-backbone-early-bit-search-v1.yaml",
+      "bytes": 4103,
+      "sha256": "8b8f8d587ff3cfbd06d790cbc365762c6e631c641b5933bce731fa6cbfd6ebe0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v5-qsilu-cumulative-w8-policy-search-v1.yaml",
+      "bytes": 6544,
+      "sha256": "55bbbb9e195fe4981a326240e3e0744267a884f85293b7bb0ea2e5f3d611e611",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v5-qsilu-remaining-nine-regions-w8-search-v1.yaml",
+      "bytes": 4585,
+      "sha256": "3783deb7607f7c61d77771dab359eef54fa3de1883748963e71c7cc24720a01e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v6-qsilu-eight-regions-w7-search-v1.yaml",
+      "bytes": 4305,
+      "sha256": "d72f9a19d1bfbdda55a11c6a064d73dc4aa5312a39341168f93a79ed6a60c6f0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v7-qsilu-eight-regions-w6-search-v1.yaml",
+      "bytes": 4286,
+      "sha256": "a227bca43010bd43907c3a692d244f3fb8bb7621acad09909fcd0caeabdb5f84",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v8-qsilu-w5-exact-and-boundary-rescue-search-v1.yaml",
+      "bytes": 4902,
+      "sha256": "461b6b626f273f545f87082842459c76ad250339d71e56d5bf89239d8e50e5ac",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/v9-qsilu-five-regions-w4-exact-search-v1.yaml",
+      "bytes": 3717,
+      "sha256": "4fbc009109def3aad48a4093e363f1e00f460d5820a46decda614c7552e7554f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-ptq-backbone-early-result-v1.yaml",
+      "bytes": 1768,
+      "sha256": "e9b655f2ced841d9d2440f6a206b577d0124c214f642ed15ef52768661bea006",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v1.yaml",
+      "bytes": 6629,
+      "sha256": "070dc5d08729f5d938d7667d560372d10c36ed5d1c6629261344a0fbe8f39253",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v14.yaml",
+      "bytes": 4797,
+      "sha256": "298c38ffecbeced4e5288d4de49b18d530dbe897880c88deab072b7b8e36f2b4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v15.yaml",
+      "bytes": 5146,
+      "sha256": "3b499d80565acb25ef04b7663497138772a30c520c7bedccfae2d3d137ae228e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v16.yaml",
+      "bytes": 5044,
+      "sha256": "5b93a9b2b8cdbb4582c1cade475d6b4a3c777814b587d6305e9588fff40f3086",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v17.yaml",
+      "bytes": 4948,
+      "sha256": "26c55b1733233a945f8cc6ec0bed8c8800296025e0d6932f6c1ee858c3ab7af2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v18.yaml",
+      "bytes": 4825,
+      "sha256": "2462f26c8639afa2c40a1de09d305aef9998ba7d657d7a222822e6a9a00d9f1c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v2.yaml",
+      "bytes": 6289,
+      "sha256": "bed98c98dcb6b8e4a4075845544bde5100f8cba4f506b8e89e34234ff27a5577",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v3.yaml",
+      "bytes": 6451,
+      "sha256": "2f83ba617b5501338ab3578f3cb1026b79f18aee3b6bf2668b167d5616db1f43",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v4.yaml",
+      "bytes": 5081,
+      "sha256": "0a6c306c05a271d0ac6d72f6369f3a910b7a85356e0387546170ece21a1824fc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v5.yaml",
+      "bytes": 5308,
+      "sha256": "d5cb91f906b1fa18b47a3e1e129c6f899720cadf988315722776415bff3b8838",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v6.yaml",
+      "bytes": 4627,
+      "sha256": "73f40ad569e7e027492bbe4ba374f2573272b62c26e192167e71e9cf76449809",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v7.yaml",
+      "bytes": 4665,
+      "sha256": "562a1446c378e0fb8929d235fabd785719fc9d3769d801104e5e0af271ce3e78",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v8.yaml",
+      "bytes": 4906,
+      "sha256": "132cd2a6cc15226435f60deebcde36bb9bdc827e306443bc468cb2d904ad0d25",
+      "git_mode": "100644"
+    },
+    {
+      "path": "configs/experiments/weight-region-sensitivity-plan-v9.yaml",
+      "bytes": 4516,
+      "sha256": "9bc7084e9217754153cc2ad69e83e6ae658304944ffa0ab6318ebd57c1d5d394",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/README.md",
+      "bytes": 1626,
+      "sha256": "b75669c3f489b8ebf772043c40062c674f4621f2162112ea1bec85dd62d5d56b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/activation-preselection-teacher-v1.pdf",
+      "bytes": 119989,
+      "sha256": "8b1ca9e44cf1679d924cfe08197782ce575d2c9d1c2ee41965b22e791002a551",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/activation-preselection-teacher-v1.png",
+      "bytes": 505835,
+      "sha256": "3bfe999ce0fd9ed2fde79500cc03a5484d3459647ced29a28ae58023d5c50684",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/activation-preselection-teacher-v1.svg",
+      "bytes": 304305,
+      "sha256": "82ea786c5be8558659a790f3a85ee834a48bb12f8b77e191ddbe15459b7ec103",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/README.md",
+      "bytes": 3691,
+      "sha256": "c3f23a9f14fc33b4c338395e19774be9c4806504860a0f3d9f65221d26fb21c5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/audit.json",
+      "bytes": 15608,
+      "sha256": "df49ab778f9fb66cb5e3da51a6ab47d8ed6d279f5cbd03eb5b59304f3255c344",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/folder-inventory.csv",
+      "bytes": 204,
+      "sha256": "84d26b1f150ba828383ebe72c0ca054d05f86fb3b46d16e20fc4799ed0cb4828",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/four-day-plan.json",
+      "bytes": 2518,
+      "sha256": "62b81e60ca6f762d84357adcceddbaf29baa037a633aedf9c7bf1d941866861b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/ptq-candidates.csv",
+      "bytes": 3166,
+      "sha256": "f1ffe2d97af2476f91003bec3263b9de8094359124dad7a668990bc3e61bf3a1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/qat-epochs.csv",
+      "bytes": 230,
+      "sha256": "a21e051dbb83054d160c5d667806473db04f7f350374eab1917f05cf8792d689",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/qat-metrics.csv",
+      "bytes": 4006,
+      "sha256": "4f3b6a122018bf1ece233d03e14f3e67f2c078535c519f69806a9a14f4b6b928",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/qat-total-deltas.pdf",
+      "bytes": 19707,
+      "sha256": "c658d9f8ffb4f11e4dc8e38f4f44568ebebab5aa2c06f0cbcc21ec33ba2f510b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/qat-total-deltas.png",
+      "bytes": 83539,
+      "sha256": "4bca80f554d41ccf249acb9e7eb771c7b00fa10fb08f20cd757b9becec22b040",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/qat-total-deltas.svg",
+      "bytes": 46554,
+      "sha256": "51fe7ecc6937da70fad1e58e93d01c15cb21a5051053b2eac8cf2068b808af0e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/weight-evidence-provenance.json",
+      "bytes": 519,
+      "sha256": "86166cfb276b02a1c07fda0c52b58e948dc06a18f9b9c6cda0ce45d077de575f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/weight-evidence-tables.md",
+      "bytes": 5885,
+      "sha256": "a6b327137a77fea4716e031c728eed021f1b07a7b33454d775c931ec94aa81e0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/weight-format-evidence.csv",
+      "bytes": 301381,
+      "sha256": "afff68d88e03b6fea9ed0785f90db231397b5e129cf2692e96ea21a78a3b270e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/weight-format-nrmse.pdf",
+      "bytes": 42961,
+      "sha256": "606e6d942eba42d6bd6404af7c670cb133607a5f223714cd9241a091b5dc0163",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/weight-format-nrmse.png",
+      "bytes": 237510,
+      "sha256": "12dded3af6229250b9d259f1018a2871965bc6efa46d88874fac6ee396d7ea55",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/weight-format-nrmse.svg",
+      "bytes": 116174,
+      "sha256": "36ae4c7f03687917a348e8bb0dc970a9903845cea3ce962a2c186a9e98dc606f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "deliverables/full-model-audit-2026-09-07/weight-sites.csv",
+      "bytes": 9410,
+      "sha256": "c711e329c2245fbc27738eaeaf9ef468901b5430486ea20cdd00e25deaf27130",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/CURRENT_PLAN.md",
+      "bytes": 6681,
+      "sha256": "e4ab633f8fa177c0b62c7e884ea39e3de787115444e40415c3cb6d6e7380fbb4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/README.md",
+      "bytes": 1219,
+      "sha256": "e6c3f9b41848d4c2ec71e13c83b7b7d80d75804020a01c1bf71e6bdcff8cf35a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/RESUME.md",
+      "bytes": 5503,
+      "sha256": "977400d234afcc0955b100ef783e5dcdc917d5d0b67b671c0791cf0fb0f47ac3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/README.md",
+      "bytes": 2184,
+      "sha256": "2c651facd590750040473a6c493796adb7bb3c9bfdbf4eccb7c59b0bb5e4d916",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/config-index-before-2026-09-08.md",
+      "bytes": 3577,
+      "sha256": "970558ebb73f19069015b2c0bcec80a7b1658dbfb51b7c9b5d3c81448d4c1886",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/project-readme-before-2026-09-08.md",
+      "bytes": 20430,
+      "sha256": "6530a8b045ec0ad7bd17bff30c0cb1c833195d2403c83733fce897002d4bec9f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/report-index-before-2026-09-08.md",
+      "bytes": 4110,
+      "sha256": "51826f139c1dacf89f58db8554f402ce23066b7414c998b38e53ab230c7c0b76",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-08-29-weight-ptq-backbone-early-v1.md",
+      "bytes": 5412,
+      "sha256": "621f9ccd2467321ab7e4ec862bd3aeab153ad9adc050be63b41bdb4de4eb3388",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-08-30-v1-v3-cpu-implementation.md",
+      "bytes": 11854,
+      "sha256": "b39ce7770675521ea50ebdc49ff39f7f63799c9a737a8c71292454ad5086c0c5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-08-31-hardswish-policy-revision.md",
+      "bytes": 11218,
+      "sha256": "3b558ac053d82161d75f56b0a45b548cddd165742df057e57098fc7e672ec4b5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-01-architecture-experiment-audit.md",
+      "bytes": 12913,
+      "sha256": "ca5cb42d2f3d5ee3c582ba9e6dc5e5535ca8aa30bf07bb5e7e34d8c4984493c4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-01-cpu-p0-integer-exact-routing.md",
+      "bytes": 7321,
+      "sha256": "4e856c9ed10b99454b4c434309385dc107be9b2715ea3e2bbd6aeae886589b4c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-03-poly-shift-ptq-special-format-and-qat-entry.md",
+      "bytes": 8226,
+      "sha256": "40669153850bb3590e3955f2f94975a8ad249391d65b0fef3eb2a34a7d1d7adc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-03-v5-map50-bit-boundary-search.md",
+      "bytes": 6656,
+      "sha256": "9d583a39cc63eb4af3f9c69ef44ac7e5d1952108d4320b6fe41c1847b28d970b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-03-v5-nine-region-w8-sensitivity.md",
+      "bytes": 5218,
+      "sha256": "94b6a7eefcc49a8fca16e649d074522300cb6c25f45fbf45924b646dca79bd9b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-04-integrated-quantization-and-paper-twn-plan.md",
+      "bytes": 12989,
+      "sha256": "0520c896c0f06af6a1209e180ab82646e4a0cb2cbc21849e832f50c2151172d1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-04-v19-v29-progressive-quantization-execution.md",
+      "bytes": 12457,
+      "sha256": "7f479dd237e031d8a187a8b70e0daa2c30a5a38b366f871212bd6c13e330d371",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-05-v29-selection-and-qsilu-handoff-plan.md",
+      "bytes": 6239,
+      "sha256": "ebf3c7271aa7e8b7c0c0aee32619fb68d79b49197a2eccf3c57d0179cbeb66b3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/2026-09-07-full-model-audit-four-day-plan.md",
+      "bytes": 11129,
+      "sha256": "b3fe95c341124eed402388a8a049675c0e090ff237449e8c69d5bc1c1cd85955",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/reports/README.md",
+      "bytes": 2329,
+      "sha256": "8cb435edf2a1d02e939d1ce820f44ba84de0492445b8aaf64ee899d4134304e8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/archive/scripts-before-2026-09-08.md",
+      "bytes": 2888,
+      "sha256": "df0aadf2f8dab681731cdb02d17a62062eb097845fa8408a88e8a5de25989fef",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/organization/README.md",
+      "bytes": 2110,
+      "sha256": "3640b430ba0ab39578789b10a514255d192d6bdfa851034ed4526e33d12e0c58",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/organization/cleanup-proposal-2026-09-08.md",
+      "bytes": 3874,
+      "sha256": "806b7021edf13b0ca7db6649c303a1cc1a47aac61c6745a4e6b49ea52b2a1de3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/organization/inventory-2026-09-08.json",
+      "bytes": 834645,
+      "sha256": "596ccfb991f60708e46052e7271c980bfd34ba9f54325125d932924d98df9d0d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/organization/report-retention-2026-09-08.json",
+      "bytes": 39970,
+      "sha256": "4e65a896f9de48948229d54c57b165fd180577ba7e03cd32cddd7c61e6e919c9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/organization/report-retention-2026-09-08.md",
+      "bytes": 10651,
+      "sha256": "fe5743c52da200ec6bf98ddaec7964181494a13f50813337697fc33192bf357a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/organization/report-retention-execution-2026-09-08.json",
+      "bytes": 10594,
+      "sha256": "3947c0a2984fa3afcc940cce181c8b265d464bd906847cafc1551b932a724ef5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-08-29-activation-output-smoke-v2.md",
+      "bytes": 6148,
+      "sha256": "2d2292f6a819aadbe579282ab349d3b7764a3ac6b15bf79d7306748a6c7bb3d6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-08-29-activation-preselection-report.md",
+      "bytes": 9897,
+      "sha256": "1accbb8c1bc9fb7eaec813a6acc99e279b3e6f9c796cb4b5a0d42b19dd9315f5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-08-31-q3-activation-parent-evidence.md",
+      "bytes": 18827,
+      "sha256": "85575a64a0827509baa09bb0cce3ac90dda4c74c58a3bdf8285f68442430f5e4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-09-03-v4-qsilu-backbone-early-w8-search-validation.md",
+      "bytes": 9402,
+      "sha256": "33647a029cd06aaae41bea85b281616e12ae1d1001767d514584e1c358cab8d1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-09-07-continuous-qat-recovery-results.md",
+      "bytes": 7979,
+      "sha256": "ce391d90675a500aa1c3d19439109a897eaa4e28ab395815203cfb30950213cf",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-09-07-evidence-consistency-boundaries.md",
+      "bytes": 4389,
+      "sha256": "d673cef66118aa8029e318afd37bd63c77cae65a5d443a1fff86589f09e7b8fa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-09-07-weight-distribution-detailed-analysis.md",
+      "bytes": 12114,
+      "sha256": "2e9dca92519f8b5161e013e016f9ffb17e350dd49cdd7ef9441b867911335a44",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-09-08-cumulative-ptq-plan.md",
+      "bytes": 4520,
+      "sha256": "3b0b6990ebe9c5ee74db5788a77695bb33675bc57496dcf070924fe4834ec412",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-09-08-quantization-method-and-decisions.md",
+      "bytes": 7478,
+      "sha256": "ca797d46f64cd817a25ed43d0dfa53e4561ce90c6b3ca09d94767d557bc27136",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/2026-09-08-quantization-phase-handoff.md",
+      "bytes": 11616,
+      "sha256": "0ac13311befe6344d14c946fc8df023563880eafb94bd196f37a78fc1f95f6be",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/reports/README.md",
+      "bytes": 2103,
+      "sha256": "425ccb9752269733057bf53f270955716156662d6b1df47fb0d5a7bebbbf5e03",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/research/2026-09-01-quantization-literature-and-innovation-audit.md",
+      "bytes": 43716,
+      "sha256": "a8975dc9b2be39427b662c6418730a6aa3c8e69f87ad72a25832945255fa7410",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/research/2026-09-04-paper-twn-primary-literature.md",
+      "bytes": 18809,
+      "sha256": "55610a7948dccc878585fdf5fd43eb47a60550231f79070e380d46bc8b1100ce",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-09-06-v36-full-coverage-plan.md",
+      "bytes": 3988,
+      "sha256": "d5524ade7adfb07a52e7c52b76fdcf5bbd32a7ba89cf1b9a011255c73e7ef892",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-09-06-v36-full-coverage-design.md",
+      "bytes": 2351,
+      "sha256": "5d56eaf649d95da4f678b3f78668efdc2e269adc0ebddb649ac66a9e5f90f37d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-29-activation-coupled-smoke-matrix.md",
+      "bytes": 5319,
+      "sha256": "e6fba393edd76e2090aba37a61475f9eaa8dbcbdd4279e24802ae24af8fba66b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-29-activation-preselection-figure.md",
+      "bytes": 4026,
+      "sha256": "5d7f07a64ec69154fe39406985edaed6e598f4692abeea5b3a0842796405afd7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-29-activation-preselection-github-publication.md",
+      "bytes": 4007,
+      "sha256": "333d26437d05d99dcff027d9e53f014c54b21d875b42269967ed728ae69f8677",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-29-full35-quantization-plan.md",
+      "bytes": 4265,
+      "sha256": "a88c88420e9d683e5536f2205d5e8f1642547afff5e6e52b20d98aaa1e680e9d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-29-qsilu-lsqplus-activation-intake.md",
+      "bytes": 6138,
+      "sha256": "6f5a431e6ad940fb40a892e398b95033d94f16b4b50bc57ae33a0803c5cee06a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-29-weight-ptq-backbone-early-v1.md",
+      "bytes": 5801,
+      "sha256": "af784bca66cdf577fcb3f2c2554e46b1e2eb79b994b540dbd9cd4f22e9997575",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-29-weight-region-replan.md",
+      "bytes": 4419,
+      "sha256": "8cf5fa739777370bb9e8e5dcd093dbd2f578132de33b3e72219a692e8b8fd220",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-30-v0-v3-cpu-implementation.md",
+      "bytes": 10470,
+      "sha256": "85736f68cd05880a8b3e4103884deb7643804ec8126f80ec43e9b2ba5a29d9ea",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-08-31-hardswish-policy-revision.md",
+      "bytes": 8696,
+      "sha256": "483b8df5b854321ce2d8e06a60bfa62d29b8c5cf63891309da1c65970d968980",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-01-architecture-experiment-audit-and-v4.md",
+      "bytes": 8888,
+      "sha256": "4b72a05d11ca3a266526ff07d5c0f7cdf58df9448d8227d831150a3d18d9d5e9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-01-cpu-p0-integer-exact-routing.md",
+      "bytes": 3158,
+      "sha256": "a679db2459f2d239ae3f90c0d0c2226723a969d62f894d2e7230e7b973d76713",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-03-poly-shift-w8-w7-and-qat-p0.md",
+      "bytes": 5852,
+      "sha256": "d9440fe82629a58023edd1607b7ab67a946db61809d8f49d208f8b482b2fc1d1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-03-v4-qsilu-backbone-early-w8-search-validation.md",
+      "bytes": 6627,
+      "sha256": "338aa17ba57ff32c062f5150a77f1f061f41b79294806d7a085c13223df71f1b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-03-v5-map50-bit-boundary-search.md",
+      "bytes": 3666,
+      "sha256": "3d660f78c27ee5521a30079d7682da8f22328c2e1344be210ae938d21302858e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-03-v5-nine-region-w8-sensitivity.md",
+      "bytes": 2813,
+      "sha256": "dd9d0091dbacc2231bd7e5d3bf85be06b7b3c770b5eda5c221bf8722de0ed681",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-04-integrated-paper-twn-roadmap.md",
+      "bytes": 3940,
+      "sha256": "88422a036fab46a19cc823d0b20f23db4e08990b2dbaea95d10baee651464308",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-04-paper-twn-primary-literature.md",
+      "bytes": 2075,
+      "sha256": "1a89e7cbdc081be2db2ee4bcd1fed16d57430f4e800baf43d620208900c3604f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-04-v19-patience5-continuation.md",
+      "bytes": 5331,
+      "sha256": "dc26aa3dc7a55edf970651c6333442d33d677b89b57bf53e5cc6ca3d08b7d0f3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-04-v19-sham-checkpoint-export-recovery.md",
+      "bytes": 5116,
+      "sha256": "a0d7400586279e783664901615df642dd477d7de683615827f3c921954e24f97",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-05-qsilu-q2-preflight-schema-repair.md",
+      "bytes": 3315,
+      "sha256": "d95b6e7f1f6e8f871ebd4ea508de3cd195b36aa55fab7fb710b6e760ec52b84e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-05-v29-archive-and-qsilu-handoff.md",
+      "bytes": 3741,
+      "sha256": "913468e950f4715c329bd456d1c7a270b7a78d481ff13bf3abd538f03ce0d866",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-05-v29-low-token-monitor-and-qsilu-complete-lane.md",
+      "bytes": 3687,
+      "sha256": "b697cfb349dfafe22a3209db531456ed1f27ebddb8b8b5cd929fe8bcd41e00c9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-05-v29-matched-sham-gate-repair.md",
+      "bytes": 3772,
+      "sha256": "b995802c108a2eda7221b324c634bdd776e5bb223d69d5404348f8ead479096c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-05-v30-qsilu-eight-format-cpu-preparation.md",
+      "bytes": 3140,
+      "sha256": "5bc26de205c8f2d34e19763d95cca8c6b5a29bf472c15da4a2db92ee0f1c4d0d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-06-qsilu-special-formats-first-revision.md",
+      "bytes": 16380,
+      "sha256": "9b73786bb192710cf90c45bb0b2f913553121739fb6078d59932c24bbc632135",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-07-continuous-five-epoch-plan.md",
+      "bytes": 1253,
+      "sha256": "807ba91c6c726c43b2866b311cb61df9634bbba243fc37a7ab143783f16c5df8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-07-continuous-p0-implementation.md",
+      "bytes": 4936,
+      "sha256": "29280de1365d7e6416ac114002b2b729e9fee499df721e9938b80117b78de420",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-07-evidence-consistency-clarification.md",
+      "bytes": 1370,
+      "sha256": "7a2d4491427fb07d4ec076712e5c59f08e4e3aafd43820d229dc03eea3f8ac5a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-07-full-model-audit-four-day-plan.md",
+      "bytes": 2369,
+      "sha256": "3e6c58e480243c490784dc912d5961eed91a81928630018ef20cf9c12cf3e44d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-07-github-half-publication.md",
+      "bytes": 1736,
+      "sha256": "f449ea265f43c3edb3872ff20a75b1a264c23326298886344934f2aa1cf6dd2c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-07-six-short-qat-continuation.md",
+      "bytes": 4331,
+      "sha256": "36f3e6cbb0fc49d941dad659d7dba3b089ef56773db4a907d7f5907642f995ce",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-07-weight-evidence-supplement.md",
+      "bytes": 1332,
+      "sha256": "025dca13b8a0b1ba4a20a4955c62e5630d53053d91af083137b1cf27a173d146",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-08-blocking-monitor-events.md",
+      "bytes": 5408,
+      "sha256": "9ad88fd183b268e7bff3abaacfa9adbefb10eef642ee2c6c6709d210f72cb7e5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-08-cumulative-ptq-continuation.md",
+      "bytes": 6183,
+      "sha256": "cdfb90e93eef259cd84c5694ec5280fcb13071faac2f9367b0b1bb1fc0820b6c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-08-matched-benchmark-contract.md",
+      "bytes": 1544,
+      "sha256": "4d56b1913ea37521d12fba4a845d0686641c51600358d2d9d5cd27cee073f9ef",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-08-project-organization.md",
+      "bytes": 3865,
+      "sha256": "e73fe2c56d39e36bcd8f15e7b91dccd80ad34d209158076fc7213770189dbdaf",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-08-quantization-phase-handoff.md",
+      "bytes": 3696,
+      "sha256": "73fadb475c46accd601a2c8ac53a67dc3497c538000cd395ac2717535aa470d6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-08-report-cleanup-and-publication.md",
+      "bytes": 4340,
+      "sha256": "733cdefe487f11d4c67c1e846db107baa7c580483e0f25d88f9571f9832b0aac",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/2026-09-08-report-retention-proposal.md",
+      "bytes": 2286,
+      "sha256": "d61cf0979d77cdedea5ac10e6db97c9c80e82fcd41989364a8eb72b82aaa232a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/worklogs/README.md",
+      "bytes": 4392,
+      "sha256": "b2646575c0f2566e724e0886eb55e45c4529274ec39fc0113603a2f984a5108d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 1770,
+      "sha256": "d354e39008e16811c7881a39251c1da0a4e1a83bc2a89284b8b76c3ecdfc5295",
+      "git_mode": "100644"
+    },
+    {
+      "path": "quantize_spec.md",
+      "bytes": 80661,
+      "sha256": "a6a61429bc458a3e1473180567bdcabcdc9d095e705d2a2b09faaa328ddce8fd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "requirements-report.txt",
+      "bytes": 19,
+      "sha256": "48ee9dbf164ec7438470efa7b3847688dc1010a88d020a7777ace4934c1fcace",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/README.md",
+      "bytes": 3100,
+      "sha256": "80bdbf8b5dc31b62039d44eab2451c8d7b1a93d37b49be12fc8c7c837303756f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/activation_intake.py",
+      "bytes": 157,
+      "sha256": "1b7621509ff3886324f6baea079f5fb2f74d2346ef92f72ab10aae59cc9438d5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/audit_continuous_evidence.py",
+      "bytes": 6171,
+      "sha256": "144229239c0efc99937c0216ecbfc134d477abbed5898043ba25b1c077e506fc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/extend_continuous_qat.py",
+      "bytes": 4536,
+      "sha256": "9ecf1ed4ea556b29f67c9fac3bd02c60b5508e1e4f48d84fa01ea5d82293b448",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/inventory_project.py",
+      "bytes": 8650,
+      "sha256": "086654432265f981b402544339d47b043a5c1c159fd1f27b22361657348077e6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/preflight_continuous_parent.py",
+      "bytes": 10531,
+      "sha256": "d4ab233f878506afeaa5c97e51febdccb65e504cf9d6f496914421aa4eb75351",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/prepare_continuous_matrix.py",
+      "bytes": 3701,
+      "sha256": "5c994e0af35c4b0252cb172ff2f16327f5f9cb7e6f0e40a2b36f39ee75125d06",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/prepare_continuous_qat.py",
+      "bytes": 5856,
+      "sha256": "1c705cd749fc0f79c9c6810fd81094fd94ed4dd07c22c8d9e3aae175bb793093",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/prepare_exact_weight_cpu.py",
+      "bytes": 170,
+      "sha256": "5633eb0cb14116808974a08bf7fe7bcff13a7ea2ca917d84608267488d809153",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/prepare_v1_v3.py",
+      "bytes": 100,
+      "sha256": "95e0c228d22b4084d5f297b704d94529f9e392bccb093266dff1d29c8b1a8720",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/profile_continuous_distribution.py",
+      "bytes": 4318,
+      "sha256": "e13f38c123a616db9e9f00b87ce207bc88a806337481ee2c50c089690c98f53b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/render_activation_preselection.py",
+      "bytes": 11165,
+      "sha256": "ee1f7d3fa80a33451faeebdfa61722ed8eb74fe658e6dfb8d2f7b7af4cd2bbd4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/report_full_model_audit.py",
+      "bytes": 7818,
+      "sha256": "f470e8e3db07ca39d1285481e8b17b65179f4a96c8bee868b5dfe41f61ec88e8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/report_weight_evidence.py",
+      "bytes": 8431,
+      "sha256": "af72322ab110e76d80c77bc8ee5152c2ff14f7de2c530fa620b2e0a5dbb0c719",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/run_continuous_layer_probe.py",
+      "bytes": 5846,
+      "sha256": "fb008512e76f538bb3fc948e97e956204b8cc8911be140e7c18db55cd02afbeb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/run_continuous_qat_queue.py",
+      "bytes": 6058,
+      "sha256": "0274ae2cbb9dec58d80ff6e62e5a0afec252f14af55e82b8a418c62bbbc095c8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/run_continuous_special_queue.py",
+      "bytes": 9542,
+      "sha256": "ba907aa690e7bac5dd8526284e06ad52cd783f723618a4f9663fff1fe6a1b8b6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/run_cumulative_ptq_queue.py",
+      "bytes": 20206,
+      "sha256": "1e286f172c6098fa7f641ca31de476962147494004488d2710903e03df9ac553",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/summarize_continuous_qat.py",
+      "bytes": 5738,
+      "sha256": "e850396fc8a8d18229b746fc53668fb01f2c24c6b77321c58f973b57327b9802",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/trace_continuous_precision.py",
+      "bytes": 3957,
+      "sha256": "bb8e7bc0df45a5bf5d56a3ce19576b1a85ce81dd09550c557dd9bc3dc91f4228",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/validate_continuous_parent.py",
+      "bytes": 3882,
+      "sha256": "a24472097852f4b75b17df7e8591bd13e85fbf3768493f1ec0dea461604ba40f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/README.md",
+      "bytes": 866,
+      "sha256": "2a0ee70aa0c2c925df2c823d6272af0755a295166a60f5baf3c8822194ac837c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/__init__.py",
+      "bytes": 8303,
+      "sha256": "a61344f3013a5bae490a75df44fd4655543c7f6506098272404968138c39c692",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/activation_adapter.py",
+      "bytes": 8381,
+      "sha256": "5db658d3c986878926483a5b2d0c463ac53b754674bd8cbf42478756178a0b10",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/activation_policy_search.py",
+      "bytes": 26675,
+      "sha256": "2032c13e9f9a74692f437f2f9b7942ef692f15fec7cd8e2d28cd250049352f64",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/activation_smoke.py",
+      "bytes": 20700,
+      "sha256": "ffa9ed89f38db239ffe8505743af09354bb886473bca1c9b5218128ccb86f233",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/activations.py",
+      "bytes": 4672,
+      "sha256": "db9e4fdf46b37b178fd1596c6791aeba025a01f47958a7594d6356f921fb8845",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/balance_selection.py",
+      "bytes": 6797,
+      "sha256": "a6c0238bdad369454dd577c320ceea7df85763f78a8642014ac9006f8dee8c2e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/blocking_monitor.py",
+      "bytes": 2166,
+      "sha256": "b86a901ac3aaa2b9d489003c48dfaa19410d909900439e6262001db824479974",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/diagnostic_manifest.py",
+      "bytes": 16354,
+      "sha256": "6de907cef8c68ef7e2b83d32fd81eb2d73e3ab31f4bce2f663ceb486dec769eb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/dual_metric_regate.py",
+      "bytes": 12214,
+      "sha256": "e7fc4c3ba5d58c49e4ca8346e8bf28a951b1151b31644e1ba2f416313a7aa515",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/exact_preparation.py",
+      "bytes": 16982,
+      "sha256": "90369d93fd0a215ee5f3663d9b838ed967adb03f340bd56c6ed2fb350104f1bd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/exact_routing.py",
+      "bytes": 16841,
+      "sha256": "e0e8c1f55d6b1cf86b6a85d730b4b31b117d97a67dea1d4d26bea86591e25d46",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/experiment_plan.py",
+      "bytes": 8073,
+      "sha256": "9e5e6abd018c3586dfb9577f07b6ae2b36e77e6c722c7aec12de20db72069475",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/full35_adapter.py",
+      "bytes": 10410,
+      "sha256": "185af41c226edb8439c81d27725005133aae00ba503e2dc5ec2d1fb54dd630f1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/full_coverage_successor.py",
+      "bytes": 57259,
+      "sha256": "cff1901becfe9b54829e22768addec41f6d8e1baf0a7259445ebc13fd0df8c39",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/intake.py",
+      "bytes": 24926,
+      "sha256": "ee456be7487f2c7af8b97d5fefdc92e9c0186048d206ab6f36528f9c3f07e97e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/integer_boundaries.py",
+      "bytes": 19996,
+      "sha256": "d1c609ef1adde2346c759afaf6d4f1728088c58e2abcac3f9f34c796a817a97c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/metric_gate.py",
+      "bytes": 11377,
+      "sha256": "1002184ef128086da5f228514650d5dd5690573f9bba134f31b09756ecb9accb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/metric_regate.py",
+      "bytes": 7508,
+      "sha256": "acb21584df9efcc2265feaf6dc26b8415e53a6c6c24371a35569391651628d5d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/mixed_layer_qat.py",
+      "bytes": 17624,
+      "sha256": "5b890fc7230e9d6681cf4562af64abcc5fb071ec2e0f49b9d71fb0238f2891aa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/mixed_layer_successor.py",
+      "bytes": 21325,
+      "sha256": "f4f404530ad5c39a2e814f41a3e79c0451791e0e08cde10adab5c00e142bce18",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/mixed_policy_search.py",
+      "bytes": 54045,
+      "sha256": "23f5b7ba30b708d98abcc09bb8585196e014de6084eb13e09f3fdc259a8c15fa",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/policy_search.py",
+      "bytes": 40336,
+      "sha256": "bba4bf45810de820456fcb2085268a2d115a0bc655d4f156d57eb4a8f1e7fb10",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/preparation.py",
+      "bytes": 11802,
+      "sha256": "f865c69233de69e6fc5859d038beea969f8c0dbadcc0e30ffd82ad8b8f82e222",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/progressive_preparation.py",
+      "bytes": 31675,
+      "sha256": "88937cdccc37727321920b22fda4e905c938f6fd014134f82b0b61cd553bfeff",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/progressive_qat_queue.py",
+      "bytes": 32069,
+      "sha256": "ff012afbb2748a2ab86bb577e784d5052e4da104914940321c9c69505ee13892",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/progressive_queue.py",
+      "bytes": 61783,
+      "sha256": "58ea81a1dee00b5e00bc623e545bf143bc50fc721e61c0ba8cec215792af431b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/progressive_regate.py",
+      "bytes": 16421,
+      "sha256": "eec620188cae7309e5e6e40f5c17c19b3c9db3db1e8c328e3301c6c67f5e8d45",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_calibration.py",
+      "bytes": 3357,
+      "sha256": "648cee882dc67da92581e95a37689a51c813276bd0bd2eee4e84f37ee16c0557",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_continuation.py",
+      "bytes": 10798,
+      "sha256": "ad3a935b7f8a8e3932fdab2e8fc7ea5338856e3038ea1f52318a2cb556828d25",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_graph.py",
+      "bytes": 10542,
+      "sha256": "5618f72b3a1023cc945644f187c835c92cf71182ff0d5744937f80cec61e86bc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_metrics.py",
+      "bytes": 10887,
+      "sha256": "dd9b6b7895957c820488a600a66fa2d4d4730c8b01e9119b65c136a648f70190",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_optimizer.py",
+      "bytes": 4405,
+      "sha256": "7f0865e01456a6aa1296c218be04f794b58192f847f52aabba402bd2332ea0bd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_plan.py",
+      "bytes": 27770,
+      "sha256": "e3e0f0b86b10badb539b2a751b987dfeb871a6a671adaeade9c5f035d0c489b4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_projection.py",
+      "bytes": 1410,
+      "sha256": "758d3c918b41799005b963f6c657da47749f4230e96e7f787895ee1a2a926624",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_queue.py",
+      "bytes": 13741,
+      "sha256": "dbb50fd5b42620fd84f733da66629a33c82f0166d7ac19f87ee9783c707f7696",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_runtime.py",
+      "bytes": 80497,
+      "sha256": "13a1e26a5186d326bfd2a4ddc869ea9156428f0a4ea56e19ffccb0d3b0497c41",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_schedule.py",
+      "bytes": 4563,
+      "sha256": "f3604b807995b5a04ab5e1ebbc9a454f3c441701a49f8cc3630664666471caf0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_validation.py",
+      "bytes": 3717,
+      "sha256": "31f7fdffeda2a3659d5f358bac74f3430e6b8691fc3469c47798fc311148465c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qat_weights.py",
+      "bytes": 20068,
+      "sha256": "1868ffb9ba359ee40d0cd0bed1a352e29ea50f4ef3f1c963a88e21dc3d4e0061",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/qsilu_lane_queue.py",
+      "bytes": 50055,
+      "sha256": "08ff4f0ca3e81f1e1ba85708221b31da35cc8e470a4c8c1d5e13dd0c24cba343",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/quantizers.py",
+      "bytes": 4199,
+      "sha256": "a04827b2b3428ba23f77b6a98ba2a4f96339136b50f935053af1f4675d1a072d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/scaled_codebook.py",
+      "bytes": 4436,
+      "sha256": "ee2d4b239bd7a1138dccf8cbed608f314d2af2487f3cd464a7315089a1212b04",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/sd4_encoding.py",
+      "bytes": 4055,
+      "sha256": "9120e56588791d48adbcb7bfde7a554c015576e1194231ebe05875c4d6e3b662",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/search_data.py",
+      "bytes": 7601,
+      "sha256": "5648ab61073f55cc4490ada22964667ccc7c207a78a6e5db64a05a974160ad36",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/search_evidence.py",
+      "bytes": 871,
+      "sha256": "bf48783b6f19e06070036f75a26ff5077721ee5a5553cbfef447ac8aa90f6f89",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/search_race.py",
+      "bytes": 25296,
+      "sha256": "5d118ee2204a813eb9c531cff3f0864a9e449ac93a214f338069f4ff4565e8ae",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/search_validation.py",
+      "bytes": 33417,
+      "sha256": "f2712b52e07915f8b25ffb7cba91b1fb0f44ec38e1dc0d0b4256a1027d0a8f32",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/ternary_routing.py",
+      "bytes": 12184,
+      "sha256": "bb0336ca52dc135cd4be794aa21fbfb9eda6aed742da9e68809ba2864dadcb44",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/tuesday_quick_qat.py",
+      "bytes": 15545,
+      "sha256": "9106938ca45b7a1d2e99577290cbc4ca7f2a8076a442388c2b7971f3f70fcf8d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/tuesday_quick_queue.py",
+      "bytes": 15141,
+      "sha256": "27e8e76a0c96a4b3e4e550ed15166f437090dbe82a945733fdef30297a333aff",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/validation_source.py",
+      "bytes": 3483,
+      "sha256": "282207de13aec6f2d50e4d55ab689b8406af0a368bba8f601de1883090f0aede",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/weight_formats.py",
+      "bytes": 27555,
+      "sha256": "c23a5e0c2209f42e6664e84cfb66089b8b2d90b8e07da7fd173c282918721252",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/weight_quantization.py",
+      "bytes": 32153,
+      "sha256": "7e068be14a071c17197c2b0448b717895e67a3c338692df01d3e7ca2205e6bec",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/weight_sensitivity.py",
+      "bytes": 36733,
+      "sha256": "ad2dd519a1d9c5f85856603997a9193a0c05bf35b4507eb925c5ddf25f526a34",
+      "git_mode": "100644"
+    },
+    {
+      "path": "src/yolo_quantize/weight_views.py",
+      "bytes": 13830,
+      "sha256": "e023068391f5495d9a833476be83118e06c93db3d2ce5c81ae16ca07c93b3ed8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/README.md",
+      "bytes": 514,
+      "sha256": "f8dc6f77521aebb075ad4554d32fe533435d82db6d967130fa2c531642e1e37f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_activation_adapter.py",
+      "bytes": 3794,
+      "sha256": "d450ab48136b634a861039897efbbdd3650fe286564b3b684d0723ec85e0f4ee",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_activation_intake.py",
+      "bytes": 10308,
+      "sha256": "31f3280e5b7e7ced2d850c00ee75fe9965d2785ec2b30a3ac75742a7c4ba0814",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_activation_policy_search.py",
+      "bytes": 1748,
+      "sha256": "ae749ca3a3a284530e40185861d3d4e08f783a336a2f4f9724232a7640a9740c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_activation_revision.py",
+      "bytes": 3410,
+      "sha256": "a99906ecfbec8a61977666708e9524182f5ee5047b0eebe1eaef0ec1808d421c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_balance_selection.py",
+      "bytes": 3366,
+      "sha256": "e94fe02d5ef38675c6ab1e737c992db37477332696a0503863c21357880b5d9c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_blocking_monitor.py",
+      "bytes": 1823,
+      "sha256": "f16b1d69921ffdab22244ea2d6bc78abe0d2db7b890dc96bb80a2319b5ce7e28",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_continuous_evidence_audit.py",
+      "bytes": 912,
+      "sha256": "f4f418457f9843064cd1f14cc512b495c61309149407ea32f648b391e4713452",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_continuous_qat_queue.py",
+      "bytes": 1980,
+      "sha256": "52a8f2c82ecf0b5c9f77f1332c5e251561dce23682370239fa11d60c2fcd99ca",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_continuous_qat_summary.py",
+      "bytes": 1096,
+      "sha256": "45a64695a926bfc1807da082936fdb5b611eab123647b9b34328c29b4ebce2a5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_continuous_special_supervisor.py",
+      "bytes": 4076,
+      "sha256": "4da28f3988748b1fc3586f89e8678bd83f508962b5deb091919c749d87ed1885",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_cumulative_ptq_queue.py",
+      "bytes": 2518,
+      "sha256": "272fa0d66731a320aa36fbdb4829be219bd2bfd4a2f566baaf27c6c04ce5047a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_diagnostic_manifest.py",
+      "bytes": 5160,
+      "sha256": "abc82a5543646290f311c2eec2a72e4ff0dadff59e781b881a41e725a2ff2dc8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_dual_metric_regate.py",
+      "bytes": 6960,
+      "sha256": "febbf6f33b9a600ab9f6c0463fd67989e1c070841668fe20606cc54830a1f4b1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_exact_preparation.py",
+      "bytes": 2223,
+      "sha256": "8ac4434a657f934fc4203322cd79530f92a3bde73457ffe0bec584d970e9c9e4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_exact_routing.py",
+      "bytes": 6182,
+      "sha256": "5ed9c4b8b85eb6e06203d66c4d04cb62057ece41f8487bc3b6eec6efd0555687",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_experiment_plan.py",
+      "bytes": 4997,
+      "sha256": "1ed4eedffe77d644cbfdd62a99ee2addaa0c6c0d0cc051c434b885e0b27ce976",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_full35_activation_adapter.py",
+      "bytes": 4374,
+      "sha256": "4606e2503d04569103334371e8cc95626e0cc84419a42422cadfc5283c17e31b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_full35_validation_source.py",
+      "bytes": 2775,
+      "sha256": "8e1bedd84e0d51ee9960d468e16e2ac1c681d8f8f1d36489605374199546e954",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_full_coverage_successor.py",
+      "bytes": 13749,
+      "sha256": "02f9a3f48811283332756af2acf98d7be56f9140b7e98d9c08b77f6251345922",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_integer_boundaries.py",
+      "bytes": 7047,
+      "sha256": "4354351747e28200193a319eeadbe109f97805cb9018f6f2d632fad4c4318333",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_locked_ptq_parent.py",
+      "bytes": 3440,
+      "sha256": "8dc2a408faf8dc30c6cb802a69181c6f12a8b9c0e42d9ca31611b2f60dc86289",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_lsq_plus.py",
+      "bytes": 2801,
+      "sha256": "57966c8293edc6ae814757e1038c09a7916b16a69d0593b0e44c9a215dd95e46",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_metric_gate.py",
+      "bytes": 6678,
+      "sha256": "752c4e27c4994ecbfa6a7edaa116eeb44725a4a2df6daa7d2fda0e8c7193f5ea",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_metric_regate.py",
+      "bytes": 3133,
+      "sha256": "7554514ff03f7d576d6b0a4b4536b69dbe6e93d8aa1ae22375fd75d45d6716d2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_mixed_layer_qat.py",
+      "bytes": 2589,
+      "sha256": "0a92d38ae69bdd37e1106f0f6a840316d4db2bf15004590fe48147b1bac2cb73",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_mixed_layer_successor.py",
+      "bytes": 1924,
+      "sha256": "f04edce8e69673abd23b0b7e1359de3f502b2269340ff33acbe3bfe147a837c3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_mixed_policy_search.py",
+      "bytes": 11594,
+      "sha256": "15105b6d5730279537f464ce617c809d8101f9b798eef0d7513b9f96188d4bd3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_policy_contract.py",
+      "bytes": 7369,
+      "sha256": "0df9b8beafe273a80f90ae344489f4e71c267daf3929ceefe7a4b871f97b820f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_policy_search.py",
+      "bytes": 4176,
+      "sha256": "e227b14abe1414c454f65c51b756397b7a8436dacbc4783c1e9e4f255802c107",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_preparation.py",
+      "bytes": 1451,
+      "sha256": "a4413b547622c3baf2bfcc26885b8eee5b2e5e990b2cb7e4ba9464cf74846dbf",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_progressive_preparation.py",
+      "bytes": 7893,
+      "sha256": "749d8c7a9371061e8f9ac258c39fe79bdb7045e9b3081ff64c3310b6dcf084f1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_progressive_qat_queue.py",
+      "bytes": 10301,
+      "sha256": "d6ad64f16a67403e354ad63fc68c0b4a5dea6fe49cf8f77fcc83d7f0f11b0838",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_progressive_queue.py",
+      "bytes": 9820,
+      "sha256": "ec0cbfe3314bfa95df6efbd6cfe912f1849cd8a9aaa328c9266df516b4775d90",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_progressive_regate.py",
+      "bytes": 4990,
+      "sha256": "b0b5f8135b74e8ca8f51c367c12af48da850a48dfc9feec26bd8a19f9d285b69",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_project_inventory.py",
+      "bytes": 1546,
+      "sha256": "d4959344631377a89e93ff3ce256f7a51da788969f8910684e309ab8a48c5da8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_calibration.py",
+      "bytes": 1413,
+      "sha256": "11d7cd0cbc2650636d97f66c0596422b6f27d8332c0ceade47322c953ffba004",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_continuation.py",
+      "bytes": 3461,
+      "sha256": "2fc3a2b0ed906c8e75fdd69b35e35423cfe3521a174c98d159e4a095ca0e9f47",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_graph.py",
+      "bytes": 7877,
+      "sha256": "359683d5c8df8a5c059a2e2e78870e4d45a2a66562c64f63f411b49928934df9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_metrics.py",
+      "bytes": 4864,
+      "sha256": "3eb2b6b2870bd68becff5e73739165fa3aa4de9fa51b6952177fba2e07acbae4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_optimizer.py",
+      "bytes": 2689,
+      "sha256": "926f7e5b48a1f120c730e1f6760d8ca192b6776ebf39f5d55bc4eb4feb1c93c3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_plan.py",
+      "bytes": 9832,
+      "sha256": "c37ac9a1d94450d0ff61e9f9a9fcecd212acd2c6d7e76c5717ef250a382a391e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_projection.py",
+      "bytes": 1192,
+      "sha256": "a23dae6187125ea501e7da68db771d2af918a8886ad5a5e080db023a3ce0387d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_queue.py",
+      "bytes": 3935,
+      "sha256": "7004ef54391c03070908ba104cbda6bc87c14b723a0a8e457c0c5b6be2453025",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_runtime.py",
+      "bytes": 22309,
+      "sha256": "a19ac6bde27afb2f1ce5a8481f487cc637b6c80efb1b7a1ffca84db9c397f687",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_schedule.py",
+      "bytes": 4233,
+      "sha256": "03197266d05f9ce131145a54089e6096693d86a0289d750be4659987728b2a75",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_validation.py",
+      "bytes": 1471,
+      "sha256": "b7441726644fd95c1340bfaa7da7b499f54983b4ac27643b78c41d8880b1b3b2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qat_weights.py",
+      "bytes": 8951,
+      "sha256": "6b1484e7e72bab40516aca014cb597f0708cd9a227914955cabe125932ca3553",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qsilu.py",
+      "bytes": 2690,
+      "sha256": "c266380c76f126975960edac847ddb0814b453503648e74b6cb36bee7281cfd5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_qsilu_lane_queue.py",
+      "bytes": 20070,
+      "sha256": "b552f19b0dc2fa283e40512a21f08085613554ae21ebd2153877e9ff273d9180",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_sd4_encoding.py",
+      "bytes": 1762,
+      "sha256": "9a8b7813954d50781c443e15178e2ce8d0c167d5c97a736a3aa4daaa579ef258",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_search_evidence.py",
+      "bytes": 1266,
+      "sha256": "8219b9e4d4b1e7f12880c149f0b2b7567774992e769086ab64d4703e3434086d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_search_race.py",
+      "bytes": 4885,
+      "sha256": "7ae41a27700f4a02b550b340dedf689db3e8dd95c3459713410fe15487348607",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_search_validation.py",
+      "bytes": 7763,
+      "sha256": "2681b741639b6b4b9dcb9adffd8457556f1c5723e412dfec61557181411e21b9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_ternary_routing.py",
+      "bytes": 3160,
+      "sha256": "49f55a57f060c51fde870622bbf092ddb03234c19ebfb388284f90308a18421e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_tuesday_quick_qat.py",
+      "bytes": 1876,
+      "sha256": "b9f02e603970ec496e0a9dff013e21b60a242b2b8c18ac1149dc4b0190350e2d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_tuesday_quick_queue.py",
+      "bytes": 3026,
+      "sha256": "ebc7bdfa6e67fc3ade878d7c86f8f065b3126ae88520b3fa1644ca772f59f726",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_weight_format_analysis.py",
+      "bytes": 14749,
+      "sha256": "9ab0cce3d8f234ea57299967e618593cd8e1df2b9f71130b7dd7acb3841f2ecc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_weight_quantization.py",
+      "bytes": 20756,
+      "sha256": "d57a24a6b48fa7b5b1a71367283ebe7b25ae9a129dfe83309eb31955091f6513",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_weight_sensitivity.py",
+      "bytes": 13010,
+      "sha256": "60ce100c3041378d5120a6d1391d68c94e11c85f34efb6c232aa3b6951587c8d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "tests/test_weight_views.py",
+      "bytes": 3752,
+      "sha256": "549a4266fa739c7e5fe57eeda7d3d972260629b74a1be127435ba943bf2be245",
+      "git_mode": "100644"
+    },
+    {
+      "path": "三元權重變形器神經網路加速電路之設計與晶片實現.pdf",
+      "bytes": 10461095,
+      "sha256": "5bcc540e51f535e56f3131f540e2321a7096a4106c6a3127e5e152d4b93e0a5c",
+      "git_mode": "100644"
+    }
+  ]
+}

@@ -1,0 +1,524 @@
+{
+  "status": "passed",
+  "gpu_used": false,
+  "results": {
+    "rep17": {
+      "initial_equivalence": {
+        "detect": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        },
+        "pose": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "initial_hardware_equivalence_to_stage7": {
+        "detect": {
+          "raw_max_abs": 0.000133514404296875,
+          "matched_decoded_max_abs": 0.000102996826171875
+        },
+        "pose": {
+          "raw_max_abs": 3.0517578125e-05,
+          "matched_decoded_max_abs": 3.814697265625e-05
+        }
+      },
+      "fold_equivalence_operators": "float_pwl",
+      "training_operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-training-rep17.json",
+      "nonzero_fold": {
+        "detect": {
+          "raw_max_abs": 6.866455078125e-05,
+          "matched_decoded_max_abs": 0.0004119873046875
+        },
+        "pose": {
+          "raw_max_abs": 1.9073486328125e-05,
+          "matched_decoded_max_abs": 3.0517578125e-05
+        }
+      },
+      "nonzero_fold_640": {
+        "detect": {
+          "raw_max_abs": 6.961822509765625e-05,
+          "matched_decoded_max_abs": 4.57763671875e-05
+        },
+        "pose": {
+          "raw_max_abs": 3.62396240234375e-05,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "linear_and_activation_dtypes": {
+        "17": {
+          "torch.float32": {
+            "linear_max_abs": 1.5735626220703125e-05,
+            "atol": 0.0002,
+            "rtol": 1e-05
+          },
+          "torch.float16": {
+            "linear_max_abs": 0.0078125,
+            "atol": 0.03,
+            "rtol": 0.02
+          }
+        }
+      },
+      "roundtrip": {
+        "multibranch-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-hardware": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        }
+      },
+      "fallback_rejected": true,
+      "initial_checkpoint": "/home/uxin/yolo/yolo_achitechure/artifacts/stage8/repconv-variants-20261107/initial/rep17.pt",
+      "sha256": "6b129878c649fd9d0580b6a4c1599e9a4cac658d5ee7ef63f5dc7bf9394f6e5b",
+      "train_parameters": 26519984,
+      "folded_parameters": 26453680,
+      "operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-rep17.json"
+    },
+    "rep20": {
+      "initial_equivalence": {
+        "detect": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        },
+        "pose": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "initial_hardware_equivalence_to_stage7": {
+        "detect": {
+          "raw_max_abs": 3.814697265625e-05,
+          "matched_decoded_max_abs": 3.0517578125e-05
+        },
+        "pose": {
+          "raw_max_abs": 3.4332275390625e-05,
+          "matched_decoded_max_abs": 2.288818359375e-05
+        }
+      },
+      "fold_equivalence_operators": "float_pwl",
+      "training_operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-training-rep20.json",
+      "nonzero_fold": {
+        "detect": {
+          "raw_max_abs": 4.9591064453125e-05,
+          "matched_decoded_max_abs": 1.52587890625e-05
+        },
+        "pose": {
+          "raw_max_abs": 3.814697265625e-05,
+          "matched_decoded_max_abs": 4.57763671875e-05
+        }
+      },
+      "nonzero_fold_640": {
+        "detect": {
+          "raw_max_abs": 4.00543212890625e-05,
+          "matched_decoded_max_abs": 0.0
+        },
+        "pose": {
+          "raw_max_abs": 2.86102294921875e-05,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "linear_and_activation_dtypes": {
+        "20": {
+          "torch.float32": {
+            "linear_max_abs": 2.574920654296875e-05,
+            "atol": 0.0002,
+            "rtol": 1e-05
+          },
+          "torch.float16": {
+            "linear_max_abs": 0.00390625,
+            "atol": 0.03,
+            "rtol": 0.02
+          }
+        }
+      },
+      "roundtrip": {
+        "multibranch-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-hardware": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        }
+      },
+      "fallback_rejected": true,
+      "initial_checkpoint": "/home/uxin/yolo/yolo_achitechure/artifacts/stage8/repconv-variants-20261107/initial/rep20.pt",
+      "sha256": "e93de215c3710c69bcbc32f67ecaff4fcba084e942663e4304347c421c022909",
+      "train_parameters": 26717104,
+      "folded_parameters": 26453424,
+      "operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-rep20.json"
+    },
+    "rep17_20": {
+      "initial_equivalence": {
+        "detect": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        },
+        "pose": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "initial_hardware_equivalence_to_stage7": {
+        "detect": {
+          "raw_max_abs": 0.000133514404296875,
+          "matched_decoded_max_abs": 0.000102996826171875
+        },
+        "pose": {
+          "raw_max_abs": 3.0517578125e-05,
+          "matched_decoded_max_abs": 3.814697265625e-05
+        }
+      },
+      "fold_equivalence_operators": "float_pwl",
+      "training_operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-training-rep17_20.json",
+      "nonzero_fold": {
+        "detect": {
+          "raw_max_abs": 8.392333984375e-05,
+          "matched_decoded_max_abs": 0.00018310546875
+        },
+        "pose": {
+          "raw_max_abs": 2.6702880859375e-05,
+          "matched_decoded_max_abs": 3.0517578125e-05
+        }
+      },
+      "nonzero_fold_640": {
+        "detect": {
+          "raw_max_abs": 4.1961669921875e-05,
+          "matched_decoded_max_abs": 6.103515625e-05
+        },
+        "pose": {
+          "raw_max_abs": 4.57763671875e-05,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "linear_and_activation_dtypes": {
+        "17": {
+          "torch.float32": {
+            "linear_max_abs": 3.910064697265625e-05,
+            "atol": 0.0002,
+            "rtol": 1e-05
+          },
+          "torch.float16": {
+            "linear_max_abs": 0.0078125,
+            "atol": 0.03,
+            "rtol": 0.02
+          }
+        },
+        "20": {
+          "torch.float32": {
+            "linear_max_abs": 2.7179718017578125e-05,
+            "atol": 0.0002,
+            "rtol": 1e-05
+          },
+          "torch.float16": {
+            "linear_max_abs": 0.0078125,
+            "atol": 0.03,
+            "rtol": 0.02
+          }
+        }
+      },
+      "roundtrip": {
+        "multibranch-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-hardware": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        }
+      },
+      "fallback_rejected": true,
+      "initial_checkpoint": "/home/uxin/yolo/yolo_achitechure/artifacts/stage8/repconv-variants-20261107/initial/rep17_20.pt",
+      "sha256": "a175eace5c80b88de58dfd3623517b664853db42ad630f185f0e9ccd66a048ad",
+      "train_parameters": 26783152,
+      "folded_parameters": 26453168,
+      "operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-rep17_20.json"
+    },
+    "rep17_20_silu": {
+      "initial_equivalence": {
+        "detect": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        },
+        "pose": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "initial_hardware_equivalence_to_stage7": {
+        "detect": {
+          "raw_max_abs": 0.000133514404296875,
+          "matched_decoded_max_abs": 0.000102996826171875
+        },
+        "pose": {
+          "raw_max_abs": 3.0517578125e-05,
+          "matched_decoded_max_abs": 3.814697265625e-05
+        }
+      },
+      "fold_equivalence_operators": "rep_silu_pwl",
+      "training_operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-training-rep17_20_silu.json",
+      "nonzero_fold": {
+        "detect": {
+          "raw_max_abs": 4.1961669921875e-05,
+          "matched_decoded_max_abs": 0.0005035400390625
+        },
+        "pose": {
+          "raw_max_abs": 3.814697265625e-05,
+          "matched_decoded_max_abs": 2.288818359375e-05
+        }
+      },
+      "nonzero_fold_640": {
+        "detect": {
+          "raw_max_abs": 4.482269287109375e-05,
+          "matched_decoded_max_abs": 6.103515625e-05
+        },
+        "pose": {
+          "raw_max_abs": 3.4332275390625e-05,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "linear_and_activation_dtypes": {
+        "17": {
+          "torch.float32": {
+            "linear_max_abs": 1.9311904907226562e-05,
+            "atol": 0.0002,
+            "rtol": 1e-05
+          },
+          "torch.float16": {
+            "linear_max_abs": 0.0078125,
+            "atol": 0.03,
+            "rtol": 0.02
+          }
+        },
+        "20": {
+          "torch.float32": {
+            "linear_max_abs": 4.1484832763671875e-05,
+            "atol": 0.0002,
+            "rtol": 1e-05
+          },
+          "torch.float16": {
+            "linear_max_abs": 0.0078125,
+            "atol": 0.03,
+            "rtol": 0.02
+          }
+        }
+      },
+      "roundtrip": {
+        "multibranch-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-hardware": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        }
+      },
+      "fallback_rejected": true,
+      "initial_checkpoint": "/home/uxin/yolo/yolo_achitechure/artifacts/stage8/repconv-variants-20261107/initial/rep17_20_silu.pt",
+      "sha256": "15e5feebe42d87c5e8424d7073d803482e4c354c72218db7f7033cc39f76c45e",
+      "train_parameters": 26783152,
+      "folded_parameters": 26453168,
+      "operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-rep17_20_silu.json"
+    },
+    "acb17_20": {
+      "initial_equivalence": {
+        "detect": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        },
+        "pose": {
+          "raw_max_abs": 0.0,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "initial_hardware_equivalence_to_stage7": {
+        "detect": {
+          "raw_max_abs": 0.00012969970703125,
+          "matched_decoded_max_abs": 9.1552734375e-05
+        },
+        "pose": {
+          "raw_max_abs": 2.288818359375e-05,
+          "matched_decoded_max_abs": 3.814697265625e-05
+        }
+      },
+      "fold_equivalence_operators": "float_pwl",
+      "training_operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-training-acb17_20.json",
+      "nonzero_fold": {
+        "detect": {
+          "raw_max_abs": 3.814697265625e-05,
+          "matched_decoded_max_abs": 0.00011444091796875
+        },
+        "pose": {
+          "raw_max_abs": 3.4332275390625e-05,
+          "matched_decoded_max_abs": 4.57763671875e-05
+        }
+      },
+      "nonzero_fold_640": {
+        "detect": {
+          "raw_max_abs": 6.103515625e-05,
+          "matched_decoded_max_abs": 3.0517578125e-05
+        },
+        "pose": {
+          "raw_max_abs": 3.814697265625e-05,
+          "matched_decoded_max_abs": 0.0
+        }
+      },
+      "linear_and_activation_dtypes": {
+        "17": {
+          "torch.float32": {
+            "linear_max_abs": 2.002716064453125e-05,
+            "atol": 0.0002,
+            "rtol": 1e-05
+          },
+          "torch.float16": {
+            "linear_max_abs": 0.0078125,
+            "atol": 0.03,
+            "rtol": 0.02
+          }
+        },
+        "20": {
+          "torch.float32": {
+            "linear_max_abs": 2.7179718017578125e-05,
+            "atol": 0.0002,
+            "rtol": 1e-05
+          },
+          "torch.float16": {
+            "linear_max_abs": 0.0078125,
+            "atol": 0.03,
+            "rtol": 0.02
+          }
+        }
+      },
+      "roundtrip": {
+        "multibranch-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-training-operators": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        },
+        "folded-hardware": {
+          "detect": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          },
+          "pose": {
+            "raw_max_abs": 0.0,
+            "matched_decoded_max_abs": 0.0
+          }
+        }
+      },
+      "fallback_rejected": true,
+      "initial_checkpoint": "/home/uxin/yolo/yolo_achitechure/artifacts/stage8/repconv-variants-20261107/initial/acb17_20.pt",
+      "sha256": "2461d97251e23f6bf97775f5add538847b4a05636de9d57d345c13fbd82815f0",
+      "train_parameters": 28423088,
+      "folded_parameters": 26453168,
+      "operators": "/home/uxin/yolo/yolo_achitechure/stage8/operators-acb17_20.json"
+    }
+  },
+  "comparison": "FP32 raw anchor-aligned; decoded one-to-one same tolerance; FP16 block-only, task deployment FP32",
+  "next_stage_started": false
+}

@@ -1,0 +1,411 @@
+{
+  "variant": "M2",
+  "phase": "masf",
+  "smoke": false,
+  "recipe": {
+    "version": 5,
+    "batch": 16,
+    "logical_batch": 128,
+    "imgsz": 640,
+    "seed": 1,
+    "optimizer": "AdamW",
+    "lr0": 1e-05,
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "warmup_epochs": 1,
+    "warmup_bias_lr": 0.0,
+    "linear_final_fraction": 0.5,
+    "gradient_clip": 10.0,
+    "amp": true,
+    "initial_loss_scale": 1024.0,
+    "overflow_attempts": 16,
+    "dtype": "AMP-FP16; score/softmax/parameters/evaluation-FP32",
+    "bn": "all running statistics frozen",
+    "loss": "native E2E; reference64/actual macro; beta1 before one2one head",
+    "ema": "trainable parameters only; all frozen parameters and buffers bitwise fixed",
+    "normalization": "inherited native Pose attention",
+    "selection": "best improved primary AP; no monitored AP drop >.001; else parent",
+    "resume": "last complete epoch; exact live/EMA/optimizer/scaler; repeat interrupted epoch",
+    "reference_review_sha256": "52b3c1efad4fe212fb20ea65c9a7d27debfd54373819dda6420d627d12f4256f",
+    "phase": "masf",
+    "task": "pose",
+    "epochs": 5,
+    "patience": 0,
+    "scope": "task-head-and-masf",
+    "reference_batch": 64,
+    "steps_per_epoch": 47,
+    "group_lrs": {
+      "head": 5e-06,
+      "context": 1e-05,
+      "alpha": 0.0001
+    },
+    "warmup_start_factor": 0.1,
+    "scheduler": "warmup-cosine",
+    "smoke_steps": 2
+  },
+  "best": {
+    "AP50_95": 0.9207093886162863,
+    "epoch": 0,
+    "checkpoint": "epoch-00.pt"
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 683,
+        "formal": true,
+        "internal": {
+          "metrics/precision(B)": 0.917187622604998,
+          "metrics/recall(B)": 0.85721358167326,
+          "metrics/mAP50(B)": 0.9052377366389334,
+          "metrics/mAP50-95(B)": 0.6284018405302074,
+          "metrics/precision(P)": 0.912609195322666,
+          "metrics/recall(P)": 0.8842927781124985,
+          "metrics/mAP50(P)": 0.9233478403462654,
+          "metrics/mAP50-95(P)": 0.9207093886162863,
+          "fitness": 1.5491112291464937
+        },
+        "metrics": {
+          "box_AP50": 0.9052377366389334,
+          "box_AP50_95": 0.6284018405302074,
+          "pose_AP50": 0.9233478403462654,
+          "pose_AP50_95": 0.9207093886162863,
+          "ball_box_AP50": 0.8618297202487522,
+          "ball_box_AP50_95": 0.5290957907115325,
+          "bat_box_AP50": 0.9486457530291146,
+          "bat_box_AP50_95": 0.7277078903488825,
+          "ball_pose_AP50": 0.897099489632018,
+          "ball_pose_AP50_95": 0.897099489632018,
+          "bat_pose_AP50": 0.9495961910605126,
+          "bat_pose_AP50_95": 0.9443192876005542
+        },
+        "seconds": 4.657927751541138
+      }
+    },
+    {
+      "epoch": 1,
+      "images": 5964,
+      "optimizer_steps": 47,
+      "seconds": 98.88680005073547,
+      "training_seconds": 93.82095980644226,
+      "peak_allocated_bytes": 5281123840,
+      "amp_retries": 2,
+      "first_batch_images": [
+        "Untitled_mov-114_jpg.rf.cbfa399c636a439748346339067172ee.jpg",
+        "478_png_jpg.rf.b19a92b08593d1847f4d8ca74d454d97.jpg",
+        "20250314_162543_mp4-0056_jpg.rf.05f7b282ea72e0c0f5a00489bba37282.jpg",
+        "000000449705_jpg.rf.c69bf05e14ece9857d48f3a046dc7a5a.jpg",
+        "346_png_jpg.rf.363418ad38279f6d9bf79c15373e8d66.jpg",
+        "20250315_163624_mp4-0091_jpg.rf.4942815977d1d92afeb0d3dd85b142ad.jpg",
+        "20250315_163903_mp4-0079_jpg.rf.ab2009959f95ac45f0943b8e0344dc04.jpg",
+        "youtube-342_jpg.rf.44285459f272899a71a74981db61d13b.jpg",
+        "baseball1941_png_jpg.rf.99b1a68679fc4e54ff49a2d4b25cc55c.jpg",
+        "AngleV_1717202555_mp4-0080_jpg.rf.751aea46961a9f2240c5274039fadd57.jpg",
+        "20250312_143547_mp4-0133_jpg.rf.c77073e1d15825c2d35e0ccce925f204.jpg",
+        "3H2A9587-MPEG-4091_jpg.rf.3a5b55d929a56cc6a6f17c7c5ecfa212.jpg",
+        "baseball2272_png_jpg.rf.eda236f258a64dadad55c3595f4da3ef.jpg",
+        "20250314_163024_mp4-0012_jpg.rf.e5c8357efd007444a5c6178234ca6839.jpg",
+        "image199_jpeg_jpg.rf.02658a849550b01b00c1086b2169df12.jpg",
+        "000000306967_jpg.rf.7a4ce7bf0ca8d8c26e873769019d0c23.jpg"
+      ],
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 0.0003736101498361677,
+        "model.23.one2one_cv2.0.0.conv.weight": 7.709814235568047e-05,
+        "model.23.p3_masf.context.project.conv.weight": 0.00013336911797523499
+      },
+      "qk_update_abs_max": {},
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 683,
+        "formal": true,
+        "internal": {
+          "metrics/precision(B)": 0.922906866008666,
+          "metrics/recall(B)": 0.8543385301924729,
+          "metrics/mAP50(B)": 0.9064081475660356,
+          "metrics/mAP50-95(B)": 0.6263122092977148,
+          "metrics/precision(P)": 0.9231680022656343,
+          "metrics/recall(P)": 0.871713289431781,
+          "metrics/mAP50(P)": 0.9213497276865912,
+          "metrics/mAP50-95(P)": 0.918625284246577,
+          "fitness": 1.5449374935442917
+        },
+        "metrics": {
+          "box_AP50": 0.9064081475660356,
+          "box_AP50_95": 0.6263122092977148,
+          "pose_AP50": 0.9213497276865912,
+          "pose_AP50_95": 0.918625284246577,
+          "ball_box_AP50": 0.8647326561732909,
+          "ball_box_AP50_95": 0.5270730769040197,
+          "bat_box_AP50": 0.9480836389587803,
+          "bat_box_AP50_95": 0.7255513416914098,
+          "ball_pose_AP50": 0.893591707356467,
+          "ball_pose_AP50_95": 0.8935917073564671,
+          "bat_pose_AP50": 0.9491077480167153,
+          "bat_pose_AP50_95": 0.9436588611366872
+        },
+        "seconds": 4.771196365356445
+      }
+    },
+    {
+      "epoch": 2,
+      "images": 5964,
+      "optimizer_steps": 47,
+      "seconds": 92.84146690368652,
+      "training_seconds": 87.48772716522217,
+      "peak_allocated_bytes": 5281124352,
+      "amp_retries": 1,
+      "first_batch_images": [
+        "AngleV_1715122533_mp4-0086_jpg.rf.7d7af15c58ffbb5d203ae15895100b94.jpg",
+        "20250327_152114_frame_378_20250327_193958_jpg.rf.dca578c035dba939011611780927d5d3.jpg",
+        "318_png_jpg.rf.0c6fc69dea6f14e78f2ea749877a1579.jpg",
+        "252d9225799d8a1a_jpg.rf.aaf63aee5dfe54206088cb4683bbd401.jpg",
+        "20250312_143216_mp4-0014_jpg.rf.db9e0483cb852a962de97c07d90ed277.jpg",
+        "20250314_150219_mp4-0143_jpg.rf.d37f3f0bafb09aa5b641dd3cdcd274fe.jpg",
+        "0233E_mp4-0023_jpg.rf.7e57a59026e3d9bcfbb903f9abb0d6ba.jpg",
+        "0014O_mp4-0023_jpg.rf.e5e587f23f7584b35d123044449be695.jpg",
+        "AngleV_1717202555_mp4-0004_jpg.rf.8344e5497177c05be3340cff619ca0a6.jpg",
+        "1533I_mp4-0001_jpg.rf.c1f1632a7aba267fc663e7d68d0f17bb.jpg",
+        "youtube-495_jpg.rf.a976bfa53f744fa6f5c7da51b81001c7.jpg",
+        "000000352317_jpg.rf.461519c82210dd2a6e3fa61dc0fc2460.jpg",
+        "20250312_143547_mp4-0165_jpg.rf.442c5a9acdcc636ee798f7c8a596b5a8.jpg",
+        "ohtani_mp4-0001_jpg.rf.9fde6bf5f2a1059a34ae4c0068dc83c4.jpg",
+        "800b46820dc46153_jpg.rf.37e55034c63fcc282370d0462a8c5503.jpg",
+        "V1-0001_3H2A0131-MPEG-402_jpg.rf.cb91693b1590ff44faa706421db2827a.jpg"
+      ],
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 5.6805729400366545e-06,
+        "model.23.one2one_cv2.0.0.conv.weight": 0.00012482702732086182,
+        "model.23.p3_masf.context.project.conv.weight": 0.0002403613179922104
+      },
+      "qk_update_abs_max": {},
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 683,
+        "formal": true,
+        "internal": {
+          "metrics/precision(B)": 0.911918710816477,
+          "metrics/recall(B)": 0.8526422102006335,
+          "metrics/mAP50(B)": 0.9007303336820711,
+          "metrics/mAP50-95(B)": 0.6264499905351772,
+          "metrics/precision(P)": 0.9240422135679515,
+          "metrics/recall(P)": 0.8656248432271988,
+          "metrics/mAP50(P)": 0.920288919899789,
+          "metrics/mAP50-95(P)": 0.9172539813777807,
+          "fitness": 1.543703971912958
+        },
+        "metrics": {
+          "box_AP50": 0.9007303336820711,
+          "box_AP50_95": 0.6264499905351772,
+          "pose_AP50": 0.920288919899789,
+          "pose_AP50_95": 0.9172539813777807,
+          "ball_box_AP50": 0.8589023776702441,
+          "ball_box_AP50_95": 0.5268880059119161,
+          "bat_box_AP50": 0.9425582896938982,
+          "bat_box_AP50_95": 0.7260119751584383,
+          "ball_pose_AP50": 0.8913497883846988,
+          "ball_pose_AP50_95": 0.8913497883846986,
+          "bat_pose_AP50": 0.9492280514148792,
+          "bat_pose_AP50_95": 0.9431581743708619
+        },
+        "seconds": 5.033435344696045
+      }
+    },
+    {
+      "epoch": 3,
+      "images": 5964,
+      "optimizer_steps": 47,
+      "seconds": 87.88853764533997,
+      "training_seconds": 82.49491119384766,
+      "peak_allocated_bytes": 5281124352,
+      "amp_retries": 0,
+      "first_batch_images": [
+        "Realmuto_mp4-0005_jpg.rf.2113706761fa844675eb2e9ec92fadd4.jpg",
+        "9d27eaa40d6fa929_jpg.rf.cabd259da651ca0f455e679d97906b10.jpg",
+        "youtube-28_jpg.rf.d77ed44e394e017d0826c370d37d6852.jpg",
+        "3H2A7726062_jpg.rf.777bda77286d94cb836f9c7d0dba2a00.jpg",
+        "AngleW_1683932996_mp4-0092_jpg.rf.62be2c5de08cc5eae455bc4bccf4cd5c.jpg",
+        "baseball2298_png_jpg.rf.3ecdb1ec1d207b392bd615b51c45be58.jpg",
+        "1277W_mp4-0001_jpg.rf.cfec8c403e4b87f5480192d329e81599.jpg",
+        "20250315_163624_mp4-0100_jpg.rf.6f9d54eec140cfe8450076e830c63536.jpg",
+        "20250312_143547_mp4-0133_jpg.rf.c77073e1d15825c2d35e0ccce925f204.jpg",
+        "AngleW_1683932996_mp4-0040_jpg.rf.9a5b38fa625eae383db7172e261d04b1.jpg",
+        "000000018290_jpg.rf.ff1332156f1b398e0e1433dc6b488b62.jpg",
+        "117_png_jpg.rf.ed81acd3fa403e8774fa07e0894bd17f.jpg",
+        "3H2A9516-MPEG-4056_jpg.rf.4e0a38242cc9941334047ef16127c828.jpg",
+        "20250314_163024_mp4-0043_jpg.rf.ea352675fa81de93e0b0e3aa2fa6bb32.jpg",
+        "1533I_mp4-0001_jpg.rf.08574c39753cfb16742353ad237c3896.jpg",
+        "c1e33cf951e2471b_jpg.rf.2bd48c49be26fb58afe0c8b85a667782.jpg"
+      ],
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 4.6260072849690914e-05,
+        "model.23.one2one_cv2.0.0.conv.weight": 0.00012885406613349915,
+        "model.23.p3_masf.context.project.conv.weight": 0.00023182854056358337
+      },
+      "qk_update_abs_max": {},
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 683,
+        "formal": true,
+        "internal": {
+          "metrics/precision(B)": 0.9295286710616777,
+          "metrics/recall(B)": 0.852738319477687,
+          "metrics/mAP50(B)": 0.9037721517447503,
+          "metrics/mAP50-95(B)": 0.6235906240623709,
+          "metrics/precision(P)": 0.9408474240968729,
+          "metrics/recall(P)": 0.862916436526033,
+          "metrics/mAP50(P)": 0.9188587558839516,
+          "metrics/mAP50-95(P)": 0.9175944107724016,
+          "fitness": 1.5411850348347724
+        },
+        "metrics": {
+          "box_AP50": 0.9037721517447503,
+          "box_AP50_95": 0.6235906240623709,
+          "pose_AP50": 0.9188587558839516,
+          "pose_AP50_95": 0.9175944107724016,
+          "ball_box_AP50": 0.8649423976168308,
+          "ball_box_AP50_95": 0.523692005041759,
+          "bat_box_AP50": 0.9426019058726698,
+          "bat_box_AP50_95": 0.7234892430829825,
+          "ball_pose_AP50": 0.8942702707800878,
+          "ball_pose_AP50_95": 0.8942702707800876,
+          "bat_pose_AP50": 0.9434472409878154,
+          "bat_pose_AP50_95": 0.9409185507647153
+        },
+        "seconds": 5.028841257095337
+      }
+    },
+    {
+      "epoch": 4,
+      "images": 5964,
+      "optimizer_steps": 47,
+      "seconds": 89.28847241401672,
+      "training_seconds": 84.4654905796051,
+      "peak_allocated_bytes": 5281123840,
+      "amp_retries": 0,
+      "first_batch_images": [
+        "3H2A9587-MPEG-4091_jpg.rf.f56ef4edd83140643c44b0050abbad6c.jpg",
+        "0071E_mp4-0008_jpg.rf.21843403da6ebc8b1cb3a9e760de4cd5.jpg",
+        "20250314_163024_mp4-0040_jpg.rf.6b9c54548314c5b02d6256571bcebd96.jpg",
+        "20250315_163624_mp4-0096_jpg.rf.462ff61cbc9de368955795844d302931.jpg",
+        "20250312_143547_mp4-0132_jpg.rf.d4af4ded29c84899e06b334765914292.jpg",
+        "1277W_mp4-0079_jpg.rf.8e8b727be5e35282b6b4f77978ed2ab9.jpg",
+        "381_png_jpg.rf.f52d6943685755e518231278a78f157f.jpg",
+        "000000149388_jpg.rf.88ef5fc404f703dd4ebc8f3478438002.jpg",
+        "3H2A9516-MPEG-4077_jpg.rf.40b1062f4c1f65dcdcd3079cabeb75e5.jpg",
+        "0233E_mp4-0023_jpg.rf.7e57a59026e3d9bcfbb903f9abb0d6ba.jpg",
+        "535_png_jpg.rf.eacce541cf64b0c3ac2549f34c8c5f0f.jpg",
+        "20250314_163024_mp4-0018_jpg.rf.901883d3e30812ae23812ed554099f2c.jpg",
+        "AngleV_1717202555_mp4-0082_jpg.rf.bada4786ae8c33dfdb90fef9d026f62d.jpg",
+        "0227E_mp4-0030_jpg.rf.10f9c9f1b7ad9211e0f3734539d90fb2.jpg",
+        "3H2A9516-MPEG-4069_jpg.rf.44b8fea38b6df38bca11b83869396f71.jpg",
+        "image158_jpg.rf.69ec33c5aee4dbc3841c57c6c991e253.jpg"
+      ],
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 8.462928235530853e-06,
+        "model.23.one2one_cv2.0.0.conv.weight": 9.845197200775146e-05,
+        "model.23.p3_masf.context.project.conv.weight": 0.00011615082621574402
+      },
+      "qk_update_abs_max": {},
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 683,
+        "formal": true,
+        "internal": {
+          "metrics/precision(B)": 0.9128406182520326,
+          "metrics/recall(B)": 0.860123849198502,
+          "metrics/mAP50(B)": 0.902443642331967,
+          "metrics/mAP50-95(B)": 0.6304096012484494,
+          "metrics/precision(P)": 0.9259886759373067,
+          "metrics/recall(P)": 0.8724135271516564,
+          "metrics/mAP50(P)": 0.9183241945840988,
+          "metrics/mAP50-95(P)": 0.9169760023558787,
+          "fitness": 1.547385603604328
+        },
+        "metrics": {
+          "box_AP50": 0.902443642331967,
+          "box_AP50_95": 0.6304096012484494,
+          "pose_AP50": 0.9183241945840988,
+          "pose_AP50_95": 0.9169760023558787,
+          "ball_box_AP50": 0.8620562976659313,
+          "ball_box_AP50_95": 0.5303135283999189,
+          "bat_box_AP50": 0.9428309869980029,
+          "bat_box_AP50_95": 0.7305056740969798,
+          "ball_pose_AP50": 0.8929654206901193,
+          "ball_pose_AP50_95": 0.8929654206901192,
+          "bat_pose_AP50": 0.9436829684780781,
+          "bat_pose_AP50_95": 0.9409865840216384
+        },
+        "seconds": 4.533045291900635
+      }
+    },
+    {
+      "epoch": 5,
+      "images": 5964,
+      "optimizer_steps": 47,
+      "seconds": 88.68968677520752,
+      "training_seconds": 83.35192608833313,
+      "peak_allocated_bytes": 5281123840,
+      "amp_retries": 0,
+      "first_batch_images": [
+        "Untitled_mov-126_jpg.rf.75f55696ee976122a644861710849841.jpg",
+        "000000554464_jpg.rf.752c78b81aab6d0d9e4ab2f0d0bc3dcf.jpg",
+        "20250315_163903_mp4-0023_jpg.rf.d0bbf70c58e32f20e40efe93690d33cf.jpg",
+        "20250315_163903_mp4-0084_jpg.rf.5fcac8f367a5fbf233976942a319ebcf.jpg",
+        "20250315_163903_mp4-0065_jpg.rf.fd6e37f385b5326e6feb14d79b2c9d0a.jpg",
+        "youtube-105_jpg.rf.326f8218d829d8d957fe9f1ceeed5b87.jpg",
+        "image73_jpeg_jpg.rf.3c75e7bc86dd1b53b3c8c02f0c4f51be.jpg",
+        "20_png_jpg.rf.43dcc81a9c4d6907933677e159456315.jpg",
+        "20250312_143347_mp4-0098_jpg.rf.ba7232674e37d80eb241c267f95aa3b4.jpg",
+        "0071E_mp4-0014_jpg.rf.546a0202bf18ba4d2fc9773c5e9055ac.jpg",
+        "youtube-448_jpg.rf.aad895f01bdf6a619c9408f2a658e88e.jpg",
+        "20250312_143347_mp4-0103_jpg.rf.6eabe67aec5da513a5dd56aa241d0867.jpg",
+        "Pasquantino_mp4-0010_jpg.rf.13b2f77e4a6236b75bd749e6ff9bec98.jpg",
+        "20250312_143347_mp4-0086_jpg.rf.01b69d14d381af785f42ad745154b17e.jpg",
+        "20250314_163024_mp4-0058_jpg.rf.d8f6a6598f0173a53920535671abe912.jpg",
+        "3H2A9516-MPEG-4123_jpg.rf.5f06e3f75349783e087bd9a9a839b872.jpg"
+      ],
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 0.00018405646551400423,
+        "model.23.one2one_cv2.0.0.conv.weight": 7.563724648207426e-05,
+        "model.23.p3_masf.context.project.conv.weight": 0.00012035761028528214
+      },
+      "qk_update_abs_max": {},
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 683,
+        "formal": true,
+        "internal": {
+          "metrics/precision(B)": 0.9251985909869227,
+          "metrics/recall(B)": 0.8554519474108924,
+          "metrics/mAP50(B)": 0.9051225414797115,
+          "metrics/mAP50-95(B)": 0.6302244664219049,
+          "metrics/precision(P)": 0.9362889370772332,
+          "metrics/recall(P)": 0.8656300644592383,
+          "metrics/mAP50(P)": 0.9230896940495485,
+          "metrics/mAP50-95(P)": 0.9199941272776414,
+          "fitness": 1.5502185936995463
+        },
+        "metrics": {
+          "box_AP50": 0.9051225414797115,
+          "box_AP50_95": 0.6302244664219049,
+          "pose_AP50": 0.9230896940495485,
+          "pose_AP50_95": 0.9199941272776414,
+          "ball_box_AP50": 0.8668999472310605,
+          "ball_box_AP50_95": 0.5303663046662797,
+          "bat_box_AP50": 0.9433451357283626,
+          "bat_box_AP50_95": 0.73008262817753,
+          "ball_pose_AP50": 0.8963434547410032,
+          "ball_pose_AP50_95": 0.8963434547410033,
+          "bat_pose_AP50": 0.9498359333580938,
+          "bat_pose_AP50_95": 0.9436447998142798
+        },
+        "seconds": 5.006997346878052
+      }
+    }
+  ],
+  "stop_reason": "budget"
+}

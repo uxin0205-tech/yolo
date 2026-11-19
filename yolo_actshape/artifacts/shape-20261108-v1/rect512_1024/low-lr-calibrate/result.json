@@ -1,0 +1,94 @@
+{
+  "status": "passed",
+  "selected_pose_weight": 0.1,
+  "parent_sha256": "7eee7796e49f09246cba4aebec66c0b78659bbb75ce86df2d74e35fb623ca9a9",
+  "recipe": {
+    "epochs": 10,
+    "low_lr_epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "neck_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "neck": 9.5e-07,
+      "detect_head": 2.5e-06,
+      "pose_head": 2.5e-06
+    },
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "all_bn_running": "fixed",
+    "attention": "all tensors frozen",
+    "backbone": "frozen",
+    "operators": "qSiLU/D1 deployment forward; Float-PWL STE backward",
+    "detect_physical": 8,
+    "detect_accumulation": 32,
+    "pose_physical": 8,
+    "pose_accumulation": 2,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "fresh_ema": true,
+    "amp": true,
+    "fp32_ciou": true,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "max_amp_retries": 16
+  },
+  "shape": [
+    512,
+    1024
+  ],
+  "records": [
+    {
+      "phase": "measure",
+      "index": 0,
+      "ratio": 9.959226281447384,
+      "pose_weight": 0.25,
+      "detect_norm": 113.65700279756388,
+      "pose_norm": 1131.935809332037,
+      "cosine_similarity": 0.0038652880514890757
+    },
+    {
+      "phase": "measure",
+      "index": 1,
+      "ratio": 1.1975656730308977,
+      "pose_weight": 0.25,
+      "detect_norm": 134.08638035234014,
+      "pose_norm": 160.57724633092715,
+      "cosine_similarity": -0.016570665153920066
+    },
+    {
+      "phase": "measure",
+      "index": 2,
+      "ratio": 0.9608029788415691,
+      "pose_weight": 0.25,
+      "detect_norm": 144.49515779920037,
+      "pose_norm": 138.8313780416543,
+      "cosine_similarity": -0.010548458841576238
+    },
+    {
+      "phase": "confirm-0",
+      "index": 0,
+      "ratio": 0.41404782574170723,
+      "pose_weight": 0.1,
+      "detect_norm": 140.84931686532067,
+      "pose_norm": 58.3183534052908,
+      "cosine_similarity": 0.028326653709649978
+    },
+    {
+      "phase": "confirm-0",
+      "index": 1,
+      "ratio": 0.5319181949869509,
+      "pose_weight": 0.1,
+      "detect_norm": 153.7682081316147,
+      "pose_norm": 81.79210771574628,
+      "cosine_similarity": -0.0708570808055619
+    }
+  ],
+  "validation_used": false,
+  "parent_restored": true
+}

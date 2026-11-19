@@ -1,0 +1,137 @@
+{
+  "amp": {
+    "enabled": true,
+    "max_overflow_retries": 16
+  },
+  "architecture": "full35",
+  "augmentation": {
+    "detect_fliplr": 0.5,
+    "detect_mosaic": 0.0,
+    "pose_fliplr": 0.0,
+    "pose_mosaic": 0.0
+  },
+  "baseline_metrics": "/home/uxin/yolo/yolo_combine/variants/full35/baselines/formal-gate-p3-seed0.json",
+  "batches": {
+    "detect_train_logical": 128,
+    "detect_train_physical_microbatch": 64,
+    "detect_validation": 32,
+    "loss_reference": 64,
+    "pose_train_physical": 16,
+    "pose_validation": 16
+  },
+  "config": "/home/uxin/yolo/yolo_combine/variants/full35/configs/joint.yaml",
+  "detect_data": "/home/uxin/yolo/coco2017.yaml",
+  "enable_j3": false,
+  "imgsz": 640,
+  "j2_plateau": {
+    "adjust_momentum": false,
+    "lr_factor": 0.5,
+    "max_reductions": 1,
+    "min_delta": 0.0001,
+    "monitor": "bittrue_joint_score",
+    "patience": 17,
+    "recovery_after": 8
+  },
+  "macro": {
+    "detect_logical_batches": 2,
+    "detect_physical_microbatches": 4,
+    "detect_weight": 1.0,
+    "pose_batches": 1,
+    "pose_weight": 0.25
+  },
+  "maximum_map_drop": 0.08,
+  "optimizer": "AdamW",
+  "pose_checkpoint": "/home/uxin/yolo/yolo_combine/variants/full35/artifacts/pose/p0-full35-p3-b32a4-e100max-seed0/weights/best.pt",
+  "pose_data": "/home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml",
+  "registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml",
+  "run_root": "/home/uxin/yolo/yolo_combine/variants/full35/artifacts/fusion/formal",
+  "runtime_overrides": {
+    "detect_images_per_full_macro": 256,
+    "detect_logical_batches_per_macro": 2,
+    "detect_physical_microbatches_per_macro": 8,
+    "detect_train_logical": 128,
+    "detect_train_physical_microbatch": 32
+  },
+  "schema_version": 1,
+  "shared_bn": {
+    "affine_trainable": true,
+    "running_statistics_frozen": true
+  },
+  "source_bundle": "/home/uxin/yolo/yolo_achitechure/achitechure_1/final",
+  "stage_policies": {
+    "j0": {
+      "backbone_start_layer": 11,
+      "epochs": 8,
+      "learning_rates": {
+        "attention": 0.0,
+        "backbone": 0.0,
+        "detect_head": 0.0,
+        "masf": 0.0,
+        "neck": 0.0,
+        "pose_head": 0.0002
+      },
+      "patience": 0,
+      "task_mode": "pose",
+      "tune_attention": false,
+      "warmup_epochs": 1
+    },
+    "j1": {
+      "backbone_start_layer": 11,
+      "epochs": 20,
+      "learning_rates": {
+        "attention": 0.0,
+        "backbone": 0.0,
+        "detect_head": 0.0002,
+        "masf": 0.0,
+        "neck": 7.5e-05,
+        "pose_head": 0.0002
+      },
+      "patience": 8,
+      "task_mode": "joint",
+      "tune_attention": false,
+      "warmup_epochs": 1
+    },
+    "j2": {
+      "backbone_start_layer": 9,
+      "epochs": 80,
+      "learning_rates": {
+        "attention": 0.0,
+        "backbone": 1.5e-05,
+        "detect_head": 0.0002,
+        "masf": 0.00015,
+        "neck": 7.5e-05,
+        "pose_head": 0.0002
+      },
+      "patience": 17,
+      "task_mode": "joint",
+      "tune_attention": false,
+      "warmup_epochs": 1
+    },
+    "j3": {
+      "backbone_start_layer": 0,
+      "epochs": 20,
+      "learning_rates": {
+        "attention": 5e-07,
+        "backbone": 3.8e-06,
+        "detect_head": 5e-05,
+        "masf": 3.8e-05,
+        "neck": 1.9e-05,
+        "pose_head": 5e-05
+      },
+      "patience": 5,
+      "task_mode": "joint",
+      "tune_attention": true,
+      "warmup_epochs": 3
+    }
+  },
+  "stages": [
+    "j0",
+    "j1",
+    "j2"
+  ],
+  "xnor": {
+    "backend": "tiled_exact",
+    "qk_ste": false,
+    "token_tile": 32
+  }
+}

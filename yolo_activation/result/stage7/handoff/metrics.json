@@ -1,0 +1,43 @@
+{
+  "evaluator": "完整 COCO val5000、BBAT5 v1 val683；FP32 E2E conf .001 iou .7 max_det300",
+  "models": {
+    "qsilu_pq": {
+      "metrics": {
+        "coco_AP": 0.513951265381378,
+        "person_AP": 0.643234026088054,
+        "sports_ball_AP": 0.5146623165317121,
+        "baseball_bat_AP": 0.4690357899624067,
+        "box_AP50_95": 0.6139042018842924,
+        "pose_AP50_95": 0.9007615878805139,
+        "ball_box_AP50_95": 0.4974302119527326,
+        "ball_pose_AP50_95": 0.8647309926872065,
+        "bat_box_AP50_95": 0.730378191815852,
+        "bat_pose_AP50_95": 0.9367921830738212
+      },
+      "epoch": 8,
+      "activation_relative_gate": true
+    },
+    "poly_quality": {
+      "metrics": {
+        "coco_AP": 0.5156104931963268,
+        "person_AP": 0.6430242726460877,
+        "sports_ball_AP": 0.5154654219828001,
+        "baseball_bat_AP": 0.46610286757568814,
+        "box_AP50_95": 0.6165051809361508,
+        "pose_AP50_95": 0.9039340047788486,
+        "ball_box_AP50_95": 0.5002246313995821,
+        "ball_pose_AP50_95": 0.8671171615547468,
+        "bat_box_AP50_95": 0.7327857304727192,
+        "bat_pose_AP50_95": 0.9407508480029503
+      },
+      "epoch": 10,
+      "activation_relative_gate": true
+    }
+  },
+  "original_independent_gate": {
+    "qsilu_pq": false,
+    "hardswish": false,
+    "poly_shift": false,
+    "poly_quality": false
+  }
+}

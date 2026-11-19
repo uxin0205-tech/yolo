@@ -1,0 +1,100 @@
+{
+  "finished": "2026-10-19T20:53:22.570137+08:00",
+  "original_source_verified_before_extension": true,
+  "tasks": {
+    "detect": {
+      "exported_checkpoint": "/home/uxin/yolo/yolo_masf/result/stage4/detect/trained-epoch05.pt",
+      "sha256": "943d2fe7770271bcdbe17085937f45ba95580469670d0af8d224c040c49cc56f",
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1/detect-training/resume.pt",
+      "resume_sha256": "92708a9a04fd7f32841e116d57be7837ffc53dc89d8fe7a50eac73ea97d422e8",
+      "alpha_live": 0.0032280022278428078,
+      "alpha_ema": 0.0032206978648900986,
+      "ema_updates": 2315,
+      "strict_reload_equal": true,
+      "context_update_absmax": {
+        "model.23.p3_masf.context.dw3.conv.weight": 0.004247706383466721,
+        "model.23.p3_masf.context.dw5.conv.weight": 0.0040874481201171875,
+        "model.23.p3_masf.context.project.conv.weight": 0.005488557741045952
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "images": 118287,
+          "optimizer_steps": 463,
+          "amp_retries": 0
+        },
+        {
+          "epoch": 2,
+          "images": 118287,
+          "optimizer_steps": 463,
+          "amp_retries": 0
+        },
+        {
+          "epoch": 3,
+          "images": 118287,
+          "optimizer_steps": 463,
+          "amp_retries": 0
+        },
+        {
+          "epoch": 4,
+          "images": 118287,
+          "optimizer_steps": 463,
+          "amp_retries": 0
+        },
+        {
+          "epoch": 5,
+          "images": 118287,
+          "optimizer_steps": 463,
+          "amp_retries": 1
+        }
+      ]
+    },
+    "pose": {
+      "exported_checkpoint": "/home/uxin/yolo/yolo_masf/result/stage4/pose/trained-epoch05.pt",
+      "sha256": "c3df44fbf3e896f8542bde799bb5f78f53959bc0428877561230140e8872146c",
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1/pose-training/resume.pt",
+      "resume_sha256": "ce505cffef1e7b11ead658dbccdd234b594671db422879145dbdc17489c7cdf4",
+      "alpha_live": 0.0005086241872049868,
+      "alpha_ema": 0.000509449397213757,
+      "ema_updates": 235,
+      "strict_reload_equal": true,
+      "context_update_absmax": {
+        "model.23.p3_masf.context.dw3.conv.weight": 0.00032719969749450684,
+        "model.23.p3_masf.context.dw5.conv.weight": 0.0003288537263870239,
+        "model.23.p3_masf.context.project.conv.weight": 0.00043485313653945923
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "images": 5964,
+          "optimizer_steps": 47,
+          "amp_retries": 2
+        },
+        {
+          "epoch": 2,
+          "images": 5964,
+          "optimizer_steps": 47,
+          "amp_retries": 1
+        },
+        {
+          "epoch": 3,
+          "images": 5964,
+          "optimizer_steps": 47,
+          "amp_retries": 0
+        },
+        {
+          "epoch": 4,
+          "images": 5964,
+          "optimizer_steps": 47,
+          "amp_retries": 0
+        },
+        {
+          "epoch": 5,
+          "images": 5964,
+          "optimizer_steps": 47,
+          "amp_retries": 0
+        }
+      ]
+    }
+  }
+}

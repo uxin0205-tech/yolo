@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "scope": "CPU FP32 160／640 合成輸入、原模型逐值等價、routing、契約負向檢查；不是重跑 AP",
+  "isolated_process": true,
+  "workspace_reads_denied": true,
+  "external_workspace_reads": [],
+  "gpu_used": false,
+  "models": {
+    "qsilu_pq": {
+      "contract": {
+        "activation": "qsilu_pq",
+        "registered_activation_sites": 187,
+        "alias_groups": 30,
+        "attention_sites": [
+          "graph.model.10.m.0.attn",
+          "graph.model.22.m.0.1.attn"
+        ],
+        "binary": "B2",
+        "scale": "S1-Q10",
+        "normalization": "D1-PWL-LUT256",
+        "repconv": false,
+        "parameters": 26453936
+      },
+      "sizes": {
+        "160": {
+          "tensors": 24,
+          "bitwise_equal": true,
+          "max_abs_error": 0.0,
+          "routing_equal": true
+        },
+        "640": {
+          "tensors": 24,
+          "bitwise_equal": true,
+          "max_abs_error": 0.0,
+          "routing_equal": true
+        }
+      },
+      "wrong_activation_rejected": true,
+      "wrong_constant_rejected": true
+    },
+    "poly_quality": {
+      "contract": {
+        "activation": "poly_quality",
+        "registered_activation_sites": 187,
+        "alias_groups": 30,
+        "attention_sites": [
+          "graph.model.10.m.0.attn",
+          "graph.model.22.m.0.1.attn"
+        ],
+        "binary": "B2",
+        "scale": "S1-Q10",
+        "normalization": "D1-PWL-LUT256",
+        "repconv": false,
+        "parameters": 26453936
+      },
+      "sizes": {
+        "160": {
+          "tensors": 24,
+          "bitwise_equal": true,
+          "max_abs_error": 0.0,
+          "routing_equal": true
+        },
+        "640": {
+          "tensors": 24,
+          "bitwise_equal": true,
+          "max_abs_error": 0.0,
+          "routing_equal": true
+        }
+      },
+      "wrong_activation_rejected": true,
+      "wrong_constant_rejected": true
+    }
+  }
+}

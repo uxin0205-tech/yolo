@@ -1,0 +1,76 @@
+{
+  "release": "1119",
+  "checked_at": "2026-11-20T00:05:59+08:00",
+  "device": "CPU",
+  "gpu_used": false,
+  "training_run": false,
+  "ap_source": "existing Stage8/9 full COCO val2017 5000 and BBAT5 v1 val683 evaluation",
+  "retired_directory_available_during_validation": false,
+  "profiles": {
+    "hardware": {
+      "status": "passed",
+      "bitwise_equal": true,
+      "silu_rejected": true,
+      "GPU_used": false,
+      "sha256": "a7526f060612fdada757679b6b32d408b760d4c53f99e6adcb9923f16636b457",
+      "frozen_files_verified": 372,
+      "runtime_files": 367,
+      "reference_sha256": "60f509b4bd64494e41fbf3176710e8471a9f89380490c64f5bb8bbc7f8d92fdd",
+      "tested_shapes": [
+        {
+          "hw": [
+            160,
+            320
+          ],
+          "tensors": 24
+        },
+        {
+          "hw": [
+            512,
+            768
+          ],
+          "tensors": 24
+        }
+      ]
+    },
+    "accuracy": {
+      "status": "passed",
+      "bitwise_equal": true,
+      "silu_rejected": true,
+      "GPU_used": false,
+      "sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+      "frozen_files_verified": 372,
+      "runtime_files": 367,
+      "reference_sha256": "46e60c6165fd2d5897f5f6c816ffca1818f60fe0fa88b802dc07d70017c3db89",
+      "tested_shapes": [
+        {
+          "hw": [
+            160,
+            320
+          ],
+          "tensors": 24
+        },
+        {
+          "hw": [
+            640,
+            640
+          ],
+          "tensors": 24
+        }
+      ]
+    }
+  },
+  "cleanup": {
+    "retired": "yolo_optimize",
+    "before_allocated_bytes": 246619746304,
+    "removed_root_files": [
+      "README.md.orig",
+      ".gitignore.orig"
+    ],
+    "locked_references_checked_before_deletion": 110,
+    "external_stage_links_with_literal_retired_path": 0,
+    "stage_documents_and_code_checked": 6108,
+    "stage_content_index_sha256": "8242f85206f6c2b8e2aef145d661f658b67240d86860ffc865fc7fec8f9657b0",
+    "stage_file_hashes_unchanged": true
+  }
+}

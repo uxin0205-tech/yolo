@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "activation-manifest.schema.json",
+  "title": "Activation Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "model_id", "reviewed", "sites"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "model_id": {"type": "string", "minLength": 1},
+    "model_source_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-fA-F]{64}$"},
+    "reviewed": {"type": "boolean"},
+    "sites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["module_path", "region", "eligible", "original_activation"],
+        "properties": {
+          "module_path": {"type": "string", "minLength": 1},
+          "region": {"type": "string", "minLength": 1},
+          "eligible": {"type": "boolean"},
+          "cost_weight": {"type": "number", "exclusiveMinimum": 0},
+          "original_activation": {"const": "silu"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "kind": "stage6-final-review-v1",
+  "created_at": "2026-10-29T23:57:17.621738+08:00",
+  "reviewed_before_implementation": true,
+  "selected": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029/train/best-e001.pt",
+    "sha256": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7",
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6092024665178761,
+      "pose_AP50_95": 0.8998503112793659,
+      "ball_box_AP50_95": 0.49388345969797987,
+      "ball_pose_AP50_95": 0.8634740979003016,
+      "bat_box_AP50_95": 0.7245214733377724,
+      "bat_pose_AP50_95": 0.93622652465843
+    },
+    "epoch": 1,
+    "phase": "Pose-head-recovery",
+    "ema_updates": 373
+  },
+  "optimize_selected": {
+    "checkpoint": "/home/uxin/yolo/yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17_20/train/epochs/e5/inference.pt",
+    "sha256": "9d9306f3574eb584c5adbe43c303afb2865109234ddf6dcb4c866b63901fc161"
+  },
+  "sources_sha256": {
+    "yolo_optimize/reports/current-model/CURRENT.json": "60f1e5c03ca8e9d6c502e6070747614a8559633581631747c85ac96b8662fb4d",
+    "yolo_optimize/reports/current-model/REP17-20-FINAL-0915.md": "e38df1370a0ea9a4266d25e9c4bb1e90235a3e48c95ee0f294d984f813ff8beb",
+    "yolo_optimize/model/load_model.py": "eab42495258621547ef462904aa38a115b0b456a5b5fd1b36aea3a09cc6ff987",
+    "yolo_optimize/model/model.yaml": "51e8c27ec491ca82f66f21d001f494290b21b8ff70e6a88df2c5a9679098c6d6",
+    "yolo_optimize/model/manifest.json": "087e8c1f832a26520768cb024939f0aa6b97a5a2fa0bcbfe8157364478d2d043",
+    "yolo_optimize/model/runtime_classes.py": "439f1675d77ac2ab030d0a19e5206a440f14ae2f594dd47ae18c13cef67490c3",
+    "yolo_optimize/model/validation/validation.json": "09111202c0e96bcd40730bcca12f071f692fbf0eea66bd1c4c98dcdedb45ac99",
+    "yolo_binaryqk/binaryqk/evaluate.py": "02c38fa3d8ab8cf30b6c6f1a279a8f092548687a9bd71ab78ef7f13c09dbf593",
+    "yolo_binaryqk/binaryqk/data.py": "b4d60596f297e530bd6a635bbb5f70f6afa51c0f1493312f45745670f08db424",
+    "yolo_masf/masf_yolo/stage4/evaluate.py": "78ff09ced940c9de55fc689c6b5a497416952da0931a9d297824030c32b53761",
+    "yolo_combine/stage6/data.py": "7ea7addc67a6f84475b41220f1701ce31cf8a6b12b9f9352b33ead1c0f82ecf5",
+    "yolo_combine/artifacts/stage6/pose-head-recovery-20261029/verification/result.json": "d9fc17d2b5aab1231d651eabdb2d0845d004889fc17b582701d481e8fddfadaf"
+  },
+  "dataset_config_sha256": "58a5c9f371d40dea531049b7e7e4d9be1f57d782d6ca043b29d29b74ee00ed7c",
+  "method": [
+    "Use optimize self-contained model/ package and its own runtime in isolated worker. Never substitute current attention classes for old serialized model.",
+    "Use exact current native evaluators and dataset args; canonical full val5000/683, batch8, rect=True stride32, FP32 E2E conf.001 iou.7 maxdet300. Verify image order and batch shapes match saved current dataset snapshot.",
+    "Current selected checkpoint already independently reloaded and full AP reproduced; reuse those results, validate old optimize once under same settings. This is no additional training.",
+    "Consolidate Stage6 selected weights/manifest/metrics/lineage/results/curves/offline redraw; label failure of original final accuracy targets and do not automatically start Stage7.",
+    "Measure actual parameters/file bytes and analytically count executed Conv2d MAC subtotal. Do not call it hardware latency or complete operation count.",
+    "Keep protected sources/needed model lineage. No commit/push, no writes to optimize."
+  ],
+  "gpu_budget": {
+    "jobs": 1,
+    "estimated_minutes": [
+      1,
+      4
+    ],
+    "max_seconds_without_progress": 600,
+    "conflict": "require idle"
+  }
+}

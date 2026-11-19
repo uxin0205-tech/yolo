@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "report_id": "rtx5060ti-half-0822",
+  "report_date": "2026-08-22",
+  "scope": {
+    "completed_included": [
+      "fraction=0.3 Full35/Partial75 Phase B and Phase C",
+      "fraction=1.0 Full35/Partial75 Phase B",
+      "ball/bat validation for A0, A2, fraction=0.3 B/C"
+    ],
+    "excluded_running": {
+      "queue": "artifacts/queues/fraction10-phase-c-rtx5060ti-fraction10-phasec8x2-workers6-patience7-r1/state.json",
+      "status_at_audit": "running",
+      "current_job_at_audit": "train:full35:c",
+      "fraction": 1.0,
+      "physical_batch": 8,
+      "nbs": 16,
+      "workers": 6,
+      "patience": 7
+    }
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.90",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "gpu_vram_bytes": 17102864384,
+    "seed": 0,
+    "imgsz": 640,
+    "validation_batch": 8
+  },
+  "accepted_a2": {
+    "full35": {
+      "float_sha256": "af390ec43cadb5aaac47a22ebf58c710106c3f8dd143fbd2bbcb0eb2b76ebf26",
+      "published_bittrue_sha256": "8c85f6484f7a2f251f3665f7b565873870209b231fe07944e9a9d31273e2ccac",
+      "map50_95": 0.50639125121949,
+      "decision": "retained"
+    },
+    "partial75": {
+      "float_sha256": "070b571d1a52b1e7d13acc25d4c77278e38395d975fe6bff5e9bbd1bdc01e568",
+      "published_bittrue_sha256": "5e3330e8c236ced4f50199126dcdb6470fc39afd64f1c99738dd49ff42f10d21",
+      "map50_95": 0.5067544912590529,
+      "decision": "retained"
+    }
+  },
+  "fraction_effect_phase_b": {
+    "full35": {
+      "fraction_03_map50_95": 0.49950444563093044,
+      "fraction_10_map50_95": 0.5035027108346335,
+      "fraction_10_minus_fraction_03": 0.003998265203703055,
+      "fraction_10_minus_a2": -0.002888540384856517,
+      "gate": "rollback_to_a2"
+    },
+    "partial75": {
+      "fraction_03_map50_95": 0.4982864460951055,
+      "fraction_10_map50_95": 0.5040094609568293,
+      "fraction_10_minus_fraction_03": 0.00572301486172383,
+      "fraction_10_minus_a2": -0.002745030302223617,
+      "gate": "rollback_to_a2"
+    }
+  },
+  "fraction_03_phase_c": {
+    "full35": {
+      "map50_95": 0.4971468268656683,
+      "delta_vs_a2": -0.00924442435382169,
+      "gate": "rollback_to_a2"
+    },
+    "partial75": {
+      "map50_95": 0.497261550897957,
+      "delta_vs_a2": -0.009492940361095916,
+      "gate": "rollback_to_a2"
+    }
+  },
+  "architecture_cost": {
+    "measurement": "Ultralytics model.info(), fused, imgsz=640",
+    "a0": {"parameters": 20412144, "gflops": 68.2},
+    "full35": {"parameters": 20487153, "gflops": 69.1},
+    "partial75": {"parameters": 20418609, "gflops": 68.3}
+  },
+  "ball_bat_dataset": {
+    "source": "/home/uxin0/yolo/original/pose/dataset",
+    "derived": "/home/uxin0/yolo/original/pose/detect_dataset/coco80/data.yaml",
+    "validation_images": 567,
+    "sports_ball_instances": 301,
+    "baseball_bat_instances": 484,
+    "coco_train2017_overlap_images": 93,
+    "overlap_fraction": 0.164021164021164
+  },
+  "resource_safety": {
+    "minimum_available_ram_fail_bytes": 1610612736,
+    "minimum_free_vram_fail_bytes": 1073741824,
+    "completed_runs_oom": 0,
+    "lowest_observed_available_ram_bytes": 7745658880,
+    "lowest_observed_free_vram_bytes": 2608295936,
+    "phase_c_fraction03_capacity_probe": {
+      "full35_peak_vram_bytes": 5328045056,
+      "partial75_peak_vram_bytes": 5165796352,
+      "physical_batch": 8,
+      "accumulate": 2,
+      "amp": true
+    }
+  },
+  "conclusion": {
+    "accepted_checkpoints_changed": false,
+    "fraction_03_is_a_major_cause_of_phase_b_degradation": true,
+    "fraction_03_is_the_only_cause": false,
+    "overall_accuracy_improvement_claimed": false,
+    "provisional_engineering_preference": "partial75",
+    "formal_architecture_winner_declared": false,
+    "missing_for_formal_winner": "same-GPU identical-setting FP16 p50 latency"
+  },
+  "audit": {
+    "checkpoint_metrics_sha256_consistent": true,
+    "metrics_finite": true,
+    "training_csv_epoch_counts_consistent": true,
+    "pytest": "48 passed in 34.56s",
+    "fraction03_queue_child_summary_missing": true,
+    "fraction03_full35_b_telemetry_nul_padding_bytes": 461
+  }
+}

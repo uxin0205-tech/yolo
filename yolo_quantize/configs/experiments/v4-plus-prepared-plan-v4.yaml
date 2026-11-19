@@ -1,0 +1,194 @@
+schema_version: 4
+plan_id: full35-v4-plus-prepared-v4
+date: '2026-09-03'
+supersedes: full35-v4-plus-prepared-v3
+source_plan: configs/experiments/full35-quantization-plan-v4.yaml
+execution_authorized: false
+gpu_required_steps_must_not_run: true
+current_stop: first_qsilu_backbone_early_w8_search_green_before_expansion
+
+p0_before_gpu:
+  completed:
+    - exact_scaled_codebook_solver_unit_tests
+    - sd4_16_code_pack_unpack_unit_tests
+    - metric_gate_contract_identity
+    - weight_runner_bn_folded_view
+    - diagnostic_only_status_semantics
+    - bind_runner_to_fixed_calibration_and_probe_manifest
+    - implement_integer_boundary_reference_contract
+    - audit_full35_add_concat_protected_islands_and_int32_mac_bounds
+    - calibrate_and_freeze_first_qsilu_lsq_plus_a8_parent
+    - run_first_qsilu_backbone_early_w8_output_diagnostic
+    - run_first_three_role_eight_metric_search_with_coco_person
+  pending: []
+  next_requires_gpu:
+    - measure_join_saturation_and_layer_output_error
+
+before_w4_and_special_formats:
+  completed:
+    - exact_scaled_codebook_solver_unit_tests
+    - sd4_16_code_pack_unpack_unit_tests
+    - regenerate_three_parent_full35_exact_uniform_w4_and_fixed_sd4_static_results
+    - publish_fixed_sd4_routing_v3_with_36_static_candidates
+  pending: []
+
+before_qat:
+  pending:
+    - resolve_fold_aware_qat_contract
+
+before_speed_or_energy_claim:
+  pending:
+    - freeze_hardware_target_before_speed_claim
+
+v4_uniform_bridge:
+  status: first_qsilu_backbone_early_w8_green_remaining_cells_not_authorized
+  activation_parents: [qsilu_pq, hardswish, poly_shift]
+  matched_fp_weight_controls: 3
+  coarse_weight_bits: [w8, w6, w4]
+  coarse_quantized_cells: 9
+  boundary_weight_bits: [w7, w5]
+  boundary_quantized_cells: 6
+  total_quantized_universe: 15
+  run_order:
+    - matched_controls_and_w8
+    - w6
+    - w4_with_exact_uniform_comparator
+    - w7_and_w5_boundary_points
+  all_bits_retained: true
+  completed_cells:
+    - cell_id: qsilu_pq--lsq-plus-a8--backbone_early--w8-mse_grid_v1
+      diagnostic: diagnostic_pass
+      search_gate: green
+      worst_total_delta: -0.013504198375223875
+      worst_incremental_delta: -0.007147057049401329
+      formal_winner: false
+
+v4h_q3_regional_bridge:
+  status: prepared_conditional_not_run
+  base_parent: qsilu_pq
+  override_activation: hardswish
+  single_regions: [neck_attention, masf, backbone_attention]
+  per_policy: [fp32_weight_matched_control, w8]
+  initial_cells: 6
+  conditional_pair: [neck_attention, masf]
+  conditional_cells: 2
+  prerequisite: both_single_region_w8_cells_pass
+  single_delta_addition: forbidden
+
+v5_universe:
+  status: prepared_not_run
+  parents: [qsilu_pq, hardswish, poly_shift]
+  regions:
+    - backbone_early
+    - backbone_deep
+    - backbone_attention_safe
+    - neck
+    - masf
+    - neck_attention_safe
+    - detect_one2one_tower
+    - detect_one2one_predictor
+    - pose_one2one_tower
+    - pose_one2one_predictor
+  bits: [w8, w7, w6, w5, w4]
+  static_cells: 150
+  diagnostic_cells:
+    preferred: all_150_if_time_allows
+    minimum_coarse: 90
+    minimum_formula: 3_parents_x_10_regions_x_w8_w6_w4
+    boundary_bits_retained: true
+  all_150_full_validation: false
+
+evaluation_tiers:
+  static:
+    gpu: false
+    cells: all_150
+    promotion_authority: false
+  diagnostic:
+    gpu: true
+    cells: all_150_or_preregistered_stratified_subset
+    result_label: diagnostic_pass
+    promotion_authority: false
+  search:
+    gpu: true
+    maximum_cells: 30
+    selection_contract: coco_val_plus_bbat_canonical_search_val
+    includes_dominated_sentinels: true
+    promotion_authority: true
+  formal:
+    gpu: true
+    maximum_finalists: 6
+    contract: locked_policies_full_coco_and_bbat_formal_val
+    repeated_search_forbidden: true
+
+special_format_stage:
+  status: exact_static_routing_complete_gpu_output_validation_pending
+  routing_manifest: artifacts/manifests/fixed-sd4-routing-candidates-v3.yaml
+  stable_static_candidates: 36
+  promotion_authorized: false
+  routed_regions_only: true
+  comparators:
+    - optimal_uniform_w4
+    - optimal_fixed_sd4
+    - apot4
+    - paper_twn
+    - exact_scaled_ternary
+  ls_sd4_starts_after_exact_fixed: true
+  activation_sd4_deferred: true
+
+racing:
+  objectives:
+    - worst_eight_metric_margin
+    - ideal_packed_code_bytes
+    - aligned_storage_and_metadata
+    - bop_or_traffic_proxy
+  retained_roles: [accuracy, balanced, hardware]
+  maximum_roles: 3
+  sentinel_required: true
+  actual_latency_for_selection: false
+
+qat_funnel:
+  global_status: not_authorized
+  entry: only_ptq_recovery_band_or_special_formats
+  w8_pass_skips_qat: true
+  s15:
+    epochs: 15
+    maximum_policies: 8
+    composition: up_to_6_main_plus_2_preregistered_sentinels
+  d20:
+    epochs: 20
+    maximum_policies: 3
+    more_rounds_than_old_stage2: true
+  d60:
+    epochs: 60
+    maximum_policies: 2
+  formal_top2:
+    train_fraction: 1.0
+    epochs: [100, 120]
+    seeds: [0, 1, 2]
+  optimizer:
+    control: AdamW
+    pilot: MuSGD
+    pilot_requires_new_matched_sham: true
+    cross_optimizer_state_resume: forbidden
+  hyperparameter_trials:
+    maximum: 8
+    adamw: 4
+    musgd: 4
+    model_lr_multipliers: [0.05, 0.1, 0.2]
+    qparam_lr_ratios: [0.5, 1.0, 2.0]
+    trial_epochs: [5, 10, 15]
+
+lower_activation_stage:
+  starts_after_stable_weight_map: true
+  primary: [a7, a6]
+  a_sd4_comparators: [lsq_plus_a4, apot_a4, fixed_a_sd4, learned_a_sd4]
+  hardware_claim_without_kernel: forbidden
+
+stop_points:
+  - after_p0_cpu_report
+  - after_v4_uniform_report_and_user_selection
+  - after_v4h_report_and_user_selection
+  - after_v5_search_report_and_user_selection
+  - before_any_qat
+  - before_formal_training
+  - before_export_or_final_optimization

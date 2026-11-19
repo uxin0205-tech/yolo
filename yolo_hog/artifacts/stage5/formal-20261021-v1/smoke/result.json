@@ -1,0 +1,160 @@
+{
+  "variant": "H2",
+  "phase": "hog-adaptation",
+  "smoke": true,
+  "recipe": {
+    "version": 7,
+    "batch": 16,
+    "logical_batch": 128,
+    "imgsz": 640,
+    "seed": 20260919,
+    "optimizer": "AdamW",
+    "lr0": 1e-05,
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "warmup_epochs": 1,
+    "warmup_bias_lr": 0.0,
+    "linear_final_fraction": 0.5,
+    "gradient_clip": 10.0,
+    "amp": true,
+    "initial_loss_scale": 1024.0,
+    "overflow_attempts": 16,
+    "dtype": "AMP-FP16; score/softmax/parameters/evaluation-FP32",
+    "bn": "all BN running statistics frozen",
+    "loss": "native terminal E2E .1/.9 batch-sum + mu HOG batch-sum;64/actual macro",
+    "ema": "inherited age, only trainable parameters averaged",
+    "normalization": "B2/S1/integer PWL/D1 unchanged; all Attention parameters frozen",
+    "selection": "save best overall AP including parent; recommend only > parent and all eight AP drops <=.001",
+    "resume": "last complete epoch; exact live/EMA/optimizer/scaler; repeat interrupted epoch",
+    "reference_review_sha256": "6a04b7d8377c508a338184b94cfa8316cabaae73ae0b7f764e4a2c495a6bb13e",
+    "phase": "hog-adaptation",
+    "epochs": 10,
+    "minimum_epochs": 5,
+    "patience": 4,
+    "scope": "neck-head-hog-fixed-attention",
+    "reference_batch": 64,
+    "steps_per_epoch": 925,
+    "group_lrs": {
+      "head": 5e-06,
+      "neck": 1e-05,
+      "hog": 0.0003
+    },
+    "scheduler": "warmup-cosine",
+    "smoke_steps": 2,
+    "hog": {
+      "mu": 0.14903249130973698,
+      "calibration_sha256": "bc5734c22a7eb5237d644058494cd4743c209800bd02226f02683ff56d3a6f38",
+      "schedule": "E1 linear ramp; E2-E8 full; E9-E10 off; no separate control training"
+    }
+  },
+  "best": {
+    "AP50_95": 0.0,
+    "epoch": 1,
+    "checkpoint": "epoch-01.pt"
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "evaluation": {
+        "protocol": "E2E FP32 conf=.001 iou=.7 max_det=300; native matching and official COCO bbox",
+        "images": 16,
+        "formal": false,
+        "internal": {
+          "metrics/precision(B)": 0.6949945807499015,
+          "metrics/recall(B)": 0.693786282088033,
+          "metrics/mAP50(B)": 0.7563168768909757,
+          "metrics/mAP50-95(B)": 0.5353040039565091,
+          "fitness": 0.5353040039565091
+        },
+        "classes_internal": {
+          "person": {
+            "AP50": 0.8171662592645828,
+            "AP50_95": 0.5533515180418253,
+            "precision": 0.9018251425165821,
+            "recall": 0.7288135593220338,
+            "instances": 59
+          },
+          "sports_ball": {
+            "AP50": null,
+            "AP50_95": null,
+            "reason": "no evaluated class targets"
+          },
+          "baseball_bat": {
+            "AP50": null,
+            "AP50_95": null,
+            "reason": "no evaluated class targets"
+          }
+        },
+        "seconds": 0.7665669741109014
+      }
+    },
+    {
+      "epoch": 1,
+      "images": 256,
+      "optimizer_steps": 2,
+      "seconds": 12.060281038284302,
+      "training_seconds": 6.189291715621948,
+      "peak_allocated_bytes": 5885881344,
+      "amp_retries": 0,
+      "first_batch_images": [
+        "000000128211.jpg",
+        "000000258450.jpg",
+        "000000354179.jpg",
+        "000000460389.jpg",
+        "000000217951.jpg",
+        "000000558510.jpg",
+        "000000443160.jpg",
+        "000000519113.jpg",
+        "000000504057.jpg",
+        "000000397760.jpg",
+        "000000444576.jpg",
+        "000000217458.jpg",
+        "000000571916.jpg",
+        "000000045180.jpg",
+        "000000031332.jpg",
+        "000000543264.jpg"
+      ],
+      "required_update_abs_max": {
+        "model.16.cv2.conv.weight": 2.000480890274048e-05,
+        "model.23.one2one_cv2.0.0.conv.weight": 1.0013580322265625e-05
+      },
+      "qk_update_abs_max": {},
+      "evaluation": {
+        "protocol": "E2E FP32 conf=.001 iou=.7 max_det=300; native matching and official COCO bbox",
+        "images": 16,
+        "formal": false,
+        "internal": {
+          "metrics/precision(B)": 0.7041834099722001,
+          "metrics/recall(B)": 0.7032316893239364,
+          "metrics/mAP50(B)": 0.7636356113065781,
+          "metrics/mAP50-95(B)": 0.5383017683321439,
+          "fitness": 0.5383017683321439
+        },
+        "classes_internal": {
+          "person": {
+            "AP50": 0.817436459922825,
+            "AP50_95": 0.552990418828692,
+            "precision": 0.8811553819387712,
+            "recall": 0.7288135593220338,
+            "instances": 59
+          },
+          "sports_ball": {
+            "AP50": null,
+            "AP50_95": null,
+            "reason": "no evaluated class targets"
+          },
+          "baseball_bat": {
+            "AP50": null,
+            "AP50_95": null,
+            "reason": "no evaluated class targets"
+          }
+        },
+        "seconds": 0.4647930711507797
+      }
+    }
+  ],
+  "stop_reason": "smoke"
+}

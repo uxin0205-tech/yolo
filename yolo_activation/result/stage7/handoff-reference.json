@@ -1,0 +1,14 @@
+{
+  "reviewed_at": "2026-11-03T11:25:02.390447+08:00",
+  "reviewed_before_implementation": true,
+  "sources": {
+    "yolo_optimize/model/load_model.py": "eab42495258621547ef462904aa38a115b0b456a5b5fd1b36aea3a09cc6ff987",
+    "yolo_optimize/model/README.md": "ff54903ac8196fb8946e17bc849168fb753e1da541b315787b536636341a974a",
+    "yolo_optimize/docs/worklogs/2026-09-15-rep17-20-E5-model-handoff.md": "287b9ad6ca9da5d2a956c08516548e10f794fe22632a789b7850fb8b53c128b6",
+    "yolo_activation/stage7/model.py": "3c245f039979c62a001733f8c04042eee0c012a4cfec26b870e1fc1bab6f7762",
+    "yolo_combine/src/yolo_combine/fusion_model.py": "c901d4ddc56bd0aae9c12f7a3bb3160b32fd6fe2888461ed22683e06d773f70e"
+  },
+  "採用": "參考 optimize 交付：原 state_dict＋零參數骨架、必要執行類別、SHA 驗證、獨立 CPU 雙 head 等價測試。",
+  "差異": "本輪為 Stage7 未加入 RepConv／MASF；保持 B2、S1 Q10、D1 完整 exp＋reciprocal，禁止換成 optimize 舊 normalization。交付 qSiLU 與 PolyQuality 兩個現有選定模型，不新增訓練或轉 FP16。",
+  "驗證": "載入原模型後建立骨架；交付包在獨立程序阻擋研究目錄讀取，檢查完整輸出與原模型逐值一致、activation／常數／alias 不變；來源 runtime 僅為凍結匯出，演算法仍由原專案維護。"
+}

@@ -1,0 +1,21 @@
+{
+  "removed": [
+    {
+      "path": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/train-poly_shift/resume.pt",
+      "bytes": 421972925
+    },
+    {
+      "path": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/train-hardswish/resume.pt",
+      "bytes": 421972221
+    },
+    {
+      "path": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/train-poly_quality/resume.pt",
+      "bytes": 421972221
+    },
+    {
+      "path": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/train-qsilu_pq/resume.pt",
+      "bytes": 421972925
+    }
+  ],
+  "reason": "完整重載驗證後刪除不需續跑的 optimizer resume；未解 qSiLU 保留"
+}

@@ -1,0 +1,158 @@
+{
+  "status": "passed",
+  "parent_sha256": "73be7a2b3e8b65b01ceca41bb41e6ece1d22245ff4c8ef594998979ecd8794c7",
+  "recipe": {
+    "epochs": 5,
+    "loss_horizon": 5,
+    "task": "joint",
+    "scope": "rep_and_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "rep": 1e-05,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "all_bn_running": "fixed",
+    "bn_affine": "trainable only selected Rep and both heads",
+    "attention": "all tensors frozen",
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "amp": true,
+    "detect_physical": 16,
+    "detect_accumulation": 16,
+    "pose_physical": 16,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "initial_ema_updates": 0,
+    "max_amp_retries": 16,
+    "ciou": "canonical FP32 wrapper; formula unchanged",
+    "name": "rep20"
+  },
+  "records": [
+    {
+      "detect_mean_loss": 1.661910280585289,
+      "pose_mean_loss": 1.2357889413833618,
+      "joint_mean_loss": 1.5198698341846466,
+      "loss_for_backward": 97.27166938781738,
+      "detect_components": [
+        1.0717817544937134,
+        0.9639682769775391,
+        0.005927403923124075
+      ],
+      "pose_components": [
+        0.9777348041534424,
+        0.03347373753786087,
+        0.03314600884914398,
+        0.2978874742984772,
+        0.0028312369249761105,
+        0.0
+      ],
+      "detect_batch_sizes": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "pose_batch_sizes": [
+        16
+      ],
+      "detect_images": 256,
+      "pose_images": 16,
+      "gradient_presence": {
+        "shared": true,
+        "detect_head": true,
+        "pose_head": true
+      },
+      "gradient_statistics": {
+        "detect_norm": 13.872042219512192,
+        "pose_norm": 14.553179218903832,
+        "cosine_similarity": 0.05521524854677664
+      },
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 145.22543334960938
+    },
+    {
+      "detect_mean_loss": 1.630716733634472,
+      "pose_mean_loss": 0.9461574554443359,
+      "joint_mean_loss": 1.4025303075710933,
+      "loss_for_backward": 89.76193968454997,
+      "detect_components": [
+        1.0198290348052979,
+        0.9593175649642944,
+        0.00588269205763936
+      ],
+      "pose_components": [
+        0.6236059069633484,
+        0.02138487994670868,
+        0.01144457794725895,
+        0.25755900144577026,
+        0.002211982384324074,
+        0.0
+      ],
+      "detect_batch_sizes": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "pose_batch_sizes": [
+        16
+      ],
+      "detect_images": 256,
+      "pose_images": 16,
+      "gradient_presence": {
+        "shared": true,
+        "detect_head": true,
+        "pose_head": true
+      },
+      "gradient_statistics": {
+        "detect_norm": 13.972449715625581,
+        "pose_norm": 8.79311771348961,
+        "cosine_similarity": -0.013597837880794246
+      },
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 134.4786376953125
+    }
+  ],
+  "updated_parameters": 318,
+  "new_branch_and_both_heads_updated": true,
+  "frozen_tensors_and_ema_verified": true,
+  "peak_allocated_GiB": 5.500176429748535,
+  "peak_reserved_GiB": 5.771484375,
+  "seconds_per_macro": 5.613706469535828,
+  "ema_updates": 2,
+  "smoke_weights_discarded": true
+}

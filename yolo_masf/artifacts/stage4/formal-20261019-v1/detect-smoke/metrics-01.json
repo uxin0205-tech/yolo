@@ -1,0 +1,32 @@
+{
+  "protocol": "E2E FP32 conf=.001 iou=.7 max_det=300; native matching and official COCO bbox",
+  "images": 16,
+  "formal": false,
+  "internal": {
+    "metrics/precision(B)": 0.695557735792312,
+    "metrics/recall(B)": 0.6935477386853877,
+    "metrics/mAP50(B)": 0.7562349354448566,
+    "metrics/mAP50-95(B)": 0.5351857109827537,
+    "fitness": 0.5351857109827537
+  },
+  "classes_internal": {
+    "person": {
+      "AP50": 0.8173473939830549,
+      "AP50_95": 0.5533455994007467,
+      "precision": 0.9031732295914069,
+      "recall": 0.7288135593220338,
+      "instances": 59
+    },
+    "sports_ball": {
+      "AP50": null,
+      "AP50_95": null,
+      "reason": "no evaluated class targets"
+    },
+    "baseball_bat": {
+      "AP50": null,
+      "AP50_95": null,
+      "reason": "no evaluated class targets"
+    }
+  },
+  "seconds": 0.6538752103224397
+}

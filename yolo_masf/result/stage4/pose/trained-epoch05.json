@@ -1,0 +1,503 @@
+{
+  "sha256": "c3df44fbf3e896f8542bde799bb5f78f53959bc0428877561230140e8872146c",
+  "manifest": {
+    "schema": "masf-stage4-v1",
+    "task": "pose",
+    "parent": "/home/uxin/yolo/yolo_pose_training/artifacts/preserved/stagewise_lr_p3_640/weights/best.pt",
+    "parent_sha256": "e50e155c6c070da4b038fe5679575f4c094b9cfff8eb3a2143770d7dad4cad9e",
+    "upstream": {
+      "architecture": {
+        "nc": 2,
+        "end2end": true,
+        "reg_max": 1,
+        "kpt_shape": [
+          2,
+          3
+        ],
+        "scales": {
+          "n": [
+            0.5,
+            0.25,
+            1024
+          ],
+          "s": [
+            0.5,
+            0.5,
+            1024
+          ],
+          "m": [
+            0.5,
+            1.0,
+            512
+          ],
+          "l": [
+            1.0,
+            1.0,
+            512
+          ],
+          "x": [
+            1.0,
+            1.5,
+            512
+          ]
+        },
+        "backbone": [
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              64,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              128,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            2,
+            "C3k2",
+            [
+              256,
+              false,
+              0.25
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              256,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            2,
+            "C3k2",
+            [
+              512,
+              false,
+              0.25
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              512,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            2,
+            "C3k2",
+            [
+              512,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              1024,
+              3,
+              2
+            ]
+          ],
+          [
+            -1,
+            2,
+            "C3k2",
+            [
+              1024,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "SPPF",
+            [
+              1024,
+              5,
+              3,
+              true
+            ]
+          ],
+          [
+            -1,
+            2,
+            "C2PSA",
+            [
+              1024
+            ]
+          ]
+        ],
+        "head": [
+          [
+            -1,
+            1,
+            "nn.Upsample",
+            [
+              "None",
+              2,
+              "nearest"
+            ]
+          ],
+          [
+            [
+              -1,
+              6
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          [
+            -1,
+            2,
+            "C3k2",
+            [
+              512,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "nn.Upsample",
+            [
+              "None",
+              2,
+              "nearest"
+            ]
+          ],
+          [
+            [
+              -1,
+              4
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          [
+            -1,
+            2,
+            "C3k2",
+            [
+              256,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              256,
+              3,
+              2
+            ]
+          ],
+          [
+            [
+              -1,
+              13
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          [
+            -1,
+            2,
+            "C3k2",
+            [
+              512,
+              true
+            ]
+          ],
+          [
+            -1,
+            1,
+            "Conv",
+            [
+              512,
+              3,
+              2
+            ]
+          ],
+          [
+            [
+              -1,
+              10
+            ],
+            1,
+            "Concat",
+            [
+              1
+            ]
+          ],
+          [
+            -1,
+            1,
+            "C3k2",
+            [
+              1024,
+              true,
+              0.5,
+              true
+            ]
+          ],
+          [
+            [
+              16,
+              19,
+              22
+            ],
+            1,
+            "Pose26",
+            [
+              "nc",
+              "kpt_shape"
+            ]
+          ]
+        ],
+        "scale": "m",
+        "yaml_file": "yolo26m-pose.yaml",
+        "channels": 3
+      },
+      "names": {
+        "0": "ball",
+        "1": "bat"
+      },
+      "activation_calls": {
+        "model.0.act": "SiLU",
+        "model.1.act": "SiLU",
+        "model.2.cv1.act": "SiLU",
+        "model.2.cv2.act": "SiLU",
+        "model.2.m.0.cv1.act": "SiLU",
+        "model.2.m.0.cv2.act": "SiLU",
+        "model.2.m.0.cv3.act": "SiLU",
+        "model.2.m.0.m.0.cv1.act": "SiLU",
+        "model.2.m.0.m.0.cv2.act": "SiLU",
+        "model.2.m.0.m.1.cv1.act": "SiLU",
+        "model.2.m.0.m.1.cv2.act": "SiLU",
+        "model.3.act": "SiLU",
+        "model.4.cv1.act": "SiLU",
+        "model.4.cv2.act": "SiLU",
+        "model.4.m.0.cv1.act": "SiLU",
+        "model.4.m.0.cv2.act": "SiLU",
+        "model.4.m.0.cv3.act": "SiLU",
+        "model.4.m.0.m.0.cv1.act": "SiLU",
+        "model.4.m.0.m.0.cv2.act": "SiLU",
+        "model.4.m.0.m.1.cv1.act": "SiLU",
+        "model.4.m.0.m.1.cv2.act": "SiLU",
+        "model.5.act": "SiLU",
+        "model.6.cv1.act": "SiLU",
+        "model.6.cv2.act": "SiLU",
+        "model.6.m.0.cv1.act": "SiLU",
+        "model.6.m.0.cv2.act": "SiLU",
+        "model.6.m.0.cv3.act": "SiLU",
+        "model.6.m.0.m.0.cv1.act": "SiLU",
+        "model.6.m.0.m.0.cv2.act": "SiLU",
+        "model.6.m.0.m.1.cv1.act": "SiLU",
+        "model.6.m.0.m.1.cv2.act": "SiLU",
+        "model.7.act": "SiLU",
+        "model.8.cv1.act": "SiLU",
+        "model.8.cv2.act": "SiLU",
+        "model.8.m.0.cv1.act": "SiLU",
+        "model.8.m.0.cv2.act": "SiLU",
+        "model.8.m.0.cv3.act": "SiLU",
+        "model.8.m.0.m.0.cv1.act": "SiLU",
+        "model.8.m.0.m.0.cv2.act": "SiLU",
+        "model.8.m.0.m.1.cv1.act": "SiLU",
+        "model.8.m.0.m.1.cv2.act": "SiLU",
+        "model.9.cv1.act": "Identity",
+        "model.9.cv2.act": "SiLU",
+        "model.10.cv1.act": "SiLU",
+        "model.10.cv2.act": "SiLU",
+        "model.10.m.0.attn.qkv.act": "Identity",
+        "model.10.m.0.attn.proj.act": "Identity",
+        "model.10.m.0.attn.pe.act": "Identity",
+        "model.10.m.0.ffn.0.act": "SiLU",
+        "model.10.m.0.ffn.1.act": "Identity",
+        "model.13.cv1.act": "SiLU",
+        "model.13.cv2.act": "SiLU",
+        "model.13.m.0.cv1.act": "SiLU",
+        "model.13.m.0.cv2.act": "SiLU",
+        "model.13.m.0.cv3.act": "SiLU",
+        "model.13.m.0.m.0.cv1.act": "SiLU",
+        "model.13.m.0.m.0.cv2.act": "SiLU",
+        "model.13.m.0.m.1.cv1.act": "SiLU",
+        "model.13.m.0.m.1.cv2.act": "SiLU",
+        "model.16.cv1.act": "SiLU",
+        "model.16.cv2.act": "SiLU",
+        "model.16.m.0.cv1.act": "SiLU",
+        "model.16.m.0.cv2.act": "SiLU",
+        "model.16.m.0.cv3.act": "SiLU",
+        "model.16.m.0.m.0.cv1.act": "SiLU",
+        "model.16.m.0.m.0.cv2.act": "SiLU",
+        "model.16.m.0.m.1.cv1.act": "SiLU",
+        "model.16.m.0.m.1.cv2.act": "SiLU",
+        "model.17.act": "SiLU",
+        "model.19.cv1.act": "SiLU",
+        "model.19.cv2.act": "SiLU",
+        "model.19.m.0.cv1.act": "SiLU",
+        "model.19.m.0.cv2.act": "SiLU",
+        "model.19.m.0.cv3.act": "SiLU",
+        "model.19.m.0.m.0.cv1.act": "SiLU",
+        "model.19.m.0.m.0.cv2.act": "SiLU",
+        "model.19.m.0.m.1.cv1.act": "SiLU",
+        "model.19.m.0.m.1.cv2.act": "SiLU",
+        "model.20.act": "SiLU",
+        "model.22.cv1.act": "SiLU",
+        "model.22.cv2.act": "SiLU",
+        "model.22.m.0.0.cv1.act": "SiLU",
+        "model.22.m.0.0.cv2.act": "SiLU",
+        "model.22.m.0.1.attn.qkv.act": "Identity",
+        "model.22.m.0.1.attn.proj.act": "Identity",
+        "model.22.m.0.1.attn.pe.act": "Identity",
+        "model.22.m.0.1.ffn.0.act": "SiLU",
+        "model.22.m.0.1.ffn.1.act": "Identity",
+        "model.23.cv2.0.0.act": "SiLU",
+        "model.23.cv2.0.1.act": "SiLU",
+        "model.23.cv2.1.0.act": "SiLU",
+        "model.23.cv2.1.1.act": "SiLU",
+        "model.23.cv2.2.0.act": "SiLU",
+        "model.23.cv2.2.1.act": "SiLU",
+        "model.23.cv3.0.0.0.act": "SiLU",
+        "model.23.cv3.0.0.1.act": "SiLU",
+        "model.23.cv3.0.1.0.act": "SiLU",
+        "model.23.cv3.0.1.1.act": "SiLU",
+        "model.23.cv3.1.0.0.act": "SiLU",
+        "model.23.cv3.1.0.1.act": "SiLU",
+        "model.23.cv3.1.1.0.act": "SiLU",
+        "model.23.cv3.1.1.1.act": "SiLU",
+        "model.23.cv3.2.0.0.act": "SiLU",
+        "model.23.cv3.2.0.1.act": "SiLU",
+        "model.23.cv3.2.1.0.act": "SiLU",
+        "model.23.cv3.2.1.1.act": "SiLU",
+        "model.23.one2one_cv2.0.0.act": "SiLU",
+        "model.23.one2one_cv2.0.1.act": "SiLU",
+        "model.23.one2one_cv2.1.0.act": "SiLU",
+        "model.23.one2one_cv2.1.1.act": "SiLU",
+        "model.23.one2one_cv2.2.0.act": "SiLU",
+        "model.23.one2one_cv2.2.1.act": "SiLU",
+        "model.23.one2one_cv3.0.0.0.act": "SiLU",
+        "model.23.one2one_cv3.0.0.1.act": "SiLU",
+        "model.23.one2one_cv3.0.1.0.act": "SiLU",
+        "model.23.one2one_cv3.0.1.1.act": "SiLU",
+        "model.23.one2one_cv3.1.0.0.act": "SiLU",
+        "model.23.one2one_cv3.1.0.1.act": "SiLU",
+        "model.23.one2one_cv3.1.1.0.act": "SiLU",
+        "model.23.one2one_cv3.1.1.1.act": "SiLU",
+        "model.23.one2one_cv3.2.0.0.act": "SiLU",
+        "model.23.one2one_cv3.2.0.1.act": "SiLU",
+        "model.23.one2one_cv3.2.1.0.act": "SiLU",
+        "model.23.one2one_cv3.2.1.1.act": "SiLU",
+        "model.23.cv4.0.0.act": "SiLU",
+        "model.23.cv4.0.1.act": "SiLU",
+        "model.23.cv4.1.0.act": "SiLU",
+        "model.23.cv4.1.1.act": "SiLU",
+        "model.23.cv4.2.0.act": "SiLU",
+        "model.23.cv4.2.1.act": "SiLU",
+        "model.23.one2one_cv4.0.0.act": "SiLU",
+        "model.23.one2one_cv4.0.1.act": "SiLU",
+        "model.23.one2one_cv4.1.0.act": "SiLU",
+        "model.23.one2one_cv4.1.1.act": "SiLU",
+        "model.23.one2one_cv4.2.0.act": "SiLU",
+        "model.23.one2one_cv4.2.1.act": "SiLU"
+      },
+      "attention": "inherited native float"
+    },
+    "reference_review_sha256": "52b3c1efad4fe212fb20ea65c9a7d27debfd54373819dda6420d627d12f4256f",
+    "masf": {
+      "placement": "model.23.p3_masf",
+      "raw_p3": "model.16",
+      "head_inputs": [
+        16,
+        19,
+        22
+      ],
+      "channels": 256,
+      "context": "DW3+DW5 -> pointwise",
+      "alpha_initial": 0.0,
+      "bridge_beta": 1.0,
+      "activation_class": "ShiftPiecewiseQuadraticSiLU",
+      "activation_profile": {
+        "activation_name": "qsilu_pq",
+        "display_name": "Shift-friendly piecewise-quadratic SiLU",
+        "threshold": 8.0,
+        "knots": [
+          0.0,
+          1.0,
+          2.0,
+          4.0,
+          8.0
+        ],
+        "quadratic_coefficients": [
+          [
+            0.22265625,
+            0.0,
+            0.0
+          ],
+          [
+            0.08984375,
+            0.265625,
+            -0.1328125
+          ],
+          [
+            -0.021484375,
+            0.7109375,
+            -0.578125
+          ],
+          [
+            -0.0048828125,
+            0.578125,
+            -0.3125
+          ]
+        ],
+        "hardware_class": "dyadic piecewise-quadratic spline",
+        "dyadic_direct_coefficients": true,
+        "integer_emulator_supported": true
+      },
+      "activation_calls": [
+        "model.23.p3_masf.context.dw3.act",
+        "model.23.p3_masf.context.dw5.act",
+        "model.23.p3_masf.context.project.act"
+      ],
+      "context_seed": 1,
+      "bn": "unfolded, running stats frozen",
+      "arithmetic": "FP32 reference"
+    },
+    "repconv": null,
+    "data": "bbat5-v1 immutable",
+    "evaluator": "native Pose val683 FP32 E2E"
+  },
+  "deployment_alpha": 0.000509449397213757
+}

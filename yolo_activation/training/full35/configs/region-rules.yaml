@@ -1,0 +1,24 @@
+schema_version: 1
+rules:
+  - pattern: '^graph\.model\.[0-4]\..*act$'
+    region: backbone_early
+  - pattern: '^graph\.model\.[5-9]\..*act$'
+    region: backbone_deep
+  - pattern: '^graph\.model\.10\..*act$'
+    region: backbone_attention
+  - pattern: '^graph\.model\.(13|16|17|19|20|22)\.(?!.*(p3_masf|ffn)).*act$'
+    region: neck
+  - pattern: '^graph\.model\.22\..*\.ffn\.0\.act$'
+    region: neck_attention
+  - pattern: '^graph\.model\.16\.p3_masf\..*act$'
+    region: masf
+  - pattern: '^graph\.model\.23\.detect_head\.(cv2|cv3)\..*act$'
+    region: detect_one2many
+  - pattern: '^graph\.model\.23\.detect_head\.one2one_(cv2|cv3)\..*act$'
+    region: detect_one2one
+  - pattern: '^graph\.model\.23\.pose_head\.(cv2|cv3|cv4)\..*act$'
+    region: pose_one2many
+  - pattern: '^graph\.model\.23\.pose_head\.one2one_(cv2|cv3|cv4)\..*act$'
+    region: pose_one2one
+  - pattern: '^graph\.model\.23\.pose_head\.flow_model\.(s|t)\.[0-9]+\.(1|3)$'
+    region: pose_flow

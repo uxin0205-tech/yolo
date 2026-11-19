@@ -1,0 +1,62 @@
+{
+  "schema": "integrated-stage3-reference-review-v1",
+  "reviewed_before_implementation": true,
+  "created_at": "2026-10-19T11:23:30.052212+08:00",
+  "parent": "/home/uxin/yolo/yolo_binaryqk/result/stage2/epoch-05.pt",
+  "parent_sha256": "9cacbd802f089a6e0aca87c2e0d1743d74458e7c030029be3076dd3090b48dea",
+  "parent_official_AP50_95": 0.5141516576900635,
+  "sources_before_change": {
+    "yolo_optimize/experiments/attention_recovery_v1/modeling.py": "6e99ebe3a0a56475eca010d7912a8b9a9f4e0bbb2855598f350cff291dfed469",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/pwl_contract.py": "946bfe70d417edba8e8fb20fa50ec4dcf2d3fa0e8289312f457999a8d48dcab3",
+    "yolo_optimize/model/runtime/yolo_attention/normalization.py": "d90bd1ab110a0dc7fbc9d8a1d847883af8af35b42400cdf4ace98555205f39b2",
+    "yolo_attention/src/yolo_attention/normalization.py": "06ecda5b88ffa148f13552154de17d731a27056cc10d12a07a240c747091974e",
+    "yolo_attention/src/yolo_attention/bdcn.py": "f7db26a1459ff9f9f4c9ec00a00de4488b309078ef645e5e1d9b4872aec40f40",
+    "yolo_attention/PWL/results/REPORT.md": "7586b139e44f640fac320394f217de448e47c8595d300b7ad4b6c55eede50b0a",
+    "yolo_attention/reports/summary.json": "1cb6f104810acd8a9a7b344d6e168a6f04cc677aa9867afed4dff3cad74b0db9",
+    "yolo_attention_final/final/results.json": "00e406b76b03b0e1302025d863684177fd9decc91208922249459f189c90fab4",
+    "yolo_attention_final/src/yolo_attention/final_evaluation.py": "41dc8bcf5e11b6cc16293293120649010b315c82b756f7974e4fd35159b16bf8",
+    "yolo_attention_final/src/yolo_attention/final_selection.py": "0a70e325d2f84823cedc351fb5aae4a7b99a8d033782ea169e5851c34187564b",
+    "yolo_binaryqk/binaryqk/evaluate.py": "02c38fa3d8ab8cf30b6c6f1a279a8f092548687a9bd71ab78ef7f13c09dbf593"
+  },
+  "immutable_reference_sha256": {
+    "yolo_optimize/experiments/attention_recovery_v1/modeling.py": "6e99ebe3a0a56475eca010d7912a8b9a9f4e0bbb2855598f350cff291dfed469",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/pwl_contract.py": "946bfe70d417edba8e8fb20fa50ec4dcf2d3fa0e8289312f457999a8d48dcab3",
+    "yolo_optimize/model/runtime/yolo_attention/normalization.py": "d90bd1ab110a0dc7fbc9d8a1d847883af8af35b42400cdf4ace98555205f39b2"
+  },
+  "adopted": [
+    "optimize PWL [-10,0]/20; Stage3A adds planned [-8,0]/16 float only",
+    "reuse normalization mathematical definitions; all N1-N9 share exact floating division for initial comparison, Multimax has its native stick-breaking contract",
+    "old BitTrue Q8.8 scores/UQ1.15 endpoints; no exp(0) saturation below1",
+    "BDCN mantissa reciprocal concept; replace frexp/ldexp by integer leading-one",
+    "final materialize-before-evaluate, strict manifest, frozen-parent inheritance; .001 accuracy gate as engineering tolerance"
+  ],
+  "differences": [
+    "parent is trained Stage2 S1 Q10 with signed16 bias; no old PoT parent or old weights",
+    "D1 256 midpoint LUT, D2 16-segment signed PWL, D3 64 midpoint LUT plus one integer Newton are project extensions",
+    "Q1.16 reciprocal mantissa plus exponent; probability UQ1.24; no final renormalization",
+    "no exact Softmax full-val/control training; parent AP inherited, exact used only in numerical diagnosis",
+    "no training initially; only consider at most2 candidates if meaningful full-task loss >.001 and numeric gates passed; recipe reviewed before any recovery"
+  ],
+  "paper": {
+    "url": "https://www.mdpi.com/2079-9292/14/12/2337",
+    "verified_sections": [
+      "4.2",
+      "5.3"
+    ],
+    "notes": "原文保留共用32-bit divider；Newton用於LayerNorm平方根。新reciprocal PWL/Newton不是原文復現。直接open429，已從原出版者搜尋快取核對原文。"
+  },
+  "gates": {
+    "reciprocal_relative_error_max": {
+      "D1": 0.0021,
+      "D2": 0.0011,
+      "D3": 0.00012
+    },
+    "real_data_pv_relative_l2_max_for_full_eval": 0.5,
+    "task_tolerance_vs_parent": 0.001,
+    "deploy_vs_best_comparison_tolerance": 0.001,
+    "diagnostic_images": 16,
+    "formal_images": 5000
+  },
+  "monitor_interval_seconds": 600,
+  "next_stage_started": false
+}

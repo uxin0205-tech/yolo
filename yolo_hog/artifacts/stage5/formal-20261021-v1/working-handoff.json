@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "as_of": "2026-10-21T14:13:31.866582+08:00",
+  "stage": 5,
+  "status": "completed-with-negative-result",
+  "supervisor": {
+    "pid": 1314778,
+    "stage": 5,
+    "status": "failed",
+    "exit_code": 1,
+    "finished_unix": 1792556066.349024,
+    "elapsed_seconds": 1850.3997497558594,
+    "next_stage_started": false
+  },
+  "cpu_tests_passed": 16,
+  "cpu_coverage_images": 1024,
+  "cpu_coverage_sports_ball_zero_cells": {
+    "instances": 59,
+    "no_valid_cells": 6
+  },
+  "gpu_calibration_completed": true,
+  "gpu_smoke_completed": true,
+  "formal_training_started": true,
+  "budget_epochs": [
+    5,
+    10
+  ],
+  "monitor_interval_seconds": 600,
+  "next_stage_started": false,
+  "masf_results_policy": "retain all formal candidates/resumes/results; revisit only after combine and user decision",
+  "status_command": "bash yolo_hog/run_stage5.sh status --output /home/uxin/yolo/yolo_hog/artifacts/stage5/formal-20261021-v1",
+  "stop_file": "/home/uxin/yolo/yolo_hog/artifacts/stage5/formal-20261021-v1/STOP",
+  "worklog": "docs/worklogs/2026-10-21-hog-stage5.md",
+  "formal_training_active": false,
+  "completed_epochs": 1,
+  "formal_reload_completed": true,
+  "estimated_finish": null,
+  "result": "/home/uxin/yolo/yolo_hog/result/stage5/handoff.json",
+  "stop_reason": "AP safety stop: baseball_bat_AP50_95 delta < -0.02",
+  "budget_note": "minimum 5 applies to patience, AP safety stop overrides; stopped after 1 epoch",
+  "review_status_path": "/home/uxin/yolo/yolo_hog/artifacts/stage5/formal-20261021-v1/safety-stop-review/audit.json",
+  "status_command_note": "original queue remains failed; review_status_path and result contain completed negative-result handoff",
+  "resources_cleaned": true,
+  "hog_candidate_available": false,
+  "hog_resume_available": false,
+  "resource_cleanup": "/home/uxin/yolo/yolo_hog/artifacts/stage5/formal-20261021-v1/resource-cleanup-20261021.json"
+}

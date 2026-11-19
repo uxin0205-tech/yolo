@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "checked_at": "2026-10-20T10:42:07.156020+08:00",
+  "finished_at": "2026-10-20T09:50:32.163797+08:00",
+  "successful_jobs": 15,
+  "source_guard": "passed using verify_source before documentation updates; no source changed",
+  "source_manifest_sha256": "f2a5e567a148574fe81144766b5ec7c6f105b685e91673c7855081f66a769bb3",
+  "deliveries": [
+    {
+      "task": "detect",
+      "arm": "L1",
+      "candidate": "/home/uxin/yolo/yolo_masf/result/stage4/detect/L1/candidate.pt",
+      "sha256": "ed8b49c90263e2ebbc84b7cc697cf7b798927ace5b545317498d4fc721328579",
+      "formal_reload_metrics_exact": true,
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1/detect-L1-training/resume.pt",
+      "resume_sha256": "3c2a069d98a3663809a6b5645318bd3b2ec9367f8530cb9000654bd605a9f5ff"
+    },
+    {
+      "task": "detect",
+      "arm": "L2",
+      "candidate": "/home/uxin/yolo/yolo_masf/result/stage4/detect/L2/candidate.pt",
+      "sha256": "7c85d1e7059e1ce778124fe274689845169a187f2663705157cf39ea259f2d02",
+      "formal_reload_metrics_exact": true,
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1/detect-L2-training/resume.pt",
+      "resume_sha256": "e20618e01cd8644af19c73aff2ae91d950d094bb0879be4eeec4d3724c7b2772"
+    },
+    {
+      "task": "pose",
+      "arm": "L1",
+      "candidate": "/home/uxin/yolo/yolo_masf/result/stage4/pose/L1/candidate.pt",
+      "sha256": "16a56f4a9f4c4d311800dc6204e284fa12c27feff8b36eb777a7369f6b0fe888",
+      "formal_reload_metrics_exact": true,
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1/pose-L1-training/resume.pt",
+      "resume_sha256": "b3dabcf7ce9c8d8d0760382b02c237e14c628959a476b9c59556c04a46e8cad2"
+    },
+    {
+      "task": "pose",
+      "arm": "L2",
+      "candidate": "/home/uxin/yolo/yolo_masf/result/stage4/pose/L2/candidate.pt",
+      "sha256": "19c6dd2230aead7c067fcdf7079f8016b4c075ba03e7e53a4b4e68f030505549",
+      "formal_reload_metrics_exact": true,
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1/pose-L2-training/resume.pt",
+      "resume_sha256": "ca262af98ad54a1f41ed355729f0b7169cd3ce9324ca470297045f37ca343061"
+    }
+  ],
+  "smoke_removed_files": 8,
+  "smoke_removed_bytes": 1223126450,
+  "svg_parsed": true,
+  "metrics_csv_rows": 92,
+  "new_gpu_work": false,
+  "next_stage_started": false,
+  "final_document_links_checked": 14,
+  "metrics_csv_deltas_checked": 92
+}

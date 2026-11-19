@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "completed_at": "2026-08-18",
+  "queue": {
+    "path": "../artifacts/lr-sweep-queue",
+    "revision": 95,
+    "jobs_succeeded": 19,
+    "jobs_total": 19
+  },
+  "evaluation": {
+    "model": "yolo26m.yaml",
+    "scale": "m",
+    "classes": 80,
+    "dataset": "COCO2017 val, 5000 images",
+    "evaluator": "Ultralytics internal COCO metric",
+    "seed": 0,
+    "normalization": "Bit-True PWL",
+    "canonical_coco_api_used": false
+  },
+  "formal_winner": {
+    "file": "pwl-final-best.pt",
+    "sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+    "map50_95": 0.5067368995935831,
+    "map50": 0.677047718215406,
+    "map75": 0.5551035937976228,
+    "reason": "Only seed 0 was requested; the trained gain cannot satisfy the three-seed mean +0.001 formal gate."
+  },
+  "best_observed": {
+    "source_run": "lr-block-x1-bittrue",
+    "sha256": "c70cd1d0315518d61b6ac6b5936173f04dc5b0eadcb86b288699655434dcf9fb",
+    "map50_95": 0.5069386684559859,
+    "map50": 0.677631777184596,
+    "map75": 0.5550554741424325,
+    "delta_vs_formal_winner": 0.0002017688624028,
+    "delta_vs_audited_parent": 0.0001944350916878,
+    "gap_to_b26_fp": 0.0110593315440141,
+    "artifact_location": "../pwl-best-observed.pt",
+    "included_in_final": false
+  },
+  "hardware_contract": {
+    "attention_sites": [
+      "model.10.m.0.attn",
+      "model.22.m.0.1.attn"
+    ],
+    "score_format": "Q8.8",
+    "range": [
+      -10,
+      0
+    ],
+    "segments": 20,
+    "delta": 0.5,
+    "endpoint_format": "UQ1.15",
+    "endpoints": 21,
+    "endpoint_storage_bits_per_site": 336,
+    "denominator": "exact float reference"
+  },
+  "provenance": {
+    "project_git_revision": "3e4c5dc983ce5fe52e64e45e277883572b0648fe",
+    "ultralytics_version": "8.4.90",
+    "ultralytics_git_revision": "ea920761b1c6d531c2231d0033714301690cf67d",
+    "python": "3.12.3",
+    "torch": "2.11.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "dataset_yaml_sha256": "e6556e609f623fabc7d076262b14d7ae953a9301b9ea3db242ff01437af4ffa0",
+    "parent_sha256": "9e2ca0d93793785f0f7e514d876580204070bac57b4163d7c5f0c5ca352b9c3f"
+  },
+  "delivery": {
+    "directory": "final",
+    "checkpoint_count": 1,
+    "checkpoint": "pwl-final-best.pt",
+    "command": "python run.py"
+  }
+}

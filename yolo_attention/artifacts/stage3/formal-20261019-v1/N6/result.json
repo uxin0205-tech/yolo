@@ -1,0 +1,38 @@
+{
+  "candidate": "N6",
+  "formal": true,
+  "AP50_95": 0.5104622900000944,
+  "AP50": 0.6838332107451998,
+  "internal_AP50_95": 0.5034910043611864,
+  "checkpoint": "/home/uxin/yolo/yolo_attention/artifacts/stage3/formal-20261019-v1/N6/evaluated.pt",
+  "sha256": "7de5f8941e5206af4e9af854fd2e2dbb2ad27a426251874cf4bf9e50b2fc8856",
+  "checkpoint_bytes": 88090059,
+  "parameters": 21897272,
+  "peak_allocated_bytes": 1090746880,
+  "reason": "完整 COCO val5000；無加訓",
+  "normalization": {
+    "exp_backend": "normalized-hard-sigmoid",
+    "reciprocal_backend": "native-float-division",
+    "pwl_range": null,
+    "pwl_segments": null,
+    "buffers_sha256": {},
+    "max_tokens": 1024,
+    "probability_format": "FP32",
+    "remaining_float": [
+      "QKV",
+      "PV",
+      "projection",
+      "Conv",
+      "SiLU"
+    ],
+    "complete_fixed_normalization": false,
+    "backward_proxy": "not-trained"
+  },
+  "person_AP50": 0.8646392850276052,
+  "person_AP50_95": 0.6418587215245098,
+  "ball_AP50": 0.7169988224153482,
+  "ball_AP50_95": 0.5126264638058264,
+  "bat_AP50": 0.7121608470652785,
+  "bat_AP50_95": 0.47344977113377573,
+  "reciprocal_table_bytes": null
+}

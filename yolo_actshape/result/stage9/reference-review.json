@@ -1,0 +1,387 @@
+{
+  "reviewed_at": "2026-11-08T15:42:38.266875+08:00",
+  "reviewed_before_implementation": true,
+  "sources_sha256": {
+    "yolo_optimize/experiments/pose_only_rep_v1/config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/run_arm.py": "5b0e609d7e07823f08102ee15d77ee080550d971cb98177373e87e650a03030f",
+    "yolo_optimize/experiments/pose_only_rep_v1/RESULTS.md": "4b0e059a3397d14faf206d814c6ea6396dbe5f014337a5a98c793efc2ae045e5",
+    "yolo_optimize/experiments/activation/bridge_v1/train.py": "f12ac718dd5efc2ed1622be4df554feb82be2fa4ddfacb9cc3dc6ff7907d4cd0",
+    "yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/resolved-config.json": "deb0233e405ddd57ceaea2360903712780524c4584e5fda8794c41fff9da27d3",
+    "yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/summary.json": "98640a2e3df6a37de5a46e2577f20c2b68dbdda4d00a84270f03369f071dafd9",
+    "yolo_optimize/experiments/combine/bridge_v1/j3_stage.py": "568d3e95e6af2cfc50706c3873788c6a6a62d08371054f86037db4a4d5fedf6e",
+    "yolo_activation/result/stage7/protocol.json": "ff53c2b9eee9565818e28ef088936cbbdda0db5e635593e9ee80afdcde97cf89",
+    "yolo_achitechure/stage8/protocol.json": "3f314b3d7b78da15bb8584444128f40d07cdf259003cdc66258d1ebad0871ecf",
+    "yolo_achitechure/result/stage8-retrain/handoff/rep17_20.json": "bb1f58fa7524fcded88e1aeefe81d12dfcec2a7dc2c657ae023781e469927b4e",
+    "configs/datasets/bbat5-v1.yaml": "208e0f9e5bfded11f5739e9c598d98b4e5414699c64b9faf6f9625680988754a",
+    "yolo_p2/ultralytics/data/base.py": "6915996cdf1a029126c9c61171d65ba60cf863a20557bed2e2af3c34ce9cb029",
+    "yolo_p2/ultralytics/data/augment.py": "697492fd23c9d763b99ed65f56cf4ee5457732e30caa10618a20a1ed96de4b64",
+    "yolo_combine/src/yolo_combine/joint_loss.py": "f96f23e76d8dfc8f47623b7426c1857a01afdbe107ee455dde033ff8552d6ff9",
+    "yolo_combine/stage6/data.py": "7ea7addc67a6f84475b41220f1701ce31cf8a6b12b9f9352b33ead1c0f82ecf5",
+    "yolo_attention/src/yolo_attention/normalization.py": "540855c19a4742b4146ffaa342f5666780f33416a97f25a7e7984fcc9935645b",
+    "yolo_attention/src/yolo_attention/reciprocal.py": "251f1910e051c2ef380021744931174fb5c85b626ec05808f53bfeb099daa260",
+    "yolo_binaryqk/binaryqk/basis.py": "2b19e24d124bb805227c80a5dcd737596c226ef46acdaf8b544ebf0c9935e871"
+  },
+  "local_primary_evidence": {
+    "optimize_rep": "qSiLU／Float PWL、5E、固定 BN、指定 Rep＋heads；原結果只有雙 Rep 通過其工程門檻。",
+    "optimize_activation_config": {
+      "activation_recovery": {
+        "activation": "qsilu_pq",
+        "activation_gate": 0.015,
+        "best_joint_is_activation_relative_only": true,
+        "epochs": 10,
+        "fp32_bbox_iou": true,
+        "original_fusion_gate_still_reported_separately": true,
+        "paired_seed": 1,
+        "pose_weight": 0.25,
+        "sha256": "d5b2083b2b736ded790578a2779d223d82413ce0c6cbac1468601105c094f9a6",
+        "shared_bn_affine_trainable": true,
+        "shared_bn_running_fixed": true,
+        "start": "/home/uxin/yolo/yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/j3-pose-head-recovery-v1/inference/best_pose.pt",
+        "warmup": 1
+      },
+      "macro": {
+        "detect_logical_batches": 2,
+        "detect_physical_microbatches": 16,
+        "detect_weight": 1.0,
+        "pose_batches": 1,
+        "pose_weight": 0.25
+      },
+      "batches": {
+        "detect_train_logical": 128,
+        "detect_train_physical_microbatch": 16,
+        "detect_validation": 32,
+        "loss_reference": 64,
+        "pose_train_physical": 16,
+        "pose_validation": 16
+      },
+      "shared_bn": {
+        "affine_trainable": true,
+        "running_statistics_frozen": true
+      },
+      "stage_policies": {
+        "j0": {
+          "backbone_start_layer": 11,
+          "epochs": 8,
+          "learning_rates": {
+            "attention": 0.0,
+            "backbone": 0.0,
+            "detect_head": 0.0,
+            "masf": 0.0,
+            "neck": 0.0,
+            "pose_head": 0.0002
+          },
+          "patience": 0,
+          "task_mode": "pose",
+          "tune_attention": false,
+          "warmup_epochs": 1
+        },
+        "j1": {
+          "backbone_start_layer": 11,
+          "epochs": 20,
+          "learning_rates": {
+            "attention": 0.0,
+            "backbone": 0.0,
+            "detect_head": 0.0002,
+            "masf": 0.0,
+            "neck": 7.5e-05,
+            "pose_head": 0.0002
+          },
+          "patience": 8,
+          "task_mode": "joint",
+          "tune_attention": false,
+          "warmup_epochs": 1
+        },
+        "j2": {
+          "backbone_start_layer": 9,
+          "epochs": 80,
+          "learning_rates": {
+            "attention": 0.0,
+            "backbone": 1.5e-05,
+            "detect_head": 0.0002,
+            "masf": 0.00015,
+            "neck": 7.5e-05,
+            "pose_head": 0.0002
+          },
+          "patience": 17,
+          "task_mode": "joint",
+          "tune_attention": false,
+          "warmup_epochs": 1
+        },
+        "j3": {
+          "backbone_start_layer": 0,
+          "epochs": 10,
+          "learning_rates": {
+            "attention": 5e-08,
+            "backbone": 3.8e-07,
+            "detect_head": 5e-06,
+            "masf": 3.8e-06,
+            "neck": 1.9e-06,
+            "pose_head": 5e-06
+          },
+          "patience": 0,
+          "task_mode": "joint",
+          "tune_attention": true,
+          "warmup_epochs": 1
+        }
+      }
+    },
+    "optimize_activation_result": {
+      "epochs_completed": 10,
+      "best_state": {
+        "best_detect": {
+          "epoch": 8,
+          "score": 0.5657211590883047,
+          "metrics": {
+            "coco/box/precision": 0.7306851129330642,
+            "coco/box/recall": 0.6111740230160562,
+            "coco/box/map50": 0.6747461574618973,
+            "coco/box/map75": 0.5502629895425436,
+            "coco/box/map50_95": 0.5044423693054506,
+            "coco/person/box/precision": 0.7988777537345052,
+            "coco/person/box/recall": 0.7717361046673471,
+            "coco/person/box/map50": 0.8425644345063895,
+            "coco/person/box/map75": 0.6862448546316589,
+            "coco/person/box/map50_95": 0.6269999488711587,
+            "bbat/box/precision": 0.859486100648826,
+            "bbat/box/recall": 0.8288579831655076,
+            "bbat/box/map50": 0.8757749466969447,
+            "bbat/box/map75": 0.668605441324237,
+            "bbat/box/map50_95": 0.6114782484806105,
+            "bbat/pose/precision": 0.8692120761386606,
+            "bbat/pose/recall": 0.8385852606136139,
+            "bbat/pose/map50": 0.89133802505222,
+            "bbat/pose/map75": 0.8903121477590685,
+            "bbat/pose/map50_95": 0.8884536745910449,
+            "bbat/ball/box/precision": 0.8438359737145689,
+            "bbat/ball/box/recall": 0.811704834605598,
+            "bbat/ball/box/map50": 0.8364471929487844,
+            "bbat/ball/box/map75": 0.46506380594327357,
+            "bbat/ball/box/map50_95": 0.4922970776851813,
+            "bbat/ball/pose/precision": 0.8540384593305956,
+            "bbat/ball/pose/recall": 0.821882951653944,
+            "bbat/ball/pose/map50": 0.8538382653960892,
+            "bbat/ball/pose/map75": 0.8525198648618635,
+            "bbat/ball/pose/map50_95": 0.852750134685764,
+            "bbat/bat/box/precision": 0.8751362275830832,
+            "bbat/bat/box/recall": 0.8460111317254174,
+            "bbat/bat/box/map50": 0.9151027004451049,
+            "bbat/bat/box/map75": 0.8721470767052005,
+            "bbat/bat/box/map50_95": 0.73065941927604,
+            "bbat/bat/pose/precision": 0.8843856929467254,
+            "bbat/bat/pose/recall": 0.8552875695732839,
+            "bbat/bat/pose/map50": 0.928837784708351,
+            "bbat/bat/pose/map75": 0.9281044306562735,
+            "bbat/bat/pose/map50_95": 0.9241572144963259
+          }
+        },
+        "best_pose": {
+          "epoch": 1,
+          "score": 0.7546682022494154,
+          "metrics": {
+            "coco/box/precision": 0.7306235695301189,
+            "coco/box/recall": 0.6142420588996277,
+            "coco/box/map50": 0.6746711843021975,
+            "coco/box/map75": 0.5510293221916206,
+            "coco/box/map50_95": 0.5038853044278478,
+            "coco/person/box/precision": 0.7932113669636487,
+            "coco/person/box/recall": 0.7748592361545235,
+            "coco/person/box/map50": 0.8423333766792567,
+            "coco/person/box/map75": 0.685010264696432,
+            "coco/person/box/map50_95": 0.6258870024108538,
+            "bbat/box/precision": 0.8703110957017406,
+            "bbat/box/recall": 0.8289562891206257,
+            "bbat/box/map50": 0.879780565639992,
+            "bbat/box/map75": 0.6803571326254985,
+            "bbat/box/map50_95": 0.6180075225276841,
+            "bbat/pose/precision": 0.8765117934373498,
+            "bbat/pose/recall": 0.8391682835521439,
+            "bbat/pose/map50": 0.8955822595967815,
+            "bbat/pose/map75": 0.8936291885340703,
+            "bbat/pose/map50_95": 0.8913288819711468,
+            "bbat/ball/box/precision": 0.861371461514083,
+            "bbat/ball/box/recall": 0.8063355838071142,
+            "bbat/ball/box/map50": 0.8437151999818555,
+            "bbat/ball/box/map75": 0.4899385664015199,
+            "bbat/ball/box/map50_95": 0.5051924516446623,
+            "bbat/ball/pose/precision": 0.8702569927886356,
+            "bbat/ball/pose/recall": 0.8193384223918575,
+            "bbat/ball/pose/map50": 0.8623942165649763,
+            "bbat/ball/pose/map75": 0.8593753719957633,
+            "bbat/ball/pose/map50_95": 0.8596494404736988,
+            "bbat/bat/box/precision": 0.8792507298893983,
+            "bbat/bat/box/recall": 0.8515769944341373,
+            "bbat/bat/box/map50": 0.9158459312981284,
+            "bbat/bat/box/map75": 0.8707756988494771,
+            "bbat/bat/box/map50_95": 0.7308225934107058,
+            "bbat/bat/pose/precision": 0.882766594086064,
+            "bbat/bat/pose/recall": 0.8589981447124304,
+            "bbat/bat/pose/map50": 0.9287703026285866,
+            "bbat/bat/pose/map75": 0.9278830050723772,
+            "bbat/bat/pose/map50_95": 0.9230083234685947
+          }
+        },
+        "best_joint": {
+          "epoch": 1,
+          "score": 0.7060875186617359,
+          "metrics": {
+            "coco/box/precision": 0.7306235695301189,
+            "coco/box/recall": 0.6142420588996277,
+            "coco/box/map50": 0.6746711843021975,
+            "coco/box/map75": 0.5510293221916206,
+            "coco/box/map50_95": 0.5038853044278478,
+            "coco/person/box/precision": 0.7932113669636487,
+            "coco/person/box/recall": 0.7748592361545235,
+            "coco/person/box/map50": 0.8423333766792567,
+            "coco/person/box/map75": 0.685010264696432,
+            "coco/person/box/map50_95": 0.6258870024108538,
+            "bbat/box/precision": 0.8703110957017406,
+            "bbat/box/recall": 0.8289562891206257,
+            "bbat/box/map50": 0.879780565639992,
+            "bbat/box/map75": 0.6803571326254985,
+            "bbat/box/map50_95": 0.6180075225276841,
+            "bbat/pose/precision": 0.8765117934373498,
+            "bbat/pose/recall": 0.8391682835521439,
+            "bbat/pose/map50": 0.8955822595967815,
+            "bbat/pose/map75": 0.8936291885340703,
+            "bbat/pose/map50_95": 0.8913288819711468,
+            "bbat/ball/box/precision": 0.861371461514083,
+            "bbat/ball/box/recall": 0.8063355838071142,
+            "bbat/ball/box/map50": 0.8437151999818555,
+            "bbat/ball/box/map75": 0.4899385664015199,
+            "bbat/ball/box/map50_95": 0.5051924516446623,
+            "bbat/ball/pose/precision": 0.8702569927886356,
+            "bbat/ball/pose/recall": 0.8193384223918575,
+            "bbat/ball/pose/map50": 0.8623942165649763,
+            "bbat/ball/pose/map75": 0.8593753719957633,
+            "bbat/ball/pose/map50_95": 0.8596494404736988,
+            "bbat/bat/box/precision": 0.8792507298893983,
+            "bbat/bat/box/recall": 0.8515769944341373,
+            "bbat/bat/box/map50": 0.9158459312981284,
+            "bbat/bat/box/map75": 0.8707756988494771,
+            "bbat/bat/box/map50_95": 0.7308225934107058,
+            "bbat/bat/pose/precision": 0.882766594086064,
+            "bbat/bat/pose/recall": 0.8589981447124304,
+            "bbat/bat/pose/map50": 0.9287703026285866,
+            "bbat/bat/pose/map75": 0.9278830050723772,
+            "bbat/bat/pose/map50_95": 0.9230083234685947
+          },
+          "gate": {
+            "passed": true,
+            "deltas": {
+              "coco/box/map50_95": -0.00035676686591812334,
+              "coco/person/box/map50_95": -0.0010958667267473299,
+              "bbat/box/map50_95": 0.00923460689534894,
+              "bbat/pose/map50_95": 0.004582252906190631,
+              "bbat/ball/box/map50_95": 0.012991563866342593,
+              "bbat/bat/box/map50_95": 0.005477649924354955,
+              "bbat/ball/pose/map50_95": 0.00523135818737519,
+              "bbat/bat/pose/map50_95": 0.003933147625005851
+            }
+          }
+        },
+        "last": {
+          "epoch": 9,
+          "score": 0.7019550530172445,
+          "metrics": {
+            "coco/box/precision": 0.7342790127161167,
+            "coco/box/recall": 0.6099199583477379,
+            "coco/box/map50": 0.6752336021233944,
+            "coco/box/map75": 0.5507499841441176,
+            "coco/box/map50_95": 0.5046365639109613,
+            "coco/person/box/precision": 0.7981119992742061,
+            "coco/person/box/recall": 0.7710599802795847,
+            "coco/person/box/map50": 0.8426539050490517,
+            "coco/person/box/map75": 0.6850894596979045,
+            "coco/person/box/map50_95": 0.6264939971614896,
+            "bbat/box/precision": 0.8561801751917777,
+            "bbat/box/recall": 0.8349238470167706,
+            "bbat/box/map50": 0.8707575652699645,
+            "bbat/box/map75": 0.6660878708397846,
+            "bbat/box/map50_95": 0.6104201601989564,
+            "bbat/pose/precision": 0.8636927269992287,
+            "bbat/pose/recall": 0.8447081816765568,
+            "bbat/pose/map50": 0.887756093017924,
+            "bbat/pose/map75": 0.8855423897813486,
+            "bbat/pose/map50_95": 0.8841122719074075,
+            "bbat/ball/box/precision": 0.8412217740317351,
+            "bbat/ball/box/recall": 0.8295165394402035,
+            "bbat/ball/box/map50": 0.8275476362178156,
+            "bbat/ball/box/map75": 0.4652079067653904,
+            "bbat/ball/box/map50_95": 0.49207193658496984,
+            "bbat/ball/pose/precision": 0.8493941783138749,
+            "bbat/ball/pose/recall": 0.8396946564885496,
+            "bbat/ball/pose/map50": 0.8479161299947894,
+            "bbat/ball/pose/map75": 0.8454470966042058,
+            "bbat/ball/pose/map50_95": 0.8458410780350281,
+            "bbat/bat/box/precision": 0.8711385763518201,
+            "bbat/bat/box/recall": 0.8403311545933375,
+            "bbat/bat/box/map50": 0.9139674943221134,
+            "bbat/bat/box/map75": 0.8669678349141787,
+            "bbat/bat/box/map50_95": 0.728768383812943,
+            "bbat/bat/pose/precision": 0.8779912756845825,
+            "bbat/bat/pose/recall": 0.849721706864564,
+            "bbat/bat/pose/map50": 0.9275960560410588,
+            "bbat/bat/pose/map75": 0.9256376829584915,
+            "bbat/bat/pose/map50_95": 0.9223834657797869
+          },
+          "gate": {
+            "passed": true,
+            "deltas": {
+              "coco/box/map50_95": 0.00039449261719537443,
+              "coco/person/box/map50_95": -0.0004888719761115823,
+              "bbat/box/map50_95": 0.001647244566621242,
+              "bbat/pose/map50_95": -0.0026343571575486724,
+              "bbat/ball/box/map50_95": -0.00012895119334987992,
+              "bbat/bat/box/map50_95": 0.003423440326592142,
+              "bbat/ball/pose/map50_95": -0.008577004251295595,
+              "bbat/bat/pose/map50_95": 0.003308289936198028
+            },
+            "failed_metrics": []
+          }
+        }
+      }
+    },
+    "selected_parent": {
+      "coco_AP": 0.5143471497030708,
+      "person_AP": 0.6427959303974734,
+      "sports_ball_AP": 0.5157820851022553,
+      "baseball_bat_AP": 0.46957631026676677,
+      "box_AP50_95": 0.6143706928427835,
+      "pose_AP50_95": 0.9013894285347345,
+      "ball_box_AP50_95": 0.49976429858092136,
+      "ball_pose_AP50_95": 0.8645462333785403,
+      "bat_box_AP50_95": 0.7289770871046457,
+      "bat_pose_AP50_95": 0.9382326236909287
+    }
+  },
+  "adopted": [
+    "AdamW(.948,.999)、weight decay .00027、warmup1／cosine .5、fresh EMA、clip10、FP32 CIoU、完整 epoch resume",
+    "neck LR1.9e-6／heads5e-6 取自 optimize activation J3；qSiLU 與 D1 契約固定",
+    "同一 COCO train118287／val5000、BBAT5 v1 train5964／val683，原生 E2E evaluator"
+  ],
+  "new_extension": [
+    "optimize 沒有相同 final parent 的受控特徵圖矩陣；本輪是形狀研究延伸。",
+    "原訓練算子 Float PWL；本輪固定最終部署 D1 前向，反向用既有 Float PWL proxy。",
+    "本輪只訓 neck 與雙 head、backbone／Attention 全固定，沿用 folded Rep 結構；不重新展開 Rep。",
+    "physical8、Detect累積32、Pose2批共16，保持macro256／16與reference64，所有BN running固定。",
+    "shape適應停用affine／random crop，只保留HSV與Detect翻轉；避免把隨機裁切混入canvas效果，兩候選一致。",
+    "固定長方形走專用runtime canvas，不將tuple交給會coerce為max的標準training imgsz。",
+    "固定canvas直接使用原生LetterBox與單一縮放比；避免ceil預resize造成H/W gain略異，bbox/keypoint反算採同一scalar。原rect640參考保持原pipeline，fixed640另列。"
+  ],
+  "web_primary_sources": [
+    {
+      "url": "https://docs.ultralytics.com/modes/predict/#fixed-shape-vs-minimum-rectangle-rect",
+      "finding": "predict可用(H,W)；standard train只接受整數，矩形canvas需驗證自訂資料層。"
+    },
+    {
+      "url": "https://docs.ultralytics.com/modes/train/#train-settings",
+      "finding": "rect是最小padding策略，不等於任意固定長方形；本機版本為準。"
+    }
+  ],
+  "limitations": [
+    "單seed，無同預算原形狀control加訓；固定640及原rect640只做推論參考。",
+    "形狀改變同時改變有效解析度／padding，不把成本下降全歸因二次冪。",
+    "沒有RTL/HLS/實板數據；未假設padding token無影響。"
+  ],
+  "budget_revision": "2026-11-08 使用者在GPU啟動前要求增加輪數：每組10E＋半LR10E，最多40E；10E依optimize qsilu_pq-short-e10參考，形狀與neck_heads適應仍是本輪延伸。"
+}

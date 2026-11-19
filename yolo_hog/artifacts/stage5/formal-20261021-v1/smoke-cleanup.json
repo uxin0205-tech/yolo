@@ -1,0 +1,21 @@
+{
+  "authorization": "existing user instruction to remove replaced unnecessary outputs directly",
+  "status": "completed",
+  "removed": [
+    {
+      "path": "/home/uxin/yolo/yolo_hog/artifacts/stage5/formal-20261021-v1/smoke/epoch-01.pt",
+      "sha256": "ba58ba39c9afe45e45c2d5ae76fc2a80099d079e3d536a2bc714f323753329c3",
+      "bytes": 88111069,
+      "reason": "disposable smoke checkpoint; formal E1 resume and strip/reload proof retained"
+    },
+    {
+      "path": "/home/uxin/yolo/yolo_hog/artifacts/stage5/formal-20261021-v1/smoke/resume.pt",
+      "sha256": "33a01d38e10a1adec94f088ebc007918a23843c139be19db70fcfbbe655b51c9",
+      "bytes": 267169687,
+      "reason": "disposable smoke checkpoint; formal E1 resume and strip/reload proof retained"
+    }
+  ],
+  "reclaimed_bytes": 355280756,
+  "formal_resume_retained": true,
+  "masf_results_unchanged": true
+}

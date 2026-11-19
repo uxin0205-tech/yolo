@@ -1,0 +1,163 @@
+schema_version: 1
+plan_id: v13-qsilu-sd4-coupled-policy-search-v1
+date: '2026-09-03'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-map50-v1
+
+execution_authorization:
+  authorization_id: user-2026-09-03-autonomous-v13-sd4-coupled-search
+  validation_roles: [candidate]
+  candidate_ids:
+    - qsilu-balanced-plus-sd4-neck-attention
+    - qsilu-balanced-plus-sd4-detect-tower
+    - qsilu-balanced-plus-sd4-detect-predictor
+    - qsilu-balanced-plus-three-sd4-groups
+    - qsilu-all-w8-plus-three-sd4-groups
+  route_ids:
+    - fixed-sd4-neck-attention
+    - fixed-sd4-detect-tower
+    - fixed-sd4-detect-predictor
+  training: false
+  stop_after: diagnostic_then_search_val_gate_and_pareto
+
+upstream:
+  base_search_plan:
+    path: configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml
+    sha256: 3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v9.yaml
+    sha256: 9bc7084e9217754153cc2ad69e83e6ae658304944ffa0ab6318ebd57c1d5d394
+  reference_search_report:
+    path: artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json
+    sha256: 738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2
+    reuse_roles: [accepted, matched]
+  reference_map50_regate:
+    path: artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json
+    sha256: 67fce27506fac33e7655e791d815c04d7030ba213978a1ab27873369a396573e
+  comparison_candidates:
+    - &v10
+      path: artifacts/reports/v10-qsilu-mixed-weight-policy-search-v1.json
+      sha256: 614d8318d1d79390b0294504e88edcd49b4ec0c0115730f31e442cbf16db939a
+      candidate_id: qsilu-balanced-pose-w5
+    - <<: *v10
+      candidate_id: accuracy-a05-add-pose-tower-w8
+    - <<: *v10
+      candidate_id: accuracy-a09-add-neck-w8
+    - &v11
+      path: artifacts/reports/v11-qsilu-special-format-route-sensitivity-v1.json
+      sha256: eac59d133f59453ce61e148b825996b0e42e46ef3944241f8ab1bc6f4cc2a01a
+      candidate_id: fixed-sd4-isolated-neck-attention
+    - <<: *v11
+      candidate_id: fixed-sd4-isolated-detect-tower
+    - <<: *v11
+      candidate_id: fixed-sd4-isolated-detect-predictor
+
+activation:
+  default: qsilu_pq
+  bits: 8
+  signed_codes: false
+  region_assignments: {}
+  policy_id: qsilu_pq--lsq-plus-a8
+  checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+    sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+
+routes:
+  fixed-sd4-neck-attention: &neck_attention_route
+    manifest: &fixed_groups
+      path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml
+      sha256: 33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665
+    list_key: neck_attention_safe
+  fixed-sd4-detect-tower: &detect_tower_route
+    manifest: *fixed_groups
+    list_key: detect_one2one_tower
+  fixed-sd4-detect-predictor: &detect_predictor_route
+    manifest: *fixed_groups
+    list_key: detect_one2one_predictor
+
+candidate_templates:
+  balanced_defaults: &balanced_defaults
+    - {region: backbone_early, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: backbone_deep, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: neck, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: pose_one2one_tower, format: {family: uniform, bits: 5, scale_method: optimal_scaled_codebook}}
+  all_w8_defaults: &all_w8_defaults
+    - {region: backbone_early, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: backbone_deep, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: neck, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: masf, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: neck_attention_safe, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: detect_one2one_tower, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: detect_one2one_predictor, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: pose_one2one_tower, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+    - {region: pose_one2one_predictor, format: {family: uniform, bits: 8, scale_method: mse_grid_v1}}
+
+candidates:
+  - candidate_id: qsilu-balanced-plus-sd4-neck-attention
+    region_defaults: *balanced_defaults
+    path_routes:
+      - route_id: fixed-sd4-neck-attention
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+  - candidate_id: qsilu-balanced-plus-sd4-detect-tower
+    region_defaults: *balanced_defaults
+    path_routes:
+      - route_id: fixed-sd4-detect-tower
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+  - candidate_id: qsilu-balanced-plus-sd4-detect-predictor
+    region_defaults: *balanced_defaults
+    path_routes:
+      - route_id: fixed-sd4-detect-predictor
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+  - candidate_id: qsilu-balanced-plus-three-sd4-groups
+    region_defaults: *balanced_defaults
+    path_routes:
+      - route_id: fixed-sd4-neck-attention
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+      - route_id: fixed-sd4-detect-tower
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+      - route_id: fixed-sd4-detect-predictor
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+  - candidate_id: qsilu-all-w8-plus-three-sd4-groups
+    region_defaults: *all_w8_defaults
+    path_routes:
+      - route_id: fixed-sd4-neck-attention
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+      - route_id: fixed-sd4-detect-tower
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+      - route_id: fixed-sd4-detect-predictor
+        format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}
+
+diagnostic:
+  manifest: inherit_weight_plan
+  fixed_probe_per_task: 1
+  all_finite_required: true
+  same_structure_required: true
+  selection_claim: false
+
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch: {detect: 32, pose: 16}
+  workers: {detect: 4, pose: 8}
+  plots: false
+  save_coco_json: false
+  augmentation: false
+
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+
+selection:
+  hard_gate_first: true
+  objectives: [maximize_worst_total_map50_delta, minimize_total_packed_weight_bytes]
+  accuracy_tolerance: 0.002
+  roles: [accuracy, balanced, hardware]
+  mean_metric_can_override_worst_task: false

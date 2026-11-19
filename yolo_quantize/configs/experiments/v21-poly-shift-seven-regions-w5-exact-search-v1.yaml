@@ -1,0 +1,115 @@
+schema_version: 1
+plan_id: v21-poly-shift-seven-regions-w5-exact-search-v1
+date: '2026-09-03'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-map50-v1
+
+execution_authorization:
+  authorization_id: user-2026-09-03-autonomous-poly-shift-stage5-w5-exact-search
+  scope: seven_dual_green_w6_candidate_only_w5_exact_validations
+  cells:
+    - poly_shift--lsq-plus-a8--neck--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--masf--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--neck_attention_safe--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--detect_one2one_tower--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--detect_one2one_predictor--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--pose_one2one_tower--w5-optimal_scaled_codebook
+    - poly_shift--lsq-plus-a8--pose_one2one_predictor--w5-optimal_scaled_codebook
+  validation_roles: [candidate]
+  training: false
+  stop_after: write_map50_and_map50_95_gates_then_prepare_w4
+
+upstream:
+  base_search_plan:
+    path: configs/experiments/v15-poly-shift-backbone-early-w8-search-v1.yaml
+    sha256: 9d4207d1db4204ee317cfd8d652916cfdd92b569c51a541054428e39e96d0490
+  reference_search_report:
+    path: artifacts/reports/v15-poly-shift-backbone-early-w8-search-v1.json
+    sha256: 563bf656c731ce44c790dd75d5bf8f65a28a5f9157408303ee4dbd8f9e1f8c56
+    reuse_roles: [accepted, matched]
+    old_candidate_role: include_as_backbone_early_w8_control_only
+  reference_map50_regate:
+    path: artifacts/reports/v15-poly-shift-backbone-early-w8-map50-regate-v1.json
+    sha256: e8b5d75ad5cde241bf8323727d3544990e9fe9674119759e0483885be956335a
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v17.yaml
+    sha256: 26c55b1733233a945f8cc6ec0bed8c8800296025e0d6932f6c1ee858c3ab7af2
+
+candidates:
+  - &first
+    cell_id: poly_shift--lsq-plus-a8--neck--w5-optimal_scaled_codebook
+    activation: poly_shift
+    region: neck
+    weight_bits: 5
+    scale_method: optimal_scaled_codebook
+    diagnostic_report: &diagnostic
+      path: artifacts/reports/weight-ptq-poly-shift-seven-regions-w5-exact-diagnostic-v17.json
+      sha256: 38e7439582aaef00db2e5bfd4f329351cdb489f5b19d0be77ae3792a49f5abb1
+  - cell_id: poly_shift--lsq-plus-a8--masf--w5-optimal_scaled_codebook
+    activation: poly_shift
+    region: masf
+    weight_bits: 5
+    scale_method: optimal_scaled_codebook
+    diagnostic_report: *diagnostic
+  - cell_id: poly_shift--lsq-plus-a8--neck_attention_safe--w5-optimal_scaled_codebook
+    activation: poly_shift
+    region: neck_attention_safe
+    weight_bits: 5
+    scale_method: optimal_scaled_codebook
+    diagnostic_report: *diagnostic
+  - cell_id: poly_shift--lsq-plus-a8--detect_one2one_tower--w5-optimal_scaled_codebook
+    activation: poly_shift
+    region: detect_one2one_tower
+    weight_bits: 5
+    scale_method: optimal_scaled_codebook
+    diagnostic_report: *diagnostic
+  - cell_id: poly_shift--lsq-plus-a8--detect_one2one_predictor--w5-optimal_scaled_codebook
+    activation: poly_shift
+    region: detect_one2one_predictor
+    weight_bits: 5
+    scale_method: optimal_scaled_codebook
+    diagnostic_report: *diagnostic
+  - cell_id: poly_shift--lsq-plus-a8--pose_one2one_tower--w5-optimal_scaled_codebook
+    activation: poly_shift
+    region: pose_one2one_tower
+    weight_bits: 5
+    scale_method: optimal_scaled_codebook
+    diagnostic_report: *diagnostic
+  - cell_id: poly_shift--lsq-plus-a8--pose_one2one_predictor--w5-optimal_scaled_codebook
+    activation: poly_shift
+    region: pose_one2one_predictor
+    weight_bits: 5
+    scale_method: optimal_scaled_codebook
+    diagnostic_report: *diagnostic
+
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch: {detect: 32, pose: 16}
+  workers: {detect: 4, pose: 8}
+  plots: false
+  save_coco_json: false
+  augmentation: false
+
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  map50_95_companion_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+
+selection:
+  hard_gate_first: true
+  objectives:
+    - maximize_worst_total_map50_delta
+    - maximize_worst_total_map50_95_delta
+    - minimize_total_packed_weight_bytes
+  accuracy_tolerance: 0.002
+  roles: [accuracy, balanced, hardware]
+  mean_metric_can_override_worst_task: false

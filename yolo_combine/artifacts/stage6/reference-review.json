@@ -1,0 +1,281 @@
+{
+  "schema": "stage6-rebuild-reference-v2",
+  "created_at": "2026-10-29T13:28:36.918130+08:00",
+  "reviewed_before_implementation": true,
+  "sources_sha256": {
+    "yolo_optimize/experiments/combine/bridge_v1/adapted_source.py": "93295494f4f38de027649d2d77633d2b21262374a17f5fda17c74a3416ae3a09",
+    "yolo_optimize/experiments/combine/bridge_v1/pose_first.py": "933238b2706865194e1d77d49bfd462dab4f0f0378c979a512d7e6e20d07d500",
+    "yolo_optimize/experiments/combine/bridge_v1/full_pose.py": "399f9b0431ad16ee01b58b6e9169fc69ba4203d9234eadeb25058ae89a03b838",
+    "yolo_optimize/experiments/combine/bridge_v1/full_pose_gentle.py": "bf28d46f432db1ff412c81f4a5651a579855ab4be4f50ca1aa94b46106262adb",
+    "yolo_optimize/experiments/combine/bridge_v1/merge_pose.py": "1ab91beadcca31e682941cfefd62aed65b7005d4b969160175babaa155cf8e06",
+    "yolo_optimize/experiments/combine/bridge_v1/merge_joint.py": "d900a8f0e5b1b88ce8a94aaf991e40b6b8e748edf17e2f568d46f9844ee88c12",
+    "yolo_optimize/experiments/combine/bridge_v1/balanced_joint.py": "9333c5c0fe6c60939fff0104a490c7505e6a2cadb48ce71adb6bef755b506dc9",
+    "yolo_optimize/experiments/combine/bridge_v1/j2_stage.py": "ce8af3bd35042d356fd13a31a42fdf363f533ebf1142c90df0ab6bb81eb28b0c",
+    "yolo_optimize/experiments/combine/bridge_v1/j3_stage.py": "568d3e95e6af2cfc50706c3873788c6a6a62d08371054f86037db4a4d5fedf6e",
+    "yolo_optimize/experiments/combine/bridge_v1/calibrate_task_weight.py": "d55091c3e1c86005513ca681486026c37cea0588a1413f7e3ce0889681d9cba3",
+    "yolo_optimize/experiments/combine/bridge_v1/full35/configs/j1.yaml": "6a9babff19f095a033d59c9894bc7d155d946f2dba4d56ab71f92e993655f055",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/j0-pose-extend-v1/resolved-config.json": "1335792ae8855dd35ffc64ce33ed52df6bcb2c442d26cf48b7d2e7cc9ba62e2f",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/full-pose-gentle-v1/resolved-config.json": "f7f873859f524355208663a4b5c563db041bc070c1ce9a713694301f085368db",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/merge-j0-v1/resolved-config.json": "7979fe22fb5db4cf0420a9cea716938cd6f78b236be469d6b3a2da5fd2c9817d",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/balanced-j1-v2/resolved-config.json": "e821f663da7041bb34a6d6118cf7125fd49501f0341eb659bb64878bf9c42aa2",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/balanced-j2-v1/resolved-config.json": "3f67d52a80264eaea4d99de69a1934fa44b14393aed71e2587db9ee00e1929cc",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/balanced-j3-v1/resolved-config.json": "f860fb6a40a3ee32f32b6536d3db7d063818122cb7e6c37b5bd9c7111466dd97",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/full-pose-assembly-v1/summary.json": "5a5a4306552ca4df8ed06dfab188b08d5982a1d9a053e6c3243ab95a005fd71e",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/full-pose-gentle-v1/pose-stop.json": "024ea6145791c590a1d749b55bef83885e643503adaa44dc76a9547b02ceff7c",
+    "yolo_optimize/experiments/combine/j0_runtime.py": "4c4d45d8c6d1b6f315fd84c781ad46d079ec5132cb5da67bccc99acf628683b7",
+    "yolo_combine/src/yolo_combine/_formal_training_impl.py": "a3ca888fdd414d72a0a5f6c16e406fbfd919b36ec5784dac87530b0536efab65",
+    "yolo_combine/src/yolo_combine/stage_policy.py": "d637dc3dec31b035f11ce4930febfb0431fbe601cf3c50b236a50213150bb9ac",
+    "yolo_combine/src/yolo_combine/joint_loss.py": "f96f23e76d8dfc8f47623b7426c1857a01afdbe107ee455dde033ff8552d6ff9",
+    "yolo_combine/src/yolo_combine/joint_data.py": "e3a682169ff820f6bf082b9e750b0c1d0c9bea2db1ed7c66a9c55bdcca902d1b",
+    "yolo_combine/src/yolo_combine/fusion_model.py": "c901d4ddc56bd0aae9c12f7a3bb3160b32fd6fe2888461ed22683e06d773f70e"
+  },
+  "detect_parent": "/home/uxin/yolo/yolo_hog/result/stage5/selected.pt",
+  "detect_parent_sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c",
+  "pose_parent": "/home/uxin/yolo/yolo_pose_training/artifacts/preserved/stagewise_lr_p3_640/weights/best.pt",
+  "pose_parent_sha256": "e50e155c6c070da4b038fe5679575f4c094b9cfff8eb3a2143770d7dad4cad9e",
+  "detect_handoff": "/home/uxin/yolo/yolo_hog/result/stage5/handoff.json",
+  "detect_handoff_sha256": "7ede446aa2538907f6cecf38561b7587fbc0982a53581af6db9b4607be381eb6",
+  "pose_handoff": "/home/uxin/yolo/yolo_masf/result/stage4/pose/handoff.json",
+  "pose_handoff_sha256": "6a3593bc5c8de1eacbd142c6b399b02293cfa1acef75d899282cf006cf09a8d5",
+  "detect_expected": {
+    "AP50": 0.6881566643376319,
+    "AP50_95": 0.5146207909643931,
+    "person_AP50": 0.8652829508872645,
+    "person_AP50_95": 0.643206570344524,
+    "sports_ball_AP50": 0.7193263653043688,
+    "sports_ball_AP50_95": 0.5132240067644241,
+    "baseball_bat_AP50": 0.72414367148113,
+    "baseball_bat_AP50_95": 0.4875940887506186
+  },
+  "pose_expected": {
+    "box_AP50": 0.9052377366389334,
+    "box_AP50_95": 0.6284018405302074,
+    "pose_AP50": 0.9233478403462654,
+    "pose_AP50_95": 0.9207093886162863,
+    "ball_box_AP50": 0.8618297202487522,
+    "ball_box_AP50_95": 0.5290957907115325,
+    "bat_box_AP50": 0.9486457530291146,
+    "bat_box_AP50_95": 0.7277078903488825,
+    "ball_pose_AP50": 0.897099489632018,
+    "ball_pose_AP50_95": 0.897099489632018,
+    "bat_pose_AP50": 0.9495961910605126,
+    "bat_pose_AP50_95": 0.9443192876005542
+  },
+  "findings": [
+    "optimize 使用同一 Detect trunk 的 Pose head warmup／延長，再完整 Pose gentle 適應，再比對 rho，不直接平均兩個無關的已訓 trunk。",
+    "optimize 完整 Pose gentle 配方 backbone1.5e-6／neck7.5e-6／head2e-5，60輪／patience12；full-pose-assembly 比較0/.1/.25，再接 merge-J0、J1/J2/J3。",
+    "各新 run 使用 fresh AdamW、fresh EMA age0、native loss horizon、warmup1/cosine.5；joint 任務權重以 train-only 梯度校準。",
+    "shared BN statistics與affine固定；初次接入與適應的可訓練head BN可更新，不能套用後期Rep微調的全固定配方。"
+  ],
+  "differences": [
+    "新起點是Stage5 Detect與受保護的已訓Pose；舊Stage6權重、數據全部刪除，不作parent。",
+    "保留本輪B2/S1Q10/D1；無MASF/HOG，原SiLU在Stage7才換qSiLU。",
+    "Attention整個模組固定至J3，包含QKV、score、bias與PWL/reciprocal，避免融合時更改已選硬體契約；optimize J3允許部分Attention小LR，這點不照搬。",
+    "Detect physical32×8、Pose16、reference64對齊；validation沿用上游FP32 E2E batch8與official COCO四項，與optimize舊internal結果分開。",
+    "H0初次head8輪，必要H1延長40輪；P為同血緣完整Pose適應，不重跑原獨立Pose。",
+    "必要joint段延長依使用者已授權的階段內收斂規則，屬本專案延伸，使用明確reference LR倍率，不承接上段terminal min cap。"
+  ],
+  "protocol": {
+    "seed": 20261003,
+    "rho": [
+      0.0,
+      0.1,
+      0.25
+    ],
+    "mixing": "同血緣完整Pose適應後，D_shared+rho*(P_shared-D_shared)，排除全部Attention；Detect head取D，Pose head取P。",
+    "data": {
+      "coco_train": 118287,
+      "coco_val": 5000,
+      "bbat_train": 5964,
+      "bbat_val": 683,
+      "registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml"
+    },
+    "evaluator": "Stage3 official COCO4 + Stage4 native BBAT6; FP32 E2E conf.001/iou.7/maxdet300; batch8; no fusion",
+    "optimizer": {
+      "name": "AdamW",
+      "betas": [
+        0.948,
+        0.999
+      ],
+      "weight_decay": 0.00027,
+      "clip": 10,
+      "amp": true,
+      "initial_scale": 1024,
+      "retries": 16
+    },
+    "detect_microbatch": 32,
+    "detect_microbatches": 8,
+    "pose_microbatch": 16,
+    "reference_batch": 64,
+    "phases": {
+      "H0": {
+        "scope": "head",
+        "task": "pose",
+        "epochs": 8,
+        "patience": 0,
+        "lrs": {
+          "pose_head": 0.0002
+        },
+        "warmup_epochs": 1,
+        "final_factor": 0.5,
+        "loss_horizon": 8,
+        "fresh_ema": true,
+        "head_bn": "trainable",
+        "shared_bn_affine": false,
+        "min_delta": 0.0001,
+        "plateau_half_after": null
+      },
+      "H1": {
+        "scope": "head",
+        "task": "pose",
+        "epochs": 40,
+        "patience": 10,
+        "lrs": {
+          "pose_head": 0.0002
+        },
+        "warmup_epochs": 1,
+        "final_factor": 0.5,
+        "loss_horizon": 40,
+        "fresh_ema": true,
+        "head_bn": "trainable",
+        "shared_bn_affine": false,
+        "min_delta": 0.0001,
+        "plateau_half_after": null
+      },
+      "P": {
+        "scope": "pose_full",
+        "task": "pose",
+        "epochs": 60,
+        "patience": 12,
+        "lrs": {
+          "backbone": 1.5e-06,
+          "neck": 7.5e-06,
+          "pose_head": 2e-05
+        },
+        "warmup_epochs": 1,
+        "final_factor": 0.5,
+        "loss_horizon": 60,
+        "fresh_ema": true,
+        "head_bn": "trainable",
+        "shared_bn_affine": false,
+        "min_delta": 0.0001,
+        "plateau_half_after": null
+      },
+      "M0": {
+        "scope": "head",
+        "task": "pose",
+        "epochs": 20,
+        "patience": 10,
+        "lrs": {
+          "pose_head": 0.0002
+        },
+        "warmup_epochs": 1,
+        "final_factor": 0.5,
+        "loss_horizon": 20,
+        "fresh_ema": true,
+        "head_bn": "trainable",
+        "shared_bn_affine": false,
+        "min_delta": 0.0001,
+        "plateau_half_after": null
+      },
+      "J1": {
+        "scope": "joint_neck",
+        "task": "joint",
+        "epochs": 20,
+        "patience": 8,
+        "lrs": {
+          "neck": 7.5e-06,
+          "detect_head": 2e-05,
+          "pose_head": 2e-05
+        },
+        "warmup_epochs": 1,
+        "final_factor": 0.5,
+        "loss_horizon": 20,
+        "fresh_ema": true,
+        "head_bn": "trainable",
+        "shared_bn_affine": false,
+        "min_delta": 0.0001,
+        "plateau_half_after": null
+      },
+      "J2": {
+        "scope": "joint_back9",
+        "task": "joint",
+        "epochs": 40,
+        "patience": 17,
+        "lrs": {
+          "backbone": 1.5e-06,
+          "neck": 7.5e-06,
+          "detect_head": 2e-05,
+          "pose_head": 2e-05
+        },
+        "warmup_epochs": 1,
+        "final_factor": 0.5,
+        "loss_horizon": 40,
+        "fresh_ema": true,
+        "head_bn": "trainable",
+        "shared_bn_affine": false,
+        "min_delta": 0.0001,
+        "plateau_half_after": 8
+      },
+      "J3": {
+        "scope": "joint_full",
+        "task": "joint",
+        "epochs": 20,
+        "patience": 5,
+        "lrs": {
+          "backbone": 3.8e-07,
+          "neck": 1.9e-06,
+          "detect_head": 5e-06,
+          "pose_head": 5e-06
+        },
+        "warmup_epochs": 1,
+        "final_factor": 0.5,
+        "loss_horizon": 20,
+        "fresh_ema": true,
+        "head_bn": "trainable",
+        "shared_bn_affine": false,
+        "min_delta": 0.0001,
+        "plateau_half_after": null
+      }
+    },
+    "extensions": {
+      "J1": [
+        0.5,
+        0.25
+      ],
+      "J2": [
+        0.5,
+        0.25
+      ]
+    },
+    "calibration": {
+      "macros": 16,
+      "confirmation_macros": 8,
+      "initial_pose_weight": 0.25,
+      "target_ratio": 1.0,
+      "confirmation_band": [
+        0.5,
+        2.0
+      ],
+      "step": 0.005,
+      "bounds": [
+        0.01,
+        0.25
+      ],
+      "attempts": 2
+    },
+    "final_gate": {
+      "coco_drop": 0.005,
+      "pose_drop": 0.02
+    },
+    "training_safety": {
+      "coco_catastrophic_drop": 0.05,
+      "coco_drop_from_epoch5": 0.02,
+      "pose_joint_drop": 0.08,
+      "pose_adaptation_drop": 0.03
+    },
+    "monitor_seconds": 600,
+    "max_stall_seconds": 1800,
+    "next_stage_started": false
+  }
+}

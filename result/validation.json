@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-17T14:08:55.707084+08:00",
+  "protected_sha_verified": 494,
+  "source_lock_guard": "passed",
+  "mainline_manifest_files_verified": 372,
+  "selected_checkpoint_sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+  "training_ema_sha256": "7ddd8bebb86dc24a3feab15edd840587dd56e9afeb2a1994f89084687a1afb34",
+  "cpu_portable_validation": {
+    "status": "passed",
+    "bitwise_equal": true,
+    "silu_rejected": true,
+    "GPU_used": false
+  },
+  "cpu_reference_shapes": [
+    [
+      160,
+      320
+    ],
+    [
+      640,
+      640
+    ]
+  ],
+  "shape_metric_rows_verified": 16,
+  "lineage_rows": 7,
+  "local_links_checked": 162,
+  "missing_links": [],
+  "removed_files_absent": 98,
+  "cleanup_bytes": 1296444995,
+  "figures_visually_reviewed": [
+    "mainline-accuracy.png",
+    "shape-tradeoffs.png"
+  ],
+  "new_GPU_jobs": 0,
+  "new_AP_evaluations": 0,
+  "new_training_epochs": 0,
+  "existing_evaluation_evidence": [
+    "yolo_actshape/result/stage9/final-audit.json",
+    "yolo_actshape/result/stage9-portrait/final-audit.json"
+  ],
+  "next_stage_started": false,
+  "notes": "本次 CPU 驗證新 result/model 入口；不重跑已完成 GPU AP。Markdown 歷史任務書快照不當成現行操作入口。",
+  "completed_at": "2026-11-17T14:10:55.839726+08:00",
+  "documentation_sha256": {
+    "README.md": "444656fc923e0cb0691a278aa43af68e73d22dfbfec00c81e9c88903a150b505",
+    "result/README.md": "b1f32dfecaead77d9089f54b2905763d24cbb0f22feccc11839c1ea91198b4fe",
+    "docs/research/README.md": "63800ef56a92e6d4d2b9b70356aa6bda1c243961fcc461fa6da013857d113a80",
+    "docs/research/yolo-research-summary-2026-11-17.md": "4805bb50105a93c70ba04b70c0dba0c9dac356eb9c1a522d93c44f65588161ff",
+    "docs/research/data/integrated-20261117/README.md": "e8739623ece4dc89892ae86c2fc20a83dd1456fbf85b4b1d0a011dad59f9d3fb",
+    "docs/research/yolo-research-plan-2026-09-21.md": "3fc1d52940551918c0ff4fc59ae0a5488fcbe6b19d71e1d9a42545d8b1673636",
+    "docs/worklogs/2026-11-17-integrated-research-handoff.md": "9cec59e8dd90868162a27eafe17d6095371cbfd602b5f5cb7a59cc65c3153cd0",
+    "yolo_binaryqk/result/stage1/README.md": "66252e76492ff8083402e96324a14b32a531750e9211ac578b3759f3a3bfda18",
+    "yolo_binaryqk/result/stage2/README.md": "2c31ae673c71306054a8b03552579356afa817ea54af2e5ab7699d5002e9e0e9",
+    "yolo_attention/result/stage3/README.md": "088edff0b0e2e7619905b17861a96941e0861191e498bbd9624de3c6b107cfeb",
+    "yolo_actshape/README.md": "588f2d9204f0ea8d39010c69a23d1691984f4d357d4f291be83e1b65940e0182"
+  },
+  "documentation_repairs": [
+    "研究索引兩個歷史失效連結已改接實際重建與完成紀錄。"
+  ],
+  "source_lock_entries": 466
+}

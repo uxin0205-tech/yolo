@@ -1,0 +1,39 @@
+{
+  "status": "training-deployment-requirements-clarified-awaiting-execution-confirmation",
+  "training_authorized": false,
+  "recorded_at": "2026-11-04T14:00:03.383267+08:00",
+  "sources_sha256": {
+    "yolo_p2/ultralytics/nn/modules/conv.py": "c802f36ea1596d8910f2b651d57877b50a4960857b97cbb5a20d44a1dbbaa774",
+    "yolo_optimize/experiments/src/yolo_optimize/repconv.py": "191b09a8f404f2a30e70d3b70e70618a6ae084fa3af690030300f13b7a20dfe7",
+    "yolo_optimize/experiments/pose_only_rep_v1/config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/models.py": "d0292e87cd05a5bd71dae2642c2a5844fd6edf47f3a6811af1c0e59414619ba9",
+    "yolo_achitechure/stage8/rep.py": "d123010e4f1ff59ff309e8c3e5b6b6cd33ec6df1005757da6e50f4dba6e8c678",
+    "yolo_achitechure/stage8/model.py": "74c01b1311201640df3ccf12cc8405382729f5c25ab3d7fcbe60cd424752ee91",
+    "yolo_achitechure/stage8/training.py": "2563aa70c804f9794253162aef376426f91e0bbf6d2b7f8b9736edb034789b52",
+    "yolo_achitechure/stage8/evaluate.py": "80f152b8075abeeefdbafb441a67a48f9ca7a9e6e66dedab245fed66eb147a20",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/train-rep17/result.json": "273672833840a26c88af0c0054879fd1ee300b32166331151f7afdb37ef3699e",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/calibrate-rep17/result.json": "0eb0d3dd993bdef1661ef9f7065de112096f159776c035192b95864fba615060",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/smoke-rep17/result.json": "fe69432b303fba80a4c73a4b1cba1aa325ec8cfd1befeb5f457308da6e9717b3",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/train-rep20/result.json": "42be0a5a3c98611879771792cfe5f34c4be5ee15a85662721fad9bd148248ac0",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/calibrate-rep20/result.json": "6b2e750a3de8155c8bb9bf27a38e9483b1fe2f613bd430f2fd1e775b3c860a39",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/smoke-rep20/result.json": "83343b4e7b7b63476f1ade83931a31e8d9a97f60303feb656770dca744e0d0b0",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/train-rep17_20/result.json": "710bc895279a525404bafd958e2960f45f94324d11e86141c7777c5dd0e878bd",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/calibrate-rep17_20/result.json": "9b5ad14ef8893acca80c758265d123e8b663b781d999e3cabaeb9123c9af34e3",
+    "yolo_achitechure/artifacts/stage8/repconv-20261103/smoke-rep17_20/result.json": "77a2ff8575cdadeeac6c880257ffebe345fbd3a3a568fd5ccaffc06970d5dd98"
+  },
+  "withdrawn_files": [
+    {
+      "path": "docs/research/repconv-native-training-proposal-2026-11-04.md",
+      "sha256": "4fbe12ccd9a20ae4f3ac0d01a466bee0e22e93cb650186bfe92f947778c960ca",
+      "bytes": 7244
+    },
+    {
+      "path": "docs/research/repconv-native-training-reference-2026-11-04.json",
+      "sha256": "d3c0eb47271e4be66ee57ee2ce207df540fa3020a325d47df5f99da48667f1a2",
+      "bytes": 1810
+    }
+  ],
+  "reason": "代理過度推論成 SiLU／exact Softmax 切換；使用者要求先核對 RepConv 原本訓練方式；未曾執行該提案",
+  "training_hardware_simplification_required": false,
+  "deployment_hardware_simplification_required": true
+}

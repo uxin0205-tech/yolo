@@ -1,0 +1,8062 @@
+{
+  "input": [
+    1,
+    3,
+    640,
+    640
+  ],
+  "dtype": "FP32",
+  "device": "CPU",
+  "classification": "executed-shape analytical Conv2d MAC subtotal; not hardware measurement",
+  "parameters": 26453936,
+  "independent_parameters": 45428208,
+  "parameter_reduction_fraction": 0.4176759954960143,
+  "checkpoint_bytes": 106576996,
+  "Conv2d": {
+    "both": {
+      "MAC": 47325696000,
+      "calls": [
+        {
+          "module": "graph.model.0.conv",
+          "output": [
+            1,
+            64,
+            320,
+            320
+          ],
+          "MAC": 176947200
+        },
+        {
+          "module": "graph.model.1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 1887436800
+        },
+        {
+          "module": "graph.model.2.cv1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.2.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.2.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.2.m.0.cv3.conv",
+          "output": [
+            1,
+            64,
+            160,
+            160
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.2.cv2.conv",
+          "output": [
+            1,
+            256,
+            160,
+            160
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "graph.model.3.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "graph.model.4.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.4.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.4.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.4.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.4.cv2.conv",
+          "output": [
+            1,
+            512,
+            80,
+            80
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "graph.model.5.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "graph.model.6.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.6.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.6.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.6.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.6.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.7.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.8.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.8.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.8.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.8.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.8.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "graph.model.9.cv1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.9.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.10.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.q.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.k.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.v.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.10.m.0.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.10.m.0.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.10.m.0.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.10.m.0.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.10.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.13.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 838860800
+        },
+        {
+          "module": "graph.model.13.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.13.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.13.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.13.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.16.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 1677721600
+        },
+        {
+          "module": "graph.model.16.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.16.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.16.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.16.cv2.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.17.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.19.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.19.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.19.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.19.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.19.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.20.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.22.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.22.m.0.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.22.m.0.0.cv2.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.q.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.k.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.v.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.22.m.0.1.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.22.m.0.1.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.22.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.2",
+          "output": [
+            1,
+            80,
+            80,
+            80
+          ],
+          "MAC": 131072000
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.2",
+          "output": [
+            1,
+            80,
+            40,
+            40
+          ],
+          "MAC": 32768000
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.2",
+          "output": [
+            1,
+            80,
+            20,
+            20
+          ],
+          "MAC": 8192000
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.2",
+          "output": [
+            1,
+            80,
+            80,
+            80
+          ],
+          "MAC": 131072000
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.2",
+          "output": [
+            1,
+            80,
+            40,
+            40
+          ],
+          "MAC": 32768000
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.2",
+          "output": [
+            1,
+            80,
+            20,
+            20
+          ],
+          "MAC": 8192000
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.2",
+          "output": [
+            1,
+            2,
+            80,
+            80
+          ],
+          "MAC": 3276800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.2",
+          "output": [
+            1,
+            2,
+            40,
+            40
+          ],
+          "MAC": 819200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.2",
+          "output": [
+            1,
+            2,
+            20,
+            20
+          ],
+          "MAC": 204800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4_kpts.0",
+          "output": [
+            1,
+            6,
+            80,
+            80
+          ],
+          "MAC": 2457600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4_kpts.1",
+          "output": [
+            1,
+            6,
+            40,
+            40
+          ],
+          "MAC": 614400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4_kpts.2",
+          "output": [
+            1,
+            6,
+            20,
+            20
+          ],
+          "MAC": 153600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.2",
+          "output": [
+            1,
+            2,
+            80,
+            80
+          ],
+          "MAC": 3276800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.2",
+          "output": [
+            1,
+            2,
+            40,
+            40
+          ],
+          "MAC": 819200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.2",
+          "output": [
+            1,
+            2,
+            20,
+            20
+          ],
+          "MAC": 204800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4_kpts.0",
+          "output": [
+            1,
+            6,
+            80,
+            80
+          ],
+          "MAC": 2457600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4_kpts.1",
+          "output": [
+            1,
+            6,
+            40,
+            40
+          ],
+          "MAC": 614400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4_kpts.2",
+          "output": [
+            1,
+            6,
+            20,
+            20
+          ],
+          "MAC": 153600
+        }
+      ]
+    },
+    "detect": {
+      "MAC": 37382758400,
+      "calls": [
+        {
+          "module": "graph.model.0.conv",
+          "output": [
+            1,
+            64,
+            320,
+            320
+          ],
+          "MAC": 176947200
+        },
+        {
+          "module": "graph.model.1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 1887436800
+        },
+        {
+          "module": "graph.model.2.cv1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.2.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.2.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.2.m.0.cv3.conv",
+          "output": [
+            1,
+            64,
+            160,
+            160
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.2.cv2.conv",
+          "output": [
+            1,
+            256,
+            160,
+            160
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "graph.model.3.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "graph.model.4.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.4.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.4.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.4.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.4.cv2.conv",
+          "output": [
+            1,
+            512,
+            80,
+            80
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "graph.model.5.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "graph.model.6.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.6.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.6.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.6.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.6.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.7.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.8.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.8.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.8.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.8.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.8.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "graph.model.9.cv1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.9.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.10.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.q.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.k.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.v.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.10.m.0.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.10.m.0.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.10.m.0.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.10.m.0.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.10.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.13.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 838860800
+        },
+        {
+          "module": "graph.model.13.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.13.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.13.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.13.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.16.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 1677721600
+        },
+        {
+          "module": "graph.model.16.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.16.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.16.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.16.cv2.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.17.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.19.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.19.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.19.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.19.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.19.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.20.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.22.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.22.m.0.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.22.m.0.0.cv2.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.q.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.k.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.v.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.22.m.0.1.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.22.m.0.1.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.22.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.0.2",
+          "output": [
+            1,
+            80,
+            80,
+            80
+          ],
+          "MAC": 131072000
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.1.2",
+          "output": [
+            1,
+            80,
+            40,
+            40
+          ],
+          "MAC": 32768000
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.23.detect_head.cv3.2.2",
+          "output": [
+            1,
+            80,
+            20,
+            20
+          ],
+          "MAC": 8192000
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.0.2",
+          "output": [
+            1,
+            80,
+            80,
+            80
+          ],
+          "MAC": 131072000
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.1.2",
+          "output": [
+            1,
+            80,
+            40,
+            40
+          ],
+          "MAC": 32768000
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.23.detect_head.one2one_cv3.2.2",
+          "output": [
+            1,
+            80,
+            20,
+            20
+          ],
+          "MAC": 8192000
+        }
+      ]
+    },
+    "pose": {
+      "MAC": 40740147200,
+      "calls": [
+        {
+          "module": "graph.model.0.conv",
+          "output": [
+            1,
+            64,
+            320,
+            320
+          ],
+          "MAC": 176947200
+        },
+        {
+          "module": "graph.model.1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 1887436800
+        },
+        {
+          "module": "graph.model.2.cv1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.2.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.2.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.2.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.2.m.0.cv3.conv",
+          "output": [
+            1,
+            64,
+            160,
+            160
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.2.cv2.conv",
+          "output": [
+            1,
+            256,
+            160,
+            160
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "graph.model.3.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "graph.model.4.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.4.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.4.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.4.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.4.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.4.cv2.conv",
+          "output": [
+            1,
+            512,
+            80,
+            80
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "graph.model.5.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "graph.model.6.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.6.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.6.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.6.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.6.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.6.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.7.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.8.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.8.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.8.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.8.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.8.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.8.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "graph.model.9.cv1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.9.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.10.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.q.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.k.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.10.m.0.attn.qkv.v.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.10.m.0.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.10.m.0.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.10.m.0.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.10.m.0.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.10.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.13.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 838860800
+        },
+        {
+          "module": "graph.model.13.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.13.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.13.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.13.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.13.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.16.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 1677721600
+        },
+        {
+          "module": "graph.model.16.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.16.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.16.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.16.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.16.cv2.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.17.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.19.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.19.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.19.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.19.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.19.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.19.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "graph.model.20.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.22.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.22.m.0.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.22.m.0.0.cv2.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.q.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.k.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.qkv.v.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.22.m.0.1.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.22.m.0.1.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.22.m.0.1.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.22.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.0.2",
+          "output": [
+            1,
+            2,
+            80,
+            80
+          ],
+          "MAC": 3276800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.1.2",
+          "output": [
+            1,
+            2,
+            40,
+            40
+          ],
+          "MAC": 819200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv3.2.2",
+          "output": [
+            1,
+            2,
+            20,
+            20
+          ],
+          "MAC": 204800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4_kpts.0",
+          "output": [
+            1,
+            6,
+            80,
+            80
+          ],
+          "MAC": 2457600
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4_kpts.1",
+          "output": [
+            1,
+            6,
+            40,
+            40
+          ],
+          "MAC": 614400
+        },
+        {
+          "module": "graph.model.23.pose_head.cv4_kpts.2",
+          "output": [
+            1,
+            6,
+            20,
+            20
+          ],
+          "MAC": 153600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.0.2",
+          "output": [
+            1,
+            2,
+            80,
+            80
+          ],
+          "MAC": 3276800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.1.2",
+          "output": [
+            1,
+            2,
+            40,
+            40
+          ],
+          "MAC": 819200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv3.2.2",
+          "output": [
+            1,
+            2,
+            20,
+            20
+          ],
+          "MAC": 204800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4_kpts.0",
+          "output": [
+            1,
+            6,
+            80,
+            80
+          ],
+          "MAC": 2457600
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4_kpts.1",
+          "output": [
+            1,
+            6,
+            40,
+            40
+          ],
+          "MAC": 614400
+        },
+        {
+          "module": "graph.model.23.pose_head.one2one_cv4_kpts.2",
+          "output": [
+            1,
+            6,
+            20,
+            20
+          ],
+          "MAC": 153600
+        }
+      ]
+    },
+    "independent_detect": {
+      "MAC": 37382758400,
+      "calls": [
+        {
+          "module": "model.0.conv",
+          "output": [
+            1,
+            64,
+            320,
+            320
+          ],
+          "MAC": 176947200
+        },
+        {
+          "module": "model.1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 1887436800
+        },
+        {
+          "module": "model.2.cv1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.2.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.2.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.2.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.2.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.2.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.2.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.2.m.0.cv3.conv",
+          "output": [
+            1,
+            64,
+            160,
+            160
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.2.cv2.conv",
+          "output": [
+            1,
+            256,
+            160,
+            160
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "model.3.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "model.4.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.4.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.4.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.4.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.4.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.4.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.4.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.4.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.4.cv2.conv",
+          "output": [
+            1,
+            512,
+            80,
+            80
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "model.5.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "model.6.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.6.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.6.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.6.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.6.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.6.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.6.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.6.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.6.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.7.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.8.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.8.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "model.8.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.8.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.8.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.8.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.8.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "model.8.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.8.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "model.9.cv1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.9.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "model.10.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.10.m.0.attn.qkv.q.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "model.10.m.0.attn.qkv.k.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "model.10.m.0.attn.qkv.v.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.10.m.0.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "model.10.m.0.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.10.m.0.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.10.m.0.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.10.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.13.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 838860800
+        },
+        {
+          "module": "model.13.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.13.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.13.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.13.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.13.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.13.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.13.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.13.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.16.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 1677721600
+        },
+        {
+          "module": "model.16.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.16.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.16.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.16.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.16.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.16.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.16.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.16.cv2.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.17.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.19.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.19.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.19.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.19.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.19.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.19.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.19.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.19.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.19.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.20.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.22.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "model.22.m.0.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.22.m.0.0.cv2.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.22.m.0.1.attn.qkv.q.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "model.22.m.0.1.attn.qkv.k.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "model.22.m.0.1.attn.qkv.v.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.22.m.0.1.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "model.22.m.0.1.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.22.m.0.1.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.22.m.0.1.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.22.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "model.23.cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.23.cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.23.cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "model.23.cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "model.23.cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.23.cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "model.23.cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.23.cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "model.23.cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.23.cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.23.cv3.0.2",
+          "output": [
+            1,
+            80,
+            80,
+            80
+          ],
+          "MAC": 131072000
+        },
+        {
+          "module": "model.23.cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "model.23.cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "model.23.cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "model.23.cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.23.cv3.1.2",
+          "output": [
+            1,
+            80,
+            40,
+            40
+          ],
+          "MAC": 32768000
+        },
+        {
+          "module": "model.23.cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "model.23.cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.23.cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "model.23.cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.23.cv3.2.2",
+          "output": [
+            1,
+            80,
+            20,
+            20
+          ],
+          "MAC": 8192000
+        },
+        {
+          "module": "model.23.one2one_cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.23.one2one_cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.23.one2one_cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "model.23.one2one_cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "model.23.one2one_cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.23.one2one_cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "model.23.one2one_cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.23.one2one_cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.one2one_cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "model.23.one2one_cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.one2one_cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.23.one2one_cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.one2one_cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.23.one2one_cv3.0.2",
+          "output": [
+            1,
+            80,
+            80,
+            80
+          ],
+          "MAC": 131072000
+        },
+        {
+          "module": "model.23.one2one_cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "model.23.one2one_cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "model.23.one2one_cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "model.23.one2one_cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.23.one2one_cv3.1.2",
+          "output": [
+            1,
+            80,
+            40,
+            40
+          ],
+          "MAC": 32768000
+        },
+        {
+          "module": "model.23.one2one_cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "model.23.one2one_cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.23.one2one_cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "model.23.one2one_cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.23.one2one_cv3.2.2",
+          "output": [
+            1,
+            80,
+            20,
+            20
+          ],
+          "MAC": 8192000
+        }
+      ]
+    },
+    "independent_pose": {
+      "MAC": 40740147200,
+      "calls": [
+        {
+          "module": "model.0.conv",
+          "output": [
+            1,
+            64,
+            320,
+            320
+          ],
+          "MAC": 176947200
+        },
+        {
+          "module": "model.1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 1887436800
+        },
+        {
+          "module": "model.2.cv1.conv",
+          "output": [
+            1,
+            128,
+            160,
+            160
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.2.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.2.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.2.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.2.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.2.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.2.m.0.cv2.conv",
+          "output": [
+            1,
+            32,
+            160,
+            160
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.2.m.0.cv3.conv",
+          "output": [
+            1,
+            64,
+            160,
+            160
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.2.cv2.conv",
+          "output": [
+            1,
+            256,
+            160,
+            160
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "model.3.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "model.4.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.4.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.4.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.4.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.4.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.4.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.4.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.4.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.4.cv2.conv",
+          "output": [
+            1,
+            512,
+            80,
+            80
+          ],
+          "MAC": 1258291200
+        },
+        {
+          "module": "model.5.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 3774873600
+        },
+        {
+          "module": "model.6.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.6.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.6.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.6.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.6.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.6.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.6.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.6.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.6.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.7.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.8.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.8.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "model.8.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.8.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.8.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.8.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.8.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 13107200
+        },
+        {
+          "module": "model.8.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.8.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "model.9.cv1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.9.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "model.10.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.10.m.0.attn.qkv.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.10.m.0.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "model.10.m.0.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.10.m.0.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.10.m.0.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.10.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.13.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 838860800
+        },
+        {
+          "module": "model.13.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.13.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.13.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.13.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.13.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.13.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.13.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.13.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.16.cv1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 1677721600
+        },
+        {
+          "module": "model.16.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.16.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.16.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.16.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.16.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.16.m.0.cv2.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.16.m.0.cv3.conv",
+          "output": [
+            1,
+            128,
+            80,
+            80
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.16.cv2.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.17.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.19.cv1.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.19.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.19.m.0.m.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.19.m.0.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.19.m.0.m.1.cv1.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.19.m.0.m.1.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.19.m.0.cv2.conv",
+          "output": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.19.m.0.cv3.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.19.cv2.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 629145600
+        },
+        {
+          "module": "model.20.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.22.cv1.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "model.22.m.0.0.cv1.conv",
+          "output": [
+            1,
+            128,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.22.m.0.0.cv2.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.22.m.0.1.attn.qkv.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.22.m.0.1.attn.pe.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "model.22.m.0.1.attn.proj.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.22.m.0.1.ffn.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.22.m.0.1.ffn.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.22.cv2.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 157286400
+        },
+        {
+          "module": "model.23.cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.23.cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.23.cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "model.23.cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "model.23.cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.23.cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "model.23.cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.23.cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "model.23.cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.23.cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.23.cv3.0.2",
+          "output": [
+            1,
+            2,
+            80,
+            80
+          ],
+          "MAC": 3276800
+        },
+        {
+          "module": "model.23.cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "model.23.cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "model.23.cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "model.23.cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.23.cv3.1.2",
+          "output": [
+            1,
+            2,
+            40,
+            40
+          ],
+          "MAC": 819200
+        },
+        {
+          "module": "model.23.cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "model.23.cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.23.cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "model.23.cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.23.cv3.2.2",
+          "output": [
+            1,
+            2,
+            20,
+            20
+          ],
+          "MAC": 204800
+        },
+        {
+          "module": "model.23.cv4.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.23.cv4.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.23.cv4.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "model.23.cv4.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.23.cv4.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.23.cv4.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.cv4_kpts.0",
+          "output": [
+            1,
+            6,
+            80,
+            80
+          ],
+          "MAC": 2457600
+        },
+        {
+          "module": "model.23.cv4_kpts.1",
+          "output": [
+            1,
+            6,
+            40,
+            40
+          ],
+          "MAC": 614400
+        },
+        {
+          "module": "model.23.cv4_kpts.2",
+          "output": [
+            1,
+            6,
+            20,
+            20
+          ],
+          "MAC": 153600
+        },
+        {
+          "module": "model.23.one2one_cv2.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.23.one2one_cv2.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.23.one2one_cv2.0.2",
+          "output": [
+            1,
+            4,
+            80,
+            80
+          ],
+          "MAC": 1638400
+        },
+        {
+          "module": "model.23.one2one_cv2.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "model.23.one2one_cv2.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.23.one2one_cv2.1.2",
+          "output": [
+            1,
+            4,
+            40,
+            40
+          ],
+          "MAC": 409600
+        },
+        {
+          "module": "model.23.one2one_cv2.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.23.one2one_cv2.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.one2one_cv2.2.2",
+          "output": [
+            1,
+            4,
+            20,
+            20
+          ],
+          "MAC": 102400
+        },
+        {
+          "module": "model.23.one2one_cv3.0.0.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.one2one_cv3.0.0.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.23.one2one_cv3.0.1.0.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.one2one_cv3.0.1.1.conv",
+          "output": [
+            1,
+            256,
+            80,
+            80
+          ],
+          "MAC": 419430400
+        },
+        {
+          "module": "model.23.one2one_cv3.0.2",
+          "output": [
+            1,
+            2,
+            80,
+            80
+          ],
+          "MAC": 3276800
+        },
+        {
+          "module": "model.23.one2one_cv3.1.0.0.conv",
+          "output": [
+            1,
+            512,
+            40,
+            40
+          ],
+          "MAC": 7372800
+        },
+        {
+          "module": "model.23.one2one_cv3.1.0.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 209715200
+        },
+        {
+          "module": "model.23.one2one_cv3.1.1.0.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 3686400
+        },
+        {
+          "module": "model.23.one2one_cv3.1.1.1.conv",
+          "output": [
+            1,
+            256,
+            40,
+            40
+          ],
+          "MAC": 104857600
+        },
+        {
+          "module": "model.23.one2one_cv3.1.2",
+          "output": [
+            1,
+            2,
+            40,
+            40
+          ],
+          "MAC": 819200
+        },
+        {
+          "module": "model.23.one2one_cv3.2.0.0.conv",
+          "output": [
+            1,
+            512,
+            20,
+            20
+          ],
+          "MAC": 1843200
+        },
+        {
+          "module": "model.23.one2one_cv3.2.0.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 52428800
+        },
+        {
+          "module": "model.23.one2one_cv3.2.1.0.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 921600
+        },
+        {
+          "module": "model.23.one2one_cv3.2.1.1.conv",
+          "output": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "MAC": 26214400
+        },
+        {
+          "module": "model.23.one2one_cv3.2.2",
+          "output": [
+            1,
+            2,
+            20,
+            20
+          ],
+          "MAC": 204800
+        },
+        {
+          "module": "model.23.one2one_cv4.0.0.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 943718400
+        },
+        {
+          "module": "model.23.one2one_cv4.0.1.conv",
+          "output": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "MAC": 235929600
+        },
+        {
+          "module": "model.23.one2one_cv4.1.0.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 471859200
+        },
+        {
+          "module": "model.23.one2one_cv4.1.1.conv",
+          "output": [
+            1,
+            64,
+            40,
+            40
+          ],
+          "MAC": 58982400
+        },
+        {
+          "module": "model.23.one2one_cv4.2.0.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 117964800
+        },
+        {
+          "module": "model.23.one2one_cv4.2.1.conv",
+          "output": [
+            1,
+            64,
+            20,
+            20
+          ],
+          "MAC": 14745600
+        },
+        {
+          "module": "model.23.one2one_cv4_kpts.0",
+          "output": [
+            1,
+            6,
+            80,
+            80
+          ],
+          "MAC": 2457600
+        },
+        {
+          "module": "model.23.one2one_cv4_kpts.1",
+          "output": [
+            1,
+            6,
+            40,
+            40
+          ],
+          "MAC": 614400
+        },
+        {
+          "module": "model.23.one2one_cv4_kpts.2",
+          "output": [
+            1,
+            6,
+            20,
+            20
+          ],
+          "MAC": 153600
+        }
+      ]
+    }
+  },
+  "independent_Conv2d_MAC": 78122905600,
+  "Conv2d_reduction_fraction": 0.3942148511178776,
+  "attention_640_analytical": [
+    {
+      "site": "model.10.m.0.attn",
+      "heads": 4,
+      "key_dim": 32,
+      "head_dim": 64,
+      "tokens_at_640": 400,
+      "bases": 2,
+      "binary_bit_products": 40960000,
+      "PV_float_MAC": 40960000,
+      "hadamard_add_sub": 512000,
+      "reciprocal_rows": 1600
+    },
+    {
+      "site": "model.22.m.0.1.attn",
+      "heads": 4,
+      "key_dim": 32,
+      "head_dim": 64,
+      "tokens_at_640": 400,
+      "bases": 2,
+      "binary_bit_products": 40960000,
+      "PV_float_MAC": 40960000,
+      "hadamard_add_sub": 512000,
+      "reciprocal_rows": 1600
+    }
+  ],
+  "excluded_from_conv_subtotal": [
+    "QK binary",
+    "Hadamard",
+    "PWL/reciprocal",
+    "PV matmul",
+    "BN",
+    "activations",
+    "decode",
+    "resize/concat"
+  ],
+  "QKV_and_projection_Conv2d_included": true,
+  "target_latency_energy_RTL_HLS": "未量測"
+}

@@ -1,0 +1,158 @@
+{
+  "schema": "yolo-integrated-result-v2",
+  "status": "complete",
+  "as_of": "2026-11-19",
+  "selection": "使用者指定兩個部署版本。固定 512×768 為硬體選擇，原 reference_rect640 為精度選擇。",
+  "model": {
+    "package": "model",
+    "loader": "model/load_shape.py",
+    "checkpoint": "model/rep17_20.pt",
+    "sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+    "bytes": 106717343,
+    "parameters": 26453168,
+    "canonical_package": "yolo_actshape/result/stage9/handoff",
+    "input": {
+      "layout": "RGB BCHW",
+      "dtype": "FP32",
+      "range": [
+        0,
+        1
+      ],
+      "preprocessing": "reference_rect640 / original batch rectangular letterbox",
+      "fixed_hw": null
+    },
+    "tasks": [
+      "detect",
+      "pose",
+      "both"
+    ]
+  },
+  "metrics": {
+    "coco_AP": 0.5143471497030708,
+    "person_AP": 0.6427959303974734,
+    "sports_ball_AP": 0.5157820851022553,
+    "baseball_bat_AP": 0.46957631026676677,
+    "box_AP50_95": 0.6143706928427835,
+    "pose_AP50_95": 0.9013894285347345,
+    "ball_box_AP50_95": 0.49976429858092136,
+    "ball_pose_AP50_95": 0.8645462333785403,
+    "bat_box_AP50_95": 0.7289770871046457,
+    "bat_pose_AP50_95": 0.9382326236909287
+  },
+  "evaluator": {
+    "detect": "COCO val2017 5000 / official AP50-95",
+    "pose": "BBAT5 v1 val 683 / box and keypoint AP50-95",
+    "source": "yolo_actshape/protocol.json",
+    "source_sha256": "249a2e2c258738ed08e47f82733685f2bb08e51d5e5535105373d50b14be3c1d"
+  },
+  "deployment": {
+    "activation": "ShiftPiecewiseQuadraticSiLU / qsilu_pq",
+    "binary": "B2 sign + Hadamard",
+    "scale": "S1 Q10",
+    "bias": "signed16 / 1024; by[dy] + bx[dx]",
+    "normalization": "D1 integer PWL exp [-10,0] / 20 + reciprocal LUT256",
+    "reciprocal": "UQ1.16",
+    "denominator": "uint26",
+    "probability": "UQ1.24",
+    "max_tokens": 1024,
+    "max_axis": 32,
+    "rep_layers": [
+      17,
+      20
+    ],
+    "folded": true,
+    "full_contract": "model/rep17_20.json"
+  },
+  "training": {
+    "checkpoint": "training/rep17_20-best-ema.pt",
+    "sha256": "7ddd8bebb86dc24a3feab15edd840587dd56e9afeb2a1994f89084687a1afb34",
+    "activation": "qsilu_pq",
+    "normalization": "Float PWL [-10,0] / 20",
+    "role": "最佳多分支 EMA；供新訓練段初始化，不含可精確續跑的 optimizer state",
+    "exact_optimizer_resume": false
+  },
+  "shape_research": {
+    "completed_epochs": 120,
+    "trained_candidates": 6,
+    "epochs_per_candidate": 20,
+    "layout_gpu_replay_passes": 336,
+    "selected": "reference_rect640",
+    "portrait_candidate": "yolo_actshape/result/stage9-portrait/handoff",
+    "portrait_is_official": false,
+    "selected_at_original_gate": "reference_rect640",
+    "hardware_selected_by_user": "rect512_768/adapt10/E2"
+  },
+  "lineage": "data/lineage.json",
+  "report": "../docs/research/yolo-research-summary-2026-11-17.md",
+  "cleanup": "cleanup-20261117.json",
+  "limitations": [
+    "單 seed、validation 選型",
+    "沒有原方法 control 加訓",
+    "仍有浮點 Conv/QKV/PV/projection/head/decode",
+    "尚未做整網整數量化、RTL/HLS 或板端量測",
+    "固定輸入下改內部 stride 的架構變體未實作"
+  ],
+  "next_stage_started": false,
+  "profiles": {
+    "hardware": {
+      "candidate": "rect512_768",
+      "package": "hardware",
+      "loader": "hardware/load_shape.py",
+      "checkpoint": "hardware/rep17_20.pt",
+      "bytes": 106728476,
+      "sha256": "a7526f060612fdada757679b6b32d408b760d4c53f99e6adcb9923f16636b457",
+      "parent_sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+      "parameters": 26453168,
+      "shape_hw": [
+        512,
+        768
+      ],
+      "preprocessing": "fixed centered letterbox",
+      "phase": "adapt10",
+      "epoch": 2,
+      "metrics": {
+        "coco_AP": 0.5196317508834373,
+        "person_AP": 0.6458654186776733,
+        "sports_ball_AP": 0.5219122564526139,
+        "baseball_bat_AP": 0.45335120761032666,
+        "box_AP50_95": 0.6245007321351908,
+        "pose_AP50_95": 0.8990255807792658,
+        "ball_box_AP50_95": 0.516027864554657,
+        "ball_pose_AP50_95": 0.8628889209624224,
+        "bat_box_AP50_95": 0.7329735997157245,
+        "bat_pose_AP50_95": 0.9351622405961088
+      },
+      "source_checkpoint": "yolo_actshape/artifacts/shape-expanded-20261108-v1/rect512_768/adapt10/best-e002.pt",
+      "full_contract": "hardware/rep17_20.json"
+    },
+    "accuracy": {
+      "candidate": "reference_rect640",
+      "package": "accuracy",
+      "loader": "accuracy/load_shape.py",
+      "checkpoint": "accuracy/rep17_20.pt",
+      "bytes": 106717343,
+      "sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+      "parameters": 26453168,
+      "shape_hw": null,
+      "preprocessing": "original batch rectangular letterbox at imgsz=640",
+      "phase": "stage8 rep17_20",
+      "epoch": 1,
+      "metrics": {
+        "coco_AP": 0.5143471497030708,
+        "person_AP": 0.6427959303974734,
+        "sports_ball_AP": 0.5157820851022553,
+        "baseball_bat_AP": 0.46957631026676677,
+        "box_AP50_95": 0.6143706928427835,
+        "pose_AP50_95": 0.9013894285347345,
+        "ball_box_AP50_95": 0.49976429858092136,
+        "ball_pose_AP50_95": 0.8645462333785403,
+        "bat_box_AP50_95": 0.7289770871046457,
+        "bat_pose_AP50_95": 0.9382326236909287
+      },
+      "source_checkpoint": "yolo_actshape/result/stage9/handoff/rep17_20.pt",
+      "full_contract": "accuracy/rep17_20.json"
+    }
+  },
+  "legacy_fields_profile": "accuracy",
+  "selection_validation": "validation-1119.json"
+}

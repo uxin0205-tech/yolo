@@ -1,0 +1,20 @@
+{
+  "type": "analytical-reference-not-hardware-timing",
+  "input": [
+    640,
+    640
+  ],
+  "sites": 2,
+  "heads_per_site": 4,
+  "tokens_per_site": 400,
+  "rows_per_image": 3200,
+  "weights_per_image": 1280000,
+  "row_max_comparisons": 1276800,
+  "denominator_additions": 1276800,
+  "exp_interpolation_multiplications": 1280000,
+  "reciprocal_table_bytes": 544,
+  "reciprocal_per_row": "one LUT, leading-one and shifts",
+  "probability_scaling_multiplications": 1280000,
+  "exp_table_bytes": 42,
+  "qkv_pv_projection": "unchanged float; not included in normalization proxy"
+}

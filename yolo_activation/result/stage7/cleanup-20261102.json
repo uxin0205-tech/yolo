@@ -1,0 +1,929 @@
+{
+  "time_unix": 1793550083.0554435,
+  "reason": "舊 activation 已由 Stage7 E1 共同 parent 取代；保留報告、配置、小型指標及外部仍使用的權重；不封存",
+  "protected_files": {
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/resolved-config.json": "05c49d01bc1367a4f0325ef16c36973647f3eeb32465425759e14dc838f0d2cc",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0009/bittrue/metrics.json": "431d67cee012305e4196878a5108d1bbea8465bd0f6dfcb54c68b0157aa934ae",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/activation-experiment.json": "8d9f2a6ec33ffac6194aaf0a965c14dcd1b86fff58334eeb478706ec0f0f8074",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_joint.pt": "eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt": "79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/logs/gate.csv": "96174ab5f6be9eeb90c3e653a56a23558aa7b92f5ce66660b88007636d959c0c",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0008/bittrue/metrics.json": "fdf621f8624a1e022bae320dceabb1619040524f0d8b5bbfbc2c26fdb0689422",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt": "8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713",
+    "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/activation-experiment.json": "42506b7d45ae34b44e65af87051f50bc9cb07c3b91ab6ab76a1b1ed079695ae7"
+  },
+  "preserved": [
+    "canonical activation_lab code (optimize external dependency)",
+    "release unique accepted SiLU and qSiLU weights",
+    "reports/configs/metrics/history and formal data"
+  ],
+  "removed": [
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-qsilu-pq-seed1/checkpoints/best_detect.pt",
+      "bytes": 425468506
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-qsilu-pq-seed1/checkpoints/best_pose.pt",
+      "bytes": 425459492
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-qsilu-pq-seed1/checkpoints/last.pt",
+      "bytes": 425436957
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-qsilu-pq-seed1/inference/best_detect.pt",
+      "bytes": 106826785
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-qsilu-pq-seed1/inference/best_pose.pt",
+      "bytes": 106824297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-qsilu-pq-seed1/inference/last.pt",
+      "bytes": 106818077
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-qsilu-pq-seed1/validation/epoch-0000/float/detect/predictions.json",
+      "bytes": 74257774
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-qsilu-pq-seed1/validation/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 74255862
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-pose_one2many/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-pose_one2one/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-detect_one2one/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 92657689
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-detect_one2one/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 18394495
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-backbone_early/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 16387588
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-backbone_attention/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 42866286
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-pose_one2one/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-backbone_deep/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 49570232
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-pose_flow/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-backbone_deep/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 77260540
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-neck/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 82386345
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-detect_one2many/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-masf/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 73051651
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-neck/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 196941532
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-detect_one2many/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-backbone_early/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 70465323
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-backbone_attention/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 73141067
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-pose_one2many/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-neck_attention/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72608955
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-pose_flow/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-hardswish-masf/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72378115
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-reference-accepted-silu/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72332445
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-reference-uniform-qsilu/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72595511
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/q3-nonsilu-cpu/evaluations/q3-cpu-qsilu-leaky_relu_1_8-neck_attention/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 70047153
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/checkpoints/best_detect.pt",
+      "bytes": 425469082
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/checkpoints/best_joint.pt",
+      "bytes": 425465535
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/checkpoints/best_pose.pt",
+      "bytes": 425461028
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/checkpoints/last.pt",
+      "bytes": 425438493
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_detect.pt",
+      "bytes": 106826785
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_pose.pt",
+      "bytes": 106824297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/last.pt",
+      "bytes": 106818077
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0004/float/detect/predictions.json",
+      "bytes": 73309476
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0004/bittrue/detect/predictions.json",
+      "bytes": 73308903
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0006/float/detect/predictions.json",
+      "bytes": 72842409
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0006/bittrue/detect/predictions.json",
+      "bytes": 72843196
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0000/float/detect/predictions.json",
+      "bytes": 74723058
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 74714106
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0008/float/detect/predictions.json",
+      "bytes": 72912812
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0008/bittrue/detect/predictions.json",
+      "bytes": 72915767
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0003/float/detect/predictions.json",
+      "bytes": 72892461
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0003/bittrue/detect/predictions.json",
+      "bytes": 72900166
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0005/float/detect/predictions.json",
+      "bytes": 73037135
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0005/bittrue/detect/predictions.json",
+      "bytes": 73037294
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0001/float/detect/predictions.json",
+      "bytes": 73743524
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0001/bittrue/detect/predictions.json",
+      "bytes": 73738096
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0009/float/detect/predictions.json",
+      "bytes": 72557090
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0009/bittrue/detect/predictions.json",
+      "bytes": 72557013
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0007/float/detect/predictions.json",
+      "bytes": 72514893
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0007/bittrue/detect/predictions.json",
+      "bytes": 72512913
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0002/float/detect/predictions.json",
+      "bytes": 72624554
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0002/bittrue/detect/predictions.json",
+      "bytes": 72622432
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/checkpoints/best_detect.pt",
+      "bytes": 425470170
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/checkpoints/best_joint.pt",
+      "bytes": 425464703
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/checkpoints/best_pose.pt",
+      "bytes": 425460196
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/checkpoints/last.pt",
+      "bytes": 425438621
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_detect.pt",
+      "bytes": 106826785
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_pose.pt",
+      "bytes": 106824297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/last.pt",
+      "bytes": 106818077
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0004/float/detect/predictions.json",
+      "bytes": 75614827
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0004/bittrue/detect/predictions.json",
+      "bytes": 75612596
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0006/float/detect/predictions.json",
+      "bytes": 75759548
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0006/bittrue/detect/predictions.json",
+      "bytes": 75750184
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0000/float/detect/predictions.json",
+      "bytes": 79537056
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 79533526
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0008/float/detect/predictions.json",
+      "bytes": 75477643
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0008/bittrue/detect/predictions.json",
+      "bytes": 75475009
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0003/float/detect/predictions.json",
+      "bytes": 75841056
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0003/bittrue/detect/predictions.json",
+      "bytes": 75853010
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0005/float/detect/predictions.json",
+      "bytes": 75442726
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0005/bittrue/detect/predictions.json",
+      "bytes": 75447454
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0001/float/detect/predictions.json",
+      "bytes": 76169191
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0001/bittrue/detect/predictions.json",
+      "bytes": 76163404
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0009/float/detect/predictions.json",
+      "bytes": 74667480
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0009/bittrue/detect/predictions.json",
+      "bytes": 74659031
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0007/float/detect/predictions.json",
+      "bytes": 75766672
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0007/bittrue/detect/predictions.json",
+      "bytes": 75767980
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0002/float/detect/predictions.json",
+      "bytes": 75763559
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/validation/epoch-0002/bittrue/detect/predictions.json",
+      "bytes": 75755126
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/checkpoints/best_detect.pt",
+      "bytes": 425469210
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/checkpoints/best_joint.pt",
+      "bytes": 425466623
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/checkpoints/best_pose.pt",
+      "bytes": 425461156
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/checkpoints/last.pt",
+      "bytes": 425440541
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_detect.pt",
+      "bytes": 106826785
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_pose.pt",
+      "bytes": 106824297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/last.pt",
+      "bytes": 106818077
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0004/float/detect/predictions.json",
+      "bytes": 72390539
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0004/bittrue/detect/predictions.json",
+      "bytes": 72394179
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0006/float/detect/predictions.json",
+      "bytes": 73476058
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0006/bittrue/detect/predictions.json",
+      "bytes": 73476494
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0000/float/detect/predictions.json",
+      "bytes": 74374998
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 74375375
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0008/float/detect/predictions.json",
+      "bytes": 72956692
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0008/bittrue/detect/predictions.json",
+      "bytes": 72950571
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0003/float/detect/predictions.json",
+      "bytes": 72231838
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0003/bittrue/detect/predictions.json",
+      "bytes": 72229718
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0005/float/detect/predictions.json",
+      "bytes": 72481391
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0005/bittrue/detect/predictions.json",
+      "bytes": 72475280
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0001/float/detect/predictions.json",
+      "bytes": 72890827
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0001/bittrue/detect/predictions.json",
+      "bytes": 72888278
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0009/float/detect/predictions.json",
+      "bytes": 72667863
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0009/bittrue/detect/predictions.json",
+      "bytes": 72670509
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0007/float/detect/predictions.json",
+      "bytes": 73227388
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0007/bittrue/detect/predictions.json",
+      "bytes": 73230246
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0002/float/detect/predictions.json",
+      "bytes": 72085296
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/validation/epoch-0002/bittrue/detect/predictions.json",
+      "bytes": 72084675
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/checkpoints/best_detect.pt",
+      "bytes": 425468506
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/checkpoints/best_joint.pt",
+      "bytes": 425465727
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/checkpoints/best_pose.pt",
+      "bytes": 425461220
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/checkpoints/last.pt",
+      "bytes": 425438685
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/inference/best_detect.pt",
+      "bytes": 106826785
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/inference/best_joint.pt",
+      "bytes": 106825541
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/inference/best_pose.pt",
+      "bytes": 106824297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/inference/last.pt",
+      "bytes": 106818077
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0004/float/detect/predictions.json",
+      "bytes": 73928837
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0004/bittrue/detect/predictions.json",
+      "bytes": 73934614
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0000/float/detect/predictions.json",
+      "bytes": 71904826
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 71897399
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0003/float/detect/predictions.json",
+      "bytes": 72505977
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0003/bittrue/detect/predictions.json",
+      "bytes": 72509684
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0005/float/detect/predictions.json",
+      "bytes": 73252209
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0005/bittrue/detect/predictions.json",
+      "bytes": 73247270
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0001/float/detect/predictions.json",
+      "bytes": 72966295
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0001/bittrue/detect/predictions.json",
+      "bytes": 72974235
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0002/float/detect/predictions.json",
+      "bytes": 74548603
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/finalist-seed1-uniform-silu-seed1/validation/epoch-0002/bittrue/detect/predictions.json",
+      "bytes": 74555011
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/checkpoints/best_detect.pt",
+      "bytes": 425469210
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/checkpoints/best_joint.pt",
+      "bytes": 425465663
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/checkpoints/best_pose.pt",
+      "bytes": 425460196
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/checkpoints/last.pt",
+      "bytes": 425439581
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_detect.pt",
+      "bytes": 106826785
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_pose.pt",
+      "bytes": 106824297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/last.pt",
+      "bytes": 106818077
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0004/float/detect/predictions.json",
+      "bytes": 72491919
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0004/bittrue/detect/predictions.json",
+      "bytes": 72493439
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0006/float/detect/predictions.json",
+      "bytes": 72256100
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0006/bittrue/detect/predictions.json",
+      "bytes": 72266104
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0000/float/detect/predictions.json",
+      "bytes": 74322891
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 74331267
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0008/float/detect/predictions.json",
+      "bytes": 72510244
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0008/bittrue/detect/predictions.json",
+      "bytes": 72507516
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0003/float/detect/predictions.json",
+      "bytes": 72655501
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0003/bittrue/detect/predictions.json",
+      "bytes": 72662223
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0005/float/detect/predictions.json",
+      "bytes": 71968445
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0005/bittrue/detect/predictions.json",
+      "bytes": 71981320
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0001/float/detect/predictions.json",
+      "bytes": 73406993
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0001/bittrue/detect/predictions.json",
+      "bytes": 73396292
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0009/float/detect/predictions.json",
+      "bytes": 72029578
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0009/bittrue/detect/predictions.json",
+      "bytes": 72028230
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0007/float/detect/predictions.json",
+      "bytes": 72345413
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0007/bittrue/detect/predictions.json",
+      "bytes": 72356043
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0002/float/detect/predictions.json",
+      "bytes": 71987064
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/validation/epoch-0002/bittrue/detect/predictions.json",
+      "bytes": 71981291
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/checkpoints/best_detect.pt",
+      "bytes": 425468570
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/checkpoints/best_joint.pt",
+      "bytes": 425465023
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/checkpoints/best_pose.pt",
+      "bytes": 425460516
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/checkpoints/last.pt",
+      "bytes": 425437981
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/inference/best_detect.pt",
+      "bytes": 106826785
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/inference/best_joint.pt",
+      "bytes": 106825541
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/inference/best_pose.pt",
+      "bytes": 106824297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/inference/last.pt",
+      "bytes": 106818077
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0004/float/detect/predictions.json",
+      "bytes": 73001333
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0004/bittrue/detect/predictions.json",
+      "bytes": 73004816
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0006/float/detect/predictions.json",
+      "bytes": 72789646
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0006/bittrue/detect/predictions.json",
+      "bytes": 72785474
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0000/float/detect/predictions.json",
+      "bytes": 74412078
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 74415968
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0008/float/detect/predictions.json",
+      "bytes": 72785343
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0008/bittrue/detect/predictions.json",
+      "bytes": 72791596
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0003/float/detect/predictions.json",
+      "bytes": 72897268
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0003/bittrue/detect/predictions.json",
+      "bytes": 72895849
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0005/float/detect/predictions.json",
+      "bytes": 72803116
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0005/bittrue/detect/predictions.json",
+      "bytes": 72809859
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0001/float/detect/predictions.json",
+      "bytes": 72958132
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0001/bittrue/detect/predictions.json",
+      "bytes": 72953293
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0009/float/detect/predictions.json",
+      "bytes": 72595326
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0009/bittrue/detect/predictions.json",
+      "bytes": 72594746
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0007/float/detect/predictions.json",
+      "bytes": 72915388
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0007/bittrue/detect/predictions.json",
+      "bytes": 72926228
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0002/float/detect/predictions.json",
+      "bytes": 72265118
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-silu-seed1/validation/epoch-0002/bittrue/detect/predictions.json",
+      "bytes": 72259436
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-uniform-silu-seed1/checkpoints/best_detect.pt",
+      "bytes": 425467738
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-uniform-silu-seed1/checkpoints/best_pose.pt",
+      "bytes": 425458724
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-uniform-silu-seed1/checkpoints/last.pt",
+      "bytes": 425436189
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-uniform-silu-seed1/inference/best_detect.pt",
+      "bytes": 106826785
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-uniform-silu-seed1/inference/best_pose.pt",
+      "bytes": 106824297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-uniform-silu-seed1/inference/last.pt",
+      "bytes": 106818077
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-uniform-silu-seed1/validation/epoch-0000/float/detect/predictions.json",
+      "bytes": 77036853
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/short-recovery-uniform-silu-seed1/validation/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 77036014
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-masf-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72133433
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-masf-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72133297
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-detect_one2one-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 74883024
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-detect_one2one-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 74880055
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/zero-shot-uniform-poly-quality-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72495171
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/zero-shot-uniform-poly-quality-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72495122
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-neck_attention-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72255531
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-neck_attention-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72251599
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-backbone_early-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 71344158
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-backbone_early-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 71338492
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-detect_one2many-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72249385
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-detect_one2many-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72247267
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/zero-shot-uniform-qsilu-pq-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 74753852
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/zero-shot-uniform-qsilu-pq-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 74760878
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-backbone_attention-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72235692
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-backbone_attention-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72237435
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-neck-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 71642909
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-neck-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 71647690
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/zero-shot-uniform-poly-shift-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 73887625
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/zero-shot-uniform-poly-shift-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 73886376
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-pose_one2many-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72249385
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-pose_one2many-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72247267
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/zero-shot-uniform-hardswish-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 111435779
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/zero-shot-uniform-hardswish-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 111440475
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-backbone_deep-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72883239
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-backbone_deep-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72885726
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-pose_one2one-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72249385
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-pose_one2one-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72247267
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-pose_flow-seed1/epoch-0000/float/detect/predictions.json",
+      "bytes": 72249385
+    },
+    {
+      "path": "yolo_activation/artifacts/runs/full35/evaluations/sensitivity-zero-shot-poly_shift-pose_flow-seed1/epoch-0000/bittrue/detect/predictions.json",
+      "bytes": 72247267
+    }
+  ],
+  "bytes_removed": 28064453317,
+  "gpu_processes": []
+}

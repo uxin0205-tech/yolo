@@ -1,0 +1,6 @@
+candidate,train_parameters,folded_parameters,folded_checkpoint_bytes,selected_conv_forward_units_before,selected_conv_forward_units_after,cost_scope
+rep17,26519984,26453680,106724631,10,9,selected same-size dense convolution branches only; excludes BN/activation/backward; no whole-network or hardware speed claim
+rep20,26717104,26453424,106721559,10,9,selected same-size dense convolution branches only; excludes BN/activation/backward; no whole-network or hardware speed claim
+rep17_20,26783152,26453168,106717343,10,9,selected same-size dense convolution branches only; excludes BN/activation/backward; no whole-network or hardware speed claim
+rep17_20_silu,26783152,26453168,106717407,10,9,selected same-size dense convolution branches only; excludes BN/activation/backward; no whole-network or hardware speed claim
+acb17_20,28423088,26453168,106717343,15,9,selected same-size dense convolution branches only; excludes BN/activation/backward; no whole-network or hardware speed claim

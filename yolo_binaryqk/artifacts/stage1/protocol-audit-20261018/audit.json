@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-18",
+  "status": "protocol-audit-complete; stage1-incomplete; old-queue-not-restarted",
+  "comparison": [
+    {
+      "model": "b26-fp",
+      "internal_AP50_95": 0.517997835,
+      "official_AP50_95": null,
+      "source": "yolo_attention/reports/comparison.csv",
+      "kind": "historical"
+    },
+    {
+      "model": "h-scr",
+      "internal_AP50_95": 0.495242744,
+      "official_AP50_95": null,
+      "source": "yolo_attention/reports/comparison.csv",
+      "kind": "historical"
+    },
+    {
+      "model": "w-dir",
+      "internal_AP50_95": 0.507457458,
+      "official_AP50_95": null,
+      "source": "yolo_attention/reports/comparison.csv",
+      "kind": "historical"
+    },
+    {
+      "model": "optimize-a0",
+      "internal_AP50_95": 0.5067385740341632,
+      "official_AP50_95": null,
+      "source": "/home/uxin/yolo/yolo_optimize/experiments/studies/pre-fusion-full35-b100/artifacts/baseline-a0/summary.json",
+      "kind": "historical"
+    },
+    {
+      "model": "parent-current-evaluator",
+      "internal_AP50_95": 0.5180015938061294,
+      "official_AP50_95": 0.5246855326575044,
+      "source": "yolo_binaryqk/artifacts/stage1/protocol-audit-20261018/parent-evaluation.json",
+      "kind": "full-5000-evaluation-only"
+    },
+    {
+      "model": "B1-epoch-0",
+      "internal_AP50_95": 0.3887353370904934,
+      "official_AP50_95": 0.40142223741029875,
+      "source": "yolo_binaryqk/artifacts/stage1/formal-20261018/B1/result.json",
+      "kind": "restricted-QK-only-diagnostic"
+    },
+    {
+      "model": "B1-epoch-10",
+      "internal_AP50_95": 0.4289485884245244,
+      "official_AP50_95": 0.4405414317809291,
+      "source": "yolo_binaryqk/artifacts/stage1/formal-20261018/B1/result.json",
+      "kind": "restricted-QK-only-diagnostic"
+    }
+  ],
+  "sources_sha256": {
+    "yolo_attention/reports/comparison.csv": "96c3fae01ed9d05939fb621a124892ae18fa349b6093fb2ece9952367e7bd1ad",
+    "yolo_attention/reports/TRAINING_AUDIT.md": "9c0727bdcf88900dbf294183506db4479a6593b975c2cd435b273a2f2d258347",
+    "yolo_attention/artifacts/runs/h-scr/training.yaml": "54a16681c620b372263f0ee29366b072c97dcbc554ee98c40d6534fad05e29f2",
+    "yolo_attention/artifacts/runs/w-dir/training.yaml": "9065f5742f0529f8f4324c26f849aec372ce7930ca4332062583cf802d0cbe37",
+    "yolo_attention/artifacts/runs/h-scr/variant.yaml": "019242d8eba83695a14a4ec2b76d1ff6d5124f15d0030b5d8efaf7ea89b06fdd",
+    "yolo_attention/src/yolo_attention/integration.py": "189ea7d59f81c1a853520050b3531cbc6accefeb7a1f99ad98e3b15438004392",
+    "yolo_optimize/reports/performance/comparison.csv": "09b027d5949261601d5f463888fb6e2a942494b3aaa7042d5b5d82123bc4d57a",
+    "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/recover_a0.py": "7433861af40126ba558c4b86fd2204a477b73d71bb10bbb2e2144926d8604ca3"
+  },
+  "queue_exits": [
+    {
+      "variant": "B1",
+      "exit_code": 0,
+      "time": "2026-10-18T05:07:39.212126+08:00"
+    },
+    {
+      "variant": "B2",
+      "exit_code": 1,
+      "time": "2026-10-18T05:07:59.262322+08:00"
+    }
+  ],
+  "checks": {
+    "pytest": "38 passed in 3.85s",
+    "ruff": "All checks passed",
+    "B1_best_strict_reload": "passed; candidate_action=skip-completed",
+    "parent_evaluation_images": 5000
+  },
+  "confirmed": [
+    "同一 parent SHA 以本輪 evaluator 重現 internal 約 0.518 與 official 約 0.525",
+    "本輪 Q/K-only 5e-7 與初次 attention-only/full-model 5e-5 恢復不同",
+    "既有 H-SCR/W-DIR 是 dynamic scale；本輪是校準固定 scale",
+    "optimize 5e-7 來源是已訓 A0 的 Q/K+head 後期微調"
+  ],
+  "unresolved": [
+    "尚未以配對實驗量化 scope、LR、固定 scale 各自造成的落差",
+    "修正版恢復訓練尚未執行，不能保證新 B1/B2/B3 達到 0.51",
+    "B2/B3 尚無本輪正式結果，不選 branch winner"
+  ],
+  "later_update": "使用者明確授權直接刪除 v1 錯誤 run、checkpoint、resume；已執行，見 ../cleanup-invalid-v1.json。v2 恢復已重建。"
+}

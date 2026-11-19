@@ -1,0 +1,231 @@
+{
+  "status": "completed",
+  "created_at": "2026-10-31T01:14:49.942045+08:00",
+  "authorization": "2026-10-31 使用者明確要求刪除不用的內容，準備下一階段；沿用直接刪除、不封存授權",
+  "scope": "只處理第六階段研究輸出，不動 optimize／正式資料／其他階段權重",
+  "selected": {
+    "path": "yolo_combine/result/stage6/pose-head-recovery/train/best-e001.pt",
+    "sha256": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7"
+  },
+  "dependency_review": {
+    "active_stage6_processes": false,
+    "external_checkpoint_consumers": [],
+    "search_scope": [
+      "yolo_optimize",
+      "yolo_activation",
+      "yolo_achitechure",
+      "yolo_quantize",
+      "yolo_attention",
+      "yolo_binaryqk",
+      "yolo_masf"
+    ],
+    "loader": "stage6.checkpoint.load 只讀 selected.pt 與 sidecar，from_manifest 重建架構不讀 Stage6 中間權重",
+    "historical_json_paths": "保留原 SHA／lineage，不代表舊檔仍存在；清理清單為存在性依據"
+  },
+  "retain": [
+    "selected.pt 實體與 JSON",
+    "AP／history／protocol／source locks",
+    "報告、CSV、圖表與重畫程式",
+    "受保護 Detect／Pose 原來源及 optimize 所需舊 runtime"
+  ],
+  "files": [
+    {
+      "id": "C01",
+      "path": "yolo_combine/artifacts/stage6/j1-review-20261029/reproduce/model.pt",
+      "bytes": 106517064,
+      "sha256": "a6005897584db34c765f6accd1a4555051f449a10e4e716cf762e663ca02c570",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C02",
+      "path": "yolo_combine/artifacts/stage6/j1-review-20261029/restore_detect_head/model.pt",
+      "bytes": 106532040,
+      "sha256": "cc38e44054906eb9b68711dba9fd64c079c93cdc44137bce45abf4e2afef7a7f",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C03",
+      "path": "yolo_combine/artifacts/stage6/datasets/bbat5-v1/val/labels.cache",
+      "bytes": 226467,
+      "sha256": "1b1ccebd43096608f16b09cb755302c317b03f4c7c92f4994264e4036f818a87",
+      "reason": "正式資料 runtime View 的可重建 cache",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C04",
+      "path": "yolo_combine/artifacts/stage6/datasets/bbat5-v1/train/labels.cache",
+      "bytes": 1979114,
+      "sha256": "e2a45b69c60b959de5fd8e0e1fae8c40375cde1ef8c684ab90240ce0f37bc414",
+      "reason": "正式資料 runtime View 的可重建 cache",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C05",
+      "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e002.pt",
+      "bytes": 106582023,
+      "sha256": "0790a6072f9843213d71d7bd3fe6a31cad88a11d6e762b30520aebdba87cbf96",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C06",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/M0/resume.pt",
+      "bytes": 249693145,
+      "sha256": "e32b3743ecf3c034df95e77019a486c6ed84d51036bc17daa5fbbf79f6629b60",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C07",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/M0/best-e001.pt",
+      "bytes": 106572836,
+      "sha256": "7fbc4e86f286620ea5c64507e4b5e65c4bc49146dfda257abe247f2d4022234e",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C08",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/H0/resume.pt",
+      "bytes": 249691737,
+      "sha256": "a14e36ab1ac55364145c19628da3fb60f47f4852511a2ba55ce426cb08fc4f47",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C09",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/H0/best-e007.pt",
+      "bytes": 106551396,
+      "sha256": "60b29d9875fff315b52abc6aa3ca90f9f133a5e9a6aa4b43a213aa4bb77f3b19",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C10",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/P/best-e031.pt",
+      "bytes": 106553316,
+      "sha256": "3aa9d1d11d8d865c20413edfd9d7b98d2213a9cdd7e6fef8e9fbd5b491056df7",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C11",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/P/resume.pt",
+      "bytes": 398069677,
+      "sha256": "27c3b6af82a6149d7e9e75751c2e098515e9b9fc3ef83d1f8bf180a6e4660fd2",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C12",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/mix/rho-0/model.pt",
+      "bytes": 106514824,
+      "sha256": "92972ecf87c93ed609d08addcf0d4783a1b3a982762694f6d61477bb4b33945d",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C13",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/mix/rho-0.1/model.pt",
+      "bytes": 106514824,
+      "sha256": "3f651753c3aac154a5c68d77e10bb737879d36081a4e4bcde4436c6cb3193eda",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C14",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/mix/rho-0.25/model.pt",
+      "bytes": 106514824,
+      "sha256": "534a295a89a2719d5f2621a790fac401f0f73e00bcced4b25f4cdadfe5918895",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C15",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/J1/resume.pt",
+      "bytes": 340452079,
+      "sha256": "01d1dcbf26f2b059b9fe28cac6f6b7d831e8768f3f5d470254bf193dcf605d26",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C16",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/H1/best-e032.pt",
+      "bytes": 106552356,
+      "sha256": "4bc86d869c3217ded6c83d1f59d57ecc4df6dc5f73d8d0ceb0e6c5ac2c057cc1",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C17",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/H1/resume.pt",
+      "bytes": 249707033,
+      "sha256": "354a69bbf1014c312c258d0d33cf466e0502b27278f4af8bbe7f8c0d4038f552",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C18",
+      "path": "yolo_combine/artifacts/stage6/rebuild-20261029/initialization/detect-anchor.pt",
+      "bytes": 106555520,
+      "sha256": "1085fd13edb439ba0b90762fc6b1ca22ced329d171b6e1542fcc0bb6c7660c30",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    },
+    {
+      "id": "C19",
+      "path": "yolo_combine/result/stage6/pose-head-recovery/train/resume.pt",
+      "bytes": 249690649,
+      "sha256": "a52019d1bce655bb833b2b634c94e27182d62a55a471dbf5452fa30f798a0a9d",
+      "reason": "已停止且不再接續的中間模型／optimizer；來源與 AP 留於 JSON",
+      "recoverability": "原位元組不保留；中間模型須按 protocol 重訓，cache 可重建",
+      "hardlink_count": 1,
+      "removed": true
+    }
+  ],
+  "planned_bytes": 2911470924,
+  "open_file_holders": [],
+  "completed_at": "2026-10-31T01:20:12.179618+08:00",
+  "removed_files": 19,
+  "removed_bytes": 2911470924,
+  "released_unique_file_bytes": 2911470924,
+  "selected_sha256_after": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7",
+  "historical_sidecars_retained": true
+}

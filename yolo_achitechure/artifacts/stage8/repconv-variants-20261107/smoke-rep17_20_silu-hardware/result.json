@@ -1,0 +1,159 @@
+{
+  "status": "passed",
+  "parent_sha256": "ee6542ea4f83369a0be6760bc32d7cfafbf38f899e6ef389db3260a9499504af",
+  "recipe": {
+    "epochs": 3,
+    "loss_horizon": 3,
+    "task": "joint",
+    "scope": "rep_and_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "rep": 2.5e-06,
+      "detect_head": 1.25e-06,
+      "pose_head": 1.25e-06
+    },
+    "all_bn_running": "fixed",
+    "bn_affine": "trainable only selected Rep and both heads",
+    "attention": "all tensors frozen",
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "amp": true,
+    "detect_physical": 16,
+    "detect_accumulation": 16,
+    "pose_physical": 16,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "initial_ema_updates": 0,
+    "max_amp_retries": 16,
+    "ciou": "canonical FP32 wrapper; formula unchanged",
+    "operators": "hardware",
+    "name": "rep17_20_silu-hardware-adapt"
+  },
+  "records": [
+    {
+      "detect_mean_loss": 1.6635028794407845,
+      "pose_mean_loss": 1.2272295951843262,
+      "joint_mean_loss": 1.5848306478535543,
+      "loss_for_backward": 101.42916146262748,
+      "detect_components": [
+        1.0748155117034912,
+        0.9653313755989075,
+        0.0059577785432338715
+      ],
+      "pose_components": [
+        0.9674175977706909,
+        0.034824371337890625,
+        0.03290634974837303,
+        0.3152465224266052,
+        0.0028511134441941977,
+        0.0
+      ],
+      "detect_batch_sizes": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "pose_batch_sizes": [
+        16
+      ],
+      "detect_images": 256,
+      "pose_images": 16,
+      "gradient_presence": {
+        "shared": true,
+        "detect_head": true,
+        "pose_head": true
+      },
+      "gradient_statistics": {
+        "detect_norm": 35.68703625171011,
+        "pose_norm": 32.44075885514409,
+        "cosine_similarity": -0.01988062756089156
+      },
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 104.12802124023438
+    },
+    {
+      "detect_mean_loss": 1.6291544660925865,
+      "pose_mean_loss": 0.9416210651397705,
+      "joint_mean_loss": 1.5051730331338822,
+      "loss_for_backward": 96.33107412056846,
+      "detect_components": [
+        1.0205774307250977,
+        0.9571487307548523,
+        0.005940549541264772
+      ],
+      "pose_components": [
+        0.631156325340271,
+        0.01826542615890503,
+        0.011467094533145428,
+        0.25072893500328064,
+        0.0022721115965396166,
+        0.0
+      ],
+      "detect_batch_sizes": [
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16
+      ],
+      "pose_batch_sizes": [
+        16
+      ],
+      "detect_images": 256,
+      "pose_images": 16,
+      "gradient_presence": {
+        "shared": true,
+        "detect_head": true,
+        "pose_head": true
+      },
+      "gradient_statistics": {
+        "detect_norm": 34.61562690052943,
+        "pose_norm": 27.61930154625217,
+        "cosine_similarity": 0.0017737535864722307
+      },
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 105.86589813232422
+    }
+  ],
+  "updated_parameters": 324,
+  "new_branch_and_both_heads_updated": true,
+  "frozen_tensors_and_ema_verified": true,
+  "peak_allocated_GiB": 6.211198806762695,
+  "peak_reserved_GiB": 6.470703125,
+  "seconds_per_macro": 5.674714088439941,
+  "ema_updates": 2,
+  "smoke_weights_discarded": true
+}

@@ -1,0 +1,60 @@
+{
+  "root": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102",
+  "output": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/calibrate-qsilu_pq",
+  "action": "calibrate",
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/zero-qsilu_pq/model.pt",
+    "sha256": "3d0706b841e25557d57f507f4aae6ccc93265d7507c461a070cfe1049cb7c711",
+    "metrics": {
+      "coco_AP": 0.5092678560255361,
+      "person_AP": 0.63718638874614,
+      "sports_ball_AP": 0.5090461490938095,
+      "baseball_bat_AP": 0.47162791302818863,
+      "box_AP50_95": 0.5994475779655404,
+      "pose_AP50_95": 0.8991316749883941,
+      "ball_box_AP50_95": 0.4810701635245618,
+      "ball_pose_AP50_95": 0.8615810164813078,
+      "bat_box_AP50_95": 0.7178249924065188,
+      "bat_pose_AP50_95": 0.9366823334954798
+    },
+    "candidate": "qsilu_pq",
+    "phase": "zero"
+  },
+  "recipe": {
+    "epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "joint_full",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "backbone": 3.8e-07,
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "shared_bn_running": "fixed",
+    "shared_bn_affine": "trainable outside frozen Attention",
+    "head_bn": "trainable",
+    "attention": "all tensors frozen",
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "amp": true,
+    "detect_physical": 16,
+    "detect_accumulation": 16,
+    "pose_physical": 16,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "initial_ema_updates": 0,
+    "max_amp_retries": 16,
+    "checkpoint": "one best EMA and one epoch-boundary resume per candidate",
+    "ciou": "optimize canonical _fp32_bbox_iou wrapper on native loss; same formula, process-local",
+    "name": "qsilu_pq"
+  }
+}

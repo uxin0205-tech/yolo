@@ -1,0 +1,107 @@
+{
+  "ready": true,
+  "stage": 4,
+  "tasks": {
+    "detect": {
+      "task": "detect",
+      "adopt_masf_recommendation": false,
+      "checkpoint": "/home/uxin/yolo/yolo_attention/result/stage3/kd-epoch05/evaluated.pt",
+      "sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c",
+      "candidate": "/home/uxin/yolo/yolo_masf/result/stage4/detect/candidate.pt",
+      "candidate_sha256": "98a9492daca8e7fe5899df5d144dd652f832a101a989810d778b2bc66ae3adfc",
+      "best_epoch": 0,
+      "parent": {
+        "AP50": 0.6881566643376319,
+        "AP50_95": 0.5146207909643931,
+        "person_AP50": 0.8652829508872645,
+        "person_AP50_95": 0.643206570344524,
+        "sports_ball_AP50": 0.7193263653043688,
+        "sports_ball_AP50_95": 0.5132240067644241,
+        "baseball_bat_AP50": 0.72414367148113,
+        "baseball_bat_AP50_95": 0.4875940887506186
+      },
+      "alpha_on": {
+        "AP50": 0.6881566643376319,
+        "AP50_95": 0.5146207909643931,
+        "person_AP50": 0.8652829508872645,
+        "person_AP50_95": 0.643206570344524,
+        "sports_ball_AP50": 0.7193263653043688,
+        "sports_ball_AP50_95": 0.5132240067644241,
+        "baseball_bat_AP50": 0.72414367148113,
+        "baseball_bat_AP50_95": 0.4875940887506186
+      },
+      "alpha_off": {
+        "AP50": 0.6881566643376319,
+        "AP50_95": 0.5146207909643931,
+        "person_AP50": 0.8652829508872645,
+        "person_AP50_95": 0.643206570344524,
+        "sports_ball_AP50": 0.7193263653043688,
+        "sports_ball_AP50_95": 0.5132240067644241,
+        "baseball_bat_AP50": 0.72414367148113,
+        "baseball_bat_AP50_95": 0.4875940887506186
+      },
+      "reason": "未同時證實 parent 改善與 MASF 正貢獻，建議維持 parent",
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1/detect-training/resume.pt",
+      "resume_sha256": "92708a9a04fd7f32841e116d57be7837ffc53dc89d8fe7a50eac73ea97d422e8",
+      "source_run": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1",
+      "next_stage_started": false
+    },
+    "pose": {
+      "task": "pose",
+      "adopt_masf_recommendation": false,
+      "checkpoint": "/home/uxin/yolo/yolo_pose_training/artifacts/preserved/stagewise_lr_p3_640/weights/best.pt",
+      "sha256": "e50e155c6c070da4b038fe5679575f4c094b9cfff8eb3a2143770d7dad4cad9e",
+      "candidate": "/home/uxin/yolo/yolo_masf/result/stage4/pose/candidate.pt",
+      "candidate_sha256": "0104de9d336b3b51a471c9915b557d2deb35c3c2ca895772eb3727e08dc01da6",
+      "best_epoch": 0,
+      "parent": {
+        "box_AP50": 0.9052377366389334,
+        "box_AP50_95": 0.6284018405302074,
+        "pose_AP50": 0.9233478403462654,
+        "pose_AP50_95": 0.9207093886162863,
+        "ball_box_AP50": 0.8618297202487522,
+        "ball_box_AP50_95": 0.5290957907115325,
+        "bat_box_AP50": 0.9486457530291146,
+        "bat_box_AP50_95": 0.7277078903488825,
+        "ball_pose_AP50": 0.897099489632018,
+        "ball_pose_AP50_95": 0.897099489632018,
+        "bat_pose_AP50": 0.9495961910605126,
+        "bat_pose_AP50_95": 0.9443192876005542
+      },
+      "alpha_on": {
+        "box_AP50": 0.9052377366389334,
+        "box_AP50_95": 0.6284018405302074,
+        "pose_AP50": 0.9233478403462654,
+        "pose_AP50_95": 0.9207093886162863,
+        "ball_box_AP50": 0.8618297202487522,
+        "ball_box_AP50_95": 0.5290957907115325,
+        "bat_box_AP50": 0.9486457530291146,
+        "bat_box_AP50_95": 0.7277078903488825,
+        "ball_pose_AP50": 0.897099489632018,
+        "ball_pose_AP50_95": 0.897099489632018,
+        "bat_pose_AP50": 0.9495961910605126,
+        "bat_pose_AP50_95": 0.9443192876005542
+      },
+      "alpha_off": {
+        "box_AP50": 0.9052377366389334,
+        "box_AP50_95": 0.6284018405302074,
+        "pose_AP50": 0.9233478403462654,
+        "pose_AP50_95": 0.9207093886162863,
+        "ball_box_AP50": 0.8618297202487522,
+        "ball_box_AP50_95": 0.5290957907115325,
+        "bat_box_AP50": 0.9486457530291146,
+        "bat_box_AP50_95": 0.7277078903488825,
+        "ball_pose_AP50": 0.897099489632018,
+        "ball_pose_AP50_95": 0.897099489632018,
+        "bat_pose_AP50": 0.9495961910605126,
+        "bat_pose_AP50_95": 0.9443192876005542
+      },
+      "reason": "未同時證實 parent 改善與 MASF 正貢獻，建議維持 parent",
+      "resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1/pose-training/resume.pt",
+      "resume_sha256": "ce505cffef1e7b11ead658dbccdd234b594671db422879145dbdc17489c7cdf4",
+      "source_run": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1",
+      "next_stage_started": false
+    }
+  },
+  "next_stage_started": false
+}

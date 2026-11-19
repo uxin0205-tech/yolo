@@ -1,0 +1,195 @@
+{
+  "status": "passed",
+  "parent_sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+  "shape": [
+    512,
+    1024
+  ],
+  "recipe": {
+    "epochs": 10,
+    "low_lr_epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "neck_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "all_bn_running": "fixed",
+    "attention": "all tensors frozen",
+    "backbone": "frozen",
+    "operators": "qSiLU/D1 deployment forward; Float-PWL STE backward",
+    "detect_physical": 8,
+    "detect_accumulation": 32,
+    "pose_physical": 8,
+    "pose_accumulation": 2,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "fresh_ema": true,
+    "amp": true,
+    "fp32_ciou": true,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "max_amp_retries": 16
+  },
+  "seconds_per_macro": 6.870670318603516,
+  "peak_allocated_GiB": 5.567732334136963,
+  "peak_reserved_GiB": 5.859375,
+  "updated_parameters": 415,
+  "reports": [
+    {
+      "detect_mean_loss": 1.723048996180296,
+      "pose_mean_loss": 0.918821394443512,
+      "joint_mean_loss": 1.7072798275187904,
+      "loss_for_backward": 109.26590896120258,
+      "detect_components": [
+        1.0646250247955322,
+        0.9732403755187988,
+        0.007498459424823523
+      ],
+      "pose_components": [
+        0.7925822734832764,
+        0.028152838349342346,
+        0.007339548319578171,
+        0.26465025544166565,
+        0.0025236911606043577,
+        0.0
+      ],
+      "detect_batch_sizes": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "pose_batch_sizes": [
+        8,
+        8
+      ],
+      "detect_images": 256,
+      "pose_images": 16,
+      "gradient_presence": {
+        "shared": true,
+        "detect_head": true,
+        "pose_head": true
+      },
+      "gradient_statistics": {
+        "detect_norm": 166.8892037096641,
+        "pose_norm": 13.451097779941485,
+        "cosine_similarity": 0.0014458470834567397
+      },
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 196.7688446044922
+    },
+    {
+      "detect_mean_loss": 1.6386525891721249,
+      "pose_mean_loss": 0.9598921239376068,
+      "joint_mean_loss": 1.6253435604420363,
+      "loss_for_backward": 104.02198786829032,
+      "detect_components": [
+        0.9978265166282654,
+        0.9330945014953613,
+        0.006957281846553087
+      ],
+      "pose_components": [
+        0.6435587406158447,
+        0.013736417517066002,
+        0.01605292223393917,
+        0.2989519238471985,
+        0.0023633544333279133,
+        0.0
+      ],
+      "detect_batch_sizes": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "pose_batch_sizes": [
+        8,
+        8
+      ],
+      "detect_images": 256,
+      "pose_images": 16,
+      "gradient_presence": {
+        "shared": true,
+        "detect_head": true,
+        "pose_head": true
+      },
+      "gradient_statistics": {
+        "detect_norm": 145.58052072187843,
+        "pose_norm": 12.733108269326191,
+        "cosine_similarity": 0.026845388365877822
+      },
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 167.76332092285156
+    }
+  ],
+  "smoke_weights_discarded": true
+}

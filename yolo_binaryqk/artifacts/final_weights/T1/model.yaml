@@ -1,0 +1,147 @@
+nc: 80
+scales:
+  m:
+  - 0.5
+  - 1.0
+  - 512
+scale: m
+backbone:
+- - -1
+  - 1
+  - Conv
+  - - 64
+    - 3
+    - 2
+- - -1
+  - 1
+  - Conv
+  - - 128
+    - 3
+    - 2
+- - -1
+  - 2
+  - C3k2
+  - - 256
+    - false
+    - 0.25
+- - -1
+  - 1
+  - Conv
+  - - 256
+    - 3
+    - 2
+- - -1
+  - 2
+  - C3k2
+  - - 512
+    - false
+    - 0.25
+- - -1
+  - 1
+  - Conv
+  - - 512
+    - 3
+    - 2
+- - -1
+  - 2
+  - C3k2
+  - - 512
+    - true
+- - -1
+  - 1
+  - Conv
+  - - 1024
+    - 3
+    - 2
+- - -1
+  - 2
+  - C3k2
+  - - 1024
+    - true
+- - -1
+  - 1
+  - SPPF
+  - - 1024
+    - 5
+- - -1
+  - 2
+  - C2PSA
+  - - 1024
+head:
+- - -1
+  - 1
+  - nn.Upsample
+  - - None
+    - 2
+    - nearest
+- - - -1
+    - 6
+  - 1
+  - Concat
+  - - 1
+- - -1
+  - 2
+  - C3k2
+  - - 512
+    - false
+- - -1
+  - 1
+  - nn.Upsample
+  - - None
+    - 2
+    - nearest
+- - - -1
+    - 4
+  - 1
+  - Concat
+  - - 1
+- - -1
+  - 2
+  - C3k2
+  - - 256
+    - false
+- - -1
+  - 1
+  - Conv
+  - - 256
+    - 3
+    - 2
+- - - -1
+    - 13
+  - 1
+  - Concat
+  - - 1
+- - -1
+  - 2
+  - C3k2
+  - - 512
+    - false
+- - -1
+  - 1
+  - Conv
+  - - 512
+    - 3
+    - 2
+- - - -1
+    - 10
+  - 1
+  - Concat
+  - - 1
+- - -1
+  - 2
+  - C3k2
+  - - 1024
+    - true
+- - - 16
+    - 19
+    - 22
+  - 1
+  - Detect
+  - - nc
+binaryqk:
+  schema_version: 2
+  variant: T1
+  config_hash: be9b62613a9341cc51dd8352dc3af7e1353414f413660b2123c7145f11803940
+  attention: SignOnlyBinaryAttention
+  qk_mode: sign
+  base_variant: T0

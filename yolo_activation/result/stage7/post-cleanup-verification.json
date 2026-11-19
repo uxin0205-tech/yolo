@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "source_lock_unchanged": true,
+  "gpu_used": false,
+  "models": {
+    "qsilu_pq": {
+      "status": "passed",
+      "checkpoint_sha256": "2f91ec1862ad62304f1e2727e9b9ee64a27c5a46a45137f83a74dc7f14c46a69",
+      "activation": "qsilu_pq",
+      "repconv": null,
+      "parameters": 26453936
+    },
+    "poly_quality": {
+      "status": "passed",
+      "checkpoint_sha256": "447b06043eae81cc4422c4b1a05f40d7843526f2ac3eec15860e4b454d2aac7d",
+      "activation": "poly_quality",
+      "repconv": null,
+      "parameters": 26453936
+    }
+  },
+  "handoff_manifest_files_verified": 378,
+  "local_links_passed": true,
+  "broken_symlinks": [],
+  "plots_redrawn_without_gpu": true,
+  "ruff": "passed",
+  "diff_check": "passed",
+  "protected_files_unchanged": 48
+}

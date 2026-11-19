@@ -1,0 +1,140 @@
+schema_version: 1
+plan_id: v5-qsilu-cumulative-w8-policy-search-v1
+date: '2026-09-03'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-map50-v1
+
+execution_authorization:
+  authorization_id: user-2026-09-03-autonomous-v5-stage3-cumulative-w8
+  scope: candidate_only_monotonic_combined_w8_validation
+  validation_roles: [candidate]
+  training: false
+  stop_rule: first_failed_predecessor_blocks_descendants
+  candidate_ids:
+    - accuracy-a02-masf-pose-predictor-w8
+    - accuracy-a03-add-detect-predictor-w8
+    - accuracy-a04-add-neck-attention-w8
+    - accuracy-a05-add-pose-tower-w8
+    - accuracy-a06-add-detect-tower-w8
+    - accuracy-a07-add-backbone-early-w8
+    - accuracy-a08-add-backbone-deep-w8
+    - accuracy-a09-add-neck-w8
+    - compression-c02-neck-backbone-deep-w8
+    - compression-c03-add-backbone-early-w8
+    - compression-c04-add-pose-tower-w8
+    - compression-c05-add-detect-tower-w8
+    - compression-c06-add-neck-attention-w8
+    - compression-c07-add-masf-w8
+    - compression-c08-add-predictors-w8
+
+upstream:
+  base_search_plan:
+    path: configs/experiments/v4-qsilu-backbone-early-w8-search-v1.yaml
+    sha256: 3da5d7370685cc5c5efb47f24d1c33d4d6f710d25fdb7d7493dbd7e9d97b3985
+  reference_search_report:
+    path: artifacts/reports/v4-qsilu-backbone-early-w8-search-v1.json
+    sha256: 738f5103656deebcb248ad6e7d0770caa662fa191c90882f45f8f78e47bc6ad2
+  reference_map50_regate:
+    path: artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json
+    sha256: 67fce27506fac33e7655e791d815c04d7030ba213978a1ab27873369a396573e
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v5.yaml
+    sha256: d5cb91f906b1fa18b47a3e1e129c6f899720cadf988315722776415bff3b8838
+  isolated_w8_search_report:
+    path: artifacts/reports/v5-qsilu-remaining-nine-regions-w8-search-v1.json
+    sha256: 6df5efd6e0094538b7b66bc068246c2cd525e90a2557819fa280606ef74b4665
+
+weight_format:
+  bits: 8
+  scale_method: mse_grid_v1
+  granularity: per_output_channel
+  rounding: nearest_even
+
+chains:
+  - chain_id: accuracy
+    purpose: protect_worst_task_before_adding_large_regions
+    seed:
+      candidate_id: qsilu_pq--lsq-plus-a8--masf--w8-mse_grid_v1
+      regions: [masf]
+    candidates:
+      - policy_id: accuracy-a02-masf-pose-predictor-w8
+        predecessor_id: qsilu_pq--lsq-plus-a8--masf--w8-mse_grid_v1
+        regions: [masf, pose_one2one_predictor]
+      - policy_id: accuracy-a03-add-detect-predictor-w8
+        predecessor_id: accuracy-a02-masf-pose-predictor-w8
+        regions: [masf, pose_one2one_predictor, detect_one2one_predictor]
+      - policy_id: accuracy-a04-add-neck-attention-w8
+        predecessor_id: accuracy-a03-add-detect-predictor-w8
+        regions: [masf, pose_one2one_predictor, detect_one2one_predictor, neck_attention_safe]
+      - policy_id: accuracy-a05-add-pose-tower-w8
+        predecessor_id: accuracy-a04-add-neck-attention-w8
+        regions: [masf, pose_one2one_predictor, detect_one2one_predictor, neck_attention_safe, pose_one2one_tower]
+      - policy_id: accuracy-a06-add-detect-tower-w8
+        predecessor_id: accuracy-a05-add-pose-tower-w8
+        regions: [masf, pose_one2one_predictor, detect_one2one_predictor, neck_attention_safe, pose_one2one_tower, detect_one2one_tower]
+      - policy_id: accuracy-a07-add-backbone-early-w8
+        predecessor_id: accuracy-a06-add-detect-tower-w8
+        regions: [masf, pose_one2one_predictor, detect_one2one_predictor, neck_attention_safe, pose_one2one_tower, detect_one2one_tower, backbone_early]
+      - policy_id: accuracy-a08-add-backbone-deep-w8
+        predecessor_id: accuracy-a07-add-backbone-early-w8
+        regions: [masf, pose_one2one_predictor, detect_one2one_predictor, neck_attention_safe, pose_one2one_tower, detect_one2one_tower, backbone_early, backbone_deep]
+      - policy_id: accuracy-a09-add-neck-w8
+        predecessor_id: accuracy-a08-add-backbone-deep-w8
+        regions: [masf, pose_one2one_predictor, detect_one2one_predictor, neck_attention_safe, pose_one2one_tower, detect_one2one_tower, backbone_early, backbone_deep, neck]
+
+  - chain_id: compression
+    purpose: test_large_weight_regions_first
+    seed:
+      candidate_id: qsilu_pq--lsq-plus-a8--neck--w8-mse_grid_v1
+      regions: [neck]
+    candidates:
+      - policy_id: compression-c02-neck-backbone-deep-w8
+        predecessor_id: qsilu_pq--lsq-plus-a8--neck--w8-mse_grid_v1
+        regions: [neck, backbone_deep]
+      - policy_id: compression-c03-add-backbone-early-w8
+        predecessor_id: compression-c02-neck-backbone-deep-w8
+        regions: [neck, backbone_deep, backbone_early]
+      - policy_id: compression-c04-add-pose-tower-w8
+        predecessor_id: compression-c03-add-backbone-early-w8
+        regions: [neck, backbone_deep, backbone_early, pose_one2one_tower]
+      - policy_id: compression-c05-add-detect-tower-w8
+        predecessor_id: compression-c04-add-pose-tower-w8
+        regions: [neck, backbone_deep, backbone_early, pose_one2one_tower, detect_one2one_tower]
+      - policy_id: compression-c06-add-neck-attention-w8
+        predecessor_id: compression-c05-add-detect-tower-w8
+        regions: [neck, backbone_deep, backbone_early, pose_one2one_tower, detect_one2one_tower, neck_attention_safe]
+      - policy_id: compression-c07-add-masf-w8
+        predecessor_id: compression-c06-add-neck-attention-w8
+        regions: [neck, backbone_deep, backbone_early, pose_one2one_tower, detect_one2one_tower, neck_attention_safe, masf]
+      - policy_id: compression-c08-add-predictors-w8
+        predecessor_id: compression-c07-add-masf-w8
+        regions: [neck, backbone_deep, backbone_early, pose_one2one_tower, detect_one2one_tower, neck_attention_safe, masf, pose_one2one_predictor, detect_one2one_predictor]
+
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch: {detect: 32, pose: 16}
+  workers: {detect: 4, pose: 8}
+  plots: false
+  save_coco_json: false
+  augmentation: false
+
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+
+selection:
+  hard_gate_first: true
+  objectives: [maximize_worst_total_map50_delta, minimize_total_packed_weight_bytes]
+  accuracy_tolerance: 0.002
+  roles: [accuracy, balanced, hardware]
+  include_all_prior_isolated_w8_candidates: true
+  mean_metric_can_override_worst_task: false

@@ -1,0 +1,111 @@
+{
+  "checked_at": "2026-11-02T22:44:40.480264+08:00",
+  "supervisor_status": "running",
+  "worker": 2916020,
+  "candidates": [
+    {
+      "candidate": "qsilu_pq",
+      "status": "complete",
+      "completed_epochs": 10,
+      "selected_epoch": 8,
+      "metrics": {
+        "coco_AP": 0.513951265381378,
+        "person_AP": 0.643234026088054,
+        "sports_ball_AP": 0.5146623165317121,
+        "baseball_bat_AP": 0.4690357899624067,
+        "box_AP50_95": 0.6139042018842924,
+        "pose_AP50_95": 0.9007615878805139,
+        "ball_box_AP50_95": 0.4974302119527326,
+        "ball_pose_AP50_95": 0.8647309926872065,
+        "bat_box_AP50_95": 0.730378191815852,
+        "bat_pose_AP50_95": 0.9367921830738212
+      },
+      "gate": true,
+      "score": 0.6462768721866454,
+      "median_epoch_seconds": 2671.8908752202988,
+      "amp_retries": 2,
+      "violations": []
+    },
+    {
+      "candidate": "hardswish",
+      "status": "complete",
+      "completed_epochs": 10,
+      "selected_epoch": 8,
+      "metrics": {
+        "coco_AP": 0.4984743343662916,
+        "person_AP": 0.6293051629483731,
+        "sports_ball_AP": 0.4951651726711344,
+        "baseball_bat_AP": 0.4262657688686266,
+        "box_AP50_95": 0.6096301303685062,
+        "pose_AP50_95": 0.9052935121145242,
+        "ball_box_AP50_95": 0.5047614594893669,
+        "ball_pose_AP50_95": 0.878103183380262,
+        "bat_box_AP50_95": 0.7144988012476456,
+        "bat_pose_AP50_95": 0.9324838408487865
+      },
+      "gate": false,
+      "score": 0.6348822154775609,
+      "median_epoch_seconds": 1283.7244532108307,
+      "amp_retries": 3,
+      "violations": []
+    },
+    {
+      "candidate": "poly_shift",
+      "status": "complete",
+      "completed_epochs": 10,
+      "selected_epoch": 10,
+      "metrics": {
+        "coco_AP": 0.5149956199132761,
+        "person_AP": 0.6434572915516049,
+        "sports_ball_AP": 0.5148586864243344,
+        "baseball_bat_AP": 0.47236697110271336,
+        "box_AP50_95": 0.6137294083919003,
+        "pose_AP50_95": 0.901010817705424,
+        "ball_box_AP50_95": 0.4957548776980407,
+        "ball_pose_AP50_95": 0.8635576317407182,
+        "bat_box_AP50_95": 0.7317039390857598,
+        "bat_pose_AP50_95": 0.9384640036701299
+      },
+      "gate": true,
+      "score": 0.6468948776483222,
+      "median_epoch_seconds": 2322.353850841522,
+      "amp_retries": 1,
+      "violations": []
+    },
+    {
+      "candidate": "poly_quality",
+      "status": "training",
+      "completed_epochs": 6,
+      "selected_epoch": 6,
+      "metrics": {
+        "coco_AP": 0.5145248766132771,
+        "person_AP": 0.643340967832341,
+        "sports_ball_AP": 0.5165171064269901,
+        "baseball_bat_AP": 0.4682592302536707,
+        "box_AP50_95": 0.613434125033359,
+        "pose_AP50_95": 0.9002737806801575,
+        "ball_box_AP50_95": 0.4946453012353732,
+        "ball_pose_AP50_95": 0.8605292045467893,
+        "bat_box_AP50_95": 0.7322229488313449,
+        "bat_pose_AP50_95": 0.9400183568135253
+      },
+      "gate": true,
+      "score": 0.646257249069164,
+      "median_epoch_seconds": 2316.815058708191,
+      "amp_retries": 3,
+      "violations": []
+    }
+  ],
+  "latest_progress": {
+    "epoch": 7,
+    "epochs": 10,
+    "step": 390,
+    "steps": 463,
+    "seconds": 1899.1549708843231,
+    "amp_overflow_retries": 0
+  },
+  "estimated_training_end": "2026-11-03T00:47:28.585528+08:00",
+  "stage8_started": false,
+  "sensitivity_and_reload_pending": true,
+  "queue_eta": "2026-11-03 01:00–03:00 Asia/Taipei"
+}

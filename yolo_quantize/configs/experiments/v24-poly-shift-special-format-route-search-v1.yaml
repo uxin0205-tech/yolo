@@ -1,0 +1,210 @@
+schema_version: 1
+plan_id: v24-poly-shift-special-format-route-search-v1
+date: '2026-09-03'
+execution_authorized: true
+formal_training: false
+formal_validation: false
+metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-map50-v1
+
+execution_authorization:
+  authorization_id: user-2026-09-03-autonomous-poly-shift-special-format-route-search
+  validation_roles: [candidate]
+  candidate_ids:
+    - polyshift-fixed-sd4-backbone-early
+    - polyshift-w4-backbone-early-control
+    - polyshift-fixed-sd4-backbone-deep
+    - polyshift-w4-backbone-deep-control
+    - polyshift-fixed-sd4-neck
+    - polyshift-w4-neck-control
+    - polyshift-fixed-sd4-neck-attention
+    - polyshift-w4-neck-attention-control
+    - polyshift-fixed-sd4-detect-tower
+    - polyshift-w4-detect-tower-control
+    - polyshift-fixed-sd4-detect-predictor
+    - polyshift-w4-detect-predictor-control
+    - polyshift-paper-twn-safe
+    - polyshift-w4-paper-safe-control
+    - polyshift-paper-twn-balanced
+    - polyshift-w4-paper-balanced-control
+  route_ids:
+    - fixed-sd4-backbone-early
+    - fixed-sd4-backbone-deep
+    - fixed-sd4-neck
+    - fixed-sd4-neck-attention
+    - fixed-sd4-detect-tower
+    - fixed-sd4-detect-predictor
+    - paper-twn-safe
+    - paper-twn-balanced
+  training: false
+  stop_after: paired_route_diagnostic_then_dual_metric_search_val_gate
+
+upstream:
+  base_search_plan:
+    path: configs/experiments/v15-poly-shift-backbone-early-w8-search-v1.yaml
+    sha256: 9d4207d1db4204ee317cfd8d652916cfdd92b569c51a541054428e39e96d0490
+  weight_plan:
+    path: configs/experiments/weight-region-sensitivity-plan-v18.yaml
+    sha256: 2462f26c8639afa2c40a1de09d305aef9998ba7d657d7a222822e6a9a00d9f1c
+  reference_search_report:
+    path: artifacts/reports/v15-poly-shift-backbone-early-w8-search-v1.json
+    sha256: 563bf656c731ce44c790dd75d5bf8f65a28a5f9157408303ee4dbd8f9e1f8c56
+    reuse_roles: [accepted, matched]
+  reference_map50_regate:
+    path: artifacts/reports/v15-poly-shift-backbone-early-w8-map50-regate-v1.json
+    sha256: e8b5d75ad5cde241bf8323727d3544990e9fe9674119759e0483885be956335a
+  comparison_candidates:
+    - path: artifacts/reports/v17-poly-shift-cumulative-w8-policy-search-v1.json
+      sha256: f5bc68744bd7ff783a0a7f6976e0c26646c371601f9db8e3ad60027d39d2fc3c
+      candidate_id: compression-c08-add-predictors-w8
+  exact_static_routing:
+    source: artifacts/manifests/fixed-sd4-routing-candidates-v3.yaml
+    source_sha256: afbefae48e3bafd87a2842da205c3f7a5b5d081f5351a9caf480ecacb1ed98f4
+    interpretation: static_candidate_only_requires_map_validation
+  ternary_static_routing:
+    source: artifacts/manifests/paper-twn-routing-candidates-v1.yaml
+    source_sha256: 05540a7fcc1f5c5adbc87b65a6c49d90446162d526cda5ac634746fe9885f145
+    interpretation: static_candidate_only_requires_map_validation
+
+activation:
+  default: poly_shift
+  bits: 8
+  signed_codes: false
+  region_assignments: {}
+  policy_id: poly_shift--lsq-plus-a8
+  checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+    sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+
+routes:
+  fixed-sd4-backbone-early: &fixed_early
+    manifest: &fixed_groups
+      path: artifacts/manifests/fixed-sd4-routing-groups-v4.yaml
+      sha256: 33f7be722a0aeb490d25f1112db6a2fb93d178289b67600de6f8d57e03b0a665
+    list_key: backbone_early
+  fixed-sd4-backbone-deep: &fixed_deep
+    manifest: *fixed_groups
+    list_key: backbone_deep
+  fixed-sd4-neck: &fixed_neck
+    manifest: *fixed_groups
+    list_key: neck
+  fixed-sd4-neck-attention: &fixed_neck_attention
+    manifest: *fixed_groups
+    list_key: neck_attention_safe
+  fixed-sd4-detect-tower: &fixed_detect_tower
+    manifest: *fixed_groups
+    list_key: detect_one2one_tower
+  fixed-sd4-detect-predictor: &fixed_detect_predictor
+    manifest: *fixed_groups
+    list_key: detect_one2one_predictor
+  paper-twn-safe: &paper_safe
+    manifest: &paper_routes
+      path: artifacts/manifests/paper-twn-routing-candidates-v1.yaml
+      sha256: 05540a7fcc1f5c5adbc87b65a6c49d90446162d526cda5ac634746fe9885f145
+    list_key: safe_candidates
+  paper-twn-balanced: &paper_balanced
+    manifest: *paper_routes
+    list_key: balanced_candidates
+
+candidates:
+  - candidate_id: polyshift-fixed-sd4-backbone-early
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-backbone-early, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-w4-backbone-early-control
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-backbone-early, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-fixed-sd4-backbone-deep
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-backbone-deep, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-w4-backbone-deep-control
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-backbone-deep, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-fixed-sd4-neck
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-neck, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-w4-neck-control
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-neck, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-fixed-sd4-neck-attention
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-neck-attention, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-w4-neck-attention-control
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-neck-attention, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-fixed-sd4-detect-tower
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-detect-tower, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-w4-detect-tower-control
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-detect-tower, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-fixed-sd4-detect-predictor
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-detect-predictor, format: {family: fixed_sd4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-w4-detect-predictor-control
+    region_defaults: []
+    path_routes:
+      - {route_id: fixed-sd4-detect-predictor, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-paper-twn-safe
+    region_defaults: []
+    path_routes:
+      - {route_id: paper-twn-safe, format: {family: paper_twn, threshold_multiplier: 0.7}}
+  - candidate_id: polyshift-w4-paper-safe-control
+    region_defaults: []
+    path_routes:
+      - {route_id: paper-twn-safe, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+  - candidate_id: polyshift-paper-twn-balanced
+    region_defaults: []
+    path_routes:
+      - {route_id: paper-twn-balanced, format: {family: paper_twn, threshold_multiplier: 0.7}}
+  - candidate_id: polyshift-w4-paper-balanced-control
+    region_defaults: []
+    path_routes:
+      - {route_id: paper-twn-balanced, format: {family: uniform, bits: 4, scale_method: optimal_scaled_codebook}}
+
+diagnostic:
+  manifest: inherit_weight_plan
+  fixed_probe_per_task: 1
+  all_finite_required: true
+  same_structure_required: true
+  selection_claim: false
+
+validation:
+  source: inherit_base_search_plan
+  backend: bittrue
+  image_size: 640
+  batch: {detect: 32, pose: 16}
+  workers: {detect: 4, pose: 8}
+  plots: false
+  save_coco_json: false
+  augmentation: false
+
+gates:
+  all_eight_metrics_required: true
+  metric_family: map50
+  activation_replacement_included: true
+  total_max_drop: 0.015
+  map50_95_companion_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+
+selection:
+  hard_gate_first: true
+  objectives:
+    - maximize_worst_total_map50_delta
+    - maximize_worst_total_map50_95_delta
+    - minimize_total_packed_weight_bytes
+  accuracy_tolerance: 0.002
+  roles: [accuracy, balanced, hardware]
+  paired_path_matched_controls_required: true
+  mean_metric_can_override_worst_task: false

@@ -1,0 +1,63 @@
+{
+  "schema": "actshape-extension-reference-v1",
+  "created_at": "2026-11-08T18:28:49.532705+08:00",
+  "sources_sha256": {
+    "yolo_optimize/experiments/pose_only_rep_v1/config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/run_arm.py": "5b0e609d7e07823f08102ee15d77ee080550d971cb98177373e87e650a03030f",
+    "yolo_optimize/experiments/pose_only_rep_v1/RESULTS.md": "4b0e059a3397d14faf206d814c6ea6396dbe5f014337a5a98c793efc2ae045e5",
+    "yolo_optimize/experiments/activation/bridge_v1/train.py": "f12ac718dd5efc2ed1622be4df554feb82be2fa4ddfacb9cc3dc6ff7907d4cd0",
+    "yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/resolved-config.json": "deb0233e405ddd57ceaea2360903712780524c4584e5fda8794c41fff9da27d3",
+    "yolo_optimize/experiments/activation/bridge_v1/artifacts/runs/qsilu_pq-short-e10-seed1-v1/summary.json": "98640a2e3df6a37de5a46e2577f20c2b68dbdda4d00a84270f03369f071dafd9",
+    "yolo_optimize/model/runtime/yolo_attention/profiling.py": "3b1c6989881affc11a5bee4524fe12b145fd7e75ec00fad88f38aab0f5a34c50",
+    "yolo_optimize/model/runtime/achitechure_1/profiling.py": "4ce13d3239861ec8e9a7cf9a517d53886e358560b425798aa41a13cf563f39a9",
+    "yolo_actshape/analysis/hardware-shapes-cpu.json": "89f28068c7cba3a0123d7a254123c69db926ae0718e78620588eaa5523cc3d78",
+    "yolo_actshape/analysis/hardware-shapes.json": "930a23cc5c0e5de05573ddc549c0fb62620680cd4b18bf46fb787fb7b43fbefe"
+  },
+  "actual_reference": {
+    "activation_recipe": {
+      "activation": "qsilu_pq",
+      "activation_gate": 0.015,
+      "best_joint_is_activation_relative_only": true,
+      "epochs": 10,
+      "fp32_bbox_iou": true,
+      "original_fusion_gate_still_reported_separately": true,
+      "paired_seed": 1,
+      "pose_weight": 0.25,
+      "sha256": "d5b2083b2b736ded790578a2779d223d82413ce0c6cbac1468601105c094f9a6",
+      "shared_bn_affine_trainable": true,
+      "shared_bn_running_fixed": true,
+      "start": "/home/uxin/yolo/yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/j3-pose-head-recovery-v1/inference/best_pose.pt",
+      "warmup": 1
+    },
+    "summary_keys": [
+      "run_dir",
+      "completed_stages",
+      "epochs_completed",
+      "global_macro_steps",
+      "best_state",
+      "checkpoint_paths",
+      "plots"
+    ],
+    "rep_parent_sha256": "a80d68947b112b11c418b0ec438dc4fbb73f63bd6be91249a2f4664c1d7a718d",
+    "rep_result": "optimize Rep17+20 E5 COCO50.5869%、person62.6941%、BBATbox60.9797%、Pose89.1041%，為不同Pose-MASF血緣，不與本輪直接當control。"
+  },
+  "adopted": [
+    "重用已驗證stage9的完整macro／loss／AdamW／scheduler／fresh EMA／resume與FP32 CIoU。",
+    "三組共同parent為使用者選定qSiLU Rep17+20 E1；backbone／Attention／BN running固定，neck與雙head適應。",
+    "使用optimize analytical profiler的N²計數概念及runtime profiler的warmup／同步計時；全部維持部署FP32，不混用FP16。"
+  ],
+  "differences": [
+    "原optimize qSiLU適應10E；本輪依使用者要求各10E再半LR10E，完整epochs不增加baseline加訓。",
+    "新三組shape是本專案延伸，optimize未證明其AP或硬體最優；geometry／D1已先CPU驗證。",
+    "新GPU replay包含分塊與pitch還原、Rep Conv halo、完整key分母的query分塊，僅診斷、不替換正式模型。",
+    "初輪來源鎖及執行中程序不更動；擴充只在初輪完成並取得同一queue flock後使用GPU。"
+  ],
+  "validation": [
+    "原來源鎖／parent SHA／資料registry保持",
+    "CPU幾何與tile 邊界單元、reference bittrue誤差",
+    "GPU兩個task真實樣本的replay及完整COCO5000／BBAT683 AP",
+    "GPU smoke實際權重更新、frozen tensors／EMA／qSiLU／D1契約",
+    "每輪完整AP與最佳重載，獨立CPU可攜交接"
+  ],
+  "difficulty": "未指定實體目標晶片；只報軟體時間、容量與tiling利用率，不宣稱板端加速。"
+}

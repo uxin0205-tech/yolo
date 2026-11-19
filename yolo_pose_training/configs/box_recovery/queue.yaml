@@ -1,0 +1,8 @@
+stages:
+- configs/box_recovery/control.yaml
+- configs/box_recovery/box10.yaml
+monitor_seconds: 600
+evaluation_imgsz: 640
+max_pose_ap_drop: 0.003
+max_per_class_ap_drop: 0.005
+min_box_ap_gain: 0.001

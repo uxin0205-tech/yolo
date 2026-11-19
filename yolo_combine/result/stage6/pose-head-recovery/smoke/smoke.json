@@ -1,0 +1,125 @@
+[
+  {
+    "phase": "Pose-head-recovery",
+    "recipe": {
+      "name": "Pose-head-recovery",
+      "scope": "head",
+      "task": "pose",
+      "epochs": 10,
+      "patience": 4,
+      "lrs": {
+        "pose_head": 2e-05
+      },
+      "warmup_epochs": 1,
+      "final_factor": 0.5,
+      "loss_horizon": 10,
+      "fresh_ema": true,
+      "head_bn": "trainable",
+      "shared_bn_affine": false,
+      "min_delta": 0.0001,
+      "plateau_half_after": 0,
+      "extension": 0,
+      "selection": "pose_recovery",
+      "head_recovery_max_pose_drop": 0.02,
+      "retain_epoch_candidates": false
+    },
+    "seconds": 3.5857739448547363,
+    "updated_parameter_tensors": 258,
+    "active_tensors": 264,
+    "mutable_bn_buffers": 144,
+    "frozen_verified": true,
+    "smoke_updates_discarded": true,
+    "macro_count": 2,
+    "macro_reports": [
+      {
+        "detect_mean_loss": 0.0,
+        "pose_mean_loss": 1.490509033203125,
+        "joint_mean_loss": 1.490509033203125,
+        "loss_for_backward": 95.392578125,
+        "detect_components": [],
+        "pose_components": [
+          0.7897742390632629,
+          0.0163937546312809,
+          0.05199392884969711,
+          0.24174737930297852,
+          0.0030696168541908264,
+          0.0
+        ],
+        "detect_batch_sizes": [],
+        "pose_batch_sizes": [
+          16
+        ],
+        "detect_images": 0,
+        "pose_images": 16,
+        "gradient_presence": {
+          "shared": false,
+          "detect_head": false,
+          "pose_head": true
+        },
+        "gradient_statistics": null,
+        "amp_scale": 128.0,
+        "amp_overflow_retries": 3,
+        "clipped_gradient_norm": 2290.912109375
+      },
+      {
+        "detect_mean_loss": 0.0,
+        "pose_mean_loss": 1.7658803462982178,
+        "joint_mean_loss": 1.7658803462982178,
+        "loss_for_backward": 113.01634216308594,
+        "detect_components": [],
+        "pose_components": [
+          0.9272275567054749,
+          0.0349658839404583,
+          0.09046760946512222,
+          0.30792149901390076,
+          0.002736607100814581,
+          0.0
+        ],
+        "detect_batch_sizes": [],
+        "pose_batch_sizes": [
+          16
+        ],
+        "detect_images": 0,
+        "pose_images": 16,
+        "gradient_presence": {
+          "shared": false,
+          "detect_head": false,
+          "pose_head": true
+        },
+        "gradient_statistics": null,
+        "amp_scale": 64.0,
+        "amp_overflow_retries": 1,
+        "clipped_gradient_norm": 3209.36865234375
+      }
+    ],
+    "peak_gpu_bytes": 3169751552,
+    "detect_mean_loss": 0.0,
+    "pose_mean_loss": 1.7658803462982178,
+    "joint_mean_loss": 1.7658803462982178,
+    "loss_for_backward": 113.01634216308594,
+    "detect_components": [],
+    "pose_components": [
+      0.9272275567054749,
+      0.0349658839404583,
+      0.09046760946512222,
+      0.30792149901390076,
+      0.002736607100814581,
+      0.0
+    ],
+    "detect_batch_sizes": [],
+    "pose_batch_sizes": [
+      16
+    ],
+    "detect_images": 0,
+    "pose_images": 16,
+    "gradient_presence": {
+      "shared": false,
+      "detect_head": false,
+      "pose_head": true
+    },
+    "gradient_statistics": null,
+    "amp_scale": 64.0,
+    "amp_overflow_retries": 1,
+    "clipped_gradient_norm": 3209.36865234375
+  }
+]

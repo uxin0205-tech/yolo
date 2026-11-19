@@ -1,0 +1,65 @@
+{
+  "schema": "stage8-user-selection-v1",
+  "selected_at": "2026-11-08T15:27:12.713677+08:00",
+  "selection_source": "explicit_user",
+  "user_request": "幫我選擇 REP17+20的那一個；後續更正為 qsilu的",
+  "candidate": "rep17_20",
+  "selected_epoch": 1,
+  "training_activation": "qsilu_pq",
+  "deployment_activation": "qsilu_pq",
+  "training_normalization": "Float PWL [-10,0] / 20",
+  "deployment_normalization": "D1 integer PWL exp [-10,0] / 20 + LUT256 reciprocal",
+  "checkpoint": "handoff/rep17_20.pt",
+  "checkpoint_sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+  "deployment_manifest": "handoff/rep17_20.json",
+  "training_checkpoint": "training/rep17_20-best-ema.pt",
+  "training_checkpoint_sha256": "7ddd8bebb86dc24a3feab15edd840587dd56e9afeb2a1994f89084687a1afb34",
+  "metrics": {
+    "coco_AP": 0.5143471497030708,
+    "person_AP": 0.6427959303974734,
+    "sports_ball_AP": 0.5157820851022553,
+    "baseball_bat_AP": 0.46957631026676677,
+    "box_AP50_95": 0.6143706928427835,
+    "pose_AP50_95": 0.9013894285347345,
+    "ball_box_AP50_95": 0.49976429858092136,
+    "ball_pose_AP50_95": 0.8645462333785403,
+    "bat_box_AP50_95": 0.7289770871046457,
+    "bat_pose_AP50_95": 0.9382326236909287
+  },
+  "automatic_recommendation": "rep17_20_silu",
+  "automatic_relative_gate": false,
+  "automatic_reference_engineering_gate": false,
+  "choice_note": "依使用者明確選擇，採用 qSiLU 訓練版 Rep17＋20；原自動建議與實測 AP 保留，不將使用者選擇改寫為門檻通過。",
+  "next_stage_started": true,
+  "previous_default": "rep17_20_silu",
+  "previous_manifest_sha256": "6dda19689909cd5273f3fa3a96da2f2625d9cec6e34138635170b0e390052e19",
+  "original_result_sha256": "bddf534acf6f12ff83575d7c7067d2d48b8c6ca92ef17e0c162421a500a3e3e8",
+  "operator_contract": {
+    "binary": "B2 sign + Hadamard",
+    "scale": "S1 Q10",
+    "bias": "signed16 / 1024",
+    "folded": true,
+    "rep_layers": [
+      17,
+      20
+    ]
+  },
+  "manifest_sha256": "9ee468693c8474e5ab2d6b914611140377d93ec20b441b2a4dea2bfc1d6ce80f",
+  "validation": {
+    "path": "selection-validation.json",
+    "sha256": "fe7d00447b01bbb3164536b4918f6554c794928f10199e4f65a0e949762db0da",
+    "status": "passed",
+    "default_load_verified": true,
+    "gpu_used": false
+  },
+  "status": "final",
+  "next_stage_authorized": true,
+  "cleanup": "cleanup-final-20261108.json",
+  "next_stage_workspace": "yolo_actshape",
+  "next_stage_note": "已授權且CPU研究已開始；GPU實際狀態見Stage9 status.json。",
+  "post_cleanup_validation": {
+    "path": "cleanup-validation.json",
+    "sha256": "8ea1b85f5edede9bb61bc42db199fdfcb2ac68918b3f82a76b0b74f2e726ce47",
+    "status": "passed"
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "status": "complete",
+  "comparison_winner": "poly_quality",
+  "repconv_parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_activation/result/stage7/handoff/qsilu_pq.pt",
+    "sha256": "2f91ec1862ad62304f1e2727e9b9ee64a27c5a46a45137f83a74dc7f14c46a69",
+    "metrics": {
+      "coco_AP": 0.513951265381378,
+      "person_AP": 0.643234026088054,
+      "sports_ball_AP": 0.5146623165317121,
+      "baseball_bat_AP": 0.4690357899624067,
+      "box_AP50_95": 0.6139042018842924,
+      "pose_AP50_95": 0.9007615878805139,
+      "ball_box_AP50_95": 0.4974302119527326,
+      "ball_pose_AP50_95": 0.8647309926872065,
+      "bat_box_AP50_95": 0.730378191815852,
+      "bat_pose_AP50_95": 0.9367921830738212
+    },
+    "epoch": 8,
+    "phase": "qsilu_pq",
+    "candidate": "qsilu_pq",
+    "activation_relative_gate": true,
+    "ema_updates": 3704,
+    "verification": "/home/uxin/yolo/yolo_activation/result/stage7/evidence/activation-20261102/verify-qsilu_pq/result.json"
+  },
+  "qsilu_candidate": {
+    "checkpoint": "/home/uxin/yolo/yolo_activation/result/stage7/handoff/qsilu_pq.pt",
+    "sha256": "2f91ec1862ad62304f1e2727e9b9ee64a27c5a46a45137f83a74dc7f14c46a69",
+    "metrics": {
+      "coco_AP": 0.513951265381378,
+      "person_AP": 0.643234026088054,
+      "sports_ball_AP": 0.5146623165317121,
+      "baseball_bat_AP": 0.4690357899624067,
+      "box_AP50_95": 0.6139042018842924,
+      "pose_AP50_95": 0.9007615878805139,
+      "ball_box_AP50_95": 0.4974302119527326,
+      "ball_pose_AP50_95": 0.8647309926872065,
+      "bat_box_AP50_95": 0.730378191815852,
+      "bat_pose_AP50_95": 0.9367921830738212
+    },
+    "epoch": 8,
+    "phase": "qsilu_pq",
+    "candidate": "qsilu_pq",
+    "activation_relative_gate": true,
+    "ema_updates": 3704,
+    "verification": "/home/uxin/yolo/yolo_activation/result/stage7/evidence/activation-20261102/verify-qsilu_pq/result.json"
+  },
+  "models": {
+    "qsilu_pq": {
+      "checkpoint": "/home/uxin/yolo/yolo_activation/result/stage7/handoff/qsilu_pq.pt",
+      "sha256": "2f91ec1862ad62304f1e2727e9b9ee64a27c5a46a45137f83a74dc7f14c46a69",
+      "metrics": {
+        "coco_AP": 0.513951265381378,
+        "person_AP": 0.643234026088054,
+        "sports_ball_AP": 0.5146623165317121,
+        "baseball_bat_AP": 0.4690357899624067,
+        "box_AP50_95": 0.6139042018842924,
+        "pose_AP50_95": 0.9007615878805139,
+        "ball_box_AP50_95": 0.4974302119527326,
+        "ball_pose_AP50_95": 0.8647309926872065,
+        "bat_box_AP50_95": 0.730378191815852,
+        "bat_pose_AP50_95": 0.9367921830738212
+      },
+      "epoch": 8,
+      "phase": "qsilu_pq",
+      "candidate": "qsilu_pq",
+      "activation_relative_gate": true,
+      "ema_updates": 3704,
+      "verification": "/home/uxin/yolo/yolo_activation/result/stage7/evidence/activation-20261102/verify-qsilu_pq/result.json"
+    },
+    "hardswish": {
+      "checkpoint": "/home/uxin/yolo/yolo_activation/result/stage7/candidates/hardswish.pt",
+      "sha256": "6e0f50b32f8d0f8d297b529e7fe64741fd881ae569ab7444b88d7f3d4ef12453",
+      "metrics": {
+        "coco_AP": 0.4984743343662916,
+        "person_AP": 0.6293051629483731,
+        "sports_ball_AP": 0.4951651726711344,
+        "baseball_bat_AP": 0.4262657688686266,
+        "box_AP50_95": 0.6096301303685062,
+        "pose_AP50_95": 0.9052935121145242,
+        "ball_box_AP50_95": 0.5047614594893669,
+        "ball_pose_AP50_95": 0.878103183380262,
+        "bat_box_AP50_95": 0.7144988012476456,
+        "bat_pose_AP50_95": 0.9324838408487865
+      },
+      "epoch": 8,
+      "phase": "hardswish",
+      "candidate": "hardswish",
+      "activation_relative_gate": false,
+      "ema_updates": 3704,
+      "verification": "/home/uxin/yolo/yolo_activation/result/stage7/evidence/activation-20261102/verify-hardswish/result.json"
+    },
+    "poly_shift": {
+      "checkpoint": "/home/uxin/yolo/yolo_activation/result/stage7/candidates/poly_shift.pt",
+      "sha256": "7dae8e41f167185b6ff5113491890ddb13b5e099be0013f1594662b11d4056e9",
+      "metrics": {
+        "coco_AP": 0.5149956199132761,
+        "person_AP": 0.6434572915516049,
+        "sports_ball_AP": 0.5148586864243344,
+        "baseball_bat_AP": 0.47236697110271336,
+        "box_AP50_95": 0.6137294083919003,
+        "pose_AP50_95": 0.901010817705424,
+        "ball_box_AP50_95": 0.4957548776980407,
+        "ball_pose_AP50_95": 0.8635576317407182,
+        "bat_box_AP50_95": 0.7317039390857598,
+        "bat_pose_AP50_95": 0.9384640036701299
+      },
+      "epoch": 10,
+      "phase": "poly_shift",
+      "candidate": "poly_shift",
+      "activation_relative_gate": true,
+      "ema_updates": 4630,
+      "verification": "/home/uxin/yolo/yolo_activation/result/stage7/evidence/activation-20261102/verify-poly_shift/result.json"
+    },
+    "poly_quality": {
+      "checkpoint": "/home/uxin/yolo/yolo_activation/result/stage7/handoff/poly_quality.pt",
+      "sha256": "447b06043eae81cc4422c4b1a05f40d7843526f2ac3eec15860e4b454d2aac7d",
+      "metrics": {
+        "coco_AP": 0.5156104931963268,
+        "person_AP": 0.6430242726460877,
+        "sports_ball_AP": 0.5154654219828001,
+        "baseball_bat_AP": 0.46610286757568814,
+        "box_AP50_95": 0.6165051809361508,
+        "pose_AP50_95": 0.9039340047788486,
+        "ball_box_AP50_95": 0.5002246313995821,
+        "ball_pose_AP50_95": 0.8671171615547468,
+        "bat_box_AP50_95": 0.7327857304727192,
+        "bat_pose_AP50_95": 0.9407508480029503
+      },
+      "epoch": 10,
+      "phase": "poly_quality",
+      "candidate": "poly_quality",
+      "activation_relative_gate": true,
+      "ema_updates": 4630,
+      "verification": "/home/uxin/yolo/yolo_activation/result/stage7/evidence/activation-20261102/verify-poly_quality/result.json"
+    }
+  },
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/result/stage6/selected.pt",
+    "sha256": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7",
+    "manifest_sha256": "ee7cb614640fbc3c94b2825c8abf70214cf4c38a68cad56ce6ad99a56788239c",
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6092024665178761,
+      "pose_AP50_95": 0.8998503112793659,
+      "ball_box_AP50_95": 0.49388345969797987,
+      "ball_pose_AP50_95": 0.8634740979003016,
+      "bat_box_AP50_95": 0.7245214733377724,
+      "bat_pose_AP50_95": 0.93622652465843
+    },
+    "original_accuracy_gate_passed": false,
+    "selection": "使用者在看過結果後要求整理並準備下一階段；保留原未達標事實"
+  },
+  "stage": 7,
+  "next_stage_started": false,
+  "hardware_contract_preserved": true,
+  "repconv_installed": false,
+  "original_independent_gate": {
+    "qsilu_pq": false,
+    "hardswish": false,
+    "poly_shift": false,
+    "poly_quality": false
+  },
+  "limits": [
+    "單 seed；不是 RTL/HLS/板端量測",
+    "Conv/QKV/PV/projection 仍浮點；activation 只提供硬體成本 proxy 與局部定點 reference",
+    "特徵圖矩形／2 冪次尺寸分析留最後階段；本輪不改尺寸或 token 上限"
+  ],
+  "source_lock": "/home/uxin/yolo/yolo_activation/result/stage7/evidence/activation-20261102/source.json",
+  "portable_package": "/home/uxin/yolo/yolo_activation/result/stage7/handoff",
+  "completion_time": "2026-11-03T01:00:29+08:00"
+}

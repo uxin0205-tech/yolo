@@ -1,0 +1,94 @@
+{
+  "schema": "stage6-j1-group-rollback-review-v1",
+  "created_at": "2026-10-29T20:21:19.935114",
+  "reviewed_before_implementation": true,
+  "references_sha256": {
+    "yolo_optimize/experiments/combine/bridge_v1/diagnose_j1.py": "659cc9826a619fdfcf0d1f7d641440be11fe01dd0f3183b95739cb615b9a3116",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/j1-diagnosis-v1/summary.json": "64dc025a85fc26f6df23753c726e0d5e4c7730013f58cd83bc92714ae7e2cb50",
+    "yolo_optimize/experiments/combine/bridge_v1/balanced_joint.py": "9333c5c0fe6c60939fff0104a490c7505e6a2cadb48ce71adb6bef755b506dc9",
+    "yolo_optimize/experiments/combine/bridge_v1/merge_joint.py": "d900a8f0e5b1b88ce8a94aaf991e40b6b8e748edf17e2f568d46f9844ee88c12",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/balanced-j1-v2/resolved-config.json": "e821f663da7041bb34a6d6118cf7125fd49501f0341eb659bb64878bf9c42aa2"
+  },
+  "optimize_diagnostic_results": {
+    "reproduce": {
+      "coco/box/map50_95": 0.4679083218392978,
+      "bbat/box/map50_95": 0.47366392349994035,
+      "bbat/pose/map50_95": 0.8081717078917254
+    },
+    "restore_detect_bn": {
+      "coco/box/map50_95": 0.2958699244182004,
+      "bbat/box/map50_95": 0.47366392349994035,
+      "bbat/pose/map50_95": 0.8081717078917254
+    },
+    "restore_neck": {
+      "coco/box/map50_95": 0.40080011706241786,
+      "bbat/box/map50_95": 0.4399984820829337,
+      "bbat/pose/map50_95": 0.7472403444661104
+    },
+    "restore_detect_parameters": {
+      "coco/box/map50_95": 0.4014023005731886,
+      "bbat/box/map50_95": 0.47366392349994035,
+      "bbat/pose/map50_95": 0.8081717078917254
+    },
+    "restore_masf": {
+      "coco/box/map50_95": 0.4679038695262892,
+      "bbat/box/map50_95": 0.47366392349994035,
+      "bbat/pose/map50_95": 0.8081717078917254
+    }
+  },
+  "adopted": "完整重現與分組回退；同一trained checkpoint，每次只從phase parent恢復一組state，不修改來源。",
+  "differences": "本輪D1固定、無MASF；增加完整Detect head回退；沿用官方COCO四項及BBAT六項FP32 batch8，不使用optimize舊internal數值作直接精度比較。",
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/rebuild-20261029/M0/best-e001.pt",
+    "sha256": "7fbc4e86f286620ea5c64507e4b5e65c4bc49146dfda257abe247f2d4022234e",
+    "metrics": {
+      "coco_AP": 0.5148807247575495,
+      "person_AP": 0.6424804793598471,
+      "sports_ball_AP": 0.5134375038397792,
+      "baseball_bat_AP": 0.4842590449893524,
+      "box_AP50_95": 0.5812369465685425,
+      "pose_AP50_95": 0.8845468660311189,
+      "ball_box_AP50_95": 0.48492496119891626,
+      "ball_pose_AP50_95": 0.8540194333513244,
+      "bat_box_AP50_95": 0.6775489319381687,
+      "bat_pose_AP50_95": 0.9150742987109135
+    },
+    "epoch": 1,
+    "phase": "M0",
+    "ema_updates": 373
+  },
+  "resume": "/home/uxin/yolo/yolo_combine/artifacts/stage6/rebuild-20261029/J1/resume.pt",
+  "resume_sha256": "01d1dcbf26f2b059b9fe28cac6f6b7d831e8768f3f5d470254bf193dcf605d26",
+  "epoch": 6,
+  "expected_metrics": {
+    "coco_AP": 0.5125097418328837,
+    "person_AP": 0.6415803508443042,
+    "sports_ball_AP": 0.5162067267279214,
+    "baseball_bat_AP": 0.4626696710268651,
+    "box_AP50_95": 0.6056448077906925,
+    "pose_AP50_95": 0.8958015896017333,
+    "ball_box_AP50_95": 0.484730281491779,
+    "ball_pose_AP50_95": 0.8575149098549751,
+    "bat_box_AP50_95": 0.7265593340896059,
+    "bat_pose_AP50_95": 0.9340882693484913
+  },
+  "cases": [
+    "reproduce",
+    "restore_detect_bn",
+    "restore_detect_parameters",
+    "restore_detect_head",
+    "restore_neck"
+  ],
+  "budget": "5 full COCO5000 + BBAT683 evaluations; no training; one idle RTX5090",
+  "hypotheses": [
+    "BN drift: restoring Detect BN improves COCO bat while Pose remains exact",
+    "Detect parameter drift: parameters or whole head rollback improves bat",
+    "shared neck conflict: neck rollback improves COCO and may lose Pose gains"
+  ],
+  "stops": [
+    "reproduction mismatch",
+    "state outside selected group changes",
+    "hardware contract changed",
+    "nonfinite values"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "time": "2026-10-19T21:55:51.480207+08:00",
+  "tests_passed": 18,
+  "test_output": ".................                                                        [100%]\n17 passed in 23.41s\n",
+  "checks": [
+    "both tasks both arms exact E5 live/EMA",
+    "AdamW moments and steps exact",
+    "scaler and EMA age preserved",
+    "new extension resume roundtrip exact",
+    "strict inference checkpoint reload",
+    "native E2E .1/.9 remains constant after resume",
+    "five-epoch minimum and patience",
+    "LR start and endpoint",
+    "existing shared training and KD regression tests"
+  ],
+  "test_sha256": "666de6c6c6428a5a5284fdf0e5b29380f6e2bbf5a5174096b91a336a92682f2c",
+  "reference_sha256": "5aa202b23890853f8693175cc6b6af57a362523bfeb61c4cda517690c041364e",
+  "additional_queue_graph_test": "passed"
+}

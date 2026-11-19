@@ -1,0 +1,195 @@
+{
+  "status": "passed",
+  "parent_sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+  "shape": [
+    384,
+    768
+  ],
+  "recipe": {
+    "epochs": 10,
+    "low_lr_epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "neck_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "all_bn_running": "fixed",
+    "attention": "all tensors frozen",
+    "backbone": "frozen",
+    "operators": "qSiLU/D1 deployment forward; Float-PWL STE backward",
+    "detect_physical": 8,
+    "detect_accumulation": 32,
+    "pose_physical": 8,
+    "pose_accumulation": 2,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "fresh_ema": true,
+    "amp": true,
+    "fp32_ciou": true,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "max_amp_retries": 16
+  },
+  "seconds_per_macro": 4.7242671251297,
+  "peak_allocated_GiB": 3.266183376312256,
+  "peak_reserved_GiB": 3.490234375,
+  "updated_parameters": 415,
+  "reports": [
+    {
+      "detect_mean_loss": 1.6835454553365707,
+      "pose_mean_loss": 0.9764308333396912,
+      "joint_mean_loss": 1.619262307882309,
+      "loss_for_backward": 103.63278770446777,
+      "detect_components": [
+        1.0984998941421509,
+        0.9901696443557739,
+        0.006899336818605661
+      ],
+      "pose_components": [
+        0.8499903678894043,
+        0.0334937758743763,
+        0.011279094032943249,
+        0.2514583468437195,
+        0.0028921125922352076,
+        0.0
+      ],
+      "detect_batch_sizes": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "pose_batch_sizes": [
+        8,
+        8
+      ],
+      "detect_images": 256,
+      "pose_images": 16,
+      "gradient_presence": {
+        "shared": true,
+        "detect_head": true,
+        "pose_head": true
+      },
+      "gradient_statistics": {
+        "detect_norm": 156.6840686330182,
+        "pose_norm": 58.68718832435243,
+        "cosine_similarity": -0.05570677899013131
+      },
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 189.17044067382812
+    },
+    {
+      "detect_mean_loss": 1.6344097629189491,
+      "pose_mean_loss": 1.0723214745521545,
+      "joint_mean_loss": 1.5833108276128767,
+      "loss_for_backward": 101.3318929672241,
+      "detect_components": [
+        1.0367799997329712,
+        0.948272705078125,
+        0.006610755808651447
+      ],
+      "pose_components": [
+        0.758522629737854,
+        0.01054220087826252,
+        0.0051944684237241745,
+        0.26899588108062744,
+        0.003063306212425232,
+        0.0
+      ],
+      "detect_batch_sizes": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "pose_batch_sizes": [
+        8,
+        8
+      ],
+      "detect_images": 256,
+      "pose_images": 16,
+      "gradient_presence": {
+        "shared": true,
+        "detect_head": true,
+        "pose_head": true
+      },
+      "gradient_statistics": {
+        "detect_norm": 144.88998135222963,
+        "pose_norm": 72.09369621713293,
+        "cosine_similarity": 0.022462982407726387
+      },
+      "amp_scale": 1024.0,
+      "amp_overflow_retries": 0,
+      "clipped_gradient_norm": 184.07359313964844
+    }
+  ],
+  "smoke_weights_discarded": true
+}

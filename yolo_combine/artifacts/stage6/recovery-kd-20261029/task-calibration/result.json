@@ -1,0 +1,303 @@
+{
+  "status": "passed",
+  "parent_sha256": "a6005897584db34c765f6accd1a4555051f449a10e4e716cf762e663ca02c570",
+  "recipe": {
+    "scope": "joint_back9",
+    "task": "joint",
+    "epochs": 5,
+    "patience": 0,
+    "lrs": {
+      "backbone": 3.8e-07,
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "loss_horizon": 5,
+    "fresh_ema": true,
+    "head_bn": "trainable",
+    "shared_bn_affine": false,
+    "min_delta": 0.0001,
+    "plateau_half_after": 0,
+    "name": "KD-recovery",
+    "extension": 0,
+    "selection": "balanced_recovery",
+    "recovery_safety": {
+      "coco_from_parent": 0.01,
+      "coco_from_original": 0.05,
+      "pose_from_parent": 0.03
+    },
+    "retain_epoch_candidates": true,
+    "kd": {
+      "sites": [
+        16,
+        19,
+        22
+      ],
+      "teachers": {
+        "detect": {
+          "checkpoint": "/home/uxin/yolo/yolo_hog/result/stage5/selected.pt",
+          "sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c"
+        },
+        "pose": {
+          "checkpoint": "/home/uxin/yolo/yolo_pose_training/artifacts/preserved/stagewise_lr_p3_640/weights/best.pt",
+          "sha256": "e50e155c6c070da4b038fe5679575f4c094b9cfff8eb3a2143770d7dad4cad9e"
+        }
+      },
+      "version": 1,
+      "mu": {
+        "detect": 3.260468885602049,
+        "pose": 11.557662296506145
+      }
+    }
+  },
+  "selected_pose_weight": 0.085,
+  "calibration_median_ratio": 2.9434628996473986,
+  "confirmation_median_ratio": 1.6131110057431122,
+  "validation_used": false,
+  "checkpoint_restored_each_macro": true,
+  "optimizer_step_noop": true,
+  "records": [
+    {
+      "phase": "measure",
+      "index": 0,
+      "ratio": 5.979460487120136,
+      "pose_weight": 0.25,
+      "detect_norm": 268.5305955812943,
+      "pose_norm": 1605.668085861186,
+      "cosine_similarity": -0.01725342933788575,
+      "amp_retries": 1
+    },
+    {
+      "phase": "measure",
+      "index": 1,
+      "ratio": 2.0110696746289602,
+      "pose_weight": 0.25,
+      "detect_norm": 290.0374686667066,
+      "pose_norm": 583.285557741761,
+      "cosine_similarity": 0.21428432603510694,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 2,
+      "ratio": 1.6770262794407682,
+      "pose_weight": 0.25,
+      "detect_norm": 280.23101382976967,
+      "pose_norm": 469.9547745068531,
+      "cosine_similarity": 0.028339161465811974,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 3,
+      "ratio": 4.531460685376932,
+      "pose_weight": 0.25,
+      "detect_norm": 284.91124001715053,
+      "pose_norm": 1291.0640829597087,
+      "cosine_similarity": 0.04043174000104959,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 4,
+      "ratio": 5.327219004654999,
+      "pose_weight": 0.25,
+      "detect_norm": 291.50779957094346,
+      "pose_norm": 1552.9258898794906,
+      "cosine_similarity": 0.084562412096601,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 5,
+      "ratio": 3.8614242712942697,
+      "pose_weight": 0.25,
+      "detect_norm": 290.8911999108032,
+      "pose_norm": 1123.254339641489,
+      "cosine_similarity": 0.045155158877493363,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 6,
+      "ratio": 1.7330506794466232,
+      "pose_weight": 0.25,
+      "detect_norm": 287.1836383547501,
+      "pose_norm": 497.70379957665295,
+      "cosine_similarity": 0.042751032386115925,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 7,
+      "ratio": 4.9477649015888785,
+      "pose_weight": 0.25,
+      "detect_norm": 281.8125700909292,
+      "pose_norm": 1394.3423431224553,
+      "cosine_similarity": 0.10725353160431417,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 8,
+      "ratio": 5.263990795538678,
+      "pose_weight": 0.25,
+      "detect_norm": 287.01714675136895,
+      "pose_norm": 1510.85561866098,
+      "cosine_similarity": 0.05568030143952959,
+      "amp_retries": 1
+    },
+    {
+      "phase": "measure",
+      "index": 9,
+      "ratio": 4.015050730491533,
+      "pose_weight": 0.25,
+      "detect_norm": 274.51014234917346,
+      "pose_norm": 1102.1721475663835,
+      "cosine_similarity": 0.006801783437943875,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 10,
+      "ratio": 1.6962396703201315,
+      "pose_weight": 0.25,
+      "detect_norm": 280.98646799269056,
+      "pose_norm": 476.62039383233963,
+      "cosine_similarity": -0.006717860084534054,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 11,
+      "ratio": 1.6655269863267321,
+      "pose_weight": 0.25,
+      "detect_norm": 294.8541470763057,
+      "pose_norm": 491.08753898593847,
+      "cosine_similarity": 0.11067166243028115,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 12,
+      "ratio": 4.829894217119176,
+      "pose_weight": 0.25,
+      "detect_norm": 287.151501347202,
+      "pose_norm": 1386.9113757939404,
+      "cosine_similarity": 0.04790748327967084,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 13,
+      "ratio": 1.4543222226433514,
+      "pose_weight": 0.25,
+      "detect_norm": 305.1465863785253,
+      "pose_norm": 443.7814617340483,
+      "cosine_similarity": 0.15652542996912905,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 14,
+      "ratio": 2.025501528000528,
+      "pose_weight": 0.25,
+      "detect_norm": 284.17397357872426,
+      "pose_norm": 575.5948177016877,
+      "cosine_similarity": 0.09996016536564924,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 15,
+      "ratio": 1.5148952232141,
+      "pose_weight": 0.25,
+      "detect_norm": 295.6471899241293,
+      "pose_norm": 447.87451577273526,
+      "cosine_similarity": 0.04406896716726612,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 0,
+      "ratio": 1.6270346760148386,
+      "pose_weight": 0.085,
+      "detect_norm": 320.7057257145614,
+      "pose_norm": 521.7993365340951,
+      "cosine_similarity": 0.03653501670707051,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 1,
+      "ratio": 2.0372963053838133,
+      "pose_weight": 0.085,
+      "detect_norm": 342.23102291262734,
+      "pose_norm": 697.2259985676188,
+      "cosine_similarity": -0.10695956536282052,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 2,
+      "ratio": 0.5381805156335203,
+      "pose_weight": 0.085,
+      "detect_norm": 325.65988479575674,
+      "pose_norm": 175.2638047205332,
+      "cosine_similarity": 0.009950440742046266,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 3,
+      "ratio": 2.2001694488778014,
+      "pose_weight": 0.085,
+      "detect_norm": 335.38263647347696,
+      "pose_norm": 737.8986304530338,
+      "cosine_similarity": -0.02819121834940131,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 4,
+      "ratio": 1.599187335471386,
+      "pose_weight": 0.085,
+      "detect_norm": 336.9479023313516,
+      "pose_norm": 538.842818121947,
+      "cosine_similarity": 0.057924298602123316,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 5,
+      "ratio": 1.8814842969894767,
+      "pose_weight": 0.085,
+      "detect_norm": 323.0527532623439,
+      "pose_norm": 607.818682362316,
+      "cosine_similarity": -0.025120705675594074,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 6,
+      "ratio": 0.5085531989440681,
+      "pose_weight": 0.085,
+      "detect_norm": 342.8832052697459,
+      "pose_norm": 174.37435090412484,
+      "cosine_similarity": 0.1397545782045885,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 7,
+      "ratio": 0.4866519162033046,
+      "pose_weight": 0.085,
+      "detect_norm": 356.1141701548235,
+      "pose_norm": 173.30364329299454,
+      "cosine_similarity": -0.060098729727606534,
+      "amp_retries": 0
+    }
+  ]
+}

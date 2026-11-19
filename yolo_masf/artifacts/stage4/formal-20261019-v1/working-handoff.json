@@ -1,0 +1,44 @@
+{
+  "time": "2026-10-19T18:17:40.347437+08:00",
+  "stage": 4,
+  "complete": true,
+  "working_session_handoff": "long training stable; user requested exit working",
+  "supervisor_pid": 791720,
+  "worker_pid": 791729,
+  "monitor_interval_seconds": 600,
+  "latest_training": {
+    "time_unix": 1792404986.4152975,
+    "variant": "M1",
+    "phase": "masf",
+    "kind": "training",
+    "epoch": 1,
+    "images": 5120,
+    "steps": 20,
+    "loss_macro_sum": 442.2679805755615,
+    "gradient_norm": 65.64671325683594,
+    "qk_gradient_norm": {},
+    "required_gradient_norm": {
+      "model.23.p3_masf.alpha": 0.1564542055130005,
+      "model.23.one2one_cv2.0.0.conv.weight": 8.39111042022705
+    },
+    "loss_backward_factor": 0.25,
+    "amp_retries": 0,
+    "loss_scale": 1024.0,
+    "lr": {
+      "head/decay": 6.943844492440606e-07,
+      "head/no_decay": 6.943844492440606e-07,
+      "alpha/no_decay": 1.3887688984881211e-05,
+      "context/decay": 1.3887688984881211e-06,
+      "context/no_decay": 1.3887688984881211e-06
+    },
+    "elapsed_seconds": 77.93470501899719,
+    "epoch_eta_seconds": 1722.5853052509483
+  },
+  "estimated_completion_taipei": "2026-10-19 21:00–21:30",
+  "estimate_basis": "M1 first20 macros 5120 images/77.93sec (~30min per full epoch); five epochs plus full evaluations and M2 five epochs",
+  "gpu_memory_observed_MiB": 7769,
+  "remaining": [],
+  "stop_after_stage": 4,
+  "finished": "2026-10-19T20:53:22+08:00",
+  "superseded_by_extension": "/home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1"
+}

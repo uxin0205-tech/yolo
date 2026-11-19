@@ -1,0 +1,163 @@
+{
+  "verified_prefusion_epochs": 40,
+  "matched_comparison_rows": 30,
+  "p2_gate_passed": false,
+  "p2_mean_epoch_seconds": {
+    "masf-p2-control-v1": 489.39893383979796,
+    "masf-p2-p2-v1": 680.2973955631256
+  },
+  "p2_alpha_ema": [
+    0.0004666048043873161,
+    0.003511697519570589,
+    0.007696643006056547,
+    0.012286770157516003,
+    0.016492312774062157
+  ],
+  "qat": [
+    {
+      "run": "masf-exact-ternary",
+      "epochs": 5,
+      "worst_map50_drop_pp": 0.9487870743995153,
+      "worst_map50_95_drop_pp": 1.0687582398226203
+    },
+    {
+      "run": "masf-paper-twn",
+      "epochs": 5,
+      "worst_map50_drop_pp": 0.8744016580318648,
+      "worst_map50_95_drop_pp": 1.0644013596636415
+    },
+    {
+      "run": "masf-twn",
+      "epochs": 5,
+      "worst_map50_drop_pp": 0.8264441880304285,
+      "worst_map50_95_drop_pp": 0.9812737424266305
+    }
+  ],
+  "sources": [
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p3-control-v1/summary.json",
+      "sha256": "0510a049ae78d5d9a75b222c5520c1d6c84ae2374d79e7576ca90cfdd066c792"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p3-shared-v1/summary.json",
+      "sha256": "408151dd70a4bc7d76a005435a109278b2f2fedb2a033f3ec00623b9b69af9a2"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p3-fork-v1/summary.json",
+      "sha256": "a80d6202b2f8034be2feeae10c2684c4cc39d5d314b102da0f06225eb892da92"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-head-control-v1/summary.json",
+      "sha256": "72c4b74d6f813fc6b5fb03c344b8d6eef760c555784b22f12b66e9a32c2954b6"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-head-fork-v1/summary.json",
+      "sha256": "849b017372d0df037fa3afbf1f2de510fd8ae1a0cfa8bbbce92171293c1afb88"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-task-bridge-v1/summary.json",
+      "sha256": "93941b74f7e98d71096c8d870d955222b43a0b1c789bba5519201568bc1bbcad"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p2-control-v1/summary.json",
+      "sha256": "b8b7a9c26fa61e7a2b8a31aa820fa1aff4a981e386d8ffa3b6dc85da57db0295"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p2-p2-v1/summary.json",
+      "sha256": "a34897baf6fe7f18d413bc61288e87cd61a904f053bbdd487e9775929dada342"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p2-queue-v1-state.json",
+      "sha256": "cd8dc9a9fdce5c9c7334c9e3b52c84c37e8071c74318458bc1d49e22f6c71a17"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p2-control-v1/progress.jsonl",
+      "sha256": "49aa3d9837b92dcae6886b10713ec288ca978d65b29952808830821329dca859"
+    },
+    {
+      "path": "yolo_optimize/studies/pre-fusion-full35-b100/artifacts/masf-p2-p2-v1/progress.jsonl",
+      "sha256": "a7116d491f3d8f5de68bce44e8dc164b3a0950d7a8368a0e351a441dda4604c7"
+    },
+    {
+      "path": "yolo_quantize/artifacts/queues/full-model-continuous-0907/qat-recovery-summary.json",
+      "sha256": "c52802bdd70ce2afdc7017a88dc92735e67d317ec842427222d719388d97fe0d"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-exact-ternary-5ep-v1-qat-seed1/qat-experiment.json",
+      "sha256": "fa787ddde464e4466d1fc252bd83be48a15bf96fc5c02553c7ef65c178026095"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-exact-ternary-5ep-v1-qat-seed1/validation/epoch-0000/bittrue/metrics.json",
+      "sha256": "1cfdffda9092bd0c46734117f249bf539dec111b4bb3a84dbdfd596358ef5953"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-exact-ternary-5ep-v1-qat-seed1/validation/epoch-0001/bittrue/metrics.json",
+      "sha256": "c959093531f5e0bd03b08dd97fb788bd41afa682d988bb3456e799e851c44fcf"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-exact-ternary-5ep-v1-qat-seed1/validation/epoch-0002/bittrue/metrics.json",
+      "sha256": "f12f74fdf729bb841041a92c2e8075f06e726ea4181f93afb8ee94f5ad109cfd"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-exact-ternary-5ep-v1-qat-seed1/validation/epoch-0003/bittrue/metrics.json",
+      "sha256": "e85afeaa237a6a3161b2125a5a04606041d7067ab412ef11dc71e184624a313d"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-exact-ternary-5ep-v1-qat-seed1/validation/epoch-0004/bittrue/metrics.json",
+      "sha256": "222dad655ffa3c1963c59de8ea5d872b317938c64d2694bd7092df50ee702ad0"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-paper-twn-5ep-v1-qat-seed1/qat-experiment.json",
+      "sha256": "29209ba6567506af711585ce371dc5080f47637e2931250597c4a9e332ef003e"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-paper-twn-5ep-v1-qat-seed1/validation/epoch-0000/bittrue/metrics.json",
+      "sha256": "304d9280ae066c7712f832c1be59f12de4b72b0a39bba5c2a685b4912a1c5d69"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-paper-twn-5ep-v1-qat-seed1/validation/epoch-0001/bittrue/metrics.json",
+      "sha256": "fdb0dbc791f06fba2508202a15d0436e8898c5b576f47ebba17943e4c9848438"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-paper-twn-5ep-v1-qat-seed1/validation/epoch-0002/bittrue/metrics.json",
+      "sha256": "e35c678378b275a76b8d9887d897166202cbaeba907dd23e41bfab0f759fecdc"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-paper-twn-5ep-v1-qat-seed1/validation/epoch-0003/bittrue/metrics.json",
+      "sha256": "31492579b0c4a2f759568ec9ed56923322fc658947a522d56b5cce76099a4659"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-paper-twn-5ep-v1-qat-seed1/validation/epoch-0004/bittrue/metrics.json",
+      "sha256": "a65c9ad5d1400592a9074070e5a413d99087b493e327f67b1716c13bfed0c424"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-twn-5ep-v1-qat-seed1/qat-experiment.json",
+      "sha256": "2f8b86caefc2136a3ad43379e7e8eea5db26f97f9ae708edc5071a00c49899b7"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-twn-5ep-v1-qat-seed1/validation/epoch-0000/bittrue/metrics.json",
+      "sha256": "656f23b7e652c451cb667200090ec0431696dfc8293eafd54555dd2999d9b9fa"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-twn-5ep-v1-qat-seed1/validation/epoch-0001/bittrue/metrics.json",
+      "sha256": "0ad94b8bd46e43f4103eb37a69c160650ea7c84c677e4e53e012f7c3264b2a86"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-twn-5ep-v1-qat-seed1/validation/epoch-0002/bittrue/metrics.json",
+      "sha256": "d5f972cd72a69d608f9e3d81d94fd583a9c28da5b21b5ad821ebe23c0305eb24"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-twn-5ep-v1-qat-seed1/validation/epoch-0003/bittrue/metrics.json",
+      "sha256": "13813d7418baf5c41894b256e63d0d1abb3c3b399b34612de8cf40a54bbd3f30"
+    },
+    {
+      "path": "yolo_quantize/artifacts/runs/qat/continuous-0907-special-v1/continuous-0907-masf-twn-5ep-v1-qat-seed1/validation/epoch-0004/bittrue/metrics.json",
+      "sha256": "2097559cab1921841c43d905bfabdf69b3eb72c7b1d11d88c8e6f263e73835b7"
+    }
+  ],
+  "limits": [
+    "未載入模型或重跑 GPU 驗證；checkpoint 只核對存在。",
+    "首 macro trace 一致不代表本次逐張稽核完整資料順序。",
+    "本次 gate 重算以既有 EMA summary 為依據；無多 seed 或獨立 test。"
+  ]
+}

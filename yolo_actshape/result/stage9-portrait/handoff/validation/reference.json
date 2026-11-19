@@ -1,0 +1,478 @@
+{
+  "outputs": [
+    {
+      "shape": [
+        160,
+        320
+      ],
+      "seed": 1700,
+      "records": {
+        "output.detect.0": {
+          "shape": [
+            1,
+            300,
+            6
+          ],
+          "dtype": "torch.float32",
+          "sha256": "92df827c59d48c5b15ac1e0028d5796d93bf4d44f65f1e268a1d44dbce4832b0"
+        },
+        "output.detect.1.one2many.boxes": {
+          "shape": [
+            1,
+            4,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "155f7c80b46a435aa240afea551d3cd91d63d87490bf1370f57e8e87af178361"
+        },
+        "output.detect.1.one2many.scores": {
+          "shape": [
+            1,
+            80,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "740394ad741c198aaafbf3c942ea08cb5b63e9556000c1d22eec382a8294f4cc"
+        },
+        "output.detect.1.one2many.feats.0": {
+          "shape": [
+            1,
+            256,
+            20,
+            40
+          ],
+          "dtype": "torch.float32",
+          "sha256": "e350325f3fc293c342e813e257c5387dc1ea38c6699ef54aeb6838ef19c2dcbf"
+        },
+        "output.detect.1.one2many.feats.1": {
+          "shape": [
+            1,
+            512,
+            10,
+            20
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d25a8c1d5e8107249a24726ec765139879478ae28fb5676cfdd8983538ba2439"
+        },
+        "output.detect.1.one2many.feats.2": {
+          "shape": [
+            1,
+            512,
+            5,
+            10
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d7f9e04fb43e304d36521b915082d66693272d3a2396c80986981fa0f62d8817"
+        },
+        "output.detect.1.one2one.boxes": {
+          "shape": [
+            1,
+            4,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "58219fcdf9d11573761d6d4b27f6a663016805038d795245bebf3a2368a16f53"
+        },
+        "output.detect.1.one2one.scores": {
+          "shape": [
+            1,
+            80,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "39748626e202f10fd347a806067045193cdeb6bddcde250c3ee0becdb9b8df25"
+        },
+        "output.detect.1.one2one.feats.0": {
+          "shape": [
+            1,
+            256,
+            20,
+            40
+          ],
+          "dtype": "torch.float32",
+          "sha256": "e350325f3fc293c342e813e257c5387dc1ea38c6699ef54aeb6838ef19c2dcbf"
+        },
+        "output.detect.1.one2one.feats.1": {
+          "shape": [
+            1,
+            512,
+            10,
+            20
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d25a8c1d5e8107249a24726ec765139879478ae28fb5676cfdd8983538ba2439"
+        },
+        "output.detect.1.one2one.feats.2": {
+          "shape": [
+            1,
+            512,
+            5,
+            10
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d7f9e04fb43e304d36521b915082d66693272d3a2396c80986981fa0f62d8817"
+        },
+        "output.pose.0": {
+          "shape": [
+            1,
+            300,
+            12
+          ],
+          "dtype": "torch.float32",
+          "sha256": "1281a68c9b6abc6d29d28434cf28aad38fc79b77fbe6c66414b5b29bdf8d10e2"
+        },
+        "output.pose.1.one2many.boxes": {
+          "shape": [
+            1,
+            4,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "4d47ac76e5b007d0f6c240153853227f9f90b0fdc916e1908ba6aae4fdc24db0"
+        },
+        "output.pose.1.one2many.scores": {
+          "shape": [
+            1,
+            2,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "1ec16ebcb266cb75954d956c036dce723f4940e40a862cf0f7d2c9819765d491"
+        },
+        "output.pose.1.one2many.feats.0": {
+          "shape": [
+            1,
+            256,
+            20,
+            40
+          ],
+          "dtype": "torch.float32",
+          "sha256": "e350325f3fc293c342e813e257c5387dc1ea38c6699ef54aeb6838ef19c2dcbf"
+        },
+        "output.pose.1.one2many.feats.1": {
+          "shape": [
+            1,
+            512,
+            10,
+            20
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d25a8c1d5e8107249a24726ec765139879478ae28fb5676cfdd8983538ba2439"
+        },
+        "output.pose.1.one2many.feats.2": {
+          "shape": [
+            1,
+            512,
+            5,
+            10
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d7f9e04fb43e304d36521b915082d66693272d3a2396c80986981fa0f62d8817"
+        },
+        "output.pose.1.one2many.kpts": {
+          "shape": [
+            1,
+            6,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "90bf383728efae4f2ee82f0c14ff3451c4ec71c31cdb683fa3b321f448541f01"
+        },
+        "output.pose.1.one2one.boxes": {
+          "shape": [
+            1,
+            4,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "fa8954cd7ef3886d6277ea94be0b31a8a4c7912a0f8d3b8f2ef04ed585c9a5ce"
+        },
+        "output.pose.1.one2one.scores": {
+          "shape": [
+            1,
+            2,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "ac8d85acfd6e883837eb8aed5ac9d9f03ce38da798e840f4fc9d0d6b9af94fd0"
+        },
+        "output.pose.1.one2one.feats.0": {
+          "shape": [
+            1,
+            256,
+            20,
+            40
+          ],
+          "dtype": "torch.float32",
+          "sha256": "e350325f3fc293c342e813e257c5387dc1ea38c6699ef54aeb6838ef19c2dcbf"
+        },
+        "output.pose.1.one2one.feats.1": {
+          "shape": [
+            1,
+            512,
+            10,
+            20
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d25a8c1d5e8107249a24726ec765139879478ae28fb5676cfdd8983538ba2439"
+        },
+        "output.pose.1.one2one.feats.2": {
+          "shape": [
+            1,
+            512,
+            5,
+            10
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d7f9e04fb43e304d36521b915082d66693272d3a2396c80986981fa0f62d8817"
+        },
+        "output.pose.1.one2one.kpts": {
+          "shape": [
+            1,
+            6,
+            1050
+          ],
+          "dtype": "torch.float32",
+          "sha256": "f9fe4388246d1013b72152651c9eada198d0f81d335515c0a452a38a806ab989"
+        }
+      }
+    },
+    {
+      "shape": [
+        768,
+        512
+      ],
+      "seed": 1701,
+      "records": {
+        "output.detect.0": {
+          "shape": [
+            1,
+            300,
+            6
+          ],
+          "dtype": "torch.float32",
+          "sha256": "ea5f34664cc0f94bb8a946696f6d8fbe8c6dd832651f69516a6b1cdb3b8ea20f"
+        },
+        "output.detect.1.one2many.boxes": {
+          "shape": [
+            1,
+            4,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "695544dd6724a152d715b46ab8d16629ae4216c8961ac5af3746b14a7819e4cc"
+        },
+        "output.detect.1.one2many.scores": {
+          "shape": [
+            1,
+            80,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "c272f1f21f659600ddf172a9db4bbc87f38d12ee1ec8c0ce56cb22af02ab0f65"
+        },
+        "output.detect.1.one2many.feats.0": {
+          "shape": [
+            1,
+            256,
+            96,
+            64
+          ],
+          "dtype": "torch.float32",
+          "sha256": "077748c3cf9697090ca2e6503a82e61c5e959b3e13d148abc85c7068d110f314"
+        },
+        "output.detect.1.one2many.feats.1": {
+          "shape": [
+            1,
+            512,
+            48,
+            32
+          ],
+          "dtype": "torch.float32",
+          "sha256": "49e327bae4f9a361098a1c6e08f4d4c2cb293a024662774699ac9a1f953de18e"
+        },
+        "output.detect.1.one2many.feats.2": {
+          "shape": [
+            1,
+            512,
+            24,
+            16
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d017c604de937dea1f97027061f97220e190340b17e10f2ee0dd592e9c5fe2e3"
+        },
+        "output.detect.1.one2one.boxes": {
+          "shape": [
+            1,
+            4,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d16f9d12861dd74ab25f593bef64c97c7001d8f2f066a1289e72d580f244f194"
+        },
+        "output.detect.1.one2one.scores": {
+          "shape": [
+            1,
+            80,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "f8a54b9e6f3ac98691323072dbb267daa084aa8d377d05eabf167517b69e72d2"
+        },
+        "output.detect.1.one2one.feats.0": {
+          "shape": [
+            1,
+            256,
+            96,
+            64
+          ],
+          "dtype": "torch.float32",
+          "sha256": "077748c3cf9697090ca2e6503a82e61c5e959b3e13d148abc85c7068d110f314"
+        },
+        "output.detect.1.one2one.feats.1": {
+          "shape": [
+            1,
+            512,
+            48,
+            32
+          ],
+          "dtype": "torch.float32",
+          "sha256": "49e327bae4f9a361098a1c6e08f4d4c2cb293a024662774699ac9a1f953de18e"
+        },
+        "output.detect.1.one2one.feats.2": {
+          "shape": [
+            1,
+            512,
+            24,
+            16
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d017c604de937dea1f97027061f97220e190340b17e10f2ee0dd592e9c5fe2e3"
+        },
+        "output.pose.0": {
+          "shape": [
+            1,
+            300,
+            12
+          ],
+          "dtype": "torch.float32",
+          "sha256": "81383fd1058d731c2bb75c9c9503784b225911e4a25e11fd9a9b5c3d57d6a86e"
+        },
+        "output.pose.1.one2many.boxes": {
+          "shape": [
+            1,
+            4,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "1e14ffde3d6f9b0a560ae2768da3f6f21d36412b139600b405ff9c23b4770a90"
+        },
+        "output.pose.1.one2many.scores": {
+          "shape": [
+            1,
+            2,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "6d1bee0055dde0b6ea745ebc633d1b43e18257d1a8c7d834c77cb6d347092f3b"
+        },
+        "output.pose.1.one2many.feats.0": {
+          "shape": [
+            1,
+            256,
+            96,
+            64
+          ],
+          "dtype": "torch.float32",
+          "sha256": "077748c3cf9697090ca2e6503a82e61c5e959b3e13d148abc85c7068d110f314"
+        },
+        "output.pose.1.one2many.feats.1": {
+          "shape": [
+            1,
+            512,
+            48,
+            32
+          ],
+          "dtype": "torch.float32",
+          "sha256": "49e327bae4f9a361098a1c6e08f4d4c2cb293a024662774699ac9a1f953de18e"
+        },
+        "output.pose.1.one2many.feats.2": {
+          "shape": [
+            1,
+            512,
+            24,
+            16
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d017c604de937dea1f97027061f97220e190340b17e10f2ee0dd592e9c5fe2e3"
+        },
+        "output.pose.1.one2many.kpts": {
+          "shape": [
+            1,
+            6,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "54f362747cd331208bf2320a2106faa13bbb097f61e82a81376678c3be593017"
+        },
+        "output.pose.1.one2one.boxes": {
+          "shape": [
+            1,
+            4,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "f23a71145dea21eb87c7ea295c2580360ec49a55dd306fc34c2b23a706035cba"
+        },
+        "output.pose.1.one2one.scores": {
+          "shape": [
+            1,
+            2,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "192a0c12256c2e7ff2c038bf9693e7a5e5ed1d2fba3c1a95f50618bb019c3236"
+        },
+        "output.pose.1.one2one.feats.0": {
+          "shape": [
+            1,
+            256,
+            96,
+            64
+          ],
+          "dtype": "torch.float32",
+          "sha256": "077748c3cf9697090ca2e6503a82e61c5e959b3e13d148abc85c7068d110f314"
+        },
+        "output.pose.1.one2one.feats.1": {
+          "shape": [
+            1,
+            512,
+            48,
+            32
+          ],
+          "dtype": "torch.float32",
+          "sha256": "49e327bae4f9a361098a1c6e08f4d4c2cb293a024662774699ac9a1f953de18e"
+        },
+        "output.pose.1.one2one.feats.2": {
+          "shape": [
+            1,
+            512,
+            24,
+            16
+          ],
+          "dtype": "torch.float32",
+          "sha256": "d017c604de937dea1f97027061f97220e190340b17e10f2ee0dd592e9c5fe2e3"
+        },
+        "output.pose.1.one2one.kpts": {
+          "shape": [
+            1,
+            6,
+            8064
+          ],
+          "dtype": "torch.float32",
+          "sha256": "13521b5d32b5e40d071e3675b3a81961a7206007c61a1b9ff19684d6fd418bca"
+        }
+      }
+    }
+  ]
+}

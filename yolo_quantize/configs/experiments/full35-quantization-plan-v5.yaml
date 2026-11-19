@@ -1,0 +1,153 @@
+schema_version: 5
+plan_id: full35-activation-aware-quantization-v5
+date: '2026-09-03'
+supersedes: full35-activation-aware-quantization-v4
+status: stage1_bit_boundary_and_stage2_region_w8_complete_stage3_combined_policy_in_progress
+execution_authorized: true
+formal_training_started: false
+
+purpose:
+  objective: 在activation替換與weight量化合併後，尋找精度優先的容量Pareto平衡點
+  hard_accuracy_contract: 八項mAP50相對accepted Full35的最差絕對下降不得超過0.015
+  optimization_order: [hard_gate, maximize_worst_task_map50, minimize_packed_weight_bytes]
+  accuracy_tolerance_for_balanced_role: 0.002
+  activation_replacement_included_in_total_delta: true
+  mean_metric_can_override_worst_task: false
+
+frozen_history:
+  aggregate_plan: configs/experiments/full35-quantization-plan-v4.yaml
+  metric_family: map50_95
+  total_max_drop: 0.04
+  note: v4原始檔、raw metrics、hash與報告保留；不得原地改寫為v5結論
+
+immutable_sources:
+  accepted_checkpoint: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt
+  accepted_checkpoint_sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+  coco: /home/uxin/yolo/coco2017.yaml
+  bbat5_registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+  bbat5_search: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose-search.yaml
+  bbat5_formal: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  bbat5_assignment_changed: false
+  random_split_created: false
+
+activation_policies:
+  new_silu_runs: false
+  active:
+    - id: qsilu_pq--lsq-plus-a8
+      role: accuracy_fallback
+      checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+      sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    - id: hardswish--lsq-plus-a8
+      role: standard_hardware_operator
+      checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-hardswish-seed1/inference/best_joint.pt
+      sha256: 79e0e4f615a7d8b82da4fd244165d2c035d7a523681833392d30b66e57177731
+    - id: poly_shift--lsq-plus-a8
+      role: dyadic_hardware_extreme
+      checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+      sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+  q3_regional_hardswish_order: [neck_attention, masf, backbone_attention]
+  excluded_future:
+    poly_quality: {preserve_historical_artifacts: true}
+
+graph_contract:
+  view: bn_folded_deployment
+  deployment_candidate_modules: 148
+  deployment_candidate_weights: 22571840
+  training_only_excluded_modules: 99
+  binary_qk_protected_modules: 4
+  protected_semantics: [binary_qk, attention_pwl, topk, gather, box_decode, keypoint_decode]
+  dfl_quantization: false
+  nms_quantization: false
+
+metric_gate:
+  metric_family: map50
+  metric_contract_id: full35-coco-val-bbat5-search-val-bittrue-map50-v1
+  keys:
+    - coco/box/map50
+    - coco/person/box/map50
+    - bbat/box/map50
+    - bbat/pose/map50
+    - bbat/ball/box/map50
+    - bbat/bat/box/map50
+    - bbat/ball/pose/map50
+    - bbat/bat/pose/map50
+  total_max_drop: 0.015
+  activation_replacement_included: true
+  w8_incremental_max_drop: 0.01
+  matched_sham_max_absolute_drift: 0.01
+  recovery_floor: 0.04
+  unit: absolute_map_on_zero_to_one_scale
+
+completed_stage1:
+  parent: qsilu_pq--lsq-plus-a8
+  region: backbone_early
+  diagnostics:
+    grid_w7_w4: artifacts/reports/weight-ptq-qsilu-backbone-early-w7-w4-grid-diagnostic-v4.json
+    exact_w4: artifacts/reports/weight-ptq-qsilu-backbone-early-w4-exact-diagnostic-v4.json
+  map50_regate: artifacts/reports/v5-qsilu-backbone-early-w8-map50-regate-v1.json
+  bit_search: artifacts/reports/v5-qsilu-backbone-early-bit-search-v1.json
+  outcomes:
+    w8: {decision: green, worst_total_delta: -0.01140780541415487}
+    w7: {decision: recover, worst_total_delta: -0.020949834545670787}
+    w6: {decision: reject, worst_total_delta: -0.04468562198245862}
+    w5: {decision: reject, worst_total_delta: -0.28676872394574904}
+    w4_grid: {decision: reject, worst_total_delta: -0.9713332423791344}
+    w4_exact: {decision: reject, worst_total_delta: -0.8547782992897037}
+  pareto_roles: {accuracy: w8, balanced: w8, hardware: w8}
+  conclusion: 不對整個backbone_early套用低於8-bit PTQ；W7只保留為QAT或layer-mixed recover候選
+
+staged_execution:
+  - stage: 2
+    state: completed
+    scope: qsilu_pq--lsq-plus-a8的其餘九區isolated W8
+    order: [backbone_deep, backbone_attention_safe, neck, masf, neck_attention_safe, detect_one2one_tower, detect_one2one_predictor, pose_one2one_tower, pose_one2one_predictor]
+    stop_rule: 每格先diagnostic，再使用完整COCO val與固定600張BBAT5 search-val；不碰formal-val
+    result: 8格green；backbone_attention_safe為recover；isolated accuracy=masf、balanced/hardware=neck
+  - stage: 3
+    state: in_progress
+    scope: 通過區域的累積W8與layer/group mixed precision
+    rule: 每加入一區都重新量測，不相加isolated delta
+  - stage: 4
+    state: pending
+    scope: exact uniform W4、Fixed SD4、Paper-TWN、APoT4與LS-SD4
+    rule: 只測uniform敏感度支持的低敏感層；Fixed SD4與LS-SD4分開
+  - stage: 5
+    state: pending
+    scope: uniform Hardswish、poly_shift與Q3 regional Hardswish的activation×weight耦合驗證
+  - stage: 6
+    state: pending
+    scope: 只對recover候選做fold-aware QAT、matched sham與有限HPO
+  - stage: 7
+    state: pending
+    scope: 鎖定Pareto finalists後才做formal、多seed、長訓練、packed export與硬體測量
+
+weight_formats:
+  uniform_bits: [8, 7, 6, 5, 4]
+  granularity: per_output_channel
+  uniform_scale_methods: [mse_grid_v1, optimal_scaled_codebook]
+  special: [fixed_sd4, ls_sd4, paper_twn, channel_twn, ttq, apot4]
+  accumulator: int32
+  non_power_of_two_bits_hardware_claim: 只有容量與BOP代理，沒有native kernel不得宣稱GPU加速
+
+qat:
+  from_scratch: false
+  prerequisite: fold_aware_effective_weight_grid_resolved
+  quantized_weight: W_eff_equals_gamma_times_W_over_sqrt_running_var_plus_eps
+  bn_running_statistics: frozen
+  matched_sham_required: true
+  primary_optimizer: AdamW
+  optimizer_hpo: MuSGD只能作另立matched-sham的paired pilot
+  detect_logical_batch: 128
+  pose_physical_probe_order: [16, 8, 4]
+  loss_weights: {detect: 1.0, pose: 0.25}
+  augmentation: accepted_full35_exact
+  added_noise: false
+  short_epochs: [5, 10, 15]
+  extended_epochs: [20, 60]
+  promotion: 只有short recovery趨勢與matched sham都有效才延長
+
+formal:
+  finalists_only: true
+  all_eight_map50_total_drop_each_seed: 0.015
+  report: [mean, standard_deviation, worst_seed]
+  deferred_final_optimizations: [pq, freq, kd, masf_freq]

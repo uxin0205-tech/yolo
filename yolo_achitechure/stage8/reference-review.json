@@ -1,0 +1,492 @@
+{
+  "schema": "stage8-reference-review-v2",
+  "reviewed_at": "2026-11-07T14:11:12.942163+08:00",
+  "reviewed_before_implementation": true,
+  "sources_sha256": {
+    "yolo_optimize/experiments/pose_only_rep_v1/config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/models.py": "d0292e87cd05a5bd71dae2642c2a5844fd6edf47f3a6811af1c0e59414619ba9",
+    "yolo_optimize/experiments/pose_only_rep_v1/run_arm.py": "5b0e609d7e07823f08102ee15d77ee080550d971cb98177373e87e650a03030f",
+    "yolo_optimize/experiments/pose_only_rep_v1/preflight.py": "663cc670f329d84f23a2f8750214ecc961f05ca714fc60189972e5839cb59553",
+    "yolo_optimize/experiments/pose_only_rep_v1/queue-plan.json": "7196a645e590e9d00a822804ccbb008d5c7c482c251f5e95ec9139d9cf202570",
+    "yolo_optimize/experiments/pose_only_rep_v1/RESULTS.md": "4b0e059a3397d14faf206d814c6ea6396dbe5f014337a5a98c793efc2ae045e5",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/final-audit.json": "b1d0c829fb139a20f6471b3b58c6debdd374d775bebd279b42dc49be1ca7de97",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17/train/resolved-config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17/train/summary.json": "e016fbe77f88c445fcc02bdb2b68758528996459e64ca6a8513fe9aaa311f0a4",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17/smoke/summary.json": "92f5a1b15d4d1694cbd64e3e90e6290d3402cdf986465ac4fa6ae6ec357bc438",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep20/train/resolved-config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep20/train/summary.json": "1934d4b7e6c398ddf9a89d9350ec185229b551f6d534370f06c265ea1c3faa19",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep20/smoke/summary.json": "5718efe229da5251a24c20815bcf4da454fdec8c66f2989bbd5ab47b4f8c2196",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17_20/train/resolved-config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17_20/train/summary.json": "935f0d3678a011d1519974deb84fa4d27af74ff0db35459d584638f089a2462b",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17_20/smoke/summary.json": "55ee2caf2a3067b71d18d0a4f5fddbd56aaac77df5f01460080e2f2b00f6fa07",
+    "yolo_optimize/experiments/src/yolo_optimize/repconv.py": "191b09a8f404f2a30e70d3b70e70618a6ae084fa3af690030300f13b7a20dfe7",
+    "yolo_optimize/experiments/pose_masf_training_v1/training_b.py": "f122fa9310cfc27b510448d4b720de801dfe7a72f0528b4dcee9afbf84956788",
+    "yolo_activation/stage7/training.py": "fb00e5ac2d1c802662ab813ff00db40710dc51df34133c6a4eb5e33a5bf49826",
+    "yolo_activation/stage7/ops.py": "4e89e08df201141176cbf5486ac51ed8d103976b7fc83d6484c820bd8a9dffc0",
+    "yolo_activation/stage7/model.py": "3c245f039979c62a001733f8c04042eee0c012a4cfec26b870e1fc1bab6f7762",
+    "yolo_combine/stage6/ops.py": "e8e5de235400271355a2ce19d7036e90a658568a795fb93cca57edc1a71bd671",
+    "yolo_combine/stage6/data.py": "7ea7addc67a6f84475b41220f1701ce31cf8a6b12b9f9352b33ead1c0f82ecf5",
+    "yolo_combine/stage6/evaluate.py": "bb3aab46dd653dbbf967879f5335a6c1a1d35ca55bb054b65e70b17f26d7a17e",
+    "yolo_attention/src/yolo_attention/stage3_checkpoint.py": "aaf7ce31c273f6df6d94f51f6f3eda6360a552761c77d19c47dd82986eee88e4",
+    "yolo_p2/ultralytics/nn/modules/conv.py": "c802f36ea1596d8910f2b651d57877b50a4960857b97cbb5a20d44a1dbbaa774"
+  },
+  "optimize_actual_runs": {
+    "rep17": {
+      "config": {
+        "epochs": 5,
+        "warmup_epochs": 1,
+        "seed": 1,
+        "imgsz": 640,
+        "optimizer": "AdamW",
+        "betas": [
+          0.948,
+          0.999
+        ],
+        "weight_decay": 0.00027,
+        "lrs": {
+          "heads": 5e-06,
+          "attention": 1e-05,
+          "scale": 0.0002,
+          "bias": 1e-05,
+          "rep": 1e-05
+        },
+        "detect_physical_batch": 16,
+        "detect_microbatches_per_macro": 16,
+        "detect_images_per_macro_max": 256,
+        "pose_physical_batch": 16,
+        "reference_batch": 64,
+        "task_weights": {
+          "detect": 1.0,
+          "pose": 0.25
+        },
+        "steps_per_epoch": 463,
+        "coco_train_images": 118287,
+        "bbat_train_images": 5964,
+        "coco_val_images": 5000,
+        "bbat_val_images": 683,
+        "all_bn_running_fixed": true,
+        "shared_only_selected_attention_or_rep_trainable": true,
+        "parent_sha256": "a80d68947b112b11c418b0ec438dc4fbb73f63bd6be91249a2f4664c1d7a718d",
+        "no_unchanged_control_training": true,
+        "no_extra_epochs": true,
+        "original_paused_jobs_not_resumed": true,
+        "binary_scale_format": "unsigned m/1024, 1<=m<=1024",
+        "binary_bias_format": "signed 16-bit m/1024",
+        "catastrophic_ap_drop_from_own_e0": 0.05,
+        "validation_tolerance_vs_parent_for_candidate": 0.001,
+        "reference_reuse": "/home/uxin/yolo/yolo_optimize/experiments/binaryqk_masf_pair_v1/artifacts/pose_only_masf/train/summary.json",
+        "attention_fixed": true,
+        "sequential_lineage": "B E5 BinaryQK + Pose-only MASF -> independent Rep17 / Rep20 / Rep17_20",
+        "detect_masf": false,
+        "pose_masf": true,
+        "pose_masf_fixed": true,
+        "training_scope": "selected Rep layers + both heads; Pose MASF and Attention frozen"
+      },
+      "status": "completed",
+      "epoch_ap": {
+        "1": {
+          "coco/box/map50_95": 0.5049182041473498,
+          "coco/person/box/map50_95": 0.6264806465231982,
+          "bbat/box/map50_95": 0.6083298509399383,
+          "bbat/pose/map50_95": 0.890221373037839,
+          "bbat/ball/box/map50_95": 0.49355477816933285,
+          "bbat/ball/pose/map50_95": 0.8588392730153922,
+          "bbat/bat/box/map50_95": 0.7231049237105438,
+          "bbat/bat/pose/map50_95": 0.921603473060286
+        },
+        "2": {
+          "coco/box/map50_95": 0.5052350170528204,
+          "coco/person/box/map50_95": 0.6267529912555727,
+          "bbat/box/map50_95": 0.6106066150304754,
+          "bbat/pose/map50_95": 0.8909697920904552,
+          "bbat/ball/box/map50_95": 0.4958767257636244,
+          "bbat/ball/pose/map50_95": 0.8611896586316018,
+          "bbat/bat/box/map50_95": 0.7253365042973263,
+          "bbat/bat/pose/map50_95": 0.9207499255493088
+        },
+        "3": {
+          "coco/box/map50_95": 0.505945854101151,
+          "coco/person/box/map50_95": 0.6274294092740506,
+          "bbat/box/map50_95": 0.611964287279835,
+          "bbat/pose/map50_95": 0.8922494456450233,
+          "bbat/ball/box/map50_95": 0.49814561407814295,
+          "bbat/ball/pose/map50_95": 0.8634957148018081,
+          "bbat/bat/box/map50_95": 0.7257829604815272,
+          "bbat/bat/pose/map50_95": 0.9210031764882386
+        },
+        "4": {
+          "coco/box/map50_95": 0.5063143541070422,
+          "coco/person/box/map50_95": 0.6265837642534787,
+          "bbat/box/map50_95": 0.6101441186202694,
+          "bbat/pose/map50_95": 0.8899858110742027,
+          "bbat/ball/box/map50_95": 0.4923727009609717,
+          "bbat/ball/pose/map50_95": 0.8584280961120477,
+          "bbat/bat/box/map50_95": 0.7279155362795672,
+          "bbat/bat/pose/map50_95": 0.9215435260363579
+        },
+        "5": {
+          "coco/box/map50_95": 0.5058769641158806,
+          "coco/person/box/map50_95": 0.6272727678470732,
+          "bbat/box/map50_95": 0.6081609096786779,
+          "bbat/pose/map50_95": 0.889432231384571,
+          "bbat/ball/box/map50_95": 0.4917861911578162,
+          "bbat/ball/pose/map50_95": 0.8575512748184597,
+          "bbat/bat/box/map50_95": 0.7245356281995393,
+          "bbat/bat/pose/map50_95": 0.921313187950682
+        }
+      },
+      "smoke": {
+        "status": "completed",
+        "guard_passed": true,
+        "formal_epoch": false,
+        "peak_allocated_bytes": 6458960896
+      },
+      "parent_sha256": "a80d68947b112b11c418b0ec438dc4fbb73f63bd6be91249a2f4664c1d7a718d"
+    },
+    "rep20": {
+      "config": {
+        "epochs": 5,
+        "warmup_epochs": 1,
+        "seed": 1,
+        "imgsz": 640,
+        "optimizer": "AdamW",
+        "betas": [
+          0.948,
+          0.999
+        ],
+        "weight_decay": 0.00027,
+        "lrs": {
+          "heads": 5e-06,
+          "attention": 1e-05,
+          "scale": 0.0002,
+          "bias": 1e-05,
+          "rep": 1e-05
+        },
+        "detect_physical_batch": 16,
+        "detect_microbatches_per_macro": 16,
+        "detect_images_per_macro_max": 256,
+        "pose_physical_batch": 16,
+        "reference_batch": 64,
+        "task_weights": {
+          "detect": 1.0,
+          "pose": 0.25
+        },
+        "steps_per_epoch": 463,
+        "coco_train_images": 118287,
+        "bbat_train_images": 5964,
+        "coco_val_images": 5000,
+        "bbat_val_images": 683,
+        "all_bn_running_fixed": true,
+        "shared_only_selected_attention_or_rep_trainable": true,
+        "parent_sha256": "a80d68947b112b11c418b0ec438dc4fbb73f63bd6be91249a2f4664c1d7a718d",
+        "no_unchanged_control_training": true,
+        "no_extra_epochs": true,
+        "original_paused_jobs_not_resumed": true,
+        "binary_scale_format": "unsigned m/1024, 1<=m<=1024",
+        "binary_bias_format": "signed 16-bit m/1024",
+        "catastrophic_ap_drop_from_own_e0": 0.05,
+        "validation_tolerance_vs_parent_for_candidate": 0.001,
+        "reference_reuse": "/home/uxin/yolo/yolo_optimize/experiments/binaryqk_masf_pair_v1/artifacts/pose_only_masf/train/summary.json",
+        "attention_fixed": true,
+        "sequential_lineage": "B E5 BinaryQK + Pose-only MASF -> independent Rep17 / Rep20 / Rep17_20",
+        "detect_masf": false,
+        "pose_masf": true,
+        "pose_masf_fixed": true,
+        "training_scope": "selected Rep layers + both heads; Pose MASF and Attention frozen"
+      },
+      "status": "completed",
+      "epoch_ap": {
+        "1": {
+          "coco/box/map50_95": 0.5054545756545228,
+          "coco/person/box/map50_95": 0.626757558178873,
+          "bbat/box/map50_95": 0.6070086879393679,
+          "bbat/pose/map50_95": 0.8885122621164523,
+          "bbat/ball/box/map50_95": 0.4902886933791649,
+          "bbat/ball/pose/map50_95": 0.8568345033712556,
+          "bbat/bat/box/map50_95": 0.7237286824995708,
+          "bbat/bat/pose/map50_95": 0.9201900208616497
+        },
+        "2": {
+          "coco/box/map50_95": 0.505512096298012,
+          "coco/person/box/map50_95": 0.6271568435202157,
+          "bbat/box/map50_95": 0.609059103674979,
+          "bbat/pose/map50_95": 0.8875391944286294,
+          "bbat/ball/box/map50_95": 0.4914409061746146,
+          "bbat/ball/pose/map50_95": 0.8549693343510146,
+          "bbat/bat/box/map50_95": 0.7266773011753432,
+          "bbat/bat/pose/map50_95": 0.9201090545062447
+        },
+        "3": {
+          "coco/box/map50_95": 0.5058507152515517,
+          "coco/person/box/map50_95": 0.6269127681120319,
+          "bbat/box/map50_95": 0.608997103931012,
+          "bbat/pose/map50_95": 0.8861134869267205,
+          "bbat/ball/box/map50_95": 0.4928861820370119,
+          "bbat/ball/pose/map50_95": 0.8532900232004333,
+          "bbat/bat/box/map50_95": 0.7251080258250122,
+          "bbat/bat/pose/map50_95": 0.9189369506530077
+        },
+        "4": {
+          "coco/box/map50_95": 0.5063376551782635,
+          "coco/person/box/map50_95": 0.6268620010514663,
+          "bbat/box/map50_95": 0.6086183522677668,
+          "bbat/pose/map50_95": 0.8866082932178978,
+          "bbat/ball/box/map50_95": 0.49285870357284967,
+          "bbat/ball/pose/map50_95": 0.854133813225913,
+          "bbat/bat/box/map50_95": 0.7243780009626839,
+          "bbat/bat/pose/map50_95": 0.919082773209883
+        },
+        "5": {
+          "coco/box/map50_95": 0.5060793843803478,
+          "coco/person/box/map50_95": 0.6269405353053652,
+          "bbat/box/map50_95": 0.6078686096603704,
+          "bbat/pose/map50_95": 0.8870362648587369,
+          "bbat/ball/box/map50_95": 0.49064531719693677,
+          "bbat/ball/pose/map50_95": 0.8535921941345828,
+          "bbat/bat/box/map50_95": 0.725091902123804,
+          "bbat/bat/pose/map50_95": 0.9204803355828908
+        }
+      },
+      "smoke": {
+        "status": "completed",
+        "guard_passed": true,
+        "formal_epoch": false,
+        "peak_allocated_bytes": 5738052608
+      },
+      "parent_sha256": "a80d68947b112b11c418b0ec438dc4fbb73f63bd6be91249a2f4664c1d7a718d"
+    },
+    "rep17_20": {
+      "config": {
+        "epochs": 5,
+        "warmup_epochs": 1,
+        "seed": 1,
+        "imgsz": 640,
+        "optimizer": "AdamW",
+        "betas": [
+          0.948,
+          0.999
+        ],
+        "weight_decay": 0.00027,
+        "lrs": {
+          "heads": 5e-06,
+          "attention": 1e-05,
+          "scale": 0.0002,
+          "bias": 1e-05,
+          "rep": 1e-05
+        },
+        "detect_physical_batch": 16,
+        "detect_microbatches_per_macro": 16,
+        "detect_images_per_macro_max": 256,
+        "pose_physical_batch": 16,
+        "reference_batch": 64,
+        "task_weights": {
+          "detect": 1.0,
+          "pose": 0.25
+        },
+        "steps_per_epoch": 463,
+        "coco_train_images": 118287,
+        "bbat_train_images": 5964,
+        "coco_val_images": 5000,
+        "bbat_val_images": 683,
+        "all_bn_running_fixed": true,
+        "shared_only_selected_attention_or_rep_trainable": true,
+        "parent_sha256": "a80d68947b112b11c418b0ec438dc4fbb73f63bd6be91249a2f4664c1d7a718d",
+        "no_unchanged_control_training": true,
+        "no_extra_epochs": true,
+        "original_paused_jobs_not_resumed": true,
+        "binary_scale_format": "unsigned m/1024, 1<=m<=1024",
+        "binary_bias_format": "signed 16-bit m/1024",
+        "catastrophic_ap_drop_from_own_e0": 0.05,
+        "validation_tolerance_vs_parent_for_candidate": 0.001,
+        "reference_reuse": "/home/uxin/yolo/yolo_optimize/experiments/binaryqk_masf_pair_v1/artifacts/pose_only_masf/train/summary.json",
+        "attention_fixed": true,
+        "sequential_lineage": "B E5 BinaryQK + Pose-only MASF -> independent Rep17 / Rep20 / Rep17_20",
+        "detect_masf": false,
+        "pose_masf": true,
+        "pose_masf_fixed": true,
+        "training_scope": "selected Rep layers + both heads; Pose MASF and Attention frozen"
+      },
+      "status": "completed",
+      "epoch_ap": {
+        "1": {
+          "coco/box/map50_95": 0.5053947012245313,
+          "coco/person/box/map50_95": 0.6266145410751213,
+          "bbat/box/map50_95": 0.6059486762259074,
+          "bbat/pose/map50_95": 0.8878995664057483,
+          "bbat/ball/box/map50_95": 0.48784868731938824,
+          "bbat/ball/pose/map50_95": 0.8546059917104716,
+          "bbat/bat/box/map50_95": 0.7240486651324265,
+          "bbat/bat/pose/map50_95": 0.9211931411010248
+        },
+        "2": {
+          "coco/box/map50_95": 0.5049186722261797,
+          "coco/person/box/map50_95": 0.6271251653808398,
+          "bbat/box/map50_95": 0.610416763769956,
+          "bbat/pose/map50_95": 0.889791697313098,
+          "bbat/ball/box/map50_95": 0.49617047256892255,
+          "bbat/ball/pose/map50_95": 0.8589540521604528,
+          "bbat/bat/box/map50_95": 0.7246630549709894,
+          "bbat/bat/pose/map50_95": 0.9206293424657433
+        },
+        "3": {
+          "coco/box/map50_95": 0.505493427993866,
+          "coco/person/box/map50_95": 0.6267843998003018,
+          "bbat/box/map50_95": 0.6134288374365291,
+          "bbat/pose/map50_95": 0.893064436535715,
+          "bbat/ball/box/map50_95": 0.4988040357747951,
+          "bbat/ball/pose/map50_95": 0.8640239584872559,
+          "bbat/bat/box/map50_95": 0.7280536390982634,
+          "bbat/bat/pose/map50_95": 0.9221049145841741
+        },
+        "4": {
+          "coco/box/map50_95": 0.5058963065404167,
+          "coco/person/box/map50_95": 0.6268655110578264,
+          "bbat/box/map50_95": 0.6112538407049634,
+          "bbat/pose/map50_95": 0.8918804604597321,
+          "bbat/ball/box/map50_95": 0.49501677809506617,
+          "bbat/ball/pose/map50_95": 0.8611217359045471,
+          "bbat/bat/box/map50_95": 0.7274909033148604,
+          "bbat/bat/pose/map50_95": 0.9226391850149174
+        },
+        "5": {
+          "coco/box/map50_95": 0.5058692362707653,
+          "coco/person/box/map50_95": 0.626986020192464,
+          "bbat/box/map50_95": 0.6097972367715616,
+          "bbat/pose/map50_95": 0.8910405728870566,
+          "bbat/ball/box/map50_95": 0.49239673299037545,
+          "bbat/ball/pose/map50_95": 0.8588764772627874,
+          "bbat/bat/box/map50_95": 0.7271977405527478,
+          "bbat/bat/pose/map50_95": 0.9232046685113258
+        }
+      },
+      "smoke": {
+        "status": "completed",
+        "guard_passed": true,
+        "formal_epoch": false,
+        "peak_allocated_bytes": 6500487168
+      },
+      "parent_sha256": "a80d68947b112b11c418b0ec438dc4fbb73f63bd6be91249a2f4664c1d7a718d"
+    }
+  },
+  "adopted": [
+    "原生 ultralytics RepConv；3x3 繼承，1x1 BN gamma/beta 為零；相加後 activation",
+    "只訓選定 Rep 與兩 heads；所有 BN running 固定；Attention 固定",
+    "AdamW (.948,.999)；Rep LR1e-5、heads5e-6；5E warmup1/cosine .5；fresh EMA",
+    "Detect16x16、Pose16、reference64；完整資料、AMP canonical FP32 CIoU、clip10"
+  ],
+  "differences": {
+    "training_operators": "SiLU + FP32 exact Softmax；此為本專案延伸，optimize 實際仍用 qSiLU/PWL，不能冒稱已有驗證",
+    "parent": "Stage7 qSiLU E8 權重轉常規算子；三組共同 parent；無 MASF；B2/S1 保留",
+    "deployment": "先相同算子 FP32 fold，再換回固定 qSiLU/D1 整數完整 Softmax；不宣稱兩種 operator 等價",
+    "pose_weight": "新前向以 train-only 梯度校準，非直接複製 optimize .25",
+    "budget": "各5E；改善持續才多5E、LR減半；最多30E",
+    "selection": "每E原生及硬體部署完整AP，依部署AP選；與Stage7及v1最佳比較"
+  },
+  "verification": [
+    "所有候選 native 零分支初始化等價",
+    "D1/qSiLU 初始還原與 Stage7 等價",
+    "非零分支線性及完整輸出 FP32/FP16 folding",
+    "native/folded/hardware manifest、alias、常數及重載",
+    "實際算子呼叫、兩 task 梯度及 frozen/EMA",
+    "正式部署 AP；不以原生AP替代"
+  ],
+  "v1_source_sha256": {
+    "yolo_achitechure/stage8/__init__.py": "1178a5818ee091ae872d56d98707c48c251fb8dc0db9d0906e86dbf0baf53318",
+    "yolo_achitechure/stage8/calibration.py": "2da46270b4f73cff671e5868be7260f9a1c264c39351a52f1a128ae7ba87737f",
+    "yolo_achitechure/stage8/common.py": "a42b7392fd8ed1fe7b42b358f98d899cc4dd45ba772f3756098a0085439ecb4e",
+    "yolo_achitechure/stage8/diagnostics.py": "ae56037e8ea876622b4d08b52c998463a21fa31041dd402687a9a2d9b895f023",
+    "yolo_achitechure/stage8/evaluate.py": "80f152b8075abeeefdbafb441a67a48f9ca7a9e6e66dedab245fed66eb147a20",
+    "yolo_achitechure/stage8/model.py": "74c01b1311201640df3ccf12cc8405382729f5c25ab3d7fcbe60cd424752ee91",
+    "yolo_achitechure/stage8/ops.py": "c824fd2c83f2c219fbd0d2a9e21629755b4864b3a162340dab180a1e0853da80",
+    "yolo_achitechure/stage8/packaging.py": "423ace7ef0a295dec1f7546f5a429bfd6d42455056d9253fdba4d47406aec7a3",
+    "yolo_achitechure/stage8/portable_loader.py": "fd958be78a3fc23111b593470e001468c9ec8def111cfb5a2acd749ca8ab12bf",
+    "yolo_achitechure/stage8/portable_validate.py": "0ab19388b4458eb19902e8aaca4d4107d49cda2f279191a29f20d8dcce628103",
+    "yolo_achitechure/stage8/redraw.py": "aa27505ab53917a33fd1dea82788e1df0fe0af650ac4fd4d38adbc2e8b84139e",
+    "yolo_achitechure/stage8/rep.py": "d123010e4f1ff59ff309e8c3e5b6b6cd33ec6df1005757da6e50f4dba6e8c678",
+    "yolo_achitechure/stage8/report.py": "b0431012dc11993e5ef49a1b2fa209fc1e00b51e22efd105373b213d72fdb039",
+    "yolo_achitechure/stage8/runner.py": "bf8796684190031658eae05c005dcf6b2eef2fb040c28e8fdde17d55607596c2",
+    "yolo_achitechure/stage8/training.py": "2563aa70c804f9794253162aef376426f91e0bbf6d2b7f8b9736edb034789b52"
+  },
+  "unresolved": "精度恢復程度及算子轉換AP差距需實測；無 RTL/HLS 或板端量測",
+  "followup_operator_review": {
+    "sources_sha256": {
+      "yolo_optimize/experiments/pose_only_rep_v1/preflight.py": "663cc670f329d84f23a2f8750214ecc961f05ca714fc60189972e5839cb59553",
+      "yolo_optimize/experiments/pose_only_rep_v1/artifacts/preflight-v1.json": "71fa6c78ca42e8b5e8062286a8c098a8b72f8d7f8336e16ac9a470ec6a6eede4",
+      "yolo_optimize/experiments/attention_recovery_v1/modeling.py": "6e99ebe3a0a56475eca010d7912a8b9a9f4e0bbb2855598f350cff291dfed469",
+      "yolo_optimize/experiments/activation/bridge_v1/verify_selected.py": "39aff7bb8bea7241fe9c3279bb1c491cd0fb9ba96b7b651cdf6a5a697c06e10e",
+      "yolo_optimize/experiments/activation/bridge_v1/evaluate.py": "f3f70669ad7ba3e7b6a4bd720fc34eb5a45748fee3694b20145cb4cec8426a37",
+      "yolo_optimize/experiments/studies/pre-fusion-full35-b100/scripts/pwl_contract.py": "946bfe70d417edba8e8fb20fa50ec4dcf2d3fa0e8289312f457999a8d48dcab3",
+      "yolo_achitechure/achitechure_1/final/configs/attention/float-pwl-final.yaml": "28d456720633ee3df108b04e0bd83b312e9d49eba06c81e6527e1a60b7a79f4a",
+      "yolo_achitechure/achitechure_1/final/configs/attention/bittrue-pwl-final.yaml": "ef1e393a6720e42f443948cc9925bed0bf365533232bd3892040c203894c0dcb"
+    },
+    "findings": [
+      "原生 RepConv 透過 act=original.act 繼承 qSiLU，不改成 SiLU",
+      "已完成 preflight-v1：三組 native_silu_absent=true；初始化／非零 folding 通過",
+      "optimize build float PWL[-10,0]/20；Float/BitTrue 皆保留 qSiLU；BitTrue 舊路徑分母仍浮點除法，與 D1 不同",
+      "改成 SiLU/exact Softmax 是本輪新增假設，不能視為 optimize 配方",
+      "舊輪自訂 Rep 是相同雙線性分支原理；類別換成原生本身不能保證精度改善"
+    ],
+    "decision": "撤下 SiLU 草案並保持 GPU 停止；先交付查核結果"
+  },
+  "retraining_review": {
+    "reviewed_at": "2026-11-07T14:26:46.983023+08:00",
+    "reviewed_before_implementation": true,
+    "authorization": "最新使用者允許參照建議、比較 RepConv 變體並重新訓練；解除暫停",
+    "candidate_specs": {
+      "rep17": {
+        "layers": [
+          17
+        ],
+        "variant": "rep",
+        "operators": "float_pwl"
+      },
+      "rep20": {
+        "layers": [
+          20
+        ],
+        "variant": "rep",
+        "operators": "float_pwl"
+      },
+      "rep17_20": {
+        "layers": [
+          17,
+          20
+        ],
+        "variant": "rep",
+        "operators": "float_pwl"
+      },
+      "rep17_20_silu": {
+        "layers": [
+          17,
+          20
+        ],
+        "variant": "rep",
+        "operators": "rep_silu_pwl"
+      },
+      "acb17_20": {
+        "layers": [
+          17,
+          20
+        ],
+        "variant": "acb",
+        "operators": "float_pwl"
+      }
+    },
+    "primary_sources": [
+      {
+        "url": "https://github.com/DingXiaoH/ACNet/blob/master/acnet/acb.py",
+        "method": "ACB 3x3/1x3/3x1 線性分支，調整 padding 保持對齊；折成單3x3",
+        "difference": "使用 qSiLU，相同預訓3x3，新增兩支BN gamma/beta=0，全部running固定；不是原論文從頭訓練配方"
+      },
+      {
+        "url": "https://openaccess.thecvf.com/content/CVPR2021/html/Ding_RepVGG_Making_VGG-Style_ConvNets_Great_Again_CVPR_2021_paper.html",
+        "method": "結構重參數化；本模型17/20為stride2，不加形狀不相符的identity分支"
+      }
+    ],
+    "adopted": "沿用已核對 optimize Rep scope、BN/EMA、LR、warmup/cosine、macro batch、完整資料與驗證；訓練改回 Float PWL[-10,0]/20，qSiLU 主線保留",
+    "differences": "SiLU 只替換兩個 Rep 的相加後 activation，單獨比較；ACB 單獨比較結構，均本輪延伸而非 optimize 已驗證。所有部署恢復 qSiLU/D1。",
+    "budget": "5組各5E，持續改善最多再5E半LR；SiLU 若有明顯部署切換落差且未嚴重退化，允許一次3E qSiLU/D1 適應，總上限53E",
+    "selection": "以硬體部署10項AP，先保護各項再平衡分數；同時比較原Stage7及v1最佳，不覆蓋較佳結果",
+    "validation": "CPU初始/非零fold/非方形及stride2邊界/FP32 FP16/alias/三種mode嚴格重載；GPUtrain-only校準與2macro梯度smoke、完整雙模式AP"
+  }
+}

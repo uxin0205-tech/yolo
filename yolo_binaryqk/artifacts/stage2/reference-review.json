@@ -1,0 +1,55 @@
+{
+  "schema": "binaryqk-stage2-reference-review-v1",
+  "reviewed_before_implementation": true,
+  "created_at": "2026-10-19T00:15:11.608755+08:00",
+  "sources_sha256": {
+    "yolo_optimize/experiments/attention_recovery_v1/modeling.py": "6e99ebe3a0a56475eca010d7912a8b9a9f4e0bbb2855598f350cff291dfed469",
+    "yolo_optimize/experiments/post_masf_hardware_v1/models.py": "070afac23331119ffb337504e7ecaec2beae98c620f25fb5768c0a211fceb634",
+    "yolo_optimize/experiments/post_masf_hardware_v1/config.json": "e114198ad9b8d325fc8258af696b73899c9fe1d8251567034f638bf3b9270179",
+    "yolo_optimize/experiments/post_masf_hardware_v1/run_arm.py": "dcd1e8e1b1ac91f465a844337075f1d4229ff35da812c86e6f83e66de81b53dc",
+    "yolo_optimize/experiments/post_masf_hardware_v1/artifacts/scale_bias/train/summary.json": "ddbcbf2d02e14397d6d59130f615ad63ec33c7ce2180e066b4c2815770fa4aa6",
+    "yolo_optimize/experiments/pose_masf_training_v1/training_b.py": "f122fa9310cfc27b510448d4b720de801dfe7a72f0528b4dcee9afbf84956788",
+    "yolo_combine/src/yolo_combine/joint_loss.py": "f96f23e76d8dfc8f47623b7426c1857a01afdbe107ee455dde033ff8552d6ff9",
+    "yolo_combine/src/yolo_combine/_joint_trainer_impl.py": "f9bb39ca7efae2c6a1c4e002b8db28cd857f56f9f8b2fb0077056762c458c82a",
+    "yolo_attention/src/yolo_attention/relative_bias.py": "09750d8b0ce32ff7e88beb800c9be059923ec437b594393ac871787ad8e63e68",
+    "yolo_attention/src/yolo_attention/binary_basis.py": "c0733399c915a0ce51e65bb9644c943c6cb4914ebe329a1f1a8bba65b5aaee89"
+  },
+  "parent": "/home/uxin/yolo/yolo_binaryqk/result/stage1/epoch-00.pt",
+  "parent_sha256": "db8b11ddec3c3263e9a79d815645f320dc74cb646f2ea638b8ded4c2efe268f9",
+  "parent_official_AP50_95": 0.5098886554294018,
+  "source_result": {
+    "post_masf_scale_bias_internal_AP50_95_e5": 0.5052484190894473,
+    "original_gate_passed": false
+  },
+  "adopted": [
+    "Q10 bounded amplitude STE，16個固定係數",
+    "signed16/1024分解式relative bias，max_size32",
+    "5epochs，Attention及head適應、所有BN statistics固定",
+    "AdamW betas .948/.999、weight_decay .00027；scale與bias不decay",
+    "分組LR：attention1e-5、heads5e-6、scale2e-4、bias1e-5",
+    "physical16、logical256、reference64，尾批依實際image count正規化；AMP retry16、clip10",
+    "warmup1epoch從.1到1，再cosine至.5；EMA .9999 tau2000只更新trainable tensors"
+  ],
+  "differences": [
+    "本輪為COCO Detect，不接Pose或MASF，沒有任務間weight normalization",
+    "共同parent為Stage1 B2；bias不存在，兩組均以zero初始化，不借用歷史別模型bias",
+    "S2是沿用同bounded amplitude STE的專案延伸，round(log2)投影到2^k，不新增其他候選",
+    "保持parent native Softmax／SiLU，PWL與qSiLU尚未到指定階段",
+    "整數Q10 score前向明確實作，S2用left shift；訓練梯度以浮點proxy傳遞",
+    "同預算5epochs各自best含epoch0，依官方整體AP選型，exact tie才以S2固定shift成本優先"
+  ],
+  "stops": [
+    "每組epoch0與每epoch完整val5000，初始低於parent90%停止診斷",
+    "任一完整epoch AP較自己的epoch0低超過.05時停止",
+    "完成S1/S2後產生結果並停止，不啟動第3階段"
+  ],
+  "cleanup": "yolo_binaryqk已在Stage1完成首次重建，不再次清空；yolo_attention只新增Stage2共用算子，保留optimize仍用的舊API，完整整併待Stage3",
+  "authorization": "使用者2026-10-19指定進入第2階段；沿用GPU工作前說明、每600秒背景監測及長訓穩定後退出working要求",
+  "parent_relocation": {
+    "at": "2026-10-19T00:33:23.611980+08:00",
+    "previous_parent": "/home/uxin/yolo/yolo_binaryqk/artifacts/stage1/formal-20261018-v2/recovery/epoch-00.pt",
+    "previous_review_sha256": "e44e7c8964ca603bec416463e2c07b5f6f243c4b008a3258ae1c9906b01d4d0d",
+    "checkpoint_bytes_unchanged": true,
+    "reason": "依使用者要求，跨階段從 result 交接；歷史路徑僅保留符號連結，不複製權重。"
+  }
+}

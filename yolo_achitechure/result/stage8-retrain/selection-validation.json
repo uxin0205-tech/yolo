@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "checked_at": "2026-11-08T15:27:37.993956+08:00",
+  "call": "load_model() without candidate",
+  "candidate": "rep17_20",
+  "contract": {
+    "activation": "qsilu_pq",
+    "registered_activation_sites": 187,
+    "alias_groups": 30,
+    "attention_sites": [
+      "graph.model.10.m.0.attn",
+      "graph.model.22.m.0.1.attn"
+    ],
+    "binary": "B2",
+    "scale": "S1-Q10",
+    "normalization": "D1-PWL-LUT256",
+    "repconv": "rep17_20",
+    "parameters": 26453168,
+    "rep_mode": "folded",
+    "rep_sites": [
+      "graph.model.17",
+      "graph.model.20"
+    ]
+  },
+  "sizes": {
+    "160": {
+      "tensors": 24,
+      "bitwise_equal": true
+    },
+    "640": {
+      "tensors": 24,
+      "bitwise_equal": true
+    }
+  },
+  "gpu_used": false,
+  "task_AP_rerun": false,
+  "manifest_sha256": "ff6c55650674bdf9f3a7c4780b794d1f37562ab7cc4728067bc303313db7334a"
+}

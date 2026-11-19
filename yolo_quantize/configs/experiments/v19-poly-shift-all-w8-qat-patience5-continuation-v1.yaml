@@ -1,0 +1,30 @@
+schema_version: 1
+kind: patience_only_epoch_boundary
+date: '2026-09-04'
+authorization_id: user-2026-09-04-v19-patience5-after-epoch9
+reason: 使用者要求在當前epoch完成後改為patience=5，且承接既有joint-score停滯計數。
+
+base_plan:
+  path: configs/experiments/v19-poly-shift-all-w8-qat-pilot-v1.yaml
+  sha256: 2745da54f419b529233da5d149c617981d9ad9ffe55b6b5291d84676e47e10a8
+
+resume_checkpoint:
+  path: artifacts/runs/qat/v19-poly-shift-all-w8-qat-pilot-v1-qat-seed1/checkpoints/epoch-0009-before-patience5.pt
+  sha256: ca700f72a699ea338b13fd6708a9c48ea6cce5e8f13ed53055e02d35da691996
+
+transition:
+  from: 0
+  to: 5
+boundary_next_epoch: 10
+
+joint_score_history:
+  - {epoch: 0, best_joint_score: 0.8288842987769311}
+  - {epoch: 1, best_joint_score: 0.8285597611434483}
+  - {epoch: 2, best_joint_score: 0.8284357400308472}
+  - {epoch: 3, best_joint_score: 0.8292131104121896}
+  - {epoch: 4, best_joint_score: 0.8290296084896469}
+  - {epoch: 5, best_joint_score: 0.8317651484021804}
+  - {epoch: 6, best_joint_score: 0.8268744714316527}
+  - {epoch: 7, best_joint_score: 0.8216592598958481}
+  - {epoch: 8, best_joint_score: 0.8179727502839836}
+  - {epoch: 9, best_joint_score: 0.8181452158764742}

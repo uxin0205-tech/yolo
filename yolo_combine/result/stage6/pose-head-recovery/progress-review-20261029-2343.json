@@ -1,0 +1,454 @@
+{
+  "checked_at": "2026-10-29T23:45:15.946938+08:00",
+  "kd_completed_at": "2026-10-29T22:43:23.363693+08:00",
+  "kd_selected": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e002.pt",
+    "sha256": "0790a6072f9843213d71d7bd3fe6a31cad88a11d6e762b30520aebdba87cbf96",
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6052339010323264,
+      "pose_AP50_95": 0.8949919888234579,
+      "ball_box_AP50_95": 0.48657728335389033,
+      "ball_pose_AP50_95": 0.8557942363978208,
+      "bat_box_AP50_95": 0.7238905187107626,
+      "bat_pose_AP50_95": 0.9341897412490949
+    },
+    "epoch": 2,
+    "phase": "KD-recovery",
+    "ema_updates": 926
+  },
+  "kd_full_reload_passed": true,
+  "head_history": [
+    {
+      "epoch": 1,
+      "metrics": {
+        "coco_AP": 0.5126760552637888,
+        "person_AP": 0.6412553759835176,
+        "sports_ball_AP": 0.5151605700527103,
+        "baseball_bat_AP": 0.4708406202413094,
+        "box_AP50_95": 0.6092024665178761,
+        "pose_AP50_95": 0.8998503112793659,
+        "ball_box_AP50_95": 0.49388345969797987,
+        "ball_pose_AP50_95": 0.8634740979003016,
+        "bat_box_AP50_95": 0.7245214733377724,
+        "bat_pose_AP50_95": 0.93622652465843
+      },
+      "seconds": 85.71260905265808,
+      "lrs": {
+        "pose_head-1": 1e-05,
+        "pose_head-0": 1e-05
+      },
+      "ema_updates": 373,
+      "criterion": {
+        "detect": {
+          "end2end": true,
+          "updates": 0,
+          "o2m": 0.8,
+          "o2o": 0.19999999999999996,
+          "o2m_copy": 0.8,
+          "final_o2m": 0.1,
+          "total": 1.0
+        },
+        "pose": {
+          "end2end": true,
+          "updates": 0,
+          "o2m": 0.8,
+          "o2o": 0.19999999999999996,
+          "o2m_copy": 0.8,
+          "final_o2m": 0.1,
+          "total": 1.0
+        }
+      },
+      "safety": null,
+      "candidate_checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029/train/best-e001.pt",
+      "detect_images": 0,
+      "pose_images": 5964,
+      "amp_retries": 4
+    },
+    {
+      "epoch": 2,
+      "metrics": {
+        "coco_AP": 0.5126760552637888,
+        "person_AP": 0.6412553759835176,
+        "sports_ball_AP": 0.5151605700527103,
+        "baseball_bat_AP": 0.4708406202413094,
+        "box_AP50_95": 0.6061634160539568,
+        "pose_AP50_95": 0.8978555960888498,
+        "ball_box_AP50_95": 0.4876576044328906,
+        "ball_pose_AP50_95": 0.8593730543024509,
+        "bat_box_AP50_95": 0.7246692276750232,
+        "bat_pose_AP50_95": 0.9363381378752488
+      },
+      "seconds": 80.8792495727539,
+      "lrs": {
+        "pose_head-1": 9.84994222579062e-06,
+        "pose_head-0": 9.84994222579062e-06
+      },
+      "ema_updates": 746,
+      "criterion": {
+        "detect": {
+          "end2end": true,
+          "updates": 0,
+          "o2m": 0.8,
+          "o2o": 0.19999999999999996,
+          "o2m_copy": 0.8,
+          "final_o2m": 0.1,
+          "total": 1.0
+        },
+        "pose": {
+          "end2end": true,
+          "updates": 1,
+          "o2m": 0.7222222222222222,
+          "o2o": 0.2777777777777778,
+          "o2m_copy": 0.8,
+          "final_o2m": 0.1,
+          "total": 1.0
+        }
+      },
+      "safety": null,
+      "candidate_checkpoint": null,
+      "detect_images": 0,
+      "pose_images": 5964,
+      "amp_retries": 0
+    },
+    {
+      "epoch": 3,
+      "metrics": {
+        "coco_AP": 0.5126760552637888,
+        "person_AP": 0.6412553759835176,
+        "sports_ball_AP": 0.5151605700527103,
+        "baseball_bat_AP": 0.4708406202413094,
+        "box_AP50_95": 0.6057903366363351,
+        "pose_AP50_95": 0.897185717759681,
+        "ball_box_AP50_95": 0.48887037150279167,
+        "ball_pose_AP50_95": 0.8570675802387813,
+        "bat_box_AP50_95": 0.7227103017698784,
+        "bat_pose_AP50_95": 0.9373038552805804
+      },
+      "seconds": 81.17728686332703,
+      "lrs": {
+        "pose_head-1": 9.416280613808834e-06,
+        "pose_head-0": 9.416280613808834e-06
+      },
+      "ema_updates": 1119,
+      "criterion": {
+        "detect": {
+          "end2end": true,
+          "updates": 0,
+          "o2m": 0.8,
+          "o2o": 0.19999999999999996,
+          "o2m_copy": 0.8,
+          "final_o2m": 0.1,
+          "total": 1.0
+        },
+        "pose": {
+          "end2end": true,
+          "updates": 2,
+          "o2m": 0.6444444444444445,
+          "o2o": 0.3555555555555555,
+          "o2m_copy": 0.8,
+          "final_o2m": 0.1,
+          "total": 1.0
+        }
+      },
+      "safety": null,
+      "candidate_checkpoint": null,
+      "detect_images": 0,
+      "pose_images": 5964,
+      "amp_retries": 0
+    },
+    {
+      "epoch": 4,
+      "metrics": {
+        "coco_AP": 0.5126760552637888,
+        "person_AP": 0.6412553759835176,
+        "sports_ball_AP": 0.5151605700527103,
+        "baseball_bat_AP": 0.4708406202413094,
+        "box_AP50_95": 0.6066723111184434,
+        "pose_AP50_95": 0.8958713302416234,
+        "ball_box_AP50_95": 0.48985915331824287,
+        "ball_pose_AP50_95": 0.8553356430483017,
+        "bat_box_AP50_95": 0.723485468918644,
+        "bat_pose_AP50_95": 0.9364070174349453
+      },
+      "seconds": 81.30515646934509,
+      "lrs": {
+        "pose_head-1": 8.751350918118069e-06,
+        "pose_head-0": 8.751350918118069e-06
+      },
+      "ema_updates": 1492,
+      "criterion": {
+        "detect": {
+          "end2end": true,
+          "updates": 0,
+          "o2m": 0.8,
+          "o2o": 0.19999999999999996,
+          "o2m_copy": 0.8,
+          "final_o2m": 0.1,
+          "total": 1.0
+        },
+        "pose": {
+          "end2end": true,
+          "updates": 3,
+          "o2m": 0.5666666666666668,
+          "o2o": 0.43333333333333324,
+          "o2m_copy": 0.8,
+          "final_o2m": 0.1,
+          "total": 1.0
+        }
+      },
+      "safety": null,
+      "candidate_checkpoint": null,
+      "detect_images": 0,
+      "pose_images": 5964,
+      "amp_retries": 0
+    }
+  ],
+  "head_progress": {
+    "time_unix": 1793288715.679285,
+    "kind": "training",
+    "phase": "Pose-head-recovery",
+    "epoch": 5,
+    "epochs": 10,
+    "step": 100,
+    "steps": 373,
+    "seconds": 12.526071310043335,
+    "remaining_train_seconds": 34.1961746764183,
+    "lrs": {
+      "pose_head-1": 8.543566681337456e-06,
+      "pose_head-0": 8.543566681337456e-06
+    },
+    "ema_updates": 1592,
+    "criterion": {
+      "detect": {
+        "end2end": true,
+        "updates": 0,
+        "o2m": 0.8,
+        "o2o": 0.19999999999999996,
+        "o2m_copy": 0.8,
+        "final_o2m": 0.1,
+        "total": 1.0
+      },
+      "pose": {
+        "end2end": true,
+        "updates": 4,
+        "o2m": 0.48888888888888893,
+        "o2o": 0.5111111111111111,
+        "o2m_copy": 0.8,
+        "final_o2m": 0.1,
+        "total": 1.0
+      }
+    },
+    "detect_mean_loss": 0.0,
+    "pose_mean_loss": 1.1083393096923828,
+    "joint_mean_loss": 1.1083393096923828,
+    "loss_for_backward": 70.9337158203125,
+    "detect_components": [],
+    "pose_components": [
+      0.7769060730934143,
+      0.011793911457061768,
+      0.026177912950515747,
+      0.24843162298202515,
+      0.003326586913317442,
+      0.0
+    ],
+    "detect_batch_sizes": [],
+    "pose_batch_sizes": [
+      16
+    ],
+    "detect_images": 0,
+    "pose_images": 16,
+    "gradient_presence": {
+      "shared": false,
+      "detect_head": false,
+      "pose_head": true
+    },
+    "gradient_statistics": null,
+    "amp_scale": 64.0,
+    "amp_overflow_retries": 0,
+    "clipped_gradient_norm": 349.2705383300781
+  },
+  "head_supervisor": {
+    "pid": 2612391,
+    "status": "running",
+    "started_at": 1793288357.7174873,
+    "monitor_seconds": 600,
+    "stage": 6,
+    "next_stage_started": false,
+    "job": "train",
+    "worker_pid": 2612437,
+    "updated_at": 1793288368.0973086,
+    "job_started_at": 1793288368.0716617,
+    "progress": {},
+    "gpu_processes": "",
+    "last_monitor_at": 1793288368.0717952,
+    "last_job_exit": 0
+  },
+  "head_best_so_far": {
+    "epoch": 1,
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6092024665178761,
+      "pose_AP50_95": 0.8998503112793659,
+      "ball_box_AP50_95": 0.49388345969797987,
+      "ball_pose_AP50_95": 0.8634740979003016,
+      "bat_box_AP50_95": 0.7245214733377724,
+      "bat_pose_AP50_95": 0.93622652465843
+    },
+    "seconds": 85.71260905265808,
+    "lrs": {
+      "pose_head-1": 1e-05,
+      "pose_head-0": 1e-05
+    },
+    "ema_updates": 373,
+    "criterion": {
+      "detect": {
+        "end2end": true,
+        "updates": 0,
+        "o2m": 0.8,
+        "o2o": 0.19999999999999996,
+        "o2m_copy": 0.8,
+        "final_o2m": 0.1,
+        "total": 1.0
+      },
+      "pose": {
+        "end2end": true,
+        "updates": 0,
+        "o2m": 0.8,
+        "o2o": 0.19999999999999996,
+        "o2m_copy": 0.8,
+        "final_o2m": 0.1,
+        "total": 1.0
+      }
+    },
+    "safety": null,
+    "candidate_checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029/train/best-e001.pt",
+    "detect_images": 0,
+    "pose_images": 5964,
+    "amp_retries": 4
+  },
+  "head_best_sha256": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7",
+  "optimize_index_sha256": "60f1e5c03ca8e9d6c502e6070747614a8559633581631747c85ac96b8662fb4d",
+  "comparison": [
+    {
+      "metric": "COCO 整體",
+      "optimize": 0.5058692362707653,
+      "current": 0.5056865534864775,
+      "delta": -0.00018268278428779094
+    },
+    {
+      "metric": "COCO person",
+      "optimize": 0.626986020192464,
+      "current": 0.6247641712255937,
+      "delta": -0.0022218489668702768
+    },
+    {
+      "metric": "BBAT 框",
+      "optimize": 0.6097972367715616,
+      "current": 0.6092024665178761,
+      "delta": -0.0005947702536854838
+    },
+    {
+      "metric": "BBAT 關鍵點",
+      "optimize": 0.8910405728870566,
+      "current": 0.8998503112793659,
+      "delta": 0.008809738392309252
+    },
+    {
+      "metric": "球框",
+      "optimize": 0.49239673299037545,
+      "current": 0.49388345969797987,
+      "delta": 0.0014867267076044133
+    },
+    {
+      "metric": "球關鍵點",
+      "optimize": 0.8588764772627874,
+      "current": 0.8634740979003016,
+      "delta": 0.0045976206375142326
+    },
+    {
+      "metric": "球棒框",
+      "optimize": 0.7271977405527478,
+      "current": 0.7245214733377724,
+      "delta": -0.0026762672149753808
+    },
+    {
+      "metric": "球棒關鍵點",
+      "optimize": 0.9232046685113258,
+      "current": 0.93622652465843,
+      "delta": 0.013021856147104272
+    }
+  ],
+  "cleanup": {
+    "created_at": "2026-10-29T23:41:54.243888+08:00",
+    "reason": "KD five-epoch comparison and independent reload complete; E2 selected and already used by new Pose-head recovery. No identical KD extension or E5 resume planned. Keep all epoch AP/safety/smoke/config/source locks; remove only rejected inference candidates and inactive E5 optimizer resume.",
+    "retained_checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e002.pt",
+    "retained_sha256": "0790a6072f9843213d71d7bd3fe6a31cad88a11d6e762b30520aebdba87cbf96",
+    "old_supervisor_stopped": true,
+    "new_parent_and_smoke_verified": true,
+    "referenced_history_note": "Immutable result/history contain original artifact paths. This audit records pruning without rewriting files hashed by the active new protocol.",
+    "files": [
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e001.pt",
+        "bytes": 106582023,
+        "sha256": "19fc6777d8a2bc38a15f74760a630605d57b7e65fcec9caf06463157b1bb7fcf"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e001.json",
+        "bytes": 88046,
+        "sha256": "8d876792224c92b541b2b53fa9fb0140337c02c3251ed656e8b1a04f34dd7a90"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e003.pt",
+        "bytes": 106582023,
+        "sha256": "8c9fb7500b61dfff67f06df3b3259ec95e88a231dbf5dd5cd3c18b6c829d4bf1"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e003.json",
+        "bytes": 88046,
+        "sha256": "610eb3edebe8b0f5275443b7b887d90ee8da70622298f9755d9b0bcfa6e1828e"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e004.pt",
+        "bytes": 106582023,
+        "sha256": "1295c4e7de4bd9e39a0bc2779df6927ac44e7741b82e401d29345b56cb491ce5"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e004.json",
+        "bytes": 88046,
+        "sha256": "5a878951094e01eaf44d009ff57bb4e05430549f1e24c21d7065932167b8f330"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e005.pt",
+        "bytes": 106582023,
+        "sha256": "f37af3280a424bebde424fc8b3fafe1fa51373fcde4d45a5f379ad63878badaa"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e005.json",
+        "bytes": 88046,
+        "sha256": "3ce6f55839c95696bb48e7a69d6fc8db70f008dcdf2d7874ce6aa61e3c1eaa67"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/resume.pt",
+        "bytes": 351993355,
+        "sha256": "60f73dd5c632d1b117447d10b4a504bb415699f9d06e5a0c9520967d7325900c"
+      },
+      {
+        "path": "yolo_combine/artifacts/stage6/recovery-kd-20261029/train/resume.json",
+        "bytes": 102,
+        "sha256": "eb9c9d8ee186dee8f51f4e556189bfb8656072122f64ec55507a5881c7e14176"
+      }
+    ],
+    "planned_bytes": 778673733,
+    "status": "complete",
+    "completed_at": "2026-10-29T23:41:54.448754+08:00"
+  },
+  "stage6_complete": false,
+  "next_stage_started": false
+}

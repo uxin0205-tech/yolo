@@ -1,0 +1,105 @@
+{
+  "checked_at": "2026-11-03T00:23:51.439353+08:00",
+  "candidates": [
+    {
+      "candidate": "qsilu_pq",
+      "completed_epochs": 10,
+      "selected_epoch": 8,
+      "metrics": {
+        "coco_AP": 0.513951265381378,
+        "person_AP": 0.643234026088054,
+        "sports_ball_AP": 0.5146623165317121,
+        "baseball_bat_AP": 0.4690357899624067,
+        "box_AP50_95": 0.6139042018842924,
+        "pose_AP50_95": 0.9007615878805139,
+        "ball_box_AP50_95": 0.4974302119527326,
+        "ball_pose_AP50_95": 0.8647309926872065,
+        "bat_box_AP50_95": 0.730378191815852,
+        "bat_pose_AP50_95": 0.9367921830738212
+      },
+      "gate": true,
+      "score": 0.6462768721866454,
+      "retries": 2,
+      "violations": []
+    },
+    {
+      "candidate": "hardswish",
+      "completed_epochs": 10,
+      "selected_epoch": 8,
+      "metrics": {
+        "coco_AP": 0.4984743343662916,
+        "person_AP": 0.6293051629483731,
+        "sports_ball_AP": 0.4951651726711344,
+        "baseball_bat_AP": 0.4262657688686266,
+        "box_AP50_95": 0.6096301303685062,
+        "pose_AP50_95": 0.9052935121145242,
+        "ball_box_AP50_95": 0.5047614594893669,
+        "ball_pose_AP50_95": 0.878103183380262,
+        "bat_box_AP50_95": 0.7144988012476456,
+        "bat_pose_AP50_95": 0.9324838408487865
+      },
+      "gate": false,
+      "score": 0.6348822154775609,
+      "retries": 3,
+      "violations": []
+    },
+    {
+      "candidate": "poly_shift",
+      "completed_epochs": 10,
+      "selected_epoch": 10,
+      "metrics": {
+        "coco_AP": 0.5149956199132761,
+        "person_AP": 0.6434572915516049,
+        "sports_ball_AP": 0.5148586864243344,
+        "baseball_bat_AP": 0.47236697110271336,
+        "box_AP50_95": 0.6137294083919003,
+        "pose_AP50_95": 0.901010817705424,
+        "ball_box_AP50_95": 0.4957548776980407,
+        "ball_pose_AP50_95": 0.8635576317407182,
+        "bat_box_AP50_95": 0.7317039390857598,
+        "bat_pose_AP50_95": 0.9384640036701299
+      },
+      "gate": true,
+      "score": 0.6468948776483222,
+      "retries": 1,
+      "violations": []
+    },
+    {
+      "candidate": "poly_quality",
+      "completed_epochs": 9,
+      "selected_epoch": 7,
+      "metrics": {
+        "coco_AP": 0.5153242573862732,
+        "person_AP": 0.6434528421785761,
+        "sports_ball_AP": 0.5165802793577826,
+        "baseball_bat_AP": 0.46653047015380783,
+        "box_AP50_95": 0.6155262208870771,
+        "pose_AP50_95": 0.9010039144695847,
+        "ball_box_AP50_95": 0.5001120395365308,
+        "ball_pose_AP50_95": 0.8637637786092277,
+        "bat_box_AP50_95": 0.7309404022376236,
+        "bat_pose_AP50_95": 0.9382440503299423
+      },
+      "gate": true,
+      "score": 0.6468685149737206,
+      "retries": 3,
+      "violations": []
+    }
+  ],
+  "progress": {
+    "epoch": 10,
+    "epochs": 10,
+    "step": 180,
+    "steps": 463,
+    "seconds": 876.8130576610565,
+    "amp_overflow_retries": 0
+  },
+  "estimated_training_end": "2026-11-03T00:47:47.337121+08:00",
+  "remaining": [
+    "最後一輪訓練及其完整 AP",
+    "12 個區域敏感度評估",
+    "4 組選定 checkpoint 完整重載 AP",
+    "Stage7 結果整理與交接"
+  ],
+  "stage8_started": false
+}

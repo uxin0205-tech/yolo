@@ -1,0 +1,292 @@
+{
+  "accepted": {
+    "all_eight_gates_passed": true,
+    "global_epoch": 58,
+    "j3_local_epoch_zero_based": 5,
+    "joint_score": 0.7111747389752653,
+    "stage": "J3",
+    "worst_gate_delta": -0.016354364920575293
+  },
+  "actual_stage_epochs": {
+    "J0": 8,
+    "J1": 20,
+    "J2": 25,
+    "J3": 11
+  },
+  "deployment_selection": {
+    "candidates": [
+      {
+        "all_eight_gates_passed": null,
+        "candidate_id": "standalone_detect",
+        "checkpoint": "final/full35/weights/standalone/detect-full35-a2-bittrue.pt",
+        "coco_overall_ap50_95": 0.506400885642831,
+        "decision_role": "person-only accuracy baseline",
+        "global_epoch": null,
+        "joint_score": null,
+        "label": "Standalone Detect",
+        "person_ap50": 0.841473115942069,
+        "person_ap50_95": 0.6261855612319002,
+        "person_ap50_95_delta_vs_standalone": 0.0,
+        "person_ap50_delta_vs_standalone": 0.0,
+        "person_ap75": 0.6844410144010236,
+        "person_ap75_delta_vs_standalone": 0.0,
+        "person_precision": 0.7952573592903847,
+        "person_recall": 0.7694836455608027,
+        "validation_source": "independent formal Bit-True validation"
+      },
+      {
+        "all_eight_gates_passed": false,
+        "candidate_id": "shared_best_detect",
+        "checkpoint": "final/full35/weights/combined/inference/best_detect.pt",
+        "coco_overall_ap50_95": 0.5065545722728799,
+        "decision_role": "person-first shared checkpoint; Pose not ready",
+        "global_epoch": 0,
+        "joint_score": 0.580499232014127,
+        "label": "Shared best_detect",
+        "person_ap50": 0.8414635236977497,
+        "person_ap50_95": 0.6260570359526075,
+        "person_ap50_95_delta_vs_standalone": -0.00012852527929263502,
+        "person_ap50_delta_vs_standalone": -9.592244319289733e-06,
+        "person_ap75": 0.6842281574428801,
+        "person_ap75_delta_vs_standalone": -0.00021285695814343697,
+        "person_precision": 0.7972449460594129,
+        "person_recall": 0.7687668182239955,
+        "validation_source": "full per-epoch Bit-True validation"
+      },
+      {
+        "all_eight_gates_passed": true,
+        "candidate_id": "j2_best_joint",
+        "checkpoint": "final/full35/weights/rollback/j2/inference/best_joint.pt",
+        "coco_overall_ap50_95": 0.497345631101744,
+        "decision_role": "balanced rollback",
+        "global_epoch": 35,
+        "joint_score": 0.7100382159275817,
+        "label": "J2 best_joint",
+        "person_ap50": 0.8376039819377257,
+        "person_ap50_95": 0.618511145604136,
+        "person_ap50_95_delta_vs_standalone": -0.007674415627764164,
+        "person_ap50_delta_vs_standalone": -0.0038691340043433,
+        "person_ap75": 0.6767283516436382,
+        "person_ap75_delta_vs_standalone": -0.007712662757385358,
+        "person_precision": 0.7994756604609816,
+        "person_recall": 0.7653335807738703,
+        "validation_source": "independent final Bit-True revalidation"
+      },
+      {
+        "all_eight_gates_passed": true,
+        "candidate_id": "j3_best_joint",
+        "checkpoint": "final/full35/weights/combined/inference/best_joint.pt",
+        "coco_overall_ap50_95": 0.49802233647092214,
+        "decision_role": "current joint-score default",
+        "global_epoch": 58,
+        "joint_score": 0.7111747389752653,
+        "label": "J3 best_joint",
+        "person_ap50": 0.8394095874767435,
+        "person_ap50_95": 0.6203814884224489,
+        "person_ap50_95_delta_vs_standalone": -0.005804072809451277,
+        "person_ap50_delta_vs_standalone": -0.002063528465325426,
+        "person_ap75": 0.679217515089811,
+        "person_ap75_delta_vs_standalone": -0.005223499311212576,
+        "person_precision": 0.8058975060100467,
+        "person_recall": 0.7631994061427113,
+        "validation_source": "independent final Bit-True revalidation"
+      },
+      {
+        "all_eight_gates_passed": true,
+        "candidate_id": "j3_best_pose",
+        "checkpoint": "final/full35/weights/combined/inference/best_pose.pt",
+        "coco_overall_ap50_95": 0.4980718349147051,
+        "decision_role": "pose-first balanced alternative",
+        "global_epoch": 59,
+        "joint_score": 0.7111415212904801,
+        "label": "J3 best_pose",
+        "person_ap50": 0.8393924966826347,
+        "person_ap50_95": 0.6205126845454989,
+        "person_ap50_95_delta_vs_standalone": -0.0056728766864012625,
+        "person_ap50_delta_vs_standalone": -0.0020806192594342576,
+        "person_ap75": 0.678979365075057,
+        "person_ap75_delta_vs_standalone": -0.0054616493259666,
+        "person_precision": 0.8042538077592797,
+        "person_recall": 0.7652407905725156,
+        "validation_source": "full per-epoch Bit-True validation"
+      },
+      {
+        "all_eight_gates_passed": true,
+        "candidate_id": "j3_last",
+        "checkpoint": "final/full35/weights/combined/inference/last.pt",
+        "coco_overall_ap50_95": 0.497832813314694,
+        "decision_role": "stage-complete endpoint",
+        "global_epoch": 63,
+        "joint_score": 0.7099739723667974,
+        "label": "J3 last",
+        "person_ap50": 0.8391565590821739,
+        "person_ap50_95": 0.6203983615542289,
+        "person_ap50_95_delta_vs_standalone": -0.005787199677671273,
+        "person_ap50_delta_vs_standalone": -0.002316556859895069,
+        "person_ap75": 0.6787115099885845,
+        "person_ap75_delta_vs_standalone": -0.005729504412439024,
+        "person_precision": 0.8066272942830769,
+        "person_recall": 0.7629210355386471,
+        "validation_source": "full per-epoch Bit-True validation"
+      }
+    ],
+    "current_default": "j3_best_joint",
+    "note": "J3 best_joint remains the experiment-selector default; no deployment checkpoint is locked until the user reviews the person AP comparison.",
+    "state": "pending_user_choice"
+  },
+  "figures": [
+    "figures/01-joint-score-by-epoch.png",
+    "figures/02-validation-map-by-epoch.png",
+    "figures/03-training-loss-by-epoch.png",
+    "figures/04-gate-deltas-j2-j3.png",
+    "figures/05-final-metric-comparison.png",
+    "figures/06-shared-gradient-by-epoch.png",
+    "figures/07-coco-person-ap-by-epoch.png",
+    "figures/08-coco-person-candidate-comparison.png"
+  ],
+  "final_strategy_gradient_evidence": {
+    "cosine_mean": 0.02879128594732032,
+    "negative_cosine_samples": 89,
+    "ratio_max": 11.020314393539266,
+    "ratio_mean": 2.1769590871047684,
+    "ratio_min": 0.43839431022076386,
+    "samples": 260
+  },
+  "j3_float_minus_bittrue": {
+    "bbat/ball/box/map50_95": -0.00042314725392700314,
+    "bbat/ball/pose/map50_95": 3.909118406841827e-05,
+    "bbat/bat/box/map50_95": 0.00019924193892451036,
+    "bbat/bat/pose/map50_95": 2.258835444435281e-05,
+    "bbat/box/map50_95": -0.00011195265750119088,
+    "bbat/pose/map50_95": 3.0839769256552074e-05,
+    "coco/box/map50_95": 7.126830424081243e-05,
+    "coco/person/box/map50_95": 1.585794539959995e-05
+  },
+  "j3_improvement_over_j2": 0.0011365230476836352,
+  "limitations": [
+    "只有 seed0；未執行 seed1。",
+    "logical Detect batch 128 由 physical microbatch 累積，不宣稱等同單次 physical128。",
+    "41.796% 是參數/weight storage 減少，尚非 latency、energy 或 FPGA 實測。",
+    "Q/K binary sign path與score.gamma保持硬體契約凍結；J3只微調attention可微部分。"
+  ],
+  "metrics": [
+    {
+      "j2": 0.497345631101744,
+      "j2_delta_vs_standalone": -0.009055254541087021,
+      "j3": 0.49802233647092214,
+      "j3_delta_vs_j2": 0.0006767053691781322,
+      "j3_delta_vs_standalone": -0.008378549171908889,
+      "j3_gate_passed": true,
+      "label": "COCO overall box",
+      "metric": "coco/box/map50_95",
+      "standalone": 0.506400885642831
+    },
+    {
+      "j2": 0.618511145604136,
+      "j2_delta_vs_standalone": -0.007674415627764164,
+      "j3": 0.6203814884224489,
+      "j3_delta_vs_j2": 0.0018703428183128867,
+      "j3_delta_vs_standalone": -0.005804072809451277,
+      "j3_gate_passed": true,
+      "label": "COCO person box",
+      "metric": "coco/person/box/map50_95",
+      "standalone": 0.6261855612319002
+    },
+    {
+      "j2": 0.6305660435884931,
+      "j2_delta_vs_standalone": -0.00039756942956414854,
+      "j3": 0.6300355217570656,
+      "j3_delta_vs_j2": -0.0005305218314275439,
+      "j3_delta_vs_standalone": -0.0009280912609916925,
+      "j3_gate_passed": true,
+      "label": "BBAT box overall",
+      "metric": "bbat/box/map50_95",
+      "standalone": 0.6309636130180573
+    },
+    {
+      "j2": 0.9018841296717675,
+      "j2_delta_vs_standalone": -0.010276418309421276,
+      "j3": 0.9037171741129448,
+      "j3_delta_vs_j2": 0.0018330444411773783,
+      "j3_delta_vs_standalone": -0.008443373868243897,
+      "j3_gate_passed": true,
+      "label": "BBAT pose overall",
+      "metric": "bbat/pose/map50_95",
+      "standalone": 0.9121605479811887
+    },
+    {
+      "j2": 0.5108657344286962,
+      "j2_delta_vs_standalone": 0.00011883454214078881,
+      "j3": 0.5074370361873287,
+      "j3_delta_vs_j2": -0.0034286982413674894,
+      "j3_delta_vs_standalone": -0.0033098636992267005,
+      "j3_gate_passed": true,
+      "label": "ball box",
+      "metric": "bbat/ball/box/map50_95",
+      "standalone": 0.5107468998865554
+    },
+    {
+      "j2": 0.75026635274829,
+      "j2_delta_vs_standalone": -0.0009139734012688638,
+      "j3": 0.7526340073268026,
+      "j3_delta_vs_j2": 0.0023676545785126235,
+      "j3_delta_vs_standalone": 0.0014536811772437597,
+      "j3_gate_passed": true,
+      "label": "bat box",
+      "metric": "bbat/bat/box/map50_95",
+      "standalone": 0.7511803261495589
+    },
+    {
+      "j2": 0.8607985070155056,
+      "j2_delta_vs_standalone": -0.015464573096846124,
+      "j3": 0.8599087151917765,
+      "j3_delta_vs_j2": -0.0008897918237291691,
+      "j3_delta_vs_standalone": -0.016354364920575293,
+      "j3_gate_passed": true,
+      "label": "ball pose",
+      "metric": "bbat/ball/pose/map50_95",
+      "standalone": 0.8762630801123518
+    },
+    {
+      "j2": 0.9429697523280293,
+      "j2_delta_vs_standalone": -0.005088263521996317,
+      "j3": 0.9475256330341134,
+      "j3_delta_vs_j2": 0.004555880706084148,
+      "j3_delta_vs_standalone": -0.0005323828159121691,
+      "j3_gate_passed": true,
+      "label": "bat pose",
+      "metric": "bbat/bat/pose/map50_95",
+      "standalone": 0.9480580158500256
+    }
+  ],
+  "old_strategy_gradient_evidence": {
+    "all_durable_samples": {
+      "cosine_mean": 0.03905517036318339,
+      "negative_cosine_samples": 22,
+      "ratio_max": 80.95199929308198,
+      "ratio_mean": 12.647907099826398,
+      "ratio_min": 1.0410752936409524,
+      "samples": 66
+    },
+    "initial_24_samples": {
+      "cosine_mean": 0.04977730970396675,
+      "negative_cosine_samples": 7,
+      "ratio_max": 80.95199929308198,
+      "ratio_mean": 19.687614126506734,
+      "ratio_min": 6.239354854128765,
+      "samples": 24
+    }
+  },
+  "parent_j2": {
+    "global_epoch": 35,
+    "joint_score": 0.7100382159275817
+  },
+  "schema_version": 2,
+  "status": "completed_and_j3_promoted",
+  "training_totals": {
+    "detect_images": 6624072,
+    "epochs": 64,
+    "optimizer_macro_steps": 28912,
+    "pose_images": 462336
+  }
+}

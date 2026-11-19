@@ -1,0 +1,47 @@
+{
+  "checked_at": "2026-11-17T13:44:32.900708+08:00",
+  "status": "passed",
+  "completed_at": "2026-11-13T00:07:28.395452+08:00",
+  "epochs": 20,
+  "total_stage9_completed_epochs": 120,
+  "same_training_recipe_as_512x768": true,
+  "best_phase": "adapt10",
+  "best_epoch": 5,
+  "best_sha256": "c589ab0e0590937e496553d24a74b3c236adf9c854dbfbe15d911becb129b7cc",
+  "source_files_verified": 466,
+  "source_sha256": "6747771224b91b8483d8153281fdfd94f5c0dd1d8d945141dce700b993a20180",
+  "manifest_files_verified": 372,
+  "metric_rows_verified": 4,
+  "reload_AP_max_error": 0.0,
+  "portable_validation": {
+    "status": "passed",
+    "bitwise_equal": true,
+    "silu_rejected": true,
+    "GPU_used": false
+  },
+  "layout_cases": 42,
+  "mainline_sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+  "cleanup_files": 2,
+  "cleanup_bytes": 681214190,
+  "cleanup_GiB": 0.6344301532953978,
+  "all_cleaned_paths_absent": true,
+  "external_GPU_processes_at_check": "1319820, /home/hplab/Desktop/gluformer_5090_handoff_2026-10-06./gluformer/.venv_clean_20261114/bin/python3, 5252 MiB",
+  "new_GPU_jobs": 0,
+  "model_tests_rerun": false,
+  "notes": "本次核對已完成實驗、來源、真實權重與交付；不重跑已通過的 GPU AP 或 CPU 模型 smoke。",
+  "documentation": {
+    "local_links_checked": 29,
+    "changed_source_locked_files": [],
+    "files": {
+      "README.md": "329abae3970af40e27e4a560eb299dc95ea970134e1d1509f86fe0c6784647d1",
+      "yolo_actshape/README.md": "b8868d963fe20f192f3d2750c57d8e816fa61e8ebff243b7667f6f0939ce3674",
+      "docs/research/yolo-research-plan-2026-09-21.md": "00fdf895128d3fd86937ffe1ce2aef78b99ef8c7bb947144b9af312842132a8a",
+      "yolo_actshape/portrait/README.md": "7596a7fb96803d027a87e163724e492c80afeb3f57b5dd13848f0b3e8445cf30",
+      "yolo_actshape/result/stage9-portrait/README.md": "9934856714dca014512946ee8b501a8b69ea9f64016b4088a667f5b30f8e0e0e",
+      "docs/worklogs/2026-11-17-actshape-portrait-results.md": "0aba554e335ef7ab3a1f591603ccf7974c6101f376818da9aa07cecef98d287b",
+      "docs/worklogs/README.md": "47966636d1d9b4da38198ea4d9c1a93f8ad7295b9ee641a8685ae17941071dab",
+      "AGENTS.md": "d2316f9307055a0e0c8a2e1417ae8254ef3d29738e6221c3097c55ddb5e7ef93",
+      "docs/worklogs/2026-11-12-actshape-portrait-training.md": "17c4a7d159d40a2ba2d49981e01358decaf584fcecda38d60d476099b4738021"
+    }
+  }
+}

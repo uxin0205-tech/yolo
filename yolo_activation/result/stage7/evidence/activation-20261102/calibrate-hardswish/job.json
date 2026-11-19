@@ -1,0 +1,60 @@
+{
+  "root": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102",
+  "output": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/calibrate-hardswish",
+  "action": "calibrate",
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/zero-hardswish/model.pt",
+    "sha256": "613237d51400e76a2c719353687df541994293a384b21a9b35bd95d533d936b2",
+    "metrics": {
+      "coco_AP": 0.41481311470618243,
+      "person_AP": 0.5570743740773038,
+      "sports_ball_AP": 0.39739441081901106,
+      "baseball_bat_AP": 0.3648042020928578,
+      "box_AP50_95": 0.4928197944241345,
+      "pose_AP50_95": 0.838369796036251,
+      "ball_box_AP50_95": 0.3996706601827701,
+      "ball_pose_AP50_95": 0.7939902795185778,
+      "bat_box_AP50_95": 0.5859689286654987,
+      "bat_pose_AP50_95": 0.8827493125539239
+    },
+    "candidate": "hardswish",
+    "phase": "zero"
+  },
+  "recipe": {
+    "epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "joint_full",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "backbone": 3.8e-07,
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "shared_bn_running": "fixed",
+    "shared_bn_affine": "trainable outside frozen Attention",
+    "head_bn": "trainable",
+    "attention": "all tensors frozen",
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "amp": true,
+    "detect_physical": 16,
+    "detect_accumulation": 16,
+    "pose_physical": 16,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "initial_ema_updates": 0,
+    "max_amp_retries": 16,
+    "checkpoint": "one best EMA and one epoch-boundary resume per candidate",
+    "ciou": "optimize canonical _fp32_bbox_iou wrapper on native loss; same formula, process-local",
+    "name": "hardswish"
+  }
+}

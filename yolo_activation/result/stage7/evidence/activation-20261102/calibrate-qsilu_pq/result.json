@@ -1,0 +1,369 @@
+{
+  "status": "passed",
+  "parent_sha256": "3d0706b841e25557d57f507f4aae6ccc93265d7507c461a070cfe1049cb7c711",
+  "recipe": {
+    "epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "joint_full",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "backbone": 3.8e-07,
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "shared_bn_running": "fixed",
+    "shared_bn_affine": "trainable outside frozen Attention",
+    "head_bn": "trainable",
+    "attention": "all tensors frozen",
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "amp": true,
+    "detect_physical": 16,
+    "detect_accumulation": 16,
+    "pose_physical": 16,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "initial_ema_updates": 0,
+    "max_amp_retries": 16,
+    "checkpoint": "one best EMA and one epoch-boundary resume per candidate",
+    "ciou": "optimize canonical _fp32_bbox_iou wrapper on native loss; same formula, process-local",
+    "name": "qsilu_pq"
+  },
+  "selected_pose_weight": 0.04,
+  "calibration_median_ratio": 3.453360606892873,
+  "confirmation_median_ratio": 0.9760207896626025,
+  "validation_used": false,
+  "checkpoint_restored_each_macro": true,
+  "optimizer_step_noop": true,
+  "records": [
+    {
+      "phase": "measure",
+      "index": 0,
+      "ratio": 9.948589662644917,
+      "pose_weight": 0.25,
+      "detect_norm": 301.5887789160659,
+      "pose_norm": 3000.3830082940767,
+      "cosine_similarity": 0.1996056325741328,
+      "amp_retries": 2
+    },
+    {
+      "phase": "measure",
+      "index": 1,
+      "ratio": 11.060023684314137,
+      "pose_weight": 0.25,
+      "detect_norm": 280.9825320623994,
+      "pose_norm": 3107.673459488694,
+      "cosine_similarity": 0.12137104005382886,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 2,
+      "ratio": 1.1219129219584245,
+      "pose_weight": 0.25,
+      "detect_norm": 297.04715006683364,
+      "pose_norm": 333.26103609090393,
+      "cosine_similarity": 0.07807971933396347,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 3,
+      "ratio": 0.9424832655883545,
+      "pose_weight": 0.25,
+      "detect_norm": 260.77509521900794,
+      "pose_norm": 245.7761633261247,
+      "cosine_similarity": 0.036773556306465296,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 4,
+      "ratio": 8.234867192751794,
+      "pose_weight": 0.25,
+      "detect_norm": 306.212620005944,
+      "pose_norm": 2521.62025849352,
+      "cosine_similarity": 0.1584017517415408,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 5,
+      "ratio": 6.273210308926857,
+      "pose_weight": 0.25,
+      "detect_norm": 338.2597946967379,
+      "pose_norm": 2121.9748311870585,
+      "cosine_similarity": 0.32608148342384574,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 6,
+      "ratio": 0.9729477656105164,
+      "pose_weight": 0.25,
+      "detect_norm": 350.49453396068117,
+      "pose_norm": 341.012873675744,
+      "cosine_similarity": 0.02848373043925953,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 7,
+      "ratio": 6.284140076830437,
+      "pose_weight": 0.25,
+      "detect_norm": 292.3728924657892,
+      "pose_norm": 1837.3122109231017,
+      "cosine_similarity": 0.08352615873707554,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 8,
+      "ratio": 6.7911143707265245,
+      "pose_weight": 0.25,
+      "detect_norm": 275.6569180020433,
+      "pose_norm": 1872.0176572338596,
+      "cosine_similarity": 0.17619736720547008,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 9,
+      "ratio": 6.4277704563469955,
+      "pose_weight": 0.25,
+      "detect_norm": 254.2878569522793,
+      "pose_norm": 1634.5039743256518,
+      "cosine_similarity": 0.004574867969214076,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 10,
+      "ratio": 0.96203969148794,
+      "pose_weight": 0.25,
+      "detect_norm": 259.05401323088705,
+      "pose_norm": 249.22024296735532,
+      "cosine_similarity": -0.02752316269117017,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 11,
+      "ratio": 0.6804668379230984,
+      "pose_weight": 0.25,
+      "detect_norm": 314.92981611047026,
+      "pose_norm": 214.29929613639453,
+      "cosine_similarity": -0.006499675134923109,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 12,
+      "ratio": 5.337217971798033,
+      "pose_weight": 0.25,
+      "detect_norm": 355.97623840170456,
+      "pose_norm": 1899.9227771306387,
+      "cosine_similarity": 0.0022818498554740053,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 13,
+      "ratio": 1.5695032419877126,
+      "pose_weight": 0.25,
+      "detect_norm": 257.7694257822869,
+      "pose_norm": 404.56994945061035,
+      "cosine_similarity": 0.06274950904017358,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 14,
+      "ratio": 0.8875195878148777,
+      "pose_weight": 0.25,
+      "detect_norm": 296.6733403827539,
+      "pose_norm": 263.30340077216465,
+      "cosine_similarity": 0.1827187928931213,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 15,
+      "ratio": 0.9720409370762142,
+      "pose_weight": 0.25,
+      "detect_norm": 303.16708119209784,
+      "pose_norm": 294.6908136926275,
+      "cosine_similarity": 0.06783468186846557,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 0,
+      "ratio": 0.2653823137180734,
+      "pose_weight": 0.07,
+      "detect_norm": 344.3149429212213,
+      "pose_norm": 91.37509620014009,
+      "cosine_similarity": 0.00699393028611894,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 1,
+      "ratio": 1.7693613647087043,
+      "pose_weight": 0.07,
+      "detect_norm": 423.4210847315846,
+      "pose_norm": 749.1849083271164,
+      "cosine_similarity": -0.011224310946894144,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 2,
+      "ratio": 0.2669803230946393,
+      "pose_weight": 0.07,
+      "detect_norm": 321.1362452488477,
+      "pose_norm": 85.73705851393667,
+      "cosine_similarity": -0.008784912429189481,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 3,
+      "ratio": 2.9642665269061275,
+      "pose_weight": 0.07,
+      "detect_norm": 331.29493966672686,
+      "pose_norm": 982.0465001874635,
+      "cosine_similarity": 0.22236657092697984,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 4,
+      "ratio": 1.8896535731556108,
+      "pose_weight": 0.07,
+      "detect_norm": 323.40247516143535,
+      "pose_norm": 611.118642756175,
+      "cosine_similarity": 0.13910343177883522,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 5,
+      "ratio": 2.4637091854376054,
+      "pose_weight": 0.07,
+      "detect_norm": 285.4174602447911,
+      "pose_norm": 703.1856184893643,
+      "cosine_similarity": 0.0258031203040392,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 6,
+      "ratio": 0.23377729897248337,
+      "pose_weight": 0.07,
+      "detect_norm": 372.7325395374505,
+      "pose_norm": 87.13640633221955,
+      "cosine_similarity": 0.10212791174549837,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 7,
+      "ratio": 1.8322410682358228,
+      "pose_weight": 0.07,
+      "detect_norm": 340.75253874481047,
+      "pose_norm": 624.3407955938601,
+      "cosine_similarity": 0.06894126479838539,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-2",
+      "index": 0,
+      "ratio": 1.0298903125169485,
+      "pose_weight": 0.04,
+      "detect_norm": 389.7324955580492,
+      "pose_norm": 401.38172164828956,
+      "cosine_similarity": 0.1453962307137199,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-2",
+      "index": 1,
+      "ratio": 1.3429051424832734,
+      "pose_weight": 0.04,
+      "detect_norm": 328.11648856585265,
+      "pose_norm": 440.62931982863773,
+      "cosine_similarity": 0.1488854654892353,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-2",
+      "index": 2,
+      "ratio": 0.9221512668082567,
+      "pose_weight": 0.04,
+      "detect_norm": 347.9618069743056,
+      "pose_norm": 320.87342110224597,
+      "cosine_similarity": 0.14511932830487786,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-2",
+      "index": 3,
+      "ratio": 0.1004426609939118,
+      "pose_weight": 0.04,
+      "detect_norm": 430.5908563108689,
+      "pose_norm": 43.249691407510795,
+      "cosine_similarity": -0.040347474335981105,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-2",
+      "index": 4,
+      "ratio": 0.18537377277032613,
+      "pose_weight": 0.04,
+      "detect_norm": 328.6479006588621,
+      "pose_norm": 60.92270125818062,
+      "cosine_similarity": 0.18195342465466507,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-2",
+      "index": 5,
+      "ratio": 0.1454016237401706,
+      "pose_weight": 0.04,
+      "detect_norm": 368.32340139121817,
+      "pose_norm": 53.55482062378574,
+      "cosine_similarity": 0.10984343907748964,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-2",
+      "index": 6,
+      "ratio": 1.1970192920370881,
+      "pose_weight": 0.04,
+      "detect_norm": 324.7757889975186,
+      "pose_norm": 388.7628850165964,
+      "cosine_similarity": -0.038741632712984156,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-2",
+      "index": 7,
+      "ratio": 1.8419085481209236,
+      "pose_weight": 0.04,
+      "detect_norm": 319.2918119238426,
+      "pose_norm": 588.1063177275439,
+      "cosine_similarity": 0.14922378148781648,
+      "amp_retries": 0
+    }
+  ]
+}

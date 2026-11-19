@@ -1,0 +1,147 @@
+{
+  "variant": "M2",
+  "phase": "masf",
+  "smoke": true,
+  "recipe": {
+    "version": 5,
+    "batch": 16,
+    "logical_batch": 128,
+    "imgsz": 640,
+    "seed": 1,
+    "optimizer": "AdamW",
+    "lr0": 1e-05,
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "warmup_epochs": 1,
+    "warmup_bias_lr": 0.0,
+    "linear_final_fraction": 0.5,
+    "gradient_clip": 10.0,
+    "amp": true,
+    "initial_loss_scale": 1024.0,
+    "overflow_attempts": 16,
+    "dtype": "AMP-FP16; score/softmax/parameters/evaluation-FP32",
+    "bn": "all running statistics frozen",
+    "loss": "native E2E; reference64/actual macro; beta1 before one2one head",
+    "ema": "trainable parameters only; all frozen parameters and buffers bitwise fixed",
+    "normalization": "inherited native Pose attention",
+    "selection": "best improved primary AP; no monitored AP drop >.001; else parent",
+    "resume": "last complete epoch; exact live/EMA/optimizer/scaler; repeat interrupted epoch",
+    "reference_review_sha256": "52b3c1efad4fe212fb20ea65c9a7d27debfd54373819dda6420d627d12f4256f",
+    "phase": "masf",
+    "task": "pose",
+    "epochs": 5,
+    "patience": 0,
+    "scope": "task-head-and-masf",
+    "reference_batch": 64,
+    "steps_per_epoch": 47,
+    "group_lrs": {
+      "head": 5e-06,
+      "context": 1e-05,
+      "alpha": 0.0001
+    },
+    "warmup_start_factor": 0.1,
+    "scheduler": "warmup-cosine",
+    "smoke_steps": 2
+  },
+  "best": {
+    "AP50_95": 0.0,
+    "epoch": 1,
+    "checkpoint": "epoch-01.pt"
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 16,
+        "formal": false,
+        "internal": {
+          "metrics/precision(B)": 0.9965949879538916,
+          "metrics/recall(B)": 1.0,
+          "metrics/mAP50(B)": 0.995,
+          "metrics/mAP50-95(B)": 0.7005833333333333,
+          "metrics/precision(P)": 0.9965949879538916,
+          "metrics/recall(P)": 1.0,
+          "metrics/mAP50(P)": 0.995,
+          "metrics/mAP50-95(P)": 0.9949999999999999,
+          "fitness": 1.6955833333333332
+        },
+        "metrics": {
+          "box_AP50": 0.995,
+          "box_AP50_95": 0.7005833333333333,
+          "pose_AP50": 0.995,
+          "pose_AP50_95": 0.9949999999999999,
+          "bat_box_AP50": 0.995,
+          "bat_box_AP50_95": 0.7005833333333333,
+          "bat_pose_AP50": 0.995,
+          "bat_pose_AP50_95": 0.9949999999999999
+        },
+        "seconds": 0.44445252418518066
+      }
+    },
+    {
+      "epoch": 1,
+      "images": 256,
+      "optimizer_steps": 2,
+      "seconds": 17.01816964149475,
+      "training_seconds": 7.171544790267944,
+      "peak_allocated_bytes": 5285530112,
+      "amp_retries": 2,
+      "first_batch_images": [
+        "Untitled_mov-114_jpg.rf.cbfa399c636a439748346339067172ee.jpg",
+        "478_png_jpg.rf.b19a92b08593d1847f4d8ca74d454d97.jpg",
+        "20250314_162543_mp4-0056_jpg.rf.05f7b282ea72e0c0f5a00489bba37282.jpg",
+        "000000449705_jpg.rf.c69bf05e14ece9857d48f3a046dc7a5a.jpg",
+        "346_png_jpg.rf.363418ad38279f6d9bf79c15373e8d66.jpg",
+        "20250315_163624_mp4-0091_jpg.rf.4942815977d1d92afeb0d3dd85b142ad.jpg",
+        "20250315_163903_mp4-0079_jpg.rf.ab2009959f95ac45f0943b8e0344dc04.jpg",
+        "youtube-342_jpg.rf.44285459f272899a71a74981db61d13b.jpg",
+        "baseball1941_png_jpg.rf.99b1a68679fc4e54ff49a2d4b25cc55c.jpg",
+        "AngleV_1717202555_mp4-0080_jpg.rf.751aea46961a9f2240c5274039fadd57.jpg",
+        "20250312_143547_mp4-0133_jpg.rf.c77073e1d15825c2d35e0ccce925f204.jpg",
+        "3H2A9587-MPEG-4091_jpg.rf.3a5b55d929a56cc6a6f17c7c5ecfa212.jpg",
+        "baseball2272_png_jpg.rf.eda236f258a64dadad55c3595f4da3ef.jpg",
+        "20250314_163024_mp4-0012_jpg.rf.e5c8357efd007444a5c6178234ca6839.jpg",
+        "image199_jpeg_jpg.rf.02658a849550b01b00c1086b2169df12.jpg",
+        "000000306967_jpg.rf.7a4ce7bf0ca8d8c26e873769019d0c23.jpg"
+      ],
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 0.00019134380272589624,
+        "model.23.one2one_cv2.0.0.conv.weight": 1.000240445137024e-05,
+        "model.23.p3_masf.context.project.conv.weight": 7.24010169506073e-06
+      },
+      "qk_update_abs_max": {},
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 16,
+        "formal": false,
+        "internal": {
+          "metrics/precision(B)": 0.9966537678256451,
+          "metrics/recall(B)": 1.0,
+          "metrics/mAP50(B)": 0.995,
+          "metrics/mAP50-95(B)": 0.7005833333333333,
+          "metrics/precision(P)": 0.9966537678256451,
+          "metrics/recall(P)": 1.0,
+          "metrics/mAP50(P)": 0.995,
+          "metrics/mAP50-95(P)": 0.9949999999999999,
+          "fitness": 1.6955833333333332
+        },
+        "metrics": {
+          "box_AP50": 0.995,
+          "box_AP50_95": 0.7005833333333333,
+          "pose_AP50": 0.995,
+          "pose_AP50_95": 0.9949999999999999,
+          "bat_box_AP50": 0.995,
+          "bat_box_AP50_95": 0.7005833333333333,
+          "bat_pose_AP50": 0.995,
+          "bat_pose_AP50_95": 0.9949999999999999
+        },
+        "seconds": 0.5018258094787598
+      }
+    }
+  ],
+  "stop_reason": "smoke"
+}

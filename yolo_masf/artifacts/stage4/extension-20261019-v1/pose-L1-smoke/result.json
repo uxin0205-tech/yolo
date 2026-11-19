@@ -1,0 +1,158 @@
+{
+  "variant": "pose-L1",
+  "phase": "masf-extension",
+  "smoke": true,
+  "recipe": {
+    "version": 6,
+    "batch": 16,
+    "logical_batch": 128,
+    "imgsz": 640,
+    "seed": 6,
+    "optimizer": "AdamW",
+    "lr0": 1e-05,
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "warmup_epochs": 0,
+    "warmup_bias_lr": 0.0,
+    "linear_final_fraction": 0.2,
+    "gradient_clip": 10.0,
+    "amp": true,
+    "initial_loss_scale": 1024.0,
+    "overflow_attempts": 16,
+    "dtype": "AMP-FP16; score/softmax/parameters/evaluation-FP32",
+    "bn": "all running statistics frozen",
+    "loss": "native E2E terminal .1/.9; original macro normalization, beta1; no clock reset",
+    "ema": "trainable parameters only; all frozen parameters and buffers bitwise fixed",
+    "normalization": "inherited native Pose attention",
+    "selection": "save best primary AP; report class safety and trained alpha-on/off separately",
+    "resume": "last complete epoch; exact live/EMA/optimizer/scaler; repeat interrupted epoch",
+    "reference_review_sha256": "5aa202b23890853f8693175cc6b6af57a362523bfeb61c4cda517690c041364e",
+    "phase": "masf-extension",
+    "task": "pose",
+    "epochs": 15,
+    "patience": 0,
+    "scope": "task-head-and-masf",
+    "reference_batch": 64,
+    "steps_per_epoch": 47,
+    "group_lrs": {
+      "head": 2.5e-06,
+      "context": 5e-06,
+      "alpha": 5e-05
+    },
+    "warmup_start_factor": 0.1,
+    "scheduler": "warmup-cosine",
+    "smoke_steps": 2,
+    "arm": "L1",
+    "minimum_epochs": 5,
+    "observed_patience": 5,
+    "criterion_initial_age": 5,
+    "criterion_terminal_weights": [
+      0.1,
+      0.9
+    ],
+    "continuation_resume": "/home/uxin/yolo/yolo_masf/artifacts/stage4/formal-20261019-v1/pose-training/resume.pt",
+    "continuation_sha256": "ce505cffef1e7b11ead658dbccdd234b594671db422879145dbdc17489c7cdf4",
+    "start_state": "exact live+EMA+AdamW moments+scaler+EMA age from original task E5"
+  },
+  "best": {
+    "AP50_95": 0.0,
+    "epoch": 1,
+    "checkpoint": "epoch-01.pt"
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 16,
+        "formal": false,
+        "internal": {
+          "metrics/precision(B)": 0.9966694178862457,
+          "metrics/recall(B)": 1.0,
+          "metrics/mAP50(B)": 0.995,
+          "metrics/mAP50-95(B)": 0.7005833333333333,
+          "metrics/precision(P)": 0.9966694178862457,
+          "metrics/recall(P)": 1.0,
+          "metrics/mAP50(P)": 0.995,
+          "metrics/mAP50-95(P)": 0.9949999999999999,
+          "fitness": 1.6955833333333332
+        },
+        "metrics": {
+          "box_AP50": 0.995,
+          "box_AP50_95": 0.7005833333333333,
+          "pose_AP50": 0.995,
+          "pose_AP50_95": 0.9949999999999999,
+          "bat_box_AP50": 0.995,
+          "bat_box_AP50_95": 0.7005833333333333,
+          "bat_pose_AP50": 0.995,
+          "bat_pose_AP50_95": 0.9949999999999999
+        },
+        "seconds": 0.49229860305786133
+      }
+    },
+    {
+      "epoch": 1,
+      "images": 256,
+      "optimizer_steps": 2,
+      "seconds": 14.7785005569458,
+      "training_seconds": 4.715439558029175,
+      "peak_allocated_bytes": 5286729728,
+      "amp_retries": 0,
+      "first_batch_images": [
+        "baseball1974_png_jpg.rf.05d2be5bdd15d2a6653e4c1849584a21.jpg",
+        "000000070288_jpg.rf.55d99671cad39968cb5e3aa781f4d6d6.jpg",
+        "296_png_jpg.rf.b0ef582fad017d3c89f6d7b847fdd7af.jpg",
+        "0007B_mp4-0002_jpg.rf.3fc6503162677d68f9651827a5517ada.jpg",
+        "image68_jpg.rf.49328860187976b4dad98df3338789e7.jpg",
+        "20250315_163624_mp4-0081_jpg.rf.58f7ae1283e88ef66df7f66a5fbce622.jpg",
+        "image123_jpg.rf.391edeb07ae869998c1411b29d6996e4.jpg",
+        "baseball85_png_jpg.rf.c77d79d69c59896adb215aab61e286ca.jpg",
+        "3H2A9516-MPEG-4068_jpg.rf.8c23a390e078f70b251eafd956907397.jpg",
+        "547_png_jpg.rf.d27e310330ed5c022012269268521628.jpg",
+        "0005B_mp4-0008_jpg.rf.e4abdd3daf7b98f1e258db56d2b91437.jpg",
+        "0288E_mp4-0002_jpg.rf.677b9b36ebf8ef9b7667b3cde5836c12.jpg",
+        "AngleV_1710100086_mp4-0148_jpg.rf.370eaba2acadf179f3b7dd338e6c0fb9.jpg",
+        "Duran_mp4-0002_jpg.rf.364736a18179f4911f680e661057d029.jpg",
+        "frame1405_jpg.rf.3d4347de817340082c4ee4aa74495ce7.jpg",
+        "000000502517_jpg.rf.8a7b4384e7814e9e4d89446a084761df.jpg"
+      ],
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 8.205301128327847e-06,
+        "model.23.one2one_cv2.0.0.conv.weight": 3.8389116525650024e-06,
+        "model.23.p3_masf.context.project.conv.weight": 9.182840585708618e-06
+      },
+      "qk_update_abs_max": {},
+      "evaluation": {
+        "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+        "images": 16,
+        "formal": false,
+        "internal": {
+          "metrics/precision(B)": 0.9966854915567054,
+          "metrics/recall(B)": 1.0,
+          "metrics/mAP50(B)": 0.995,
+          "metrics/mAP50-95(B)": 0.7003125,
+          "metrics/precision(P)": 0.9966854915567054,
+          "metrics/recall(P)": 1.0,
+          "metrics/mAP50(P)": 0.995,
+          "metrics/mAP50-95(P)": 0.9949999999999999,
+          "fitness": 1.6953125
+        },
+        "metrics": {
+          "box_AP50": 0.995,
+          "box_AP50_95": 0.7003125,
+          "pose_AP50": 0.995,
+          "pose_AP50_95": 0.9949999999999999,
+          "bat_box_AP50": 0.995,
+          "bat_box_AP50_95": 0.7003125,
+          "bat_pose_AP50": 0.995,
+          "bat_pose_AP50_95": 0.9949999999999999
+        },
+        "seconds": 0.47782135009765625
+      }
+    }
+  ],
+  "stop_reason": "smoke"
+}

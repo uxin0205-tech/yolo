@@ -1,0 +1,45 @@
+study:
+  seed: 0
+  imgsz: 640
+  workers: 8
+  device: 0
+  vram_fraction: 0.70
+  minimum_free_gb: 80
+  expected_gpu: NVIDIA GeForce RTX 5090
+  expected_train_images: 118287
+  expected_val_images: 5000
+  expected_classes: 80
+  dataset_root: p2_study/data/coco2017
+  annotation_root: p2_study/data/annotations
+  pretrained: /home/uxin/yolo/original/weight/yolo11m.pt
+  dataset: p2_study/coco2017.yaml
+  formal_epochs: 100
+  staged_head_epochs: 20
+  staged_full_epochs: 80
+  staged_full_lr0: 0.001
+  health_epochs: 10
+  gate_fraction: 0.01
+  benchmark_images: 500
+  benchmark_warmup: 50
+  benchmark_repeats: 3
+
+official_baseline:
+  source: https://docs.ultralytics.com/models/yolo11/
+  model: YOLO11m
+  imgsz: 640
+  AP50-95: 0.515
+  cpu_onnx_ms: 183.2
+  t4_tensorrt10_ms: 4.7
+  params_millions: 20.1
+  gflops: 68.0
+
+models:
+  A0:
+    label: YOLO11m
+    yaml: ultralytics/cfg/models/11/yolo11m.yaml
+  A1:
+    label: YOLO11m-P2 Direct
+    yaml: ultralytics/cfg/models/11/yolo11m-p2.yaml
+  A2:
+    label: YOLO11m-P2 Direct Staged
+    yaml: ultralytics/cfg/models/11/yolo11m-p2.yaml

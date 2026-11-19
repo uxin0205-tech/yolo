@@ -1,0 +1,154 @@
+# 這是本輪唯一可排隊的 Full35 J3 Float20 完整設定；Pose 已由使用者明確固定為 true。
+schema_version: 1
+spec_version: 2.3.0
+spec_sha256: 572e10ef85037a4520083a0508688b7f88cd6fc7c11541530a1ef43644599216
+kind: float_screen_run
+config_id: full35-j3-float20-seed0
+title_zh: Full35 C0～C3 固定20% Float 架構初篩
+status: authorized_for_gpu_queue
+
+authorization:
+  gpu: true
+  gpu_authorized_at: "2026-08-27"
+  pose: true
+  note_zh: 使用者已於 2026-08-27 明確授權本輪 Pose=true；未來其他 run 仍須另行授權。
+
+handoff:
+  manifest: handoffs/full35-j3-seed0/manifest.json
+  full35_root: /home/uxin/yolo/yolo_combine/final/full35
+  accepted_stage: j3
+  rollback_j2_policy: 僅供回退稽核；本輪固定從 immutable final J3 EMA parent 建立。
+
+candidates: [C0, C1, C2, C3]
+
+datasets:
+  screen_manifest: artifacts/datasets/architecture-screen-20-v1/screening-manifest.json
+  screen_root: artifacts/datasets/architecture-screen-20-v1
+  detect: configs/data/coco2017-screen-20.yaml
+  pose: configs/data/bbat5-pose-screen-20.yaml
+  diagnostic_detect: configs/data/bbat5-detect-screen-20.yaml
+  canonical_bbat5_root: /home/uxin/yolo/original/pose/derived/bbat5-v1
+  coco_root: /home/uxin/yolo/coco2017
+  fraction_note_zh: 20% 已固定在 manifest；下方 fraction 必須保持 1.0。
+
+training:
+  run_root: artifacts/runs/full35-j3-float20-seed0
+  device: "0"
+  pose_enabled: true
+  imgsz: 640
+  epochs: 20
+  seed: 0
+  deterministic: true
+  amp: true
+
+  # 常用可調參數集中在這裡；任何更動都會改變 YAML hash，且四候選必須共用。
+  fraction: 1.0
+  scale: 0.5
+  cache: false
+  batch:
+    detect_logical: 128
+    detect_physical_microbatch: 32
+    detect_oom_fallback_microbatch: 16
+    detect_logical_batches_per_macro: 2
+    pose_physical: 16
+    validation_detect: 16
+    validation_pose: 16
+  workers:
+    detect: 4
+    pose: 8
+  nbs: 64
+
+  optimizer: MuSGD
+  momentum: 0.948
+  weight_decay: 0.00027
+  reference_batch_size: 64
+  max_grad_norm: 10.0
+  amp_max_overflow_retries: 16
+  validation_interval: 1
+  expected_optimizer_steps_per_candidate: 1860
+
+  task_weights:
+    detect: 1.0
+    pose: 0.25
+
+  learning_rates:
+    backbone: 0.0000038
+    neck: 0.000019
+    masf: 0.0
+    attention: 0.0
+    detect_head: 0.00005
+    pose_head: 0.00005
+
+  scheduler:
+    warmup_epochs: 1
+    warmup_start_factor: 0.1
+    final_lr_factor: 0.5
+
+  loss_overrides:
+    detect:
+      box: 7.5
+      cls: 0.5
+      dfl: 1.5
+    pose:
+      box: 7.5
+      cls: 0.5
+      dfl: 1.5
+      pose: 12.0
+      kobj: 1.0
+      rle: 1.0
+
+  augmentation:
+    detect:
+      hsv_h: 0.015
+      hsv_s: 0.7
+      hsv_v: 0.4
+      degrees: 0.0
+      translate: 0.1
+      scale: 0.5
+      shear: 0.0
+      perspective: 0.0
+      flipud: 0.0
+      fliplr: 0.5
+      mosaic: 0.0
+      mixup: 0.0
+      cutmix: 0.0
+      copy_paste: 0.0
+    pose:
+      hsv_h: 0.015
+      hsv_s: 0.7
+      hsv_v: 0.4
+      degrees: 0.0
+      translate: 0.1
+      scale: 0.5
+      shear: 0.0
+      perspective: 0.0
+      flipud: 0.0
+      fliplr: 0.0
+      mosaic: 0.0
+      mixup: 0.0
+      cutmix: 0.0
+      copy_paste: 0.0
+
+queue:
+  queue_id: architecture2-full35-j3-float20-seed0
+  gpu_index: 0
+  min_free_memory_mib: 30000
+  max_utilization_percent: 10
+  stable_polls: 3
+  poll_seconds: 60
+  lock: artifacts/queue/full35-j3-float20-seed0.lock
+  state: artifacts/queue/full35-j3-float20-seed0.json
+  log: artifacts/queue/full35-j3-float20-seed0.log
+  start_after_current_gpu_job: true
+  automatic_post_float_quantization: false
+
+lineage:
+  require_spec_sha256: true
+  require_architecture_yaml_sha256: true
+  require_training_yaml_sha256: true
+  require_dataset_yaml_sha256: true
+  require_screening_manifest_sha256: true
+  require_handoff_manifest_sha256: true
+  require_parent_checkpoint_sha256: true
+  selection_status_after_run: pending_user_decision
+  c_best_after_run: null

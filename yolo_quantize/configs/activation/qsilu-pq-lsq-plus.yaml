@@ -1,0 +1,98 @@
+schema_version: 2
+policy_id: qsilu-pq-lsq-plus-screening-v2
+status: provisional_screening_complete_not_final_winner
+
+activation:
+  name: qsilu_pq
+  implementation: yolo_quantize.activations.QSiLUPQ
+  parameter_free: true
+  knots: [0.0, 1.0, 2.0, 4.0, 8.0]
+  threshold: 8.0
+  upstream_sources:
+    float:
+      path: /home/uxin/yolo/yolo_activation/src/activation_lab/activations.py
+      sha256: 4f4f2f2cea7da7aeac8b9abdc69b877da8c731604b76ebcc5799d5a592ad2777
+    bittrue:
+      path: /home/uxin/yolo/yolo_activation/src/activation_lab/hardware.py
+      sha256: 79d68e7f87e96da99b121e73148071b618cb9517d5c494df7b87b7639edff135
+
+activation_function_bittrue:
+  implementation: yolo_quantize.activations.emulate_qsilu_pq_legacy
+  q_format:
+    total_bits: 16
+    fraction_bits: 10
+  rounding_mode: legacy_signed_half_away_from_zero
+  note: 此層只重現upstream qSiLU函數，不代表activation output固定為8-bit。
+
+activation_output_quantizer:
+  implementation: yolo_quantize.quantizers.LSQPlusActivationQuantizer
+  family: lsq_plus
+  granularity: per_tensor_per_boundary
+  code_range: unsigned_asymmetric
+  candidate_bits: [3, 4, 5, 6, 7, 8]
+  rounding_mode: nearest_even
+  learnable: [scale, offset]
+  smoke_initialization:
+    method: observed_minmax_to_integer_endpoints
+    calibration_per_task: 2
+    split: canonical_train_exemplars_only
+  future_qat_initialization: mse_representative_batches_pending
+  export_modes_to_compare: [bias_fold, integer_zero_point]
+
+full35_scope:
+  replaceable_silu_function_sites: 190
+  quantized_deployment_activation_outputs: 124
+  training_only_unquantized_sites: 66
+  training_only_regions: [detect_one2many, pose_one2many, pose_flow]
+  protected_modules_must_match_before_after: true
+
+screening_evidence:
+  report:
+    path: artifacts/reports/activation-smoke-v2.json
+    sha256: 3c9301adaa1937f50bdd0c059f7d8000ea4699ce229e98c8ddb387651340c1f1
+    cells: 30
+    passed: 30
+    failed: 0
+    formal_training: false
+    weight_format: fp32
+  qsilu_a8_proxy:
+    detect_one2one_raw_nrmse: 0.09465909213798196
+    pose_one2one_raw_nrmse: 0.10185140550372307
+    detect_topk_selected_pair_overlap: 0.8533333333333334
+    pose_topk_selected_pair_overlap: 0.6133333333333333
+  selection_claim: false
+  interpretation: qSiLU是screening seed，但不能和獨立weight winner拼接，也不是目前正式winner。
+
+eligible_parent_evidence:
+  job_id: short-recovery-uniform-qsilu-pq
+  run_name: short-recovery-v2-lr01-uniform-qsilu-pq-seed1
+  upstream_gate_passed: true
+  quantization_eligibility: screen_candidate
+  worst_metric_delta: -0.008635405318129619
+  primary_metrics:
+    coco/box/map50_95: 0.49527289402828617
+    bbat/box/map50_95: 0.6257507805406011
+    bbat/pose/map50_95: 0.9019860182143556
+  activation_experiment:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/activation-experiment.json
+    sha256: 42506b7d45ae34b44e65af87051f50bc9cb07c3b91ab6ab76a1b1ed079695ae7
+  final_epoch_bittrue_metrics:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/validation/epoch-0009/bittrue/metrics.json
+    sha256: 431d67cee012305e4196878a5108d1bbea8465bd0f6dfcb54c68b0157aa934ae
+  candidate_checkpoint:
+    path: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+    sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+
+gates:
+  upstream_activation_max_absolute_map_drop: 0.015
+  quantization_screening_max_absolute_map_drop: 0.04
+  w8a8_engineering_max_absolute_map_drop: 0.01
+  final_primary_task_max_absolute_map_drop: 0.04
+  screening_ready: true
+  finalization_ready: false
+
+restrictions:
+  - 不得使用被KeyboardInterrupt中斷的finalist qSiLU checkpoint作父節點。
+  - activation finalist queue終態前不得宣稱qsilu_pq為正式winner。
+  - smoke proxy不得替代完整validation mAP。
+  - 依使用者指示目前不啟動正式validation、QAT或長epoch訓練。

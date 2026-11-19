@@ -1,0 +1,9 @@
+stages:
+- configs/stagewise_lr/p1.yaml
+- configs/stagewise_lr/p2.yaml
+- configs/stagewise_lr/p3.yaml
+monitor_seconds: 600
+evaluation_imgsz:
+- 640
+- 960
+per_class_ap_drop_tolerance: 0.005

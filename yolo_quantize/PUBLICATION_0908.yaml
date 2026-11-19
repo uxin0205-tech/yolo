@@ -1,0 +1,35 @@
+schema_version: 1
+publication_id: quantization-stop-0908
+date: '2026-09-08'
+commit_subject: 5090 Stop 0908
+target: uxin0205-tech/yolo
+branch: main
+scope: yolo_quantize
+sync_policy: 僅將遠端 yolo_quantize 子樹對齊本機可發布快照；刪除遠端範圍內舊檔，不改其他專案，不 force push
+phase: deferred_by_user
+resume_requires_explicit_user_request: true
+resume_entry: docs/RESUME.md
+included:
+  root_files: [.gitattributes, .gitignore, README.md, IMPLEMENTATION_PLAN.md, quantize_spec.md, pyproject.toml, requirements-report.txt, PUBLICATION_MANIFEST.yaml, PUBLICATION_0907.yaml, PUBLICATION_0908.yaml, 三元權重變形器神經網路加速電路之設計與晶片實現.pdf]
+  trees: [src, tests, scripts, configs, docs, deliverables]
+  artifact_trees: [artifacts/manifests, artifacts/reports, artifacts/queues, artifacts/archives]
+  artifact_files: [artifacts/README.md]
+  artifact_extensions: [.json, .yaml, .yml, .csv, .md, .png, .pdf, .svg, .txt]
+excluded:
+  - artifacts/runs 與 artifacts/datasets；本機保留，不是刪除授權
+  - checkpoint、weights、pt/pth/ckpt/onnx/safetensors/npy/npz/bin/engine
+  - predictions.json、訓練 log、jsonl 事件流水、PID、lock、socket、tmp、orig、rej
+  - .git、.agents、.codex、.venv、cache、__pycache__、.pytest_cache、.ruff_cache
+  - 憑證、環境機密檔與其他專案
+file_safety: 不跟隨 symlink；超過 GitHub 一般單檔限制或可疑機密時中止發布
+queue_snapshot: 本次新增凍結 metadata；保留原 status 值，不能當成即時 GPU 狀態或啟動指令
+historical_policy: PUBLICATION_0907.yaml 與 PUBLICATION_MANIFEST.yaml 描述過去發行，不回寫其 hash
+cleanup:
+  reports_kept_in_place: 10
+  reports_archived: 12
+  redundant_reports_deleted_after_backup: 3
+  execution_record: docs/organization/report-retention-execution-2026-09-08.json
+gpu_started_during_publication: false
+training_or_checkpoint_modified: false
+validation: CPU 全套 351 passed；報告連結、備份／血緣 hash 及發布子樹檔名與 bytes 核對
+reproduction: GitHub 為程式與證據快照；完整恢復另需本機原始模型、checkpoint、runs 及不可變資料集

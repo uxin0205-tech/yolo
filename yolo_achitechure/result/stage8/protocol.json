@@ -1,0 +1,162 @@
+{
+  "schema": "repconv-stage8-v1",
+  "created_at": "2026-11-03T23:45:37.666810+08:00",
+  "reviewed_before_implementation": true,
+  "authorization": "2026-11-03 使用者指定進入下一步；本階段內三組訓練、必要一次降LR延長與驗證；完成後停止",
+  "candidates": [
+    "rep17",
+    "rep20",
+    "rep17_20"
+  ],
+  "layers": {
+    "rep17": [
+      17
+    ],
+    "rep20": [
+      20
+    ],
+    "rep17_20": [
+      17,
+      20
+    ]
+  },
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_activation/result/stage7/handoff/qsilu_pq.pt",
+    "sha256": "2f91ec1862ad62304f1e2727e9b9ee64a27c5a46a45137f83a74dc7f14c46a69",
+    "metrics": {
+      "coco_AP": 0.513951265381378,
+      "person_AP": 0.643234026088054,
+      "sports_ball_AP": 0.5146623165317121,
+      "baseball_bat_AP": 0.4690357899624067,
+      "box_AP50_95": 0.6139042018842924,
+      "pose_AP50_95": 0.9007615878805139,
+      "ball_box_AP50_95": 0.4974302119527326,
+      "ball_pose_AP50_95": 0.8647309926872065,
+      "bat_box_AP50_95": 0.730378191815852,
+      "bat_pose_AP50_95": 0.9367921830738212
+    },
+    "epoch": 8,
+    "phase": "qsilu_pq",
+    "candidate": "qsilu_pq",
+    "activation_relative_gate": true,
+    "ema_updates": 3704,
+    "verification": "/home/uxin/yolo/yolo_activation/result/stage7/evidence/activation-20261102/verify-qsilu_pq/result.json"
+  },
+  "sources_sha256": {
+    "yolo_optimize/experiments/pose_only_rep_v1/config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/models.py": "d0292e87cd05a5bd71dae2642c2a5844fd6edf47f3a6811af1c0e59414619ba9",
+    "yolo_optimize/experiments/pose_only_rep_v1/run_arm.py": "5b0e609d7e07823f08102ee15d77ee080550d971cb98177373e87e650a03030f",
+    "yolo_optimize/experiments/pose_only_rep_v1/preflight.py": "663cc670f329d84f23a2f8750214ecc961f05ca714fc60189972e5839cb59553",
+    "yolo_optimize/experiments/pose_only_rep_v1/queue-plan.json": "7196a645e590e9d00a822804ccbb008d5c7c482c251f5e95ec9139d9cf202570",
+    "yolo_optimize/experiments/pose_only_rep_v1/RESULTS.md": "4b0e059a3397d14faf206d814c6ea6396dbe5f014337a5a98c793efc2ae045e5",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/final-audit.json": "b1d0c829fb139a20f6471b3b58c6debdd374d775bebd279b42dc49be1ca7de97",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17/train/resolved-config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17/train/summary.json": "e016fbe77f88c445fcc02bdb2b68758528996459e64ca6a8513fe9aaa311f0a4",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17/smoke/summary.json": "92f5a1b15d4d1694cbd64e3e90e6290d3402cdf986465ac4fa6ae6ec357bc438",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep20/train/resolved-config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep20/train/summary.json": "1934d4b7e6c398ddf9a89d9350ec185229b551f6d534370f06c265ea1c3faa19",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep20/smoke/summary.json": "5718efe229da5251a24c20815bcf4da454fdec8c66f2989bbd5ab47b4f8c2196",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17_20/train/resolved-config.json": "8e22caa68d5bf6cdea34c274b1b16055614bc1d12a869dd331946c92fc25c231",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17_20/train/summary.json": "935f0d3678a011d1519974deb84fa4d27af74ff0db35459d584638f089a2462b",
+    "yolo_optimize/experiments/pose_only_rep_v1/artifacts/rep17_20/smoke/summary.json": "55ee2caf2a3067b71d18d0a4f5fddbd56aaac77df5f01460080e2f2b00f6fa07",
+    "yolo_optimize/experiments/src/yolo_optimize/repconv.py": "191b09a8f404f2a30e70d3b70e70618a6ae084fa3af690030300f13b7a20dfe7",
+    "yolo_optimize/experiments/pose_masf_training_v1/training_b.py": "f122fa9310cfc27b510448d4b720de801dfe7a72f0528b4dcee9afbf84956788",
+    "yolo_activation/stage7/training.py": "fb00e5ac2d1c802662ab813ff00db40710dc51df34133c6a4eb5e33a5bf49826",
+    "yolo_activation/stage7/ops.py": "4e89e08df201141176cbf5486ac51ed8d103976b7fc83d6484c820bd8a9dffc0",
+    "yolo_activation/stage7/model.py": "3c245f039979c62a001733f8c04042eee0c012a4cfec26b870e1fc1bab6f7762",
+    "yolo_combine/stage6/ops.py": "e8e5de235400271355a2ce19d7036e90a658568a795fb93cca57edc1a71bd671",
+    "yolo_combine/stage6/data.py": "7ea7addc67a6f84475b41220f1701ce31cf8a6b12b9f9352b33ead1c0f82ecf5",
+    "yolo_combine/stage6/evaluate.py": "bb3aab46dd653dbbf967879f5335a6c1a1d35ca55bb054b65e70b17f26d7a17e",
+    "yolo_attention/src/yolo_attention/stage3_checkpoint.py": "aaf7ce31c273f6df6d94f51f6f3eda6360a552761c77d19c47dd82986eee88e4",
+    "yolo_p2/ultralytics/nn/modules/conv.py": "c802f36ea1596d8910f2b651d57877b50a4960857b97cbb5a20d44a1dbbaa774"
+  },
+  "seed": 20261003,
+  "training": {
+    "epochs": 5,
+    "loss_horizon": 5,
+    "task": "joint",
+    "scope": "rep_and_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "rep": 1e-05,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "all_bn_running": "fixed",
+    "bn_affine": "trainable only selected Rep and both heads",
+    "attention": "all tensors frozen",
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "amp": true,
+    "detect_physical": 16,
+    "detect_accumulation": 16,
+    "pose_physical": 16,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "initial_ema_updates": 0,
+    "max_amp_retries": 16,
+    "ciou": "canonical FP32 wrapper; formula unchanged"
+  },
+  "calibration": {
+    "macros": 8,
+    "confirmation_macros": 4,
+    "attempts": 3,
+    "initial_pose_weight": 0.04,
+    "target_ratio": 1,
+    "bounds": [
+      0.025,
+      0.5
+    ],
+    "step": 0.005,
+    "confirmation_band": [
+      0.8,
+      1.25
+    ],
+    "optimizer_step": "noop; restore all model tensors each macro"
+  },
+  "extension": {
+    "max_extra_epochs_per_candidate": 5,
+    "lr_factor": 0.5,
+    "condition": "initial complete; last two epochs average balanced score > first two by .0001; best has no AP drop >.015; best epoch >=3",
+    "parent": "candidate best multibranch EMA",
+    "fresh_optimizer_ema": true
+  },
+  "max_training_epochs": 30,
+  "selection": {
+    "relative_drop_limit": 0.001,
+    "score": "0.5*(COCO four mean + BBAT six mean)",
+    "promote_min_score_gain": 0.0001,
+    "optimizer_reference_engineering_gate": "all eight drop<=.001 and COCO gain>=.001 or Pose gain>=.002; report separately",
+    "candidate_best": "gate then score; keep best trained checkpoint even when parent remains better",
+    "catastrophic_drop": 0.05,
+    "unchanged_control_training": false
+  },
+  "hardware_contract": true,
+  "activation": "qsilu_pq",
+  "normalization": "D1 integer PWL[-10,0]/20 + reciprocal LUT256; UQ1.24; no final renormalization",
+  "data": {
+    "coco_train": 118287,
+    "coco_val": 5000,
+    "bbat_train": 5964,
+    "bbat_val": 683,
+    "registry": "/home/uxin/yolo/configs/datasets/bbat5-v1.yaml"
+  },
+  "evaluator": "Stage3 official COCO4 + Stage4 native BBAT6; FP32 E2E conf.001/iou.7/maxdet300; batch8; no fusion",
+  "monitor_seconds": 600,
+  "next_stage_started": false,
+  "cpu_tolerance": {
+    "fp32_atol": 0.0002,
+    "fp32_rtol": 1e-05,
+    "low_precision_linear_atol": 0.03,
+    "low_precision_linear_rtol": 0.02
+  },
+  "remaining_ops_policy": "audit real calls; native head sigmoid retained with explicit cost pending controlled shared replacement; no hidden global quantization or extra activation search",
+  "e0": "三組初始 folded 完整 AP；只驗證，不增加 control 加訓"
+}

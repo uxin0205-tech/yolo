@@ -1,0 +1,561 @@
+{
+  "status": "completed",
+  "created_at": "2026-10-21T14:11:41.223511+08:00",
+  "authorization": "使用者：可以完全把這部分占用的資源刪除；範圍為第五階段未採用 HOG 大型產物與快取",
+  "items": [
+    {
+      "path": "yolo_hog/result/stage5/rejected-epoch01.pt",
+      "kind": "file",
+      "bytes": 88107711,
+      "allocated_bytes": 88109056,
+      "sha256": "2eac60bd5f14d55a4adf98aacdf5674c8b955b7c439327d5207b3119382d1fb2",
+      "link_target": null,
+      "reason": "使用者明確要求移除本次未採用 HOG 的模型與續訓資源；指標與 manifest 已抽取保存"
+    },
+    {
+      "path": "yolo_hog/artifacts/stage5/formal-20261021-v1/training/resume.pt",
+      "kind": "file",
+      "bytes": 267170519,
+      "allocated_bytes": 267177984,
+      "sha256": "0c242b6c3efc2981bb504883d5ebb112c3bf16e558e6a0c7cd415237e6257e70",
+      "link_target": null,
+      "reason": "使用者明確要求移除本次未採用 HOG 的模型與續訓資源；指標與 manifest 已抽取保存"
+    },
+    {
+      "path": "yolo_hog/artifacts/stage5/formal-20261021-v1/training/epoch-00.pt",
+      "kind": "file",
+      "bytes": 88111069,
+      "allocated_bytes": 88117248,
+      "sha256": "abae13cdb9a8603fa8cd3b2b8e9394bb73106448e4fdfc6f0a28f404da06d3fe",
+      "link_target": null,
+      "reason": "使用者明確要求移除本次未採用 HOG 的模型與續訓資源；指標與 manifest 已抽取保存"
+    },
+    {
+      "path": "yolo_hog/artifacts/stage5/formal-20261021-v1/safety-stop-review/epoch01-stripped.pt",
+      "kind": "symlink",
+      "bytes": 45,
+      "allocated_bytes": 0,
+      "sha256": null,
+      "link_target": "../../../../result/stage5/rejected-epoch01.pt",
+      "reason": "移除指向已刪候選的相容連結，避免斷鏈"
+    },
+    {
+      "path": "yolo_hog/artifacts/stage5/formal-20261021-v1/smoke/train-targets.jpg",
+      "kind": "file",
+      "bytes": 540690,
+      "allocated_bytes": 544768,
+      "sha256": "825ef681afd485ec348eb005288cfa59538d0d1faed7bb4afc80e97dad6333ab",
+      "link_target": null,
+      "reason": "已完成檢視的可重建 smoke 預覽圖"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/hog.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 15166,
+      "allocated_bytes": 16384,
+      "sha256": "a7575b773a5e62b3d8c8fa605e677850ae961d0751db9435cbdc01bfaa836b6f",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/checkpoint.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 6828,
+      "allocated_bytes": 8192,
+      "sha256": "0f1c666320107c11141ad40f9e9911bca83775d9517859b5ac01dda1e3b87e36",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/cli.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 9089,
+      "allocated_bytes": 12288,
+      "sha256": "9ab0397ed78f1a141915b278ba348e9c350c247751f43df0c1ab1020beb41ba7",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/models.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 8149,
+      "allocated_bytes": 8192,
+      "sha256": "5059db16cf42ce2b1152e4672fd358a667cd5e9744459de9775221e1467c34dd",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/diagnostics.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 13844,
+      "allocated_bytes": 16384,
+      "sha256": "d893eeebea090cdd4a0a546cd04c7407512a48676e52472ecc088976af3bd469",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/__init__.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 225,
+      "allocated_bytes": 4096,
+      "sha256": "ec7770a2a85c334735155461417b5b1b061512eec164f6d0352354d85c1d10c1",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/training.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 8684,
+      "allocated_bytes": 12288,
+      "sha256": "3ec67e88c2c2d9a7e1604cc6ce07df6eda9b7a0e21cfb396ef6c08e0d4d0c641",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/common.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 3340,
+      "allocated_bytes": 4096,
+      "sha256": "4771d121cc4929de670fa9bda962176c4ebb0dbce4dacff9af4b195730127c13",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/hog_yolo/__pycache__/workflow.cpython-312.pyc",
+      "kind": "file",
+      "bytes": 8758,
+      "allocated_bytes": 12288,
+      "sha256": "5f701a7c1c17e53c75b9f0aac8350c7cd1614ae51201f0ffaeb0c085bbd8a46c",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/tests/__pycache__/test_stage5_contracts.cpython-312-pytest-9.1.1.pyc",
+      "kind": "file",
+      "bytes": 22249,
+      "allocated_bytes": 24576,
+      "sha256": "a17a92dca5cb488f880f9edbc577f9b216202da11de710f6ef63fe0839d83495",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/tests/__pycache__/test_hog_targets.cpython-312-pytest-9.1.1.pyc",
+      "kind": "file",
+      "bytes": 18101,
+      "allocated_bytes": 20480,
+      "sha256": "48793597536caefd3bcd0cb7cb68b2feef6bb688c6979c430a68670eff0f2406",
+      "link_target": null,
+      "reason": "可重建 Python 快取"
+    },
+    {
+      "path": "yolo_hog/artifacts/stage5/formal-20261021-v1/worker.lock",
+      "kind": "file",
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link_target": null,
+      "reason": "本階段已停止且無 active process 的空鎖檔"
+    },
+    {
+      "path": "yolo_hog/artifacts/stage5/formal-20261021-v1/monitor.lock",
+      "kind": "file",
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link_target": null,
+      "reason": "本階段已停止且無 active process 的空鎖檔"
+    },
+    {
+      "path": "yolo_binaryqk/artifacts/stage2/smoke-20261019-v1/S1/epoch-01.pt",
+      "kind": "file",
+      "bytes": 88082663,
+      "allocated_bytes": 88084480,
+      "sha256": "ebb1097caa8ab63a96004ae34368b3f4a35a236f68f0c30811a61fd1191728cd",
+      "link_target": null,
+      "reason": "先前遺漏的已完成 Stage2 smoke，正式 S1/S2 與必要 resume 已存在；依既有直接清理授權補清"
+    },
+    {
+      "path": "yolo_binaryqk/artifacts/stage2/smoke-20261019-v1/S1/resume.pt",
+      "kind": "file",
+      "bytes": 202904297,
+      "allocated_bytes": 202907648,
+      "sha256": "203cb7ac04c021789ab64cae63664a01868c475ab3524c649cc4e34420ecac4f",
+      "link_target": null,
+      "reason": "先前遺漏的已完成 Stage2 smoke，正式 S1/S2 與必要 resume 已存在；依既有直接清理授權補清"
+    },
+    {
+      "path": "yolo_binaryqk/artifacts/stage2/smoke-20261019-v1/S2/epoch-01.pt",
+      "kind": "file",
+      "bytes": 88082727,
+      "allocated_bytes": 88084480,
+      "sha256": "cd241c3fcfead74d818934804a65c0da48ef03ae892cb1212f442d821a488724",
+      "link_target": null,
+      "reason": "先前遺漏的已完成 Stage2 smoke，正式 S1/S2 與必要 resume 已存在；依既有直接清理授權補清"
+    },
+    {
+      "path": "yolo_binaryqk/artifacts/stage2/smoke-20261019-v1/S2/resume.pt",
+      "kind": "file",
+      "bytes": 202904361,
+      "allocated_bytes": 202911744,
+      "sha256": "43d7a8611f58b4bdf736d4425c0690941ecdfabda0a28ea5201b53a4282fc36d",
+      "link_target": null,
+      "reason": "先前遺漏的已完成 Stage2 smoke，正式 S1/S2 與必要 resume 已存在；依既有直接清理授權補清"
+    }
+  ],
+  "retained": [
+    "HOG 程式與小型數據／結果／manifest",
+    "Stage5 selected.pt 及其既有 Stage3 parent",
+    "全部 MASF 正式結果／候選／必要 resume",
+    "正式資料、optimize 與其他階段檔案"
+  ],
+  "protected_selected_sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c",
+  "protected_masf_checkpoints": {
+    "yolo_masf/artifacts/stage4/extension-20261019-v1/pose-L1-training/epoch-01.pt": {
+      "size": 94980231,
+      "inode": 48639603,
+      "mtime_ns": 1792418696722486278
+    },
+    "yolo_masf/artifacts/stage4/extension-20261019-v1/pose-L1-training/resume.pt": {
+      "size": 227259181,
+      "inode": 48639614,
+      "mtime_ns": 1792419148242217278
+    },
+    "yolo_masf/artifacts/stage4/extension-20261019-v1/detect-L2-training/resume.pt": {
+      "size": 200933721,
+      "inode": 51513792,
+      "mtime_ns": 1792460895190814414
+    },
+    "yolo_masf/artifacts/stage4/extension-20261019-v1/detect-L2-training/epoch-12.pt": {
+      "size": 88417740,
+      "inode": 51513786,
+      "mtime_ns": 1792455553003345683
+    },
+    "yolo_masf/artifacts/stage4/extension-20261019-v1/detect-L1-training/epoch-03.pt": {
+      "size": 88417740,
+      "inode": 48639655,
+      "mtime_ns": 1792425067004694573
+    },
+    "yolo_masf/artifacts/stage4/extension-20261019-v1/detect-L1-training/resume.pt": {
+      "size": 200924953,
+      "inode": 48639666,
+      "mtime_ns": 1792433966689388349
+    },
+    "yolo_masf/artifacts/stage4/extension-20261019-v1/pose-L2-training/epoch-00.pt": {
+      "size": 94980231,
+      "inode": 48639626,
+      "mtime_ns": 1792419178494809357
+    },
+    "yolo_masf/artifacts/stage4/extension-20261019-v1/pose-L2-training/resume.pt": {
+      "size": 227257325,
+      "inode": 48639641,
+      "mtime_ns": 1792419633173513097
+    },
+    "yolo_masf/artifacts/stage4/formal-20261019-v1/pose-training/epoch-00.pt": {
+      "size": 94979719,
+      "inode": 48522199,
+      "mtime_ns": 1792413914600612842
+    },
+    "yolo_masf/artifacts/stage4/formal-20261019-v1/pose-training/resume.pt": {
+      "size": 227256301,
+      "inode": 48522214,
+      "mtime_ns": 1792414380060389466
+    },
+    "yolo_masf/artifacts/stage4/formal-20261019-v1/detect-training/epoch-00.pt": {
+      "size": 88417228,
+      "inode": 48522171,
+      "mtime_ns": 1792404902741533593
+    },
+    "yolo_masf/artifacts/stage4/formal-20261019-v1/detect-training/resume.pt": {
+      "size": 200920089,
+      "inode": 48522187,
+      "mtime_ns": 1792413776940595339
+    },
+    "yolo_masf/result/stage4/detect/trained-epoch05.pt": {
+      "size": 88423045,
+      "inode": 48103471,
+      "mtime_ns": 1792417727959152444
+    },
+    "yolo_masf/result/stage4/detect/candidate.pt": {
+      "size": 88417228,
+      "inode": 48522171,
+      "mtime_ns": 1792404902741533593
+    },
+    "yolo_masf/result/stage4/pose/trained-epoch05.pt": {
+      "size": 94986467,
+      "inode": 48103474,
+      "mtime_ns": 1792417734432482690
+    },
+    "yolo_masf/result/stage4/pose/candidate.pt": {
+      "size": 94979719,
+      "inode": 48522199,
+      "mtime_ns": 1792413914600612842
+    },
+    "yolo_masf/result/stage4/detect/L2/candidate.pt": {
+      "size": 88417740,
+      "inode": 51513786,
+      "mtime_ns": 1792455553003345683
+    },
+    "yolo_masf/result/stage4/detect/L1/candidate.pt": {
+      "size": 88417740,
+      "inode": 48639655,
+      "mtime_ns": 1792425067004694573
+    },
+    "yolo_masf/result/stage4/pose/L2/candidate.pt": {
+      "size": 94980231,
+      "inode": 48639626,
+      "mtime_ns": 1792419178494809357
+    },
+    "yolo_masf/result/stage4/pose/L1/candidate.pt": {
+      "size": 94980231,
+      "inode": 48639603,
+      "mtime_ns": 1792418696722486278
+    }
+  },
+  "prior_cleanup_audit": [
+    {
+      "stage": "1 Binary 舊內容",
+      "manifest": "yolo_binaryqk/artifacts/migration-20261017/cleanup-plan.json",
+      "historical_reclaimed_bytes": 3050942464,
+      "measurement_basis": "allocated blocks of unlinked files",
+      "records": 2722,
+      "current_check": {
+        "absent": 2722,
+        "replaced_by_link": 0,
+        "recreated_changed": 0,
+        "same_content_still_present": 0
+      },
+      "same_content_paths": []
+    },
+    {
+      "stage": "1 Binary 錯誤 v1",
+      "manifest": "yolo_binaryqk/artifacts/stage1/cleanup-invalid-v1.json",
+      "historical_reclaimed_bytes": 532443136,
+      "measurement_basis": "allocated blocks",
+      "records": 44,
+      "current_check": {
+        "absent": 44,
+        "replaced_by_link": 0,
+        "recreated_changed": 0,
+        "same_content_still_present": 0
+      },
+      "same_content_paths": []
+    },
+    {
+      "stage": "1 Binary smoke",
+      "manifest": "yolo_binaryqk/artifacts/stage1/cleanup-smoke-v2.json",
+      "historical_reclaimed_bytes": 1242083328,
+      "measurement_basis": "allocated blocks",
+      "records": 8,
+      "current_check": {
+        "absent": 8,
+        "replaced_by_link": 0,
+        "recreated_changed": 0,
+        "same_content_still_present": 0
+      },
+      "same_content_paths": []
+    },
+    {
+      "stage": "3 Attention 舊內容",
+      "manifest": "yolo_attention/artifacts/stage3/cleanup-final-delivery.json",
+      "historical_reclaimed_bytes": 2792814014,
+      "measurement_basis": "file byte counts",
+      "records": 322,
+      "current_check": {
+        "absent": 254,
+        "replaced_by_link": 5,
+        "recreated_changed": 10,
+        "same_content_still_present": 53
+      },
+      "same_content_paths": [
+        "yolo_attention/.ruff_cache/.gitignore",
+        "yolo_attention/.ruff_cache/CACHEDIR.TAG",
+        "yolo_attention/.pytest_cache/.gitignore",
+        "yolo_attention/.pytest_cache/CACHEDIR.TAG",
+        "yolo_attention/.pytest_cache/README.md",
+        "yolo_attention/src/yolo_attention/__pycache__/__init__.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/artifacts.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/bdcn.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/binary_basis.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/evaluation.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/experiments.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/integration.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/profiling.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/projection.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/pwl_experiment.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/pwl_validation.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/quantization.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/queue_executor.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/queue_model.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/queue_policy.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/queue_store.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/queue_workflow.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/relative_bias.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/run_config.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/runner.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/schedule.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/training.cpython-312.pyc",
+        "yolo_attention/src/yolo_attention/__pycache__/workflow.cpython-312.pyc",
+        "yolo_attention/tests/__pycache__/conftest.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_attention_integration.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_bdcn.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_bias_and_softmax.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_binary_basis.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_config_and_workflow.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_normalization_candidates.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_projection.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_pwl_backend.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_pwl_bittrue.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_pwl_diagnostics.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_pwl_queue.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_quantization_and_schedule.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_queue_backend.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_queue_cli.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_queue_evaluation.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_queue_executor.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_queue_model_store.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_queue_policy.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_queue_profiling.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_queue_workflow.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_recipes_and_artifacts.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_runner.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_trainer_profiling_cli.cpython-312-pytest-9.1.1.pyc",
+        "yolo_attention/tests/__pycache__/test_yolo_adapter.cpython-312-pytest-9.1.1.pyc"
+      ]
+    },
+    {
+      "stage": "3 Attention KD smoke",
+      "manifest": "yolo_attention/artifacts/stage3/kd-20261019-v1/smoke-cleanup.json",
+      "historical_reclaimed_bytes": 291015244,
+      "measurement_basis": "file byte counts",
+      "records": 2,
+      "current_check": {
+        "absent": 2,
+        "replaced_by_link": 0,
+        "recreated_changed": 0,
+        "same_content_still_present": 0
+      },
+      "same_content_paths": []
+    },
+    {
+      "stage": "4 MASF 舊內容",
+      "manifest": "yolo_masf/artifacts/stage4/cleanup.json",
+      "historical_reclaimed_bytes": 3069225754,
+      "measurement_basis": "file byte counts",
+      "records": 479,
+      "current_check": {
+        "absent": 477,
+        "replaced_by_link": 0,
+        "recreated_changed": 2,
+        "same_content_still_present": 0
+      },
+      "same_content_paths": []
+    },
+    {
+      "stage": "4 MASF 第一輪 smoke",
+      "manifest": "yolo_masf/artifacts/stage4/formal-20261019-v1/smoke-cleanup.json",
+      "historical_reclaimed_bytes": 611560089,
+      "measurement_basis": "file byte counts",
+      "records": 4,
+      "current_check": {
+        "absent": 4,
+        "replaced_by_link": 0,
+        "recreated_changed": 0,
+        "same_content_still_present": 0
+      },
+      "same_content_paths": []
+    },
+    {
+      "stage": "4 MASF 延長 smoke",
+      "manifest": "yolo_masf/artifacts/stage4/extension-20261019-v1/smoke-cleanup.json",
+      "historical_reclaimed_bytes": 1223126450,
+      "measurement_basis": "file byte counts",
+      "records": 8,
+      "current_check": {
+        "absent": 8,
+        "replaced_by_link": 0,
+        "recreated_changed": 0,
+        "same_content_still_present": 0
+      },
+      "same_content_paths": []
+    },
+    {
+      "stage": "5 HOG smoke",
+      "manifest": "yolo_hog/artifacts/stage5/formal-20261021-v1/smoke-cleanup.json",
+      "historical_reclaimed_bytes": 355280756,
+      "measurement_basis": "file byte counts",
+      "records": 2,
+      "current_check": {
+        "absent": 2,
+        "replaced_by_link": 0,
+        "recreated_changed": 0,
+        "same_content_still_present": 0
+      },
+      "same_content_paths": []
+    }
+  ],
+  "no_archive": true,
+  "protected_stage2_formal": {
+    "yolo_binaryqk/artifacts/stage2/formal-20261019-v1/S2/epoch-05.pt": {
+      "size": 88083687,
+      "inode": 48265388,
+      "mtime_ns": 1792357116078514122
+    },
+    "yolo_binaryqk/artifacts/stage2/formal-20261019-v1/S2/resume.pt": {
+      "size": 202910505,
+      "inode": 48265390,
+      "mtime_ns": 1792357120963816261
+    },
+    "yolo_binaryqk/result/stage2/epoch-05.pt": {
+      "size": 88083623,
+      "inode": 48265367,
+      "mtime_ns": 1792349218428376079
+    },
+    "yolo_binaryqk/result/stage2/resume.pt": {
+      "size": 202910441,
+      "inode": 48265372,
+      "mtime_ns": 1792349221109515613
+    }
+  },
+  "prior_cleanup_notes": [
+    "Attention 清單現有的 63 個實體檔全為可重建快取，非未刪舊權重；5 個連結指向必要共用實體。",
+    "MASF 舊清單有 2 個 __pycache__ 已重建，其餘舊產物不存在。",
+    "Stage2 正式模型仍保留；本次補刪 4 份先前遺漏的已完成 smoke 權重。"
+  ],
+  "cache_directories": [
+    "yolo_hog/hog_yolo/__pycache__",
+    "yolo_hog/tests/__pycache__"
+  ],
+  "empty_run_directories": [
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/generated",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/smoke/evaluation-00",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/smoke/evaluation-01",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/training/evaluation-00",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/training/evaluation-01",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/safety-stop-review/evaluation"
+  ],
+  "completed_at": "2026-10-21T14:13:31.866582+08:00",
+  "removed_directories": [
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/safety-stop-review/evaluation",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/training/evaluation-01",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/training/evaluation-00",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/smoke/evaluation-01",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/smoke/evaluation-00",
+    "yolo_hog/artifacts/stage5/formal-20261021-v1/generated",
+    "yolo_hog/hog_yolo/__pycache__",
+    "yolo_hog/tests/__pycache__"
+  ],
+  "reclaimed_file_bytes": 1026018515,
+  "reclaimed_allocated_bytes": 1026076672,
+  "gpu_used": false,
+  "archive_created": false,
+  "verification": {
+    "all_deletions_absent": true,
+    "selected_sha_unchanged": true,
+    "protected_masf_and_stage2_stats_unchanged": true,
+    "source_hashes_unchanged": true,
+    "new_document_links_valid": true,
+    "broken_hog_symlinks": [],
+    "plot_without_gpu_or_hog_checkpoint_passed": true,
+    "hog_physical_checkpoint_count": 0
+  }
+}

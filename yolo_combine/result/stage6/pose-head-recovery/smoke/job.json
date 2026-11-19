@@ -1,0 +1,46 @@
+{
+  "action": "smoke-head-recovery",
+  "root": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029",
+  "output": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029/smoke",
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e002.pt",
+    "sha256": "0790a6072f9843213d71d7bd3fe6a31cad88a11d6e762b30520aebdba87cbf96",
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6052339010323264,
+      "pose_AP50_95": 0.8949919888234579,
+      "ball_box_AP50_95": 0.48657728335389033,
+      "ball_pose_AP50_95": 0.8557942363978208,
+      "bat_box_AP50_95": 0.7238905187107626,
+      "bat_pose_AP50_95": 0.9341897412490949
+    },
+    "epoch": 2,
+    "phase": "KD-recovery",
+    "ema_updates": 926
+  },
+  "recipe": {
+    "name": "Pose-head-recovery",
+    "scope": "head",
+    "task": "pose",
+    "epochs": 10,
+    "patience": 4,
+    "lrs": {
+      "pose_head": 2e-05
+    },
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "loss_horizon": 10,
+    "fresh_ema": true,
+    "head_bn": "trainable",
+    "shared_bn_affine": false,
+    "min_delta": 0.0001,
+    "plateau_half_after": 0,
+    "extension": 0,
+    "selection": "pose_recovery",
+    "head_recovery_max_pose_drop": 0.02,
+    "retain_epoch_candidates": false
+  }
+}

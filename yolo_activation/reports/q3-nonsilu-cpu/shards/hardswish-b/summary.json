@@ -1,0 +1,442 @@
+{
+  "accepted_checkpoint": "/home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt",
+  "accepted_checkpoint_sha256": "d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c",
+  "accepted_silu_cpu_baseline": {
+    "elapsed_seconds": null,
+    "metrics": {
+      "bbat/ball/box/map50_95": 0.5064800833374091,
+      "bbat/ball/pose/map50_95": 0.856900430664654,
+      "bbat/bat/box/map50_95": 0.7524210170783139,
+      "bbat/bat/pose/map50_95": 0.9473035389044975,
+      "bbat/box/map50_95": 0.6294505502078616,
+      "bbat/pose/map50_95": 0.9021019847845757,
+      "coco/box/map50_95": 0.4984602972792155,
+      "coco/person/box/map50_95": 0.6203336579667654
+    },
+    "status": "reused"
+  },
+  "activation_execution": "torch.compile-inductor-dynamic-bitwise-verified",
+  "backend": "bittrue",
+  "candidates": [
+    "hardswish"
+  ],
+  "cpu_safety": {
+    "cuda_visible_devices": "",
+    "torch_cuda_available": false,
+    "torch_cuda_device_count": 0
+  },
+  "data_fraction": 1.0,
+  "device": "cpu",
+  "experiment_id": "full35-nonsilu-q3-cpu-v1",
+  "manifest": "/home/uxin/yolo/yolo_activation/reports/q3-nonsilu-cpu/shards/hardswish-b/q3-qsilu-recovery-activation-manifest.yaml",
+  "manifest_site_count": 190,
+  "qsilu_checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt",
+  "qsilu_checkpoint_sha256": "7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e",
+  "regions_requested": [
+    "neck",
+    "neck_attention",
+    "pose_flow",
+    "pose_one2many",
+    "pose_one2one"
+  ],
+  "resampling": false,
+  "rows": [
+    {
+      "activation_counts": {
+        "hardswish": 33,
+        "qsilu_pq": 157
+      },
+      "candidate": "hardswish",
+      "changed_path_count": 190,
+      "detect_deployment_fraction": 0.19957081545064378,
+      "elapsed_seconds": null,
+      "global_deltas_vs_accepted_silu": {
+        "bbat/ball/box/map50_95": -0.010735407504836647,
+        "bbat/ball/pose/map50_95": -0.008598461260395873,
+        "bbat/bat/box/map50_95": -0.017754945766368935,
+        "bbat/bat/pose/map50_95": -0.002118852700235596,
+        "bbat/box/map50_95": -0.014245176635602874,
+        "bbat/pose/map50_95": -0.005358656980315901,
+        "coco/box/map50_95": -0.017459551024113618,
+        "coco/person/box/map50_95": -0.013182640285496205
+      },
+      "global_gate_passed": false,
+      "global_worst_delta": -0.017754945766368935,
+      "hardware_proxy": {
+        "add_subtract": 1,
+        "coefficient_count": 0,
+        "constant_multiplications": 1,
+        "dyadic_or_apot_constants": false,
+        "fixed_point_emulator": false,
+        "interpretation": "HardSwish op, or add/clip/multiply/scale decomposition",
+        "power_of_two_threshold": false,
+        "range_operations": 1,
+        "standard_fused_operator": true,
+        "transcendental_operations": 0,
+        "variable_multiplications": 1
+      },
+      "local_deltas_vs_uniform_qsilu": {
+        "bbat/ball/box/map50_95": -0.0019253113645348319,
+        "bbat/ball/pose/map50_95": -0.008800805751892016,
+        "bbat/bat/box/map50_95": -0.018178853766875114,
+        "bbat/bat/pose/map50_95": -0.0006495427394200837,
+        "bbat/box/map50_95": -0.010052082565705,
+        "bbat/pose/map50_95": -0.004725174245656327,
+        "coco/box/map50_95": -0.014312651633524187,
+        "coco/person/box/map50_95": -0.012532716412689382
+      },
+      "local_worst_delta": -0.018178853766875114,
+      "metrics": {
+        "bbat/ball/box/map50_95": 0.4957446758325725,
+        "bbat/ball/pose/map50_95": 0.8483019694042582,
+        "bbat/bat/box/map50_95": 0.734666071311945,
+        "bbat/bat/pose/map50_95": 0.9451846862042619,
+        "bbat/box/map50_95": 0.6152053735722587,
+        "bbat/pose/map50_95": 0.8967433278042598,
+        "coco/box/map50_95": 0.48100074625510186,
+        "coco/person/box/map50_95": 0.6071510176812692
+      },
+      "per_element_savings_vs_qsilu": {
+        "add_subtract": 9,
+        "constant_multiplications": 7,
+        "range_operations": 4,
+        "variable_multiplications": 0
+      },
+      "pose_deployment_fraction": 0.19661733615221988,
+      "profile_proxy": {
+        "occupied_histogram_count": 1774900684800.0,
+        "weighted_mae_vs_qsilu": 0.04387357980951045,
+        "weighted_rmse_vs_qsilu": 0.05761256166528969
+      },
+      "region": "neck",
+      "run_name": "q3-cpu-qsilu-hardswish-neck",
+      "status": "reused",
+      "training_only": false
+    },
+    {
+      "activation_counts": {
+        "hardswish": 1,
+        "qsilu_pq": 189
+      },
+      "candidate": "hardswish",
+      "changed_path_count": 190,
+      "detect_deployment_fraction": 0.002861230329041488,
+      "elapsed_seconds": null,
+      "global_deltas_vs_accepted_silu": {
+        "bbat/ball/box/map50_95": -0.00858113800098148,
+        "bbat/ball/pose/map50_95": 0.00037092895213797217,
+        "bbat/bat/box/map50_95": 0.00042708359795762263,
+        "bbat/bat/pose/map50_95": -0.0014693099608155125,
+        "bbat/box/map50_95": -0.004077027201511929,
+        "bbat/pose/map50_95": -0.0005491905043386591,
+        "coco/box/map50_95": -0.0031858422357023963,
+        "coco/person/box/map50_95": -0.0005687380420466015
+      },
+      "global_gate_passed": true,
+      "global_worst_delta": -0.00858113800098148,
+      "hardware_proxy": {
+        "add_subtract": 1,
+        "coefficient_count": 0,
+        "constant_multiplications": 1,
+        "dyadic_or_apot_constants": false,
+        "fixed_point_emulator": false,
+        "interpretation": "HardSwish op, or add/clip/multiply/scale decomposition",
+        "power_of_two_threshold": false,
+        "range_operations": 1,
+        "standard_fused_operator": true,
+        "transcendental_operations": 0,
+        "variable_multiplications": 1
+      },
+      "local_deltas_vs_uniform_qsilu": {
+        "bbat/ball/box/map50_95": 0.00022895813932033438,
+        "bbat/ball/pose/map50_95": 0.00016858446064182964,
+        "bbat/bat/box/map50_95": 3.175597451443579e-06,
+        "bbat/bat/pose/map50_95": 0.0,
+        "bbat/box/map50_95": 0.00011606686838594449,
+        "bbat/pose/map50_95": 8.429223032091482e-05,
+        "coco/box/map50_95": -3.894284511296586e-05,
+        "coco/person/box/map50_95": 8.118583076022201e-05
+      },
+      "local_worst_delta": -3.894284511296586e-05,
+      "metrics": {
+        "bbat/ball/box/map50_95": 0.49789894533642765,
+        "bbat/ball/pose/map50_95": 0.857271359616792,
+        "bbat/bat/box/map50_95": 0.7528481006762715,
+        "bbat/bat/pose/map50_95": 0.945834228943682,
+        "bbat/box/map50_95": 0.6253735230063496,
+        "bbat/pose/map50_95": 0.901552794280237,
+        "coco/box/map50_95": 0.4952744550435131,
+        "coco/person/box/map50_95": 0.6197649199247188
+      },
+      "per_element_savings_vs_qsilu": {
+        "add_subtract": 9,
+        "constant_multiplications": 7,
+        "range_operations": 4,
+        "variable_multiplications": 0
+      },
+      "pose_deployment_fraction": 0.0028188865398167725,
+      "profile_proxy": {
+        "occupied_histogram_count": 25446604800.0,
+        "weighted_mae_vs_qsilu": 0.02909522944301068,
+        "weighted_rmse_vs_qsilu": 0.04790739493984061
+      },
+      "region": "neck_attention",
+      "run_name": "q3-cpu-qsilu-hardswish-neck_attention",
+      "status": "reused",
+      "training_only": false
+    },
+    {
+      "activation_counts": {
+        "hardswish": 24,
+        "qsilu_pq": 166
+      },
+      "candidate": "hardswish",
+      "changed_path_count": 190,
+      "detect_deployment_fraction": 0.0,
+      "elapsed_seconds": 3336.710917714983,
+      "global_deltas_vs_accepted_silu": {
+        "bbat/ball/box/map50_95": -0.008810096140301815,
+        "bbat/ball/pose/map50_95": 0.00020234449149614253,
+        "bbat/bat/box/map50_95": 0.00042390800050617905,
+        "bbat/bat/pose/map50_95": -0.0014693099608155125,
+        "bbat/box/map50_95": -0.004193094069897874,
+        "bbat/pose/map50_95": -0.0006334827346595739,
+        "coco/box/map50_95": -0.0031468993905894305,
+        "coco/person/box/map50_95": -0.0006499238728068235
+      },
+      "global_gate_passed": true,
+      "global_worst_delta": -0.008810096140301815,
+      "hardware_proxy": {
+        "add_subtract": 1,
+        "coefficient_count": 0,
+        "constant_multiplications": 1,
+        "dyadic_or_apot_constants": false,
+        "fixed_point_emulator": false,
+        "interpretation": "HardSwish op, or add/clip/multiply/scale decomposition",
+        "power_of_two_threshold": false,
+        "range_operations": 1,
+        "standard_fused_operator": true,
+        "transcendental_operations": 0,
+        "variable_multiplications": 1
+      },
+      "local_deltas_vs_uniform_qsilu": {
+        "bbat/ball/box/map50_95": 0.0,
+        "bbat/ball/pose/map50_95": 0.0,
+        "bbat/bat/box/map50_95": 0.0,
+        "bbat/bat/pose/map50_95": 0.0,
+        "bbat/box/map50_95": 0.0,
+        "bbat/pose/map50_95": 0.0,
+        "coco/box/map50_95": 0.0,
+        "coco/person/box/map50_95": 0.0
+      },
+      "local_worst_delta": 0.0,
+      "metrics": {
+        "bbat/ball/box/map50_95": 0.4976699871971073,
+        "bbat/ball/pose/map50_95": 0.8571027751561502,
+        "bbat/bat/box/map50_95": 0.7528449250788201,
+        "bbat/bat/pose/map50_95": 0.945834228943682,
+        "bbat/box/map50_95": 0.6252574561379637,
+        "bbat/pose/map50_95": 0.9014685020499161,
+        "coco/box/map50_95": 0.49531339788862605,
+        "coco/person/box/map50_95": 0.6196837340939586
+      },
+      "per_element_savings_vs_qsilu": {
+        "add_subtract": 9,
+        "constant_multiplications": 7,
+        "range_operations": 4,
+        "variable_multiplications": 0
+      },
+      "pose_deployment_fraction": 0.0,
+      "profile_proxy": {
+        "occupied_histogram_count": 190142976.0,
+        "weighted_mae_vs_qsilu": 0.00611292552684919,
+        "weighted_rmse_vs_qsilu": 0.009993479635406895
+      },
+      "region": "pose_flow",
+      "run_name": "q3-cpu-qsilu-hardswish-pose_flow",
+      "status": "completed",
+      "training_only": true
+    },
+    {
+      "activation_counts": {
+        "hardswish": 24,
+        "qsilu_pq": 166
+      },
+      "candidate": "hardswish",
+      "changed_path_count": 190,
+      "detect_deployment_fraction": 0.0,
+      "elapsed_seconds": 3216.482595423702,
+      "global_deltas_vs_accepted_silu": {
+        "bbat/ball/box/map50_95": -0.008810096140301815,
+        "bbat/ball/pose/map50_95": 0.00020234449149614253,
+        "bbat/bat/box/map50_95": 0.00042390800050617905,
+        "bbat/bat/pose/map50_95": -0.0014693099608155125,
+        "bbat/box/map50_95": -0.004193094069897874,
+        "bbat/pose/map50_95": -0.0006334827346595739,
+        "coco/box/map50_95": -0.0031468993905894305,
+        "coco/person/box/map50_95": -0.0006499238728068235
+      },
+      "global_gate_passed": true,
+      "global_worst_delta": -0.008810096140301815,
+      "hardware_proxy": {
+        "add_subtract": 1,
+        "coefficient_count": 0,
+        "constant_multiplications": 1,
+        "dyadic_or_apot_constants": false,
+        "fixed_point_emulator": false,
+        "interpretation": "HardSwish op, or add/clip/multiply/scale decomposition",
+        "power_of_two_threshold": false,
+        "range_operations": 1,
+        "standard_fused_operator": true,
+        "transcendental_operations": 0,
+        "variable_multiplications": 1
+      },
+      "local_deltas_vs_uniform_qsilu": {
+        "bbat/ball/box/map50_95": 0.0,
+        "bbat/ball/pose/map50_95": 0.0,
+        "bbat/bat/box/map50_95": 0.0,
+        "bbat/bat/pose/map50_95": 0.0,
+        "bbat/box/map50_95": 0.0,
+        "bbat/pose/map50_95": 0.0,
+        "coco/box/map50_95": 0.0,
+        "coco/person/box/map50_95": 0.0
+      },
+      "local_worst_delta": 0.0,
+      "metrics": {
+        "bbat/ball/box/map50_95": 0.4976699871971073,
+        "bbat/ball/pose/map50_95": 0.8571027751561502,
+        "bbat/bat/box/map50_95": 0.7528449250788201,
+        "bbat/bat/pose/map50_95": 0.945834228943682,
+        "bbat/box/map50_95": 0.6252574561379637,
+        "bbat/pose/map50_95": 0.9014685020499161,
+        "coco/box/map50_95": 0.49531339788862605,
+        "coco/person/box/map50_95": 0.6196837340939586
+      },
+      "per_element_savings_vs_qsilu": {
+        "add_subtract": 9,
+        "constant_multiplications": 7,
+        "range_operations": 4,
+        "variable_multiplications": 0
+      },
+      "pose_deployment_fraction": 0.0,
+      "profile_proxy": {
+        "occupied_histogram_count": 67178496000.0,
+        "weighted_mae_vs_qsilu": 0.030334707385076782,
+        "weighted_rmse_vs_qsilu": 0.04403405091960847
+      },
+      "region": "pose_one2many",
+      "run_name": "q3-cpu-qsilu-hardswish-pose_one2many",
+      "status": "completed",
+      "training_only": true
+    },
+    {
+      "activation_counts": {
+        "hardswish": 24,
+        "qsilu_pq": 166
+      },
+      "candidate": "hardswish",
+      "changed_path_count": 190,
+      "detect_deployment_fraction": 0.0,
+      "elapsed_seconds": 3256.239257715177,
+      "global_deltas_vs_accepted_silu": {
+        "bbat/ball/box/map50_95": -0.10403849051732655,
+        "bbat/ball/pose/map50_95": -0.0011294628729592304,
+        "bbat/bat/box/map50_95": -0.15032483533567143,
+        "bbat/bat/pose/map50_95": -0.010203349021684849,
+        "bbat/box/map50_95": -0.12718166292649902,
+        "bbat/pose/map50_95": -0.005666405947321929,
+        "coco/box/map50_95": -0.0031468993905894305,
+        "coco/person/box/map50_95": -0.0006499238728068235
+      },
+      "global_gate_passed": false,
+      "global_worst_delta": -0.15032483533567143,
+      "hardware_proxy": {
+        "add_subtract": 1,
+        "coefficient_count": 0,
+        "constant_multiplications": 1,
+        "dyadic_or_apot_constants": false,
+        "fixed_point_emulator": false,
+        "interpretation": "HardSwish op, or add/clip/multiply/scale decomposition",
+        "power_of_two_threshold": false,
+        "range_operations": 1,
+        "standard_fused_operator": true,
+        "transcendental_operations": 0,
+        "variable_multiplications": 1
+      },
+      "local_deltas_vs_uniform_qsilu": {
+        "bbat/ball/box/map50_95": -0.09522839437702474,
+        "bbat/ball/pose/map50_95": -0.001331807364455373,
+        "bbat/bat/box/map50_95": -0.1507487433361776,
+        "bbat/bat/pose/map50_95": -0.008734039060869336,
+        "bbat/box/map50_95": -0.12298856885660114,
+        "bbat/pose/map50_95": -0.005032923212662355,
+        "coco/box/map50_95": 0.0,
+        "coco/person/box/map50_95": 0.0
+      },
+      "local_worst_delta": -0.1507487433361776,
+      "metrics": {
+        "bbat/ball/box/map50_95": 0.40244159282008257,
+        "bbat/ball/pose/map50_95": 0.8557709677916948,
+        "bbat/bat/box/map50_95": 0.6020961817426425,
+        "bbat/bat/pose/map50_95": 0.9371001898828126,
+        "bbat/box/map50_95": 0.5022688872813625,
+        "bbat/pose/map50_95": 0.8964355788372538,
+        "coco/box/map50_95": 0.49531339788862605,
+        "coco/person/box/map50_95": 0.6196837340939586
+      },
+      "per_element_savings_vs_qsilu": {
+        "add_subtract": 9,
+        "constant_multiplications": 7,
+        "range_operations": 4,
+        "variable_multiplications": 0
+      },
+      "pose_deployment_fraction": 0.15503875968992248,
+      "profile_proxy": {
+        "occupied_histogram_count": 67178496000.0,
+        "weighted_mae_vs_qsilu": 0.029757627308777203,
+        "weighted_rmse_vs_qsilu": 0.04349767543443734
+      },
+      "region": "pose_one2one",
+      "run_name": "q3-cpu-qsilu-hardswish-pose_one2one",
+      "status": "completed",
+      "training_only": false
+    }
+  ],
+  "schema_version": 1,
+  "stage": "Q3_region_zero_shot_sensitivity",
+  "torch_threads": 4,
+  "training_only_regions": [
+    "detect_one2many",
+    "pose_flow",
+    "pose_one2many"
+  ],
+  "training_performed": false,
+  "uniform_qsilu_cpu_baseline": {
+    "activation_counts": {
+      "qsilu_pq": 190
+    },
+    "elapsed_seconds": null,
+    "global_deltas_vs_accepted_silu": {
+      "bbat/ball/box/map50_95": -0.008810096140301815,
+      "bbat/ball/pose/map50_95": 0.00020234449149614253,
+      "bbat/bat/box/map50_95": 0.00042390800050617905,
+      "bbat/bat/pose/map50_95": -0.0014693099608155125,
+      "bbat/box/map50_95": -0.004193094069897874,
+      "bbat/pose/map50_95": -0.0006334827346595739,
+      "coco/box/map50_95": -0.0031468993905894305,
+      "coco/person/box/map50_95": -0.0006499238728068235
+    },
+    "metrics": {
+      "bbat/ball/box/map50_95": 0.4976699871971073,
+      "bbat/ball/pose/map50_95": 0.8571027751561502,
+      "bbat/bat/box/map50_95": 0.7528449250788201,
+      "bbat/bat/pose/map50_95": 0.945834228943682,
+      "bbat/box/map50_95": 0.6252574561379637,
+      "bbat/pose/map50_95": 0.9014685020499161,
+      "coco/box/map50_95": 0.49531339788862605,
+      "coco/person/box/map50_95": 0.6196837340939586
+    },
+    "status": "reused"
+  },
+  "validation_plots": false
+}

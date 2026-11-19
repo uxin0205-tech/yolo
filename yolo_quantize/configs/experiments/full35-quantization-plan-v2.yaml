@@ -1,0 +1,309 @@
+schema_version: 2
+plan_id: full35-activation-aware-quantization-v2
+date: '2026-08-30'
+supersedes: full35-weight-region-sensitivity-v1
+status: v0_v3_cpu_complete_v4_plus_prepared_not_run
+language: zh-TW
+
+authorization:
+  cpu_only_v0_v3: true
+  generate_future_configs: true
+  gpu_validation: false
+  qat: false
+  formal_training: false
+  export: false
+
+model:
+  target: Full35 shared Detect+Pose accepted J3 experimental baseline
+  accepted_checkpoint: /home/uxin/yolo/yolo_combine/final/full35/weights/combined/inference/best_joint.pt
+  accepted_checkpoint_sha256: d67fb45c576035e1b9c607914c62fa2c46bad84a5f53dea2c95ea7d4155ec74c
+  accepted_optimizer: AdamW
+  deployment_semantics: one_to_one_end2end_nms_free
+  dfl_effective: false
+  reg_max: 1
+
+data:
+  coco_detect_yaml: /home/uxin/yolo/coco2017.yaml
+  bbat5_registry: /home/uxin/yolo/configs/datasets/bbat5-v1.yaml
+  bbat5_pose_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/pose.yaml
+  bbat5_detect_yaml: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml
+  bbat5_assignment_changed: false
+  physical_merge: false
+  task_specific_loaders: true
+  diagnostic_manifest:
+    path: artifacts/manifests/full35-diagnostic-cal32-probe64-v1.json
+    semantic_sha256: b0eb2a068aa515caa5ea22f2781dc68225971224cae2324d17a6be1e2d31eef2
+    file_sha256: 76b4392d2d07232967018b20af82149ba67ee036fad2cb75bb15d2d7565f4356
+    seed: 20260830
+    calibration_per_task: 32
+    probe_per_task: 64
+    coco_person_required: true
+    bbat_rf_policy: one_canonical_exemplar_per_rf_group
+    diagnostic_only: true
+
+activation_policies:
+  new_silu_runs: false
+  historical_silu_reference_only: true
+  primary_a8:
+    - policy_id: qsilu_pq--lsq-plus-a8
+      activation: qsilu_pq
+      role: accuracy
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-qsilu-pq-seed1/inference/best_joint.pt
+      parent_sha256: 7679186695317e431cd7deb17289f426f4b39b7a4993e4548e74f5ba2766190e
+    - policy_id: poly_quality--lsq-plus-a8
+      activation: poly_quality
+      role: numeric
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-quality-seed1/inference/best_joint.pt
+      parent_sha256: eedd48007345bc8dfd2179819b932bdf1dd40b25a654a7eb82c53796885ac968
+    - policy_id: poly_shift--lsq-plus-a8
+      activation: poly_shift
+      role: hardware
+      parent_checkpoint: /home/uxin/yolo/yolo_activation/artifacts/runs/full35/short-recovery-v2-lr01-uniform-poly-shift-seed1/inference/best_joint.pt
+      parent_sha256: 8783248a513329ae80e3f659e6f3ce617e4bcca9fca9530b1f95448de5e19713
+  forbidden_checkpoint: interrupted_qsilu_finalist
+  lower_bit_after_weight_map:
+    - qsilu_pq--lsq-plus-a7
+    - qsilu_pq--lsq-plus-a6
+    - poly_quality--lsq-plus-a7
+    - poly_shift--lsq-plus-a7
+    - poly_shift--lsq-plus-a6
+  a5_and_below: not_promoted_except_a_sd4_matched_research
+
+graph_inventory:
+  total_conv_linear_modules: 251
+  total_weight_elements: 26451392
+  deployment_candidate_modules: 148
+  deployment_candidate_weight_elements: 22571840
+  training_only_excluded_modules: 99
+  training_only_excluded_weight_elements: 3748480
+  binary_qk_protected_modules: 4
+  binary_qk_protected_weight_elements: 131072
+  correction_from_v1:
+    paths:
+      - graph.model.23.pose_head.one2one_cv4_sigma.0
+      - graph.model.23.pose_head.one2one_cv4_sigma.1
+      - graph.model.23.pose_head.one2one_cv4_sigma.2
+    old_status: deployment
+    corrected_status: training_only
+    reason: sigma branch is unavailable after inference fuse
+
+regions:
+  - {order: 1, id: backbone_early, modules: 21, weights: 1218240}
+  - {order: 2, id: backbone_deep, modules: 22, weights: 8126464, priority: highest}
+  - {order: 3, id: backbone_attention_safe, modules: 7, weights: 919808}
+  - {order: 4, id: neck, modules: 33, weights: 8142848, priority: highest}
+  - {order: 5, id: masf, modules: 3, weights: 74240}
+  - {order: 6, id: neck_attention_safe, modules: 5, weights: 395520}
+  - {order: 7, id: detect_one2one_tower, modules: 18, weights: 1390592}
+  - {order: 8, id: detect_one2one_predictor, modules: 6, weights: 62208}
+  - {order: 9, id: pose_one2one_tower, modules: 24, weights: 2238464}
+  - {order: 10, id: pose_one2one_predictor, modules: 9, weights: 3456}
+
+exclusions:
+  training_only_regions: [detect_one2many, pose_one2many, pose_flow, pose_sigma]
+  protected_semantics: [binary_qk, attention_pwl, masf_topology, topk, gather, box_decode, keypoint_decode]
+  dfl_quantization: false
+  nms_quantization: false
+
+weight_formats:
+  uniform:
+    bits: [8, 7, 6, 5, 4]
+    qrange: signed_full_range
+    rounding: nearest_even
+    accumulator: int32
+    main_granularity: per_output_channel
+    main_scale_method: mse
+    ablation_granularities: [per_tensor, per_output_channel, group32, group64]
+    ablation_scale_methods: [max, mse]
+    native_kernel_claim: false
+  fixed_sd4:
+    bits: 4
+    unique_values: 15
+    encoded_codes: 16
+    duplicate_zero_code: true
+    normalized_codebook: [0, 0.015625, -0.015625, 0.03125, -0.03125, 0.0625, -0.0625, 0.125, -0.125, 0.25, -0.25, 0.5, -0.5, 1.0, -1.0]
+    scale_methods: [max, mse]
+    static_ptq: true
+  ls_sd4:
+    status: planned_qat_not_authorized
+    codebook_fixed: true
+    scale: softplus_rho_plus_epsilon
+    fp32_master: true
+    gradient: ste
+    gradient_ablations: [autograd, inverse_sqrt_n, inverse_sqrt_7n, lr_only]
+  ternary:
+    paper_twn:
+      status: static_proxy_implemented
+      delta: 0.7_mean_absolute_weight
+      alpha: mean_absolute_selected_weight
+    channel_twn: planned_not_implemented
+    ttq: planned_not_implemented
+  activation_sd4:
+    status: later_matched_research
+    cells: [lsq_plus_a4, fixed_signed_a_sd4, learnable_range_a_sd4]
+
+metric_gate:
+  accepted_metrics_file: configs/experiments/accepted-full35-eight-metrics-v1.yaml
+  keys:
+    - coco/box/map50_95
+    - coco/person/box/map50_95
+    - bbat/box/map50_95
+    - bbat/pose/map50_95
+    - bbat/ball/box/map50_95
+    - bbat/bat/box/map50_95
+    - bbat/ball/pose/map50_95
+    - bbat/bat/pose/map50_95
+  all_eight_required: true
+  total_max_drop: 0.04
+  w8_incremental_max_drop: 0.01
+  matched_sham_max_absolute_drift: 0.01
+  recovery_floor: 0.06
+  headline_only: [coco/box/map50_95, bbat/box/map50_95, bbat/pose/map50_95]
+
+phases:
+  v0:
+    purpose: reconcile_published_activation_and_local_ptq_v1
+    status: complete_hash_audited
+  v1:
+    purpose: corrected_catalog_and_dual_weight_views
+    status: implemented_cpu_verified
+    seams: [Full35WeightRegionCatalog.inspect, Full35WeightViewAdapter.build]
+  v2:
+    purpose: all_layer_static_format_analysis
+    status: complete_cpu_three_parents
+    views: [unfused_fp32_master, bn_folded_deployment]
+    main_formats: [w8, w7, w6, w5, w4, fixed_sd4, paper_twn]
+    measurements_per_parent: 2960
+    total_measurements: 8880
+    delivery_manifest: artifacts/manifests/v1-v3-cpu-delivery-v1.yaml
+    fixed_sd4_routing_candidates: artifacts/manifests/fixed-sd4-routing-candidates-v1.yaml
+  v3:
+    purpose: diagnostic_manifest_and_metric_gate
+    status: implemented_cpu_verified
+    seams: [DiagnosticManifestBuilder.build, Full35MetricGate.evaluate]
+  v4:
+    purpose: activation_parent_x_uniform_bit_bridge
+    status: prepared_gpu_not_authorized
+    cells: 15
+    formula: 3_activation_parents_x_5_uniform_bits
+  v5:
+    purpose: isolated_region_sensitivity
+    status: prepared_gpu_not_authorized
+    cells: 150
+    formula: 3_activation_parents_x_10_regions_x_5_uniform_bits
+  v6:
+    purpose: constrained_router_and_static_special_formats
+    status: planned_not_authorized
+    formats: [fixed_sd4, paper_twn]
+  v7:
+    purpose: uniform_qat_recovery
+    status: planned_not_authorized
+  v8:
+    purpose: ls_sd4_channel_twn_ttq_qat
+    status: planned_not_authorized
+  v9:
+    purpose: lower_activation_bits_and_a_sd4
+    status: planned_not_authorized
+  v10:
+    purpose: full_data_multiseed_formal
+    status: planned_not_authorized
+  v11:
+    purpose: bittrue_export_and_final_factor_ablations
+    status: deferred_until_finalists
+
+qat_recipe:
+  authorized: false
+  train_view: immutable_group_safe_30_percent_train_only
+  validation: full_canonical
+  maximum_short_policies: 6
+  short_epochs: 15
+  maximum_deep_policies: 3
+  deep_epochs: 20
+  continuation_epochs: 60
+  detect_logical_batch: 128
+  pose_logical_batch: 16
+  detect_physical_probe_order: [128, 64, 32, 16]
+  pose_physical_probe_order: [16, 8, 4]
+  task_loss_weights: {detect: 1.0, pose: 0.25}
+  bn_running_statistics: frozen
+  bn_affine: trainable
+  gradient_clip_norm: 10.0
+  amp_general_ops: true
+  quantizer_observer_scale_dtype: fp32
+  fp32_master_weights: true
+  observer_schedule:
+    calibration_images_per_task: 32
+    ema_epoch: 1
+    ema_decay_old: 0.9
+    ema_decay_new: 0.1
+    scale_only_epochs: 5
+    then: joint
+  adamw_control:
+    betas: [0.948, 0.999]
+    weight_decay: 0.00027
+    qparams_weight_decay: 0.0
+    accepted_j3_lr_scale: 0.1
+    learning_rates:
+      attention: 0.00000005
+      backbone: 0.00000038
+      neck: 0.0000019
+      masf: 0.0000038
+      detect_head: 0.000005
+      pose_head: 0.000005
+  hpo:
+    model_lr_multipliers_of_j3: [0.05, 0.1, 0.2]
+    qparam_lr_ratios: [0.5, 1.0, 2.0]
+    maximum_short_trials: 8
+    epochs: [5, 10, 15]
+    optimizers: {AdamW: 4, MuSGD: 4}
+  musgd_pilot:
+    policy: balanced_only_then_top3_if_pareto
+    momentum: 0.948
+    nesterov: true
+    muon_mix: 0.2
+    sgd_mix: 1.0
+    matched_sham_required: true
+    fresh_optimizer: true
+    optional_qparam_rescue: MuSGD_plus_AdamW_Q
+  scheduler:
+    warmup: double_warmup
+    horizon_epochs: 60
+    cosine_final: 0.5
+    restarts: false
+  validation_epochs: [15, 20, 30, 40, 50, 60]
+  checkpoint_every_epochs: 5
+
+augmentation:
+  main_contract: accepted_full35_exact
+  hsv: {h: 0.015, s: 0.7, v: 0.4}
+  translate: 0.1
+  scale: 0.5
+  detect_fliplr: 0.5
+  pose_fliplr: 0.0
+  mosaic: 0.0
+  mixup: 0.0
+  cutmix: 0.0
+  copy_paste: 0.0
+  noise: disabled_mainline
+  optional_matched_noise_pilot:
+    starts_after: top3
+    per_image_probability: 0.2
+    one_of: [gaussian_sigma_2_over_255_to_8_over_255, jpeg_quality_70_to_95, blur_3x3]
+    clean_metric_reject_delta: 0.002
+
+formal_future:
+  top3_full_data_seed1_epochs: 100
+  top2_continue_epochs: 120
+  final_seeds: [0, 1, 2]
+  every_seed_must_pass_all_eight: true
+  report: [mean, standard_deviation, worst_seed]
+
+hardware_reporting:
+  allowed_without_target_kernel: [code_bytes, metadata_bytes, bop_mac_proxy, shifts, adds, memory_traffic]
+  forbidden_claims_without_measurement: [speedup, latency_gain, power_gain, resource_gain]
+  w5_w6_w7_native_gpu_claim: false
+
+finalist_only_optimizations:
+  status: deferred
+  single_factors_first: [pq, freq, kd, masf_freq]
+  combinations_only_after_single_factor_gain: true

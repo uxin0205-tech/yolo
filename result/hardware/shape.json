@@ -1,0 +1,68 @@
+{
+  "candidate": "rect512_768",
+  "shape": [
+    512,
+    768
+  ],
+  "parent": {
+    "checkpoint": "yolo_achitechure/result/stage8-retrain/handoff/rep17_20.pt",
+    "sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+    "candidate": "rep17_20",
+    "epoch": 1,
+    "metrics": {
+      "coco_AP": 0.5143471497030708,
+      "person_AP": 0.6427959303974734,
+      "sports_ball_AP": 0.5157820851022553,
+      "baseball_bat_AP": 0.46957631026676677,
+      "box_AP50_95": 0.6143706928427835,
+      "pose_AP50_95": 0.9013894285347345,
+      "ball_box_AP50_95": 0.49976429858092136,
+      "ball_pose_AP50_95": 0.8645462333785403,
+      "bat_box_AP50_95": 0.7289770871046457,
+      "bat_pose_AP50_95": 0.9382326236909287
+    }
+  },
+  "selected": {
+    "checkpoint": "/home/uxin/yolo/yolo_actshape/artifacts/shape-expanded-20261108-v1/rect512_768/adapt10/best-e002.pt",
+    "sha256": "a7526f060612fdada757679b6b32d408b760d4c53f99e6adcb9923f16636b457",
+    "metrics": {
+      "coco_AP": 0.5196317508834373,
+      "person_AP": 0.6458654186776733,
+      "sports_ball_AP": 0.5219122564526139,
+      "baseball_bat_AP": 0.45335120761032666,
+      "box_AP50_95": 0.6245007321351908,
+      "pose_AP50_95": 0.8990255807792658,
+      "ball_box_AP50_95": 0.516027864554657,
+      "ball_pose_AP50_95": 0.8628889209624224,
+      "bat_box_AP50_95": 0.7329735997157245,
+      "bat_pose_AP50_95": 0.9351622405961088
+    },
+    "epoch": 2,
+    "candidate": "rect512_768",
+    "phase": "adapt10",
+    "shape": [
+      512,
+      768
+    ]
+  },
+  "preprocessing": {
+    "fixed_canvas": "native LetterBox aspect-preserving scalar gain, round resize, center pad114, RGB0-1",
+    "canonical_unchanged": true,
+    "membership": "complete original train/val, no resplit/crop/subset",
+    "shape_order": "H,W",
+    "stride": 32
+  },
+  "source_sha256": "d8212a644a473d3bdd0e9d1f15cd38c14e8601d48d3b62dfd379f1a8f3da168b",
+  "backend": {
+    "activation": "qsilu_pq",
+    "rep": "folded17+20",
+    "binary": "B2",
+    "scale": "S1 Q10",
+    "normalization": "D1 integerPWL20 LUT256",
+    "max_attention_axis": 32,
+    "max_tokens": 1024,
+    "denominator_bits": 26,
+    "reciprocal_fraction_bits": 16,
+    "probability_fraction_bits": 24
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "status": "candidate_complete",
+  "stage": 6,
+  "stage6_complete": false,
+  "next_stage_started": false,
+  "best": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e002.pt",
+    "sha256": "0790a6072f9843213d71d7bd3fe6a31cad88a11d6e762b30520aebdba87cbf96",
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6052339010323264,
+      "pose_AP50_95": 0.8949919888234579,
+      "ball_box_AP50_95": 0.48657728335389033,
+      "ball_pose_AP50_95": 0.8557942363978208,
+      "bat_box_AP50_95": 0.7238905187107626,
+      "bat_pose_AP50_95": 0.9341897412490949
+    },
+    "epoch": 2,
+    "phase": "KD-recovery",
+    "ema_updates": 926
+  },
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/j1-review-20261029/reproduce/model.pt",
+    "sha256": "a6005897584db34c765f6accd1a4555051f449a10e4e716cf762e663ca02c570",
+    "phase": "J1-reproduced",
+    "epoch": 6,
+    "metrics": {
+      "coco_AP": 0.5125097418328837,
+      "person_AP": 0.6415803508443042,
+      "sports_ball_AP": 0.5162067267279214,
+      "baseball_bat_AP": 0.4626696710268651,
+      "box_AP50_95": 0.6056448077906925,
+      "pose_AP50_95": 0.8958015896017333,
+      "ball_box_AP50_95": 0.484730281491779,
+      "ball_pose_AP50_95": 0.8575149098549751,
+      "bat_box_AP50_95": 0.7265593340896059,
+      "bat_pose_AP50_95": 0.9340882693484913
+    }
+  },
+  "recipe": {
+    "scope": "joint_back9",
+    "task": "joint",
+    "epochs": 5,
+    "patience": 0,
+    "lrs": {
+      "backbone": 3.8e-07,
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "loss_horizon": 5,
+    "fresh_ema": true,
+    "head_bn": "trainable",
+    "shared_bn_affine": false,
+    "min_delta": 0.0001,
+    "plateau_half_after": 0,
+    "name": "KD-recovery",
+    "extension": 0,
+    "selection": "balanced_recovery",
+    "recovery_safety": {
+      "coco_from_parent": 0.01,
+      "coco_from_original": 0.05,
+      "pose_from_parent": 0.03
+    },
+    "retain_epoch_candidates": true,
+    "kd": {
+      "sites": [
+        16,
+        19,
+        22
+      ],
+      "teachers": {
+        "detect": {
+          "checkpoint": "/home/uxin/yolo/yolo_hog/result/stage5/selected.pt",
+          "sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c"
+        },
+        "pose": {
+          "checkpoint": "/home/uxin/yolo/yolo_pose_training/artifacts/preserved/stagewise_lr_p3_640/weights/best.pt",
+          "sha256": "e50e155c6c070da4b038fe5679575f4c094b9cfff8eb3a2143770d7dad4cad9e"
+        }
+      },
+      "version": 1,
+      "mu": {
+        "detect": 3.260468885602049,
+        "pose": 11.557662296506145
+      }
+    }
+  },
+  "reason": "budget",
+  "verification": {
+    "status": "passed",
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6052339010323264,
+      "pose_AP50_95": 0.8949919888234579,
+      "ball_box_AP50_95": 0.48657728335389033,
+      "ball_pose_AP50_95": 0.8557942363978208,
+      "bat_box_AP50_95": 0.7238905187107626,
+      "bat_pose_AP50_95": 0.9341897412490949
+    },
+    "sha256": "0790a6072f9843213d71d7bd3fe6a31cad88a11d6e762b30520aebdba87cbf96",
+    "full_ap_reproduced": true,
+    "teacher_exported": false
+  },
+  "accepted": false,
+  "improved_balanced_score": true,
+  "deltas_from_parent": {
+    "coco_AP": 0.0001663134309051184,
+    "person_AP": -0.00032497486078664206,
+    "sports_ball_AP": -0.0010461566752111295,
+    "baseball_bat_AP": 0.008170949214444279,
+    "box_AP50_95": -0.0004109067583660808,
+    "pose_AP50_95": -0.00080960077827541,
+    "ball_box_AP50_95": 0.0018470018621113415,
+    "ball_pose_AP50_95": -0.0017206734571543203,
+    "bat_box_AP50_95": -0.0026688153788433366,
+    "bat_pose_AP50_95": 0.00010147190060361133
+  },
+  "deltas_from_original": {
+    "coco_AP": -0.001944735700604272,
+    "person_AP": -0.0019511943610064364,
+    "sports_ball_AP": 0.001936563288286175,
+    "baseball_bat_AP": -0.0167534685093092,
+    "box_AP50_95": -0.023167939497880985,
+    "pose_AP50_95": -0.025717399792828388,
+    "ball_box_AP50_95": -0.04251850735764212,
+    "ball_pose_AP50_95": -0.0413052532341972,
+    "bat_box_AP50_95": -0.003817371638119904,
+    "bat_pose_AP50_95": -0.01012954635145924
+  },
+  "remaining_target_deficits": {
+    "coco_AP": 0.0,
+    "person_AP": 0.0,
+    "sports_ball_AP": 0.0,
+    "baseball_bat_AP": 0.011753468509309195,
+    "box_AP50_95": 0.003167939497880967,
+    "pose_AP50_95": 0.00571739979282837,
+    "ball_box_AP50_95": 0.022518507357642104,
+    "ball_pose_AP50_95": 0.021305253234197186,
+    "bat_box_AP50_95": 0.0,
+    "bat_pose_AP50_95": 0.0
+  },
+  "epochs_completed": 5,
+  "retained_epoch_candidates": [
+    "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e001.pt",
+    "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e002.pt",
+    "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e003.pt",
+    "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e004.pt",
+    "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e005.pt"
+  ],
+  "interpretation": "這是五輪恢復候選的結果，不宣稱整個第六階段已完成；保留各項精度取捨供接續分析。"
+}

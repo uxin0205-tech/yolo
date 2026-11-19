@@ -1,0 +1,105 @@
+{
+  "metrics": {
+    "coco_AP": 0.4898299653402856,
+    "person_AP": 0.6217578869064454,
+    "sports_ball_AP": 0.48819353502200263,
+    "baseball_bat_AP": 0.4217657801305138,
+    "box_AP50_95": 0.5824597485675379,
+    "pose_AP50_95": 0.8919165705456603,
+    "ball_box_AP50_95": 0.47923072835936387,
+    "ball_pose_AP50_95": 0.855673699101696,
+    "bat_box_AP50_95": 0.6856887687757119,
+    "bat_pose_AP50_95": 0.928159441989625
+  },
+  "detect": {
+    "protocol": "E2E FP32 conf=.001 iou=.7 max_det=300; native matching and official COCO bbox",
+    "images": 5000,
+    "formal": true,
+    "internal": {
+      "metrics/precision(B)": 0.7073411803003368,
+      "metrics/recall(B)": 0.5951242957857401,
+      "metrics/mAP50(B)": 0.6560991749232393,
+      "metrics/mAP50-95(B)": 0.482789539595021,
+      "fitness": 0.482789539595021
+    },
+    "classes_internal": {
+      "person": {
+        "AP50": 0.8304975273489141,
+        "AP50_95": 0.6047190800177723,
+        "precision": 0.7936396122084004,
+        "recall": 0.7569022341895599,
+        "instances": 10777
+      },
+      "sports_ball": {
+        "AP50": 0.6791441368484019,
+        "AP50_95": 0.4831675404225776,
+        "precision": 0.7687354897316875,
+        "recall": 0.6230769230769231,
+        "instances": 260
+      },
+      "baseball_bat": {
+        "AP50": 0.6635971122938533,
+        "AP50_95": 0.41915864304691564,
+        "precision": 0.7323691313878691,
+        "recall": 0.5724137931034483,
+        "instances": 145
+      }
+    },
+    "seconds": 27.439253175631166,
+    "official": {
+      "AP50_95": 0.4898299653402856,
+      "AP50": 0.6636669888034608,
+      "AP_small": 0.32815516279912704,
+      "AP_medium": 0.5316207563664298,
+      "AP_large": 0.6412630787828981,
+      "classes": {
+        "person": {
+          "AP50": 0.8534242896474227,
+          "AP50_95": 0.6217578869064454
+        },
+        "sports_ball": {
+          "AP50": 0.6861219772691857,
+          "AP50_95": 0.48819353502200263
+        },
+        "baseball_bat": {
+          "AP50": 0.6636671089649951,
+          "AP50_95": 0.4217657801305138
+        }
+      },
+      "annotation_sha256": "e8c7f7908f1d7278341fae127d0da654f102f11bd7b21d8aeefa635b8c810b6f"
+    }
+  },
+  "pose": {
+    "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+    "images": 683,
+    "formal": true,
+    "internal": {
+      "metrics/precision(B)": 0.8831683188690667,
+      "metrics/recall(B)": 0.7976231441765274,
+      "metrics/mAP50(B)": 0.8687281030456067,
+      "metrics/mAP50-95(B)": 0.5824597485675379,
+      "metrics/precision(P)": 0.9016724918473384,
+      "metrics/recall(P)": 0.8150163104539863,
+      "metrics/mAP50(P)": 0.8989958927937023,
+      "metrics/mAP50-95(P)": 0.8919165705456603,
+      "fitness": 1.4743763191131982
+    },
+    "metrics": {
+      "box_AP50": 0.8687281030456067,
+      "box_AP50_95": 0.5824597485675379,
+      "pose_AP50": 0.8989958927937023,
+      "pose_AP50_95": 0.8919165705456603,
+      "ball_box_AP50": 0.8299755228554707,
+      "ball_box_AP50_95": 0.47923072835936387,
+      "bat_box_AP50": 0.9074806832357426,
+      "bat_box_AP50_95": 0.6856887687757119,
+      "ball_pose_AP50": 0.8570628276356236,
+      "ball_pose_AP50_95": 0.855673699101696,
+      "bat_pose_AP50": 0.9409289579517811,
+      "bat_pose_AP50_95": 0.928159441989625
+    },
+    "seconds": 3.846863031387329
+  },
+  "activation_relative_gate": false,
+  "original_independent_gate": false
+}

@@ -1,0 +1,387 @@
+{
+  "activation": "qsilu_pq_a8",
+  "base_policy": "fixed_sd4_head_three",
+  "dependency": {
+    "plan": "/home/uxin/yolo/yolo_quantize/artifacts/queues/v34-qsilu-tuesday-quick-v1/short-qat-head-three-lsq-sd4-v1/generated/qat-plan.yaml",
+    "plan_sha256": "289d3730d94f376ff54ff88cba0e0083e062af9d9f3c85e8c58ddd2285d5dbe3"
+  },
+  "formal_validation": false,
+  "independent": {
+    "cells": 27,
+    "dual_report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-independent-layer-format-dual-v1.json",
+    "dual_report_sha256": "1bdf4379b09b2dd9990e07b07d9186e32df2cdc29c8d2b3c6eed24d3185673a3",
+    "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-independent-layer-format-search-v1.json",
+    "report_sha256": "c415930fdeddc5dc2ef0bf9dd75ef0089b61b2999b1222da3f50aa197e8b3836",
+    "results": [
+      {
+        "candidate_id": "independent-backbone-w8",
+        "decision": "green",
+        "format_id": "w8",
+        "quantized_bytes": 2361344,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.012740375659415881,
+        "worst_map50_delta": -0.010315813856643818
+      },
+      {
+        "candidate_id": "independent-backbone-w7",
+        "decision": "green",
+        "format_id": "w7",
+        "quantized_bytes": 2066432,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.013542921130948515,
+        "worst_map50_delta": -0.01215797006599928
+      },
+      {
+        "candidate_id": "independent-backbone-w6",
+        "decision": "green",
+        "format_id": "w6",
+        "quantized_bytes": 1771520,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.013629114963964628,
+        "worst_map50_delta": -0.011689383675231313
+      },
+      {
+        "candidate_id": "independent-backbone-w5",
+        "decision": "green",
+        "format_id": "w5",
+        "quantized_bytes": 1476608,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.013908277941891922,
+        "worst_map50_delta": -0.011450348775801977
+      },
+      {
+        "candidate_id": "independent-backbone-w4",
+        "decision": "green",
+        "format_id": "w4",
+        "quantized_bytes": 1181696,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.015140155004797762,
+        "worst_map50_delta": -0.013453908629405764
+      },
+      {
+        "candidate_id": "independent-backbone-fixed-sd4",
+        "decision": "green",
+        "format_id": "fixed-sd4",
+        "quantized_bytes": 1181696,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.013151747389933854,
+        "worst_map50_delta": -0.010475656678902823
+      },
+      {
+        "candidate_id": "independent-backbone-exact-ternary",
+        "decision": "reject",
+        "format_id": "exact-ternary",
+        "quantized_bytes": 589828,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.04236181070126843,
+        "worst_map50_delta": -0.046287563689122124
+      },
+      {
+        "candidate_id": "independent-backbone-twn-v3",
+        "decision": "reject",
+        "format_id": "twn-v3",
+        "quantized_bytes": 591872,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.08521778602882968,
+        "worst_map50_delta": -0.07418634649408129
+      },
+      {
+        "candidate_id": "independent-backbone-paper-twn-v2",
+        "decision": "reject",
+        "format_id": "paper-twn-v2",
+        "quantized_bytes": 589828,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.048215591414810854,
+        "worst_map50_delta": -0.05607747472449964
+      },
+      {
+        "candidate_id": "independent-neck-w8",
+        "decision": "green",
+        "format_id": "w8",
+        "quantized_bytes": 2361344,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.012730024013469565,
+        "worst_map50_delta": -0.011481135902401185
+      },
+      {
+        "candidate_id": "independent-neck-w7",
+        "decision": "green",
+        "format_id": "w7",
+        "quantized_bytes": 2066432,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.013116703182853295,
+        "worst_map50_delta": -0.011609252259415115
+      },
+      {
+        "candidate_id": "independent-neck-w6",
+        "decision": "green",
+        "format_id": "w6",
+        "quantized_bytes": 1771520,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.013160676542428973,
+        "worst_map50_delta": -0.011202152415066946
+      },
+      {
+        "candidate_id": "independent-neck-w5",
+        "decision": "green",
+        "format_id": "w5",
+        "quantized_bytes": 1476608,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.013916242880084084,
+        "worst_map50_delta": -0.01229151459794231
+      },
+      {
+        "candidate_id": "independent-neck-w4",
+        "decision": "green",
+        "format_id": "w4",
+        "quantized_bytes": 1181696,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.014682455572467501,
+        "worst_map50_delta": -0.01180323406198891
+      },
+      {
+        "candidate_id": "independent-neck-fixed-sd4",
+        "decision": "green",
+        "format_id": "fixed-sd4",
+        "quantized_bytes": 1181696,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.01305318390143384,
+        "worst_map50_delta": -0.011403421692356197
+      },
+      {
+        "candidate_id": "independent-neck-exact-ternary",
+        "decision": "recover",
+        "format_id": "exact-ternary",
+        "quantized_bytes": 589828,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.02765597321404334,
+        "worst_map50_delta": -0.01991380466476589
+      },
+      {
+        "candidate_id": "independent-neck-twn-v3",
+        "decision": "recover",
+        "format_id": "twn-v3",
+        "quantized_bytes": 591872,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.03898633754234393,
+        "worst_map50_delta": -0.025348286354933247
+      },
+      {
+        "candidate_id": "independent-neck-paper-twn-v2",
+        "decision": "recover",
+        "format_id": "paper-twn-v2",
+        "quantized_bytes": 589828,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.03013891057933782,
+        "worst_map50_delta": -0.022349835775410054
+      },
+      {
+        "candidate_id": "independent-head-w8",
+        "decision": "green",
+        "format_id": "w8",
+        "quantized_bytes": 295168,
+        "segment": "head",
+        "worst_map50_95_delta": -0.013130904542471067,
+        "worst_map50_delta": -0.011576087264755563
+      },
+      {
+        "candidate_id": "independent-head-w7",
+        "decision": "green",
+        "format_id": "w7",
+        "quantized_bytes": 258304,
+        "segment": "head",
+        "worst_map50_95_delta": -0.013130904542471067,
+        "worst_map50_delta": -0.011576087264755563
+      },
+      {
+        "candidate_id": "independent-head-w6",
+        "decision": "green",
+        "format_id": "w6",
+        "quantized_bytes": 221440,
+        "segment": "head",
+        "worst_map50_95_delta": -0.013130904542471067,
+        "worst_map50_delta": -0.011576087264755563
+      },
+      {
+        "candidate_id": "independent-head-w5",
+        "decision": "green",
+        "format_id": "w5",
+        "quantized_bytes": 184576,
+        "segment": "head",
+        "worst_map50_95_delta": -0.013130904542471067,
+        "worst_map50_delta": -0.011576087264755563
+      },
+      {
+        "candidate_id": "independent-head-w4",
+        "decision": "green",
+        "format_id": "w4",
+        "quantized_bytes": 147712,
+        "segment": "head",
+        "worst_map50_95_delta": -0.013130904542471067,
+        "worst_map50_delta": -0.011576087264755563
+      },
+      {
+        "candidate_id": "independent-head-fixed-sd4",
+        "decision": "green",
+        "format_id": "fixed-sd4",
+        "quantized_bytes": 147712,
+        "segment": "head",
+        "worst_map50_95_delta": -0.013130904542471067,
+        "worst_map50_delta": -0.011576087264755563
+      },
+      {
+        "candidate_id": "independent-head-exact-ternary",
+        "decision": "recover",
+        "format_id": "exact-ternary",
+        "quantized_bytes": 73732,
+        "segment": "head",
+        "worst_map50_95_delta": -0.0708972836237477,
+        "worst_map50_delta": -0.011576087264755563
+      },
+      {
+        "candidate_id": "independent-head-twn-v3",
+        "decision": "reject",
+        "format_id": "twn-v3",
+        "quantized_bytes": 73984,
+        "segment": "head",
+        "worst_map50_95_delta": -0.09392508694417012,
+        "worst_map50_delta": -0.011576087264755563
+      },
+      {
+        "candidate_id": "independent-head-paper-twn-v2",
+        "decision": "reject",
+        "format_id": "paper-twn-v2",
+        "quantized_bytes": 73732,
+        "segment": "head",
+        "worst_map50_95_delta": -0.08845228254509085,
+        "worst_map50_delta": -0.011576087264755563
+      }
+    ],
+    "shortlists": {
+      "backbone": [
+        "fixed-sd4",
+        "w8"
+      ],
+      "head": [
+        "fixed-sd4",
+        "w4"
+      ],
+      "neck": [
+        "fixed-sd4",
+        "w6"
+      ]
+    }
+  },
+  "locked_assignments": [
+    {
+      "format": {
+        "family": "fixed_sd4",
+        "scale_method": "optimal_scaled_codebook"
+      },
+      "route_id": "layer-backbone-high"
+    },
+    {
+      "format": {
+        "bits": 6,
+        "family": "uniform",
+        "scale_method": "optimal_scaled_codebook"
+      },
+      "route_id": "layer-neck-high"
+    },
+    {
+      "format": {
+        "bits": 4,
+        "family": "uniform",
+        "scale_method": "optimal_scaled_codebook"
+      },
+      "route_id": "layer-head-high"
+    }
+  ],
+  "next_training": {
+    "activation": "qsilu_pq_a8",
+    "arms": [
+      "matched_sham",
+      "qat"
+    ],
+    "epochs_per_arm": 4,
+    "formal_training": false,
+    "maximum_candidates": 1,
+    "only_if_final_policy_is_green_or_recover": true,
+    "patience": 5
+  },
+  "progressive_order": [
+    "backbone",
+    "neck",
+    "head"
+  ],
+  "schema_version": 1,
+  "stages": [
+    {
+      "dual_report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-cumulative-backbone-dual-v1.json",
+      "dual_report_sha256": "d15e7062b602d747884b9622031ad47725efc8010e2597049296ad118f8015e8",
+      "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-cumulative-backbone-v1.json",
+      "report_sha256": "833f87f5f16df9462d9754659da997e2b2ad7bbedabd865cfdb649421385a841",
+      "segment": "backbone",
+      "selected": {
+        "candidate_id": "cumulative-backbone-fixed-sd4",
+        "decision": "green",
+        "format_id": "fixed-sd4",
+        "quantized_bytes": 1651520,
+        "segment": "backbone",
+        "worst_map50_95_delta": -0.03948019142528236,
+        "worst_map50_delta": -0.012350901970825112
+      },
+      "selected_format": "fixed-sd4",
+      "shortlist": [
+        "fixed-sd4",
+        "w8"
+      ],
+      "status": "locked"
+    },
+    {
+      "dual_report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-cumulative-neck-dual-v1.json",
+      "dual_report_sha256": "846bc7345fbe607b84ee59acdbe3dd0eec187c84c12ecccca46703ddc9b0d226",
+      "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-cumulative-neck-v1.json",
+      "report_sha256": "4e5c744c04b0b67b2173d2d4de611df3259ef65ba8e9a26c2a58d1756828724e",
+      "segment": "neck",
+      "selected": {
+        "candidate_id": "cumulative-neck-w6",
+        "decision": "green",
+        "format_id": "w6",
+        "quantized_bytes": 3423040,
+        "segment": "neck",
+        "worst_map50_95_delta": -0.039627863028664945,
+        "worst_map50_delta": -0.013138654125251392
+      },
+      "selected_format": "w6",
+      "shortlist": [
+        "fixed-sd4",
+        "w6"
+      ],
+      "status": "locked"
+    },
+    {
+      "dual_report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-cumulative-head-dual-v1.json",
+      "dual_report_sha256": "71eed7f59afbdeae9f3cd2efbefa05951258ab0099b116cece75462bcad49dc8",
+      "report": "/home/uxin/yolo/yolo_quantize/artifacts/reports/v35-cumulative-head-v1.json",
+      "report_sha256": "c00114d440f84adcfc0dbe810c5f33668e5c417da0e967923d728b3efe7b65b2",
+      "segment": "head",
+      "selected": {
+        "candidate_id": "cumulative-head-w4",
+        "decision": "green",
+        "format_id": "w4",
+        "quantized_bytes": 3570752,
+        "segment": "head",
+        "worst_map50_95_delta": -0.0395639324503696,
+        "worst_map50_delta": -0.012496706835787852
+      },
+      "selected_format": "w4",
+      "shortlist": [
+        "fixed-sd4",
+        "w4"
+      ],
+      "status": "locked"
+    }
+  ],
+  "status": "complete_ready_for_one_final_mixed_qat"
+}

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yolo26-detect-pose-fusion"
+version = "0.1.0"
+description = "YOLO26 Full35 Detect/Pose routed and shared-trunk research models"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "PyYAML==6.0.3",
+  "torch==2.11.0",
+  "ultralytics==8.4.90",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+markers = [
+  "integration: loads the authoritative source bundle and real YOLO checkpoints",
+  "gpu: requires a CUDA GPU",
+]

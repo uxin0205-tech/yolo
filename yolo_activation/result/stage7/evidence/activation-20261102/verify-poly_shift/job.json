@@ -1,0 +1,26 @@
+{
+  "root": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102",
+  "output": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/verify-poly_shift",
+  "action": "verify",
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_activation/artifacts/stage7/activation-20261102/train-poly_shift/best-e010.pt",
+    "sha256": "7dae8e41f167185b6ff5113491890ddb13b5e099be0013f1594662b11d4056e9",
+    "metrics": {
+      "coco_AP": 0.5149956199132761,
+      "person_AP": 0.6434572915516049,
+      "sports_ball_AP": 0.5148586864243344,
+      "baseball_bat_AP": 0.47236697110271336,
+      "box_AP50_95": 0.6137294083919003,
+      "pose_AP50_95": 0.901010817705424,
+      "ball_box_AP50_95": 0.4957548776980407,
+      "ball_pose_AP50_95": 0.8635576317407182,
+      "bat_box_AP50_95": 0.7317039390857598,
+      "bat_pose_AP50_95": 0.9384640036701299
+    },
+    "epoch": 10,
+    "phase": "poly_shift",
+    "candidate": "poly_shift",
+    "activation_relative_gate": true,
+    "ema_updates": 4630
+  }
+}

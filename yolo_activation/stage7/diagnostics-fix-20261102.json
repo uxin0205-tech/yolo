@@ -1,0 +1,115 @@
+{
+  "error": "diagnostic forward hook returned popped string and replaced tensor; no AP/train completed",
+  "before_sha256": "9da1deac7041319f3994bbfe92bc1bf1c350b233465fbd9c14b8642621d2fafc",
+  "after_sha256": "2b5a590985260792a1f817375fde532e014111659cdc0789c4383c7d2bf48c63",
+  "affected_run": "activation-20261102 initial attempt",
+  "remedy": "forward hook returns None; add full both-output equality and 163/2 hook coverage CPU check",
+  "resume": "none; no optimizer or training initialized",
+  "status": "passed",
+  "cpu_checks": {
+    "status": "passed",
+    "cases": [
+      {
+        "candidate": "qsilu_pq",
+        "registered_sites": 187,
+        "alias_groups": 30,
+        "parameters": 26453936,
+        "strict_reload_equal": true,
+        "runtime_hooks_preserve_outputs": true,
+        "observed_deployment_sites": 163,
+        "observed_attention_sites": 2,
+        "task_routing_equal": true,
+        "reject_activation_or_reciprocal_fallback": true
+      },
+      {
+        "candidate": "hardswish",
+        "registered_sites": 187,
+        "alias_groups": 30,
+        "parameters": 26453936,
+        "strict_reload_equal": true,
+        "runtime_hooks_preserve_outputs": true,
+        "observed_deployment_sites": 163,
+        "observed_attention_sites": 2,
+        "task_routing_equal": true,
+        "reject_activation_or_reciprocal_fallback": true
+      },
+      {
+        "candidate": "poly_shift",
+        "registered_sites": 187,
+        "alias_groups": 30,
+        "parameters": 26453936,
+        "strict_reload_equal": true,
+        "runtime_hooks_preserve_outputs": true,
+        "observed_deployment_sites": 163,
+        "observed_attention_sites": 2,
+        "task_routing_equal": true,
+        "reject_activation_or_reciprocal_fallback": true
+      },
+      {
+        "candidate": "poly_quality",
+        "registered_sites": 187,
+        "alias_groups": 30,
+        "parameters": 26453936,
+        "strict_reload_equal": true,
+        "runtime_hooks_preserve_outputs": true,
+        "observed_deployment_sites": 163,
+        "observed_attention_sites": 2,
+        "task_routing_equal": true,
+        "reject_activation_or_reciprocal_fallback": true
+      }
+    ],
+    "selective_policy": "passed",
+    "gpu_used": false
+  },
+  "old_source_lock_sha256": "5631c973bd76471dce2066a8ae66d8da218bf854bac426c61a18633bde15c422",
+  "removed": [
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/source.json",
+      "bytes": 19221
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/progress.jsonl",
+      "bytes": 154
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/supervisor.log",
+      "bytes": 780
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/progress.json",
+      "bytes": 168
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/supervisor.lock",
+      "bytes": 0
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/supervisor.json",
+      "bytes": 1036
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/zero-qsilu_pq/worker.log",
+      "bytes": 4995
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/zero-qsilu_pq/progress.jsonl",
+      "bytes": 76
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/zero-qsilu_pq/model.pt",
+      "bytes": 106672776
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/zero-qsilu_pq/progress.json",
+      "bytes": 84
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/zero-qsilu_pq/model.json",
+      "bytes": 361615
+    },
+    {
+      "path": "yolo_activation/artifacts/stage7/activation-20261102/zero-qsilu_pq/job.json",
+      "bytes": 230
+    }
+  ]
+}

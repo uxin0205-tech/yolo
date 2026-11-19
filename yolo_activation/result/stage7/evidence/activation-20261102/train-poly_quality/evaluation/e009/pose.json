@@ -1,0 +1,31 @@
+{
+  "protocol": "native Pose matching; FP32 E2E conf=.001 iou=.7 max_det=300; no fusion",
+  "images": 683,
+  "formal": true,
+  "internal": {
+    "metrics/precision(B)": 0.8723137301481929,
+    "metrics/recall(B)": 0.8728821160664126,
+    "metrics/mAP50(B)": 0.883371061219858,
+    "metrics/mAP50-95(B)": 0.6136698121382791,
+    "metrics/precision(P)": 0.8834131230064954,
+    "metrics/recall(P)": 0.8850932718084654,
+    "metrics/mAP50(P)": 0.9083473651882131,
+    "metrics/mAP50-95(P)": 0.901232319401719,
+    "fitness": 1.5149021315399982
+  },
+  "metrics": {
+    "box_AP50": 0.883371061219858,
+    "box_AP50_95": 0.6136698121382791,
+    "pose_AP50": 0.9083473651882131,
+    "pose_AP50_95": 0.901232319401719,
+    "ball_box_AP50": 0.8474058084075615,
+    "ball_box_AP50_95": 0.49385165424901273,
+    "bat_box_AP50": 0.9193363140321545,
+    "bat_box_AP50_95": 0.7334879700275455,
+    "ball_pose_AP50": 0.8637206311889049,
+    "ball_pose_AP50_95": 0.862565939708146,
+    "bat_pose_AP50": 0.9529740991875214,
+    "bat_pose_AP50_95": 0.939898699095292
+  },
+  "seconds": 6.594776630401611
+}

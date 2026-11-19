@@ -1,0 +1,86 @@
+{
+  "kind": "stage6-pose-head-recovery-v1",
+  "reviewed_before_implementation": true,
+  "created_at": "2026-10-29T23:36:40.184449+08:00",
+  "sources_sha256": {
+    "yolo_optimize/experiments/combine/bridge_v1/recover_pose_head.py": "3f9199aeff1478ad3b3910573b4d294abe238b7c15ad96df27df95e0d094db99",
+    "yolo_optimize/experiments/combine/bridge_v1/pose_first.py": "933238b2706865194e1d77d49bfd462dab4f0f0378c979a512d7e6e20d07d500",
+    "yolo_optimize/experiments/combine/bridge_v1/BBAT_RECOVERY_RESULTS.md": "084750dadf2f2b370d5b786e9605a8cd50aa1060640471a4402ff4dcad1e9716",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/j3-pose-head-recovery-v1/resolved-config.json": "35b09b01f03a073b92ddde5261bf123bcfa79bed9433ac43668764257aa1f071",
+    "yolo_optimize/experiments/combine/bridge_v1/artifacts/fusion/j3-pose-head-recovery-v1/recovery-stop.json": "bd284a0f28ca87201b413822f89d73b16324c60d2b6d502b4bd43cccc63bb8c5",
+    "yolo_optimize/experiments/combine/j0_runtime.py": "4c4d45d8c6d1b6f315fd84c781ad46d079ec5132cb5da67bccc99acf628683b7",
+    "yolo_combine/src/yolo_combine/stage_policy.py": "d637dc3dec31b035f11ce4930febfb0431fbe601cf3c50b236a50213150bb9ac",
+    "yolo_combine/artifacts/stage6/recovery-kd-20261029/result.json": "df579610b2d05af5fb766fe36cb817fd5c74035c6701c2fd1225bd5003916db3",
+    "yolo_combine/artifacts/stage6/recovery-kd-20261029/verification/result.json": "73b7db1c63d2635d092c9d1b10d33e05e9344226fa81becc6d10a761031c27eb"
+  },
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e002.pt",
+    "sha256": "0790a6072f9843213d71d7bd3fe6a31cad88a11d6e762b30520aebdba87cbf96",
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6052339010323264,
+      "pose_AP50_95": 0.8949919888234579,
+      "ball_box_AP50_95": 0.48657728335389033,
+      "ball_pose_AP50_95": 0.8557942363978208,
+      "bat_box_AP50_95": 0.7238905187107626,
+      "bat_pose_AP50_95": 0.9341897412490949
+    },
+    "epoch": 2,
+    "phase": "KD-recovery",
+    "ema_updates": 926
+  },
+  "recipe": {
+    "name": "Pose-head-recovery",
+    "scope": "head",
+    "task": "pose",
+    "epochs": 10,
+    "patience": 4,
+    "lrs": {
+      "pose_head": 2e-05
+    },
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "loss_horizon": 10,
+    "fresh_ema": true,
+    "head_bn": "trainable",
+    "shared_bn_affine": false,
+    "min_delta": 0.0001,
+    "plateau_half_after": 0,
+    "extension": 0,
+    "selection": "pose_recovery",
+    "head_recovery_max_pose_drop": 0.02,
+    "retain_epoch_candidates": false
+  },
+  "reference_run": "optimize bridge_v1 j3-pose-head-recovery-v1, original J3 E12 -> E5 best, plateau at E9",
+  "reference_result": {
+    "box_gain": 0.004881,
+    "pose_gain": 0.000676,
+    "ball_box_gain": 0.006042,
+    "bat_box_gain": 0.003721,
+    "ball_pose_gain": -0.001361
+  },
+  "decisions": [
+    "KD five epochs completed; E2 remains best over every retained Stage6 candidate under the fixed balanced score. Later epochs did not improve it. Do not extend identical KD.",
+    "Adopt optimize pose-head recovery: AdamW LR2e-5, warmup1/cosine0.5, 10 native-loss epochs maximum, plateau4, min_delta0.0001, Pose physical16/reference64. Fresh EMA0 and optimizer; all non-Pose state fixed and checked each epoch.",
+    "Start from current KD E2, not historical J3 E12. Keep B2 sign+Hadamard/S1 Q10/D1 integer PWL+LUT256 reciprocal and inherited SiLU; no MASF/Rep. Protected original Pose is not retrained.",
+    "Training-only KD teachers removed for this distinct head adaptation; native Pose loss only. Pose head BN trains as optimize stage policy; shared and Detect BN remain fixed.",
+    "All four COCO AP must equal this parent exactly. Each BBAT AP may not drop more than0.02 from this parent. Final independent-model targets remain unchanged and failed baseline gates remain visible.",
+    "Select by original final acceptance first then mean(BBAT box,pose); equivalently six BBAT metrics mean for two equal-weight classes. Preserve valid best plus latest resume, discard replaced intermediate best only after resume saved.",
+    "Two real Pose-only macros verify actual head update and frozen state in live/EMA before training. Full COCO5000+BBAT683 each epoch; independently reload and verify chosen model on completion.",
+    "Seed20261003 retained as optimize. Parent/numerical/evaluator contracts differ; current validation batch8 vs historical Detect32/Pose16. This is a sequential adaptation, not a controlled proof of one factor.",
+    "This candidate remains Stage6. Its completion does not launch Stage7 or declare every original AP target achieved."
+  ],
+  "resource_budget": {
+    "gpu_count": 1,
+    "estimated_minutes": [
+      15,
+      20
+    ],
+    "monitor_seconds": 600,
+    "max_stall_seconds": 1800,
+    "gpu_conflict_policy": "wait until idle"
+  }
+}

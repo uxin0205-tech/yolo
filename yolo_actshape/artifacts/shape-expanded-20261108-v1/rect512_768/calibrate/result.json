@@ -1,0 +1,112 @@
+{
+  "status": "passed",
+  "selected_pose_weight": 0.03,
+  "parent_sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+  "recipe": {
+    "epochs": 10,
+    "low_lr_epochs": 10,
+    "loss_horizon": 10,
+    "task": "joint",
+    "scope": "neck_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "all_bn_running": "fixed",
+    "attention": "all tensors frozen",
+    "backbone": "frozen",
+    "operators": "qSiLU/D1 deployment forward; Float-PWL STE backward",
+    "detect_physical": 8,
+    "detect_accumulation": 32,
+    "pose_physical": 8,
+    "pose_accumulation": 2,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "fresh_ema": true,
+    "amp": true,
+    "fp32_ciou": true,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "max_amp_retries": 16
+  },
+  "shape": [
+    512,
+    768
+  ],
+  "records": [
+    {
+      "phase": "measure",
+      "index": 0,
+      "ratio": 7.670252033525848,
+      "pose_weight": 0.25,
+      "detect_norm": 123.68195663062387,
+      "pose_norm": 948.6717793564985,
+      "cosine_similarity": 0.05020254445791697
+    },
+    {
+      "phase": "measure",
+      "index": 1,
+      "ratio": 1.214562951916924,
+      "pose_weight": 0.25,
+      "detect_norm": 135.53035872706212,
+      "pose_norm": 164.61015256990024,
+      "cosine_similarity": -0.019538058268164314
+    },
+    {
+      "phase": "measure",
+      "index": 2,
+      "ratio": 1.0435849737000389,
+      "pose_weight": 0.25,
+      "detect_norm": 135.71689921244032,
+      "pose_norm": 141.63211669526535,
+      "cosine_similarity": 0.02061627202066683
+    },
+    {
+      "phase": "confirm-0",
+      "index": 0,
+      "ratio": 2.230354235357734,
+      "pose_weight": 0.1,
+      "detect_norm": 156.48812671074532,
+      "pose_norm": 349.02395619250854,
+      "cosine_similarity": 0.017690158663362203
+    },
+    {
+      "phase": "confirm-0",
+      "index": 1,
+      "ratio": 0.7061053472242804,
+      "pose_weight": 0.1,
+      "detect_norm": 173.10571743553893,
+      "pose_norm": 122.2308727163294,
+      "cosine_similarity": 0.006195675335227779
+    },
+    {
+      "phase": "confirm-1",
+      "index": 0,
+      "ratio": 0.6735088921793676,
+      "pose_weight": 0.03,
+      "detect_norm": 161.18793757886286,
+      "pose_norm": 108.56150927141698,
+      "cosine_similarity": 0.02338231789401753
+    },
+    {
+      "phase": "confirm-1",
+      "index": 1,
+      "ratio": 0.13845837360159172,
+      "pose_weight": 0.03,
+      "detect_norm": 158.13782311910307,
+      "pose_norm": 21.8955057939672,
+      "cosine_similarity": 0.03132229712239792
+    }
+  ],
+  "validation_used": false,
+  "parent_restored": true
+}

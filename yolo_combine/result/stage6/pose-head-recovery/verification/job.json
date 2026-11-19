@@ -1,0 +1,24 @@
+{
+  "action": "verify-recovery",
+  "root": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029",
+  "output": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029/verification",
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029/train/best-e001.pt",
+    "sha256": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7",
+    "metrics": {
+      "coco_AP": 0.5126760552637888,
+      "person_AP": 0.6412553759835176,
+      "sports_ball_AP": 0.5151605700527103,
+      "baseball_bat_AP": 0.4708406202413094,
+      "box_AP50_95": 0.6092024665178761,
+      "pose_AP50_95": 0.8998503112793659,
+      "ball_box_AP50_95": 0.49388345969797987,
+      "ball_pose_AP50_95": 0.8634740979003016,
+      "bat_box_AP50_95": 0.7245214733377724,
+      "bat_pose_AP50_95": 0.93622652465843
+    },
+    "epoch": 1,
+    "phase": "Pose-head-recovery",
+    "ema_updates": 373
+  }
+}

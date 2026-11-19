@@ -1,0 +1,498 @@
+{
+  "status": "complete",
+  "time": "2026-11-03T23:52:23.514358+08:00",
+  "reason": "Stage8 開始；舊 A1/A2 prepared、訓練中間檔已被 final 交付取代，外部活動程式與外部原始碼未引用；保留 final/inputs/src 與正式資料快照，不封存。",
+  "files": [
+    {
+      "path": "yolo_achitechure/achitechure_1/artifacts/checkpoints/a2-partial75-phase-a2-rtx4080super-batch16-workers6-r3-bittrue.pt",
+      "sha256": "5e3330e8c236ced4f50199126dcdb6470fc39afd64f1c99738dd49ff42f10d21",
+      "bytes": 44347304
+    },
+    {
+      "path": "yolo_achitechure/achitechure_1/artifacts/checkpoints/a1-full35-phase-a2-rtx4080super-batch16-workers4-r1-bittrue.pt",
+      "sha256": "8c85f6484f7a2f251f3665f7b565873870209b231fe07944e9a9d31273e2ccac",
+      "bytes": 44477325
+    },
+    {
+      "path": "yolo_achitechure/achitechure_1/artifacts/prepared/a2-partial75.pt",
+      "sha256": "8eff6f9bcbc12dc717da4b809d6d3000225c945e1ea6dfaa7cefeb2b584d6640",
+      "bytes": 44325350
+    },
+    {
+      "path": "yolo_achitechure/achitechure_1/artifacts/prepared/a1-full35.pt",
+      "sha256": "71ff9098b367548ed94c519e38fe86c45e1fa7ca6eaf4db050aad59696170fb7",
+      "bytes": 44463371
+    },
+    {
+      "path": "yolo_achitechure/achitechure_1/artifacts/runs/a2-partial75-phase-a2-rtx4080super-batch16-workers6-r3/ultralytics/weights/best.pt",
+      "sha256": "070b571d1a52b1e7d13acc25d4c77278e38395d975fe6bff5e9bbd1bdc01e568",
+      "bytes": 44249044
+    },
+    {
+      "path": "yolo_achitechure/achitechure_1/artifacts/runs/a1-full35-phase-a2-rtx4080super-batch16-workers4-r1/ultralytics/weights/best.pt",
+      "sha256": "af390ec43cadb5aaac47a22ebf58c710106c3f8dd143fbd2bbcb0eb2b76ebf26",
+      "bytes": 44389460
+    }
+  ],
+  "protected_sha256": {
+    "yolo_achitechure/achitechure_1/final/SOURCE_PROVENANCE.md": "ea91ccb8ed8fde4922259de7cc7b87938699be0082ab6809ab068ec48cbc7d0a",
+    "yolo_achitechure/achitechure_1/final/MANIFEST.json": "49ed85da6e8f8a9fd86c2adb2f17024e647ae8e79441f30a89d38a8ece05ca98",
+    "yolo_achitechure/achitechure_1/final/.gitignore": "08753bf93574576bf733c2025f7a2e35c8d46f637bfa7fd3272cf7bf7deeff46",
+    "yolo_achitechure/achitechure_1/final/requirements-lock.txt": "c2d4a7e8a1dd945804291f1700fcd96cb0420eb318002cace799e4b97dbc7765",
+    "yolo_achitechure/achitechure_1/final/models.json": "ece6980fdad186ef93c019c20a41fc567ff39b7e3a8f8409aefec19408478d87",
+    "yolo_achitechure/achitechure_1/final/VALIDATION.md": "a14081b4ffcf97d89a625cd5ce2ff2cccf5cbab0dc35698606f5a90598d0ddb8",
+    "yolo_achitechure/achitechure_1/final/checkpoint-inventory.json": "db6bd92d5c7c5a5b44dcb85678e6898aa70bce81b797bbf39fd4f1b48d69129d",
+    "yolo_achitechure/achitechure_1/final/README.md": "b835276830ab78f2fd0b7fe568bb60fb008dcccc5947e0a43c796f5bcc198074",
+    "yolo_achitechure/achitechure_1/final/scripts/verify_bundle.py": "487f9bbfc16ce9b9c5a22217e3e5a8b3b0be6367cf16acf0a90eb60d7af5813a",
+    "yolo_achitechure/achitechure_1/final/scripts/_bundle.py": "38dd9e325870dbaea5b8316a2dbc17a40f881424a18a9d950134ad6cdfd61ca5",
+    "yolo_achitechure/achitechure_1/final/scripts/validate_all.py": "8e1399784ef86088935eb9debe4c45b83f37637ea917ce86bd16977069f9d303",
+    "yolo_achitechure/achitechure_1/final/scripts/build_report.py": "f8c1d6b5cbcfa21657efa0aada2b30958613f9fe92de1f7e55ecc9743cca0cc9",
+    "yolo_achitechure/achitechure_1/final/scripts/compute_coco_ap.py": "64bbe8529e4f6362ef2789571c1dc366d8318649235c681aa00b2ddcddd19b69",
+    "yolo_achitechure/achitechure_1/final/scripts/inspect_models.py": "be41ca229ca29100b0baed3b3c6650d4291f80df7c2bef21d54f3d1b26c855ec",
+    "yolo_achitechure/achitechure_1/final/reports/checkpoint-inspection.json": "a8e2f3c90ca0c0c5bb361a67e975900a8031da4795f5f1e755f070142556819a",
+    "yolo_achitechure/achitechure_1/final/reports/FULL35_PARTIAL75_AP.md": "335ab5936d36a414d63a5f7bd391dc59a7efd827ff14a373ecdda975b470d2db",
+    "yolo_achitechure/achitechure_1/final/reports/full35-partial75-ap.csv": "dc51ec3147f0320b531db583d78f752bf47e86d5c87c07125be2698e2d23c5dd",
+    "yolo_achitechure/achitechure_1/final/reports/full35-partial75-ap.json": "0a573b064ef7e7a7053e9c992ea4975e94d2d1bcc7ce056fc479cf8fb3779509",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/ball_bat_evaluation.py": "229d3078eb5c258e2a4673339729b9e244a223b821d66186821f966a497cef53",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/cli.py": "b0d5637fba766759fb1359faf8c84b66b2423bbdc52894515da7e585bc41699a",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/__init__.py": "116e1fa582dbc789289ee98c6523f40cb3d908104c0c97d6805bf8ee7c6ed180",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/lineage.py": "1f83ead90e8d03a3f7e4806712624bf2cb4e6a6d0ab9bc2fbdf7e43144de235d",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/model.py": "1c9e9877e7ef17f322686701f0326f082066e2c34ac78ec72d7d17a9c31c35ac",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/queue_worker.py": "77eb14ac35c100f32edd147169ed2a9cc53b7964024d52de7edb225c5d444769",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/queue.py": "605ddfe9b31d14fc9fa703fc5822d2907f64f4ef1510a519661b78a889318785",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/config.py": "6b023a2db89ff3a225086aafe9aabc8a8ff1c402150fca1281f8c3cf084b0660",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/checkpoint.py": "93e44724c63c0dfd1cfc78d6f6dbf72369516eeaec35aa5efef4ae1c73ed9ef1",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/runtime.py": "149c95409c3a8048e4b524d00f100747c261939c49e1f7c4481070a3113f52ce",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/profiling.py": "4ce13d3239861ec8e9a7cf9a517d53886e358560b425798aa41a13cf563f39a9",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/selection.py": "da932719010d3387e6a673e998ba46ad0b16d3183c5876479e5ec1a2a4037373",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/training.py": "561328eefba33115968a33cbd1c68516ab7ee914557a9d0f37f36502ee58cd07",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/evaluation.py": "22b569f77372fafd777914729fb4279499ca8c4d9b77e014fc1007bfcd8eeec1",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/preflight.py": "2b97cbbc4e687532725a9fee026783c8b289f4fc44c703c3a40b7b21aecb2f0b",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/masf.py": "92d590bd36c3972bcf0df5b4bb9c1f3accab7dcfb3bf77a8323c7787a6f97f7f",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/phases.py": "cf573a608fcc8650b7c1fec0a307853420eeb0d01a0599fb6267e69d950c6262",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/schedule.py": "280846fcaeb1720bcded56658ba69a258a42c870af420f0b0a8e46006a16e844",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/recovery_workflow.py": "2f01f87d498c2a685ff0d2ff2569f53215613434770922f499cd2e819b5abd32",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/attention.py": "386dc46775ebc2f818776d8a6b689a3eed8a6d3d452bb443cae9affba1f8b1e8",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/final_evaluation.py": "41dc8bcf5e11b6cc16293293120649010b315c82b756f7974e4fd35159b16bf8",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/optimizer_scope.py": "f870477aaff30299a870433323ca461c7cf11370b8f1ebffcf1f3327177b38d9",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/cli.py": "7fd8eac1583897c78150b7eff8abc6ac9873c30bebde0ba65c27e157bb962f31",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__init__.py": "e721d13156f34069c923af5ae65acef9c61edaa3030874f7cb7c5da632c58721",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/runner.py": "6f7b2087cbe09b1c3d4ce1bcbf49f6654d3e4f5a2fdd815d93e59295103b842c",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/relative_bias.py": "07601b958b2436b1d0d991c5277d3f912877279ac8ac07f4aea96863ad7926a9",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/bdcn.py": "caac222a988f2d7a3db028814cfb78ee53b891f77a3a0a4c670ff37c1751f0b8",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/artifacts.py": "f35a9073858849055e8eba2260d1550755d9e534646e552138da6fbd043c9cb8",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/projection.py": "0598ecdc90be544448e243f65556e4077a67718ab967941ce83cdcd8e325e2ad",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/final_backend.py": "eb4546db3b67a18bec381e519fd78e61718c27428dc25191ee017c16cdc0c378",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/binary_basis.py": "cb2eaa47de8d1e74a9a686896490351de4041924bb83b37c0fc10c7e47422ff0",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/queue_store.py": "c90474250b88c8b8844224c576cb13304f01eac55c1c69a3f202a3602c357a2a",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/config.py": "7c6b398960ade3a174519b92dbe77cb80b58cc0e53ba63f17e806152893317dc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/pwl_experiment.py": "3f9b65c5acd02e5d5b29019417da3a3e651730dd8924c4d03a471f4088c7e5c3",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/lr_sweep_workflow.py": "e8c00c9b934f23577bf7656decd59089265f13aaa39cf9e602c494af2af47737",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/quantization.py": "cd9056967ce31d6ec2a66456bb9953fbfb0e60941abdf78c04d4aa7652326809",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/queue_policy.py": "8b466b8fcb8a525810d9abaf56eda4539a20fad2a515fbf7d1ff174392811836",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/queue_executor.py": "091025e071b50bbf503b00e9bf3ec14ae15e64cf8f14fef7b5ba4abe22951245",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/final_workflow.py": "606b576eda4c6cea875eade62f1783554641a08552f64eeea36947bd8b1952f2",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/queue_workflow.py": "5fe58e4bf7a98a22f3f4a188b306af73f6df75a362cebf851e7ee20e3863a5dc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/pwl_validation.py": "dcc250e87bc7a2b90c485afe96d2467421d14860f0a3f508367e74f587d10299",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/workflow.py": "ea9ae1b307ca2ce7424977bd70c8dcbacb5391b33b1056b60a36ec1bea7f7856",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/final_selection.py": "0a70e325d2f84823cedc351fb5aae4a7b99a8d033782ea169e5851c34187564b",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/queue_model.py": "d4192ec5d93c260cdb2240380918f7afb1d5438d77571e43a4416ba954420a1b",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/normalization.py": "d90bd1ab110a0dc7fbc9d8a1d847883af8af35b42400cdf4ace98555205f39b2",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/profiling.py": "3b1c6989881affc11a5bee4524fe12b145fd7e75ec00fad88f38aab0f5a34c50",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/scopes.py": "f2f76264bd679dd8d761232fc2c10281e9e30c5420196991a2e806a4b7a5ac82",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/export.py": "b6a4e51b84d22bdc959dc460931e54fac02e85a4aaa9ea5ff06a5d91c661af54",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/training.py": "752f6582b3556fea8af680ea863af079b98f06e2558ff4473e06b09072711e58",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/run_config.py": "53e8a31c33a71b18b4c40e6b4a8d61e279e8848ad4e80ef6672dd549ed1f33ef",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/experiments.py": "0b106ea8de046d3ae2212466c27c54c768bb0a0f65f482b8d7827c15a32d77b2",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/evaluation.py": "04c59d16cf97caa07686a7d8dda8289e4ee15d20a409bf3d38073225bbb880c0",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/queue_backend.py": "60eda691cb002de9c1cdd79c055413ed67ac150035c2f803dc5d27b580325bcb",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/integration.py": "589f4616b16c4e28b0e35c83df9d8180d12ef4c318aa79d723b13c56a2d61c69",
+    "yolo_achitechure/achitechure_1/final/reports/raw/bbt5-dataset-manifest.json": "cde2ddfc938d20786477ec2e6b174a6ee153e5d30edcd03ccbbffb0a06a71243",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-c-f03/coco-canonical.json": "d3dd40396d20987ee9bbd09b669ce1b8783175b08166db343aca56b1ff184b0e",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-c-f03/coco-internal.json": "9b73070ff647ad5b9c1edb76f32889bdcbfef1a5e3af8a0aab75d14ecd7a6fb8",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-c-f03/bbt5-internal.json": "ac774393a593a2a141e9d30b3d99dc9048b73c7ad3ed73938278111721056792",
+    "yolo_achitechure/achitechure_1/final/reports/raw/a0/coco-canonical.json": "e3ffec59b878a2c83236bbf31a19c7e0d39c62a5a9d72a3bbefd531f3b936374",
+    "yolo_achitechure/achitechure_1/final/reports/raw/a0/coco-internal.json": "9214be8bea60d08d1340e5fe8956099b7f3056528df7243dd88a978871fece13",
+    "yolo_achitechure/achitechure_1/final/reports/raw/a0/bbt5-internal.json": "689b2ac4505ae955eed6bb01088349aeecd9a8475c1a58bde30a6518332a269b",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-b-f10/coco-canonical.json": "b46890db2df78da91756b52abcb5fcc1e4fb6965341b2755dccdcaedb301657e",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-b-f10/coco-internal.json": "aa4e055f956c1eea8a8d4423531d0f47f9bbedb011dab7402c8ff47118d0ed8e",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-b-f10/bbt5-internal.json": "07796b512e7872454f051f5072dfa4bcd84d985c320c15babc293451984e967e",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-a2/coco-canonical.json": "2979c9dba20d05ef4f7756cfc2a75604292962545dafdb2d32143ece6b8cb893",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-a2/coco-internal.json": "674b5a1a9b4f74f70e6b141b9a7d605fd792b605cee79a4b6cd2a63099e8f886",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-a2/bbt5-internal.json": "b4c708186f21b9e37ec73ae75c6fbb6018548b13e4ab8c5e65e891e6573debdc",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-a2/coco-canonical.json": "f1663c33643fc4059f0008b3b45c69344a09291054afaeb23b092eb4b103d19e",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-a2/coco-internal.json": "46a2f67e7fb9d52a279838dc152666e1ed9c7c634a274fb8158074f043da7e1f",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-a2/bbt5-internal.json": "23bbe2d42274c493a2e28b91e4225d7f197fac0d4f5cb7621ae5768dee4b5349",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-c-f03/coco-canonical.json": "66c0db48ce5d878d8e353c71b28819ff80ab7c84a897a2ada8d60b66a25956cf",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-c-f03/coco-internal.json": "2c8a7014342ac7ccb547e81a24a3e1992e4abb34f27e1bfe7fea935c0c0468ba",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-c-f03/bbt5-internal.json": "ffa28a50dad0b4601d43101848f9b8c96f8252597154861dc4ad277078c54e2b",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-b-f10/coco-canonical.json": "dc178976fe905849339567f6455a9ac423437b2600814e8f6c4cd9dbd14b3066",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-b-f10/coco-internal.json": "de1b2af23faf8d10a338fee27fce7116129c9bf7d34e6daaa945249ddeb3a48b",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-b-f10/bbt5-internal.json": "bad2fbc1e8201d0cae037475ef937fa796838353d218b2d552c848989698c624",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-b-f03/coco-canonical.json": "ce4a313a0c0eb2f4f1c9d017cabaa2f85951a995a23204562b76ab3bdc28c740",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-b-f03/coco-internal.json": "d7bda85d1773c15c6b910282fb21563b624e6d2e53de3fa7dcfa146a9ccad937",
+    "yolo_achitechure/achitechure_1/final/reports/raw/full35-b-f03/bbt5-internal.json": "cc12d28c0120d032a7601e4b726515651a63a8916dd28b1c17536d390b083eed",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-b-f03/coco-canonical.json": "8493043b4c80f2d309ebe64e71ce07c142c43a19b7cd50a093886253e3f35ba8",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-b-f03/coco-internal.json": "d7265f4f13f7370151585439725282b31bd2dd02be34bfc3987cb929285477dc",
+    "yolo_achitechure/achitechure_1/final/reports/raw/partial75-b-f03/bbt5-internal.json": "d42c16e5c1d49862997e2156b1a80d88106046690117073801499f87b1570894",
+    "yolo_achitechure/achitechure_1/final/weights/float/full35-b-f10.pt": "81dc8629fc6db2915242ba950c522c249d89ba1aa6d53ab39389c9b5a4ed0047",
+    "yolo_achitechure/achitechure_1/final/weights/float/full35-c-f03.pt": "5e4530dbfaab34d45a18d8a40f82c29897b2666b86254302f596796fd16bb8f0",
+    "yolo_achitechure/achitechure_1/final/weights/float/partial75-b-f10.pt": "f6bc0591ac05d842a491e1c0ea32c4a8aaeda7fc6e6f88a6a2e1df88dc894841",
+    "yolo_achitechure/achitechure_1/final/weights/float/full35-a2.pt": "af390ec43cadb5aaac47a22ebf58c710106c3f8dd143fbd2bbcb0eb2b76ebf26",
+    "yolo_achitechure/achitechure_1/final/weights/float/partial75-a2.pt": "070b571d1a52b1e7d13acc25d4c77278e38395d975fe6bff5e9bbd1bdc01e568",
+    "yolo_achitechure/achitechure_1/final/weights/float/partial75-c-f03.pt": "a6e47d546ee239800bac2b6f8b046d5881607da137bfab5eaf95637ae17154d9",
+    "yolo_achitechure/achitechure_1/final/weights/float/full35-b-f03.pt": "bae03f4b260a71dbdc47876afbf78f86eb24deeb1e774f41d6c450349402d7f0",
+    "yolo_achitechure/achitechure_1/final/weights/float/partial75-b-f03.pt": "f9dddcc7aed2d9cf17927c93577192bb58d9ba84a514d6d51284bb8489f2cb80",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/full35-b-f10.pt": "a8780ae988e61905fa78134b16bf362d2392d2a71f43941f770769bd42265cae",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/full35-c-f03.pt": "8cfdb532599c27ded718ef27a1b504a5716875bdea9777b875103948a672fe5a",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/partial75-b-f10.pt": "05070ec4e7661de5980d51451c49f39192f01783ac7746b9a9ce038fe7cdb74f",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/full35-a2.pt": "5ca57319d3708e5639c4852bac0898038d61ac793a4973015f1b6be8b764582d",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/partial75-a2.pt": "aa878765518efa6a3801c03e39ce5a3d78bea0fa09c70a3cbd41a83f7c6b77e8",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/a0.pt": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/partial75-c-f03.pt": "510f70c8bfd6d45a217fdf4626cfcf349587d75b8dc965a0d1fcbcf019c36e2b",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/full35-b-f03.pt": "9eb84288e6594f980c301c57aff7c25b52c85e21f855a68e5b0f6ea63be5a7fb",
+    "yolo_achitechure/achitechure_1/final/weights/bittrue/partial75-b-f03.pt": "ef21d05d83d65e4949dd486e30b4bf411e36d3a59cf787e25fd647bfa69932da",
+    "yolo_achitechure/achitechure_1/final/configs/attention/float-pwl-final.yaml": "28d456720633ee3df108b04e0bd83b312e9d49eba06c81e6527e1a60b7a79f4a",
+    "yolo_achitechure/achitechure_1/final/configs/attention/bittrue-pwl-final.yaml": "ef1e393a6720e42f443948cc9925bed0bf365533232bd3892040c203894c0dcb",
+    "yolo_achitechure/achitechure_1/final/configs/datasets/bbt5-coco80.yaml": "c7c7bfcca99729b7e69806a8bd56bf558771dd1f15827cc9eed5e0cf273ca0bd",
+    "yolo_achitechure/achitechure_1/final/configs/datasets/coco2017.yaml": "a7618b29a06de3b96132ebd004d6bc0d5d4f7b2ff934c432270aece7317501ef",
+    "yolo_achitechure/achitechure_1/inputs/continuation/README.md": "094da00e280a6dcdbc16e1aa2baab8bff3c985ab324dd8b1abf74551fbfe3244",
+    "yolo_achitechure/achitechure_1/inputs/parent/best.pt": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123",
+    "yolo_achitechure/achitechure_1/inputs/parent/epoch0-bittrue-manifest.json": "b58ba525cd0adb73f8616fcc1471dd72386b7f6eca64f290014cb3bd4d563470",
+    "yolo_achitechure/achitechure_1/inputs/parent/epoch0-float-manifest.json": "66010748733152a1bff22bb00f5603e7ef68a753ad336664ac52c26b9c88b171",
+    "yolo_achitechure/achitechure_1/inputs/parent/LINEAGE.md": "f48a755c173f90696a776c33f23da3cdb0d90e0799f44594f6c6e6d988bd915f",
+    "yolo_achitechure/achitechure_1/inputs/parent/final-selection.json": "9af4ba9ed5134ade5ad3860ff16ef6a9d72e29cd5016b702b8e6853b58905c7d",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/FINAL-RESULTS.md": "74104e2cdf6acfbcbde6b2b4db98e5521437abf48d96b1d4a9665519929e64e5",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/FINAL-README.md": "4cc97eff53e969067392f6b4d06ce4a4af2afdfbed0ffd75d298f70df018b163",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/final-results.json": "3489790f14a7bc85d9e0677bc9998e50f6ebc1354ab1a87ce9df9ad0edd815f6",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/training_recipe.py": "508afeaeaf309798f42c82d68caac1777c427b55227889a2e8b8e205beb84e06",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/final-requirements.txt": "122f77d6f997ecbbedd3cc1db9b2ae1758e1ee40aeda7a6094299b8e7121888e",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/lr-sweep-queue.json": "8b71cf04f593bb822e44d49cdd4974bdf29fe482de119bf18e777e075c67a8a7",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/lr-sweep-events.jsonl": "480f4cabd03cdafda362d2e58652a1bdb9d17cfcfaa566a11f3ab99d9704fe98",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/SNAPSHOT.md": "9df2af5b452be34666dcf06745736c981271d7d2eca7c29212db69d5b18f78be",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/FINAL-TRAINING.md": "95e55c9bedc1252fd7b34f074ec5c0cd783e9ed6a1f52323b809d4c821fc7988",
+    "yolo_achitechure/achitechure_1/inputs/parent/provenance/final-metrics.csv": "64178291e0e80cab79d1d011f74141bbc99f008874a78038af18d8ceb2c86d40",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/ball_bat_evaluation.py": "229d3078eb5c258e2a4673339729b9e244a223b821d66186821f966a497cef53",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/cli.py": "b0d5637fba766759fb1359faf8c84b66b2423bbdc52894515da7e585bc41699a",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__init__.py": "116e1fa582dbc789289ee98c6523f40cb3d908104c0c97d6805bf8ee7c6ed180",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/lineage.py": "1f83ead90e8d03a3f7e4806712624bf2cb4e6a6d0ab9bc2fbdf7e43144de235d",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/model.py": "1c9e9877e7ef17f322686701f0326f082066e2c34ac78ec72d7d17a9c31c35ac",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/queue_worker.py": "77eb14ac35c100f32edd147169ed2a9cc53b7964024d52de7edb225c5d444769",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/queue.py": "605ddfe9b31d14fc9fa703fc5822d2907f64f4ef1510a519661b78a889318785",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/config.py": "6b023a2db89ff3a225086aafe9aabc8a8ff1c402150fca1281f8c3cf084b0660",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/checkpoint.py": "93e44724c63c0dfd1cfc78d6f6dbf72369516eeaec35aa5efef4ae1c73ed9ef1",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/runtime.py": "149c95409c3a8048e4b524d00f100747c261939c49e1f7c4481070a3113f52ce",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/profiling.py": "4ce13d3239861ec8e9a7cf9a517d53886e358560b425798aa41a13cf563f39a9",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/selection.py": "da932719010d3387e6a673e998ba46ad0b16d3183c5876479e5ec1a2a4037373",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/training.py": "561328eefba33115968a33cbd1c68516ab7ee914557a9d0f37f36502ee58cd07",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/evaluation.py": "22b569f77372fafd777914729fb4279499ca8c4d9b77e014fc1007bfcd8eeec1",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/preflight.py": "2b97cbbc4e687532725a9fee026783c8b289f4fc44c703c3a40b7b21aecb2f0b",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/masf.py": "92d590bd36c3972bcf0df5b4bb9c1f3accab7dcfb3bf77a8323c7787a6f97f7f",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/phases.py": "cf573a608fcc8650b7c1fec0a307853420eeb0d01a0599fb6267e69d950c6262"
+  },
+  "old_small_evidence": {
+    "achitechure_1/artifacts/a1-inference-smoke.json": {
+      "batch": 1,
+      "checkpoint": "/home/uxin/yolo/yolo_achitechure/achitechure_1/artifacts/prepared/a1-full35.pt",
+      "gflops": 76.3789312,
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "imgsz": 640,
+      "latency_ms": {
+        "max": 23.008603835478425,
+        "mean": 15.731963515281677,
+        "min": 8.515723049640656,
+        "p50": 15.147024882026017
+      },
+      "p3_masf_macs": 475136000,
+      "parameters": 21973037,
+      "peak_vram_bytes": 320027136,
+      "precision": "fp16"
+    },
+    "achitechure_1/artifacts/fixed-batch-smoke-2026-08-17.json": {
+      "schema_version": 1,
+      "status": "blocked",
+      "reason": "fixed batch 16 at imgsz 640 raised torch.OutOfMemoryError during hardware-friendly attention score construction",
+      "contract_response": "stopped without batch reduction or gradient accumulation",
+      "variants_attempted": [
+        "full35",
+        "partial75"
+      ],
+      "batch": 16,
+      "imgsz": 640,
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "total_vram_mib": 32607,
+      "concurrent_process": {
+        "pid": 2333463,
+        "command": "python -m yolo_attention.cli queue run --queue-root artifacts/lr-sweep-queue --execute",
+        "used_vram_mib": 15510
+      },
+      "observed_free_vram_after_attempt_mib": 16204,
+      "date": "2026-08-17"
+    },
+    "achitechure_1/artifacts/preflight.json": {
+      "dataset": {
+        "baseball_bat": "baseball bat",
+        "path": "/home/uxin0/yolo/coco2017",
+        "sports_ball": "sports ball"
+      },
+      "environment": {
+        "cuda_available": true,
+        "cuda_runtime": "12.8",
+        "driver": "591.86",
+        "gpu": "NVIDIA GeForce RTX 5060 Ti",
+        "musgd": "ultralytics.optim.muon.MuSGD",
+        "python": "3.12.13",
+        "torch": "2.11.0+cu128",
+        "ultralytics": "8.4.90",
+        "ultralytics_source": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/.venv/lib/python3.12/site-packages/ultralytics",
+        "vram_bytes": 17102864384,
+        "vram_free_bytes": 15894315008
+      },
+      "errors": [],
+      "fresh_process_reload": {
+        "ok": true,
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "1 3"
+      },
+      "graph": {
+        "attention_paths": [
+          "model.10.m.0.attn",
+          "model.22.m.0.1.attn"
+        ],
+        "detect_inputs": [
+          16,
+          19,
+          22
+        ],
+        "end2end": true,
+        "p3_index": 16,
+        "strides": [
+          8,
+          16,
+          32
+        ]
+      },
+      "parent": {
+        "path": "/home/uxin0/yolo/yolo_achitechure/achitechure_1/inputs/parent/best.pt",
+        "sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123"
+      },
+      "parent_study": {
+        "best_observed": {
+          "delta_vs_formal_winner": 0.0002017688624028,
+          "map50_95": 0.5069386684559859,
+          "selected": false,
+          "sha256": "c70cd1d0315518d61b6ac6b5936173f04dc5b0eadcb86b288699655434dcf9fb"
+        },
+        "completed": true,
+        "completed_at": "2026-08-18",
+        "formal_winner": {
+          "map50_95": 0.5067368995935831,
+          "reason": "Only seed 0 was requested; the trained gain cannot satisfy the three-seed mean +0.001 formal gate.",
+          "selected": true,
+          "sha256": "c989aeed09de7663ad093d32d098e5fc889cf04924fa1162efaf886869de0123"
+        },
+        "queue": {
+          "revision": 95,
+          "succeeded": 19,
+          "total": 19
+        }
+      },
+      "training_contract": {
+        "a1_a2_b_accumulation": false,
+        "a1_a2_b_batch": 16,
+        "a1_a2_b_nbs": 16,
+        "amp": true,
+        "expected_torch": "2.11.0+cu128",
+        "expected_ultralytics": "8.4.90",
+        "fraction": 0.3,
+        "imgsz": 640,
+        "phase_c_accumulation": true,
+        "phase_c_batch": 8,
+        "phase_c_epochs": 70,
+        "phase_c_nbs": 16,
+        "phase_c_patience": 9,
+        "seed": 0,
+        "validation_batch": 8,
+        "workers": 6
+      },
+      "transfer": {
+        "compatible_tensors": 804,
+        "coverage": 0.9721886336154776,
+        "missing_tensors": [
+          "model.10.m.0.attn.normalize.knots",
+          "model.10.m.0.attn.normalize.values",
+          "model.16.p3_masf.alpha",
+          "model.16.p3_masf.context.dw3.bn.bias",
+          "model.16.p3_masf.context.dw3.bn.num_batches_tracked",
+          "model.16.p3_masf.context.dw3.bn.running_mean",
+          "model.16.p3_masf.context.dw3.bn.running_var",
+          "model.16.p3_masf.context.dw3.bn.weight",
+          "model.16.p3_masf.context.dw3.conv.weight",
+          "model.16.p3_masf.context.dw5.bn.bias",
+          "model.16.p3_masf.context.dw5.bn.num_batches_tracked",
+          "model.16.p3_masf.context.dw5.bn.running_mean",
+          "model.16.p3_masf.context.dw5.bn.running_var",
+          "model.16.p3_masf.context.dw5.bn.weight",
+          "model.16.p3_masf.context.dw5.conv.weight",
+          "model.16.p3_masf.context.project.bn.bias",
+          "model.16.p3_masf.context.project.bn.num_batches_tracked",
+          "model.16.p3_masf.context.project.bn.running_mean",
+          "model.16.p3_masf.context.project.bn.running_var",
+          "model.16.p3_masf.context.project.bn.weight",
+          "model.16.p3_masf.context.project.conv.weight",
+          "model.22.m.0.1.attn.normalize.knots",
+          "model.22.m.0.1.attn.normalize.values"
+        ],
+        "source_tensors": 806,
+        "target_tensors": 827,
+        "unexpected_tensors": [
+          "model.10.m.0.attn.normalize.endpoint_table",
+          "model.22.m.0.1.attn.normalize.endpoint_table"
+        ]
+      },
+      "valid": true,
+      "warnings": []
+    },
+    "achitechure_1/artifacts/identity-safe-diagnostics.json": {
+      "schema_version": 1,
+      "seed": 0,
+      "input_shape": [
+        2,
+        256,
+        80,
+        80
+      ],
+      "full35": {
+        "alpha": 0.009999999776482582,
+        "mean_abs_y_minus_x": 0.0010453567374497652,
+        "input_std": 0.9996017813682556,
+        "output_std": 0.9996028542518616
+      },
+      "partial75": {
+        "alpha": 0.009999999776482582,
+        "mean_abs_y_minus_x": 0.00026934713241644204,
+        "input_std": 0.9996017813682556,
+        "output_std": 0.9996042847633362
+      },
+      "note": "Diagnostic only; no unvalidated hard threshold is applied."
+    },
+    "achitechure_1/artifacts/fixed-batch-smoke-2026-08-18.json": {
+      "contract": {
+        "accumulation": false,
+        "batch": 16,
+        "imgsz": 640,
+        "steps": 3
+      },
+      "date": "2026-08-18",
+      "formal_training_started": false,
+      "full35": {
+        "peak_vram_bytes": 18397301760,
+        "report": "artifacts/profiles/a1-train-smoke.json",
+        "train_step_p50_ms": 212.36516698263586
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "p3_masf_macs_executed": false,
+      "partial75": {
+        "peak_vram_bytes": 17761890304,
+        "report": "artifacts/profiles/a2-train-smoke.json",
+        "train_step_p50_ms": 207.53483311273158
+      },
+      "schema_version": 1,
+      "status": "passed"
+    },
+    "achitechure_1/artifacts/a2-inference-smoke.json": {
+      "batch": 1,
+      "checkpoint": "/home/uxin/yolo/yolo_achitechure/achitechure_1/artifacts/prepared/a2-partial75.pt",
+      "gflops": 75.47944960000001,
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "imgsz": 640,
+      "latency_ms": {
+        "max": 23.037617094814777,
+        "mean": 15.313239477109164,
+        "min": 8.159969933331013,
+        "p50": 17.063028528355062
+      },
+      "p3_masf_macs": 40140800,
+      "parameters": 21903917,
+      "peak_vram_bytes": 320356864,
+      "precision": "fp16"
+    },
+    "achitechure_1/artifacts/a0-inference-smoke.json": {
+      "batch": 1,
+      "checkpoint": "/home/uxin/yolo/yolo_achitechure/achitechure_1/inputs/parent/best.pt",
+      "gflops": 75.38933759999999,
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "imgsz": 640,
+      "latency_ms": {
+        "max": 23.083036998286843,
+        "mean": 16.1344729247503,
+        "min": 8.0526159144938,
+        "p50": 16.34476298931986
+      },
+      "p3_masf_macs": 0,
+      "parameters": 21897260,
+      "peak_vram_bytes": 319204864,
+      "precision": "fp16"
+    },
+    "achitechure_1/artifacts/profiles/a2-train-smoke.json": {
+      "batch": 16,
+      "checkpoint": "/home/uxin/yolo/yolo_achitechure/achitechure_1/artifacts/prepared/a2-partial75.pt",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "imgsz": 640,
+      "peak_vram_bytes": 17761890304,
+      "steps": 3,
+      "train_step_ms": {
+        "mean": 436.9576823276778,
+        "p50": 207.53483311273158
+      }
+    },
+    "achitechure_1/artifacts/profiles/a1-train-smoke.json": {
+      "batch": 16,
+      "checkpoint": "/home/uxin/yolo/yolo_achitechure/achitechure_1/artifacts/prepared/a1-full35.pt",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "imgsz": 640,
+      "peak_vram_bytes": 18397301760,
+      "steps": 3,
+      "train_step_ms": {
+        "mean": 447.75029496910673,
+        "p50": 212.36516698263586
+      }
+    }
+  },
+  "completed_at": "2026-11-03T23:54:12.306762+08:00",
+  "removed_bytes": 266251854,
+  "protected_unchanged": true,
+  "cache_note": "初版保護清單誤含可重建 pyc；清理後剔除快取再核對，所有原碼／權重／正式來源完全一致。",
+  "removed_cache_files_in_protected_tree": [
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/__pycache__/masf.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/__pycache__/__init__.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/achitechure_1/__pycache__/model.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/binary_basis.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/projection.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/integration.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/attention.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/relative_bias.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/quantization.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/normalization.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/schedule.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/__init__.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/bdcn.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/final/code/yolo_attention/__pycache__/config.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/selection.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/masf.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/phases.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/lineage.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/checkpoint.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/runtime.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/cli.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/preflight.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/__init__.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/training.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/model.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/profiling.cpython-312.pyc",
+    "yolo_achitechure/achitechure_1/src/achitechure_1/__pycache__/config.cpython-312.pyc"
+  ]
+}

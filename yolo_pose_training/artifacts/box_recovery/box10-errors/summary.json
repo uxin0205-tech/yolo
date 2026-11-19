@@ -1,0 +1,180 @@
+{
+  "weights": "/home/uxin/yolo/yolo_pose_training/runs/box_recovery_box10_640/weights/best.pt",
+  "weight_sha256": "834e73d7bb81364e50802d9c95e08fc2f3cc68260687dc452716209255aee04d",
+  "dataset": "bbat5-v1 formal val",
+  "images": 683,
+  "label_sha256": "08f3f60fea19b68782b04a1a75e35dc0ad0dc2dc0abc3cfb2389b0f7822730f2",
+  "protocol": {
+    "conf": 0.25,
+    "matching_iou": 0.5,
+    "class_aware": true,
+    "matching": "confidence-ordered greedy one-to-one",
+    "rect": false,
+    "batch": 8,
+    "half": false,
+    "keypoints": "GT visibility>0; predicted keypoint confidence is reported, not filtered",
+    "normalized_error": "distance / GT bbox diagonal",
+    "size_bins": "sqrt area after letterbox scaling to 640; invariant across evaluation resolutions",
+    "caveat": "fixed-threshold diagnostic, not AP; matched-only errors have selection bias; all-visible-GT PCK counts missed detections as failures; blur is size/texture-confounded, no occlusion or motion-blur ground truth"
+  },
+  "results": [
+    {
+      "imgsz": 640,
+      "classes": {
+        "ball": {
+          "gt": 393,
+          "tp": 339,
+          "fn": 54,
+          "fp": 57,
+          "precision": 0.8560606060606061,
+          "recall": 0.8625954198473282,
+          "unmatched_reasons": {
+            "assignment_conflict": 3,
+            "no_same_class_overlap": 45,
+            "poor_box_overlap": 6
+          },
+          "by_size": {
+            "large_96+": {
+              "gt": 77,
+              "matched": 68,
+              "recall": 0.8831168831168831
+            },
+            "medium_32_96": {
+              "gt": 25,
+              "matched": 19,
+              "recall": 0.76
+            },
+            "small_16_32": {
+              "gt": 102,
+              "matched": 89,
+              "recall": 0.8725490196078431
+            },
+            "tiny_<16": {
+              "gt": 189,
+              "matched": 163,
+              "recall": 0.8624338624338624
+            }
+          },
+          "matched_iou": {
+            "count": 339,
+            "mean": 0.8017161966432471,
+            "median": 0.8081494289589618,
+            "p90": 0.9592745985379765
+          },
+          "box_center_error_px": {
+            "count": 339,
+            "mean": 1.8107652598476764,
+            "median": 1.2885222979251203,
+            "p90": 3.4410407683419835
+          },
+          "visible_gt_keypoints": 393,
+          "matched_keypoints": 339,
+          "keypoint_error_px": {
+            "count": 339,
+            "mean": 2.921795547513825,
+            "median": 1.1886977893348711,
+            "p90": 7.4261932042203425
+          },
+          "keypoint_error_bbox_diag": {
+            "count": 339,
+            "mean": 0.04580811385096672,
+            "median": 0.040231021341652684,
+            "p90": 0.08828501741449553
+          },
+          "pck_at_0p1_matched_only": 0.9469026548672567,
+          "pck_at_0p1_all_visible_gt": 0.816793893129771,
+          "by_keypoint": {
+            "0": {
+              "count": 339,
+              "mean": 2.921795547513825,
+              "median": 1.1886977893348711,
+              "p90": 7.4261932042203425
+            },
+            "1": {
+              "count": 0,
+              "mean": null,
+              "median": null,
+              "p90": null
+            }
+          }
+        },
+        "bat": {
+          "gt": 539,
+          "tp": 486,
+          "fn": 53,
+          "fp": 48,
+          "precision": 0.9101123595505618,
+          "recall": 0.9016697588126159,
+          "unmatched_reasons": {
+            "class_confusion": 5,
+            "no_same_class_overlap": 48
+          },
+          "by_size": {
+            "large_96+": {
+              "gt": 28,
+              "matched": 22,
+              "recall": 0.7857142857142857
+            },
+            "medium_32_96": {
+              "gt": 439,
+              "matched": 407,
+              "recall": 0.9271070615034168
+            },
+            "small_16_32": {
+              "gt": 65,
+              "matched": 53,
+              "recall": 0.8153846153846154
+            },
+            "tiny_<16": {
+              "gt": 7,
+              "matched": 4,
+              "recall": 0.5714285714285714
+            }
+          },
+          "matched_iou": {
+            "count": 486,
+            "mean": 0.8830661731344682,
+            "median": 0.904240590409616,
+            "p90": 0.968294640855091
+          },
+          "box_center_error_px": {
+            "count": 486,
+            "mean": 1.9639360675453486,
+            "median": 1.412000869904004,
+            "p90": 3.0758553575464473
+          },
+          "visible_gt_keypoints": 1064,
+          "matched_keypoints": 969,
+          "keypoint_error_px": {
+            "count": 969,
+            "mean": 2.592159149409358,
+            "median": 1.8833125970687565,
+            "p90": 4.755125353062132
+          },
+          "keypoint_error_bbox_diag": {
+            "count": 969,
+            "mean": 0.030729772602901204,
+            "median": 0.02253386170835306,
+            "p90": 0.06104367081242539
+          },
+          "pck_at_0p1_matched_only": 0.9700722394220846,
+          "pck_at_0p1_all_visible_gt": 0.8834586466165414,
+          "by_keypoint": {
+            "0": {
+              "count": 483,
+              "mean": 2.3952116319865295,
+              "median": 1.7180559872114307,
+              "p90": 4.00976955357843
+            },
+            "1": {
+              "count": 486,
+              "mean": 2.7878909414159954,
+              "median": 2.018888973109441,
+              "p90": 5.663816945612169
+            }
+          }
+        }
+      }
+    }
+  ]
+}

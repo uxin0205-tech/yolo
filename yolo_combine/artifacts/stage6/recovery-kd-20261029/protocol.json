@@ -1,0 +1,110 @@
+{
+  "kind": "stage6-kd-recovery-v1",
+  "reviewed_before_implementation": true,
+  "created_at": "2026-10-29T20:40:04.006795+08:00",
+  "sources_sha256": {
+    "yolo_optimize/experiments/kd/dual_task_v1/PLAN.md": "551d6205e3814337e2288f086eb2d24d9d32186501c6edfceff4af50e5e66aeb",
+    "yolo_optimize/experiments/kd/dual_task_v1/README.md": "5b5e93fbf92a5e2948f5b23efb72cab7eedd643e04e90672dfbed8a1f6e84550",
+    "yolo_optimize/experiments/kd/dual_task_v1/spatial_kd.py": "e21fce2786abcd7a145dbe80ef16ab8bce7f692d88294b6192e9fc4a47aeee0e",
+    "yolo_optimize/experiments/kd/dual_task_v1/experiment.py": "08eebb52b420fe48a92acd9f60f3b3b56bf727f22704aeb4b215675c7477f12c",
+    "yolo_optimize/experiments/kd/dual_task_v1/calibrate_kd.py": "5b4b8b5e1b4b1988ffaea8550e12dd7d831a01c43d1e5440b9f6d4f77565de82",
+    "yolo_optimize/experiments/kd/dual_task_v1/train_pair.py": "cb1fd790f2c7d8d3fc37f4f31d7def8c8727f78e1fef245c8a3216e1c8da103f",
+    "yolo_optimize/experiments/kd/dual_task_v1/artifacts/runs/spatial-e5-seed1-v1/resolved-config.json": "b77100a9f009db3b57aeda95bead8de7a7d048af89d8556046db1e807a5ba3a5",
+    "yolo_optimize/experiments/kd/dual_task_v1/artifacts/runs/spatial-e5-seed1-v1/summary.json": "3b650638b54433b8202bef57d38b091d75b350a7bfacab9b5e891f7b0e817190",
+    "yolo_optimize/experiments/kd/dual_task_v1/artifacts/kd-calibration-v1/summary.json": "2e4aa3b6c14100db448298059a7acaa77f767c42abf8aed6857a3467b6d880ee",
+    "yolo_combine/artifacts/stage6/j1-review-20261029/reference-review.json": "8ddf1caa7dda1c13e41f931708d0da976f12fa9a476e14d054a4789d603d4bad",
+    "yolo_combine/artifacts/stage6/j1-review-20261029/results.json": "8bd016d94fc8806bbf73b9ad18d02c4aa645fe268ce29839fe0b4edc92c4cf96"
+  },
+  "parent": {
+    "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/j1-review-20261029/reproduce/model.pt",
+    "sha256": "a6005897584db34c765f6accd1a4555051f449a10e4e716cf762e663ca02c570",
+    "phase": "J1-reproduced",
+    "epoch": 6,
+    "metrics": {
+      "coco_AP": 0.5125097418328837,
+      "person_AP": 0.6415803508443042,
+      "sports_ball_AP": 0.5162067267279214,
+      "baseball_bat_AP": 0.4626696710268651,
+      "box_AP50_95": 0.6056448077906925,
+      "pose_AP50_95": 0.8958015896017333,
+      "ball_box_AP50_95": 0.484730281491779,
+      "ball_pose_AP50_95": 0.8575149098549751,
+      "bat_box_AP50_95": 0.7265593340896059,
+      "bat_pose_AP50_95": 0.9340882693484913
+    }
+  },
+  "recipe": {
+    "scope": "joint_back9",
+    "task": "joint",
+    "epochs": 5,
+    "patience": 0,
+    "lrs": {
+      "backbone": 3.8e-07,
+      "neck": 1.9e-06,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "loss_horizon": 5,
+    "fresh_ema": true,
+    "head_bn": "trainable",
+    "shared_bn_affine": false,
+    "min_delta": 0.0001,
+    "plateau_half_after": 0,
+    "name": "KD-recovery",
+    "extension": 0,
+    "selection": "balanced_recovery",
+    "recovery_safety": {
+      "coco_from_parent": 0.01,
+      "coco_from_original": 0.05,
+      "pose_from_parent": 0.03
+    },
+    "retain_epoch_candidates": true
+  },
+  "kd": {
+    "sites": [
+      16,
+      19,
+      22
+    ],
+    "teachers": {
+      "detect": {
+        "checkpoint": "/home/uxin/yolo/yolo_hog/result/stage5/selected.pt",
+        "sha256": "fe3e84cffe41c82b9e2d2ab83f6f2fdbf5df17d9cd99527ff1ef4e0d664dd71c"
+      },
+      "pose": {
+        "checkpoint": "/home/uxin/yolo/yolo_pose_training/artifacts/preserved/stagewise_lr_p3_640/weights/best.pt",
+        "sha256": "e50e155c6c070da4b038fe5679575f4c094b9cfff8eb3a2143770d7dad4cad9e"
+      }
+    },
+    "calibration_batches_per_task": 4,
+    "target_feature_gradient_ratio": 0.1,
+    "confirmation_band": [
+      0.025,
+      0.4
+    ],
+    "mu_upper_bound": 1000000,
+    "version": 1
+  },
+  "decisions": [
+    "optimize spatial-e5-seed1-v1: qSiLU E2 student, no qualified best_joint; bat pose gain and ball box loss. This is an explicitly new recovery, not a proven successful optimize recipe.",
+    "Adopt channel-energy spatial transfer at 16/19/22, sum-images then existing macro normalization, frozen eval teachers, FP32 KD math, fresh AdamW/EMA, warmup1 cosine0.5, five epochs.",
+    "Use current validated Stage5 D1 Detect teacher and protected pretrained Pose teacher, not optimize YOLO26L/full35 teachers. Detect teacher sports_ball AP is 0.00298 below current student; keep native labels and mild 0.1 gradient regularization, validate all classes.",
+    "Joint_back9 only; shared BN affine/statistics fixed, active head BN train, entire Attention fixed. Native SiLU inherited; Stage7 qSiLU not yet authorized.",
+    "D32x8+P16 reference64; recalibrate fixed mu on four train batches each and task weight on16+8 macros. No new unchanged control training.",
+    "Balanced selection: accepted first, then 0.5*mean(COCO4)+0.5*mean(BBAT6). Preserve all five candidate checkpoints until analysis, parent and anchors intact. Final COCO-0.005/BBAT-0.02 targets unchanged.",
+    "Known initial COCO bat deficit retained visibly. Stop on any new COCO drop>0.01 from E6, any original COCO drop>0.05 or any BBAT drop>0.03 from E6. This is temporary experiment safety, not relaxed final acceptance.",
+    "Two real-macro GPU smoke before long training: KD-only neck gradient, actual updates, teacher immutability/no grads, no leaked hooks/student keys, fixed tensors+EMA, criterion weights_only roundtrip.",
+    "One five-epoch recovery then automatic full checkpoint re-evaluation and comparison. Remain in Stage6; no automatic Stage7. Single seed and simultaneous LR/scope/KD changes do not isolate KD causal benefit."
+  ],
+  "resource_budget": {
+    "gpu_count": 1,
+    "device": "RTX5090",
+    "initial_train_epochs": 5,
+    "estimated_minutes": 110,
+    "monitor_seconds": 600,
+    "max_stall_seconds": 1800,
+    "gpu_conflict_policy": "wait until idle"
+  }
+}

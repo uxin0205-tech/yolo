@@ -1,0 +1,12 @@
+# Runtime dependencies for the local YOLO11 BinaryAttention workspace.
+# CUDA 12.8 wheels require the PyTorch package index below.
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+ultralytics==8.4.90
+numpy==2.5.1
+opencv-python==5.0.0.93
+PyYAML==6.0.3
+Pillow==12.3.0
+matplotlib==3.11.1

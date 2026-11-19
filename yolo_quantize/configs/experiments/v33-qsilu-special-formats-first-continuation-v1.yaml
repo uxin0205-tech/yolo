@@ -1,0 +1,153 @@
+schema_version: 1
+plan_id: v33-qsilu-special-formats-first-continuation-v1
+date: "2026-09-06"
+language: zh-TW
+status: prepared_non_gpu_revision_pending_safe_q2_boundary
+execution_authorized: true
+formal_training: false
+formal_validation: false
+
+supersedes_future_stages_only:
+  active_plan: configs/experiments/v30-qsilu-complete-quantization-lane-v1.yaml
+  active_plan_sha256: 1ae2965674a91b5e75def5c7c3d18d75d2067d0762e669916a3c4548fe10512a
+  preserved_stages: [q0, q1, q2]
+  replaced_stages: [q4, q5, q6, q7]
+  q3_parent_contract_is_unchanged: true
+  reason: 保留正在執行的matched pair；只重排尚未開始的逐層與逐區權重量化搜尋。
+
+safe_handoff:
+  trigger: q2_paired_qat_complete
+  do_not_interrupt_current_sham_or_qat: true
+  require_both_completion_manifests: [sham, qat]
+  require_q3_green_parent: true
+  current_q2_budget_remains: {epochs_max: 15, patience: 5}
+  note: 現行Q2不可半途改epochs或patience，否則sham與QAT不再matched。
+
+objective:
+  total_gate:
+    every_map50_delta_at_least: -0.015
+    every_map50_95_delta_at_least: -0.04
+    worst_task_has_priority_over_mean: true
+  ranking:
+    - pass_all_task_gates
+    - maximize_worst_task_accuracy
+    - minimize_packed_weight_bytes
+
+per_layer_cpu_profile:
+  parent: q3_qsilu_all_w8_locked_parent
+  deployment_weight_paths: 148
+  gpu: false
+  training: false
+  output_required_for_every_path:
+    - normalized_rmse
+    - cosine
+    - sqnr_db
+    - occupied_codes
+    - zero_ratio
+    - packed_bytes
+  phases:
+    - id: structured_first
+      formats:
+        - fixed_sd4_optimal_scaled_codebook
+        - exact_scaled_ternary
+        - twn_v3_0_75_filterwise
+        - paper_twn_v2_0_70_layerwise
+    - id: uniform_backfill
+      formats: [exact_w4, exact_w5, exact_w6, exact_w7]
+  output:
+    all_cells: 148_paths_x_8_formats
+    per_path_best_static_format: true
+    per_region_shortlist: true
+  restriction: CPU重建誤差只用來排序；不得直接宣稱模型精度或promotion。
+
+progressive_gpu_ptq:
+  parent: q3_qsilu_all_w8_locked_parent
+  region_order:
+    - backbone_early
+    - backbone_deep
+    - backbone_attention_safe
+    - neck
+    - masf
+    - neck_attention_safe
+    - detect_one2one_tower
+    - detect_one2one_predictor
+    - pose_one2one_tower
+    - pose_one2one_predictor
+  format_execution_order:
+    - fixed_sd4
+    - exact_scaled_ternary
+    - twn_v3_filterwise
+    - paper_twn_v2
+    - exact_w4
+    - exact_w5
+    - exact_w6
+    - exact_w7
+  rule:
+    structured_formats_finish_before_uniform_backfill: true
+    one_new_path_on_previous_green_parent: true
+    failed_candidate_keeps_previous_parent: true
+    binary_qk_and_non_weight_boundaries_remain_protected: true
+
+short_qat_screening:
+  purpose: 只判斷PTQ recover候選是否值得成為finalist，不作最終精度宣稱。
+  eligible_ptq_sources:
+    - fixed_sd4
+    - exact_scaled_ternary
+    - twn_v3_filterwise
+    - paper_twn_v2
+  source_to_qat_format:
+    fixed_sd4:
+      qat_family: ls_sd4
+      initialization: optimal_scaled_codebook
+      learned_parameter: per_output_channel_scale
+    exact_scaled_ternary:
+      qat_family: exact_scaled_ternary
+      initialization: optimal_scaled_codebook
+      learned_parameter: scale
+    twn_v3_filterwise:
+      qat_family: twn_filterwise
+      initialization: paper_delta_0_75_filter_mean_abs
+      learned_parameter: filterwise_alpha
+    paper_twn_v2:
+      qat_family: paper_twn
+      initialization: paper_delta_0_70_mean_abs
+      learned_parameter: layerwise_alpha
+  ensure_at_least_one_when_recoverable: [fixed_sd4]
+  candidate_budget: {main: 3, sentinel: 1, total: 4}
+  arms: [matched_sham, qat]
+  optimizer: AdamW
+  epochs_max: 4
+  patience: 2
+  schedule: {fp32_epochs: 0, progressive_ramp_epochs: 1, full_quant_epochs: 3}
+  batch: {detect_logical: 128, detect_microbatch: 16, pose: 16}
+  augmentation: accepted_full35_exact
+  added_noise: false
+  expected_epoch_budget:
+    old_upper_bound: 8_candidates_x_2_arms_x_15_epochs
+    revised_upper_bound: 4_candidates_x_2_arms_x_4_epochs
+    reduction: 86.7_percent
+
+uniform_backfill:
+  execution: after_structured_ptq
+  formats: [exact_w4, exact_w5, exact_w6, exact_w7]
+  automatic_qat: false
+  qat_condition:
+    - structured_formats_have_no_green_candidate_for_the_region
+    - or_uniform_candidate_is_required_as_a_matched_control
+
+regional_hardswish:
+  execution: after_qsilu_weight_mainline
+  first_cell_only: neck_attention
+  epochs_max_if_recovery_needed: 4
+  patience: 2
+  expand_to_masf_or_backbone_attention_only_after_positive_interaction: true
+
+deferred_until_finalist_review:
+  - eight_or_more_epoch_confirmation
+  - long_qat
+  - multi_seed
+  - formal_validation
+  - musgd
+  - export
+  - target_hardware_measurement
+

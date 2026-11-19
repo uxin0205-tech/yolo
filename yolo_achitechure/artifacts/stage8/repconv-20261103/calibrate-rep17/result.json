@@ -1,0 +1,166 @@
+{
+  "status": "passed",
+  "parent_sha256": "36a425f29c1f361def1628fdd7dd56d3e835e66581b82c2586cf9dca99578148",
+  "recipe": {
+    "epochs": 5,
+    "loss_horizon": 5,
+    "task": "joint",
+    "scope": "rep_and_heads",
+    "warmup_epochs": 1,
+    "final_factor": 0.5,
+    "lrs": {
+      "rep": 1e-05,
+      "detect_head": 5e-06,
+      "pose_head": 5e-06
+    },
+    "all_bn_running": "fixed",
+    "bn_affine": "trainable only selected Rep and both heads",
+    "attention": "all tensors frozen",
+    "optimizer": "AdamW",
+    "betas": [
+      0.948,
+      0.999
+    ],
+    "weight_decay": 0.00027,
+    "clip_norm": 10,
+    "initial_scale": 1024,
+    "amp": true,
+    "detect_physical": 16,
+    "detect_accumulation": 16,
+    "pose_physical": 16,
+    "reference_batch": 64,
+    "fresh_optimizer": true,
+    "initial_ema_updates": 0,
+    "max_amp_retries": 16,
+    "ciou": "canonical FP32 wrapper; formula unchanged",
+    "name": "rep17"
+  },
+  "selected_pose_weight": 0.195,
+  "calibration_median_ratio": 0.20257886314949047,
+  "confirmation_median_ratio": 0.9123826563181128,
+  "validation_used": false,
+  "checkpoint_restored_each_macro": true,
+  "optimizer_step_noop": true,
+  "records": [
+    {
+      "phase": "measure",
+      "index": 0,
+      "ratio": 2.2438051267293253,
+      "pose_weight": 0.04,
+      "detect_norm": 36.87866670463851,
+      "pose_norm": 82.74854141880996,
+      "cosine_similarity": -0.09566183074761174,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 1,
+      "ratio": 0.26407967577741776,
+      "pose_weight": 0.04,
+      "detect_norm": 31.094453186112226,
+      "pose_norm": 8.21141311586461,
+      "cosine_similarity": -0.06753558428585048,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 2,
+      "ratio": 0.2052964460802461,
+      "pose_weight": 0.04,
+      "detect_norm": 33.76621408965872,
+      "pose_norm": 6.9320837501916674,
+      "cosine_similarity": -0.06070317333272045,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 3,
+      "ratio": 0.19986128021873484,
+      "pose_weight": 0.04,
+      "detect_norm": 39.05004922684027,
+      "pose_norm": 7.804592831080914,
+      "cosine_similarity": -0.014036380527789086,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 4,
+      "ratio": 0.2389697491872399,
+      "pose_weight": 0.04,
+      "detect_norm": 36.86619983975166,
+      "pose_norm": 8.809906529192117,
+      "cosine_similarity": -0.09613651734489494,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 5,
+      "ratio": 0.10589750230582579,
+      "pose_weight": 0.04,
+      "detect_norm": 54.81550091507113,
+      "pose_norm": 5.80482463454874,
+      "cosine_similarity": 0.057822024055996846,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 6,
+      "ratio": 0.14306886377879197,
+      "pose_weight": 0.04,
+      "detect_norm": 40.01564833680589,
+      "pose_norm": 5.724993340918525,
+      "cosine_similarity": 0.18216256079881155,
+      "amp_retries": 0
+    },
+    {
+      "phase": "measure",
+      "index": 7,
+      "ratio": 0.1699066434521126,
+      "pose_weight": 0.04,
+      "detect_norm": 38.020926756504544,
+      "pose_norm": 6.460008046136305,
+      "cosine_similarity": -0.03421430978274487,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 0,
+      "ratio": 1.3090656436160357,
+      "pose_weight": 0.195,
+      "detect_norm": 26.14662787847647,
+      "pose_norm": 34.22765225212678,
+      "cosine_similarity": 0.01885992858738763,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 1,
+      "ratio": 0.8626646535471878,
+      "pose_weight": 0.195,
+      "detect_norm": 28.871473138627692,
+      "pose_norm": 24.906399372531197,
+      "cosine_similarity": -0.10196457845075209,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 2,
+      "ratio": 0.8410277002524643,
+      "pose_weight": 0.195,
+      "detect_norm": 30.09686714644246,
+      "pose_norm": 25.31229896097645,
+      "cosine_similarity": 0.024190145027826893,
+      "amp_retries": 0
+    },
+    {
+      "phase": "confirm-1",
+      "index": 3,
+      "ratio": 0.9621006590890379,
+      "pose_weight": 0.195,
+      "detect_norm": 29.225401967482625,
+      "pose_norm": 28.1177784950571,
+      "cosine_similarity": -0.049312405793282804,
+      "amp_retries": 0
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+stages:
+- configs/refinement/640.yaml
+- configs/refinement/960.yaml
+monitor_seconds: 600
+evaluation_imgsz:
+- 640
+- 960
+per_class_ap_drop_tolerance: 0.005

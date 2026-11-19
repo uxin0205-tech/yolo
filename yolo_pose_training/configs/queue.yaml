@@ -1,0 +1,7 @@
+stages:
+- configs/stage1_adamw_640.yaml
+- configs/stage2_adamw_640.yaml
+- configs/stage3_adamw_960.yaml
+- configs/stage4_musgd_960.yaml
+monitor_seconds: 600
+comparison_imgsz: 960

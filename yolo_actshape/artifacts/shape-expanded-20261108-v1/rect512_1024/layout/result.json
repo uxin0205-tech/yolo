@@ -1,0 +1,702 @@
+{
+  "status": "passed",
+  "candidate": "rect512_1024",
+  "shape": [
+    512,
+    1024
+  ],
+  "parent": {
+    "checkpoint": "yolo_achitechure/result/stage8-retrain/handoff/rep17_20.pt",
+    "sha256": "2454548104ed64768eb9ecdb99d44804ee9d8e1e371e2a508cf052c0911fdd35",
+    "candidate": "rep17_20",
+    "epoch": 1,
+    "metrics": {
+      "coco_AP": 0.5143471497030708,
+      "person_AP": 0.6427959303974734,
+      "sports_ball_AP": 0.5157820851022553,
+      "baseball_bat_AP": 0.46957631026676677,
+      "box_AP50_95": 0.6143706928427835,
+      "pose_AP50_95": 0.9013894285347345,
+      "ball_box_AP50_95": 0.49976429858092136,
+      "ball_pose_AP50_95": 0.8645462333785403,
+      "bat_box_AP50_95": 0.7289770871046457,
+      "bat_pose_AP50_95": 0.9382326236909287
+    }
+  },
+  "device": "NVIDIA GeForce RTX 5090",
+  "dtype": "FP32",
+  "batch": 1,
+  "rows": [
+    {
+      "task": "detect",
+      "module": "graph.model.16",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        64,
+        128
+      ],
+      "tile": 8,
+      "capacity_hw": [
+        64,
+        128
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 8388608,
+      "pitch_elements": 128,
+      "alignment_elements": 8,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.16",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        64,
+        128
+      ],
+      "tile": 16,
+      "capacity_hw": [
+        64,
+        128
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 8388608,
+      "pitch_elements": 128,
+      "alignment_elements": 16,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.16",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        64,
+        128
+      ],
+      "tile": 32,
+      "capacity_hw": [
+        64,
+        128
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 8388608,
+      "pitch_elements": 128,
+      "alignment_elements": 32,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.19",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        32,
+        64
+      ],
+      "tile": 8,
+      "capacity_hw": [
+        32,
+        64
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 4194304,
+      "pitch_elements": 64,
+      "alignment_elements": 8,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.19",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        32,
+        64
+      ],
+      "tile": 16,
+      "capacity_hw": [
+        32,
+        64
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 4194304,
+      "pitch_elements": 64,
+      "alignment_elements": 16,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.19",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        32,
+        64
+      ],
+      "tile": 32,
+      "capacity_hw": [
+        32,
+        64
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 4194304,
+      "pitch_elements": 64,
+      "alignment_elements": 32,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.22",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        16,
+        32
+      ],
+      "tile": 8,
+      "capacity_hw": [
+        16,
+        32
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 1048576,
+      "pitch_elements": 32,
+      "alignment_elements": 8,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.22",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        16,
+        32
+      ],
+      "tile": 16,
+      "capacity_hw": [
+        16,
+        32
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 1048576,
+      "pitch_elements": 32,
+      "alignment_elements": 16,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.22",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        16,
+        32
+      ],
+      "tile": 32,
+      "capacity_hw": [
+        32,
+        32
+      ],
+      "valid_cell_utilization": 0.5,
+      "packed_bytes": 2097152,
+      "pitch_elements": 32,
+      "alignment_elements": 32,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.17",
+      "kind": "conv_halo_qsilu",
+      "tile": 8,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.17",
+      "kind": "conv_halo_qsilu",
+      "tile": 16,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.17",
+      "kind": "conv_halo_qsilu",
+      "tile": 32,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.20",
+      "kind": "conv_halo_qsilu",
+      "tile": 8,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.20",
+      "kind": "conv_halo_qsilu",
+      "tile": 16,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.20",
+      "kind": "conv_halo_qsilu",
+      "tile": 32,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.10.m.0.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 16,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.10.m.0.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 32,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.10.m.0.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 64,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.22.m.0.1.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 16,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.22.m.0.1.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 32,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "detect",
+      "module": "graph.model.22.m.0.1.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 64,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.16",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        64,
+        128
+      ],
+      "tile": 8,
+      "capacity_hw": [
+        64,
+        128
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 8388608,
+      "pitch_elements": 128,
+      "alignment_elements": 8,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.16",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        64,
+        128
+      ],
+      "tile": 16,
+      "capacity_hw": [
+        64,
+        128
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 8388608,
+      "pitch_elements": 128,
+      "alignment_elements": 16,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.16",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        64,
+        128
+      ],
+      "tile": 32,
+      "capacity_hw": [
+        64,
+        128
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 8388608,
+      "pitch_elements": 128,
+      "alignment_elements": 32,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.19",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        32,
+        64
+      ],
+      "tile": 8,
+      "capacity_hw": [
+        32,
+        64
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 4194304,
+      "pitch_elements": 64,
+      "alignment_elements": 8,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.19",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        32,
+        64
+      ],
+      "tile": 16,
+      "capacity_hw": [
+        32,
+        64
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 4194304,
+      "pitch_elements": 64,
+      "alignment_elements": 16,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.19",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        32,
+        64
+      ],
+      "tile": 32,
+      "capacity_hw": [
+        32,
+        64
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 4194304,
+      "pitch_elements": 64,
+      "alignment_elements": 32,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.22",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        16,
+        32
+      ],
+      "tile": 8,
+      "capacity_hw": [
+        16,
+        32
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 1048576,
+      "pitch_elements": 32,
+      "alignment_elements": 8,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.22",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        16,
+        32
+      ],
+      "tile": 16,
+      "capacity_hw": [
+        16,
+        32
+      ],
+      "valid_cell_utilization": 1.0,
+      "packed_bytes": 1048576,
+      "pitch_elements": 32,
+      "alignment_elements": 16,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.22",
+      "kind": "layout",
+      "passed": true,
+      "logical_hw": [
+        16,
+        32
+      ],
+      "tile": 32,
+      "capacity_hw": [
+        32,
+        32
+      ],
+      "valid_cell_utilization": 0.5,
+      "packed_bytes": 2097152,
+      "pitch_elements": 32,
+      "alignment_elements": 32,
+      "extra_capacity_fraction": 0.0
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.17",
+      "kind": "conv_halo_qsilu",
+      "tile": 8,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.17",
+      "kind": "conv_halo_qsilu",
+      "tile": 16,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.17",
+      "kind": "conv_halo_qsilu",
+      "tile": 32,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.20",
+      "kind": "conv_halo_qsilu",
+      "tile": 8,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.20",
+      "kind": "conv_halo_qsilu",
+      "tile": 16,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.20",
+      "kind": "conv_halo_qsilu",
+      "tile": 32,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.10.m.0.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 16,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.10.m.0.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 32,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.10.m.0.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 64,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.22.m.0.1.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 16,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.22.m.0.1.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 32,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    },
+    {
+      "task": "pose",
+      "module": "graph.model.22.m.0.1.attn",
+      "kind": "query_rows_full_keys",
+      "tile": 64,
+      "keys": 512,
+      "probability_bitwise_equal": true,
+      "passed": true,
+      "max_abs_error": 0.0,
+      "rmse": 0.0,
+      "atol": 0.0001,
+      "rtol": 0.0001
+    }
+  ],
+  "diagnostic_images": {
+    "detect": "/home/uxin/yolo/yolo_binaryqk/artifacts/datasets/coco2017-runtime/images/val2017/000000298251.jpg",
+    "pose": "/home/uxin/yolo/yolo_combine/artifacts/stage6/datasets/bbat5-v1/val/images/20250315_163903_mp4-0077_jpg.rf.72d1f376d0e723078681a611a55c06e6.jpg"
+  },
+  "task_AP": "另以完整5000/683張驗證；此處每任務一張僅供算子replay",
+  "state_unchanged": true,
+  "operators_verified": true,
+  "whole_model_both_timing": {
+    "warmup": 20,
+    "iterations": 100,
+    "median_ms": 32.464150492160115,
+    "mean_ms": 32.46924734019558,
+    "peak_allocated_bytes": 617994752,
+    "incremental_peak_bytes": 436862976,
+    "timing_scope": "GPU同步的PyTorch端到端wall time，包含Python launch成本，非RTL或custom kernel"
+  },
+  "limitations": [
+    "Attention按query rows分塊、每列保留全部keys；不縮減D1分母、不新增未遮罩token。",
+    "完整QK scores仍物化；不把normalization分塊說成整個Attention無NxN儲存。",
+    "Conv分塊包含實際3x3 halo、stride、padding與folded後qSiLU；不重訓相同數學方法control。",
+    "分塊僅作replay診斷，不替換正式任務模型；正式AP仍由原部署算子完整驗證。"
+  ],
+  "hardware_synthesis": false
+}

@@ -1,0 +1,145 @@
+{
+  "pid": 2612391,
+  "status": "candidate_complete",
+  "started_at": 1793288357.7174873,
+  "monitor_seconds": 600,
+  "stage": 6,
+  "next_stage_started": false,
+  "job": "verification",
+  "worker_pid": null,
+  "updated_at": 1793288828.3015547,
+  "job_started_at": 1793288788.199791,
+  "progress": null,
+  "gpu_processes": "",
+  "last_monitor_at": 1793288788.1999104,
+  "last_job_exit": 0,
+  "final": {
+    "status": "candidate_complete",
+    "stage": 6,
+    "stage6_complete": false,
+    "next_stage_started": false,
+    "best": {
+      "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029/train/best-e001.pt",
+      "sha256": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7",
+      "metrics": {
+        "coco_AP": 0.5126760552637888,
+        "person_AP": 0.6412553759835176,
+        "sports_ball_AP": 0.5151605700527103,
+        "baseball_bat_AP": 0.4708406202413094,
+        "box_AP50_95": 0.6092024665178761,
+        "pose_AP50_95": 0.8998503112793659,
+        "ball_box_AP50_95": 0.49388345969797987,
+        "ball_pose_AP50_95": 0.8634740979003016,
+        "bat_box_AP50_95": 0.7245214733377724,
+        "bat_pose_AP50_95": 0.93622652465843
+      },
+      "epoch": 1,
+      "phase": "Pose-head-recovery",
+      "ema_updates": 373
+    },
+    "parent": {
+      "checkpoint": "/home/uxin/yolo/yolo_combine/artifacts/stage6/recovery-kd-20261029/train/candidate-e002.pt",
+      "sha256": "0790a6072f9843213d71d7bd3fe6a31cad88a11d6e762b30520aebdba87cbf96",
+      "metrics": {
+        "coco_AP": 0.5126760552637888,
+        "person_AP": 0.6412553759835176,
+        "sports_ball_AP": 0.5151605700527103,
+        "baseball_bat_AP": 0.4708406202413094,
+        "box_AP50_95": 0.6052339010323264,
+        "pose_AP50_95": 0.8949919888234579,
+        "ball_box_AP50_95": 0.48657728335389033,
+        "ball_pose_AP50_95": 0.8557942363978208,
+        "bat_box_AP50_95": 0.7238905187107626,
+        "bat_pose_AP50_95": 0.9341897412490949
+      },
+      "epoch": 2,
+      "phase": "KD-recovery",
+      "ema_updates": 926
+    },
+    "recipe": {
+      "name": "Pose-head-recovery",
+      "scope": "head",
+      "task": "pose",
+      "epochs": 10,
+      "patience": 4,
+      "lrs": {
+        "pose_head": 2e-05
+      },
+      "warmup_epochs": 1,
+      "final_factor": 0.5,
+      "loss_horizon": 10,
+      "fresh_ema": true,
+      "head_bn": "trainable",
+      "shared_bn_affine": false,
+      "min_delta": 0.0001,
+      "plateau_half_after": 0,
+      "extension": 0,
+      "selection": "pose_recovery",
+      "head_recovery_max_pose_drop": 0.02,
+      "retain_epoch_candidates": false
+    },
+    "reason": "plateau",
+    "verification": {
+      "status": "passed",
+      "metrics": {
+        "coco_AP": 0.5126760552637888,
+        "person_AP": 0.6412553759835176,
+        "sports_ball_AP": 0.5151605700527103,
+        "baseball_bat_AP": 0.4708406202413094,
+        "box_AP50_95": 0.6092024665178761,
+        "pose_AP50_95": 0.8998503112793659,
+        "ball_box_AP50_95": 0.49388345969797987,
+        "ball_pose_AP50_95": 0.8634740979003016,
+        "bat_box_AP50_95": 0.7245214733377724,
+        "bat_pose_AP50_95": 0.93622652465843
+      },
+      "sha256": "e9b9fd7ccc88f10bbd170835138ebde5c7810db0726424496e2cac2aa462ffe7",
+      "full_ap_reproduced": true,
+      "teacher_exported": false
+    },
+    "accepted": false,
+    "improved_balanced_score": true,
+    "deltas_from_parent": {
+      "coco_AP": 0.0,
+      "person_AP": 0.0,
+      "sports_ball_AP": 0.0,
+      "baseball_bat_AP": 0.0,
+      "box_AP50_95": 0.003968565485549691,
+      "pose_AP50_95": 0.004858322455908004,
+      "ball_box_AP50_95": 0.007306176344089532,
+      "ball_pose_AP50_95": 0.007679861502480789,
+      "bat_box_AP50_95": 0.0006309546270097943,
+      "bat_pose_AP50_95": 0.002036783409335108
+    },
+    "deltas_from_original": {
+      "coco_AP": -0.001944735700604272,
+      "person_AP": -0.0019511943610064364,
+      "sports_ball_AP": 0.001936563288286175,
+      "baseball_bat_AP": -0.0167534685093092,
+      "box_AP50_95": -0.019199374012331294,
+      "pose_AP50_95": -0.020859077336920384,
+      "ball_box_AP50_95": -0.03521233101355259,
+      "ball_pose_AP50_95": -0.033625391731716414,
+      "bat_box_AP50_95": -0.0031864170111101098,
+      "bat_pose_AP50_95": -0.008092762942124132
+    },
+    "remaining_target_deficits": {
+      "coco_AP": 0.0,
+      "person_AP": 0.0,
+      "sports_ball_AP": 0.0,
+      "baseball_bat_AP": 0.011753468509309195,
+      "box_AP50_95": 0.0,
+      "pose_AP50_95": 0.0008590773369203664,
+      "ball_box_AP50_95": 0.015212331013552571,
+      "ball_pose_AP50_95": 0.013625391731716396,
+      "bat_box_AP50_95": 0.0,
+      "bat_pose_AP50_95": 0.0
+    },
+    "epochs_completed": 5,
+    "retained_epoch_candidates": [
+      "/home/uxin/yolo/yolo_combine/artifacts/stage6/pose-head-recovery-20261029/train/best-e001.pt"
+    ],
+    "interpretation": "這是本輪恢復候選的結果，不宣稱整個第六階段已完成；保留各項精度取捨供接續分析。"
+  },
+  "completed_at": 1793288828.3015537
+}

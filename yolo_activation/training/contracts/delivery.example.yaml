@@ -1,0 +1,42 @@
+schema_version: 1
+delivery_id: REPLACE_WITH_IMMUTABLE_DELIVERY_ID
+
+model:
+  source_id: REPLACE_WITH_MODEL_SOURCE_ID
+  config_path: /absolute/path/to/delivery/model.yaml
+  checkpoint_path: /absolute/path/to/delivery/baseline.pt
+  checkpoint_sha256: '0000000000000000000000000000000000000000000000000000000000000000'
+  framework_commit: REPLACE_WITH_COMMIT
+  python_version: REPLACE_WITH_VERSION
+  torch_version: REPLACE_WITH_VERSION
+  framework_version: REPLACE_WITH_VERSION
+
+activation_manifest_path: /absolute/path/to/delivery/activation-manifest.yaml
+
+datasets:
+  - dataset_id: bbat5-v1-detect
+    yaml_path: /home/uxin/yolo/original/pose/derived/bbat5-v1/configs/detect.yaml
+    dataset_fingerprint: REPLACE_WITH_FINGERPRINT
+    baseline_checkpoint_path: /absolute/path/to/delivery/bbat5-baseline.pt
+    baseline_checkpoint_sha256: '0000000000000000000000000000000000000000000000000000000000000000'
+    baseline_metrics:
+      map50_95: null
+      map50: null
+      map75: null
+    recipe_path: /absolute/path/to/delivery/bbat5-recipe.yaml
+  - dataset_id: coco2017-detect
+    yaml_path: /home/uxin/yolo/coco2017.yaml
+    dataset_fingerprint: REPLACE_WITH_FINGERPRINT
+    baseline_checkpoint_path: /absolute/path/to/delivery/coco-baseline.pt
+    baseline_checkpoint_sha256: '0000000000000000000000000000000000000000000000000000000000000000'
+    baseline_metrics:
+      map50_95: null
+      map50: null
+      map75: null
+      ap_s: null
+      ap_m: null
+      ap_l: null
+    recipe_path: /absolute/path/to/delivery/coco-recipe.yaml
+
+# 未指定時只能報 operator proxy。要宣稱 latency/area/power 時必須補齊。
+hardware_target: null

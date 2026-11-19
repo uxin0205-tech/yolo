@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "images": 1024,
+  "optimizer_steps": 0,
+  "device": "cpu",
+  "seed": 20260919,
+  "physical_batch": 16,
+  "sample_rule": "fixed augmented train prefix; no val",
+  "categories": {
+    "all80": {
+      "instances": 7008,
+      "no_cell_center": 179,
+      "no_valid_energy_cell": 179,
+      "short_side_lt8px": 570,
+      "valid_cells": 2353703,
+      "zero_valid_cell_fraction": 0.025542237442922375
+    },
+    "person": {
+      "instances": 2110,
+      "no_cell_center": 47,
+      "no_valid_energy_cell": 47,
+      "short_side_lt8px": 159,
+      "valid_cells": 770605,
+      "zero_valid_cell_fraction": 0.02227488151658768
+    },
+    "sports_ball": {
+      "instances": 59,
+      "no_cell_center": 6,
+      "no_valid_energy_cell": 6,
+      "short_side_lt8px": 24,
+      "valid_cells": 1082,
+      "zero_valid_cell_fraction": 0.1016949152542373
+    },
+    "baseball_bat": {
+      "instances": 38,
+      "no_cell_center": 0,
+      "no_valid_energy_cell": 0,
+      "short_side_lt8px": 0,
+      "valid_cells": 3116,
+      "zero_valid_cell_fraction": 0.0
+    }
+  },
+  "trace_sha256": "9416c1fff9fe0532aea9abfb420935e312cad1fafa4ca05e411a2f1ad170ba57",
+  "seconds": 65.58808517456055,
+  "limitation": "prefix is not full-dataset estimate; zero own-box cells does not mean zero native/overlap gradients",
+  "h4": {
+    "supported_for_review": true,
+    "proposal": "若確認小球盲區，後續可比較僅零 cell 框的最近有效 cell 補點；需評估背景污染與梯度密度。",
+    "implemented": false,
+    "training_started": false
+  }
+}

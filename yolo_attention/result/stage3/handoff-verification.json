@@ -1,0 +1,150 @@
+{
+  "stage": 3,
+  "passed": true,
+  "formal_candidates": [
+    {
+      "candidate": "N1",
+      "sha256": "4a696c898c15de9ccc6d14c2e5d1e6e68dce3c008d1c83e200d0d8c5f17908cd",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "float-pwl-8-16",
+      "reciprocal_backend": "native-float-division"
+    },
+    {
+      "candidate": "N2",
+      "sha256": "568c2752f91b5b09f7b404ddcc69ff6b9f779651257fcdc62f0f7af05a14c576",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "float-pwl-10-20",
+      "reciprocal_backend": "native-float-division"
+    },
+    {
+      "candidate": "N3",
+      "sha256": "f2a72e8062b46d74ff96e4b7c640c5a661981f21d5fcd4fbbd0395496d432b04",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "integer-pwl-10-20",
+      "reciprocal_backend": "native-float-division"
+    },
+    {
+      "candidate": "N4",
+      "sha256": "3345a612543a31bf7d91af15363ea77fa8252e7d2bf7fba02fd21e7f5fd4c717",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "score-indexed-lut",
+      "reciprocal_backend": "native-float-division"
+    },
+    {
+      "candidate": "N5",
+      "sha256": "4ebad6bbc682246f3ab1e429573e33552a3b842ee02b2fced3caeb6cd9c6aae7",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "power-of-two",
+      "reciprocal_backend": "native-float-division"
+    },
+    {
+      "candidate": "N6",
+      "sha256": "7de5f8941e5206af4e9af854fd2e2dbb2ad27a426251874cf4bf9e50b2fc8856",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "normalized-hard-sigmoid",
+      "reciprocal_backend": "native-float-division"
+    },
+    {
+      "candidate": "D1",
+      "sha256": "a691a600715b58bf7d1438e379022443fde784c95ae75bf13336da28cc728a11",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "integer-pwl-10-20",
+      "reciprocal_backend": "lut256"
+    },
+    {
+      "candidate": "D2",
+      "sha256": "39d9a610f94c10b6f5363c1f0f73055266dba2784b00cae7ff49fa0acc4d3f9d",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "integer-pwl-10-20",
+      "reciprocal_backend": "pwl16"
+    },
+    {
+      "candidate": "D3",
+      "sha256": "a1dcd5d6afaaaa44a9118cf7e70c9a6decc8512f13bb4651c7eab4bca74289f9",
+      "actual_reload": true,
+      "images": 5000,
+      "exp_backend": "integer-pwl-10-20",
+      "reciprocal_backend": "newton64"
+    }
+  ],
+  "diagnostic_only": [
+    "N7",
+    "N8",
+    "N9"
+  ],
+  "all_jobs_succeeded": 14,
+  "annotation_sha256": "e8c7f7908f1d7278341fae127d0da654f102f11bd7b21d8aeefa635b8c810b6f",
+  "selected": "D1",
+  "sites": [
+    "model.10.m.0.attn",
+    "model.22.m.0.1.attn"
+  ],
+  "fp32_rectangular_smoke": [
+    {
+      "input": [
+        1,
+        3,
+        64,
+        96
+      ],
+      "output": [
+        1,
+        126,
+        6
+      ],
+      "finite": true
+    },
+    {
+      "input": [
+        1,
+        3,
+        96,
+        64
+      ],
+      "output": [
+        1,
+        126,
+        6
+      ],
+      "finite": true
+    }
+  ],
+  "source_unchanged": true,
+  "plot_json_only": true,
+  "gpu_used": false,
+  "next_stage_started": false,
+  "cpu_suite": {
+    "passed": 193,
+    "skipped": 1,
+    "seconds": 22.06,
+    "skip_reason": "existing BDCN CUDA test in CPU-only suite"
+  },
+  "ruff": "passed: src/tests/scripts --no-cache",
+  "legacy_compatibility": {
+    "import_path": "yolo_attention_final/src",
+    "checkpoint_link": "yolo_attention_final/final/pwl-final-best.pt",
+    "actual_checkpoint": "yolo_attention/weights/dependency-pwl-formal.pt",
+    "input": [
+      1,
+      3,
+      64,
+      96
+    ],
+    "output": [
+      1,
+      126,
+      6
+    ],
+    "finite": true
+  },
+  "cleanup_record": "/home/uxin/yolo/yolo_attention/artifacts/stage3/cleanup-final-delivery.json",
+  "checked_at": "2026-10-19T12:34:07.710310+08:00"
+}

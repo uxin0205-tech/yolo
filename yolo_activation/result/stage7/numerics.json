@@ -1,0 +1,562 @@
+{
+  "status": "passed",
+  "candidates": {
+    "qsilu_pq": {
+      "profile": {
+        "name": "qsilu_pq",
+        "class": "activation_lab.activations.ShiftPiecewiseQuadraticSiLU",
+        "profile": {
+          "activation_name": "qsilu_pq",
+          "display_name": "Shift-friendly piecewise-quadratic SiLU",
+          "threshold": 8.0,
+          "knots": [
+            0.0,
+            1.0,
+            2.0,
+            4.0,
+            8.0
+          ],
+          "quadratic_coefficients": [
+            [
+              0.22265625,
+              0.0,
+              0.0
+            ],
+            [
+              0.08984375,
+              0.265625,
+              -0.1328125
+            ],
+            [
+              -0.021484375,
+              0.7109375,
+              -0.578125
+            ],
+            [
+              -0.0048828125,
+              0.578125,
+              -0.3125
+            ]
+          ],
+          "hardware_class": "dyadic piecewise-quadratic spline",
+          "dyadic_direct_coefficients": true,
+          "integer_emulator_supported": true
+        },
+        "inplace": null
+      },
+      "max_error_vs_silu": 0.010831885804304164,
+      "rmse_vs_silu": 0.004341194477439732,
+      "max_derivative_error_vs_silu": 0.034215751215104534,
+      "boundaries": [
+        {
+          "x": -8,
+          "value_jump": 4.440892098500626e-16,
+          "derivative_jump": 9.765623865121142e-10
+        },
+        {
+          "x": -4,
+          "value_jump": 7.812500202319939e-09,
+          "derivative_jump": 5.273437686525995e-09
+        },
+        {
+          "x": -2,
+          "value_jump": 2.49999987378402e-08,
+          "derivative_jump": 1.3671874965481834e-08
+        },
+        {
+          "x": -1,
+          "value_jump": 1.0937501349062018e-08,
+          "derivative_jump": 6.250000000873612e-08
+        },
+        {
+          "x": 0,
+          "value_jump": 1e-07,
+          "derivative_jump": 8.906250004159233e-08
+        },
+        {
+          "x": 1,
+          "value_jump": 1.8906249865668912e-07,
+          "derivative_jump": 6.250000006424727e-08
+        },
+        {
+          "x": 2,
+          "value_jump": 2.2499999863256903e-07,
+          "derivative_jump": 1.3671874965481834e-08
+        },
+        {
+          "x": 4,
+          "value_jump": 2.0781250009704877e-07,
+          "derivative_jump": 5.273437686525995e-09
+        },
+        {
+          "x": 8,
+          "value_jump": 2.0000000056086265e-07,
+          "derivative_jump": 9.765623865121142e-10
+        }
+      ],
+      "dtype": {
+        "torch.float32": {
+          "finite": true,
+          "max_error_vs_float64": 3.548339009284973e-07,
+          "max_derivative_error_vs_float64_grid": 0.0,
+          "tails": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.0,
+            1000.0,
+            60000.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "torch.float16": {
+          "finite": true,
+          "max_error_vs_float64": 0.005650356411933899,
+          "max_derivative_error_vs_float64_grid": 0.00066375732421875,
+          "tails": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.0,
+            1000.0,
+            60000.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "torch.bfloat16": {
+          "finite": true,
+          "max_error_vs_float64": 0.03423023223876953,
+          "max_derivative_error_vs_float64_grid": 0.005584716796875,
+          "tails": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.0,
+            1000.0,
+            59904.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "fixed_point": {
+        "config": {
+          "total_bits": 16,
+          "fraction_bits": 10
+        },
+        "exhaustive_codes": 65536,
+        "max_abs_error": 0.0014531556516885757,
+        "mean_abs_error": 0.00010476450336227572,
+        "scope": "activation 局部 reference；任務模型仍浮點 activation",
+        "rounding": "canonical hardware.py signed magnitude round-shift; final saturation",
+        "container": "int64"
+      },
+      "cost_proxy": {
+        "variable_multiplications": 1,
+        "constant_multiplications": 8,
+        "add_subtract": 10,
+        "range_operations": 5,
+        "transcendental_operations": 0,
+        "coefficient_count": 10,
+        "power_of_two_threshold": true,
+        "dyadic_or_apot_constants": true,
+        "fixed_point_emulator": true,
+        "standard_fused_operator": false,
+        "interpretation": "One shared square; dyadic branch coefficients and static coefficient selection"
+      }
+    },
+    "hardswish": {
+      "profile": {
+        "name": "hardswish",
+        "class": "torch.nn.modules.activation.Hardswish",
+        "profile": null,
+        "inplace": false
+      },
+      "max_error_vs_silu": 0.14227761953270035,
+      "rmse_vs_silu": 0.042862021902500755,
+      "max_derivative_error_vs_silu": 0.41153882067921055,
+      "boundaries": [
+        {
+          "x": -3,
+          "value_jump": 4.9999998251504395e-08,
+          "derivative_jump": 0.4999999666666667
+        },
+        {
+          "x": 0,
+          "value_jump": 1e-07,
+          "derivative_jump": 6.666666663157628e-08
+        },
+        {
+          "x": 3,
+          "value_jump": 2.4999999759245384e-07,
+          "derivative_jump": 0.4999999666666666
+        }
+      ],
+      "dtype": {
+        "torch.float32": {
+          "finite": true,
+          "max_error_vs_float64": 2.384185791015625e-07,
+          "max_derivative_error_vs_float64_grid": 7.947285984855057e-08,
+          "tails": [
+            -0.0,
+            -0.0,
+            -0.0,
+            0.0,
+            8.0,
+            1000.0,
+            60000.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "torch.float16": {
+          "finite": true,
+          "max_error_vs_float64": 0.0009759267171225439,
+          "max_derivative_error_vs_float64_grid": 0.49967447916666663,
+          "tails": [
+            -0.0,
+            -0.0,
+            -0.0,
+            0.0,
+            8.0,
+            1000.0,
+            60000.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "torch.bfloat16": {
+          "finite": true,
+          "max_error_vs_float64": 0.0078125,
+          "max_derivative_error_vs_float64_grid": 0.49967447916666663,
+          "tails": [
+            -0.0,
+            -0.0,
+            -0.0,
+            0.0,
+            8.0,
+            1000.0,
+            59904.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "fixed_point": null,
+      "cost_proxy": {
+        "variable_multiplications": 1,
+        "constant_multiplications": 1,
+        "add_subtract": 1,
+        "range_operations": 1,
+        "transcendental_operations": 0,
+        "coefficient_count": 0,
+        "power_of_two_threshold": false,
+        "dyadic_or_apot_constants": false,
+        "fixed_point_emulator": false,
+        "standard_fused_operator": true,
+        "interpretation": "HardSwish op, or add/clip/multiply/scale decomposition"
+      }
+    },
+    "poly_shift": {
+      "profile": {
+        "name": "poly_shift",
+        "class": "activation_lab.activations.IntegralPolynomialActivation",
+        "profile": {
+          "activation_name": "poly_shift",
+          "display_name": "Integral polynomial (shift-friendly)",
+          "a": 4.5,
+          "threshold": 8.0,
+          "hardware_class": "dyadic/APoT polynomial",
+          "dyadic_direct_coefficients": true,
+          "integer_emulator_supported": true
+        },
+        "inplace": null
+      },
+      "max_error_vs_silu": 0.02699592362221459,
+      "rmse_vs_silu": 0.011740926901258131,
+      "max_derivative_error_vs_silu": 0.028939509968528038,
+      "boundaries": [
+        {
+          "x": -8.0,
+          "value_jump": 4.440892098500626e-16,
+          "derivative_jump": 0.0
+        },
+        {
+          "x": 0,
+          "value_jump": 1e-07,
+          "derivative_jump": 1.1249999642970465e-07
+        },
+        {
+          "x": 8.0,
+          "value_jump": 2.0000000233721948e-07,
+          "derivative_jump": 0.0
+        }
+      ],
+      "dtype": {
+        "torch.float32": {
+          "finite": true,
+          "max_error_vs_float64": 3.2186650491539126e-06,
+          "max_derivative_error_vs_float64_grid": 1.5951604188657598e-06,
+          "tails": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.0,
+            1000.0,
+            60000.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "torch.float16": {
+          "finite": true,
+          "max_error_vs_float64": 0.030776851887310386,
+          "max_derivative_error_vs_float64_grid": 0.01212720326422101,
+          "tails": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.0,
+            1000.0,
+            60000.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "torch.bfloat16": {
+          "finite": true,
+          "max_error_vs_float64": 0.15656217882678902,
+          "max_derivative_error_vs_float64_grid": 0.09368050600965017,
+          "tails": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.0,
+            1000.0,
+            59904.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "fixed_point": {
+        "config": {
+          "total_bits": 16,
+          "fraction_bits": 10
+        },
+        "exhaustive_codes": 65536,
+        "max_abs_error": 0.002175004152745963,
+        "mean_abs_error": 0.00012907908380783788,
+        "scope": "activation 局部 reference；任務模型仍浮點 activation",
+        "rounding": "canonical hardware.py signed magnitude round-shift; final saturation",
+        "container": "int64"
+      },
+      "cost_proxy": {
+        "variable_multiplications": 4,
+        "constant_multiplications": 6,
+        "add_subtract": 5,
+        "range_operations": 3,
+        "transcendental_operations": 0,
+        "coefficient_count": 4,
+        "power_of_two_threshold": true,
+        "dyadic_or_apot_constants": true,
+        "fixed_point_emulator": true,
+        "standard_fused_operator": false,
+        "interpretation": "Four data-power multiplies; all fixed constants map to shifts/adds"
+      }
+    },
+    "poly_quality": {
+      "profile": {
+        "name": "poly_quality",
+        "class": "activation_lab.activations.IntegralPolynomialActivation",
+        "profile": {
+          "activation_name": "poly_quality",
+          "display_name": "Integral polynomial (quality)",
+          "a": 4.0,
+          "threshold": 6.8125,
+          "hardware_class": "constant-multiply polynomial",
+          "dyadic_direct_coefficients": false,
+          "integer_emulator_supported": false
+        },
+        "inplace": null
+      },
+      "max_error_vs_silu": 0.02100178447324197,
+      "rmse_vs_silu": 0.008018103214400038,
+      "max_derivative_error_vs_silu": 0.02001830681507555,
+      "boundaries": [
+        {
+          "x": -6.8125,
+          "value_jump": 4.440892098500626e-15,
+          "derivative_jump": 4.440892098500626e-16
+        },
+        {
+          "x": 0,
+          "value_jump": 1e-07,
+          "derivative_jump": 1.1743118877305392e-07
+        },
+        {
+          "x": 6.8125,
+          "value_jump": 1.9999999700814897e-07,
+          "derivative_jump": 4.440892098500626e-16
+        }
+      ],
+      "dtype": {
+        "torch.float32": {
+          "finite": true,
+          "max_error_vs_float64": 2.875124837764531e-06,
+          "max_derivative_error_vs_float64_grid": 1.368152585889959e-06,
+          "tails": [
+            0.0,
+            0.0,
+            -1.9073486328125e-06,
+            0.0,
+            7.999998092651367,
+            1000.0,
+            60000.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "torch.float16": {
+          "finite": true,
+          "max_error_vs_float64": 0.019547892789439913,
+          "max_derivative_error_vs_float64_grid": 0.008057270902687375,
+          "tails": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.0,
+            1000.0,
+            60000.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "torch.bfloat16": {
+          "finite": true,
+          "max_error_vs_float64": 0.12500000000000355,
+          "max_derivative_error_vs_float64_grid": 0.05126998427521334,
+          "tails": [
+            0.0,
+            0.0,
+            0.109375,
+            0.0,
+            8.125,
+            1000.0,
+            59904.0
+          ],
+          "tail_derivatives": [
+            0.0,
+            0.0,
+            0.0,
+            0.5,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "fixed_point": null,
+      "cost_proxy": {
+        "variable_multiplications": 4,
+        "constant_multiplications": 6,
+        "add_subtract": 5,
+        "range_operations": 3,
+        "transcendental_operations": 0,
+        "coefficient_count": 4,
+        "power_of_two_threshold": false,
+        "dyadic_or_apot_constants": false,
+        "fixed_point_emulator": false,
+        "standard_fused_operator": false,
+        "interpretation": "Four data-power multiplies plus general constant multipliers"
+      }
+    }
+  },
+  "gpu_used": false
+}

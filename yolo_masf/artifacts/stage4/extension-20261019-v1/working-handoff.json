@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "as_of": "2026-10-20T10:43:30.243600+08:00",
+  "stage": 4,
+  "status": "completed",
+  "source_guard": "passed",
+  "supervisor": "completed",
+  "cpu_tests_passed": 18,
+  "trained_epoch05_diagnostics": {
+    "detect": {
+      "alpha": 0.0032206978648900986,
+      "checkpoint": "/home/uxin/yolo/yolo_masf/result/stage4/detect/trained-epoch05.pt",
+      "primary_on_minus_off": 8.44803216837331e-06,
+      "interpretation": "真正已訓權重的開關；不以 alpha=0 的 E0 代替"
+    },
+    "pose": {
+      "alpha": 0.000509449397213757,
+      "checkpoint": "/home/uxin/yolo/yolo_masf/result/stage4/pose/trained-epoch05.pt",
+      "primary_on_minus_off": 1.551425708679055e-06,
+      "interpretation": "真正已訓權重的開關；不以 alpha=0 的 E0 代替"
+    }
+  },
+  "gpu_smokes": {
+    "detect-L1-smoke": {
+      "optimizer_steps": 2,
+      "images": 512,
+      "amp_retries": 0,
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 7.5141433626413345e-06,
+        "model.23.one2one_cv2.0.0.conv.weight": 4.980247467756271e-06,
+        "model.23.p3_masf.context.project.conv.weight": 7.350463420152664e-06
+      }
+    },
+    "detect-L2-smoke": {
+      "optimizer_steps": 2,
+      "images": 512,
+      "amp_retries": 0,
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 7.52531923353672e-06,
+        "model.23.one2one_cv2.0.0.conv.weight": 9.960494935512543e-07,
+        "model.23.p3_masf.context.project.conv.weight": 3.675650805234909e-05
+      }
+    },
+    "pose-L1-smoke": {
+      "optimizer_steps": 2,
+      "images": 256,
+      "amp_retries": 0,
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 8.205301128327847e-06,
+        "model.23.one2one_cv2.0.0.conv.weight": 3.8389116525650024e-06,
+        "model.23.p3_masf.context.project.conv.weight": 9.182840585708618e-06
+      }
+    },
+    "pose-L2-smoke": {
+      "optimizer_steps": 2,
+      "images": 256,
+      "amp_retries": 0,
+      "required_update_abs_max": {
+        "model.23.p3_masf.alpha": 8.13603401184082e-06,
+        "model.23.one2one_cv2.0.0.conv.weight": 7.674098014831543e-07,
+        "model.23.p3_masf.context.project.conv.weight": 4.60110604763031e-05
+      }
+    }
+  },
+  "formal_initial_pose_ema_metrics_equal": true,
+  "jobs": [
+    {
+      "id": "detect-diagnostics",
+      "status": "succeeded"
+    },
+    {
+      "id": "pose-diagnostics",
+      "status": "succeeded"
+    },
+    {
+      "id": "detect-l1-smoke",
+      "status": "succeeded"
+    },
+    {
+      "id": "detect-l2-smoke",
+      "status": "succeeded"
+    },
+    {
+      "id": "pose-l1-smoke",
+      "status": "succeeded"
+    },
+    {
+      "id": "pose-l2-smoke",
+      "status": "succeeded"
+    },
+    {
+      "id": "pose-l1-training",
+      "status": "succeeded"
+    },
+    {
+      "id": "pose-l1-verification",
+      "status": "succeeded"
+    },
+    {
+      "id": "pose-l2-training",
+      "status": "succeeded"
+    },
+    {
+      "id": "pose-l2-verification",
+      "status": "succeeded"
+    },
+    {
+      "id": "detect-l1-training",
+      "status": "succeeded"
+    },
+    {
+      "id": "detect-l1-verification",
+      "status": "succeeded"
+    },
+    {
+      "id": "detect-l2-training",
+      "status": "succeeded"
+    },
+    {
+      "id": "detect-l2-verification",
+      "status": "succeeded"
+    },
+    {
+      "id": "extension-selection",
+      "status": "succeeded"
+    }
+  ],
+  "additional_epochs_per_arm": [
+    5,
+    15
+  ],
+  "maximum_cumulative_epochs": 20,
+  "early_stopping": "at least 5 additional epochs; 5 epochs without primary AP improvement",
+  "estimate_basis": "first study Detect ~29.5min/epoch, Pose ~1.5min/epoch; depends on early stop and GPU availability",
+  "monitor_interval_seconds": 600,
+  "next_stage_started": false,
+  "status_command": "bash yolo_masf/run_stage4.sh status --output /home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1",
+  "stop_file": "/home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1/STOP",
+  "worklog": "docs/worklogs/2026-10-19-masf-stage4-extension.md",
+  "finished_at": "2026-10-20T09:50:32.163797+08:00",
+  "final_audit": "/home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1/final-audit.json",
+  "report": "/home/uxin/yolo/yolo_masf/artifacts/stage4/extension-20261019-v1/RESULTS.md"
+}
